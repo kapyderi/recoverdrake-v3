@@ -1,0 +1,1612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ordenar</class>
+ <widget class="QDialog" name="ordenar">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>480</width>
+    <height>380</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Datos de listado</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/impresora.png</normaloff>:/Imagenes/impresora.png</iconset>
+  </property>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>350</y>
+     <width>83</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Salir</string>
+   </property>
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>25</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>350</y>
+     <width>83</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Aceptar</string>
+   </property>
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/good.png</normaloff>:/Imagenes/good.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>25</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>451</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 16pt &quot;Sans Serif&quot;;
+font: bold;</string>
+   </property>
+   <property name="text">
+    <string>Caracteristicas de listados</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>210</y>
+     <width>141</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Definir tipo de letra</string>
+   </property>
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/drakfont-mdk.png</normaloff>:/Imagenes/drakfont-mdk.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>25</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>90</y>
+     <width>200</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>Sin filtro (todas las peliculas)</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Titulo</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Titulo original</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: Todos los publicos</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 7</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 12</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 16</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 18</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: Adultos</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: Sin clasificar</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Drama</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Comedia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Accion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Aventura</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Ciencia-Ficcion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Romantica</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Musical</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Catastrofes</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Suspense</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Fantasia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Erotico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Porno</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Historico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Policiaco</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Terror</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Western</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Belico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Deportes</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Animacion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Documental</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Gore/Zombies</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Actor principal</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Actor secundario</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 0</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 1</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 2</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 3</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 4</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 5</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 6</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 7</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 8</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 9</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 10 (Obra Maestra)</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Soporte</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Posicion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Visionada: Si</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Visionada: No</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Color</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>B/W</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Version Original</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Subtitulada</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Doblada</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: DVD</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: avi</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: VCD</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: VHS</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: mkv</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: LD</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: B-Ray</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Director</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Fecha</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>210</y>
+     <width>301</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Este el el tipo de letra</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>461</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>250</y>
+     <width>141</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Definir color de letra</string>
+   </property>
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/pantone.png</normaloff>:/Imagenes/pantone.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>25</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_2">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>250</y>
+     <width>301</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Este es el color de letra</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_5">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>290</y>
+     <width>181</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Definir color de encabezado</string>
+   </property>
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/pantone.png</normaloff>:/Imagenes/pantone.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>25</width>
+     <height>25</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit_3">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>290</y>
+     <width>261</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Este es el color del encabezado</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>201</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: bold;</string>
+   </property>
+   <property name="text">
+    <string>Listado de PELICULAS:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>60</y>
+     <width>201</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: bold;</string>
+   </property>
+   <property name="text">
+    <string>Listado de MUSICA:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_2">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>90</y>
+     <width>200</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>Sin filtro (todas las peliculas)</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Titulo</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Titulo original</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: Todos los publicos</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 7</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 12</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 16</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 18</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: Adultos</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: Sin clasificar</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Drama</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Comedia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Accion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Aventura</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Ciencia-Ficcion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Romantica</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Musical</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Catastrofes</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Suspense</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Fantasia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Erotico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Porno</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Historico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Policiaco</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Terror</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Western</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Belico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Deportes</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Animacion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Documental</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Gore/Zombies</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Actor principal</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Actor secundario</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 0</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 1</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 2</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 3</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 4</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 5</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 6</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 7</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 8</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 9</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 10 (Obra Maestra)</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Soporte</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Posicion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Visionada: Si</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Visionada: No</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Color</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>B/W</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Version Original</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Subtitulada</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Doblada</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: DVD</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: avi</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: VCD</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: VHS</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: mkv</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: LD</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: B-Ray</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Director</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Fecha</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>201</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: bold;</string>
+   </property>
+   <property name="text">
+    <string>Listado de LIBROS:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>160</y>
+     <width>200</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>Sin filtro (todas las peliculas)</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Titulo</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Titulo original</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: Todos los publicos</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 7</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 12</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 16</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 18</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: Adultos</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: Sin clasificar</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Drama</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Comedia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Accion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Aventura</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Ciencia-Ficcion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Romantica</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Musical</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Catastrofes</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Suspense</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Fantasia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Erotico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Porno</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Historico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Policiaco</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Terror</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Western</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Belico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Deportes</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Animacion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Documental</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Gore/Zombies</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Actor principal</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Actor secundario</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 0</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 1</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 2</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 3</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 4</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 5</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 6</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 7</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 8</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 9</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 10 (Obra Maestra)</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Soporte</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Posicion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Visionada: Si</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Visionada: No</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Color</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>B/W</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Version Original</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Subtitulada</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Doblada</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: DVD</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: avi</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: VCD</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: VHS</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: mkv</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: LD</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: B-Ray</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Director</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Fecha</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="Line" name="line_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>190</y>
+     <width>461</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_4">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>160</y>
+     <width>200</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>Sin filtro (todas las peliculas)</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Titulo</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Titulo original</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: Todos los publicos</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 7</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 12</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 16</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: N.R. a menores de 18</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: Adultos</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Calificacion: Sin clasificar</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Drama</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Comedia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Accion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Aventura</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Ciencia-Ficcion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Romantica</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Musical</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Catastrofes</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Suspense</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Fantasia</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Erotico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Porno</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Historico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Policiaco</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Terror</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Western</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Belico</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Deportes</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Animacion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Documental</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Genero: Gore/Zombies</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Actor principal</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Actor secundario</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 0</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 1</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 2</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 3</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 4</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 5</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 6</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 7</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 8</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 9</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Valoracion: 10 (Obra Maestra)</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Soporte</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Posicion</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Visionada: Si</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Visionada: No</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Color</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>B/W</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Version Original</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Subtitulada</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Doblada</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: DVD</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: avi</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: VCD</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: VHS</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: mkv</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: LD</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Formato: B-Ray</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Director</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Fecha</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>130</y>
+     <width>201</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: bold;</string>
+   </property>
+   <property name="text">
+    <string>Listado de Claves:</string>
+   </property>
+  </widget>
+  <widget class="Line" name="line_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>330</y>
+     <width>461</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,1019 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Mrpm</class>
+ <widget class="QDialog" name="Mrpm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>901</width>
+    <height>609</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>738</width>
+    <height>609</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::NoFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>Salvaguarda v.0.1.0</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/rpm.png</normaloff>:/Imagenes/rpm.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_9">
+   <item row="4" column="2">
+    <layout class="QGridLayout" name="gridLayout_7">
+     <item row="0" column="0">
+      <widget class="QPushButton" name="pushButton_16">
+       <property name="toolTip">
+        <string>Parar los procesos en ejecucion</string>
+       </property>
+       <property name="statusTip">
+        <string>Parar los procesos en ejecucion</string>
+       </property>
+       <property name="whatsThis">
+        <string>Parar los procesos en ejecucion</string>
+       </property>
+       <property name="text">
+        <string>Parar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/stop.png</normaloff>:/Imagenes/stop.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="toolTip">
+        <string>Nos vamos..</string>
+       </property>
+       <property name="statusTip">
+        <string>Nos vamos..</string>
+       </property>
+       <property name="whatsThis">
+        <string>Nos vamos..</string>
+       </property>
+       <property name="text">
+        <string>Salir</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="0">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="1" colspan="2">
+      <widget class="QProgressBar" name="progressBar">
+       <property name="toolTip">
+        <string>Ratio de procesos realizados.</string>
+       </property>
+       <property name="statusTip">
+        <string>Ratio de procesos realizados.</string>
+       </property>
+       <property name="whatsThis">
+        <string>Ratio de procesos realizados.</string>
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0">
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Visor de registros de la base de datos.</string>
+     </property>
+     <property name="statusTip">
+      <string>Visor de registros de la base de datos.</string>
+     </property>
+     <property name="whatsThis">
+      <string>Visor de registros de la base de datos.</string>
+     </property>
+     <property name="autoScrollMargin">
+      <number>26</number>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>100</number>
+     </attribute>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>100</number>
+     </attribute>
+     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderCascadingSectionResizes">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderDefaultSectionSize">
+      <number>25</number>
+     </attribute>
+     <attribute name="verticalHeaderMinimumSectionSize">
+      <number>25</number>
+     </attribute>
+     <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>Nombre RPM</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeft|AlignVCenter</set>
+      </property>
+      <property name="icon">
+       <iconset resource="recoverdrake.qrc">
+        <normaloff>:/Imagenes/rpm.png</normaloff>:/Imagenes/rpm.png</iconset>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Instalado</string>
+      </property>
+      <property name="icon">
+       <iconset resource="recoverdrake.qrc">
+        <normaloff>:/Imagenes/mandrivaupdate.png</normaloff>:/Imagenes/mandrivaupdate.png</iconset>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Instalable</string>
+      </property>
+      <property name="icon">
+       <iconset resource="recoverdrake.qrc">
+        <normaloff>:/Imagenes/Correcto.png</normaloff>:/Imagenes/Correcto.png</iconset>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Descripcion</string>
+      </property>
+      <property name="icon">
+       <iconset resource="recoverdrake.qrc">
+        <normaloff>:/Imagenes/notas.png</normaloff>:/Imagenes/notas.png</iconset>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Categoria</string>
+      </property>
+      <property name="icon">
+       <iconset resource="recoverdrake.qrc">
+        <normaloff>:/Imagenes/programacion.png</normaloff>:/Imagenes/programacion.png</iconset>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Marca</string>
+      </property>
+      <property name="icon">
+       <iconset resource="recoverdrake.qrc">
+        <normaloff>:/Imagenes/good.png</normaloff>:/Imagenes/good.png</iconset>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="3">
+    <widget class="QTextEdit" name="textEdit">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="font">
+      <font>
+       <family>Nimbus Sans L Condensed</family>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Consola de procesos, donde se detalla al maximo lo que va procesando.</string>
+     </property>
+     <property name="statusTip">
+      <string>Consola de procesos, donde se detalla al maximo lo que va procesando.</string>
+     </property>
+     <property name="whatsThis">
+      <string>Consola de procesos, donde se detalla al maximo lo que va procesando.</string>
+     </property>
+     <property name="html">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Nimbus Sans L Condensed'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Sans Serif'; font-size:7pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="title">
+      <string>Tratamiento de paquetes</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_8">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="toolTip">
+         <string>Carga de fichero de una salvaguarda anterior para poder instalar, depurar o modificar.</string>
+        </property>
+        <property name="statusTip">
+         <string>Carga de fichero de una salvaguarda anterior para poder instalar, depurar o modificar.</string>
+        </property>
+        <property name="whatsThis">
+         <string>Carga de fichero de una salvaguarda anterior para poder instalar, depurar o modificar.</string>
+        </property>
+        <property name="text">
+         <string>Cargar fichero .lst</string>
+        </property>
+        <property name="icon">
+         <iconset resource="recoverdrake.qrc">
+          <normaloff>:/Imagenes/fileopen.png</normaloff>:/Imagenes/fileopen.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <pointsize>7</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Total registros:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLineEdit" name="lineEdit_2">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>51</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>61</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string>Numero de registros activos en la base de datos activa.</string>
+        </property>
+        <property name="statusTip">
+         <string>Numero de registros activos en la base de datos activa.</string>
+        </property>
+        <property name="whatsThis">
+         <string>Numero de registros activos en la base de datos activa.</string>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="4">
+       <widget class="QPushButton" name="pushButton_9">
+        <property name="toolTip">
+         <string>Purgar la base de datos de paquetes con un diccionario de palabras a evitar. Para poder quitar, modificar o insertar palabras nuevas, entra en la opcion correspondiente en Preferencias.</string>
+        </property>
+        <property name="statusTip">
+         <string>Purgar la base de datos de paquetes con un diccionario de palabras a evitar. Para poder quitar, modificar o insertar palabras nuevas, entra en la opcion correspondiente en Preferencias.</string>
+        </property>
+        <property name="whatsThis">
+         <string>Purgar la base de datos de paquetes con un diccionario de palabras a evitar. Para poder quitar, modificar o insertar palabras nuevas, entra en la opcion correspondiente en Preferencias.</string>
+        </property>
+        <property name="text">
+         <string>Evitar &quot;Palabras Clave&quot;</string>
+        </property>
+        <property name="icon">
+         <iconset resource="recoverdrake.qrc">
+          <normaloff>:/Imagenes/peligro.png</normaloff>:/Imagenes/peligro.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="toolTip">
+         <string>Generar un fichero .lst tanto de la carga de otro fichero tras depurarlo, como de la generacion de rpms del sistema.</string>
+        </property>
+        <property name="statusTip">
+         <string>Generar un fichero .lst tanto de la carga de otro fichero tras depurarlo, como de la generacion de rpms del sistema.</string>
+        </property>
+        <property name="whatsThis">
+         <string>Generar un fichero .lst tanto de la carga de otro fichero tras depurarlo, como de la generacion de rpms del sistema.</string>
+        </property>
+        <property name="text">
+         <string>Guardar fichero .lst</string>
+        </property>
+        <property name="icon">
+         <iconset resource="recoverdrake.qrc">
+          <normaloff>:/Imagenes/filesave.png</normaloff>:/Imagenes/filesave.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QPushButton" name="pushButton_15">
+        <property name="toolTip">
+         <string>Purgar los paquetes ya instalados en la base de datos activa.</string>
+        </property>
+        <property name="statusTip">
+         <string>Purgar los paquetes ya instalados en la base de datos activa.</string>
+        </property>
+        <property name="whatsThis">
+         <string>Purgar los paquetes ya instalados en la base de datos activa.</string>
+        </property>
+        <property name="text">
+         <string>Evitar &quot;Instalados&quot;</string>
+        </property>
+        <property name="icon">
+         <iconset resource="recoverdrake.qrc">
+          <normaloff>:/Imagenes/ccm1.png</normaloff>:/Imagenes/ccm1.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pushButton_14">
+        <property name="toolTip">
+         <string>Se genera el listado para poder luego guardarlo en un fichero (Salvaguarda)</string>
+        </property>
+        <property name="statusTip">
+         <string>Se genera el listado para poder luego guardarlo en un fichero (Salvaguarda)</string>
+        </property>
+        <property name="whatsThis">
+         <string>Se genera el listado para poder luego guardarlo en un fichero (Salvaguarda)</string>
+        </property>
+        <property name="text">
+         <string>Generar listado .lst</string>
+        </property>
+        <property name="icon">
+         <iconset resource="recoverdrake.qrc">
+          <normaloff>:/Imagenes/notas.png</normaloff>:/Imagenes/notas.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="4">
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="3">
+         <widget class="QPushButton" name="pushButton_17">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/atras.png</normaloff>:/Imagenes/atras.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pushButton_13">
+          <property name="toolTip">
+           <string>Se introduce la palabra clave a buscar y se localizaran todos los que contengan dichos caracteres resaltandolo de rojo.</string>
+          </property>
+          <property name="statusTip">
+           <string>Se introduce la palabra clave a buscar y se localizaran todos los que contengan dichos caracteres resaltandolo de rojo.</string>
+          </property>
+          <property name="whatsThis">
+           <string>Se introduce la palabra clave a buscar y se localizaran todos los que contengan dichos caracteres resaltandolo de rojo.</string>
+          </property>
+          <property name="text">
+           <string>Localizar</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/embudo.png</normaloff>:/Imagenes/embudo.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>Introducir palabra o caracteres a buscar, luego pulsar el boton de localizar.</string>
+          </property>
+          <property name="statusTip">
+           <string>Introducir palabra o caracteres a buscar, luego pulsar el boton de localizar.</string>
+          </property>
+          <property name="whatsThis">
+           <string>Introducir palabra o caracteres a buscar, luego pulsar el boton de localizar.</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QPushButton" name="pushButton_18">
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/adelante.png</normaloff>:/Imagenes/adelante.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLabel" name="label_2">
+          <property name="styleSheet">
+           <string notr="true">font: bold;
+color: rgb(0, 0, 255);</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="3">
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Opciones de urpmi que pueden ser elegidas entre las mostradas.</string>
+     </property>
+     <property name="statusTip">
+      <string>Opciones de urpmi que pueden ser elegidas entre las mostradas.</string>
+     </property>
+     <property name="whatsThis">
+      <string>Opciones de urpmi que pueden ser elegidas entre las mostradas.</string>
+     </property>
+     <property name="title">
+      <string>Opciones de urpmi (para actualizacion)</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="checkBox_3">
+        <property name="toolTip">
+         <string>Opcion de urpmi interactivo</string>
+        </property>
+        <property name="statusTip">
+         <string>Opcion de urpmi interactivo</string>
+        </property>
+        <property name="whatsThis">
+         <string>Opcion de urpmi interactivo</string>
+        </property>
+        <property name="text">
+         <string>--auto (por defecto)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="checkBox">
+        <property name="toolTip">
+         <string>Opcion de urpmi para elegir todas las opciones posibles</string>
+        </property>
+        <property name="statusTip">
+         <string>Opcion de urpmi para elegir todas las opciones posibles</string>
+        </property>
+        <property name="whatsThis">
+         <string>Opcion de urpmi para elegir todas las opciones posibles</string>
+        </property>
+        <property name="text">
+         <string>--a</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QCheckBox" name="checkBox_2">
+        <property name="toolTip">
+         <string>Opcion de urpmi para forzar la instalaciones</string>
+        </property>
+        <property name="statusTip">
+         <string>Opcion de urpmi para forzar la instalaciones</string>
+        </property>
+        <property name="whatsThis">
+         <string>Opcion de urpmi para forzar la instalaciones</string>
+        </property>
+        <property name="text">
+         <string>--force (No recomendado)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QCheckBox" name="checkBox_4">
+        <property name="toolTip">
+         <string>Opcion de urpmi para usar todas las opciones posibles de paquete</string>
+        </property>
+        <property name="statusTip">
+         <string>Opcion de urpmi para usar todas las opciones posibles de paquete</string>
+        </property>
+        <property name="whatsThis">
+         <string>Opcion de urpmi para usar todas las opciones posibles de paquete</string>
+        </property>
+        <property name="text">
+         <string>--fuzzy (No recomendado)</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="2" rowspan="2">
+    <layout class="QGridLayout" name="gridLayout_5">
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="title">
+        <string>Global</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="pushButton">
+          <property name="minimumSize">
+           <size>
+            <width>131</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Actualizacion de todos los paquetes de la base de datos.</string>
+          </property>
+          <property name="statusTip">
+           <string>Actualizacion de todos los paquetes de la base de datos.</string>
+          </property>
+          <property name="whatsThis">
+           <string>Actualizacion de todos los paquetes de la base de datos.</string>
+          </property>
+          <property name="text">
+           <string>Actualizar todos</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/rpm.png</normaloff>:/Imagenes/rpm.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="pushButton_6">
+          <property name="minimumSize">
+           <size>
+            <width>131</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Se realiza la comprobacion de todos los paquetes de la base de datos (Es un proceso muy largo, pero te informa de muchos datos adicionales).</string>
+          </property>
+          <property name="statusTip">
+           <string>Se realiza la comprobacion de todos los paquetes de la base de datos (Es un proceso muy largo, pero te informa de muchos datos adicionales).</string>
+          </property>
+          <property name="whatsThis">
+           <string>Se realiza la comprobacion de todos los paquetes de la base de datos (Es un proceso muy largo, pero te informa de muchos datos adicionales).</string>
+          </property>
+          <property name="text">
+           <string>Comprobar todos</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/lupa.png</normaloff>:/Imagenes/lupa.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QPushButton" name="pushButton_7">
+          <property name="minimumSize">
+           <size>
+            <width>131</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Se depura la base de datos activos, eliminando los que no se pueden instalar.</string>
+          </property>
+          <property name="statusTip">
+           <string>Se depura la base de datos activos, eliminando los que no se pueden instalar.</string>
+          </property>
+          <property name="whatsThis">
+           <string>Se depura la base de datos activos, eliminando los que no se pueden instalar.</string>
+          </property>
+          <property name="text">
+           <string>Depurar rpms</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QCheckBox" name="checkBox_5">
+          <property name="toolTip">
+           <string>Si esta marcado no se comprobaran los paquetes por lo que se acelera en un 50% el tiempo de espera para finalizar el proceso</string>
+          </property>
+          <property name="statusTip">
+           <string>Si esta marcado no se comprobaran los paquetes por lo que se acelera en un 50% el tiempo de espera para finalizar el proceso</string>
+          </property>
+          <property name="whatsThis">
+           <string>Si esta marcado no se comprobaran los paquetes por lo que se acelera en un 50% el tiempo de espera para finalizar el proceso</string>
+          </property>
+          <property name="text">
+           <string>No realizar comprobacion</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QPushButton" name="pushButton_19">
+          <property name="toolTip">
+           <string>Limpiar los datos cargados.</string>
+          </property>
+          <property name="statusTip">
+           <string>Limpiar los datos cargados.</string>
+          </property>
+          <property name="whatsThis">
+           <string>Limpiar los datos cargados.</string>
+          </property>
+          <property name="text">
+           <string>Vaciar datos cargados</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/escoba.png</normaloff>:/Imagenes/escoba.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Individual</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="0" colspan="2">
+         <widget class="QPushButton" name="pushButton_10">
+          <property name="minimumSize">
+           <size>
+            <width>131</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Marca la linea activa de la base de datos para su tratamiento.</string>
+          </property>
+          <property name="statusTip">
+           <string>Marca la linea activa de la base de datos para su tratamiento.</string>
+          </property>
+          <property name="whatsThis">
+           <string>Marca la linea activa de la base de datos para su tratamiento.</string>
+          </property>
+          <property name="text">
+           <string>Marcar seleccionado</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/good.png</normaloff>:/Imagenes/good.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" colspan="2">
+         <widget class="QPushButton" name="pushButton_5">
+          <property name="toolTip">
+           <string>Comprueba la disponibilidad solo el registro marcado.</string>
+          </property>
+          <property name="statusTip">
+           <string>Comprueba la disponibilidad solo el registro marcado.</string>
+          </property>
+          <property name="whatsThis">
+           <string>Comprueba la disponibilidad solo el registro marcado.</string>
+          </property>
+          <property name="text">
+           <string>Comprobar seleccionado</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/lupaO.png</normaloff>:/Imagenes/lupaO.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <widget class="QPushButton" name="pushButton_12">
+          <property name="minimumSize">
+           <size>
+            <width>131</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Actualiza solo el registro marcado.</string>
+          </property>
+          <property name="statusTip">
+           <string>Actualiza solo el registro marcado.</string>
+          </property>
+          <property name="whatsThis">
+           <string>Actualiza solo el registro marcado.</string>
+          </property>
+          <property name="text">
+           <string>Actualizar marcados</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/rpm.png</normaloff>:/Imagenes/rpm.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0" colspan="2">
+         <widget class="QPushButton" name="pushButton_11">
+          <property name="minimumSize">
+           <size>
+            <width>131</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Elimina todos los registros marcados anteriormente.</string>
+          </property>
+          <property name="statusTip">
+           <string>Elimina todos los registros marcados anteriormente.</string>
+          </property>
+          <property name="whatsThis">
+           <string>Elimina todos los registros marcados anteriormente.</string>
+          </property>
+          <property name="text">
+           <string>Eliminar seleccionado</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="2">
+         <widget class="QPushButton" name="pushButton_8">
+          <property name="minimumSize">
+           <size>
+            <width>131</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Actualiza todos los registros marcados anteriormente.</string>
+          </property>
+          <property name="statusTip">
+           <string>Actualiza todos los registros marcados anteriormente.</string>
+          </property>
+          <property name="whatsThis">
+           <string>Actualiza todos los registros marcados anteriormente.</string>
+          </property>
+          <property name="text">
+           <string>Actualizar seleccionado</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/rpm.png</normaloff>:/Imagenes/rpm.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>pushButton_16</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>pushButton_9</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>pushButton_15</tabstop>
+  <tabstop>pushButton_14</tabstop>
+  <tabstop>checkBox_3</tabstop>
+  <tabstop>checkBox</tabstop>
+  <tabstop>checkBox_2</tabstop>
+  <tabstop>checkBox_4</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>pushButton_7</tabstop>
+  <tabstop>checkBox_5</tabstop>
+  <tabstop>pushButton_10</tabstop>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>pushButton_12</tabstop>
+  <tabstop>pushButton_11</tabstop>
+  <tabstop>pushButton_8</tabstop>
+  <tabstop>pushButton_13</tabstop>
+  <tabstop>tableWidget</tabstop>
+ </tabstops>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,1862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Grabador</class>
+ <widget class="QDialog" name="Grabador">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1085</width>
+    <height>745</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Grabador v.0.1.0</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/grabain.png</normaloff>:/Imagenes/grabain.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_8">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="1" column="0" colspan="3">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Opciones de salida</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="1" column="4">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="radioButton">
+        <property name="toolTip">
+         <string>Se graba desde la entrada de audio</string>
+        </property>
+        <property name="statusTip">
+         <string>Se graba desde la entrada de audio</string>
+        </property>
+        <property name="whatsThis">
+         <string>Se graba desde la entrada de audio</string>
+        </property>
+        <property name="text">
+         <string>Utilizar audio interno</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QRadioButton" name="radioButton_2">
+        <property name="toolTip">
+         <string>Se graba desde la entrada de microfono</string>
+        </property>
+        <property name="statusTip">
+         <string>Se graba desde la entrada de microfono</string>
+        </property>
+        <property name="whatsThis">
+         <string>Se graba desde la entrada de microfono</string>
+        </property>
+        <property name="text">
+         <string>Utilizar microfono</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QComboBox" name="comboBox">
+        <property name="toolTip">
+         <string>Entradas accesibles</string>
+        </property>
+        <property name="statusTip">
+         <string>Entradas accesibles</string>
+        </property>
+        <property name="whatsThis">
+         <string>Entradas accesibles</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="toolTip">
+         <string>Realizar cambio de salida de grabacion </string>
+        </property>
+        <property name="statusTip">
+         <string>Realizar cambio de salida de grabacion</string>
+        </property>
+        <property name="whatsThis">
+         <string>Realizar cambio de salida de grabacion</string>
+        </property>
+        <property name="text">
+         <string>Realizar cambios</string>
+        </property>
+        <property name="icon">
+         <iconset resource="recoverdrake.qrc">
+          <normaloff>:/Imagenes/arreglo.png</normaloff>:/Imagenes/arreglo.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="8" column="2">
+    <widget class="QPushButton" name="pushButton">
+     <property name="toolTip">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="statusTip">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="whatsThis">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="text">
+      <string>Salir</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="0" colspan="3">
+    <layout class="QGridLayout" name="gridLayout_4">
+     <item row="1" column="0">
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="toolTip">
+        <string>Destino de la grabacion</string>
+       </property>
+       <property name="statusTip">
+        <string>Destino de la grabacion</string>
+       </property>
+       <property name="whatsThis">
+        <string>Destino de la grabacion</string>
+       </property>
+       <property name="title">
+        <string>Ruta para grabar</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pushButton_5">
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Seleccion de la ruta de grabacion</string>
+          </property>
+          <property name="statusTip">
+           <string>Seleccion de la ruta de grabacion</string>
+          </property>
+          <property name="whatsThis">
+           <string>Seleccion de la ruta de grabacion</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit">
+          <property name="toolTip">
+           <string>Ruta de grabacion</string>
+          </property>
+          <property name="statusTip">
+           <string>Ruta de grabacion</string>
+          </property>
+          <property name="whatsThis">
+           <string>Ruta de grabacion</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QGroupBox" name="groupBox_3">
+       <property name="toolTip">
+        <string>Desde donde recoge el sonido/audio</string>
+       </property>
+       <property name="statusTip">
+        <string>Desde donde recoge el sonido/audio</string>
+       </property>
+       <property name="whatsThis">
+        <string>Desde donde recoge el sonido/audio</string>
+       </property>
+       <property name="title">
+        <string>Fuente de entrada</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="3">
+         <widget class="QPushButton" name="pushButton_7">
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Localizar fichero de audio</string>
+          </property>
+          <property name="statusTip">
+           <string>Localizar fichero de audio</string>
+          </property>
+          <property name="whatsThis">
+           <string>Localizar fichero de audio</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QRadioButton" name="radioButton_4">
+          <property name="toolTip">
+           <string>Desde una direccion de internet</string>
+          </property>
+          <property name="statusTip">
+           <string>Desde una direccion de internet</string>
+          </property>
+          <property name="whatsThis">
+           <string>Desde una direccion de internet</string>
+          </property>
+          <property name="text">
+           <string>Internet</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QRadioButton" name="radioButton_3">
+          <property name="toolTip">
+           <string>Desde un archivo de audio</string>
+          </property>
+          <property name="statusTip">
+           <string>Desde un archivo de audio</string>
+          </property>
+          <property name="whatsThis">
+           <string>Desde un archivo de audio</string>
+          </property>
+          <property name="text">
+           <string>Archivo</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QLineEdit" name="lineEdit_2">
+          <property name="toolTip">
+           <string>Ruta de la fuente de entrada</string>
+          </property>
+          <property name="statusTip">
+           <string>Ruta de la fuente de entrada</string>
+          </property>
+          <property name="whatsThis">
+           <string>Ruta de la fuente de entrada</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="radioButton_5">
+          <property name="toolTip">
+           <string>Cualquier sonido de entrada</string>
+          </property>
+          <property name="statusTip">
+           <string>Cualquier sonido de entrada</string>
+          </property>
+          <property name="whatsThis">
+           <string>Cualquier sonido de entrada</string>
+          </property>
+          <property name="text">
+           <string>Lo que se oye</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QRadioButton" name="radioButton_8">
+          <property name="toolTip">
+           <string>Temporizador para grabacion</string>
+          </property>
+          <property name="statusTip">
+           <string>Temporizador para grabacion</string>
+          </property>
+          <property name="whatsThis">
+           <string>Temporizador para grabacion</string>
+          </property>
+          <property name="text">
+           <string>Temporizador</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="2">
+      <widget class="QGroupBox" name="groupBox_7">
+       <property name="toolTip">
+        <string>Tipo de grabacion</string>
+       </property>
+       <property name="statusTip">
+        <string>Tipo de grabacion</string>
+       </property>
+       <property name="whatsThis">
+        <string>Tipo de grabacion</string>
+       </property>
+       <property name="title">
+        <string>Opciones de grabacion</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_12">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="radioButton_6">
+          <property name="toolTip">
+           <string>Se selecciona solo grabacion de audio</string>
+          </property>
+          <property name="statusTip">
+           <string>Se selecciona solo grabacion de audio</string>
+          </property>
+          <property name="whatsThis">
+           <string>Se selecciona solo grabacion de audio</string>
+          </property>
+          <property name="text">
+           <string>Audio</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QRadioButton" name="radioButton_7">
+          <property name="toolTip">
+           <string>Se selecciona audio y video</string>
+          </property>
+          <property name="statusTip">
+           <string>Se selecciona audio y video</string>
+          </property>
+          <property name="whatsThis">
+           <string>Se selecciona audio y video</string>
+          </property>
+          <property name="text">
+           <string>Audio+Video</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>VACIO</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="3">
+    <layout class="QGridLayout" name="gridLayout_6">
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="groupBox_4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="title">
+        <string>Temporizador de grabaciones</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="2" column="4">
+         <widget class="QPushButton" name="pushButton_13">
+          <property name="text">
+           <string>Iniciar temporizador</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/apagar.jpeg</normaloff>:/Imagenes/apagar.jpeg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pushButton_9">
+          <property name="text">
+           <string>Modificar</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/boli.png</normaloff>:/Imagenes/boli.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="pushButton_10">
+          <property name="text">
+           <string>Eliminar</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="pushButton_8">
+          <property name="text">
+           <string>Insertar</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/filesave.png</normaloff>:/Imagenes/filesave.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <spacer name="horizontalSpacer_9">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0" colspan="5">
+         <widget class="QTableWidget" name="tableWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>500</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Ventana de lista de archivos cargados</string>
+          </property>
+          <property name="statusTip">
+           <string>Ventana de lista de archivos cargados</string>
+          </property>
+          <property name="whatsThis">
+           <string>Ventana de lista de archivos cargados</string>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::AnyKeyPressed</set>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <column>
+           <property name="text">
+            <string>Ruta</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Fuente</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Hora inicio</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Hora final</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QGroupBox" name="groupBox_26">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Informacion de archivo de audio</string>
+       </property>
+       <property name="statusTip">
+        <string>Informacion de archivo de audio</string>
+       </property>
+       <property name="whatsThis">
+        <string>Informacion de archivo de audio</string>
+       </property>
+       <property name="title">
+        <string>Informacion del archivo</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_93">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="1" column="0" rowspan="2" colspan="2">
+         <layout class="QGridLayout" name="gridLayout_98">
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_169">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Nombre mp3</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="label_170">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Titulo Cancion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="label_171">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Titulo Album</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLabel" name="label_172">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Nombre Artista</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLabel" name="label_173">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>Comentarios</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_30">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Nombre del artista</string>
+            </property>
+            <property name="statusTip">
+             <string>Nombre del artista</string>
+            </property>
+            <property name="whatsThis">
+             <string>Nombre del artista</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_31">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Titulo del album</string>
+            </property>
+            <property name="statusTip">
+             <string>Titulo del album</string>
+            </property>
+            <property name="whatsThis">
+             <string>Titulo del album</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_32">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Titulo de la cancion</string>
+            </property>
+            <property name="statusTip">
+             <string>Titulo de la cancion</string>
+            </property>
+            <property name="whatsThis">
+             <string>Titulo de la cancion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_33">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Nombre del archivo</string>
+            </property>
+            <property name="statusTip">
+             <string>Nombre del archivo</string>
+            </property>
+            <property name="whatsThis">
+             <string>Nombre del archivo</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_34">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Comentarios del archivo</string>
+            </property>
+            <property name="statusTip">
+             <string>Comentarios del archivo</string>
+            </property>
+            <property name="whatsThis">
+             <string>Comentarios del archivo</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <layout class="QGridLayout" name="gridLayout_97">
+          <item row="0" column="1">
+           <spacer name="horizontalSpacer_14">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="7">
+           <widget class="QLineEdit" name="lineEdit_29">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Numero de pista</string>
+            </property>
+            <property name="statusTip">
+             <string>Numero de pista</string>
+            </property>
+            <property name="whatsThis">
+             <string>Numero de pista</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QLabel" name="label_168">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Ano</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="6">
+           <widget class="QLabel" name="label_167">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Numero de pista/Total pistas</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QComboBox" name="comboBox_2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Tipo de genero musical</string>
+            </property>
+            <property name="statusTip">
+             <string>Tipo de genero musical</string>
+            </property>
+            <property name="whatsThis">
+             <string>Tipo de genero musical</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="8">
+           <widget class="QLabel" name="label_166">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string> /</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QLineEdit" name="lineEdit_28">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Anuario de la cancion</string>
+            </property>
+            <property name="statusTip">
+             <string>Anuario de la cancion</string>
+            </property>
+            <property name="whatsThis">
+             <string>Anuario de la cancion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="9">
+           <widget class="QLineEdit" name="lineEdit_27">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Pistas totales</string>
+            </property>
+            <property name="statusTip">
+             <string>Pistas totales</string>
+            </property>
+            <property name="whatsThis">
+             <string>Pistas totales</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_165">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Genero</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="0">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+       <zorder></zorder>
+       <zorder>verticalSpacer</zorder>
+      </widget>
+     </item>
+     <item row="2" column="0" colspan="2">
+      <widget class="QGroupBox" name="groupBox_6">
+       <property name="title">
+        <string>Controles</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_11">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="gridLayout_13">
+          <item row="1" column="3">
+           <widget class="QPushButton" name="pushButton_12">
+            <property name="toolTip">
+             <string>Lanza la cancion seleccionada</string>
+            </property>
+            <property name="statusTip">
+             <string>Lanza la cancion seleccionada</string>
+            </property>
+            <property name="whatsThis">
+             <string>Lanza la cancion seleccionada</string>
+            </property>
+            <property name="text">
+             <string>Play</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/play.png</normaloff>:/Imagenes/play.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="12">
+           <widget class="Phonon::VolumeSlider" name="volumeSlider_4" native="true">
+            <property name="toolTip">
+             <string>Volumen del sonido</string>
+            </property>
+            <property name="statusTip">
+             <string>Volumen del sonido</string>
+            </property>
+            <property name="whatsThis">
+             <string>Volumen del sonido</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="14">
+           <widget class="QPushButton" name="pushButton_4">
+            <property name="toolTip">
+             <string>Ecualizador grafico</string>
+            </property>
+            <property name="statusTip">
+             <string>Ecualizador grafico</string>
+            </property>
+            <property name="whatsThis">
+             <string>Ecualizador grafico</string>
+            </property>
+            <property name="text">
+             <string>Ecualizador</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/sound.png</normaloff>:/Imagenes/sound.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="7">
+           <widget class="Phonon::SeekSlider" name="seekSlider_2" native="true">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Posicionamiento de la cancion</string>
+            </property>
+            <property name="statusTip">
+             <string>Posicionamiento de la cancion</string>
+            </property>
+            <property name="whatsThis">
+             <string>Posicionamiento de la cancion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="pushButton_3">
+            <property name="toolTip">
+             <string>Cargar una grabacion para ser escuchada</string>
+            </property>
+            <property name="statusTip">
+             <string>Cargar una grabacion para ser escuchada</string>
+            </property>
+            <property name="whatsThis">
+             <string>Cargar una grabacion para ser escuchada</string>
+            </property>
+            <property name="text">
+             <string>Cargar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/abrir.png</normaloff>:/Imagenes/abrir.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QPushButton" name="pushButton_6">
+            <property name="text">
+             <string>Pausa</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/pause.png</normaloff>:/Imagenes/pause.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="6">
+           <widget class="QLCDNumber" name="lcdNumber_2">
+            <property name="maximumSize">
+             <size>
+              <width>122</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>7</pointsize>
+             </font>
+            </property>
+            <property name="toolTip">
+             <string>Tiempo transcurrido de la pista</string>
+            </property>
+            <property name="statusTip">
+             <string>Tiempo transcurrido de la pista</string>
+            </property>
+            <property name="whatsThis">
+             <string>Tiempo transcurrido de la pista</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Sunken</enum>
+            </property>
+            <property name="lineWidth">
+             <number>1</number>
+            </property>
+            <property name="smallDecimalPoint">
+             <bool>true</bool>
+            </property>
+            <property name="digitCount">
+             <number>8</number>
+            </property>
+            <property name="mode">
+             <enum>QLCDNumber::Dec</enum>
+            </property>
+            <property name="segmentStyle">
+             <enum>QLCDNumber::Flat</enum>
+            </property>
+            <property name="value" stdset="0">
+             <double>0.000000000000000</double>
+            </property>
+            <property name="intValue" stdset="0">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="pushButton_15">
+            <property name="toolTip">
+             <string>Realizar una grabacion</string>
+            </property>
+            <property name="statusTip">
+             <string>Realizar una grabacion</string>
+            </property>
+            <property name="whatsThis">
+             <string>Realizar una grabacion</string>
+            </property>
+            <property name="text">
+             <string>Grabar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/grabaout.png</normaloff>:/Imagenes/grabaout.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="13">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="5">
+           <widget class="QPushButton" name="pushButton_14">
+            <property name="toolTip">
+             <string>Parar el sonido actual</string>
+            </property>
+            <property name="statusTip">
+             <string>Parar el sonido actual</string>
+            </property>
+            <property name="whatsThis">
+             <string>Parar el sonido actual</string>
+            </property>
+            <property name="text">
+             <string>Stop</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/stop1.png</normaloff>:/Imagenes/stop1.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="pushButton_11">
+            <property name="text">
+             <string>Capturar escritorio</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/EscritorioOut.png</normaloff>:/Imagenes/EscritorioOut.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="1" column="0" colspan="2">
+      <widget class="QGroupBox" name="groupBox_5">
+       <property name="title">
+        <string>Horario</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_14">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="0" colspan="5">
+         <layout class="QGridLayout" name="gridLayout_10">
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Direccion internet</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="pushButton_16">
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEdit_3"/>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLineEdit" name="lineEdit_4"/>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0" colspan="5">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <spacer name="horizontalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="1">
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="2">
+         <widget class="QLabel" name="label_28">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Hora Local</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QLabel" name="label_29">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>VACIO</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" rowspan="2">
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="2" column="9">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_6">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Mes</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="7" colspan="2">
+           <widget class="QLabel" name="label_13">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Minutos</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="6">
+           <widget class="QLabel" name="label_11">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Hora</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QSpinBox" name="spinBox">
+            <property name="specialValueText">
+             <string>01</string>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>31</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="9" colspan="2">
+           <widget class="QLabel" name="label_12">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Segundos</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>/</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QSpinBox" name="spinBox_2">
+            <property name="inputMethodHints">
+             <set>Qt::ImhExclusiveInputMask</set>
+            </property>
+            <property name="specialValueText">
+             <string>01</string>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>12</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <widget class="QSpinBox" name="spinBox_3">
+            <property name="minimum">
+             <number>2012</number>
+            </property>
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="6">
+           <widget class="QSpinBox" name="spinBox_6">
+            <property name="specialValueText">
+             <string>00</string>
+            </property>
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>23</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="4">
+           <widget class="QLabel" name="label_8">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Ano</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>/</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="8">
+           <widget class="QSpinBox" name="spinBox_4">
+            <property name="specialValueText">
+             <string>00</string>
+            </property>
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>59</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="7">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="5">
+           <widget class="QLabel" name="label_15">
+            <property name="text">
+             <string>Selecciona fecha inicio</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Dia</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="10">
+           <widget class="QSpinBox" name="spinBox_5">
+            <property name="specialValueText">
+             <string>00</string>
+            </property>
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>59</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="6" colspan="5">
+           <widget class="QLabel" name="label_14">
+            <property name="text">
+             <string>Selecciona hora inicio</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="4" rowspan="2">
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="2" column="9">
+           <widget class="QLabel" name="label_16">
+            <property name="text">
+             <string>:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_17">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Mes</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="7" colspan="2">
+           <widget class="QLabel" name="label_18">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Minutos</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="6">
+           <widget class="QLabel" name="label_19">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Hora</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QSpinBox" name="spinBox_7">
+            <property name="specialValueText">
+             <string>01</string>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>31</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="9" colspan="2">
+           <widget class="QLabel" name="label_20">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Segundos</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="label_21">
+            <property name="text">
+             <string>/</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QSpinBox" name="spinBox_8">
+            <property name="inputMethodHints">
+             <set>Qt::ImhExclusiveInputMask</set>
+            </property>
+            <property name="specialValueText">
+             <string>01</string>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>12</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <widget class="QSpinBox" name="spinBox_9">
+            <property name="minimum">
+             <number>2012</number>
+            </property>
+            <property name="maximum">
+             <number>10000</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="6">
+           <widget class="QSpinBox" name="spinBox_10">
+            <property name="specialValueText">
+             <string>00</string>
+            </property>
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>23</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLabel" name="label_23">
+            <property name="text">
+             <string>/</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="4">
+           <widget class="QLabel" name="label_22">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Ano</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="8">
+           <widget class="QSpinBox" name="spinBox_11">
+            <property name="specialValueText">
+             <string>00</string>
+            </property>
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>59</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="7">
+           <widget class="QLabel" name="label_24">
+            <property name="text">
+             <string>:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="5">
+           <widget class="QLabel" name="label_25">
+            <property name="text">
+             <string>Selecciona fecha final</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_26">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Dia</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="6" colspan="5">
+           <widget class="QLabel" name="label_27">
+            <property name="text">
+             <string>Selecciona hora final</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="10">
+           <widget class="QSpinBox" name="spinBox_12">
+            <property name="specialValueText">
+             <string>00</string>
+            </property>
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>59</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="7" column="0" colspan="3">
+    <widget class="QTextEdit" name="textEdit"/>
+   </item>
+   <item row="6" column="0" colspan="3">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Consola de procesos</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Phonon::SeekSlider</class>
+   <extends>QWidget</extends>
+   <header location="global">phonon/seekslider.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Phonon::VolumeSlider</class>
+   <extends>QWidget</extends>
+   <header location="global">phonon/volumeslider.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

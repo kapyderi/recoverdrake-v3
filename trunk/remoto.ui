@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>remoto</class>
+ <widget class="QDialog" name="remoto">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>472</width>
+    <height>185</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>472</width>
+    <height>234</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+    <weight>75</weight>
+    <italic>false</italic>
+    <bold>true</bold>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Conexion remota viewer</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/conexion.png</normaloff>:/Imagenes/conexion.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">font: bold;</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="styleSheet">
+      <string notr="true">font: 18pt &quot;Sans Serif&quot;;
+font: bold;</string>
+     </property>
+     <property name="text">
+      <string>Conexion remota a VNC</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;img src=&quot;:/Imagenes/conexion.png&quot; width=&quot;110&quot; height=&quot;85&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="styleSheet">
+      <string notr="true">font: 75 9pt &quot;Sans Serif&quot;;
+font: bold;</string>
+     </property>
+     <property name="text">
+      <string>IP del servidor (:port*):</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit"/>
+   </item>
+   <item row="2" column="1" colspan="2">
+    <widget class="QLabel" name="label_4">
+     <property name="styleSheet">
+      <string notr="true">font: 75 7pt &quot;Sans Serif&quot;;
+color: rgb(0, 0, 255);
+font: bold;</string>
+     </property>
+     <property name="text">
+      <string>* Puerto opcional. Ejemplo (192.168.1.50:5900)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="toolTip">
+      <string>Conexion remota</string>
+     </property>
+     <property name="statusTip">
+      <string>Conexion remota</string>
+     </property>
+     <property name="whatsThis">
+      <string>Conexion remota</string>
+     </property>
+     <property name="text">
+      <string>Conectar</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/conexion.png</normaloff>:/Imagenes/conexion.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="toolTip">
+      <string>Nos vamos..</string>
+     </property>
+     <property name="statusTip">
+      <string>Nos vamos..</string>
+     </property>
+     <property name="whatsThis">
+      <string>Nos vamos..</string>
+     </property>
+     <property name="text">
+      <string>Salir</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>22</width>
+       <height>22</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

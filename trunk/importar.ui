@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>importar</class>
+ <widget class="QDialog" name="importar">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>701</width>
+    <height>371</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Importar datos</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/migrationtools.png</normaloff>:/Imagenes/migrationtools.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="10" column="1">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="text">
+      <string>Salir</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Valor destino:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1" colspan="2">
+    <widget class="QPushButton" name="pushButton">
+     <property name="text">
+      <string>Relacionar</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/service-mdk.png</normaloff>:/Imagenes/service-mdk.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit"/>
+   </item>
+   <item row="1" column="1" colspan="2">
+    <widget class="QComboBox" name="comboBox_2">
+     <item>
+      <property name="text">
+       <string>titulo</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>titulo_original</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>edad</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>drama</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>comedia</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>accion</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>aventura</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>scifi</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>romantica</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>musical</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>catastrofes</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>suspense</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>fantasia</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>erotico</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>porno</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>historico</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>policiaco</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>terror</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>western</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>belico</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>deportes</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>animacion</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>documental</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>gore_zombies</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>caratula</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>actor</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>secundario</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>calificacion</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>sinopsis</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>soporte</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>posicion</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>visionada</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>duracion</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>color</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>vose</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>formato</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>director</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Fecha</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="5" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineEdit_2"/>
+   </item>
+   <item row="0" column="1" colspan="2">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Campos de la Base de Datos:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1" colspan="2">
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="text">
+      <string>Deshacer relacion</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/snapshots.png</normaloff>:/Imagenes/snapshots.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="2">
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="text">
+      <string>Importar</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/migrationtools.png</normaloff>:/Imagenes/migrationtools.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Valor origen:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="9" column="2">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>10</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+color: rgb(0, 0, 255);
+font: bold;</string>
+     </property>
+     <property name="text">
+      <string>*Los campos que no esten relacionados no se importaran a la base de datos.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" rowspan="10">
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <column>
+      <property name="text">
+       <string>Campo a importar</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Campo DB a relacionar</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Valor origen</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Valor destino</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Aceptado</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>
