@@ -1,0 +1,38 @@
+#!/bin/bash
+# Nombre: RecoverDrake -- RecoverKTTSD
+# Parte: Recuperar KTTSD (Lector de voces)
+# Versión: 1.6.0
+
+user=`who|awk 'NR<(NF-NR) {print $1}'|cut -d ' ' -f2`
+      echo Eliminando configuración anterior...
+      urpme jovie
+      urpme kttsd 
+      urpme libkttsd4
+      echo Descomprimiendo ficheros...
+      FILE=`zenity --file-selection --filename=/home/$user/Documentos --directory --title="Seleccione el directorio donde guardar los ficheros necesarios"`
+
+        case $? in
+                 0)
+                        echo "\"$FILE\" seleccionado.";;
+                 1)
+                        echo "No ha seleccionado ningún archivo.";
+			exit 1;;
+                -1)
+                        echo "No ha seleccionado ningún archivo.";
+			exit 1;;
+        esac
+      tar xvzf /root/kttsd.tar.gz --directory=$FILE
+      echo "Instalando paquete local..."
+      sed -i '/kttsd/d' /etc/urpmi/skip.list 
+      sed -i '/libkttsd4/d' /etc/urpmi/skip.list
+      sed -i '/jovie/d' /etc/urpmi/skip.list
+      urpmi $FILE/libkttsd4.rpm
+      urpmi $FILE/kttsd.rpm
+      echo Excluyendo paquetes a actualizar
+      echo kttsd >> /etc/urpmi/skip.list
+      echo libkttsd4 >> /etc/urpmi/skip.list
+      echo jovie >> /etc/urpmi/skip.list
+      echo Paquetes introducidos satisfactoriamente.
+      echo Borrando ficheros temporales...
+      rm -f $FILE/kttsd.rpm libkttsd4.rpm
+      echo Proceso realizado con exito.

@@ -1,0 +1,37 @@
+#!/bin/bash
+# Nombre: RecoverDrake -- RecoverOrphans
+# Parte: Eliminar paquetes huerfanos
+# Versión: 1.6.0
+
+user=`who|awk 'NR<(NF-NR) {print $1}'|cut -d ' ' -f1`
+fecha=`date +%d%m%y`
+      
+FILE=`zenity --save --filename=/home/$user/Documentos/BackOrphans$fecha.lst --file-selection --title="Seleccione el fichero de volcado de paquetes huerfanos"`
+     case $? in
+                 0)
+                        echo "\"$FILE\" seleccionado.";;
+                 1)
+                        echo "No ha seleccionado ningún archivo.";
+			exit 1;;
+                -1)
+                        echo "No ha seleccionado ningún archivo.";
+			exit 1;;
+     esac
+       
+     echo "Buscando paquetes huerfanos..."
+     (
+     echo "10"; sleep 1
+     echo "#Procesando..."; sleep 1
+     echo "50"; sleep 1 
+     echo "#Procesando datos..."; sleep 1
+     echo "100"
+     ) | 
+     zenity --progress --title="Comprobación de repositorios" --text="Actualizando sistema...espera por favor" --auto-close  --auto-kill --percentage=0
+if [ "$?" = -1 ] ; then
+ zenity --error \
+ --text="Eliminación cancelada."
+fi
+     echo Realizando proceso...
+     urpme --auto-orphans >> $FILE
+     sed -i -e '/writing/d' -e '/Para/d' -e '/(paquetes/d' -e '/^$/d' $FILE
+     echo Proceso realizado con exito
