@@ -1,0 +1,73 @@
+#!/bin/bash
+# Nombre: RecoverDrake -- RecoverResRpm
+# Parte: Recuperar Rpm's
+# Versión: 1.6.0
+
+user=`who|awk 'NR<(NF-NR) {print $1}'|cut -d ' ' -f2`
+fecha=`date +%d%m%y`
+distro=`cat /etc/issue | cut -d " " -f1 | grep -v Kernel`
+if [ $distro="Mandriva" ]; then
+  variable=`rpm -qa|grep -i mandriva-release|grep -v common|cut -f3 -d '-'`
+fi;
+if [ $distro="Mageia" ]; then
+  variable=`rpm -qa|grep -i mageia-release|grep -v common|cut -f3 -d '-'`
+fi
+FILE=`zenity --filename=/home/$user/Documentos/PackAnt$distro$fecha.lst --file-selection --title="Seleccione el fichero de volcado de rpm's"`
+
+        case $? in
+                 0)
+                        echo "\"$FILE\" seleccionado.";;
+                 1)
+                        echo "No ha seleccionado ningún archivo.";
+			exit 1;;                        
+                -1)
+                        echo "No ha seleccionado ningún archivo.";
+			exit 1;;                        
+        esac
+FILE1=`zenity --save --filename=/home/$user/Documentos/RegRecover$distro$fecha.lst --file-selection --title="Seleccione el fichero de registro"`
+
+        case $? in
+                 0)
+                        echo "\"$FILE1\" seleccionado.";;
+                 1)
+                        echo "No ha seleccionado ningún archivo.";
+			exit 1;;                        
+                -1)
+                        echo "No ha seleccionado ningún archivo.";
+			exit 1;;                        
+        esac
+     if [ $distro="Mandriva" ]; then
+	echo Estas utilizando la versión de Mandria $variable
+      if [ $variable="free" ]; then  
+	sed -i 's/one-/free-/g' -i $FILE & sed -i 's/One-/Free-/g' -i $FILE & sed -i 's/-one/-free/g' -i $FILE & sed -i 's/-One/-Free/g' -i $FILE
+	sed -i 's/flash-/free-/g' -i $FILE & sed -i 's/Flash-/Free-/g' -i $FILE & sed -i 's/-flash/-free/g' -i $FILE & sed -i 's/-Flash/-Free/g' -i $FILE
+	sed -i 's/powerpack-/free-/g' -i $FILE & sed -i 's/Powerpack-/Free-/g' -i $FILE & sed -i 's/-powerpack/-free/g' -i $FILE & sed -i 's/-Powerpack/-Free/g' -i $FILE
+      fi;
+      if [ $variable="one" ]; then
+	sed -i 's/free-/one-/g' -i $FILE & sed -i 's/Free-/One-/g' -i $FILE & sed -i 's/-free/-one/g' -i $FILE & sed -i 's/-Free/-One/g' -i $FILE
+	sed -i 's/flash-/one-/g' -i $FILE & sed -i 's/Flash-/One-/g' -i $FILE & sed -i 's/-flash/-one/g' -i $FILE & sed -i 's/-Flash/-One/g' -i $FILE
+	sed -i 's/powerpack-/one-/g' -i $FILE & sed -i 's/Powerpack-/One-/g' -i $FILE & sed -i 's/-powerpack/-one/g' -i $FILE & sed -i 's/-Powerpack/-One/g' -i $FILE
+      fi;
+      if [ $variable="flash" ]; then
+	sed -i 's/free-/flash-/g' -i $FILE & sed -i 's/Free-/Flash-/g' -i $FILE & sed -i 's/-free/-flash/g' -i $FILE & sed -i 's/-Free/-Flash/g' -i $FILE
+	sed -i 's/one-/flash-/g' -i $FILE & sed -i 's/One-/Flash-/g' -i $FILE & sed -i 's/-one/-flash/g' -i $FILE & sed -i 's/-One/-Flash/g' -i $FILE
+	sed -i 's/powerpack-/flash-/g' -i $FILE & sed -i 's/Powerpack-/Flash-/g' -i $FILE & sed -i 's/-powerpack/-flash/g' -i $FILE & sed -i 's/-Powerpack/-Flash/g' -i $FILE
+      fi;
+      if [ $variable="powerpack" ]; then
+	sed -i 's/free-/powerpack-/g' -i $FILE & sed -i 's/Free-/Powerpack-/g' -i $FILE & sed -i 's/-free/-powerpack/g' -i $FILE & sed -i 's/-Free/-Powerpack/g' -i $FILE
+	sed -i 's/one-/powerpack-/g' -i $FILE & sed -i 's/One-/Powerpack-/g' -i $FILE & sed -i 's/-one/-powerpack/g' -i $FILE & sed -i 's/-One/-Powerpack/g' -i $FILE
+	sed -i 's/flash-/powerpack-/g' -i $FILE & sed -i 's/Flash-/Powerpack-/g' -i $FILE & sed -i 's/-flash/-powerpack/g' -i $FILE & sed -i 's/-Flash/-Powerpack/g' -i $FILE
+      fi;
+     fi;
+     if [ $distro="Maageia" ]; then
+	echo Estas utilizando la versión de Mageia $variable
+     fi;
+     echo Realizando volcado...
+     echo Registrando datos en el fichero RegRecover$distro$fecha.lst
+     echo Durante este proceso, solo podrá ver el acceso a los paquetes via Internet. Para poder hacer un seguimiento de lo que se esta procesando, tendrá que acceder al fichero de la ruta /home/$user/Documentos/RegRecover$distro$fecha.lst
+     echo Sea paciente, este proceso, suele ser prolongado, según paquetes a actualizar...
+     for volcado in `cat $FILE`
+       do
+         urpmi -a --auto --force $volcado >> $FILE1 
+       done
+     echo Proceso realizado con exito

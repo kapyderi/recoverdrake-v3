@@ -1,0 +1,13 @@
+#!/bin/bash
+# Nombre: RecoverDrake -- RecoverPswd
+# Parte: Recuperar Contraseña
+# Versión: 1.6.0
+
+user=`who|awk 'NR<(NF-NR) {print $1}'|cut -d ' ' -f2`
+            
+      Usuario=`zenity --entry \
+        --title="Nombre del usuario" \
+        --text="Introduzca el nombre del usuario a recuperar:" \
+        --entry-text="Usuario"` 
+      sudo passwd $Usuario
+      echo Contraseña recuperada.

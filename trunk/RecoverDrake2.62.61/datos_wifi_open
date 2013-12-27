@@ -1,0 +1,20 @@
+if [ "unplugged" != `ifplugstatus |grep $DEV |cut -d ' ' -f2` ]
+ then essid=`sudo iwconfig $DEV |grep $ESSID |cut -d: -f2 |cut -d ' ' -f1 |cut -d "\"" -f 2`
+ if [ "Not-Associated" = `sudo iwconfig $DEV | grep Access | cut -c 60-90` ]
+  then sudo iwconfig $DEV ap auto
+  RETURN=RECONEXION_REALIZADA_EN_1_FASE_OK
+ else
+  RETURN=ESTABILIDAD_WIFI_OK
+ fi
+else if [ "0" != `ping -c 5 $DGY |grep packet |cut -d ' ' -f 6 |cut -d % -f1` ]
+      then sudo service network restart
+      RETURN=RESTAURANDO_WIFI_1_FASE
+     else if [ "Not-Associated" = `sudo iwconfig $DEV | grep Access | cut -c 60-90` ]
+           then sudo iwconfig $DEV ap auto
+           RETURN=RECONEXION_REALIZADA_EN_2_FASE_OK
+          else 
+           RETURN=ESTABILIDAD_WIFI_OK
+          fi
+     fi
+fi 
+echo $RETURN\_`date`

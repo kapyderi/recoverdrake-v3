@@ -115,7 +115,7 @@ private:
     QString PonerMil(QString Valor);
     QString QuitarMil(QString Valor);
     QString CuotaCarencia;
-    int CalculoDC(int Numero);
+    int CalculoDC(int Numero, int Digit);
 
 };
 

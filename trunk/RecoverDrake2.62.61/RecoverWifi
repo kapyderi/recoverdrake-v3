@@ -1,0 +1,83 @@
+#!/bin/bash
+# Nombre: RecoverDrake -- RecoverWifi
+# Parte: Wifi intermitente
+# Versión: 1.6.0
+
+USER=`who|awk 'NR<(NF-NR) {print $1}'|cut -d ' ' -f2`
+conexion=`wc /root/wifidrake.log | cut -d ' ' -f2` 
+       echo "Creando configuración de usuario..."
+       user=`zenity --entry \
+       --title="Nombre del usuario" \
+       --text="Introduzca el nombre del usuario donde se generará el fichero .log:" \
+       --entry-text="$USER"`
+       zenity --info --text="
+       El usuario donde se generará el fichero .log, será en...
+
+       $user
+
+       La ruta será /home/$user/reconecta.log"  
+       if [ "$#" = 0 ]; then
+        zenity --question --title="Activar wifiDrake" --text="
+        Esta opción activa o desactiva WifiDrake
+
+        ¿Activar WifiDrake?" --ok-label="Activar" --cancel-label="Desactivar";
+        if [ "$?" = 1 ]; then
+         echo "Borrando configuración anterior...espere por favor."
+         rm -f /usr/sbin/reconecta
+         if [ "1" = $conexion ]; then
+          crontab -l > /root/crontab_old
+         else 
+          crontab /root/crontab_old
+         fi
+        else
+         echo "Borrando configuración anterior...espere por favor."
+         rm -f /usr/sbin/reconecta
+         if [ "1" = $conexion ]; then
+          crontab -l > /root/crontab_old
+         else
+          crontab /root/crontab_old
+         fi
+         echo "Creando configuración..."
+         DEV=`zenity --entry \
+         --title="Nombre de dispositivo" \
+         --text="Introduzca el nombre de su dispotivo inalambrico (Ejemplo: wlan0):" \
+         --entry-text="wlan0"` 
+         ESSID=`zenity --entry \
+         --title="ESSID de la red" \
+         --text="Introduzca el ESSID de su dispositivo inalambrico (ejemplo: WLAN_7F):" \
+         --entry-text="WLAN_7F"` 
+         DGY=`zenity --entry \
+         --title="Puera de enlace" \
+         --text="Introduzca la puerta de enlace de su router (Ejemplo: 192.168.1.1):" \
+         --entry-text="192.168.1.1"`
+         zenity --info --text="
+         Los datos introducidos son...
+
+         Nombre de dispositivo: $DEV
+         ESSID: $ESSID
+         DGY: $DGY"
+         echo "Generando fichero con su configuración..."
+echo "
+#!/bin/bash
+#
+# Script under GPL V3
+# Eduard Vidal i Tulsa  linux user 275003 (Original)
+# kapyderi (Adaptado del original con muchas mejoras para que realice ataques continuos, cada minuto y no la deje caer)
+# Tambien modifica directamente el crontab de root xD
+# kapyderi (Creador del rpm de Mandriva)
+# Versión sin incriptación
+# iwconfig
+DEV=$DEV                       # Dispositivo inalambrico
+ESSID="$ESSID"                 # ESSID de la red
+DGY=$DGY                       # Puerta de enlace" >> /usr/sbin/reconecta
+	 `cat /usr/sbin/datos_wifi_open >> /usr/sbin/reconecta`
+         echo "Dando permisos al fichero creado:.."
+         chmod 770 /usr/sbin/reconecta
+         echo "Instalando linea de ajuste en el crontab de root..."
+         cp /root/crontab_old /root/crontab_tmp
+         echo "*/1 * * * * /usr/sbin/reconecta >> /home/$user/reconecta.log" >> /root/crontab_tmp
+         crontab /root/crontab_tmp
+         rm -f /root/crontab_tmp
+         echo "Proceso realizado." >> /root/wifidrake.log
+        fi
+       fi
