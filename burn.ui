@@ -1,0 +1,1897 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>burn</class>
+ <widget class="QDialog" name="burn">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1009</width>
+    <height>776</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>KapyRecBurn</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/duplicado.png</normaloff>:/Imagenes/duplicado.png</iconset>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_5">
+   <item row="0" column="0" colspan="4">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="tabShape">
+      <enum>QTabWidget::Triangular</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="icon">
+       <iconset resource="recoverdrake.qrc">
+        <normaloff>:/Imagenes/carpeta.png</normaloff>:/Imagenes/carpeta.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Proyecto</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_18">
+       <item row="0" column="0">
+        <widget class="QScrollArea" name="scrollArea">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>965</width>
+            <height>656</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_10">
+           <item row="0" column="0" rowspan="3">
+            <layout class="QGridLayout" name="gridLayout_4">
+             <item row="1" column="0">
+              <widget class="QSplitter" name="splitter">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <widget class="QTableWidget" name="tableWidget">
+                <property name="toolTip">
+                 <string>Datos a grabar en el medio</string>
+                </property>
+                <property name="statusTip">
+                 <string>Datos a grabar en el medio</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Datos a grabar en el medio</string>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="dragEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="dragDropMode">
+                 <enum>QAbstractItemView::DropOnly</enum>
+                </property>
+                <property name="defaultDropAction">
+                 <enum>Qt::CopyAction</enum>
+                </property>
+                <property name="alternatingRowColors">
+                 <bool>true</bool>
+                </property>
+                <property name="selectionBehavior">
+                 <enum>QAbstractItemView::SelectRows</enum>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+                <attribute name="horizontalHeaderStretchLastSection">
+                 <bool>true</bool>
+                </attribute>
+                <column>
+                 <property name="text">
+                  <string>Nombre</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="recoverdrake.qrc">
+                   <normaloff>:/Imagenes/64px-Dolphin-icon.svg.png</normaloff>:/Imagenes/64px-Dolphin-icon.svg.png</iconset>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Ruta</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="recoverdrake.qrc">
+                   <normaloff>:/Imagenes/VLC.png</normaloff>:/Imagenes/VLC.png</iconset>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Tamano</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="recoverdrake.qrc">
+                   <normaloff>:/Imagenes/kttsd.png</normaloff>:/Imagenes/kttsd.png</iconset>
+                 </property>
+                </column>
+               </widget>
+               <widget class="QTextEdit" name="textEdit_4">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QMdiArea" name="mdiArea"/>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="1" colspan="2">
+            <widget class="QGroupBox" name="groupBox_2">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>260</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="title">
+              <string>Acciones</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_3">
+              <item row="4" column="0" colspan="2">
+               <widget class="QPushButton" name="pushButton_7">
+                <property name="text">
+                 <string>Grabar CD de audio</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/audio.png</normaloff>:/Imagenes/audio.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0" colspan="2">
+               <widget class="QPushButton" name="pushButton_6">
+                <property name="toolTip">
+                 <string>Grabacion de un CD/DVD en formato de datos</string>
+                </property>
+                <property name="statusTip">
+                 <string>Grabacion de un CD/DVD en formato de datos</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Grabacion de un CD/DVD en formato de datos</string>
+                </property>
+                <property name="text">
+                 <string>Grabar CD/DVD de datos</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/cd_burning_section.png</normaloff>:/Imagenes/cd_burning_section.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0" colspan="2">
+               <widget class="QPushButton" name="pushButton_10">
+                <property name="text">
+                 <string>Grabar CD de Video</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/smplayer.png</normaloff>:/Imagenes/smplayer.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0" colspan="2">
+               <widget class="QPushButton" name="pushButton_4">
+                <property name="text">
+                 <string>Grabar DVD de video</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/multimedia.png</normaloff>:/Imagenes/multimedia.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0" colspan="2">
+               <widget class="QPushButton" name="pushButton_11">
+                <property name="text">
+                 <string>Copiar Medio</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/duplicado.png</normaloff>:/Imagenes/duplicado.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0" colspan="2">
+               <widget class="QPushButton" name="pushButton_20">
+                <property name="statusTip">
+                 <string>Grabar un DVD de Video fiel al original</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Grabar un DVD de Video fiel al original</string>
+                </property>
+                <property name="accessibleName">
+                 <string>Grabar un DVD de Video fiel al original</string>
+                </property>
+                <property name="text">
+                 <string>Copiar DVD de video</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/DVD.png</normaloff>:/Imagenes/DVD.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1" colspan="2">
+            <widget class="QGroupBox" name="groupBox">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>260</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="title">
+              <string>Proyecto</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="0" column="0" colspan="2">
+               <widget class="QPushButton" name="pushButton">
+                <property name="toolTip">
+                 <string>Anadir manualmente archivos al proyecto</string>
+                </property>
+                <property name="statusTip">
+                 <string>Anadir manualmente archivos al proyecto</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Anadir manualmente archivos al proyecto</string>
+                </property>
+                <property name="text">
+                 <string>Anadir archivos a proyecto</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/fileopen.png</normaloff>:/Imagenes/fileopen.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0" colspan="2">
+               <widget class="QPushButton" name="pushButton_2">
+                <property name="toolTip">
+                 <string>Anadir manualmente directorio al proyecto</string>
+                </property>
+                <property name="statusTip">
+                 <string>Anadir manualmente directorio al proyecto</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Anadir manualmente directorio al proyecto</string>
+                </property>
+                <property name="text">
+                 <string>Anadir directorio a proyecto</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/carpeta.png</normaloff>:/Imagenes/carpeta.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0" colspan="2">
+               <widget class="QPushButton" name="pushButton_3">
+                <property name="toolTip">
+                 <string>Eliminar un registro del proyecto actual</string>
+                </property>
+                <property name="statusTip">
+                 <string>Eliminar un registro del proyecto actual</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Eliminar un registro del proyecto actual</string>
+                </property>
+                <property name="text">
+                 <string>Eliminar del proyecto</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0" colspan="2">
+               <widget class="QGroupBox" name="groupBox_3">
+                <property name="toolTip">
+                 <string>Espacio disponible en disco</string>
+                </property>
+                <property name="statusTip">
+                 <string>Espacio disponible en disco</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Espacio disponible en disco</string>
+                </property>
+                <property name="title">
+                 <string/>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_6">
+                 <item row="4" column="0" colspan="2">
+                  <widget class="QProgressBar" name="progressBar_2">
+                   <property name="maximumSize">
+                    <size>
+                     <width>250</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="value">
+                    <number>0</number>
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="invertedAppearance">
+                    <bool>true</bool>
+                   </property>
+                   <property name="textDirection">
+                    <enum>QProgressBar::TopToBottom</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0" colspan="2">
+                  <widget class="QLabel" name="label">
+                   <property name="text">
+                    <string>Tamano total</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_4">
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLabel" name="label_2">
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0" colspan="2">
+                  <widget class="QLabel" name="label_3">
+                   <property name="font">
+                    <font>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item row="4" column="0" colspan="2">
+               <widget class="QPushButton" name="pushButton_18">
+                <property name="text">
+                 <string>Opciones</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/local-administration-mdk.png</normaloff>:/Imagenes/local-administration-mdk.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+          <zorder>groupBox_2</zorder>
+          <zorder>groupBox</zorder>
+          <zorder>verticalSpacer</zorder>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="icon">
+       <iconset resource="recoverdrake.qrc">
+        <normaloff>:/Imagenes/local-administration-mdk.png</normaloff>:/Imagenes/local-administration-mdk.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Grabar</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_19">
+       <item row="0" column="0" colspan="3">
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>Opciones</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_22">
+          <item row="0" column="0" colspan="3">
+           <layout class="QGridLayout" name="gridLayout_7">
+            <item row="0" column="0">
+             <widget class="QGroupBox" name="groupBox_5">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Nombre del volumen de disco grabado</string>
+              </property>
+              <property name="statusTip">
+               <string>Nombre del volumen de disco grabado</string>
+              </property>
+              <property name="whatsThis">
+               <string>Nombre del volumen de disco grabado</string>
+              </property>
+              <property name="title">
+               <string>Nombre del volumen</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_13">
+               <item row="0" column="0">
+                <widget class="QLineEdit" name="lineEdit">
+                 <property name="text">
+                  <string>RCVBurn</string>
+                 </property>
+                 <property name="maxLength">
+                  <number>11</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QGroupBox" name="groupBox_6">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="title">
+               <string>Velocidad de grabacion</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_8">
+               <item row="0" column="0">
+                <widget class="QComboBox" name="comboBox">
+                 <property name="toolTip">
+                  <string>Velocidad de grabacion opcional</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Velocidad de grabacion opcional</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Velocidad de grabacion opcional</string>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>2x</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>4x</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>6x</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>8x</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>10x</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>12x</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>16x</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>18x</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>20x</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>22x</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>24x</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QGroupBox" name="groupBox_7">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="statusTip">
+               <string>Creacion de imagen</string>
+              </property>
+              <property name="whatsThis">
+               <string>Creacion de imagen</string>
+              </property>
+              <property name="accessibleName">
+               <string>Creacion de imagen</string>
+              </property>
+              <property name="title">
+               <string>Crear imagen</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_12">
+               <item row="1" column="0">
+                <layout class="QGridLayout" name="gridLayout_9">
+                 <item row="0" column="0">
+                  <widget class="QPushButton" name="pushButton_12">
+                   <property name="maximumSize">
+                    <size>
+                     <width>20</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>Donde guardar la imagen</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Donde guardar la imagen</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Donde guardar la imagen</string>
+                   </property>
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="lineEdit_2">
+                   <property name="toolTip">
+                    <string>Direccion donde se guardara la imagen iso</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Direccion donde se guardara la imagen iso</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Direccion donde se guardara la imagen iso</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QCheckBox" name="checkBox_4">
+                   <property name="text">
+                    <string>Solo Imagen</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0" rowspan="3">
+           <layout class="QGridLayout" name="gridLayout_15">
+            <item row="0" column="0">
+             <widget class="QGroupBox" name="groupBox_10">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="title">
+               <string>Informacion del disco</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_26">
+               <item row="1" column="0">
+                <widget class="QTextEdit" name="textEdit_2">
+                 <property name="toolTip">
+                  <string>Informacion del disco introducido</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Informacion del disco introducido</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Informacion del disco introducido</string>
+                 </property>
+                 <property name="html">
+                  <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:7pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QGroupBox" name="groupBox_14">
+                 <property name="toolTip">
+                  <string>Velocidades admitidas por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Velocidades admitidas por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Velocidades admitidas por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                 </property>
+                 <property name="title">
+                  <string>Velocidades admitidas</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_14">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_22">
+                    <property name="toolTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                    </property>
+                    <property name="text">
+                     <string>2x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLabel" name="label_23">
+                    <property name="toolTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                    </property>
+                    <property name="text">
+                     <string>4x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QLabel" name="label_17">
+                    <property name="toolTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                    </property>
+                    <property name="text">
+                     <string>6x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="3">
+                   <widget class="QLabel" name="label_24">
+                    <property name="toolTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                    </property>
+                    <property name="text">
+                     <string>8x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="4">
+                   <widget class="QLabel" name="label_25">
+                    <property name="toolTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                    </property>
+                    <property name="text">
+                     <string>10x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="5">
+                   <widget class="QLabel" name="label_26">
+                    <property name="toolTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                    </property>
+                    <property name="text">
+                     <string>12x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="6">
+                   <widget class="QLabel" name="label_27">
+                    <property name="toolTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                    </property>
+                    <property name="text">
+                     <string>16x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="7">
+                   <widget class="QLabel" name="label_28">
+                    <property name="toolTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                    </property>
+                    <property name="text">
+                     <string>18x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="8">
+                   <widget class="QLabel" name="label_29">
+                    <property name="toolTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                    </property>
+                    <property name="text">
+                     <string>20x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="9">
+                   <widget class="QLabel" name="label_30">
+                    <property name="toolTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                    </property>
+                    <property name="text">
+                     <string>22x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="10">
+                   <widget class="QLabel" name="label_31">
+                    <property name="toolTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="statusTip">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="whatsThis">
+                     <string>Velocidad admitida por el soporte. Se recomienda la minima para mayor seguiridad de los datos</string>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                    </property>
+                    <property name="text">
+                     <string>24x</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <layout class="QGridLayout" name="gridLayout_17">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_8">
+                   <property name="toolTip">
+                    <string>Capacidad total del disco</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Capacidad total del disco</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Capacidad total del disco</string>
+                   </property>
+                   <property name="text">
+                    <string>Capacidad:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1" colspan="2">
+                  <widget class="QLabel" name="label_9">
+                   <property name="font">
+                    <font>
+                     <pointsize>8</pointsize>
+                     <weight>75</weight>
+                     <italic>false</italic>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="toolTip">
+                    <string>Capacidad total del disco</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Capacidad total del disco</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Capacidad total del disco</string>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="3">
+                  <widget class="Line" name="line">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="4">
+                  <widget class="QLabel" name="label_10">
+                   <property name="toolTip">
+                    <string>Tipo de disco introducido</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Tipo de disco introducido</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Tipo de disco introducido</string>
+                   </property>
+                   <property name="text">
+                    <string>Tipo:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="5">
+                  <widget class="QLabel" name="label_11">
+                   <property name="font">
+                    <font>
+                     <pointsize>8</pointsize>
+                     <weight>75</weight>
+                     <italic>false</italic>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="toolTip">
+                    <string>Tipo de disco introducido</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Tipo de disco introducido</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Tipo de disco introducido</string>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="6">
+                  <widget class="Line" name="line_2">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="7">
+                  <widget class="QLabel" name="label_12">
+                   <property name="toolTip">
+                    <string>Capacidad utilizada en el disco</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Capacidad utilizada en el disco</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Capacidad utilizada en el disco</string>
+                   </property>
+                   <property name="text">
+                    <string>Utilizado:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="8">
+                  <widget class="QLabel" name="label_13">
+                   <property name="font">
+                    <font>
+                     <pointsize>8</pointsize>
+                     <weight>75</weight>
+                     <italic>false</italic>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="toolTip">
+                    <string>Capacidad utilizada en el disco</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Capacidad utilizada en el disco</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Capacidad utilizada en el disco</string>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="9">
+                  <widget class="Line" name="line_3">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="10">
+                  <widget class="QLabel" name="label_14">
+                   <property name="toolTip">
+                    <string>Nos informa si es un disco multisesion</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Nos informa si es un disco multisesion</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Nos informa si es un disco multisesion</string>
+                   </property>
+                   <property name="text">
+                    <string>Multisesion:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="11">
+                  <widget class="QLabel" name="label_15">
+                   <property name="font">
+                    <font>
+                     <pointsize>8</pointsize>
+                     <weight>75</weight>
+                     <italic>false</italic>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="toolTip">
+                    <string>Nos informa si es un disco multisesion</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Nos informa si es un disco multisesion</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Nos informa si es un disco multisesion</string>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0" colspan="12">
+                  <widget class="Line" name="line_4">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0" colspan="7">
+                  <widget class="QLabel" name="label_18">
+                   <property name="toolTip">
+                    <string>Numero de sesion grabadas en disco</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Numero de sesion grabadas en disco</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Numero de sesion grabadas en disco</string>
+                   </property>
+                   <property name="text">
+                    <string>Numero de sesiones:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0" colspan="12">
+                  <widget class="Line" name="line_5">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="0" colspan="8">
+                  <widget class="QLabel" name="label_20">
+                   <property name="toolTip">
+                    <string>Capacidad libre para poder seguir grabando en disco</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Capacidad libre para poder seguir grabando en disco</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Capacidad libre para poder seguir grabando en disco</string>
+                   </property>
+                   <property name="text">
+                    <string>Espacio libre disponible:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="8" colspan="4">
+                  <widget class="QLabel" name="label_21">
+                   <property name="font">
+                    <font>
+                     <pointsize>8</pointsize>
+                     <weight>75</weight>
+                     <italic>false</italic>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="toolTip">
+                    <string>Capacidad libre para poder seguir grabando en disco</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Capacidad libre para poder seguir grabando en disco</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Capacidad libre para poder seguir grabando en disco</string>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="7">
+                  <widget class="QLabel" name="label_19">
+                   <property name="font">
+                    <font>
+                     <pointsize>8</pointsize>
+                     <weight>75</weight>
+                     <italic>false</italic>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="toolTip">
+                    <string>Numero de sesion grabadas en disco</string>
+                   </property>
+                   <property name="statusTip">
+                    <string>Numero de sesion grabadas en disco</string>
+                   </property>
+                   <property name="whatsThis">
+                    <string>Numero de sesion grabadas en disco</string>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="8" colspan="3">
+                  <widget class="QLabel" name="label_16">
+                   <property name="text">
+                    <string>Regrabable:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="11">
+                  <widget class="QLabel" name="label_32">
+                   <property name="font">
+                    <font>
+                     <pointsize>8</pointsize>
+                     <weight>75</weight>
+                     <italic>false</italic>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QGroupBox" name="groupBox_12">
+              <property name="title">
+               <string>Contenido</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_21">
+               <item row="0" column="0">
+                <widget class="QTextEdit" name="textEdit_3">
+                 <property name="toolTip">
+                  <string>Contenido del disco introducido</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Contenido del disco introducido</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Contenido del disco introducido</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="1" colspan="2">
+           <widget class="QGroupBox" name="groupBox_9">
+            <property name="title">
+             <string>Opciones con regrabables</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_16">
+             <item row="0" column="0">
+              <widget class="QPushButton" name="pushButton_13">
+               <property name="toolTip">
+                <string>Borrado de disco regrabables</string>
+               </property>
+               <property name="statusTip">
+                <string>Borrado de disco regrabables</string>
+               </property>
+               <property name="whatsThis">
+                <string>Borrado de disco regrabables</string>
+               </property>
+               <property name="text">
+                <string>Borrar CD/DVD Regrabable</string>
+               </property>
+               <property name="icon">
+                <iconset resource="recoverdrake.qrc">
+                 <normaloff>:/Imagenes/borrar.png</normaloff>:/Imagenes/borrar.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QPushButton" name="pushButton_15">
+               <property name="toolTip">
+                <string>Formateo de disco regrabables</string>
+               </property>
+               <property name="statusTip">
+                <string>Formateo de disco regrabables</string>
+               </property>
+               <property name="whatsThis">
+                <string>Formateo de disco regrabables</string>
+               </property>
+               <property name="text">
+                <string>Formatear CD/DVD Regrabable</string>
+               </property>
+               <property name="icon">
+                <iconset resource="recoverdrake.qrc">
+                 <normaloff>:/Imagenes/borrar.png</normaloff>:/Imagenes/borrar.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QPushButton" name="pushButton_19">
+               <property name="toolTip">
+                <string>Terminar grabacion. Ya no se prodra </string>
+               </property>
+               <property name="statusTip">
+                <string>Terminar grabacion. Ya no se prodra </string>
+               </property>
+               <property name="whatsThis">
+                <string>Terminar grabacion. Ya no se prodra </string>
+               </property>
+               <property name="text">
+                <string>Cerrar disco</string>
+               </property>
+               <property name="icon">
+                <iconset resource="recoverdrake.qrc">
+                 <normaloff>:/Imagenes/stop.png</normaloff>:/Imagenes/stop.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="Line" name="line_7">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="2" column="1" colspan="2">
+           <widget class="QGroupBox" name="groupBox_8">
+            <property name="title">
+             <string>Metodo de grabacion</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_27">
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_25">
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="checkBox">
+                 <property name="toolTip">
+                  <string>Grabar un disco al vuelo, sin crear ningun archivo temporal. Es menos efectivo pero mucho mas rapido</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Grabar un disco al vuelo, sin crear ningun archivo temporal. Es menos efectivo pero mucho mas rapido</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Grabar un disco al vuelo, sin crear ningun archivo temporal. Es menos efectivo pero mucho mas rapido</string>
+                 </property>
+                 <property name="text">
+                  <string>Al vuelo</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QCheckBox" name="checkBox_5">
+                 <property name="toolTip">
+                  <string>Terminar grabacion. Ya no se prodra volver a grabar en el</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Terminar grabacion. Ya no se prodra volver a grabar en el</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Terminar grabacion. Ya no se prodra volver a grabar en el</string>
+                 </property>
+                 <property name="text">
+                  <string>Cerrar disco</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="checkBox_3">
+                 <property name="toolTip">
+                  <string>Iniciar disco multisesion</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Iniciar disco multisesion</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Iniciar disco multisesion</string>
+                 </property>
+                 <property name="text">
+                  <string>Multisesion</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QCheckBox" name="checkBox_2">
+                 <property name="toolTip">
+                  <string>Continuar un disco grabado con multisesion.</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Continuar un disco grabado con multisesion.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Continuar un disco grabado con multisesion.</string>
+                 </property>
+                 <property name="text">
+                  <string>Continuar multisesion</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="2">
+                <widget class="QCheckBox" name="checkBox_6">
+                 <property name="toolTip">
+                  <string>Simular grabacion para ver si hay errores. NO graba realmente</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Simular grabacion para ver si hay errores. NO graba realmente</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Simular grabacion para ver si hay errores. NO graba realmente</string>
+                 </property>
+                 <property name="accessibleName">
+                  <string>Simular grabacion para ver si hay errores. NO graba realmente</string>
+                 </property>
+                 <property name="text">
+                  <string>Simular grabacion (no se graba)</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="3" column="1" colspan="2">
+           <widget class="QGroupBox" name="groupBox_11">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>280</width>
+              <height>58</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Espacio utilizado en la grabacion de disco</string>
+            </property>
+            <property name="statusTip">
+             <string>Espacio utilizado en la grabacion de disco</string>
+            </property>
+            <property name="whatsThis">
+             <string>Espacio utilizado en la grabacion de disco</string>
+            </property>
+            <property name="title">
+             <string>Espacio ocupado en disco</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_20">
+             <item row="1" column="0">
+              <widget class="QProgressBar" name="progressBar_3">
+               <property name="maximumSize">
+                <size>
+                 <width>221</width>
+                 <height>23</height>
+                </size>
+               </property>
+               <property name="value">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <layout class="QGridLayout" name="gridLayout_11">
+            <item row="0" column="0">
+             <widget class="QPushButton" name="pushButton_17">
+              <property name="toolTip">
+               <string>Refrescar estado del soporte</string>
+              </property>
+              <property name="statusTip">
+               <string>Refrescar estado del soporte</string>
+              </property>
+              <property name="whatsThis">
+               <string>Refrescar estado del soporte</string>
+              </property>
+              <property name="text">
+               <string>Refrescar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/undo.png</normaloff>:/Imagenes/undo.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QPushButton" name="pushButton_16">
+              <property name="toolTip">
+               <string>Cargar/Expulsar disco</string>
+              </property>
+              <property name="statusTip">
+               <string>Cargar/Expulsar disco</string>
+              </property>
+              <property name="whatsThis">
+               <string>Cargar/Expulsar disco</string>
+              </property>
+              <property name="text">
+               <string>Cargar/Expulsar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/abrir.png</normaloff>:/Imagenes/abrir.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_33">
+              <property name="styleSheet">
+               <string notr="true">color: rgb(0, 0, 255);
+font: bold;</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="4" column="1" colspan="2">
+           <widget class="QGroupBox" name="groupBox_13">
+            <property name="title">
+             <string>Numero de copias</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_24">
+             <item row="0" column="0">
+              <layout class="QGridLayout" name="gridLayout_23">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_6">
+                 <property name="text">
+                  <string>Hacer... </string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QComboBox" name="comboBox_2">
+                 <item>
+                  <property name="text">
+                   <string>1</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>2</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>3</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>4</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>5</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>6</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>7</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>8</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>9</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>10</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_7">
+                 <property name="text">
+                  <string>copias</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="3">
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="1">
+          <widget class="QProgressBar" name="progressBar">
+           <property name="toolTip">
+            <string>Barra de progreso del proceso de grabacion</string>
+           </property>
+           <property name="statusTip">
+            <string>Barra de progreso del proceso de grabacion</string>
+           </property>
+           <property name="whatsThis">
+            <string>Barra de progreso del proceso de grabacion</string>
+           </property>
+           <property name="value">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Progreso:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="pushButton_14">
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Grabar</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/cd_burning_section.png</normaloff>:/Imagenes/cd_burning_section.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0" colspan="3">
+        <widget class="QTextEdit" name="textEdit">
+         <property name="font">
+          <font>
+           <pointsize>7</pointsize>
+          </font>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="3">
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="toolTip">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="statusTip">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="whatsThis">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="text">
+      <string>Salir</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Omision</class>
+ <widget class="QDialog" name="Omision">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>761</width>
+    <height>390</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Omitir en la sincronizacion v.0.1.0.</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/Excluir.png</normaloff>:/Imagenes/Excluir.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0" colspan="9">
+    <widget class="QTextEdit" name="textEdit">
+     <property name="toolTip">
+      <string>Ventana para introduccion de filtros</string>
+     </property>
+     <property name="statusTip">
+      <string>Ventana para introduccion de filtros</string>
+     </property>
+     <property name="whatsThis">
+      <string>Ventana para introduccion de filtros</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Nombre del objetivo:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="9">
+    <widget class="QLabel" name="label">
+     <property name="styleSheet">
+      <string notr="true">font: 7pt &quot;DejaVu Sans&quot;;
+color: rgb(255, 0, 0);
+font: bold;</string>
+     </property>
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; text-decoration: underline; color:#ff0000;&quot;&gt;Como crear los filtros:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;- Los datos tienen que ir separados por (&lt;/span&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;;&lt;/span&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;). (Ejem. prueba;DIR:prueba2).&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;- Si quieres filtrar directorios tienes que poner (&lt;/span&gt;&lt;span style=&quot; color:#0000ff;&quot;&gt;DIR:&lt;/span&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;) seguido de la palabra a filtrar (Ejem. DIR:prueba2).&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;- El filtro es sensible a MAYUSCULAS y minusculas.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="8">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="toolTip">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="statusTip">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="whatsThis">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="text">
+      <string>Salir</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="7">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="2" colspan="7">
+    <widget class="QLabel" name="label_3">
+     <property name="toolTip">
+      <string>Nombre del objetivo</string>
+     </property>
+     <property name="statusTip">
+      <string>Nombre del objetivo</string>
+     </property>
+     <property name="whatsThis">
+      <string>Nombre del objetivo</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QPushButton" name="pushButton">
+     <property name="toolTip">
+      <string>Guardar los filtros actuales</string>
+     </property>
+     <property name="statusTip">
+      <string>Guardar los filtros actuales</string>
+     </property>
+     <property name="whatsThis">
+      <string>Guardar los filtros actuales</string>
+     </property>
+     <property name="text">
+      <string>Guardar</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/filesave.png</normaloff>:/Imagenes/filesave.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="6">
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="toolTip">
+      <string>Borra todos los filtros (si no se guarda no habra modificacion)</string>
+     </property>
+     <property name="statusTip">
+      <string>Borra todos los filtros (si no se guarda no habra modificacion)</string>
+     </property>
+     <property name="whatsThis">
+      <string>Borra todos los filtros (si no se guarda no habra modificacion)</string>
+     </property>
+     <property name="text">
+      <string>Borrar</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/borrar.png</normaloff>:/Imagenes/borrar.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="5">
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="toolTip">
+      <string>Editar el texto introducido</string>
+     </property>
+     <property name="statusTip">
+      <string>Editar el texto introducido</string>
+     </property>
+     <property name="whatsThis">
+      <string>Editar el texto introducido</string>
+     </property>
+     <property name="text">
+      <string>Editar</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/boli.png</normaloff>:/Imagenes/boli.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1" colspan="4">
+    <spacer name="horizontalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

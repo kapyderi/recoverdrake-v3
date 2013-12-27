@@ -1,0 +1,30 @@
+#!/bin/bash
+# Nombre: RecoverDrake -- RecoverNTFS
+# Parte: Permisos NTFS
+# Versión: 1.6.0
+
+echo Salvaguardando fstab original y realizando modificación permanente de permisos....
+        cp /etc/fstab /etc/fstab.bak
+        sed -i '/ntfs-3g/s/umask=000//;/ntfs-3g/s/nouser/user/' /etc/fstab
+        echo
+        echo Mostrando fichero anterior...
+        cat /etc/fstab.bak
+        echo
+        echo
+        echo
+        echo Mostrando modificación realizada...        
+        cat /etc/fstab
+        echo Reconfigurando el msec sistema de seguridad de Mandriva para fijar objetivo de umask...
+        sed -i "/WIN_PARTS_UMASK=/d" /etc/security/msec/security.conf
+        sed -i '$i WIN_PARTS_UMASK=' /etc/security/msec/security.conf
+        echo Configurando ntfs-config
+        
+        zenity --info --text="
+        
+        Al entrar en esta opción debera desmarcar y volver
+        a marcar todas las opciones, incluidas las 
+        configuraciones avanzadas, para que sean desmontadas
+        y montadas otra vez todas la unidades ntfs."
+        ntfs-config
+        echo "Permisos modificados satisfactoriamente."
+        zenity --info --text="Para que la nueva configuración sea efectiva, debe reiniciar el equipo."

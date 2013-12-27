@@ -1,0 +1,15 @@
+#!/bin/bash
+# Nombre: RecoverDrake -- RecoverInclu
+# Parte: Incluir paquete
+# Versión: 1.6.0
+
+Pack=`zenity --entry \
+        --title="Nombre del paquete a incluir" \
+        --text="Introduzca el nombre del paquete a recuperar
+
+	Ejemplo: rhythmbox (Nombre simple).
+	
+	Ejemplo: /^rhythmbox/ (Todas las variantes)." \
+        --entry-text=" "`      
+	sed -i "/$Pack/d" /etc/urpmi/skip.list
+        echo Paquete $Pack recuperado satisfactoriamente.
