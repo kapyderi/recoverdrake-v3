@@ -25,8 +25,10 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QRadioButton>
 #include <QtGui/QSpacerItem>
+#include <QtGui/QTabWidget>
 #include <QtGui/QTableWidget>
 #include <QtGui/QTextEdit>
+#include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -34,6 +36,22 @@ class Ui_ConversorUD
 {
 public:
     QGridLayout *gridLayout_25;
+    QGridLayout *gridLayout_3;
+    QSpacerItem *horizontalSpacer_2;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *pushButton;
+    QLabel *label_3;
+    QPushButton *pushButton_2;
+    QComboBox *comboBox_3;
+    QPushButton *pushButton_13;
+    QGroupBox *groupBox_11;
+    QGridLayout *gridLayout_53;
+    QGridLayout *gridLayout_28;
+    QComboBox *comboBox_25;
+    QRadioButton *radioButton_6;
+    QRadioButton *radioButton_7;
+    QSpacerItem *horizontalSpacer_6;
+    QSpacerItem *horizontalSpacer_7;
     QGridLayout *gridLayout_9;
     QTextEdit *textEdit_2;
     QGroupBox *groupBox_7;
@@ -78,16 +96,7 @@ public:
     QLabel *label_37;
     QRadioButton *radioButton_4;
     QRadioButton *radioButton_5;
-    QGroupBox *groupBox;
-    QGridLayout *gridLayout_8;
-    QGridLayout *gridLayout;
-    QLineEdit *lineEdit;
-    QComboBox *comboBox;
-    QLabel *label;
-    QGridLayout *gridLayout_2;
-    QComboBox *comboBox_2;
-    QLineEdit *lineEdit_2;
-    QPushButton *pushButton_7;
+    QTextEdit *textEdit;
     QGroupBox *groupBox_10;
     QGridLayout *gridLayout_31;
     QPushButton *pushButton_14;
@@ -141,39 +150,6 @@ public:
     QSpacerItem *horizontalSpacer_5;
     QFrame *line_6;
     QCheckBox *checkBox;
-    QGroupBox *groupBox_2;
-    QGridLayout *gridLayout_4;
-    QGridLayout *gridLayout_5;
-    QLineEdit *lineEdit_3;
-    QComboBox *comboBox_6;
-    QPushButton *pushButton_10;
-    QGridLayout *gridLayout_6;
-    QComboBox *comboBox_4;
-    QLineEdit *lineEdit_4;
-    QLabel *label_2;
-    QLabel *label_15;
-    QLabel *label_14;
-    QTextEdit *textEdit;
-    QGroupBox *groupBox_3;
-    QGridLayout *gridLayout_10;
-    QGridLayout *gridLayout_12;
-    QComboBox *comboBox_8;
-    QLineEdit *lineEdit_8;
-    QLabel *label_4;
-    QGridLayout *gridLayout_11;
-    QLineEdit *lineEdit_7;
-    QComboBox *comboBox_9;
-    QPushButton *pushButton_8;
-    QGroupBox *groupBox_5;
-    QGridLayout *gridLayout_16;
-    QGridLayout *gridLayout_17;
-    QLineEdit *lineEdit_11;
-    QComboBox *comboBox_15;
-    QPushButton *pushButton_9;
-    QGridLayout *gridLayout_18;
-    QComboBox *comboBox_14;
-    QLineEdit *lineEdit_12;
-    QLabel *label_6;
     QGroupBox *groupBox_8;
     QGridLayout *gridLayout_7;
     QRadioButton *radioButton;
@@ -191,6 +167,39 @@ public:
     QLabel *label_24;
     QPushButton *pushButton_3;
     QRadioButton *radioButton_2;
+    QTabWidget *tabWidget;
+    QWidget *tab_3;
+    QGridLayout *gridLayout_33;
+    QGroupBox *groupBox;
+    QGridLayout *gridLayout_8;
+    QGridLayout *gridLayout;
+    QLineEdit *lineEdit;
+    QComboBox *comboBox;
+    QLabel *label;
+    QGridLayout *gridLayout_2;
+    QComboBox *comboBox_2;
+    QLineEdit *lineEdit_2;
+    QPushButton *pushButton_7;
+    QGroupBox *groupBox_2;
+    QGridLayout *gridLayout_4;
+    QGridLayout *gridLayout_5;
+    QLineEdit *lineEdit_3;
+    QComboBox *comboBox_6;
+    QPushButton *pushButton_10;
+    QGridLayout *gridLayout_6;
+    QComboBox *comboBox_4;
+    QLineEdit *lineEdit_4;
+    QLabel *label_2;
+    QGroupBox *groupBox_3;
+    QGridLayout *gridLayout_10;
+    QGridLayout *gridLayout_12;
+    QComboBox *comboBox_8;
+    QLineEdit *lineEdit_8;
+    QLabel *label_4;
+    QGridLayout *gridLayout_11;
+    QLineEdit *lineEdit_7;
+    QComboBox *comboBox_9;
+    QPushButton *pushButton_8;
     QGroupBox *groupBox_4;
     QGridLayout *gridLayout_13;
     QGridLayout *gridLayout_14;
@@ -201,18 +210,90 @@ public:
     QComboBox *comboBox_11;
     QLineEdit *lineEdit_10;
     QLabel *label_5;
-    QGroupBox *groupBox_11;
-    QGridLayout *gridLayout_28;
-    QRadioButton *radioButton_7;
-    QRadioButton *radioButton_6;
-    QGridLayout *gridLayout_3;
-    QSpacerItem *horizontalSpacer_2;
-    QSpacerItem *horizontalSpacer;
-    QPushButton *pushButton;
-    QLabel *label_3;
-    QPushButton *pushButton_2;
-    QComboBox *comboBox_3;
-    QPushButton *pushButton_13;
+    QGroupBox *groupBox_5;
+    QGridLayout *gridLayout_16;
+    QGridLayout *gridLayout_17;
+    QLineEdit *lineEdit_11;
+    QComboBox *comboBox_15;
+    QPushButton *pushButton_9;
+    QGridLayout *gridLayout_18;
+    QComboBox *comboBox_14;
+    QLineEdit *lineEdit_12;
+    QLabel *label_6;
+    QGroupBox *groupBox_18;
+    QGridLayout *gridLayout_52;
+    QGridLayout *gridLayout_51;
+    QLineEdit *lineEdit_47;
+    QComboBox *comboBox_26;
+    QLabel *label_52;
+    QGridLayout *gridLayout_50;
+    QLineEdit *lineEdit_46;
+    QPushButton *pushButton_20;
+    QComboBox *comboBox_27;
+    QWidget *tab_4;
+    QGridLayout *gridLayout_56;
+    QGroupBox *groupBox_15;
+    QGridLayout *gridLayout_40;
+    QGridLayout *gridLayout_41;
+    QLineEdit *lineEdit_40;
+    QComboBox *comboBox_19;
+    QLabel *label_49;
+    QGridLayout *gridLayout_42;
+    QLineEdit *lineEdit_41;
+    QPushButton *pushButton_17;
+    QComboBox *comboBox_20;
+    QGroupBox *groupBox_17;
+    QGridLayout *gridLayout_46;
+    QGridLayout *gridLayout_47;
+    QLineEdit *lineEdit_44;
+    QComboBox *comboBox_23;
+    QPushButton *pushButton_19;
+    QGridLayout *gridLayout_48;
+    QComboBox *comboBox_24;
+    QLineEdit *lineEdit_45;
+    QLabel *label_51;
+    QGroupBox *groupBox_16;
+    QGridLayout *gridLayout_43;
+    QGridLayout *gridLayout_44;
+    QComboBox *comboBox_21;
+    QLineEdit *lineEdit_42;
+    QLabel *label_50;
+    QGridLayout *gridLayout_45;
+    QLineEdit *lineEdit_43;
+    QComboBox *comboBox_22;
+    QPushButton *pushButton_18;
+    QGroupBox *groupBox_14;
+    QGridLayout *gridLayout_37;
+    QGridLayout *gridLayout_38;
+    QLineEdit *lineEdit_38;
+    QComboBox *comboBox_13;
+    QPushButton *pushButton_16;
+    QGridLayout *gridLayout_39;
+    QComboBox *comboBox_18;
+    QLineEdit *lineEdit_39;
+    QLabel *label_48;
+    QGroupBox *groupBox_13;
+    QGridLayout *gridLayout_34;
+    QGridLayout *gridLayout_35;
+    QLineEdit *lineEdit_36;
+    QComboBox *comboBox_16;
+    QPushButton *pushButton_15;
+    QGridLayout *gridLayout_36;
+    QComboBox *comboBox_17;
+    QLineEdit *lineEdit_37;
+    QLabel *label_47;
+    QGroupBox *groupBox_19;
+    QGridLayout *gridLayout_49;
+    QGridLayout *gridLayout_54;
+    QLineEdit *lineEdit_48;
+    QComboBox *comboBox_28;
+    QPushButton *pushButton_21;
+    QGridLayout *gridLayout_55;
+    QComboBox *comboBox_29;
+    QLineEdit *lineEdit_49;
+    QLabel *label_53;
+    QLabel *label_14;
+    QLabel *label_15;
 
     void setupUi(QDialog *ConversorUD)
     {
@@ -228,13 +309,101 @@ public:
         ConversorUD->setWindowIcon(icon);
         gridLayout_25 = new QGridLayout(ConversorUD);
         gridLayout_25->setObjectName(QString::fromUtf8("gridLayout_25"));
+        gridLayout_3 = new QGridLayout();
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_3->addItem(horizontalSpacer_2, 1, 2, 1, 1);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_3->addItem(horizontalSpacer, 1, 6, 1, 1);
+
+        pushButton = new QPushButton(ConversorUD);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setFocusPolicy(Qt::NoFocus);
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/Imagenes/puerta.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton->setIcon(icon1);
+        pushButton->setIconSize(QSize(25, 25));
+
+        gridLayout_3->addWidget(pushButton, 1, 7, 1, 1);
+
+        label_3 = new QLabel(ConversorUD);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        gridLayout_3->addWidget(label_3, 1, 3, 1, 1);
+
+        pushButton_2 = new QPushButton(ConversorUD);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setFocusPolicy(Qt::NoFocus);
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/Imagenes/sustituir.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_2->setIcon(icon2);
+        pushButton_2->setIconSize(QSize(25, 25));
+
+        gridLayout_3->addWidget(pushButton_2, 1, 0, 1, 1);
+
+        comboBox_3 = new QComboBox(ConversorUD);
+        comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
+
+        gridLayout_3->addWidget(comboBox_3, 1, 4, 1, 1);
+
+        pushButton_13 = new QPushButton(ConversorUD);
+        pushButton_13->setObjectName(QString::fromUtf8("pushButton_13"));
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/Imagenes/calculadora.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_13->setIcon(icon3);
+        pushButton_13->setIconSize(QSize(25, 25));
+
+        gridLayout_3->addWidget(pushButton_13, 1, 1, 1, 1);
+
+
+        gridLayout_25->addLayout(gridLayout_3, 4, 0, 1, 2);
+
+        groupBox_11 = new QGroupBox(ConversorUD);
+        groupBox_11->setObjectName(QString::fromUtf8("groupBox_11"));
+        gridLayout_53 = new QGridLayout(groupBox_11);
+        gridLayout_53->setObjectName(QString::fromUtf8("gridLayout_53"));
+        gridLayout_53->setContentsMargins(0, 0, 0, 0);
+        gridLayout_28 = new QGridLayout();
+        gridLayout_28->setObjectName(QString::fromUtf8("gridLayout_28"));
+        comboBox_25 = new QComboBox(groupBox_11);
+        comboBox_25->setObjectName(QString::fromUtf8("comboBox_25"));
+
+        gridLayout_28->addWidget(comboBox_25, 0, 1, 1, 1);
+
+        radioButton_6 = new QRadioButton(groupBox_11);
+        radioButton_6->setObjectName(QString::fromUtf8("radioButton_6"));
+
+        gridLayout_28->addWidget(radioButton_6, 0, 0, 1, 1);
+
+
+        gridLayout_53->addLayout(gridLayout_28, 0, 0, 1, 1);
+
+        radioButton_7 = new QRadioButton(groupBox_11);
+        radioButton_7->setObjectName(QString::fromUtf8("radioButton_7"));
+
+        gridLayout_53->addWidget(radioButton_7, 0, 2, 1, 1);
+
+        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_53->addItem(horizontalSpacer_6, 0, 1, 1, 1);
+
+        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_53->addItem(horizontalSpacer_7, 0, 3, 1, 1);
+
+
+        gridLayout_25->addWidget(groupBox_11, 0, 0, 1, 2);
+
         gridLayout_9 = new QGridLayout();
         gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
         gridLayout_9->setSizeConstraint(QLayout::SetMinAndMaxSize);
         textEdit_2 = new QTextEdit(ConversorUD);
         textEdit_2->setObjectName(QString::fromUtf8("textEdit_2"));
 
-        gridLayout_9->addWidget(textEdit_2, 4, 1, 1, 1);
+        gridLayout_9->addWidget(textEdit_2, 5, 1, 1, 1);
 
         groupBox_7 = new QGroupBox(ConversorUD);
         groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
@@ -336,9 +505,7 @@ public:
 
         pushButton_6 = new QPushButton(groupBox_7);
         pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/Imagenes/sustituir.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_6->setIcon(icon1);
+        pushButton_6->setIcon(icon2);
         pushButton_6->setIconSize(QSize(25, 25));
 
         gridLayout_23->addWidget(pushButton_6, 1, 8, 1, 1);
@@ -347,7 +514,7 @@ public:
         gridLayout_20->addLayout(gridLayout_23, 0, 0, 1, 1);
 
 
-        gridLayout_9->addWidget(groupBox_7, 6, 0, 1, 1);
+        gridLayout_9->addWidget(groupBox_7, 7, 0, 1, 1);
 
         groupBox_6 = new QGroupBox(ConversorUD);
         groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
@@ -376,7 +543,7 @@ public:
 
         pushButton_5 = new QPushButton(groupBox_6);
         pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
-        pushButton_5->setIcon(icon1);
+        pushButton_5->setIcon(icon2);
         pushButton_5->setIconSize(QSize(25, 25));
 
         gridLayout_19->addWidget(pushButton_5, 1, 4, 2, 1);
@@ -416,7 +583,7 @@ public:
         gridLayout_21->addLayout(gridLayout_19, 0, 0, 1, 1);
 
 
-        gridLayout_9->addWidget(groupBox_6, 6, 1, 1, 1);
+        gridLayout_9->addWidget(groupBox_6, 7, 1, 1, 1);
 
         groupBox_9 = new QGroupBox(ConversorUD);
         groupBox_9->setObjectName(QString::fromUtf8("groupBox_9"));
@@ -522,7 +689,7 @@ public:
 
         pushButton_4 = new QPushButton(groupBox_9);
         pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
-        pushButton_4->setIcon(icon1);
+        pushButton_4->setIcon(icon2);
         pushButton_4->setIconSize(QSize(25, 25));
 
         gridLayout_26->addWidget(pushButton_4, 1, 9, 1, 1);
@@ -549,75 +716,12 @@ public:
         gridLayout_27->addWidget(radioButton_5, 0, 2, 1, 1);
 
 
-        gridLayout_9->addWidget(groupBox_9, 5, 1, 1, 1);
+        gridLayout_9->addWidget(groupBox_9, 6, 1, 1, 1);
 
-        groupBox = new QGroupBox(ConversorUD);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setMaximumSize(QSize(16777215, 82));
-        gridLayout_8 = new QGridLayout(groupBox);
-        gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
-        gridLayout_8->setContentsMargins(0, 0, 0, 0);
-        gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        lineEdit = new QLineEdit(groupBox);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setFont(font1);
-        lineEdit->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        textEdit = new QTextEdit(ConversorUD);
+        textEdit->setObjectName(QString::fromUtf8("textEdit"));
 
-        gridLayout->addWidget(lineEdit, 1, 0, 1, 1);
-
-        comboBox = new QComboBox(groupBox);
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
-        comboBox->setFocusPolicy(Qt::NoFocus);
-        comboBox->setMaxVisibleItems(33);
-
-        gridLayout->addWidget(comboBox, 0, 0, 1, 1);
-
-
-        gridLayout_8->addLayout(gridLayout, 0, 0, 1, 1);
-
-        label = new QLabel(groupBox);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setFont(font1);
-
-        gridLayout_8->addWidget(label, 0, 1, 1, 1);
-
-        gridLayout_2 = new QGridLayout();
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        comboBox_2 = new QComboBox(groupBox);
-        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
-        comboBox_2->setFocusPolicy(Qt::NoFocus);
-        comboBox_2->setMaxVisibleItems(33);
-
-        gridLayout_2->addWidget(comboBox_2, 0, 0, 1, 1);
-
-        lineEdit_2 = new QLineEdit(groupBox);
-        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
-        lineEdit_2->setEnabled(true);
-        QFont font3;
-        font3.setBold(true);
-        font3.setWeight(75);
-        lineEdit_2->setFont(font3);
-        lineEdit_2->setFocusPolicy(Qt::NoFocus);
-        lineEdit_2->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
-"background-color: rgb(255, 251, 239);"));
-        lineEdit_2->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-        lineEdit_2->setReadOnly(true);
-
-        gridLayout_2->addWidget(lineEdit_2, 1, 0, 1, 1);
-
-        pushButton_7 = new QPushButton(groupBox);
-        pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
-        pushButton_7->setIcon(icon1);
-        pushButton_7->setIconSize(QSize(25, 25));
-
-        gridLayout_2->addWidget(pushButton_7, 0, 1, 2, 1);
-
-
-        gridLayout_8->addLayout(gridLayout_2, 0, 2, 1, 1);
-
-
-        gridLayout_9->addWidget(groupBox, 0, 0, 1, 1);
+        gridLayout_9->addWidget(textEdit, 5, 0, 1, 1);
 
         groupBox_10 = new QGroupBox(ConversorUD);
         groupBox_10->setObjectName(QString::fromUtf8("groupBox_10"));
@@ -631,9 +735,9 @@ public:
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(pushButton_14->sizePolicy().hasHeightForWidth());
         pushButton_14->setSizePolicy(sizePolicy3);
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/Imagenes/monedas.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_14->setIcon(icon2);
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8(":/Imagenes/monedas.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_14->setIcon(icon4);
         pushButton_14->setIconSize(QSize(25, 25));
 
         gridLayout_31->addWidget(pushButton_14, 4, 21, 1, 2);
@@ -700,11 +804,11 @@ public:
         gridLayout_29->setObjectName(QString::fromUtf8("gridLayout_29"));
         label_40 = new QLabel(groupBox_10);
         label_40->setObjectName(QString::fromUtf8("label_40"));
-        QFont font4;
-        font4.setPointSize(15);
-        font4.setBold(false);
-        font4.setWeight(50);
-        label_40->setFont(font4);
+        QFont font3;
+        font3.setPointSize(15);
+        font3.setBold(false);
+        font3.setWeight(50);
+        label_40->setFont(font3);
         label_40->setAlignment(Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft);
 
         gridLayout_29->addWidget(label_40, 0, 4, 1, 1);
@@ -877,7 +981,7 @@ public:
 
         pushButton_12 = new QPushButton(groupBox_10);
         pushButton_12->setObjectName(QString::fromUtf8("pushButton_12"));
-        pushButton_12->setIcon(icon1);
+        pushButton_12->setIcon(icon2);
         pushButton_12->setIconSize(QSize(25, 25));
 
         gridLayout_24->addWidget(pushButton_12, 0, 18, 1, 1);
@@ -977,212 +1081,7 @@ public:
         gridLayout_31->addWidget(checkBox, 4, 20, 1, 1);
 
 
-        gridLayout_9->addWidget(groupBox_10, 7, 0, 1, 2);
-
-        groupBox_2 = new QGroupBox(ConversorUD);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setMaximumSize(QSize(16777215, 82));
-        gridLayout_4 = new QGridLayout(groupBox_2);
-        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
-        gridLayout_4->setContentsMargins(0, 0, 0, 0);
-        gridLayout_5 = new QGridLayout();
-        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        lineEdit_3 = new QLineEdit(groupBox_2);
-        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
-        lineEdit_3->setEnabled(true);
-        lineEdit_3->setFont(font3);
-        lineEdit_3->setFocusPolicy(Qt::NoFocus);
-        lineEdit_3->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
-"background-color: rgb(255, 251, 239);"));
-        lineEdit_3->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-        lineEdit_3->setReadOnly(true);
-
-        gridLayout_5->addWidget(lineEdit_3, 1, 0, 1, 1);
-
-        comboBox_6 = new QComboBox(groupBox_2);
-        comboBox_6->setObjectName(QString::fromUtf8("comboBox_6"));
-        comboBox_6->setFocusPolicy(Qt::NoFocus);
-
-        gridLayout_5->addWidget(comboBox_6, 0, 0, 1, 1);
-
-        pushButton_10 = new QPushButton(groupBox_2);
-        pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
-        pushButton_10->setIcon(icon1);
-        pushButton_10->setIconSize(QSize(25, 25));
-
-        gridLayout_5->addWidget(pushButton_10, 0, 1, 2, 1);
-
-
-        gridLayout_4->addLayout(gridLayout_5, 1, 2, 1, 1);
-
-        gridLayout_6 = new QGridLayout();
-        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
-        comboBox_4 = new QComboBox(groupBox_2);
-        comboBox_4->setObjectName(QString::fromUtf8("comboBox_4"));
-        comboBox_4->setFocusPolicy(Qt::NoFocus);
-
-        gridLayout_6->addWidget(comboBox_4, 0, 0, 1, 1);
-
-        lineEdit_4 = new QLineEdit(groupBox_2);
-        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
-        lineEdit_4->setFont(font1);
-        lineEdit_4->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_6->addWidget(lineEdit_4, 1, 0, 1, 1);
-
-
-        gridLayout_4->addLayout(gridLayout_6, 1, 0, 1, 1);
-
-        label_2 = new QLabel(groupBox_2);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setFont(font1);
-
-        gridLayout_4->addWidget(label_2, 1, 1, 1, 1);
-
-
-        gridLayout_9->addWidget(groupBox_2, 0, 1, 1, 1);
-
-        label_15 = new QLabel(ConversorUD);
-        label_15->setObjectName(QString::fromUtf8("label_15"));
-
-        gridLayout_9->addWidget(label_15, 3, 1, 1, 1);
-
-        label_14 = new QLabel(ConversorUD);
-        label_14->setObjectName(QString::fromUtf8("label_14"));
-
-        gridLayout_9->addWidget(label_14, 3, 0, 1, 1);
-
-        textEdit = new QTextEdit(ConversorUD);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
-
-        gridLayout_9->addWidget(textEdit, 4, 0, 1, 1);
-
-        groupBox_3 = new QGroupBox(ConversorUD);
-        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        groupBox_3->setMaximumSize(QSize(16777215, 82));
-        gridLayout_10 = new QGridLayout(groupBox_3);
-        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
-        gridLayout_10->setContentsMargins(0, 0, 0, 0);
-        gridLayout_12 = new QGridLayout();
-        gridLayout_12->setObjectName(QString::fromUtf8("gridLayout_12"));
-        comboBox_8 = new QComboBox(groupBox_3);
-        comboBox_8->setObjectName(QString::fromUtf8("comboBox_8"));
-        comboBox_8->setFocusPolicy(Qt::NoFocus);
-
-        gridLayout_12->addWidget(comboBox_8, 0, 0, 1, 1);
-
-        lineEdit_8 = new QLineEdit(groupBox_3);
-        lineEdit_8->setObjectName(QString::fromUtf8("lineEdit_8"));
-        lineEdit_8->setFont(font1);
-        lineEdit_8->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_12->addWidget(lineEdit_8, 1, 0, 1, 1);
-
-
-        gridLayout_10->addLayout(gridLayout_12, 1, 0, 1, 1);
-
-        label_4 = new QLabel(groupBox_3);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setFont(font1);
-
-        gridLayout_10->addWidget(label_4, 1, 1, 1, 1);
-
-        gridLayout_11 = new QGridLayout();
-        gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
-        lineEdit_7 = new QLineEdit(groupBox_3);
-        lineEdit_7->setObjectName(QString::fromUtf8("lineEdit_7"));
-        lineEdit_7->setEnabled(true);
-        lineEdit_7->setFont(font3);
-        lineEdit_7->setFocusPolicy(Qt::NoFocus);
-        lineEdit_7->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
-"background-color: rgb(255, 251, 239);"));
-        lineEdit_7->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-        lineEdit_7->setReadOnly(true);
-
-        gridLayout_11->addWidget(lineEdit_7, 1, 0, 1, 1);
-
-        comboBox_9 = new QComboBox(groupBox_3);
-        comboBox_9->setObjectName(QString::fromUtf8("comboBox_9"));
-        comboBox_9->setFocusPolicy(Qt::NoFocus);
-
-        gridLayout_11->addWidget(comboBox_9, 0, 0, 1, 1);
-
-        pushButton_8 = new QPushButton(groupBox_3);
-        pushButton_8->setObjectName(QString::fromUtf8("pushButton_8"));
-        pushButton_8->setIcon(icon1);
-        pushButton_8->setIconSize(QSize(25, 25));
-
-        gridLayout_11->addWidget(pushButton_8, 0, 1, 2, 1);
-
-
-        gridLayout_10->addLayout(gridLayout_11, 1, 2, 1, 1);
-
-
-        gridLayout_9->addWidget(groupBox_3, 1, 0, 1, 1);
-
-        groupBox_5 = new QGroupBox(ConversorUD);
-        groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
-        groupBox_5->setMaximumSize(QSize(16777215, 82));
-        gridLayout_16 = new QGridLayout(groupBox_5);
-        gridLayout_16->setObjectName(QString::fromUtf8("gridLayout_16"));
-        gridLayout_16->setSizeConstraint(QLayout::SetMinAndMaxSize);
-        gridLayout_16->setContentsMargins(0, 0, 0, 0);
-        gridLayout_17 = new QGridLayout();
-        gridLayout_17->setObjectName(QString::fromUtf8("gridLayout_17"));
-        lineEdit_11 = new QLineEdit(groupBox_5);
-        lineEdit_11->setObjectName(QString::fromUtf8("lineEdit_11"));
-        lineEdit_11->setEnabled(true);
-        lineEdit_11->setFont(font3);
-        lineEdit_11->setFocusPolicy(Qt::NoFocus);
-        lineEdit_11->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
-"background-color: rgb(255, 251, 239);"));
-        lineEdit_11->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-        lineEdit_11->setReadOnly(true);
-
-        gridLayout_17->addWidget(lineEdit_11, 1, 0, 1, 1);
-
-        comboBox_15 = new QComboBox(groupBox_5);
-        comboBox_15->setObjectName(QString::fromUtf8("comboBox_15"));
-        comboBox_15->setFocusPolicy(Qt::NoFocus);
-
-        gridLayout_17->addWidget(comboBox_15, 0, 0, 1, 1);
-
-        pushButton_9 = new QPushButton(groupBox_5);
-        pushButton_9->setObjectName(QString::fromUtf8("pushButton_9"));
-        pushButton_9->setIcon(icon1);
-        pushButton_9->setIconSize(QSize(25, 25));
-
-        gridLayout_17->addWidget(pushButton_9, 0, 1, 2, 1);
-
-
-        gridLayout_16->addLayout(gridLayout_17, 1, 2, 1, 1);
-
-        gridLayout_18 = new QGridLayout();
-        gridLayout_18->setObjectName(QString::fromUtf8("gridLayout_18"));
-        comboBox_14 = new QComboBox(groupBox_5);
-        comboBox_14->setObjectName(QString::fromUtf8("comboBox_14"));
-        comboBox_14->setFocusPolicy(Qt::NoFocus);
-
-        gridLayout_18->addWidget(comboBox_14, 0, 0, 1, 1);
-
-        lineEdit_12 = new QLineEdit(groupBox_5);
-        lineEdit_12->setObjectName(QString::fromUtf8("lineEdit_12"));
-        lineEdit_12->setFont(font1);
-        lineEdit_12->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_18->addWidget(lineEdit_12, 1, 0, 1, 1);
-
-
-        gridLayout_16->addLayout(gridLayout_18, 1, 0, 1, 1);
-
-        label_6 = new QLabel(groupBox_5);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setFont(font1);
-
-        gridLayout_16->addWidget(label_6, 1, 1, 1, 1);
-
-
-        gridLayout_9->addWidget(groupBox_5, 2, 0, 1, 1);
+        gridLayout_9->addWidget(groupBox_10, 8, 0, 1, 2);
 
         groupBox_8 = new QGroupBox(ConversorUD);
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
@@ -1289,7 +1188,7 @@ public:
         sizePolicy4.setVerticalStretch(0);
         sizePolicy4.setHeightForWidth(pushButton_3->sizePolicy().hasHeightForWidth());
         pushButton_3->setSizePolicy(sizePolicy4);
-        pushButton_3->setIcon(icon1);
+        pushButton_3->setIcon(icon2);
         pushButton_3->setIconSize(QSize(25, 25));
 
         gridLayout_22->addWidget(pushButton_3, 1, 10, 1, 1);
@@ -1303,9 +1202,211 @@ public:
         gridLayout_7->addWidget(radioButton_2, 0, 1, 1, 1);
 
 
-        gridLayout_9->addWidget(groupBox_8, 5, 0, 1, 1);
+        gridLayout_9->addWidget(groupBox_8, 6, 0, 1, 1);
 
-        groupBox_4 = new QGroupBox(ConversorUD);
+        tabWidget = new QTabWidget(ConversorUD);
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        sizePolicy2.setHeightForWidth(tabWidget->sizePolicy().hasHeightForWidth());
+        tabWidget->setSizePolicy(sizePolicy2);
+        tab_3 = new QWidget();
+        tab_3->setObjectName(QString::fromUtf8("tab_3"));
+        gridLayout_33 = new QGridLayout(tab_3);
+        gridLayout_33->setObjectName(QString::fromUtf8("gridLayout_33"));
+        groupBox = new QGroupBox(tab_3);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setMaximumSize(QSize(16777215, 82));
+        gridLayout_8 = new QGridLayout(groupBox);
+        gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
+        gridLayout_8->setContentsMargins(0, 0, 0, 0);
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        lineEdit = new QLineEdit(groupBox);
+        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        lineEdit->setFont(font1);
+        lineEdit->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout->addWidget(lineEdit, 1, 0, 1, 1);
+
+        comboBox = new QComboBox(groupBox);
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+        comboBox->setFocusPolicy(Qt::NoFocus);
+        comboBox->setMaxVisibleItems(33);
+
+        gridLayout->addWidget(comboBox, 0, 0, 1, 1);
+
+
+        gridLayout_8->addLayout(gridLayout, 0, 0, 1, 1);
+
+        label = new QLabel(groupBox);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setFont(font1);
+
+        gridLayout_8->addWidget(label, 0, 1, 1, 1);
+
+        gridLayout_2 = new QGridLayout();
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        comboBox_2 = new QComboBox(groupBox);
+        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
+        comboBox_2->setFocusPolicy(Qt::NoFocus);
+        comboBox_2->setMaxVisibleItems(33);
+
+        gridLayout_2->addWidget(comboBox_2, 0, 0, 1, 1);
+
+        lineEdit_2 = new QLineEdit(groupBox);
+        lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
+        lineEdit_2->setEnabled(true);
+        QFont font4;
+        font4.setBold(true);
+        font4.setWeight(75);
+        lineEdit_2->setFont(font4);
+        lineEdit_2->setFocusPolicy(Qt::NoFocus);
+        lineEdit_2->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_2->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_2->setReadOnly(true);
+
+        gridLayout_2->addWidget(lineEdit_2, 1, 0, 1, 1);
+
+        pushButton_7 = new QPushButton(groupBox);
+        pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
+        pushButton_7->setIcon(icon2);
+        pushButton_7->setIconSize(QSize(25, 25));
+
+        gridLayout_2->addWidget(pushButton_7, 0, 1, 2, 1);
+
+
+        gridLayout_8->addLayout(gridLayout_2, 0, 2, 1, 1);
+
+
+        gridLayout_33->addWidget(groupBox, 0, 0, 1, 1);
+
+        groupBox_2 = new QGroupBox(tab_3);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        groupBox_2->setMaximumSize(QSize(16777215, 82));
+        gridLayout_4 = new QGridLayout(groupBox_2);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        gridLayout_4->setContentsMargins(0, 0, 0, 0);
+        gridLayout_5 = new QGridLayout();
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        lineEdit_3 = new QLineEdit(groupBox_2);
+        lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
+        lineEdit_3->setEnabled(true);
+        lineEdit_3->setFont(font4);
+        lineEdit_3->setFocusPolicy(Qt::NoFocus);
+        lineEdit_3->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_3->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_3->setReadOnly(true);
+
+        gridLayout_5->addWidget(lineEdit_3, 1, 0, 1, 1);
+
+        comboBox_6 = new QComboBox(groupBox_2);
+        comboBox_6->setObjectName(QString::fromUtf8("comboBox_6"));
+        comboBox_6->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_5->addWidget(comboBox_6, 0, 0, 1, 1);
+
+        pushButton_10 = new QPushButton(groupBox_2);
+        pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
+        pushButton_10->setIcon(icon2);
+        pushButton_10->setIconSize(QSize(25, 25));
+
+        gridLayout_5->addWidget(pushButton_10, 0, 1, 2, 1);
+
+
+        gridLayout_4->addLayout(gridLayout_5, 1, 2, 1, 1);
+
+        gridLayout_6 = new QGridLayout();
+        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+        comboBox_4 = new QComboBox(groupBox_2);
+        comboBox_4->setObjectName(QString::fromUtf8("comboBox_4"));
+        comboBox_4->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_6->addWidget(comboBox_4, 0, 0, 1, 1);
+
+        lineEdit_4 = new QLineEdit(groupBox_2);
+        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
+        lineEdit_4->setFont(font1);
+        lineEdit_4->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_6->addWidget(lineEdit_4, 1, 0, 1, 1);
+
+
+        gridLayout_4->addLayout(gridLayout_6, 1, 0, 1, 1);
+
+        label_2 = new QLabel(groupBox_2);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setFont(font1);
+
+        gridLayout_4->addWidget(label_2, 1, 1, 1, 1);
+
+
+        gridLayout_33->addWidget(groupBox_2, 0, 1, 1, 1);
+
+        groupBox_3 = new QGroupBox(tab_3);
+        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        groupBox_3->setMaximumSize(QSize(16777215, 82));
+        gridLayout_10 = new QGridLayout(groupBox_3);
+        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
+        gridLayout_10->setContentsMargins(0, 0, 0, 0);
+        gridLayout_12 = new QGridLayout();
+        gridLayout_12->setObjectName(QString::fromUtf8("gridLayout_12"));
+        comboBox_8 = new QComboBox(groupBox_3);
+        comboBox_8->setObjectName(QString::fromUtf8("comboBox_8"));
+        comboBox_8->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_12->addWidget(comboBox_8, 0, 0, 1, 1);
+
+        lineEdit_8 = new QLineEdit(groupBox_3);
+        lineEdit_8->setObjectName(QString::fromUtf8("lineEdit_8"));
+        lineEdit_8->setFont(font1);
+        lineEdit_8->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_12->addWidget(lineEdit_8, 1, 0, 1, 1);
+
+
+        gridLayout_10->addLayout(gridLayout_12, 1, 0, 1, 1);
+
+        label_4 = new QLabel(groupBox_3);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setFont(font1);
+
+        gridLayout_10->addWidget(label_4, 1, 1, 1, 1);
+
+        gridLayout_11 = new QGridLayout();
+        gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
+        lineEdit_7 = new QLineEdit(groupBox_3);
+        lineEdit_7->setObjectName(QString::fromUtf8("lineEdit_7"));
+        lineEdit_7->setEnabled(true);
+        lineEdit_7->setFont(font4);
+        lineEdit_7->setFocusPolicy(Qt::NoFocus);
+        lineEdit_7->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_7->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_7->setReadOnly(true);
+
+        gridLayout_11->addWidget(lineEdit_7, 1, 0, 1, 1);
+
+        comboBox_9 = new QComboBox(groupBox_3);
+        comboBox_9->setObjectName(QString::fromUtf8("comboBox_9"));
+        comboBox_9->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_11->addWidget(comboBox_9, 0, 0, 1, 1);
+
+        pushButton_8 = new QPushButton(groupBox_3);
+        pushButton_8->setObjectName(QString::fromUtf8("pushButton_8"));
+        pushButton_8->setIcon(icon2);
+        pushButton_8->setIconSize(QSize(25, 25));
+
+        gridLayout_11->addWidget(pushButton_8, 0, 1, 2, 1);
+
+
+        gridLayout_10->addLayout(gridLayout_11, 1, 2, 1, 1);
+
+
+        gridLayout_33->addWidget(groupBox_3, 1, 0, 1, 1);
+
+        groupBox_4 = new QGroupBox(tab_3);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
         groupBox_4->setMaximumSize(QSize(16777215, 82));
         gridLayout_13 = new QGridLayout(groupBox_4);
@@ -1316,7 +1417,7 @@ public:
         lineEdit_9 = new QLineEdit(groupBox_4);
         lineEdit_9->setObjectName(QString::fromUtf8("lineEdit_9"));
         lineEdit_9->setEnabled(true);
-        lineEdit_9->setFont(font3);
+        lineEdit_9->setFont(font4);
         lineEdit_9->setFocusPolicy(Qt::NoFocus);
         lineEdit_9->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
 "background-color: rgb(255, 251, 239);"));
@@ -1333,7 +1434,7 @@ public:
 
         pushButton_11 = new QPushButton(groupBox_4);
         pushButton_11->setObjectName(QString::fromUtf8("pushButton_11"));
-        pushButton_11->setIcon(icon1);
+        pushButton_11->setIcon(icon2);
         pushButton_11->setIconSize(QSize(25, 25));
 
         gridLayout_14->addWidget(pushButton_11, 0, 1, 2, 1);
@@ -1366,78 +1467,538 @@ public:
         gridLayout_13->addWidget(label_5, 1, 1, 1, 1);
 
 
-        gridLayout_9->addWidget(groupBox_4, 1, 1, 1, 1);
+        gridLayout_33->addWidget(groupBox_4, 1, 1, 1, 1);
+
+        groupBox_5 = new QGroupBox(tab_3);
+        groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
+        groupBox_5->setMaximumSize(QSize(16777215, 82));
+        gridLayout_16 = new QGridLayout(groupBox_5);
+        gridLayout_16->setObjectName(QString::fromUtf8("gridLayout_16"));
+        gridLayout_16->setSizeConstraint(QLayout::SetMinAndMaxSize);
+        gridLayout_16->setContentsMargins(0, 0, 0, 0);
+        gridLayout_17 = new QGridLayout();
+        gridLayout_17->setObjectName(QString::fromUtf8("gridLayout_17"));
+        lineEdit_11 = new QLineEdit(groupBox_5);
+        lineEdit_11->setObjectName(QString::fromUtf8("lineEdit_11"));
+        lineEdit_11->setEnabled(true);
+        lineEdit_11->setFont(font4);
+        lineEdit_11->setFocusPolicy(Qt::NoFocus);
+        lineEdit_11->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_11->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_11->setReadOnly(true);
+
+        gridLayout_17->addWidget(lineEdit_11, 1, 0, 1, 1);
+
+        comboBox_15 = new QComboBox(groupBox_5);
+        comboBox_15->setObjectName(QString::fromUtf8("comboBox_15"));
+        comboBox_15->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_17->addWidget(comboBox_15, 0, 0, 1, 1);
+
+        pushButton_9 = new QPushButton(groupBox_5);
+        pushButton_9->setObjectName(QString::fromUtf8("pushButton_9"));
+        pushButton_9->setIcon(icon2);
+        pushButton_9->setIconSize(QSize(25, 25));
+
+        gridLayout_17->addWidget(pushButton_9, 0, 1, 2, 1);
+
+
+        gridLayout_16->addLayout(gridLayout_17, 1, 2, 1, 1);
+
+        gridLayout_18 = new QGridLayout();
+        gridLayout_18->setObjectName(QString::fromUtf8("gridLayout_18"));
+        comboBox_14 = new QComboBox(groupBox_5);
+        comboBox_14->setObjectName(QString::fromUtf8("comboBox_14"));
+        comboBox_14->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_18->addWidget(comboBox_14, 0, 0, 1, 1);
+
+        lineEdit_12 = new QLineEdit(groupBox_5);
+        lineEdit_12->setObjectName(QString::fromUtf8("lineEdit_12"));
+        lineEdit_12->setFont(font1);
+        lineEdit_12->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_18->addWidget(lineEdit_12, 1, 0, 1, 1);
+
+
+        gridLayout_16->addLayout(gridLayout_18, 1, 0, 1, 1);
+
+        label_6 = new QLabel(groupBox_5);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setFont(font1);
+
+        gridLayout_16->addWidget(label_6, 1, 1, 1, 1);
+
+
+        gridLayout_33->addWidget(groupBox_5, 2, 0, 1, 1);
+
+        groupBox_18 = new QGroupBox(tab_3);
+        groupBox_18->setObjectName(QString::fromUtf8("groupBox_18"));
+        groupBox_18->setMaximumSize(QSize(16777215, 82));
+        gridLayout_52 = new QGridLayout(groupBox_18);
+        gridLayout_52->setObjectName(QString::fromUtf8("gridLayout_52"));
+        gridLayout_52->setContentsMargins(0, 0, 0, 0);
+        gridLayout_51 = new QGridLayout();
+        gridLayout_51->setObjectName(QString::fromUtf8("gridLayout_51"));
+        lineEdit_47 = new QLineEdit(groupBox_18);
+        lineEdit_47->setObjectName(QString::fromUtf8("lineEdit_47"));
+        lineEdit_47->setFont(font1);
+        lineEdit_47->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_51->addWidget(lineEdit_47, 2, 0, 1, 1);
+
+        comboBox_26 = new QComboBox(groupBox_18);
+        comboBox_26->setObjectName(QString::fromUtf8("comboBox_26"));
+        comboBox_26->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_51->addWidget(comboBox_26, 1, 0, 1, 1);
+
+
+        gridLayout_52->addLayout(gridLayout_51, 0, 0, 1, 1);
+
+        label_52 = new QLabel(groupBox_18);
+        label_52->setObjectName(QString::fromUtf8("label_52"));
+        label_52->setFont(font1);
+
+        gridLayout_52->addWidget(label_52, 0, 1, 1, 1);
+
+        gridLayout_50 = new QGridLayout();
+        gridLayout_50->setObjectName(QString::fromUtf8("gridLayout_50"));
+        lineEdit_46 = new QLineEdit(groupBox_18);
+        lineEdit_46->setObjectName(QString::fromUtf8("lineEdit_46"));
+        lineEdit_46->setEnabled(true);
+        lineEdit_46->setFont(font4);
+        lineEdit_46->setFocusPolicy(Qt::NoFocus);
+        lineEdit_46->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_46->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_46->setReadOnly(true);
+
+        gridLayout_50->addWidget(lineEdit_46, 1, 0, 1, 1);
+
+        pushButton_20 = new QPushButton(groupBox_18);
+        pushButton_20->setObjectName(QString::fromUtf8("pushButton_20"));
+        pushButton_20->setIcon(icon2);
+        pushButton_20->setIconSize(QSize(25, 25));
+
+        gridLayout_50->addWidget(pushButton_20, 0, 1, 2, 1);
+
+        comboBox_27 = new QComboBox(groupBox_18);
+        comboBox_27->setObjectName(QString::fromUtf8("comboBox_27"));
+        comboBox_27->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_50->addWidget(comboBox_27, 0, 0, 1, 1);
+
+
+        gridLayout_52->addLayout(gridLayout_50, 0, 2, 1, 1);
+
+
+        gridLayout_33->addWidget(groupBox_18, 2, 1, 1, 1);
+
+        tabWidget->addTab(tab_3, QString());
+        tab_4 = new QWidget();
+        tab_4->setObjectName(QString::fromUtf8("tab_4"));
+        gridLayout_56 = new QGridLayout(tab_4);
+        gridLayout_56->setObjectName(QString::fromUtf8("gridLayout_56"));
+        groupBox_15 = new QGroupBox(tab_4);
+        groupBox_15->setObjectName(QString::fromUtf8("groupBox_15"));
+        groupBox_15->setMaximumSize(QSize(16777215, 82));
+        gridLayout_40 = new QGridLayout(groupBox_15);
+        gridLayout_40->setObjectName(QString::fromUtf8("gridLayout_40"));
+        gridLayout_40->setContentsMargins(0, 0, 0, 0);
+        gridLayout_41 = new QGridLayout();
+        gridLayout_41->setObjectName(QString::fromUtf8("gridLayout_41"));
+        lineEdit_40 = new QLineEdit(groupBox_15);
+        lineEdit_40->setObjectName(QString::fromUtf8("lineEdit_40"));
+        lineEdit_40->setFont(font1);
+        lineEdit_40->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_41->addWidget(lineEdit_40, 1, 0, 1, 1);
+
+        comboBox_19 = new QComboBox(groupBox_15);
+        comboBox_19->setObjectName(QString::fromUtf8("comboBox_19"));
+        comboBox_19->setFocusPolicy(Qt::NoFocus);
+        comboBox_19->setMaxVisibleItems(33);
+
+        gridLayout_41->addWidget(comboBox_19, 0, 0, 1, 1);
+
+
+        gridLayout_40->addLayout(gridLayout_41, 0, 0, 1, 1);
+
+        label_49 = new QLabel(groupBox_15);
+        label_49->setObjectName(QString::fromUtf8("label_49"));
+        label_49->setFont(font1);
+
+        gridLayout_40->addWidget(label_49, 0, 1, 1, 1);
+
+        gridLayout_42 = new QGridLayout();
+        gridLayout_42->setObjectName(QString::fromUtf8("gridLayout_42"));
+        lineEdit_41 = new QLineEdit(groupBox_15);
+        lineEdit_41->setObjectName(QString::fromUtf8("lineEdit_41"));
+        lineEdit_41->setEnabled(true);
+        lineEdit_41->setFont(font4);
+        lineEdit_41->setFocusPolicy(Qt::NoFocus);
+        lineEdit_41->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_41->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_41->setReadOnly(true);
+
+        gridLayout_42->addWidget(lineEdit_41, 1, 0, 1, 1);
+
+        pushButton_17 = new QPushButton(groupBox_15);
+        pushButton_17->setObjectName(QString::fromUtf8("pushButton_17"));
+        pushButton_17->setIcon(icon2);
+        pushButton_17->setIconSize(QSize(25, 25));
+
+        gridLayout_42->addWidget(pushButton_17, 0, 1, 2, 1);
+
+        comboBox_20 = new QComboBox(groupBox_15);
+        comboBox_20->setObjectName(QString::fromUtf8("comboBox_20"));
+        comboBox_20->setFocusPolicy(Qt::NoFocus);
+        comboBox_20->setMaxVisibleItems(33);
+
+        gridLayout_42->addWidget(comboBox_20, 0, 0, 1, 1);
+
+
+        gridLayout_40->addLayout(gridLayout_42, 0, 2, 1, 1);
+
+
+        gridLayout_56->addWidget(groupBox_15, 0, 0, 1, 1);
+
+        groupBox_17 = new QGroupBox(tab_4);
+        groupBox_17->setObjectName(QString::fromUtf8("groupBox_17"));
+        groupBox_17->setMaximumSize(QSize(16777215, 82));
+        gridLayout_46 = new QGridLayout(groupBox_17);
+        gridLayout_46->setObjectName(QString::fromUtf8("gridLayout_46"));
+        gridLayout_46->setContentsMargins(0, 0, 0, 0);
+        gridLayout_47 = new QGridLayout();
+        gridLayout_47->setObjectName(QString::fromUtf8("gridLayout_47"));
+        lineEdit_44 = new QLineEdit(groupBox_17);
+        lineEdit_44->setObjectName(QString::fromUtf8("lineEdit_44"));
+        lineEdit_44->setEnabled(true);
+        lineEdit_44->setFont(font4);
+        lineEdit_44->setFocusPolicy(Qt::NoFocus);
+        lineEdit_44->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_44->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_44->setReadOnly(true);
+
+        gridLayout_47->addWidget(lineEdit_44, 1, 0, 1, 1);
+
+        comboBox_23 = new QComboBox(groupBox_17);
+        comboBox_23->setObjectName(QString::fromUtf8("comboBox_23"));
+        comboBox_23->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_47->addWidget(comboBox_23, 0, 0, 1, 1);
+
+        pushButton_19 = new QPushButton(groupBox_17);
+        pushButton_19->setObjectName(QString::fromUtf8("pushButton_19"));
+        pushButton_19->setIcon(icon2);
+        pushButton_19->setIconSize(QSize(25, 25));
+
+        gridLayout_47->addWidget(pushButton_19, 0, 1, 2, 1);
+
+
+        gridLayout_46->addLayout(gridLayout_47, 1, 2, 1, 1);
+
+        gridLayout_48 = new QGridLayout();
+        gridLayout_48->setObjectName(QString::fromUtf8("gridLayout_48"));
+        comboBox_24 = new QComboBox(groupBox_17);
+        comboBox_24->setObjectName(QString::fromUtf8("comboBox_24"));
+        comboBox_24->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_48->addWidget(comboBox_24, 0, 0, 1, 1);
+
+        lineEdit_45 = new QLineEdit(groupBox_17);
+        lineEdit_45->setObjectName(QString::fromUtf8("lineEdit_45"));
+        lineEdit_45->setFont(font1);
+        lineEdit_45->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_48->addWidget(lineEdit_45, 1, 0, 1, 1);
+
+
+        gridLayout_46->addLayout(gridLayout_48, 1, 0, 1, 1);
+
+        label_51 = new QLabel(groupBox_17);
+        label_51->setObjectName(QString::fromUtf8("label_51"));
+        label_51->setFont(font1);
+
+        gridLayout_46->addWidget(label_51, 1, 1, 1, 1);
+
+
+        gridLayout_56->addWidget(groupBox_17, 0, 1, 1, 1);
+
+        groupBox_16 = new QGroupBox(tab_4);
+        groupBox_16->setObjectName(QString::fromUtf8("groupBox_16"));
+        groupBox_16->setMaximumSize(QSize(16777215, 82));
+        gridLayout_43 = new QGridLayout(groupBox_16);
+        gridLayout_43->setObjectName(QString::fromUtf8("gridLayout_43"));
+        gridLayout_43->setContentsMargins(0, 0, 0, 0);
+        gridLayout_44 = new QGridLayout();
+        gridLayout_44->setObjectName(QString::fromUtf8("gridLayout_44"));
+        comboBox_21 = new QComboBox(groupBox_16);
+        comboBox_21->setObjectName(QString::fromUtf8("comboBox_21"));
+        comboBox_21->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_44->addWidget(comboBox_21, 0, 0, 1, 1);
+
+        lineEdit_42 = new QLineEdit(groupBox_16);
+        lineEdit_42->setObjectName(QString::fromUtf8("lineEdit_42"));
+        lineEdit_42->setFont(font1);
+        lineEdit_42->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_44->addWidget(lineEdit_42, 1, 0, 1, 1);
+
+
+        gridLayout_43->addLayout(gridLayout_44, 1, 0, 1, 1);
+
+        label_50 = new QLabel(groupBox_16);
+        label_50->setObjectName(QString::fromUtf8("label_50"));
+        label_50->setFont(font1);
+
+        gridLayout_43->addWidget(label_50, 1, 1, 1, 1);
+
+        gridLayout_45 = new QGridLayout();
+        gridLayout_45->setObjectName(QString::fromUtf8("gridLayout_45"));
+        lineEdit_43 = new QLineEdit(groupBox_16);
+        lineEdit_43->setObjectName(QString::fromUtf8("lineEdit_43"));
+        lineEdit_43->setEnabled(true);
+        lineEdit_43->setFont(font4);
+        lineEdit_43->setFocusPolicy(Qt::NoFocus);
+        lineEdit_43->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_43->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_43->setReadOnly(true);
+
+        gridLayout_45->addWidget(lineEdit_43, 1, 0, 1, 1);
+
+        comboBox_22 = new QComboBox(groupBox_16);
+        comboBox_22->setObjectName(QString::fromUtf8("comboBox_22"));
+        comboBox_22->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_45->addWidget(comboBox_22, 0, 0, 1, 1);
+
+        pushButton_18 = new QPushButton(groupBox_16);
+        pushButton_18->setObjectName(QString::fromUtf8("pushButton_18"));
+        pushButton_18->setIcon(icon2);
+        pushButton_18->setIconSize(QSize(25, 25));
+
+        gridLayout_45->addWidget(pushButton_18, 0, 1, 2, 1);
+
+
+        gridLayout_43->addLayout(gridLayout_45, 1, 2, 1, 1);
+
+
+        gridLayout_56->addWidget(groupBox_16, 1, 0, 1, 1);
+
+        groupBox_14 = new QGroupBox(tab_4);
+        groupBox_14->setObjectName(QString::fromUtf8("groupBox_14"));
+        groupBox_14->setMaximumSize(QSize(16777215, 82));
+        gridLayout_37 = new QGridLayout(groupBox_14);
+        gridLayout_37->setObjectName(QString::fromUtf8("gridLayout_37"));
+        gridLayout_37->setContentsMargins(0, 0, 0, 0);
+        gridLayout_38 = new QGridLayout();
+        gridLayout_38->setObjectName(QString::fromUtf8("gridLayout_38"));
+        lineEdit_38 = new QLineEdit(groupBox_14);
+        lineEdit_38->setObjectName(QString::fromUtf8("lineEdit_38"));
+        lineEdit_38->setEnabled(true);
+        lineEdit_38->setFont(font4);
+        lineEdit_38->setFocusPolicy(Qt::NoFocus);
+        lineEdit_38->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_38->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_38->setReadOnly(true);
+
+        gridLayout_38->addWidget(lineEdit_38, 1, 0, 1, 1);
+
+        comboBox_13 = new QComboBox(groupBox_14);
+        comboBox_13->setObjectName(QString::fromUtf8("comboBox_13"));
+        comboBox_13->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_38->addWidget(comboBox_13, 0, 0, 1, 1);
+
+        pushButton_16 = new QPushButton(groupBox_14);
+        pushButton_16->setObjectName(QString::fromUtf8("pushButton_16"));
+        pushButton_16->setIcon(icon2);
+        pushButton_16->setIconSize(QSize(25, 25));
+
+        gridLayout_38->addWidget(pushButton_16, 0, 1, 2, 1);
+
+
+        gridLayout_37->addLayout(gridLayout_38, 1, 2, 1, 1);
+
+        gridLayout_39 = new QGridLayout();
+        gridLayout_39->setObjectName(QString::fromUtf8("gridLayout_39"));
+        comboBox_18 = new QComboBox(groupBox_14);
+        comboBox_18->setObjectName(QString::fromUtf8("comboBox_18"));
+        comboBox_18->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_39->addWidget(comboBox_18, 0, 0, 1, 1);
+
+        lineEdit_39 = new QLineEdit(groupBox_14);
+        lineEdit_39->setObjectName(QString::fromUtf8("lineEdit_39"));
+        lineEdit_39->setFont(font1);
+        lineEdit_39->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_39->addWidget(lineEdit_39, 1, 0, 1, 1);
+
+
+        gridLayout_37->addLayout(gridLayout_39, 1, 0, 1, 1);
+
+        label_48 = new QLabel(groupBox_14);
+        label_48->setObjectName(QString::fromUtf8("label_48"));
+        label_48->setFont(font1);
+
+        gridLayout_37->addWidget(label_48, 1, 1, 1, 1);
+
+
+        gridLayout_56->addWidget(groupBox_14, 1, 1, 1, 1);
+
+        groupBox_13 = new QGroupBox(tab_4);
+        groupBox_13->setObjectName(QString::fromUtf8("groupBox_13"));
+        groupBox_13->setMaximumSize(QSize(16777215, 82));
+        gridLayout_34 = new QGridLayout(groupBox_13);
+        gridLayout_34->setObjectName(QString::fromUtf8("gridLayout_34"));
+        gridLayout_34->setSizeConstraint(QLayout::SetMinAndMaxSize);
+        gridLayout_34->setContentsMargins(0, 0, 0, 0);
+        gridLayout_35 = new QGridLayout();
+        gridLayout_35->setObjectName(QString::fromUtf8("gridLayout_35"));
+        lineEdit_36 = new QLineEdit(groupBox_13);
+        lineEdit_36->setObjectName(QString::fromUtf8("lineEdit_36"));
+        lineEdit_36->setEnabled(true);
+        lineEdit_36->setFont(font4);
+        lineEdit_36->setFocusPolicy(Qt::NoFocus);
+        lineEdit_36->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_36->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_36->setReadOnly(true);
+
+        gridLayout_35->addWidget(lineEdit_36, 1, 0, 1, 1);
+
+        comboBox_16 = new QComboBox(groupBox_13);
+        comboBox_16->setObjectName(QString::fromUtf8("comboBox_16"));
+        comboBox_16->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_35->addWidget(comboBox_16, 0, 0, 1, 1);
+
+        pushButton_15 = new QPushButton(groupBox_13);
+        pushButton_15->setObjectName(QString::fromUtf8("pushButton_15"));
+        pushButton_15->setIcon(icon2);
+        pushButton_15->setIconSize(QSize(25, 25));
+
+        gridLayout_35->addWidget(pushButton_15, 0, 1, 2, 1);
+
+
+        gridLayout_34->addLayout(gridLayout_35, 1, 2, 1, 1);
+
+        gridLayout_36 = new QGridLayout();
+        gridLayout_36->setObjectName(QString::fromUtf8("gridLayout_36"));
+        comboBox_17 = new QComboBox(groupBox_13);
+        comboBox_17->setObjectName(QString::fromUtf8("comboBox_17"));
+        comboBox_17->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_36->addWidget(comboBox_17, 0, 0, 1, 1);
+
+        lineEdit_37 = new QLineEdit(groupBox_13);
+        lineEdit_37->setObjectName(QString::fromUtf8("lineEdit_37"));
+        lineEdit_37->setFont(font1);
+        lineEdit_37->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_36->addWidget(lineEdit_37, 1, 0, 1, 1);
+
+
+        gridLayout_34->addLayout(gridLayout_36, 1, 0, 1, 1);
+
+        label_47 = new QLabel(groupBox_13);
+        label_47->setObjectName(QString::fromUtf8("label_47"));
+        label_47->setFont(font1);
+
+        gridLayout_34->addWidget(label_47, 1, 1, 1, 1);
+
+
+        gridLayout_56->addWidget(groupBox_13, 2, 0, 1, 1);
+
+        groupBox_19 = new QGroupBox(tab_4);
+        groupBox_19->setObjectName(QString::fromUtf8("groupBox_19"));
+        groupBox_19->setMaximumSize(QSize(16777215, 82));
+        gridLayout_49 = new QGridLayout(groupBox_19);
+        gridLayout_49->setObjectName(QString::fromUtf8("gridLayout_49"));
+        gridLayout_49->setSizeConstraint(QLayout::SetMinAndMaxSize);
+        gridLayout_49->setContentsMargins(0, 0, 0, 0);
+        gridLayout_54 = new QGridLayout();
+        gridLayout_54->setObjectName(QString::fromUtf8("gridLayout_54"));
+        lineEdit_48 = new QLineEdit(groupBox_19);
+        lineEdit_48->setObjectName(QString::fromUtf8("lineEdit_48"));
+        lineEdit_48->setEnabled(true);
+        lineEdit_48->setFont(font4);
+        lineEdit_48->setFocusPolicy(Qt::NoFocus);
+        lineEdit_48->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_48->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_48->setReadOnly(true);
+
+        gridLayout_54->addWidget(lineEdit_48, 1, 0, 1, 1);
+
+        comboBox_28 = new QComboBox(groupBox_19);
+        comboBox_28->setObjectName(QString::fromUtf8("comboBox_28"));
+        comboBox_28->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_54->addWidget(comboBox_28, 0, 0, 1, 1);
+
+        pushButton_21 = new QPushButton(groupBox_19);
+        pushButton_21->setObjectName(QString::fromUtf8("pushButton_21"));
+        pushButton_21->setIcon(icon2);
+        pushButton_21->setIconSize(QSize(25, 25));
+
+        gridLayout_54->addWidget(pushButton_21, 0, 1, 2, 1);
+
+
+        gridLayout_49->addLayout(gridLayout_54, 1, 2, 1, 1);
+
+        gridLayout_55 = new QGridLayout();
+        gridLayout_55->setObjectName(QString::fromUtf8("gridLayout_55"));
+        comboBox_29 = new QComboBox(groupBox_19);
+        comboBox_29->setObjectName(QString::fromUtf8("comboBox_29"));
+        comboBox_29->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_55->addWidget(comboBox_29, 0, 0, 1, 1);
+
+        lineEdit_49 = new QLineEdit(groupBox_19);
+        lineEdit_49->setObjectName(QString::fromUtf8("lineEdit_49"));
+        lineEdit_49->setFont(font1);
+        lineEdit_49->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_55->addWidget(lineEdit_49, 1, 0, 1, 1);
+
+
+        gridLayout_49->addLayout(gridLayout_55, 1, 0, 1, 1);
+
+        label_53 = new QLabel(groupBox_19);
+        label_53->setObjectName(QString::fromUtf8("label_53"));
+        label_53->setFont(font1);
+
+        gridLayout_49->addWidget(label_53, 1, 1, 1, 1);
+
+
+        gridLayout_56->addWidget(groupBox_19, 2, 1, 1, 1);
+
+        tabWidget->addTab(tab_4, QString());
+
+        gridLayout_9->addWidget(tabWidget, 0, 0, 1, 2);
+
+        label_14 = new QLabel(ConversorUD);
+        label_14->setObjectName(QString::fromUtf8("label_14"));
+
+        gridLayout_9->addWidget(label_14, 1, 0, 4, 1);
+
+        label_15 = new QLabel(ConversorUD);
+        label_15->setObjectName(QString::fromUtf8("label_15"));
+
+        gridLayout_9->addWidget(label_15, 1, 1, 4, 1);
 
 
         gridLayout_25->addLayout(gridLayout_9, 1, 0, 1, 2);
-
-        groupBox_11 = new QGroupBox(ConversorUD);
-        groupBox_11->setObjectName(QString::fromUtf8("groupBox_11"));
-        gridLayout_28 = new QGridLayout(groupBox_11);
-        gridLayout_28->setObjectName(QString::fromUtf8("gridLayout_28"));
-        gridLayout_28->setContentsMargins(0, 0, 0, 0);
-        radioButton_7 = new QRadioButton(groupBox_11);
-        radioButton_7->setObjectName(QString::fromUtf8("radioButton_7"));
-
-        gridLayout_28->addWidget(radioButton_7, 2, 1, 1, 1);
-
-        radioButton_6 = new QRadioButton(groupBox_11);
-        radioButton_6->setObjectName(QString::fromUtf8("radioButton_6"));
-
-        gridLayout_28->addWidget(radioButton_6, 2, 0, 1, 1);
-
-
-        gridLayout_25->addWidget(groupBox_11, 0, 0, 1, 2);
-
-        gridLayout_3 = new QGridLayout();
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_3->addItem(horizontalSpacer_2, 1, 2, 1, 1);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_3->addItem(horizontalSpacer, 1, 6, 1, 1);
-
-        pushButton = new QPushButton(ConversorUD);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setFocusPolicy(Qt::NoFocus);
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/Imagenes/puerta.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton->setIcon(icon3);
-        pushButton->setIconSize(QSize(25, 25));
-
-        gridLayout_3->addWidget(pushButton, 1, 7, 1, 1);
-
-        label_3 = new QLabel(ConversorUD);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        gridLayout_3->addWidget(label_3, 1, 3, 1, 1);
-
-        pushButton_2 = new QPushButton(ConversorUD);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setFocusPolicy(Qt::NoFocus);
-        pushButton_2->setIcon(icon1);
-        pushButton_2->setIconSize(QSize(25, 25));
-
-        gridLayout_3->addWidget(pushButton_2, 1, 0, 1, 1);
-
-        comboBox_3 = new QComboBox(ConversorUD);
-        comboBox_3->setObjectName(QString::fromUtf8("comboBox_3"));
-
-        gridLayout_3->addWidget(comboBox_3, 1, 4, 1, 1);
-
-        pushButton_13 = new QPushButton(ConversorUD);
-        pushButton_13->setObjectName(QString::fromUtf8("pushButton_13"));
-        QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/Imagenes/calculadora.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_13->setIcon(icon4);
-        pushButton_13->setIconSize(QSize(25, 25));
-
-        gridLayout_3->addWidget(pushButton_13, 1, 1, 1, 1);
-
-
-        gridLayout_25->addLayout(gridLayout_3, 4, 0, 1, 2);
 
         QWidget::setTabOrder(lineEdit, lineEdit_4);
         QWidget::setTabOrder(lineEdit_4, lineEdit_8);
@@ -1483,12 +2044,59 @@ public:
 
         retranslateUi(ConversorUD);
 
+        tabWidget->setCurrentIndex(0);
+
+
         QMetaObject::connectSlotsByName(ConversorUD);
     } // setupUi
 
     void retranslateUi(QDialog *ConversorUD)
     {
         ConversorUD->setWindowTitle(QApplication::translate("ConversorUD", "Conversor de unidades v.0.1.0", 0, QApplication::UnicodeUTF8));
+        pushButton->setText(QApplication::translate("ConversorUD", "Salir", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("ConversorUD", "Decimales", 0, QApplication::UnicodeUTF8));
+        pushButton_2->setText(QApplication::translate("ConversorUD", "Reiniciar todos", 0, QApplication::UnicodeUTF8));
+        comboBox_3->clear();
+        comboBox_3->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "1", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "2", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "3", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "4", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "5", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "6", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "7", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "8", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "9", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "10", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "11", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "12", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "13", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "14", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "15", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "16", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "17", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "18", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "19", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "20", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "30", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "40", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "50", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "60", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "70", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "80", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "90", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "100", 0, QApplication::UnicodeUTF8)
+        );
+        pushButton_13->setText(QApplication::translate("ConversorUD", "Calculadora", 0, QApplication::UnicodeUTF8));
+        groupBox_11->setTitle(QString());
+        comboBox_25->clear();
+        comboBox_25->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Aceleracion", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Almacenamiento de datos", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Distancia o Longitud", 0, QApplication::UnicodeUTF8)
+        );
+        radioButton_6->setText(QApplication::translate("ConversorUD", "Conversores", 0, QApplication::UnicodeUTF8));
+        radioButton_7->setText(QApplication::translate("ConversorUD", "Calculadoras", 0, QApplication::UnicodeUTF8));
         groupBox_7->setTitle(QApplication::translate("ConversorUD", "CCC (Calcular DC bancario)", 0, QApplication::UnicodeUTF8));
         label_10->setText(QApplication::translate("ConversorUD", "Entidad", 0, QApplication::UnicodeUTF8));
         label_11->setText(QApplication::translate("ConversorUD", "Oficina", 0, QApplication::UnicodeUTF8));
@@ -1514,6 +2122,66 @@ public:
         label_37->setText(QApplication::translate("ConversorUD", "* Tienes que introducir una \"X\" en la posicion del digito que quieres recuperar.", 0, QApplication::UnicodeUTF8));
         radioButton_4->setText(QApplication::translate("ConversorUD", "Comprobar digito", 0, QApplication::UnicodeUTF8));
         radioButton_5->setText(QApplication::translate("ConversorUD", "Recuperar numero perdido", 0, QApplication::UnicodeUTF8));
+        groupBox_10->setTitle(QApplication::translate("ConversorUD", "Calculo interes bancario", 0, QApplication::UnicodeUTF8));
+        pushButton_14->setText(QApplication::translate("ConversorUD", "Calcular", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("ConversorUD", "Periodo", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("ConversorUD", "Mensualidad", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("ConversorUD", "Interes", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QApplication::translate("ConversorUD", "Amortizacion", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem4 = tableWidget->horizontalHeaderItem(4);
+        ___qtablewidgetitem4->setText(QApplication::translate("ConversorUD", "Capital vivo", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem5 = tableWidget->horizontalHeaderItem(5);
+        ___qtablewidgetitem5->setText(QApplication::translate("ConversorUD", "Capital amortizado", 0, QApplication::UnicodeUTF8));
+        comboBox_5->clear();
+        comboBox_5->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Mensual", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Bimestral", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Trimestral", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Cuatrimestral", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Semestral", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Anual", 0, QApplication::UnicodeUTF8)
+        );
+        label_42->setText(QApplication::translate("ConversorUD", "Importe total intereses", 0, QApplication::UnicodeUTF8));
+        label_45->setText(QApplication::translate("ConversorUD", "%", 0, QApplication::UnicodeUTF8));
+        label_43->setText(QApplication::translate("ConversorUD", "* Cuota mensual orientativa. Puede haber alguna diferencia por el numero de decimales utilizados para el redondeo de la cuota mensual.", 0, QApplication::UnicodeUTF8));
+        label_40->setText(QApplication::translate("ConversorUD", "Tabla de amortizacion:", 0, QApplication::UnicodeUTF8));
+        label_41->setText(QApplication::translate("ConversorUD", "Importe total cuotas", 0, QApplication::UnicodeUTF8));
+        label_31->setText(QApplication::translate("ConversorUD", "Cuota", 0, QApplication::UnicodeUTF8));
+        label_36->setText(QApplication::translate("ConversorUD", "Tipo amortizacion", 0, QApplication::UnicodeUTF8));
+        label_39->setText(QApplication::translate("ConversorUD", "%", 0, QApplication::UnicodeUTF8));
+        label_34->setText(QApplication::translate("ConversorUD", "Anos", 0, QApplication::UnicodeUTF8));
+        label_35->setText(QApplication::translate("ConversorUD", "Total cuotas", 0, QApplication::UnicodeUTF8));
+        label_28->setText(QApplication::translate("ConversorUD", "Capital", 0, QApplication::UnicodeUTF8));
+        label_32->setText(QApplication::translate("ConversorUD", "Tipo de interes", 0, QApplication::UnicodeUTF8));
+        label_38->setText(QApplication::translate("ConversorUD", "Importe cuota", 0, QApplication::UnicodeUTF8));
+        label_33->setText(QApplication::translate("ConversorUD", "Tipo de interes efectivo", 0, QApplication::UnicodeUTF8));
+        pushButton_12->setText(QString());
+        label_44->setText(QApplication::translate("ConversorUD", "T.A.E.", 0, QApplication::UnicodeUTF8));
+        comboBox_7->clear();
+        comboBox_7->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Metodo Frances", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Metodo Americano", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Metodo Aleman", 0, QApplication::UnicodeUTF8)
+        );
+        groupBox_12->setTitle(QApplication::translate("ConversorUD", "Sistema de pago elegido", 0, QApplication::UnicodeUTF8));
+        radioButton_8->setText(QApplication::translate("ConversorUD", "Carencia total", 0, QApplication::UnicodeUTF8));
+        label_46->setText(QApplication::translate("ConversorUD", "Numero de periodos de carencia", 0, QApplication::UnicodeUTF8));
+        radioButton_9->setText(QApplication::translate("ConversorUD", "Carencia parcial", 0, QApplication::UnicodeUTF8));
+        checkBox->setText(QApplication::translate("ConversorUD", "Carencia", 0, QApplication::UnicodeUTF8));
+        groupBox_8->setTitle(QApplication::translate("ConversorUD", "ISBN (Calcular digito de libros)", 0, QApplication::UnicodeUTF8));
+        radioButton->setText(QApplication::translate("ConversorUD", "ISBN10", 0, QApplication::UnicodeUTF8));
+        label_18->setText(QApplication::translate("ConversorUD", "Digito", 0, QApplication::UnicodeUTF8));
+        label_23->setText(QApplication::translate("ConversorUD", "-", 0, QApplication::UnicodeUTF8));
+        label_17->setText(QApplication::translate("ConversorUD", "Codigo", 0, QApplication::UnicodeUTF8));
+        label_16->setText(QApplication::translate("ConversorUD", "-", 0, QApplication::UnicodeUTF8));
+        label_22->setText(QApplication::translate("ConversorUD", "-", 0, QApplication::UnicodeUTF8));
+        label_24->setText(QApplication::translate("ConversorUD", "-", 0, QApplication::UnicodeUTF8));
+        pushButton_3->setText(QString());
+        radioButton_2->setText(QApplication::translate("ConversorUD", "ISBN13", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("ConversorUD", "Distancia o Longitud", 0, QApplication::UnicodeUTF8));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()
@@ -1584,56 +2252,6 @@ public:
          << QApplication::translate("ConversorUD", "Minuto luz", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Segundo luz", 0, QApplication::UnicodeUTF8)
         );
-        groupBox_10->setTitle(QApplication::translate("ConversorUD", "Calculo interes bancario", 0, QApplication::UnicodeUTF8));
-        pushButton_14->setText(QApplication::translate("ConversorUD", "Calcular", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("ConversorUD", "Periodo", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("ConversorUD", "Mensualidad", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("ConversorUD", "Interes", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("ConversorUD", "Amortizacion", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem4 = tableWidget->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("ConversorUD", "Capital vivo", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem5 = tableWidget->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QApplication::translate("ConversorUD", "Capital amortizado", 0, QApplication::UnicodeUTF8));
-        comboBox_5->clear();
-        comboBox_5->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Mensual", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Bimestral", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Trimestral", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Cuatrimestral", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Semestral", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Anual", 0, QApplication::UnicodeUTF8)
-        );
-        label_42->setText(QApplication::translate("ConversorUD", "Importe total intereses", 0, QApplication::UnicodeUTF8));
-        label_45->setText(QApplication::translate("ConversorUD", "%", 0, QApplication::UnicodeUTF8));
-        label_43->setText(QApplication::translate("ConversorUD", "* Cuota mensual orientativa. Puede haber alguna diferencia por el numero de decimales utilizados para el redondeo de la cuota mensual.", 0, QApplication::UnicodeUTF8));
-        label_40->setText(QApplication::translate("ConversorUD", "Tabla de amortizacion:", 0, QApplication::UnicodeUTF8));
-        label_41->setText(QApplication::translate("ConversorUD", "Importe total cuotas", 0, QApplication::UnicodeUTF8));
-        label_31->setText(QApplication::translate("ConversorUD", "Cuota", 0, QApplication::UnicodeUTF8));
-        label_36->setText(QApplication::translate("ConversorUD", "Tipo amortizacion", 0, QApplication::UnicodeUTF8));
-        label_39->setText(QApplication::translate("ConversorUD", "%", 0, QApplication::UnicodeUTF8));
-        label_34->setText(QApplication::translate("ConversorUD", "Anos", 0, QApplication::UnicodeUTF8));
-        label_35->setText(QApplication::translate("ConversorUD", "Total cuotas", 0, QApplication::UnicodeUTF8));
-        label_28->setText(QApplication::translate("ConversorUD", "Capital", 0, QApplication::UnicodeUTF8));
-        label_32->setText(QApplication::translate("ConversorUD", "Tipo de interes", 0, QApplication::UnicodeUTF8));
-        label_38->setText(QApplication::translate("ConversorUD", "Importe cuota", 0, QApplication::UnicodeUTF8));
-        label_33->setText(QApplication::translate("ConversorUD", "Tipo de interes efectivo", 0, QApplication::UnicodeUTF8));
-        pushButton_12->setText(QString());
-        label_44->setText(QApplication::translate("ConversorUD", "T.A.E.", 0, QApplication::UnicodeUTF8));
-        comboBox_7->clear();
-        comboBox_7->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Metodo Frances", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Metodo Americano", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Metodo Aleman", 0, QApplication::UnicodeUTF8)
-        );
-        groupBox_12->setTitle(QApplication::translate("ConversorUD", "Sistema de pago elegido", 0, QApplication::UnicodeUTF8));
-        radioButton_8->setText(QApplication::translate("ConversorUD", "Carencia total", 0, QApplication::UnicodeUTF8));
-        label_46->setText(QApplication::translate("ConversorUD", "Numero de periodos de carencia", 0, QApplication::UnicodeUTF8));
-        radioButton_9->setText(QApplication::translate("ConversorUD", "Carencia parcial", 0, QApplication::UnicodeUTF8));
-        checkBox->setText(QApplication::translate("ConversorUD", "Carencia", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("ConversorUD", "Superficie o Area", 0, QApplication::UnicodeUTF8));
         comboBox_6->clear();
         comboBox_6->insertItems(0, QStringList()
@@ -1660,8 +2278,6 @@ public:
          << QApplication::translate("ConversorUD", "Pulgada cuadrada", 0, QApplication::UnicodeUTF8)
         );
         label_2->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
-        label_15->setText(QApplication::translate("ConversorUD", "vacio", 0, QApplication::UnicodeUTF8));
-        label_14->setText(QApplication::translate("ConversorUD", "vacio", 0, QApplication::UnicodeUTF8));
         groupBox_3->setTitle(QApplication::translate("ConversorUD", "Peso o Masa", 0, QApplication::UnicodeUTF8));
         comboBox_8->clear();
         comboBox_8->insertItems(0, QStringList()
@@ -1690,30 +2306,6 @@ public:
          << QApplication::translate("ConversorUD", "Libra", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Onza", 0, QApplication::UnicodeUTF8)
         );
-        groupBox_5->setTitle(QApplication::translate("ConversorUD", "Temperatura", 0, QApplication::UnicodeUTF8));
-        comboBox_15->clear();
-        comboBox_15->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "\302\272C (Celsius)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "K (Kelvin)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "\302\272F (Fahrenheit)", 0, QApplication::UnicodeUTF8)
-        );
-        comboBox_14->clear();
-        comboBox_14->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "\302\272C (Celsius)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "K (Kelvin)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "\302\272F (Fahrenheit)", 0, QApplication::UnicodeUTF8)
-        );
-        label_6->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
-        groupBox_8->setTitle(QApplication::translate("ConversorUD", "ISBN (Calcular digito de libros)", 0, QApplication::UnicodeUTF8));
-        radioButton->setText(QApplication::translate("ConversorUD", "ISBN10", 0, QApplication::UnicodeUTF8));
-        label_18->setText(QApplication::translate("ConversorUD", "Digito", 0, QApplication::UnicodeUTF8));
-        label_23->setText(QApplication::translate("ConversorUD", "-", 0, QApplication::UnicodeUTF8));
-        label_17->setText(QApplication::translate("ConversorUD", "Codigo", 0, QApplication::UnicodeUTF8));
-        label_16->setText(QApplication::translate("ConversorUD", "-", 0, QApplication::UnicodeUTF8));
-        label_22->setText(QApplication::translate("ConversorUD", "-", 0, QApplication::UnicodeUTF8));
-        label_24->setText(QApplication::translate("ConversorUD", "-", 0, QApplication::UnicodeUTF8));
-        pushButton_3->setText(QString());
-        radioButton_2->setText(QApplication::translate("ConversorUD", "ISBN13", 0, QApplication::UnicodeUTF8));
         groupBox_4->setTitle(QApplication::translate("ConversorUD", "Tiempo", 0, QApplication::UnicodeUTF8));
         comboBox_12->clear();
         comboBox_12->insertItems(0, QStringList()
@@ -1740,44 +2332,190 @@ public:
          << QApplication::translate("ConversorUD", "Nanosegundo", 0, QApplication::UnicodeUTF8)
         );
         label_5->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
-        groupBox_11->setTitle(QString());
-        radioButton_7->setText(QApplication::translate("ConversorUD", "Calculadoras", 0, QApplication::UnicodeUTF8));
-        radioButton_6->setText(QApplication::translate("ConversorUD", "Conversores", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("ConversorUD", "Salir", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("ConversorUD", "Decimales", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("ConversorUD", "Reiniciar todos", 0, QApplication::UnicodeUTF8));
-        comboBox_3->clear();
-        comboBox_3->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "1", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "2", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "3", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "4", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "5", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "6", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "7", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "8", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "9", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "10", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "11", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "12", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "13", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "14", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "15", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "16", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "17", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "18", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "19", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "20", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "30", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "40", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "50", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "60", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "70", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "80", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "90", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "100", 0, QApplication::UnicodeUTF8)
+        groupBox_5->setTitle(QApplication::translate("ConversorUD", "Temperatura", 0, QApplication::UnicodeUTF8));
+        comboBox_15->clear();
+        comboBox_15->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "\302\272C (Celsius)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "K (Kelvin)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "\302\272F (Fahrenheit)", 0, QApplication::UnicodeUTF8)
         );
-        pushButton_13->setText(QApplication::translate("ConversorUD", "Calculadora", 0, QApplication::UnicodeUTF8));
+        comboBox_14->clear();
+        comboBox_14->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "\302\272C (Celsius)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "K (Kelvin)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "\302\272F (Fahrenheit)", 0, QApplication::UnicodeUTF8)
+        );
+        label_6->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+        groupBox_18->setTitle(QApplication::translate("ConversorUD", "Aceleracion", 0, QApplication::UnicodeUTF8));
+        comboBox_26->clear();
+        comboBox_26->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Metros por segundo cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Pies por segundo cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gal", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Miligal", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gravedad estandar", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Fuerza G", 0, QApplication::UnicodeUTF8)
+        );
+        label_52->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+        comboBox_27->clear();
+        comboBox_27->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Metros por segundo cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Pies por segundo cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gal", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Miligal", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gravedad estandar", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Fuerza G", 0, QApplication::UnicodeUTF8)
+        );
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("ConversorUD", "Conversores 1/10", 0, QApplication::UnicodeUTF8));
+        groupBox_15->setTitle(QApplication::translate("ConversorUD", "Almacenamiento de datos", 0, QApplication::UnicodeUTF8));
+        comboBox_19->clear();
+        comboBox_19->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Bit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Nibble", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Petabit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Exabit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Byte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobyte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabyte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabyte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabyte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Petabyte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Exabyte", 0, QApplication::UnicodeUTF8)
+        );
+        label_49->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+        comboBox_20->clear();
+        comboBox_20->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Bit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Nibble", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Petabit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Exabit", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Byte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobyte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabyte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabyte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabyte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Petabyte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Exabyte", 0, QApplication::UnicodeUTF8)
+        );
+        groupBox_17->setTitle(QApplication::translate("ConversorUD", "Superficie o Area", 0, QApplication::UnicodeUTF8));
+        comboBox_23->clear();
+        comboBox_23->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Centimetro cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Metro cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilometro cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Hectarea", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Milla cuadrada", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Acre", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Yarda cuadrada", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Pie cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Pulgada cuadrada", 0, QApplication::UnicodeUTF8)
+        );
+        comboBox_24->clear();
+        comboBox_24->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Centimetro cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Metro cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilometro cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Hectarea", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Milla cuadrada", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Acre", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Yarda cuadrada", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Pie cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Pulgada cuadrada", 0, QApplication::UnicodeUTF8)
+        );
+        label_51->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+        groupBox_16->setTitle(QApplication::translate("ConversorUD", "Peso o Masa", 0, QApplication::UnicodeUTF8));
+        comboBox_21->clear();
+        comboBox_21->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Tonelada metrica", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilogramo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gramo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Miligramo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Microgramo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tonelada larga", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tonelada corta", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Piedra", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Libra", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Onza", 0, QApplication::UnicodeUTF8)
+        );
+        label_50->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+        comboBox_22->clear();
+        comboBox_22->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Tonelada metrica", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilogramo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gramo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Miligramo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Microgramo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tonelada larga", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tonelada corta", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Piedra", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Libra", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Onza", 0, QApplication::UnicodeUTF8)
+        );
+        groupBox_14->setTitle(QApplication::translate("ConversorUD", "Tiempo", 0, QApplication::UnicodeUTF8));
+        comboBox_13->clear();
+        comboBox_13->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Ano", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mes", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Semana", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Minuto", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Segundo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Milisegundo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Microsegundo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Nanosegundo", 0, QApplication::UnicodeUTF8)
+        );
+        comboBox_18->clear();
+        comboBox_18->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Ano", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mes", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Semana", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Minuto", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Segundo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Milisegundo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Microsegundo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Nanosegundo", 0, QApplication::UnicodeUTF8)
+        );
+        label_48->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+        groupBox_13->setTitle(QApplication::translate("ConversorUD", "Temperatura", 0, QApplication::UnicodeUTF8));
+        comboBox_16->clear();
+        comboBox_16->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "\302\272C (Celsius)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "K (Kelvin)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "\302\272F (Fahrenheit)", 0, QApplication::UnicodeUTF8)
+        );
+        comboBox_17->clear();
+        comboBox_17->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "\302\272C (Celsius)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "K (Kelvin)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "\302\272F (Fahrenheit)", 0, QApplication::UnicodeUTF8)
+        );
+        label_47->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+        groupBox_19->setTitle(QApplication::translate("ConversorUD", "Temperatura", 0, QApplication::UnicodeUTF8));
+        comboBox_28->clear();
+        comboBox_28->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "\302\272C (Celsius)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "K (Kelvin)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "\302\272F (Fahrenheit)", 0, QApplication::UnicodeUTF8)
+        );
+        comboBox_29->clear();
+        comboBox_29->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "\302\272C (Celsius)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "K (Kelvin)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "\302\272F (Fahrenheit)", 0, QApplication::UnicodeUTF8)
+        );
+        label_53->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("ConversorUD", "Conversores 2/10", 0, QApplication::UnicodeUTF8));
+        label_14->setText(QApplication::translate("ConversorUD", "vacio", 0, QApplication::UnicodeUTF8));
+        label_15->setText(QApplication::translate("ConversorUD", "vacio", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
