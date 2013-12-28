@@ -87,6 +87,20 @@ private slots:
     void on_lineEdit_18_returnPressed();
     void on_lineEdit_17_textChanged(const QString &arg1);
     void on_lineEdit_17_returnPressed();
+    void on_pushButton_20_clicked();
+    void on_lineEdit_47_returnPressed();
+    void on_lineEdit_47_textChanged(const QString &arg1);
+    void on_comboBox_26_activated(const QString &arg1);
+    void on_comboBox_27_activated(const QString &arg1);
+    void on_comboBox_25_activated(const QString &arg1);
+    void on_pushButton_17_clicked();
+    void on_lineEdit_40_returnPressed();
+
+    void on_lineEdit_40_textChanged(const QString &arg1);
+
+    void on_comboBox_19_activated(const QString &arg1);
+
+    void on_comboBox_20_activated(const QString &arg1);
 
 private:
     Ui::ConversorUD *ui;
