@@ -1,0 +1,13 @@
+#!/bin/bash
+# Nombre: RecoverDrake -- RecoveDolphin
+# Parte: Arreglar problema de Dolphin
+# Versión: 1.6.0
+
+user=`who|awk 'NR<(NF-NR) {print $1}'|cut -d ' ' -f2`
+    
+      echo Preparando matador de procesos...
+      echo "Instalando linea de ajuste en el crontab de root..."
+      cp /root/crontab_old /root/crontab_tmp
+      echo "*/1 * * * * /usr/sbin/matador >> /home/$user/logkill.log" >> /root/crontab_tmp
+      crontab /root/crontab_tmp
+      rm -f /root/crontab_tmp 

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Icon=RecoverDrake.png
+Name=RecoverDrake
+Name[es]=RecoverDrake
+Comment=Help with part of Mandriva instalation
+Comment[es]=Ayuda con parte de la Instalación de Mandriva
+Exec=RecoverDrake
+Type=Application
+StartupNotify=true
+Categories=KDE;Qt;Settings;DesktopSettings;

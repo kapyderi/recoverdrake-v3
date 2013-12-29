@@ -169,6 +169,7 @@ public:
     QRadioButton *radioButton_2;
     QTabWidget *tabWidget;
     QWidget *tab_3;
+    QGridLayout *gridLayout_59;
     QGridLayout *gridLayout_33;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_8;
@@ -190,6 +191,7 @@ public:
     QComboBox *comboBox_4;
     QLineEdit *lineEdit_4;
     QLabel *label_2;
+    QGridLayout *gridLayout_57;
     QGroupBox *groupBox_3;
     QGridLayout *gridLayout_10;
     QGridLayout *gridLayout_12;
@@ -210,6 +212,7 @@ public:
     QComboBox *comboBox_11;
     QLineEdit *lineEdit_10;
     QLabel *label_5;
+    QGridLayout *gridLayout_58;
     QGroupBox *groupBox_5;
     QGridLayout *gridLayout_16;
     QGridLayout *gridLayout_17;
@@ -231,6 +234,7 @@ public:
     QPushButton *pushButton_20;
     QComboBox *comboBox_27;
     QWidget *tab_4;
+    QGridLayout *gridLayout_62;
     QGridLayout *gridLayout_56;
     QGroupBox *groupBox_15;
     QGridLayout *gridLayout_40;
@@ -244,14 +248,15 @@ public:
     QComboBox *comboBox_20;
     QGroupBox *groupBox_17;
     QGridLayout *gridLayout_46;
-    QGridLayout *gridLayout_47;
-    QLineEdit *lineEdit_44;
-    QComboBox *comboBox_23;
-    QPushButton *pushButton_19;
     QGridLayout *gridLayout_48;
     QComboBox *comboBox_24;
     QLineEdit *lineEdit_45;
     QLabel *label_51;
+    QGridLayout *gridLayout_47;
+    QLineEdit *lineEdit_44;
+    QPushButton *pushButton_19;
+    QComboBox *comboBox_30;
+    QGridLayout *gridLayout_60;
     QGroupBox *groupBox_16;
     QGridLayout *gridLayout_43;
     QGridLayout *gridLayout_44;
@@ -272,6 +277,7 @@ public:
     QComboBox *comboBox_18;
     QLineEdit *lineEdit_39;
     QLabel *label_48;
+    QGridLayout *gridLayout_61;
     QGroupBox *groupBox_13;
     QGridLayout *gridLayout_34;
     QGridLayout *gridLayout_35;
@@ -1210,7 +1216,9 @@ public:
         tabWidget->setSizePolicy(sizePolicy2);
         tab_3 = new QWidget();
         tab_3->setObjectName(QString::fromUtf8("tab_3"));
-        gridLayout_33 = new QGridLayout(tab_3);
+        gridLayout_59 = new QGridLayout(tab_3);
+        gridLayout_59->setObjectName(QString::fromUtf8("gridLayout_59"));
+        gridLayout_33 = new QGridLayout();
         gridLayout_33->setObjectName(QString::fromUtf8("gridLayout_33"));
         groupBox = new QGroupBox(tab_3);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
@@ -1343,6 +1351,11 @@ public:
 
         gridLayout_33->addWidget(groupBox_2, 0, 1, 1, 1);
 
+
+        gridLayout_59->addLayout(gridLayout_33, 0, 0, 1, 1);
+
+        gridLayout_57 = new QGridLayout();
+        gridLayout_57->setObjectName(QString::fromUtf8("gridLayout_57"));
         groupBox_3 = new QGroupBox(tab_3);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
         groupBox_3->setMaximumSize(QSize(16777215, 82));
@@ -1404,7 +1417,7 @@ public:
         gridLayout_10->addLayout(gridLayout_11, 1, 2, 1, 1);
 
 
-        gridLayout_33->addWidget(groupBox_3, 1, 0, 1, 1);
+        gridLayout_57->addWidget(groupBox_3, 0, 0, 1, 1);
 
         groupBox_4 = new QGroupBox(tab_3);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
@@ -1467,8 +1480,13 @@ public:
         gridLayout_13->addWidget(label_5, 1, 1, 1, 1);
 
 
-        gridLayout_33->addWidget(groupBox_4, 1, 1, 1, 1);
+        gridLayout_57->addWidget(groupBox_4, 0, 1, 1, 1);
 
+
+        gridLayout_59->addLayout(gridLayout_57, 1, 0, 1, 1);
+
+        gridLayout_58 = new QGridLayout();
+        gridLayout_58->setObjectName(QString::fromUtf8("gridLayout_58"));
         groupBox_5 = new QGroupBox(tab_3);
         groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
         groupBox_5->setMaximumSize(QSize(16777215, 82));
@@ -1531,7 +1549,7 @@ public:
         gridLayout_16->addWidget(label_6, 1, 1, 1, 1);
 
 
-        gridLayout_33->addWidget(groupBox_5, 2, 0, 1, 1);
+        gridLayout_58->addWidget(groupBox_5, 0, 0, 1, 1);
 
         groupBox_18 = new QGroupBox(tab_3);
         groupBox_18->setObjectName(QString::fromUtf8("groupBox_18"));
@@ -1594,12 +1612,17 @@ public:
         gridLayout_52->addLayout(gridLayout_50, 0, 2, 1, 1);
 
 
-        gridLayout_33->addWidget(groupBox_18, 2, 1, 1, 1);
+        gridLayout_58->addWidget(groupBox_18, 0, 1, 1, 1);
+
+
+        gridLayout_59->addLayout(gridLayout_58, 2, 0, 1, 1);
 
         tabWidget->addTab(tab_3, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QString::fromUtf8("tab_4"));
-        gridLayout_56 = new QGridLayout(tab_4);
+        gridLayout_62 = new QGridLayout(tab_4);
+        gridLayout_62->setObjectName(QString::fromUtf8("gridLayout_62"));
+        gridLayout_56 = new QGridLayout();
         gridLayout_56->setObjectName(QString::fromUtf8("gridLayout_56"));
         groupBox_15 = new QGroupBox(tab_4);
         groupBox_15->setObjectName(QString::fromUtf8("groupBox_15"));
@@ -1672,36 +1695,6 @@ public:
         gridLayout_46 = new QGridLayout(groupBox_17);
         gridLayout_46->setObjectName(QString::fromUtf8("gridLayout_46"));
         gridLayout_46->setContentsMargins(0, 0, 0, 0);
-        gridLayout_47 = new QGridLayout();
-        gridLayout_47->setObjectName(QString::fromUtf8("gridLayout_47"));
-        lineEdit_44 = new QLineEdit(groupBox_17);
-        lineEdit_44->setObjectName(QString::fromUtf8("lineEdit_44"));
-        lineEdit_44->setEnabled(true);
-        lineEdit_44->setFont(font4);
-        lineEdit_44->setFocusPolicy(Qt::NoFocus);
-        lineEdit_44->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
-"background-color: rgb(255, 251, 239);"));
-        lineEdit_44->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-        lineEdit_44->setReadOnly(true);
-
-        gridLayout_47->addWidget(lineEdit_44, 1, 0, 1, 1);
-
-        comboBox_23 = new QComboBox(groupBox_17);
-        comboBox_23->setObjectName(QString::fromUtf8("comboBox_23"));
-        comboBox_23->setFocusPolicy(Qt::NoFocus);
-
-        gridLayout_47->addWidget(comboBox_23, 0, 0, 1, 1);
-
-        pushButton_19 = new QPushButton(groupBox_17);
-        pushButton_19->setObjectName(QString::fromUtf8("pushButton_19"));
-        pushButton_19->setIcon(icon2);
-        pushButton_19->setIconSize(QSize(25, 25));
-
-        gridLayout_47->addWidget(pushButton_19, 0, 1, 2, 1);
-
-
-        gridLayout_46->addLayout(gridLayout_47, 1, 2, 1, 1);
-
         gridLayout_48 = new QGridLayout();
         gridLayout_48->setObjectName(QString::fromUtf8("gridLayout_48"));
         comboBox_24 = new QComboBox(groupBox_17);
@@ -1718,17 +1711,52 @@ public:
         gridLayout_48->addWidget(lineEdit_45, 1, 0, 1, 1);
 
 
-        gridLayout_46->addLayout(gridLayout_48, 1, 0, 1, 1);
+        gridLayout_46->addLayout(gridLayout_48, 0, 0, 1, 1);
 
         label_51 = new QLabel(groupBox_17);
         label_51->setObjectName(QString::fromUtf8("label_51"));
         label_51->setFont(font1);
 
-        gridLayout_46->addWidget(label_51, 1, 1, 1, 1);
+        gridLayout_46->addWidget(label_51, 0, 1, 1, 1);
+
+        gridLayout_47 = new QGridLayout();
+        gridLayout_47->setObjectName(QString::fromUtf8("gridLayout_47"));
+        lineEdit_44 = new QLineEdit(groupBox_17);
+        lineEdit_44->setObjectName(QString::fromUtf8("lineEdit_44"));
+        lineEdit_44->setEnabled(true);
+        lineEdit_44->setFont(font4);
+        lineEdit_44->setFocusPolicy(Qt::NoFocus);
+        lineEdit_44->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_44->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_44->setReadOnly(true);
+
+        gridLayout_47->addWidget(lineEdit_44, 1, 0, 1, 1);
+
+        pushButton_19 = new QPushButton(groupBox_17);
+        pushButton_19->setObjectName(QString::fromUtf8("pushButton_19"));
+        pushButton_19->setIcon(icon2);
+        pushButton_19->setIconSize(QSize(25, 25));
+
+        gridLayout_47->addWidget(pushButton_19, 0, 1, 2, 1);
+
+        comboBox_30 = new QComboBox(groupBox_17);
+        comboBox_30->setObjectName(QString::fromUtf8("comboBox_30"));
+        comboBox_30->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_47->addWidget(comboBox_30, 0, 0, 1, 1);
+
+
+        gridLayout_46->addLayout(gridLayout_47, 0, 2, 1, 1);
 
 
         gridLayout_56->addWidget(groupBox_17, 0, 1, 1, 1);
 
+
+        gridLayout_62->addLayout(gridLayout_56, 0, 0, 1, 1);
+
+        gridLayout_60 = new QGridLayout();
+        gridLayout_60->setObjectName(QString::fromUtf8("gridLayout_60"));
         groupBox_16 = new QGroupBox(tab_4);
         groupBox_16->setObjectName(QString::fromUtf8("groupBox_16"));
         groupBox_16->setMaximumSize(QSize(16777215, 82));
@@ -1790,7 +1818,7 @@ public:
         gridLayout_43->addLayout(gridLayout_45, 1, 2, 1, 1);
 
 
-        gridLayout_56->addWidget(groupBox_16, 1, 0, 1, 1);
+        gridLayout_60->addWidget(groupBox_16, 0, 0, 1, 1);
 
         groupBox_14 = new QGroupBox(tab_4);
         groupBox_14->setObjectName(QString::fromUtf8("groupBox_14"));
@@ -1853,8 +1881,13 @@ public:
         gridLayout_37->addWidget(label_48, 1, 1, 1, 1);
 
 
-        gridLayout_56->addWidget(groupBox_14, 1, 1, 1, 1);
+        gridLayout_60->addWidget(groupBox_14, 0, 1, 1, 1);
 
+
+        gridLayout_62->addLayout(gridLayout_60, 1, 0, 1, 1);
+
+        gridLayout_61 = new QGridLayout();
+        gridLayout_61->setObjectName(QString::fromUtf8("gridLayout_61"));
         groupBox_13 = new QGroupBox(tab_4);
         groupBox_13->setObjectName(QString::fromUtf8("groupBox_13"));
         groupBox_13->setMaximumSize(QSize(16777215, 82));
@@ -1917,7 +1950,7 @@ public:
         gridLayout_34->addWidget(label_47, 1, 1, 1, 1);
 
 
-        gridLayout_56->addWidget(groupBox_13, 2, 0, 1, 1);
+        gridLayout_61->addWidget(groupBox_13, 0, 0, 1, 1);
 
         groupBox_19 = new QGroupBox(tab_4);
         groupBox_19->setObjectName(QString::fromUtf8("groupBox_19"));
@@ -1981,7 +2014,10 @@ public:
         gridLayout_49->addWidget(label_53, 1, 1, 1, 1);
 
 
-        gridLayout_56->addWidget(groupBox_19, 2, 1, 1, 1);
+        gridLayout_61->addWidget(groupBox_19, 0, 1, 1, 1);
+
+
+        gridLayout_62->addLayout(gridLayout_61, 2, 0, 1, 1);
 
         tabWidget->addTab(tab_4, QString());
 
@@ -2044,7 +2080,7 @@ public:
 
         retranslateUi(ConversorUD);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(ConversorUD);
@@ -2093,6 +2129,7 @@ public:
         comboBox_25->insertItems(0, QStringList()
          << QApplication::translate("ConversorUD", "Aceleracion", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Almacenamiento de datos", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Ancho de banda", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Distancia o Longitud", 0, QApplication::UnicodeUTF8)
         );
         radioButton_6->setText(QApplication::translate("ConversorUD", "Conversores", 0, QApplication::UnicodeUTF8));
@@ -2185,70 +2222,70 @@ public:
         groupBox->setTitle(QApplication::translate("ConversorUD", "Distancia o Longitud", 0, QApplication::UnicodeUTF8));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Angstrom", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Nanometro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Micrometro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Milimetro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Centimetro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Decimetro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Metro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Decametro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Hectometro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilometro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Miriametro", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Angstrom (\303\205)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Nanometro (nm)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Micrometro (\302\265m)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Milimetro (mm)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Centimetro (cm)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Decimetro (dm)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Metro (m)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Decametro (dam)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Hectometro (hm)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilometro (km)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Miriametro (mam)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Legua", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Milla", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Milla (mi)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Estadio", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Cadena", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Barra", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Yarda", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Pie", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Barra (rd)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Yarda (yd)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Pie (ft)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Link", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Mano", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Pulgada", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Pulgada (in)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Linea", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mil", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Thou", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mil (mil)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Thou (thou)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Milla nautica", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Braza", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Parsec", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Parsec (pc)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Ano luz", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Unidad astronomica", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Unidad astronomica (AE)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Minuto luz", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Segundo luz", 0, QApplication::UnicodeUTF8)
         );
         label->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
         comboBox_2->clear();
         comboBox_2->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Angstrom", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Nanometro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Micrometro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Milimetro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Centimetro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Decimetro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Metro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Decametro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Hectometro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilometro", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Miriametro", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Angstrom (\303\205)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Nanometro (nm)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Micrometro (\302\265m)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Milimetro (mm)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Centimetro (cm)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Decimetro (dm)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Metro (m)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Decametro (dam)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Hectometro (hm)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilometro (km)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Miriametro (mam)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Legua", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Milla", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Milla (mi)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Estadio", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Cadena", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Barra", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Yarda", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Pie", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Barra (rd)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Yarda (yd)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Pie (ft)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Link", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Mano", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Pulgada", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Pulgada (in)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Linea", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mil", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Thou", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mil (mil)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Thou (thou)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Milla nautica", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Braza", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Parsec", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Parsec (pc)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Ano luz", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Unidad astronomica", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Unidad astronomica (AE)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Minuto luz", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Segundo luz", 0, QApplication::UnicodeUTF8)
         );
@@ -2349,22 +2386,22 @@ public:
         groupBox_18->setTitle(QApplication::translate("ConversorUD", "Aceleracion", 0, QApplication::UnicodeUTF8));
         comboBox_26->clear();
         comboBox_26->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Metros por segundo cuadrado", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Pies por segundo cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Metros por segundo cuadrado (m/s\302\262)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Pies por segundo cuadrado (ft/s\302\262)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Gal", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Miligal", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Gravedad estandar", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Fuerza G", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Fuerza G (g)", 0, QApplication::UnicodeUTF8)
         );
         label_52->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
         comboBox_27->clear();
         comboBox_27->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Metros por segundo cuadrado", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Pies por segundo cuadrado", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Metros por segundo cuadrado (m/s\302\262)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Pies por segundo cuadrado (ft/s\302\262)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Gal", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Miligal", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Gravedad estandar", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Fuerza G", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Fuerza G (g)", 0, QApplication::UnicodeUTF8)
         );
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("ConversorUD", "Conversores 1/10", 0, QApplication::UnicodeUTF8));
         groupBox_15->setTitle(QApplication::translate("ConversorUD", "Almacenamiento de datos", 0, QApplication::UnicodeUTF8));
@@ -2378,13 +2415,13 @@ public:
          << QApplication::translate("ConversorUD", "Terabit", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Petabit", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Exabit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Byte", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobyte", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabyte", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabyte", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabyte", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Petabyte", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Exabyte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Byte (B)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobyte (KB)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabyte (MB)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabyte (GB)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabyte (TB)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Petabyte (PB)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Exabyte (EB)", 0, QApplication::UnicodeUTF8)
         );
         label_49->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
         comboBox_20->clear();
@@ -2397,40 +2434,130 @@ public:
          << QApplication::translate("ConversorUD", "Terabit", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Petabit", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Exabit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Byte", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobyte", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabyte", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabyte", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabyte", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Petabyte", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Exabyte", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Byte (B)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobyte (KB)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabyte (MB)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabyte (GB)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabyte (TB)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Petabyte (PB)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Exabyte (EB)", 0, QApplication::UnicodeUTF8)
         );
-        groupBox_17->setTitle(QApplication::translate("ConversorUD", "Superficie o Area", 0, QApplication::UnicodeUTF8));
-        comboBox_23->clear();
-        comboBox_23->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Centimetro cuadrado", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Metro cuadrado", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilometro cuadrado", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Hectarea", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Milla cuadrada", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Acre", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Yarda cuadrada", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Pie cuadrado", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Pulgada cuadrada", 0, QApplication::UnicodeUTF8)
-        );
+        groupBox_17->setTitle(QApplication::translate("ConversorUD", "Ancho de banda", 0, QApplication::UnicodeUTF8));
         comboBox_24->clear();
         comboBox_24->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Centimetro cuadrado", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Metro cuadrado", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilometro cuadrado", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Hectarea", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Milla cuadrada", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Acre", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Yarda cuadrada", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Pie cuadrado", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Pulgada cuadrada", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Bit por segundo (bit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobit por segundo (kbit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabit por segundo (Mbit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabit por segundo (Gbit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabit por segundo (Tbit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kibibit por segundo (Kibit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mebibit por segundo (Mibit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gibibit por segundo (Gibit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tebibit por segundo (Tibit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Byte por segundo (B/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobyte por segundo (kB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabyte por segundo (MB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabyte por segundo (GB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabyte por segundo (TB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kibibyte por segundo (KiB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mebibyte por segundo (MiB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gibibyte por segundo (GiB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tebibyte por segundo (TiB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Bit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kibibit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mebibit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gibibit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tebibit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Byte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kibibyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mebibyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gibibyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tebibyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Bit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kibibit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mebibit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gibibit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tebibit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Byte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kibibyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mebibyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gibibyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tebibyte por dia", 0, QApplication::UnicodeUTF8)
         );
         label_51->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+        comboBox_30->clear();
+        comboBox_30->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Bit por segundo (bit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobit por segundo (kbit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabit por segundo (Mbit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabit por segundo (Gbit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabit por segundo (Tbit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kibibit por segundo (Kibit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mebibit por segundo (Mibit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gibibit por segundo (Gibit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tebibit por segundo (Tibit/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Byte por segundo (B/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobyte por segundo (kB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabyte por segundo (MB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabyte por segundo (GB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabyte por segundo (TB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kibibyte por segundo (KiB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mebibyte por segundo (MiB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gibibyte por segundo (GiB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tebibyte por segundo (TiB/s)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Bit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kibibit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mebibit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gibibit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tebibit por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Byte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kibibyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mebibyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gibibyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tebibyte por hora", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Bit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kibibit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mebibit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gibibit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tebibit por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Byte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilobyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megabyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigabyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terabyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kibibyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Mebibyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gibibyte por dia", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Tebibyte por dia", 0, QApplication::UnicodeUTF8)
+        );
         groupBox_16->setTitle(QApplication::translate("ConversorUD", "Peso o Masa", 0, QApplication::UnicodeUTF8));
         comboBox_21->clear();
         comboBox_21->insertItems(0, QStringList()

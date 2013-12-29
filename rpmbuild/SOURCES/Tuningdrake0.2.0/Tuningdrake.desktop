@@ -1,0 +1,18 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Encoding=UTF-8
+Icon=tuningdrake
+Name=Tuningdrake
+Name[es]=Tuningdrake
+Name[pt]=Tuningdrake
+Name[pt_BR]=Tuningdrake
+Comment=Help with part of Mandriva Configuration
+Comment[es]=Ayuda con parte de la Configuración de Mandriva
+Comment[pt]=Ajuda com parte da Configuração do Mandriva
+Comment[pt_BR]=Ajuda com parte da Configuração do Mandriva
+Exec=Tuningdrake
+Terminal=true
+Type=Application
+StartupNotify=true
+Categories=KDE;Qt;Settings;DesktopSettings;
+OnlyShowIn=KDE;

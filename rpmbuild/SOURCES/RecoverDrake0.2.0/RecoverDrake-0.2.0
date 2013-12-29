@@ -1,0 +1,557 @@
+#!/bin/bash
+# Porque no instalar los mismos paquetes que se tenian antes de una actualización
+# Este script hace eso y más
+# Autor: Juan Jose Mauriz Pardo (kapyderi en blogdrake)
+# Contribuciones: Drakor, Katnatek
+# Parte del codigo basado en Tuningdrake para la configuración de los repositorios
+# Nombre: RecoverDrake
+# Versión: 0.2.0
+
+ScriptVersion="0.2.0"
+#user="`who|awk 'NR>3 {print $1}'|cut -d '' -f 2`"
+export IFS=" "
+if [ -z "`which	zenity`" ]; then
+  echo "Necesita zenity para ejecutar RecoverDrake,
+  por favor instalelo desde urpmi"
+  exit 1;
+fi
+
+if [ "`whoami`" = "root" ]; then
+ if [ "$#" = 1 ]; then
+  if [ "$1" != "--auto" -a "$1" != "--auto-mib" ]; then
+   zenity --warning --text="Ejecute RecoverDrake sin parametros para un modo
+interactivo o con los siguientes parametros:
+
+--auto para un funcionamiento automatico sin configurar los repositorios MIB
+--auto-mib para un funcionamiento automatico configurando los repositorios MIB"
+   exit 1;
+  fi;
+ fi
+
+ if [ "$#" = 0 ]; then
+    zenity --question --title="RecoverDrake by Kapyderi" --text="
+    Kapyderi 2010
+
+    RecoverDrake $ScriptVersion [Licencia: GPL 2 ó superior]
+
+    Este script pretende facilitar una instalación limpia. 
+    Recopila todos los paquetes instalados en su equipo, 
+    antes de la instalación y luego los vuelca para dejarlo
+    todo como estaba anteriormente.
+
+    Tambien sirve para copiar los .rpms de un equipo a otro.
+
+    Utilizelo bajo su responsabilidad, ya que no hay ninguna 
+    garantia por el creador. El responsable es el que lo usa.
+
+    Es aconsejable, tener tu /home en una partición aparte, 
+    ya que con tu home y con RecoverDrake, no te habras 
+    dado cuenta de que has actualizado el sistema.
+ 
+    Las opciones se basan en preferencias personales  para no 
+    tener que estar recordando las instalaciones de una 
+    distribución (versión) a otra.
+
+    A groso modo es todo el proceso que realiza nuestra 
+    herrramienta RecoverDrake. Espero que la disfruten, como 
+    yo realizandola. Gracias por usarla.
+
+    ¿Desea Continuar?" --ok-label="Continuar" --cancel-label="Leer mas (recomendable para su uso)";
+    if [ "$?" = 1 ]; then
+    zenity --question --title="Información extendida" --text="
+    
+    LO QUE HACE:
+    
+    1.- Elimina repositorios. Si tienes problemas con tu 
+    configuración de repositorios, puedes quitarlos.
+    
+    2.- Actualiza lista de reposotorios. Si anteriormente los
+    has eliminado, se crea un nuevo paquete de repositorios.
+    NOTA: Se desestima si se elige la anterior opción.
+
+    3.- Actualiza sistema. Se da la opción de actualizar de
+    manera automatica.
+
+    4.- Quita paquetes huerfanos. Elimina de su equipo los 
+    paquetes que han quedado huerfanos y que no son 
+    necesarios.
+    PROCEDA CON PRECAUCION!!!!
+
+    5.- Salvaguarda de lista de rpm's. Crea un fichero .lst con
+    la información de rpm's en su sistema.
+    Es la opción más importante de RecoverDrake, ya que 
+    puedes exportarla a otro equipo y hacer un mirror del 
+    original o por otro lado, trás una instalación de versión
+    superior, se ejecuta y vuelve a su estado original.
+
+    6.- Volcado y actualización de Lista de rpm's. Es la otra 
+    parte importante de RecoverDrake, ya que en este paso se
+    actualiza sin interacción con el usuario la lista que hemos
+    generado anteriormente, de forma automatica.
+
+   ¿Desea Continuar?" --ok-label="Continuar" --cancel-label="Salir";
+     if [ "$?" = 1 ]; then exit 1; fi;
+    fi
+  fi
+   echo "Creando configuración de usuario..."
+   user=`zenity --entry \
+        --title="Nombre del usuario" \
+        --text="Introduzca el nombre del usuario donde se generará/recuperará el fichero .lst:" \
+        --entry-text="Usuario"`
+   zenity --info --text="
+   El usuario donde se generarán los ficheros es...
+
+   $user
+
+   La ruta será /home/$user/Documentos"  
+  if [ "$#" = 0 ]; then
+    zenity --question --title="Quitar repositorios" --text="
+
+    ELIMINAR CONFIGURACION DE REPOSITORIOS
+    
+    IMPORTANTE: Esta opción solo es valida, si los repositorios 
+    suelen fallar, ya que los elimina y los vuelve a crear con
+    una nueva configuración.
+
+    Proceda con cuidado!!!    
+
+    ¿Desea quitar repositorios?" --ok-label="Eliminar repositorios" --cancel-label="Continuar sin eliminar";
+    if [ "$?" = 0 ]; then 
+       echo "Quitando repositorios..."
+      (
+        echo "10" ; sleep 1
+        echo "# Eliminando repositorios..."; sleep 1
+	echo "20"; sleep 1
+        echo "Esta linea sera ignorada"; sleep 1
+        echo "50" ; sleep 1
+        echo "Esta linea sera ignorada"; sleep 1 
+        echo "75"; sleep 1
+        echo "# Repositorios eliminados satisfactoriamente"; sleep 1
+        echo "100"; sleep 1 
+        ) |
+        zenity --progress \
+          --title="Comprobación de repositorios" \
+          --text="Eliminando repositorios..." \
+          --auto-close \
+          --percentage=0
+
+        if [ "$?" = -1 ] ; then
+                zenity --error \
+                  --text="Elimminación cancelada."
+        fi
+        echo Realizando proceso...
+        urpmi.removemedia -a
+    fi
+  fi
+  if [ "$#" = 0 ]; then
+   zenity --question --title="Volver a configurar repositorios" --text="
+
+   AÑADIR REPOSITORIOS
+
+   Se llamará a los servidores y se volveran a configurar
+   los repositorios o marcando solo la opción Otros, se 
+   configurará un repositorio manualmente.
+
+   ¿Desea configurar repositorios?" --ok-label="Configurar repositorios" --cancel-label="Continuar sin configurar";
+   if [ "$?" = 0 ]; then 
+    echo "Configurando y añadiendo repositorios..."
+    (
+    echo "10" ; sleep 1
+    echo "# Rastreando repositorios..."; sleep 1
+    echo "20"; sleep 1
+    echo "Esta linea sera ignorada"; sleep 1
+    echo "50"; sleep 1
+    echo "# Se procede a su instalación...sea paciente"; sleep 1 
+    echo "75"; sleep 1
+    echo "Esta linea sera ignorada"; sleep 1
+    echo "100" 
+    ) |
+    zenity --progress \
+    --title="Comprobación de repositorios" \
+    --text="Rastreando los repositorios..." \
+    --auto-close \
+    --percentage=0
+
+    if [ "$?" = -1 ] ; then
+     zenity --error \
+     --text="Comprobanción cancelada."
+    fi
+    urpmq --list-media > /tmp/lista
+    export Media="`cat /tmp/lista`"
+    export NumMediaAct="`cat /tmp/lista|wc -l`"
+    export NumMediaOld="$NumMediaAct"
+    export Arch="`uname -m`"
+    export Arch2="32"
+    export Version="`cat /etc/release|cut -d ' ' -f 4`"
+    export DistArch="`cat /etc/release|cut -d ' ' -f 7`"
+    export Devel="`grep -i cooker /etc/release`"
+    rm -f /tmp/lista
+    rm -f /var/cache/urpmi/mirrors.cache
+   
+   #Elección de repositorios
+   if [ "$#" = 0 ]; then
+    List="`zenity --list --title="Listado de Repositorios" --text="Seleccione su(s) repositorio(s). Marcados defecto." \
+    --checklist --width="400" --height="290"\
+    --column="" --column="Listado de repositorios" TRUE "Oficiales" TRUE "PLF" TRUE "MIB" TRUE\
+    "BDK" TRUE "MUD" FALSE "Otro" --separator=" "`";
+    else
+     List="Oficiales";
+   fi
+   echo Sea paciente, este proceso, suele ser prolongado...
+   for i in $List ; do
+   case $i in
+    "Oficiales")
+    #Configuración de Repositorios Oficiales
+    if [ "$NumMediaAct" -le "2" ]; then
+     if [ -z "$Devel" ]; then
+      urpmi.addmedia --wget --distrib --mirrorlist \
+      "http://api.mandriva.com/mirrors/basic.$Version.$DistArch.list"
+      NumMediaOld="$NumMediaAct"
+      NumMediaAct="`urpmq --list-media|wc -l`"
+      if [ "$NumMediaAct" = "$NumMediaOld" ]; then
+       #Configurando ftp://distrib-coffee.ipsl.jussieu.fr en caso de no poder configurar los
+       #Repositorios desde la lista de servidores
+       urpmi.addmedia --wget --distrib \
+       "ftp://distrib-coffee.ipsl.jussieu.fr/pub/linux/MandrivaLinux/official/$Version/$DistArch" ;
+      fi;
+       else
+        urpmi.addmedia --wget --distrib --mirrorlist \
+        "http://api.mandriva.com/mirrors/basic.cooker.$DistArch.list"
+        NumMediaOld="$NumMediaAct"
+        NumMediaAct="`urpmq --list-media|wc -l`"
+      if [ "$NumMediaAct" = "$NumMediaOld" ]; then
+       #Configurando ftp://distrib-coffee.ipsl.jussieu.fr en caso de no poder configurar los
+       #Repositorios desde la lista de servidores
+       urpmi.addmedia --wget --distrib \
+       "ftp://distrib-coffee.ipsl.jussieu.fr/pub/linux/MandrivaLinux/devel/cooker/$DistArch" ;
+      fi;
+     fi
+      NumMediaAct="`urpmq --list-media|wc -l`"
+     if [ "$NumMediaAct" = "$NumMediaOld" ]; then 
+      return 1;
+     fi
+    fi
+    if [ "$?" = 1 ]; then 
+     zenity --warning --text="Fallo al intentar configurar los repositorios Oficiales
+     RecoverDrake no puede continuar, verifique la configuración de la red y vuelva\
+     a ejecutar RecoverDrake"
+     exit 1;
+      else
+       export NumMediaOld="$NumMediaAct";
+    fi;;
+    "PLF")
+    #Configuración de Repositorios PLF
+    if [ -z "`echo $Media|grep -i "plf"`" ]; then
+     if [ -z "$Devel" ]; then
+      urpmi.addmedia --wget --distrib --mirrorlist \
+      "http://plf.zarb.org/mirrors/$Version.$DistArch.list"
+      NumMediaOld="$NumMediaAct"
+      NumMediaAct="`urpmq --list-media|wc -l`"
+      if [ "$NumMediaAct" = "$NumMediaOld" ]; then
+       #Configurando ftp://distrib-coffee.ipsl.jussieu.fr en caso de no poder configurar los
+       #Repositorios desde la lista de medios
+       urpmi.addmedia --wget --distrib \
+       "ftp://distrib-coffee.ipsl.jussieu.fr/pub/linux/plf/mandriva/cfg/$Version/$DistArch" ;
+      fi
+       else
+        urpmi.addmedia --wget --distrib --mirrorlist \
+	"http://plf.zarb.org/mirrors/cooker.$DistArch.list"
+	NumMediaOld="$NumMediaAct"
+	NumMediaAct="`urpmq --list-media|wc -l`"
+      if [ "$NumMediaAct" = "$NumMediaOld" ]; then
+       #Configurando ftp://distrib-coffee.ipsl.jussieu.fr en caso de no poder configurar los
+       #Repositorios desde la lista de medios
+       urpmi.addmedia --wget --distrib \
+       "ftp://distrib-coffee.ipsl.jussieu.fr/pub/linux/plf/mandriva/cfg/cooker/$DistArch" ;
+      fi
+     fi
+     NumMediaAct="`urpmq --list-media|wc -l`"
+     if [ "$NumMediaAct" = "$NumMediaOld" ]; then
+      return 1;
+     fi
+    fi
+    if [ "$?" = 1 ]; then
+     zenity --warning --text="Fallo al intentar configurar los repositorios PLF
+     RecoverDrake no puede continuar, verifique la configuración de la red y vuelva\
+     a ejecutar RecoverDrake"
+     exit 1;
+     else
+      export NumMediaOld="$NumMediaAct";
+    fi;;
+    "MIB")
+    #Configuración de Repositorios MIB
+    if [ -z "`echo $Media|grep -i "mib"`" -a -z "$Devel" ]; then
+     if [ "$#" = 0 ]; then
+      zenity --question --title="Repositorios adicionales" \
+      --text="Configurar los repositorios MIB le proporciona acceso a 
+      versiones más recientes de algunas aplicaciones
+ 
+      ¿Desea configurar los repositorios MIB?
+      (Si duda responda No)" --ok-label="Configurar" --cancel-label="No configurar"
+      Configurar="$?";
+      else
+       case "$1" in
+        "--auto")Configurar=1;;
+        "--auto-mib")Configurar=0;;
+      esac;
+     fi
+     if [ "$Configurar" = "0" ]; then
+      if [ -z "`echo $Media|grep -i "mib"`" -a -z "$Devel" ]; then
+       urpmi.addmedia --wget --update MIB-basic_${Arch2} http://mib.pianetalinux.org/MIB/$Version/${Arch2}/basic/ with media_info/synthesis.hdlist.cz &&
+       urpmi.addmedia --wget MIB-experts_${Arch2} http://mib.pianetalinux.org/MIB/$Version/${Arch2}/experts/ with media_info/synthesis.hdlist.cz
+       if [ "$?" != "0" ]; then
+	exit 1; 
+       fi;
+      fi   
+      if [ "$?" != "0" -a "$#" = "0" ]; then
+       zenity --question --title="Error configurando Repositorios"\
+       --text="Fallo al intentar configurar los repositorios MIB
+       Si lo desea puede continuar con RecoverDrake o salir y volverlo a ejecutar para volver a intentar añadir estos repositorios.
+
+       ¿Desea Continuar?" --ok-label="Continuar" --cancel-label="Salir";
+       if [ "$?" = 1 ]; then exit 1; fi;
+      fi
+     fi
+    fi;;
+    "BDK")
+    #Configuración de los repositorios Blogdrake
+    test -z "`echo $Media|grep -i "bdk"`" && expr "$Version" ">=" "2009.1"
+    if [ $? = 0  ]; then
+     if [ "$#" = 0 ]; then
+      zenity --question --title="Repositorios adicionales II" \
+      --text="Configurar los repositorios de Blogdrake le proporciona acceso a 
+      algunos paquetes que posiblemente no se encuentren en otros repositorios
+
+      ¿Desea configurar los repositorios de Blogdrake?
+      (Si duda responda No)" --ok-label="Configurar" --cancel-label="No configurar"
+      Configurar="$?";
+      else
+       Configurar=0;
+     fi
+     if [ "$Configurar" = "0" ]; then
+      urpmi.addmedia --update --wget Bdk-${DistArch}-free ftp://ftp.blogdrake.net/mandriva/$Version/free/${DistArch} with media_info/synthesis.hdlist.cz 
+      urpmi.addmedia --update --wget Bdk-noarch-free ftp://ftp.blogdrake.net/mandriva/$Version/free/noarch with media_info/synthesis.hdlist.cz 
+      urpmi.addmedia --update --wget Bdk-noarch-nonfree ftp://ftp.blogdrake.net/mandriva/$Version/non-free/noarch with media_info/synthesis.hdlist.cz 
+      urpmi.addmedia --update --wget Bdk-${DistArch}-nonfree ftp://ftp.blogdrake.net/mandriva/$Version/non-free/${DistArch} with media_info/synthesis.hdlist.cz 
+      if [ "$?" != "0" ]; then
+       return 1;
+      fi
+      if [ "$?" != "0" -a "$#" = "0" ]; then
+       zenity --question --title="Error configurando Repositorios"\
+       --text="Fallo al intentar configurar los repositorios Blogdrake
+       Si lo desea puede continuar con RecoverDrake o salir y volverlo a ejecutar para volver a intentar añadir estos repositorios.
+
+       ¿Desea Continuar?" --ok-label="Continuar" --cancel-label="Salir";
+       if [ "$?" = 1 ]; then exit 1; fi;
+      fi
+     fi
+    fi;;
+    "MUD")
+    #Configuración de los repositorios de MUD
+    test -z "`echo $Media|grep -i "mud"`" && expr $Version \>= 2007.1
+    if [ $? = 0 ] ; then
+     if [ "$#" = 0 ]; then
+      zenity --question --title="Repositorios adicionales III" \
+      --text="Configurar los repositorios de MUD le proporciona acceso a 
+      algunos paquetes que posiblemente no se encuentren en otros repositorios
+
+      ¿Desea configurar los repositorios de MUD?
+      (Si duda responda No)" --ok-label="Configurar" --cancel-label="No configurar"
+      Configurar="$?";
+      else
+       Configurar=0;
+     fi
+     if [ "$Configurar" = "0" ]; then
+      if [ -z "`echo $Media|grep -i "mud"`"  ]; then
+       expr $Version \>= 2007.1 && 
+       urpmi.addmedia --wget MUD-${DistArch} ftp://ftp.mandrivauser.de/rpm/GPL/$Version/$DistArch/release/ \
+       with media_info/synthesis.hdlist.cz
+       if [ "$?" != "0" ]; then
+        return 1; 
+       fi
+      fi
+      if [ "$?" != "0" -a "$#" = "0" ]; then
+       zenity --question --title="Error configurando Repositorios"\
+       --text="Fallo al intentar configurar los repositorios MUD
+       Si lo desea puede continuar con RecoverDrake o salir y volverlo a ejecutar para volver a intentar añadir estos repositorios.
+
+       ¿Desea Continuar?" --ok-label="Continuar" --cancel-label="Salir";
+       if [ "$?" = 1 ]; then exit 1; fi;
+      fi 
+     fi
+    fi;;
+    "Otro")
+    #Configuración de los repositorios a mano
+    Repo=`zenity --entry \
+        --title="Nombre del repositorios" \
+        --text="Introduzca el nombre del repositorios completo:" \
+        --entry-text="Repositorio manual"`
+    $Repo
+   esac;
+   done
+   fi
+  fi 
+
+  #Actualizar
+  if [ "$#" = 0 ]; then
+    zenity --question --title="Actualizar el sistema"\
+    --text="
+
+    ACTUALIZACION DE PAQUETES
+
+    IMPORTANTE: Esta actualización se hace automatica,
+    por lo que Vd. no podrá seleccionar los paquetes
+    a instalar.
+
+    (si tiene dudas, pinche en la botón no)
+   
+    ¿Desea actualizar su sistema ahora?" --ok-label="Si, actualizar"\
+    --cancel-label="Ahora No"
+    Configurar="$?";
+    else
+      Configurar="0";
+  fi
+  if [ "$Configurar" = "0" ]; then
+        echo "Actualizando sistema, sea paciente..."
+        (
+        echo "10"; sleep 1
+        echo "#Procesando..."; sleep 1
+        echo "50"; sleep 1 
+        echo "#Instalando actualizaciones"; sleep 1 
+        echo "100"
+        ) | 
+        zenity --progress --title="Comprobación de repositorios" --text="Actualizando sistema...espere por favor" --auto-close  --auto-kill --percentage=0
+        if [ "$?" = -1 ] ; then
+                zenity --error \
+                  --text="Elimminación cancelada."
+        fi
+       echo Sea paciente, este proceso, suele ser prolongado...
+       urpmi --wget --auto --force --auto-update
+  fi
+    
+   #Auto-orphans
+   if [ "$#" = 0 ]; then
+    zenity --question --title="Comprobar paquetes huerfanos"\
+    --text="
+    
+    ELIMINAR PAQUETES HUERFANOS
+
+    PRECACION: Proceda con sumo cuidado, ya que esta
+    opción puede desestabilizar su sistema.
+
+    Es importante que entienda lo que esta haciendo con 
+    esta opción.
+
+    (si tiene dudas pinche en el botón no)
+    
+    ¿Desea restrear y eliminar los paquetes huerfanos?" --ok-label="Si, Comprobar"\
+    --cancel-label="Ahora No"
+    Configurar="$?";
+    else
+      Configurar="0";
+  fi
+  if [ "$Configurar" = "0" ]; then
+        echo "Buscando paquetes huerfanos..."
+        (
+        echo "10"; sleep 1
+        echo "#Procesando..."; sleep 1
+        echo "50"; sleep 1 
+        echo "#Procesando datos..."; sleep 1
+        echo "100"
+        ) | 
+        zenity --progress --title="Comprobación de repositorios" --text="Actualizando sistema...espera por favor" --auto-close  --auto-kill --percentage=0
+        if [ "$?" = -1 ] ; then
+                zenity --error \
+                  --text="Elimminación cancelada."
+        fi
+        echo Realizando proceso...
+        urpme --auto-orphans
+  fi
+  zenity --question --title="Hacer salvaguarda de rpm's" --text="
+
+  SALVAGUARDA DE LISTADO DE PAQUETES INSTALADOS EN SU
+  EQUIPO
+
+  IMPORTANTE: Esta opción sirve para hacer una salvaguarda
+  de sus paquetes antes de la actualización.
+
+  Utilizelo solo para este proposito.
+
+  Generará un fichero ubicado en su /home/$user/
+  Documentos/ llamado PackAnt.lst
+
+  En el caso de existir un fichero anterior con el mismo
+  nombre será eliminado y generado de nuevo.
+
+  Es importante que lo guarde en un sitio seguro, ya que se 
+  necesitará para la actualización posterior o por 
+  inestabilidad del sistema.
+ 
+  Si tiene su /home en una partición aparte, no debe tener
+  ningún problema, ya que siempre tendrá localizado dicho
+  fichero, sino es asi, deberá ser grabado en un Pendrive
+  para futuras actualizaciones o volcados. 
+ 
+  ¿Crear fichero?" --ok-label="Si" --cancel-label="No";
+  if [ "$?" = 0 ]; then 
+        echo "Realizando salvaguarda..."
+	(
+        echo "10" ; sleep 1
+        echo "# Actualizando los rpm's del sistema"
+	(rm /home/$user/Documentos/PackAnt.lst)
+	echo "20" 
+        echo "# Creando fichero .lst"
+        (rpm -qa --queryformat='%{N} ' >> /home/$user/Documentos/PackAnt.lst)  
+        echo "50" 
+        echo "Esta linea sera ignorada" 
+        echo "75" 
+        echo "# Fichero creado correctamente en la ruta /home/$user/Documentos/PackAnt.lst"
+        echo "100" 
+        ) |
+        zenity --progress \
+          --title="Salvando rpm's del sistema Mandriva" \
+          --text="Rastreando los rpm's instalados..." \
+          --percentage=0
+
+        if [ "$?" = -1 ] ; then
+                zenity --error \
+                  --text="Actualización cancelada."
+        fi
+	
+  else
+      zenity --question --title="Actualizar rpm's" --text="
+
+      RECUPERAR LISTADO DE PAQUETES Y ACTUALIZAR EQUIPO
+
+      IMPORTANTE: Esta opción sirve para recuperar los 
+      paquetes despues de la actualización.
+
+      Utilizelo solo para este proposito.
+
+      IMPORTANTE: Si su /home esta en una partición aparte, 
+      continue sin problemas, sino es asi, copie el fichero
+      denominado PackAnt.lst en la ubicación:
+      /home/$user/Documentos, antes de realizar este paso, 
+      ya que sino es asi, no podrá realizarlo.
+
+      Instalará todos los paquetes guardados, desechando los 
+      ya instalados.
+
+      Este proceso, puede tardar un tiempo, sea paciente, 
+      la espera lo merece. 
+ 
+      ¿Actualizar paquetes?" --ok-label="Si" --cancel-label="No";
+      if [ "$?" = 0 ]; then 
+        echo "Realizando volcado..."
+        echo Sea paciente, este proceso, suele ser prolongado, según paquetes a actualizar...
+	urpmi -a --auto --force `cat /home/$user/Documentos/PackAnt.lst`          
+      fi;
+  fi;
+  echo "Proceso finalizado."
+  #Mensaje Final
+  zenity --info --text="Felicidades $user, se han realizado con exito las tareas solicitadas."
+  exit 0
+else
+ zenity --warning --text="RecoverDrake debe ser ejecutado por root"
+ exit 1;
+fi

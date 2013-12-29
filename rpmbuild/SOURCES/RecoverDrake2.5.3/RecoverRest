@@ -1,0 +1,11 @@
+#!/bin/bash
+# Nombre: RecoverDrake -- RecoverRest
+# Parte: Reconstrucción de fichero de exclusiones
+# Versión: 1.6.0
+
+rm -f /etc/urpmi/skip.list
+echo "
+# Here you can specify the packages that won't be upgraded automatically
+# for example, to exclude all apache packages :
+# /^apache/" >> /etc/urpmi/skip.list
+echo Restauración del fichero de exclusiones realizado.

@@ -22,7 +22,7 @@ static const uint qt_meta_data_ConversorUD[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      72,   14, // methods
+      77,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -104,6 +104,11 @@ static const uint qt_meta_data_ConversorUD[] = {
     2124,   72,   12,   12, 0x08,
     2160,   72,   12,   12, 0x08,
     2194,   72,   12,   12, 0x08,
+    2228,   12,   12,   12, 0x08,
+    2255,   12,   12,   12, 0x08,
+    2286,   72,   12,   12, 0x08,
+    2322,   72,   12,   12, 0x08,
+    2356,   72,   12,   12, 0x08,
 
        0        // eod
 };
@@ -176,6 +181,11 @@ static const char qt_meta_stringdata_ConversorUD[] = {
     "on_lineEdit_40_textChanged(QString)\0"
     "on_comboBox_19_activated(QString)\0"
     "on_comboBox_20_activated(QString)\0"
+    "on_pushButton_19_clicked()\0"
+    "on_lineEdit_45_returnPressed()\0"
+    "on_lineEdit_45_textChanged(QString)\0"
+    "on_comboBox_24_activated(QString)\0"
+    "on_comboBox_30_activated(QString)\0"
 };
 
 void ConversorUD::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -256,6 +266,11 @@ void ConversorUD::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 69: _t->on_lineEdit_40_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 70: _t->on_comboBox_19_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 71: _t->on_comboBox_20_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 72: _t->on_pushButton_19_clicked(); break;
+        case 73: _t->on_lineEdit_45_returnPressed(); break;
+        case 74: _t->on_lineEdit_45_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 75: _t->on_comboBox_24_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 76: _t->on_comboBox_30_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -293,9 +308,9 @@ int ConversorUD::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 72)
+        if (_id < 77)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 72;
+        _id -= 77;
     }
     return _id;
 }

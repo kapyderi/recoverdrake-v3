@@ -1,0 +1,376 @@
+#!/bin/bash
+#Facilitando Mandriva
+#Autor: José Alberto Valle Cid (katnatek en blogdrake)
+#Contribuciones: Gonzalo Seguel Ceballos (Madek en BlogDrake)
+#Agradecimientos: 
+# A todos los Bofh de Blogdrake que colaboraron con sus sugerencias
+# A todos los que indirectamente han contribuido con el desarrollo
+#  de este script en el siguiente hilo de blogdrake http://blogdrake.net/node/15932
+# A will por darle promoción en los foros Brasileños y
+# la traducción al portugués
+ScriptVersion="0.1.6"
+export IFS=" "
+if [ -z "`which	zenity`" ]; then
+ echo "Necesita zenity para ejecutar esta versión de TuningDrake,
+por favor instalelo o intente ejecutar alguna de las otras versiones
+${0}-qt ó ${0}-cli" >&2
+exit 1;
+fi
+
+if [ "`whoami`" = "root" ]; then
+ if [ "$#" = 1 ]; then
+  if [ "$1" != "--auto" -a "$1" != "--auto-mib" ]; then
+   zenity --warning --text="Ejecute Tuningdrake sin parametros para un modo
+interactivo o con los siguientes parametros:
+
+--auto para un funcionamiento automatico sin configurar los repositorios MIB
+--auto-mib para un funcionamiento automatico configurando los repositorios MIB"
+   exit 1;
+  fi;
+ fi
+ 
+ if [ "$#" = 0 ]; then
+  zenity --question --title="Tuningdrake by Kapyderi" --text="Kapyderi-katnatek 2010
+
+ Este script pretende facilitar la configuración inicial de Mandriva
+ Configurando los Repositorios más usados, los codecs y plugins necesarios
+ También permite configurar varias aplicaciones para diversos usos
+ Entre ellos Mensajería Instantánea, Reproducción de Audio/Video, etc.
+
+ Es importante abrir una consola para ver todo lo que va realizando Tuningdrake
+ ya que asi hacemos un seguimiento del proceso.
+ 
+ Las opciones predeterminadas se basan en preferencias personales y/o
+ sugerencias de usuarios de BlogDrake y mias propias para no tener que estar
+ recordando las instalaciones de una distribución a otra.
+
+ Licencia: GPL 2 ó superior
+
+ ¿Desea Continuar?" --ok-label="Continuar" --cancel-label="Salir";
+ if [ "$?" = 1 ]; then exit 1; fi;
+ fi
+
+ urpmq --list-media > /tmp/lista
+ export Media="`cat /tmp/lista`"
+ export NumMediaAct="`cat /tmp/lista|wc -l`"
+ export NumMediaOld="$NumMediaAct"
+ export Arch="`uname -m`"
+ export Arch2="32"
+ export Version="`cat /etc/release|cut -d ' ' -f 4`"
+ export DistArch="`cat /etc/release|cut -d ' ' -f 7`"
+ export Devel="`grep -i cooker /etc/release`"
+ rm -f /tmp/lista
+ rm -f /var/cache/urpmi/mirrors.cache
+
+ #Configuración de Repositorios Oficiales
+ Tuningdrake-backend "oficial"
+ if [ "$?" = 1 ]; then 
+   zenity --warning --text="Fallo al intentar configurar los repositorios Oficiales
+TuningDrake no puede continuar, verifique la configuración de la red y vuelva\
+ a ejecutar TuningDrake"
+   exit 1;
+  else
+   export NumMediaOld="$NumMediaAct";
+  fi;
+ fi
+
+ #Configuración de Repositorios PLF
+ Tuningdrake-backend "plf"
+  if [ "$?" = 1 ]; then
+   zenity --warning --text="Fallo al intentar configurar los repositorios PLF
+TuningDrake no puede continuar, verifique la configuración de la red y vuelva\
+ a ejecutar TuningDrake"
+   exit 1;
+  else
+   export NumMediaOld="$NumMediaAct";
+ fi
+
+ #Añadir MIB a petición en caso de que no esten agregados
+ # y no se este usuando Cooker
+ if [ -z "`echo $Media|grep -i "mib"`" -a -z "$Devel" ]; then
+  if [ "$#" = 0 ]; then
+   zenity --question --title="Repositorios adicionales" \
+  --text="Configurar los repositorios MIB le proporciona acceso a versiones
+más recientes de algunas aplicaciones
+
+¿Desea configurar los repositorios MIB?
+ (Si duda responda No)" --ok-label="Configurar" --cancel-label="No configurar"
+   Configurar="$?";
+  else
+   case "$1" in
+    "--auto")Configurar=1;;
+    "--auto-mib")Configurar=0;;
+   esac;
+  fi
+  if [ "$Configurar" = "0" ]; then
+   Tuningdrake-backend "mib"
+   if [ "$?" != "0" -a "$#" = "0" ]; then
+    zenity --question --title="Error configurando Repositorios"\
+ --text="Fallo al intentar configurar los repositorios MIB
+Si gusta puede continuar con la configuración de su Mandriva
+o salir y volver a ejecutar TuningDrake para volver a intentar añadir estos repositorios
+
+¿Desea Continuar?" --ok-label="Continuar" --cancel-label="Salir";
+    if [ "$?" = 1 ]; then exit 1; fi;
+   fi;
+  fi;
+ fi
+
+#Configuración de los repositorios de Blogdrake a petición del usuario
+#La configuración solo se realiza para las versiones soportadas
+#De momento la unica versión soportada es Mandriva 2009.1
+test -z "`echo $Media|grep -i "bdk"`" && expr "$Version" ">=" "2009.1"
+if [ $? = 0  ]; then
+  if [ "$#" = 0 ]; then
+   zenity --question --title="Repositorios adicionales II" \
+  --text="Configurar los repositorios de Blogdrake le proporciona acceso a algunos
+paquetes que posiblemente no se encuentren en otros repositorios
+
+¿Desea configurar los repositorios de Blogdrake?
+ (Si duda responda No)" --ok-label="Configurar" --cancel-label="No configurar"
+   Configurar="$?";
+  else
+   Configurar=0;
+  fi
+  if [ "$Configurar" = "0" ]; then
+   Tuningdrake-backend "bdk"
+   if [ "$?" != "0" -a "$#" = "0" ]; then
+    zenity --question --title="Error configurando Repositorios"\
+ --text="Fallo al intentar configurar los repositorios Blogdrake
+Si gusta puede continuar con la configuración de su Mandriva
+o salir y volver a ejecutar TuningDrake para volver a intentar añadir estos repositorios
+
+¿Desea Continuar?" --ok-label="Continuar" --cancel-label="Salir";
+    if [ "$?" = 1 ]; then exit 1; fi;
+   fi;
+ fi;
+fi
+
+ #Configuración de los repositorios de MUD a petición del usuario
+ #La configuración solo se realiza para las versiones soportadas
+ test -z "`echo $Media|grep -i "mud"`" && expr $Version \>= 2007.1
+ if [ $? = 0 ] ; then
+  if [ "$#" = 0 ]; then
+   zenity --question --title="Repositorios adicionales III" \
+   --text="Configurar los repositorios de MUD le proporciona acceso a algunos
+paquetes que posiblemente no se encuentren en otros repositorios
+
+¿Desea configurar los repositorios de MUD?
+ (Si duda responda No)" --ok-label="Configurar" --cancel-label="No configurar"
+   Configurar="$?";
+  else
+   Configurar=0;
+  fi
+  if [ "$Configurar" = "0" ]; then
+   Tuningdrake-backend "mud"
+   if [ "$?" != "0" -a "$#" = "0" ]; then
+    zenity --question --title="Error configurando Repositorios"\
+ --text="Fallo al intentar configurar los repositorios MUD
+Si gusta puede continuar con la configuración de su Mandriva
+o salir y volver a ejecutar TuningDrake para volver a intentar añadir estos repositorios
+
+¿Desea Continuar?" --ok-label="Continuar" --cancel-label="Salir";
+    if [ "$?" = 1 ]; then exit 1; fi;
+   fi; 
+  fi;
+ fi
+
+ urpmi.update --wget -a
+ Tuningdrake-backend "genericos"
+ 
+ #Controladores de impresora
+ if [ "$#" = 0 ]; then
+  zenity --question --title="Controladores de Impresoras"\
+ --text="¿Desea instalar todos lo controladores para impresora
+proporcionados por Mandriva?"  --ok-label="Instalar" --cancel-label="No, gracias"
+  Configurar="$?";
+ else
+  Configurar=0;
+ fi
+ if [ "$Configurar" = "0" ]; then urpmi --wget --auto task-printing; fi
+
+ #Configuración de Reproductor de Audio
+ if [ "$#" = 0 ]; then
+  List="`zenity --list --title="Reproductor audio" --text="Seleccione su(s) reproductor(es)
+  " --checklist --width="400" --height="290"\
+ --column="" --column="Reproductor" FALSE "Amarok" TRUE "Exaile" FALSE\
+ "Audacious" FALSE "Banshee" FALSE "Rhythmbox" FALSE "Xmms" --separator=" "`";
+ else
+  List="Exaile";
+ fi
+ Tuningdrake-backend "sound" $List
+
+ #Configuración de Reproductor de Video
+ if [ "$#" = 0 ]; then
+  List="`zenity --list --title="Reproductor de  Video" --text="Seleccione su(s) reproductor(es)
+  " --checklist --width="400" --height="290"\
+ --column="" --column="Reproductor" FALSE "DragonPlayer" FALSE "Kaffeine"\
+ FALSE "Totem" TRUE "Vlc" FALSE "Smplayer" FALSE "Kmplayer" --separator=" "`";
+ else
+  List="Vlc";
+ fi
+ Tuningdrake-backend "video" $List
+
+ #Mensajeria instantanea
+ if [ "$#" = 0 ]; then
+  List="`zenity --list --title="Mensageria Instantanea" --text="Seleccione su(s) cliente(s)" \
+--checklist --width="400" --height="290" --column="" --column="Cliente" FALSE "Amsn" TRUE "Pidgin" FALSE "Kopete" FALSE "Emesene" FALSE "Kmess" TRUE "Skype" --separator=" "`";
+ else
+  List="Pidgin Skype";
+ fi
+ Tuningdrake-backend "im" $List
+
+ #VoIp y video conferencia
+ if [ "$#" = 0 ]; then
+  List="`zenity --list --title="VoIP y videoconferencia" --text="Seleccione su(s) cliente(s)" \
+--checklist --width="400" --height="290" --column="" --column="Cliente" FALSE "Ekiga" FALSE "Gnokii" FALSE "Phone" --separator=" "`";
+ else
+  List="";
+ fi
+ Tuningdrake-backend "voip" $List
+
+ #Cliente Bittorrent/p2p
+ if [ "$#" = 0 ]; then
+  List="`zenity --list --title="Cliente Bittorrent/p2p" --text="Seleccione su(s) cliente(s)" \
+--checklist --width="400" --height="290" --column="" --column="Cliente" FALSE "Vuze" FALSE "Amule" FALSE "Apollon" TRUE "Ktorrent" FALSE "Deluge" FALSE "Transmission" FALSE "Nicotine" FALSE "Megaupload" FALSE "Ed2k" --separator=" "`";
+ else
+  List="Ktorrent";
+ fi
+ Tuningdrake-backend "p2p" $List
+
+ #Quemador
+ if [ "$#" = 0 ]; then
+  List="`zenity --list --title="Quemador CD/DVD" --text="Seleccione su(s) aplicacion(es)" \
+--checklist --width="400" --height="290" --column="" --column="Aplicación" TRUE "K3b" FALSE "Brasero" --separator=" "`";
+ else
+  List="K3b";
+ fi
+ Tuningdrake-backend "burn" $List
+
+ #Compresores/Descompresores
+ if [ "$#" = 0 ]; then
+  List="`zenity --list --title="Manipulación de archivos comprimidos" --text="Seleccione su(s) aplicaciones" \
+--checklist --width="400" --height="290" --column="" --column="Aplicación" TRUE "File-roller" FALSE "Ark" --separator=" "`";
+ else
+  List="File-roller";
+ fi
+ Tuningdrake-backend "zip" $List
+
+ #Desarrollo
+ if [ "$#" = 0 ]; then
+  List="`zenity --list --title="Desarrollo" --text="Seleccione las opciones que necesite" \
+--checklist --width="400" --height="290" --column="" --column="Cliente" FALSE "C" TRUE "C++" FALSE "Fortran" FALSE "Basic" FALSE "Rpm" --separator=" "`";
+ else
+  List="C++";
+ fi
+ Tuningdrake-backend "devel" $List
+
+ #Emulación y virtualización
+ if [ "$#" = 0 ]; then
+  List="`zenity --list --title="Emulación y Virtualización" --text="Seleccione las aplicaciones que necesite" \
+--checklist --width="400" --height="290" --column="" --column="Aplicación" FALSE "Wine" FALSE "Wine-doors" FALSE "Playonlinux" FALSE "VirtualBox" FALSE "Qemu" FALSE "M.A.M.E." FALSE "Rocksndiamonds" --separator=" "`";
+ else
+  List="";
+ fi 
+ Tuningdrake-backend "emu" $List
+
+#Escritorios
+ if [ "$#" = 0 ]; then
+  List="`zenity --list --title="Escritorios" --text="Seleccione los escritorios que precise" \
+--checklist --width="400" --height="290" --column="" --column="Aplicación" TRUE "Kde4" TRUE "Gnome" TRUE "E17" FALSE "Moblin" FALSE "Sugar" FALSE "Ede" TRUE "Lxde" FALSE "Xfce" --separator=" "`";
+ else
+  List="Kde4 Gnome E17 Xfce";
+ fi 
+ Tuningdrake-backend "Entornos" $List
+
+ #Miscelanea
+ if [ "$#" = 0 ]; then
+  List="`zenity --list --title="Miscelanea (De todo un poco)" --text="Seleccione las aplicaciones que necesite" \
+--checklist --width="400" --height="290" --column="" --column="Aplicación" TRUE "Juegos" FALSE "Proceso de audio y video" FALSE "Antivirus" TRUE "Dock" FALSE "Imprescindibles" --separator=" "`";
+ else
+  List="Juegos Dock";
+ fi 
+ Tuningdrake-backend "Misc" $List
+
+ #Kernel
+ if [ "$#" = 0 ]; then
+  zenity --question --title="Mantenga actualizado el kernel"\
+ --text="Mantener actualizado el kernel le permite estar más seguro, poder detectar más hardware
+y le provee de correcciones a los fallos del mismo .
+
+ Ademas se instalaran paquetes útiles para poder compilar módulos ( controladores ) de terceros.
+
+ ¿Desea que el kernel y sus fuentes se actualicen automáticamente? ( si duda responda No )"\
+ --ok-label="Si" --cancel-label="No"
+  Configurar="$?";
+ else
+  Configurar="0"
+ fi
+ if [ "$Configurar" = "0" ]; then
+  Tuningdrake-backend "kernel"
+  KERNEL="TRUE"
+ fi
+
+ #Actualizar
+ if [ "$#" = 0 ]; then
+  zenity --question --title="Actualizar el sistema"\
+ --text="¿Desea actualizar su sistema ahora?" --ok-label="Si, actualizar"\
+ --cancel-label="Ahora No"
+  Configurar="$?";
+ else
+  Configurar="0";
+ fi
+ if [ "$Configurar" = "0" ]; then
+  urpmi --wget --auto --auto-update;
+ fi
+ 
+ #Intentando que los usuarios no tengan problema con pulseaudio
+ if [ "$#" = 0 ]; then
+  zenity --question --title="¿Problemas con pulseaudio?"\
+ --text="Si tiene algún problema con pulseaudio (en especial si usa skype)
+ se configurara un arreglo sugerido en el wiki de Mandriva ¿Desea arreglar Pulseaudio?
+
+ IMPORTANTE: si este funciona correctamente elija 'No', ya que puede ser peor el remedio que la enfermedad" --ok-label="Si, arreglar"\
+ --cancel-label="No, gracias"
+  Configurar="$?";
+ else
+  Configurar="0";
+ fi
+ if [ "$Configurar" = "0" ]; then
+  Tuningdrake-backend "pulse"
+ fi
+
+#Ofrecer limpiar /tmp al inicio
+ if [ "$#" = 0 ]; then
+  zenity --question --title="Limpiar /tmp"\
+ --text="¿Desea limpiar /tmp al inicio?" --ok-label="Si, limpiar"\
+ --cancel-label="No gracias"
+  Configurar="$?";
+ else
+  Configurar="0";
+ fi
+ if [ "$Configurar" = "0" ]; then
+  Tuningdrake-backend "tmp"
+ fi
+ 
+ #Mensaje Final
+ USER="`w|awk 'NR>2 {print $1}'|cut -d '
+' -f 2`"
+ zenity --info --text="Felicidades $USER, TuningDrake ha configurado exitosamente
+su Mandriva Linux. Cierre su sesión y vuelva a iniciarla para que todos los cambios
+se efectúen
+
+ --kapyderi 2010 (Gracias katnatek por tu colaboración y codigo)--"
+ if [ "$KERNEL" = "TRUE" ]; then 
+  zenity --question --title "Reiniciar el equipo"\
+ --text="Ha elegido actualizar el kernel, para activar el nuevo kernel necesita
+reiniciar el equipo ¿Desea reiniciarlo ahora?" --ok-label="Reiniciar"\
+ --cancel-label="Ahora no"
+   if [ $? = 0 ]; then reboot; fi;
+ fi
+ exit 0;
+else
+ zenity --warning --text="TuningDrake debe ser ejecutado por root"
+ exit 1;
+fi
+
