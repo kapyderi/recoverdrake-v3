@@ -1,0 +1,5 @@
+#!/bin/bash
+# Nombre: RecoverDrake -- RecoverDVD
+# Parte: Arreglar fallo de apertura CD/DVD
+# Versión: 1.6.0
+echo "dev cdrom.autoclose=0" >> /etc/sysctl.conf

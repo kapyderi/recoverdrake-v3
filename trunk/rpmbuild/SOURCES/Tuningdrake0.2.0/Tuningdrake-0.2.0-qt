@@ -1,0 +1,348 @@
+#!/bin/bash
+#Facilitando Mandriva
+#Autor: José Alberto Valle Cid (katnatek en blogdrake)
+#Contribuciones: Gonzalo Seguel Ceballos (Madek en BlogDrake)
+#Agradecimientos: 
+# A todos los Bofh de Blogdrake que colaboraron con sus sugerencias
+# A todos los que indirectamente han contribuido con el desarrollo
+#  de este script en el siguiente hilo de blogdrake http://blogdrake.net/node/15932
+# A will por darle promoción en los foros Brasileños y
+# la traducción al portugués
+ScriptVersion="0.2.0"
+export IFS=" "
+if [ -z "`which	kdialog`" ]; then
+ echo "Necesita kdialog para ejecutar esta versión de TuningDrake,
+por favor instalelo o intente ejecutar alguna de las otras versiones
+Tuningdrake ó Tuningdrake-cli" >&2
+exit 1;
+fi
+
+if [ "`whoami`" = "root" ]; then
+ if [ "$#" = 1 ]; then
+  if [ "$1" != "--auto" -a "$1" != "--auto-mib" ]; then
+   kdialog --msgbox "Ejecute TuningDrake sin parametros para un modo
+interactivo o con los siguientes parametros:
+
+--auto para un funcionamiento automatico sin configurar los repositorios MIB
+--auto-mib para un funcionamiento automatico configurando los repositorios MIB"
+   exit 1;
+  fi;
+ fi
+ 
+ if [ "$#" = 0 ]; then
+  kdialog --msgbox "Este script pretende facilitar la configuración inicial de Mandriva.
+ Configurando los Repositorios más usados, los codecs y plugins necesarios. \
+ También permite configurar varias aplicaciones para diversos usos. \
+ Entre ellos Mensajería Instantánea, Reproducción de Audio/Video, etc. \
+ Las opciones predeterminadas se basan en preferencias personales y/o \
+ sugerencias de usuarios de BlogDrake.
+
+ Licencia: GPL 2 ó superior" --title "TuningDrake $ScriptVersion";
+ fi
+
+ urpmq --list-media > /tmp/lista
+ export Media="`cat /tmp/lista`"
+ export NumMediaAct="`cat /tmp/lista|wc -l`"
+ export NumMediaOld="$NumMediaAct"
+ export Arch="`uname -m`"
+ export Arch2="32"
+ export Version="`cat /etc/release|cut -d ' ' -f 4`"
+ export DistArch="`cat /etc/release|cut -d ' ' -f 7`"
+ export Devel="`grep -i cooker /etc/release`"
+ rm -f /tmp/lista
+ rm -f /var/cache/urpmi/mirrors.cache
+
+ #Configuración de Repositorios Oficialess
+ Tuningdrake-backend "oficial"
+  if [ "$?" = 1 ]; then
+   kdialog --error "Fallo al intentar configurar los repositorios Oficiales
+TuningDrake no puede continuar, verifique la configuración de la red y vuelva\
+ a ejecutar TuningDrake"
+   dcopserver_shutdown
+   exit 1;
+  else
+   NumMediaOld="$NumMediaAct";
+  fi;
+ fi
+
+ #Configuración de Repositorios PLF
+ Tuningdrake-backend "plf"
+  if [ "$?" = 1 ]; then
+   kdialog --error "Fallo al intentar configurar los repositorios PLF
+TuningDrake no puede continuar, verifique la configuración de la red y vuelva\
+ a ejecutar TuningDrake"
+   dcopserver_shutdown
+   exit 1;
+  else
+   NumMediaOld="$NumMediaAct";
+ fi
+
+ #Añadir MIB a petición en caso de que no esten agregados
+ # y no se este usuando Cooker
+ if [ -z "`echo $Media|grep -i "mib"`" -a -z "$Devel" ]; then
+  if [ "$#" = 0 ]; then
+   kdialog --yesno "Configurar los repositorios MIB le proporciona acceso a versiones \
+más recientes de algunas aplicaciones
+
+¿Desea configurar los repositorios MIB?
+ (Si duda responda No)" --title "Repositorios adicionales"
+   Configurar="$?";
+  else
+   case "$1" in
+    "--auto")Configurar=1;;
+    "--auto-mib")Configurar=0;;
+   esac;
+  fi
+  if [ "$Configurar" = "0" ]; then
+   Tuningdrake-backend "mib"
+   if [ "$?" != "0" -a "$#" = "0" ]; then
+    kdialog --yesno "Fallo al intentar configurar los repositorios MIB
+Si gusta puede continuar con la configuración de su Mandriva
+o salir y volver a ejecutar TuningDrake para volver a intentar añadir estos repositorios
+
+¿Desea Continuar?"
+    if [ "$?" = "1"]; then
+     dcopserver_shutdown
+     exit 1;
+    fi
+   fi; 
+  fi;
+ fi
+
+#Configuración de los repositorios de Blogdrake a petición del usuario
+#La configuración solo se realiza para las versiones soportadas
+#De momento la unica versión soportada es Mandriva 2009.1
+test -z "`echo $Media|grep -i "bdk"`" && expr "$Version" ">=" "2009.1"
+if [ $? = 0  ]; then
+  if [ "$#" = 0 ]; then
+   kdialog --yesno "Configurar los repositorios de Blogdrake le proporciona acceso a algunos \
+paquetes que posiblemente no se encuentren en otros repositorios
+
+¿Desea configurar los repositorios de Blogdrake?
+ (Si duda responda No)" --title="Repositorios adicionales II" 
+   Configurar="$?";
+  else
+   Configurar=0;
+  fi
+  if [ "$Configurar" = "0" ]; then
+   Tuningdrake-backend "bdk"
+   if [ "$?" != "0" -a "$#" = "0" ]; then
+    kdialog --yesno "Fallo al intentar configurar los repositorios Blogdrake
+Si gusta puede continuar con la configuración de su Mandriva
+o salir y volver a ejecutar TuningDrake para volver a intentar añadir estos repositorios
+
+¿Desea Continuar?" --title "Error configurando Repositorios"
+    if [ "$?" = 1 ]; then exit 1; fi;
+   fi;
+ fi;
+fi
+
+#Configuración de los repositorios de MUD a petición del usuario
+#La configuración solo se realiza para las versiones soportadas
+#De momento la unica versión soportada es Mandriva 2009.1
+test -z "`echo $Media|grep -i "mud"`" && expr $Version \>= 2007.1
+ if [ $? = 0 ] ; then
+  if [ "$#" = 0 ]; then
+   kdialog --yesno "Configurar los repositorios MUD le proporciona acceso a algunos \
+paquetes que posiblemente no se encuentren en otros repositorios
+
+¿Desea configurar los repositorios MUD?
+ (Si duda responda No)" --title "Repositorios adicionales III" 
+   Configurar="$?";
+  else
+   Configurar=0;
+  fi
+  if [ "$Configurar" = "0" ]; then
+   Tuningdrake-backend "mud"
+   if [ "$?" != "0" -a "$#" = "0" ]; then
+    kdialog --yesno "Fallo al intentar configurar los repositorios MUD
+Si gusta puede continuar con la configuración de su Mandriva
+o salir y volver a ejecutar TuningDrake para volver a intentar añadir estos repositorios
+
+¿Desea Continuar?" --title "Error configurando Repositorios"
+    if [ "$?" = 1 ]; then exit 1; fi;
+   fi;
+ fi;
+fi
+
+ urpmi.update --wget -a
+ Tuningdrake-backend "genericos"
+
+ #Controladores de impresora
+ if [ "$#" = 0 ]; then
+  kdialog --yesno "¿Desea instalar todos lo controladores para impresora
+proporcionados por Mandriva?" --title "Controladores de Impresoras"
+  Configurar="$?";
+ else
+  Configurar="0";
+ fi
+ if [ "$Configurar" = "0" ]; then urpmi --wget --auto task-printing; fi
+
+ #Configuración de Reproductor de Audio
+ if [ "$#" = 0 ]; then
+  List="`kdialog --checklist "Seleccione su(s) reproductor(es)"  "Amarok" "Amaro*" on\
+ "Exaile" "Exaile" off "Audacious" "Audacious" off "Banshee" "Banshee" off "Rhythmbox"\
+ "Rhythmbox" off "Xmms" "Xmms" off --title "Reproductor de audio" --geometry "400x290"`";
+ else
+  List="Amarok";
+ fi
+ Tuningdrake-backend "sound" `echo $List|sed 's/"//g'`
+
+ #Configuración de Reproductor de Video
+ if [ "$#" = 0 ]; then
+  List="`kdialog --checklist "Seleccione su(s) reproductor(es)" "DragonPlayer" "DragonPlayer" on "Kaffeine"\
+ "Kaffeine" off "Totem" "Totem" off "Vlc" "Vlc" off "Smplayer"\
+ "Smplayer" off "Kmplayer" "Kmplayer" off --title "Reproductor de video" --geometry "400x290"`";
+ else
+  List="DragonPlayer";
+ fi
+ Tuningdrake-backend "video" `echo $List|sed 's/"//g'`
+ 
+ #Mensajeria instantanea
+ if [ "$#" = 0 ]; then
+  List="`kdialog --checklist "Seleccione su(s) cliente(s)" "Amsn" "Amsn" off "Pidgin" "Pidgin" off "Kopete"\
+ "Kopete" on "Emesene" "Emesene" off "Kmess" "Kmess" off\
+ --title "Mensageria Instantanea" --geometry "400x290"`";
+ else
+  List="Kopete";
+ fi
+ Tuningdrake-backend "im" `echo $List|sed 's/"//g'`
+
+ #VoIp y video conferencia
+ if [ "$#" = 0 ]; then
+  List="`kdialog --checklist "Seleccione su(s) cliente(s)" "Ekiga" "Ekiga" off \
+"Gnokii" "Gnokii" off "Phone" "Phone" off --title "VoIp y videoconferencia" --geometry "400x290"`";
+ else
+  List="";
+ fi
+ Tuningdrake-backend "voip" `echo $List|sed 's/"//g'`
+  
+ #Cliente Bittorrent/p2p
+ if [ "$#" = 0 ]; then
+  List="`kdialog --checklist "Seleccione su(s) cliente(s)" "Vuze" "Vuze" off "Amule" "Amule" off "Apollon" "Apollon" off "Ktorrent" "Ktorrent" on\
+ "Deluge" "Deluge" off "Transmission" "Transmission" off "Nicotine" "Nicotine" off "Megaupload" "Megaupload" off "Ed2k" "Ed2k" off\
+ --title "Cliente Bittorrent/p2p" --geometry "400x290"`";
+ else
+  List="Ktorrent";
+ fi
+ Tuningdrake-backend "p2p" `echo $List|sed 's/"//g'`
+
+ #Quemador
+ if [ "$#" = 0 ]; then
+  List="`kdialog --checklist  "Seleccione su(s) aplicacion(es)" "K3b" "K3b" on "Brasero"\
+ "Brasero" off --title "Quemador CD/DVD" --geometry "400x290"`";
+ else
+  List="K3b";
+ fi
+ Tuningdrake-backend "burn" `echo $List|sed 's/"//g'`
+
+ #Compresores/Descompresores
+ if [ "$#" = 0 ]; then
+  List="`kdialog --checklist "Seleccione su(s) aplicaciones" "File-roller" "File-roller"\
+ off "Ark" "Ark" on --title "Manipulación de archivos compresos" --geometry "400x290"`";
+ else
+  List="Ark";
+ fi
+ Tuningdrake-backend "zip" `echo $List|sed 's/"//g'`
+
+ #Desarrollo
+ if [ "$#" = 0 ]; then
+  List="`kdialog --checklist "Seleccione las opciones que necesite" \
+"C" "C" off "C++" "C++" off "Fortran" "Fortran" off "Basic" "Basic" off \
+"Rpm" "Rpm" off --title "Desarrollo" --geometry "400x290"`";
+ else
+  List="";
+ fi
+ Tuningdrake-backend "devel" `echo $List|sed 's/"//g'`
+ 
+ #Emuladores y virtualización
+ if [ "$#" = 0 ]; then
+  List="`kdialog --checklist "Selecione las opciones que necesite" \
+"Wine" "Wine" off "Wine-doors" "Wine-doors" off "Playonlinux" "Playonlinux" off "VirtualBox" "VirtualBox" off "Qemu" "Qemu" off "M.A.M.E." "M.A.M.E." off\
+ "Rocksndiamonds" "Rocksndiamonds" off --title "Emuladores y virtualización" --geometry "400x290"`";
+ else
+  List="";
+ fi
+ Tuningdrake-backend "emu" `echo $List|sed 's/"//g'`
+ 
+ #Miscelanea
+ if [ "$#" = 0 ]; then
+  List="`kdialog --checklist "Selecione las opciones que necesite" \
+"Escritorios" "Escritorios" on "Juegos" "Juegos" off "Procesadores de audio y video" "Procesadores de audio y video" off "Antivirus" "Antivirus" off "Dock" "Dock" off "Imprescindibles" "Imprescindibles" off --title "Miscelanea (De todo un poco)" --geometry "400x290"`";
+ else
+  List="Escritorios";
+ fi
+ Tuningdrake-backend "Misc" `echo $List|sed 's/"//g'`
+
+ #Kernel
+ if [ "$#" = 0 ]; then
+  kdialog --yesno "Mantener actualizado el kernel le permite estar más seguro, poder detectar
+ más hardware y le provee de correcciones a los fallos del mismo .
+
+ Ademas se instalaran paquetes útiles para poder compilar módulos(controladores) de terceros.
+
+ ¿Desea que el kernel y sus fuentes se actualicen automáticamente? (si duda responda No)"\
+ --title "Mantenga actualizado el kernel"
+ Configurar="$?";
+ else
+  Configurar="0";
+ fi
+ if [ "$Configurar" = "0" ]; then
+  Tuningdrake-backend "kernel"
+  KERNEL="TRUE";
+ fi
+
+ #Actualizar
+ if [ "$#" = 0 ]; then
+  kdialog --yesno "¿Desea actualizar su sistema ahora?" --title="Actualizar el sistema"
+  Configurar="$?";
+ else
+  Configurar="0";
+ fi
+ 
+ if [ "$Configurar" = "0" ]; then
+  urpmi --wget --auto --auto-update;
+ fi
+
+ #Intentando que los usuarios no tengan problema con pulseaudio
+ if [ "$#" = 0 ]; then
+  kdialog --yesno "Si tiene algún problema con pulseaudio (en especial si usa skype)
+ se configurara un arreglo sugerido en el wiki de Mandriva ¿Desea arreglar Pulseaudio?
+ (si este funciona correctamente elija 'No'" --title "¿Problemas con Pulseaudio?"
+  Configurar="$?";
+ else
+  Configurar="0";
+ fi
+ if [ "$Configurar" = "0" ]; then
+  Tuningdrake-backend "pulse";
+ fi
+ 
+ #Ofrecer limpiar /tmp al inicio
+ if [ "$#" = 0 ]; then
+  kdialog --yesno "¿Desea limpiar /tmp al inicio?" --title "Limpiar /tmpa"
+  Configurar="$?";
+ else
+  Configurar="0";
+ fi
+ 
+ if [ "$Configurar" = "0" ]; then
+  Tuningdrake-backend "tmp"
+ fi
+
+ USER="`w|awk 'NR>2 {print $1}'|cut -d '
+' -f 2`"
+ kdialog --msgbox "Felicidades $USER, TuningDrake ha configurado exitosamente
+su Mandriva Linux. Cierre su sesión y vuelva a iniciarla para que todos los cambios
+se efectúen"
+ if [ "$KERNEL" = "TRUE" ]; then 
+  kdialog --yesno "Ha elegido actualizar el kernel, para activar el nuevo kernel necesita
+reiniciar el equipo ¿Desea reiniciarlo ahora?"
+  if [ $? = 0 ]; then reboot; fi ;
+ fi
+ dcopserver_shutdown
+ exit 0;
+else
+ kdialog --error "TuningDrake debe ser ejecutado por root"
+ dcopserver_shutdown
+ exit 1;
+fi

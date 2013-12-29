@@ -26,15 +26,337 @@
     <normaloff>:/Imagenes/medir.png</normaloff>:/Imagenes/medir.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_25">
+   <item row="4" column="0" colspan="2">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="1" column="2">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="6">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="7">
+      <widget class="QPushButton" name="pushButton">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="text">
+        <string>Salir</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Decimales</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="text">
+        <string>Reiniciar todos</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="4">
+      <widget class="QComboBox" name="comboBox_3">
+       <item>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>8</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>9</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>10</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>11</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>12</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>13</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>14</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>15</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>16</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>17</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>18</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>19</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>20</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>30</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>40</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>50</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>60</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>70</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>80</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>90</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>100</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="pushButton_13">
+       <property name="text">
+        <string>Calculadora</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/calculadora.png</normaloff>:/Imagenes/calculadora.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox_11">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_53">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <layout class="QGridLayout" name="gridLayout_28">
+        <item row="0" column="1">
+         <widget class="QComboBox" name="comboBox_25">
+          <item>
+           <property name="text">
+            <string>Aceleracion</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Almacenamiento de datos</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Distancia o Longitud</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="radioButton_6">
+          <property name="text">
+           <string>Conversores</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="2">
+       <widget class="QRadioButton" name="radioButton_7">
+        <property name="text">
+         <string>Calculadoras</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <spacer name="horizontalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="3">
+       <spacer name="horizontalSpacer_7">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item row="1" column="0" colspan="2">
     <layout class="QGridLayout" name="gridLayout_9">
      <property name="sizeConstraint">
       <enum>QLayout::SetMinAndMaxSize</enum>
      </property>
-     <item row="4" column="1">
+     <item row="5" column="1">
       <widget class="QTextEdit" name="textEdit_2"/>
      </item>
-     <item row="6" column="0">
+     <item row="7" column="0">
       <widget class="QGroupBox" name="groupBox_7">
        <property name="title">
         <string>CCC (Calcular DC bancario)</string>
@@ -257,7 +579,7 @@ background-color: rgb(255, 251, 239);</string>
        </layout>
       </widget>
      </item>
-     <item row="6" column="1">
+     <item row="7" column="1">
       <widget class="QGroupBox" name="groupBox_6">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -395,7 +717,7 @@ background-color: rgb(255, 251, 239);</string>
        </layout>
       </widget>
      </item>
-     <item row="5" column="1">
+     <item row="6" column="1">
       <widget class="QGroupBox" name="groupBox_9">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -666,440 +988,10 @@ color: rgb(255, 0, 0);</string>
        </layout>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QGroupBox" name="groupBox">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>82</height>
-        </size>
-       </property>
-       <property name="title">
-        <string>Distancia o Longitud</string>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_8">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <item row="0" column="0">
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="lineEdit">
-            <property name="font">
-             <font>
-              <pointsize>15</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QComboBox" name="comboBox">
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="maxVisibleItems">
-             <number>33</number>
-            </property>
-            <item>
-             <property name="text">
-              <string>Angstrom</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nanometro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Micrometro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Milimetro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Centimetro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Decimetro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Metro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Decametro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Hectometro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Kilometro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Miriametro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Legua</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Milla</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Estadio</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Cadena</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Barra</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Yarda</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Pie</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Link</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Mano</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Pulgada</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Linea</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Mil</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Thou</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Milla nautica</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Braza</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Parsec</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Ano luz</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Unidad astronomica</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Minuto luz</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Segundo luz</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="label">
-          <property name="font">
-           <font>
-            <pointsize>15</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>=</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0">
-           <widget class="QComboBox" name="comboBox_2">
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="maxVisibleItems">
-             <number>33</number>
-            </property>
-            <item>
-             <property name="text">
-              <string>Angstrom</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nanometro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Micrometro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Milimetro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Centimetro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Decimetro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Metro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Decametro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Hectometro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Kilometro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Miriametro</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Legua</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Milla</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Estadio</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Cadena</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Barra</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Yarda</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Pie</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Link</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Mano</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Pulgada</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Linea</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Mil</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Thou</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Milla nautica</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Braza</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Parsec</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Ano luz</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Unidad astronomica</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Minuto luz</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Segundo luz</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="lineEdit_2">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(0, 0, 255);
-background-color: rgb(255, 251, 239);</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1" rowspan="2">
-           <widget class="QPushButton" name="pushButton_7">
-            <property name="icon">
-             <iconset resource="recoverdrake.qrc">
-              <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>25</width>
-              <height>25</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
+     <item row="5" column="0">
+      <widget class="QTextEdit" name="textEdit"/>
      </item>
-     <item row="7" column="0" colspan="2">
+     <item row="8" column="0" colspan="2">
       <widget class="QGroupBox" name="groupBox_10">
        <property name="title">
         <string>Calculo interes bancario</string>
@@ -1775,598 +1667,7 @@ background-color: rgb(255, 251, 239);</string>
        </layout>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QGroupBox" name="groupBox_2">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>82</height>
-        </size>
-       </property>
-       <property name="title">
-        <string>Superficie o Area</string>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_4">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <item row="1" column="2">
-         <layout class="QGridLayout" name="gridLayout_5">
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="lineEdit_3">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(0, 0, 255);
-background-color: rgb(255, 251, 239);</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QComboBox" name="comboBox_6">
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <item>
-             <property name="text">
-              <string>Centimetro cuadrado</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Metro cuadrado</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Kilometro cuadrado</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Hectarea</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Milla cuadrada</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Acre</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Yarda cuadrada</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Pie cuadrado</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Pulgada cuadrada</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="0" column="1" rowspan="2">
-           <widget class="QPushButton" name="pushButton_10">
-            <property name="icon">
-             <iconset resource="recoverdrake.qrc">
-              <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>25</width>
-              <height>25</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="0">
-         <layout class="QGridLayout" name="gridLayout_6">
-          <item row="0" column="0">
-           <widget class="QComboBox" name="comboBox_4">
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <item>
-             <property name="text">
-              <string>Centimetro cuadrado</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Metro cuadrado</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Kilometro cuadrado</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Hectarea</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Milla cuadrada</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Acre</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Yarda cuadrada</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Pie cuadrado</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Pulgada cuadrada</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="lineEdit_4">
-            <property name="font">
-             <font>
-              <pointsize>15</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="label_2">
-          <property name="font">
-           <font>
-            <pointsize>15</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>=</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLabel" name="label_15">
-       <property name="text">
-        <string>vacio</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_14">
-       <property name="text">
-        <string>vacio</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QTextEdit" name="textEdit"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QGroupBox" name="groupBox_3">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>82</height>
-        </size>
-       </property>
-       <property name="title">
-        <string>Peso o Masa</string>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_10">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <item row="1" column="0">
-         <layout class="QGridLayout" name="gridLayout_12">
-          <item row="0" column="0">
-           <widget class="QComboBox" name="comboBox_8">
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <item>
-             <property name="text">
-              <string>Tonelada metrica</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Kilogramo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Gramo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Miligramo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Microgramo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Tonelada larga</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Tonelada corta</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Piedra</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Libra</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Onza</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="lineEdit_8">
-            <property name="font">
-             <font>
-              <pointsize>15</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="label_4">
-          <property name="font">
-           <font>
-            <pointsize>15</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>=</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <layout class="QGridLayout" name="gridLayout_11">
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="lineEdit_7">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(0, 0, 255);
-background-color: rgb(255, 251, 239);</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QComboBox" name="comboBox_9">
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <item>
-             <property name="text">
-              <string>Tonelada metrica</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Kilogramo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Gramo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Miligramo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Microgramo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Tonelada larga</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Tonelada corta</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Piedra</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Libra</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Onza</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="0" column="1" rowspan="2">
-           <widget class="QPushButton" name="pushButton_8">
-            <property name="icon">
-             <iconset resource="recoverdrake.qrc">
-              <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>25</width>
-              <height>25</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QGroupBox" name="groupBox_5">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>82</height>
-        </size>
-       </property>
-       <property name="title">
-        <string>Temperatura</string>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_16">
-        <property name="sizeConstraint">
-         <enum>QLayout::SetMinAndMaxSize</enum>
-        </property>
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <item row="1" column="2">
-         <layout class="QGridLayout" name="gridLayout_17">
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="lineEdit_11">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(0, 0, 255);
-background-color: rgb(255, 251, 239);</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QComboBox" name="comboBox_15">
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <item>
-             <property name="text">
-              <string>ºC (Celsius)</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>K (Kelvin)</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>ºF (Fahrenheit)</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="0" column="1" rowspan="2">
-           <widget class="QPushButton" name="pushButton_9">
-            <property name="icon">
-             <iconset resource="recoverdrake.qrc">
-              <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>25</width>
-              <height>25</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="0">
-         <layout class="QGridLayout" name="gridLayout_18">
-          <item row="0" column="0">
-           <widget class="QComboBox" name="comboBox_14">
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
-            </property>
-            <item>
-             <property name="text">
-              <string>ºC (Celsius)</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>K (Kelvin)</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>ºF (Fahrenheit)</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="lineEdit_12">
-            <property name="font">
-             <font>
-              <pointsize>15</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="label_6">
-          <property name="font">
-           <font>
-            <pointsize>15</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>=</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </item>
-     <item row="5" column="0">
+     <item row="6" column="0">
       <widget class="QGroupBox" name="groupBox_8">
        <property name="title">
         <string>ISBN (Calcular digito de libros)</string>
@@ -2614,483 +1915,2639 @@ background-color: rgb(255, 251, 239);</string>
        </layout>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QGroupBox" name="groupBox_4">
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>82</height>
-        </size>
+     <item row="0" column="0" colspan="2">
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
-       <property name="title">
-        <string>Tiempo</string>
+       <property name="currentIndex">
+        <number>0</number>
        </property>
-       <layout class="QGridLayout" name="gridLayout_13">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <item row="1" column="2">
-         <layout class="QGridLayout" name="gridLayout_14">
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="lineEdit_9">
-            <property name="enabled">
-             <bool>true</bool>
+       <widget class="QWidget" name="tab_3">
+        <attribute name="title">
+         <string>Conversores 1/10</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_33">
+         <item row="0" column="0">
+          <widget class="QGroupBox" name="groupBox">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>82</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Distancia o Longitud</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_8">
+            <property name="leftMargin">
+             <number>0</number>
             </property>
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
+            <property name="topMargin">
+             <number>0</number>
             </property>
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
+            <property name="rightMargin">
+             <number>0</number>
             </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(0, 0, 255);
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="0" column="0">
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="maxVisibleItems">
+                 <number>33</number>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Angstrom</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Nanometro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Micrometro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milimetro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Centimetro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Decimetro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Metro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Decametro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Hectometro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilometro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Miriametro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Legua</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milla</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Estadio</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Cadena</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Barra</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Yarda</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pie</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Link</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Mano</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pulgada</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Linea</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Mil</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Thou</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milla nautica</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Braza</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Parsec</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Ano luz</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Unidad astronomica</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Minuto luz</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Segundo luz</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>=</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_2">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="maxVisibleItems">
+                 <number>33</number>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Angstrom</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Nanometro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Micrometro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milimetro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Centimetro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Decimetro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Metro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Decametro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Hectometro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilometro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Miriametro</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Legua</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milla</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Estadio</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Cadena</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Barra</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Yarda</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pie</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Link</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Mano</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pulgada</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Linea</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Mil</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Thou</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milla nautica</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Braza</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Parsec</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Ano luz</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Unidad astronomica</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Minuto luz</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Segundo luz</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_2">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 0, 255);
 background-color: rgb(255, 251, 239);</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1" rowspan="2">
+               <widget class="QPushButton" name="pushButton_7">
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QGroupBox" name="groupBox_2">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>82</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Superficie o Area</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <property name="leftMargin">
+             <number>0</number>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <property name="topMargin">
+             <number>0</number>
             </property>
-            <property name="readOnly">
-             <bool>true</bool>
+            <property name="rightMargin">
+             <number>0</number>
             </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QComboBox" name="comboBox_12">
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
+            <property name="bottomMargin">
+             <number>0</number>
             </property>
-            <item>
-             <property name="text">
-              <string>Ano</string>
-             </property>
+            <item row="1" column="2">
+             <layout class="QGridLayout" name="gridLayout_5">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_3">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_6">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Centimetro cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Metro cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilometro cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Hectarea</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milla cuadrada</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Acre</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Yarda cuadrada</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pie cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pulgada cuadrada</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="1" rowspan="2">
+               <widget class="QPushButton" name="pushButton_10">
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
-            <item>
-             <property name="text">
-              <string>Mes</string>
-             </property>
+            <item row="1" column="0">
+             <layout class="QGridLayout" name="gridLayout_6">
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_4">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Centimetro cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Metro cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilometro cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Hectarea</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milla cuadrada</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Acre</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Yarda cuadrada</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pie cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pulgada cuadrada</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_4">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
-            <item>
-             <property name="text">
-              <string>Semana</string>
-             </property>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_2">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>=</string>
+              </property>
+             </widget>
             </item>
-            <item>
-             <property name="text">
-              <string>Hora</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Minuto</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Segundo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Milisegundo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Microsegundo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nanosegundo</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="0" column="1" rowspan="2">
-           <widget class="QPushButton" name="pushButton_11">
-            <property name="icon">
-             <iconset resource="recoverdrake.qrc">
-              <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+           </layout>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QGroupBox" name="groupBox_3">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>82</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Peso o Masa</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_10">
+            <property name="leftMargin">
+             <number>0</number>
             </property>
-            <property name="iconSize">
-             <size>
-              <width>25</width>
-              <height>25</height>
-             </size>
+            <property name="topMargin">
+             <number>0</number>
             </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="0">
-         <layout class="QGridLayout" name="gridLayout_15">
-          <item row="0" column="0">
-           <widget class="QComboBox" name="comboBox_11">
-            <property name="focusPolicy">
-             <enum>Qt::NoFocus</enum>
+            <property name="rightMargin">
+             <number>0</number>
             </property>
-            <item>
-             <property name="text">
-              <string>Ano</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Mes</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Semana</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Hora</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Minuto</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Segundo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Milisegundo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Microsegundo</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nanosegundo</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLineEdit" name="lineEdit_10">
-            <property name="font">
-             <font>
-              <pointsize>15</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
+            <property name="bottomMargin">
+             <number>0</number>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            <item row="1" column="0">
+             <layout class="QGridLayout" name="gridLayout_12">
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_8">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Tonelada metrica</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilogramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Miligramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Microgramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Tonelada larga</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Tonelada corta</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Piedra</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Libra</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Onza</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_8">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_4">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>=</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <layout class="QGridLayout" name="gridLayout_11">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_7">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_9">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Tonelada metrica</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilogramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Miligramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Microgramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Tonelada larga</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Tonelada corta</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Piedra</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Libra</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Onza</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="1" rowspan="2">
+               <widget class="QPushButton" name="pushButton_8">
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QGroupBox" name="groupBox_4">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>82</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Tiempo</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_13">
+            <property name="leftMargin">
+             <number>0</number>
             </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="label_5">
-          <property name="font">
-           <font>
-            <pointsize>15</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>=</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBox_11">
-     <property name="title">
-      <string/>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_28">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item row="2" column="1">
-       <widget class="QRadioButton" name="radioButton_7">
-        <property name="text">
-         <string>Calculadoras</string>
-        </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="1" column="2">
+             <layout class="QGridLayout" name="gridLayout_14">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_9">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_12">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Ano</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Mes</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Semana</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Hora</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Minuto</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Segundo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milisegundo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Microsegundo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Nanosegundo</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="1" rowspan="2">
+               <widget class="QPushButton" name="pushButton_11">
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0">
+             <layout class="QGridLayout" name="gridLayout_15">
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_11">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Ano</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Mes</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Semana</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Hora</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Minuto</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Segundo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milisegundo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Microsegundo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Nanosegundo</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_10">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_5">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>=</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QGroupBox" name="groupBox_5">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>82</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Temperatura</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_16">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMinAndMaxSize</enum>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="1" column="2">
+             <layout class="QGridLayout" name="gridLayout_17">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_11">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_15">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>ºC (Celsius)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>K (Kelvin)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>ºF (Fahrenheit)</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="1" rowspan="2">
+               <widget class="QPushButton" name="pushButton_9">
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0">
+             <layout class="QGridLayout" name="gridLayout_18">
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_14">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>ºC (Celsius)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>K (Kelvin)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>ºF (Fahrenheit)</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_12">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_6">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>=</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QGroupBox" name="groupBox_18">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>82</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Aceleracion</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_52">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="0" column="0">
+             <layout class="QGridLayout" name="gridLayout_51">
+              <item row="2" column="0">
+               <widget class="QLineEdit" name="lineEdit_47">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QComboBox" name="comboBox_26">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Metros por segundo cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pies por segundo cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gal</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Miligal</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gravedad estandar</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Fuerza G</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_52">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>=</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <layout class="QGridLayout" name="gridLayout_50">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_46">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1" rowspan="2">
+               <widget class="QPushButton" name="pushButton_20">
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_27">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Metros por segundo cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pies por segundo cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gal</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Miligal</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gravedad estandar</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Fuerza G</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
        </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QRadioButton" name="radioButton_6">
-        <property name="text">
-         <string>Conversores</string>
-        </property>
+       <widget class="QWidget" name="tab_4">
+        <attribute name="title">
+         <string>Conversores 2/10</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_56">
+         <item row="0" column="0">
+          <widget class="QGroupBox" name="groupBox_15">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>82</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Almacenamiento de datos</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_40">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="0" column="0">
+             <layout class="QGridLayout" name="gridLayout_41">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_40">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_19">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="maxVisibleItems">
+                 <number>33</number>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Bit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Nibble</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilobit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Megabit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gigabit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Terabit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Petabit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Exabit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Byte</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilobyte</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Megabyte</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gigabyte</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Terabyte</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Petabyte</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Exabyte</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_49">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>=</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <layout class="QGridLayout" name="gridLayout_42">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_41">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1" rowspan="2">
+               <widget class="QPushButton" name="pushButton_17">
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_20">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="maxVisibleItems">
+                 <number>33</number>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Bit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Nibble</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilobit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Megabit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gigabit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Terabit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Petabit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Exabit</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Byte</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilobyte</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Megabyte</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gigabyte</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Terabyte</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Petabyte</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Exabyte</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QGroupBox" name="groupBox_17">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>82</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Superficie o Area</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_46">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="1" column="2">
+             <layout class="QGridLayout" name="gridLayout_47">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_44">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_23">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Centimetro cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Metro cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilometro cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Hectarea</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milla cuadrada</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Acre</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Yarda cuadrada</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pie cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pulgada cuadrada</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="1" rowspan="2">
+               <widget class="QPushButton" name="pushButton_19">
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0">
+             <layout class="QGridLayout" name="gridLayout_48">
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_24">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Centimetro cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Metro cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilometro cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Hectarea</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milla cuadrada</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Acre</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Yarda cuadrada</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pie cuadrado</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Pulgada cuadrada</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_45">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_51">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>=</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QGroupBox" name="groupBox_16">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>82</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Peso o Masa</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_43">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="1" column="0">
+             <layout class="QGridLayout" name="gridLayout_44">
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_21">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Tonelada metrica</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilogramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Miligramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Microgramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Tonelada larga</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Tonelada corta</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Piedra</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Libra</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Onza</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_42">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_50">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>=</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <layout class="QGridLayout" name="gridLayout_45">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_43">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_22">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Tonelada metrica</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Kilogramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Miligramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Microgramo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Tonelada larga</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Tonelada corta</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Piedra</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Libra</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Onza</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="1" rowspan="2">
+               <widget class="QPushButton" name="pushButton_18">
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QGroupBox" name="groupBox_14">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>82</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Tiempo</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_37">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="1" column="2">
+             <layout class="QGridLayout" name="gridLayout_38">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_38">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_13">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Ano</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Mes</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Semana</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Hora</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Minuto</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Segundo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milisegundo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Microsegundo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Nanosegundo</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="1" rowspan="2">
+               <widget class="QPushButton" name="pushButton_16">
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0">
+             <layout class="QGridLayout" name="gridLayout_39">
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_18">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Ano</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Mes</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Semana</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Hora</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Minuto</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Segundo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Milisegundo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Microsegundo</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Nanosegundo</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_39">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_48">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>=</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QGroupBox" name="groupBox_13">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>82</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Temperatura</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_34">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMinAndMaxSize</enum>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="1" column="2">
+             <layout class="QGridLayout" name="gridLayout_35">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_36">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_16">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>ºC (Celsius)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>K (Kelvin)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>ºF (Fahrenheit)</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="1" rowspan="2">
+               <widget class="QPushButton" name="pushButton_15">
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0">
+             <layout class="QGridLayout" name="gridLayout_36">
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_17">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>ºC (Celsius)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>K (Kelvin)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>ºF (Fahrenheit)</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_37">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_47">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>=</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QGroupBox" name="groupBox_19">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>82</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>Temperatura</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_49">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMinAndMaxSize</enum>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="1" column="2">
+             <layout class="QGridLayout" name="gridLayout_54">
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_48">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+                <property name="readOnly">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_28">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>ºC (Celsius)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>K (Kelvin)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>ºF (Fahrenheit)</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="0" column="1" rowspan="2">
+               <widget class="QPushButton" name="pushButton_21">
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0">
+             <layout class="QGridLayout" name="gridLayout_55">
+              <item row="0" column="0">
+               <widget class="QComboBox" name="comboBox_29">
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>ºC (Celsius)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>K (Kelvin)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>ºF (Fahrenheit)</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLineEdit" name="lineEdit_49">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="label_53">
+              <property name="font">
+               <font>
+                <pointsize>15</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>=</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
        </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="4" column="0" colspan="2">
-    <layout class="QGridLayout" name="gridLayout_3">
-     <item row="1" column="2">
-      <spacer name="horizontalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
+      </widget>
      </item>
-     <item row="1" column="6">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="1" column="7">
-      <widget class="QPushButton" name="pushButton">
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
+     <item row="1" column="0" rowspan="4">
+      <widget class="QLabel" name="label_14">
        <property name="text">
-        <string>Salir</string>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
+        <string>vacio</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="3">
-      <widget class="QLabel" name="label_3">
+     <item row="1" column="1" rowspan="4">
+      <widget class="QLabel" name="label_15">
        <property name="text">
-        <string>Decimales</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="text">
-        <string>Reiniciar todos</string>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="4">
-      <widget class="QComboBox" name="comboBox_3">
-       <item>
-        <property name="text">
-         <string>1</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>2</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>3</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>4</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>5</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>6</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>7</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>8</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>9</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>10</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>11</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>12</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>13</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>14</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>15</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>16</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>17</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>18</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>19</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>20</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>30</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>40</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>50</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>60</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>70</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>80</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>90</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>100</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QPushButton" name="pushButton_13">
-       <property name="text">
-        <string>Calculadora</string>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/calculadora.png</normaloff>:/Imagenes/calculadora.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
+        <string>vacio</string>
        </property>
       </widget>
      </item>

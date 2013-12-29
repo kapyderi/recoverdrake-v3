@@ -1,0 +1,15 @@
+#! /bin/bash
+# Script under GPL V3
+# kapyderi (Utilidad para poder gestionar la memoria en el caso de uso excesivo por parte de Dolphin, a la hora de vista previa en video)
+# Tambien modifica directamente el crontab de root 
+# kapyderi (Creador del rpm de Mandriva)
+
+      if ["0" = `ps -e|grep "kio_thumbnail"|awk {'print $4'}`| cut -d | wc -l ]
+	then
+	    RETURN="Sin procesos que matar"
+	else
+            kill -9 `ps -ef|grep -v grep |grep kio_thumbnail| awk '{print $2}'`
+	    RETURN="Procesos matados"	    
+	fi
+
+echo $RETURN\_`date` "

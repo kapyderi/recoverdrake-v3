@@ -1,0 +1,47 @@
+#!/bin/bash
+# Nombre: RecoverDrake -- RecoverMovewma
+# Parte: Mover archivos .wma
+# Versión: 1.6.0
+
+user=`who|awk 'NR<(NF-NR) {print $1}'|cut -d ' ' -f2`
+Lugar=`pwd`
+      
+    echo "Realizando volcado de ripeado a destino..."
+    (
+    echo "10" ; sleep 1
+    echo "# Ingresando archivos .wma"
+    FILE=`zenity --file-selection --filename=/home/$user/Documentos --directory --title="Seleccione donde guardar los archivos .wma"`
+
+        case $? in
+                 0)
+                        echo "\"$FILE\" seleccionado.";;
+                 1)
+                        echo "No ha seleccionado ningún archivo.";
+			exit 1;;
+                -1)
+                        echo "No ha seleccionado ningún archivo.";
+			exit 1;;
+        esac
+    echo "20" 
+    echo "# Creando ficheros .wma en destino"
+    NUM=1
+     for i in `ls $Lugar/*.cdda.wav`
+     do
+      ffmpeg -i $i -ab 192k -y $FILE/Track.$NUM.wma
+      rm -f $i
+      let "NUM +=1"
+     done
+    echo "50" 
+    echo "Esta linea sera ignorada" 
+    echo "75" 
+    echo "# Ficheros creados correctamente en la ruta $FILE"
+    echo "100" 
+    ) |
+    zenity --progress \
+    --title="Convirtiendo ficheros .cda" \
+    --text="Conversión en proceso..." \
+    --percentage=0
+    if [ "$?" = -1 ] ; then
+     zenity --error \
+     --text="Conversión cancelada."
+    fi

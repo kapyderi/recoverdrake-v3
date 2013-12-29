@@ -1,0 +1,563 @@
+kapyderi 2010 BOFH de Blogdrake.net
+
+RecoverDrake es una utilidad que le puede sacar de muchos apuros.
+
+En un principio fué diseñada para recuperar paquetes instalados
+en su ordenardor y poder volver a instalarlos sin tener que 
+recordar que habia instalado anteriormente, a quien no le ha 
+pasado alguna vez, verdad.
+
+Con el paso del tiempo, se ha hecho más extenso y en estos 
+momentos cubre muchas aplicaciones en una, ya que tienes
+infinidad de soporte a problemas y configuraciones.
+
+Se distribuye de la siguiente manera:
+
+01.-Eliminar repositorios.
+    
+    Como su nombre indica, trás una instalación limpia, se 
+    quedan instalados como repositorios los soportes del
+    DVD/CD de instalación, pues con esta opción se pueden
+    eliminar y dejar limpios todos los soportes.
+
+    Tambien sirve cuando tienes algún grupo de repositorios
+    problematicos y quieres cambiarlos o cualquier otro tipo
+    de problemas de configuración de los mismos.
+   
+02.-Añadir repositorios. 
+
+    Si quieres configurar un grupo de repositorios, puedes 
+    hacerlo con esta opción, te dará la opción de elegir 
+    entre varios repositorios oficiales y no oficales, solo
+    hay que marcar el que nos interese.
+
+    2.1.-Oficiales.
+         
+         Corresponden a los repositorios Main, Contrib, non-free
+         y sus respectivos "updates" y "backports"
+
+    2.2.-PLF.
+  
+	 Corresponden al grupo "Penguin Liberation Front" más 
+         conocido como PLF y es un grupo de paquetes altamente
+         recomendado.
+
+    2.3.-MIB.
+
+         Corresponden al grupo "Mandriva International Backports"
+         más conocido como MIB de origen Italiano y es un grupo
+         de paquetes más moderno e incluso no distribuidos en 
+         otros repositorios, pero suelen causar problemas con los
+         repositorios oficiales, por lo que recomiendo que esten
+         inhabilitados desde inicio y solo habilitar cuando se
+         necesite un paquete en particular.
+
+    2.4.-BDK.
+
+         Somos, ya que me incluyo, el grupo "blogdrake", el foro
+         oficial de Mandriva en lengua Española y en nuestro
+         repositorio puedes encontrar versiones recientes de 
+         paquetes actualizados y paquetes que no encontrarás en
+         otros repositorios.
+
+         Al igual que MIB, debería estar deshabilitado de comienzo
+         y habilitar en el momento de su uso, para evitar cualquier
+         incompatibilidad de software.
+
+    2.5.-MUD.
+
+         Corresponden al grupo "Mandriva User Deutschland" más 
+         conocido como MUD de origen Alemán y como MIB es un
+         desarrollo totalmente independiente, por lo que debe
+         estar deshabilitado desde inicio, por la similitud
+         con el grupo MIB.
+
+    2.6.-Otro.
+
+         Este apartado solo sirve para poder introducir un repositorio
+         a mano, ya que hay muchos más que no voy a relacionar aqui, 
+         pero que pueden ser de tu interes.
+
+03.-Editar/Configurar repositorios.
+
+    Con esta opción puedes habilitar y deshabilitar cualquier repositorio
+    y además puedes eliminar alguno o todos, a mano, de manera independiente.
+    
+    Tambien se podrían añadir cualquier otro nuevo y volver a configurarlos,
+    vamos un editor en toda regla.
+
+04.-Actualizar sistema.
+
+    Como su nombre indica, una vez configurados los repositorios es
+    importante hacer una actualización para solucionar cualquier
+    bugs, problema, etc.
+
+    Dicha actualización se realiza de manera automatica, para no 
+    tener que interactuar con la terminal.
+
+05.-Eliminar paquetes huerfanos.
+
+    Su finalidad es el desinstalar del sistema todos los 
+    paquetes que se quedan huerfanos por desinstalación de
+    otros paquetes.
+
+    Esta opción se incluye como una opción más, pero no se
+    recomienda utilizar esta opción, ya que se puede 
+    inutilizar el sistema.
+  
+    PROCEDA CON PRECAUCION!!!!
+
+06.-Salvaguardar/Recuperar rpm.
+
+    Como su nombre indica, este apartado sirve para poder 
+    guardar y salvar todos los rpm's que se tienen instalados
+    en el equipo, con la finalidad de poder recuperarlos en
+    un futuro.
+
+    6.1.-Salvaguardar rpm's.
+
+         Crea un fichero .lst con la información de rpm's de
+         su sistema.
+   
+         Es la opción más importante de RecoverDrake y para lo 
+         que fue construido, ya que puedes exportar la lisa a 
+         otro equipo y hacer un mirror del original o por otro
+         lado, trás una instalación de nueva versión, se ejecuta
+         y vuelve a su estado original.
+
+     6.2.-Recuperar rpm's.
+
+          Volcado y actualización de Lista de rpm's. 
+          Es la otra parte importante de RecoverDrake, ya que en 
+          este paso se actualiza sin interacción con el usuario,
+          la lista que hemos generado anteriormente, de forma
+          automatica.
+
+07.- Probar KDE inestable.
+
+     Cuantas veces has querido instalar una versión de kde
+     superior y no soportada por Mandriva y te ha dado miedo de
+     que no respondiera el equipo trás el reinicio. 
+
+     Pues para los que tenemos "versionitis" llega esta aplicación, 
+     donde se pueden probar versiones inestables, sin morir en el 
+     intento.
+
+     7.1.-Añadir KDE inestable.
+ 
+          Tal como nos dice su descripción, de esta manera añadimos
+          el mirror del repositorio donde estan los paquetes a
+          actualizar del nuevo KDE que haya en el momento.
+
+          En la primera parte de este proceso, pondremos el nombre
+          con el que se identificará internamente el repositorio 
+          en nuestro sistema y que por defecto será KDE4.
+
+          En la segunda parte del proceso, se introduce la dirección
+          ftp/html donde estan colgados los ficheros a actualizar.
+
+          IMPORTANTE: En la copia de la dirección no se debe poner la
+          parte donde se hace referencia al synthesis.hdlist, ya que
+          por defecto lo pone automaticamente, con esta terminación...
+         
+          " with media_info/synthesis.hdlist.cz "
+
+          Se crea una copia de seguridad de los paquetes que van a 
+          ser actualizados para poder recuperarlos más tarde.   
+ 
+     7.2.-Actualizar KDE inestable.
+
+          Mediante esta opción se hace una simulación para saber si
+          habrá problemas de compatibilidad o errores apreciados.
+
+          Trás la simulación, comienza la instalación si se marca la
+          casilla de "si"
+
+     7.3.-Desinstalar KDE inestable.
+ 
+          Si no nos convence la instalación de la nueva versión de      
+          KDE, solo nos queda eliminar los paquetes nuevos que se
+          han instalado, eliminar el repositorio KDE4 que se ha
+          creado nuevamente y volver a instalar los paquetes que se
+          habian actualizado.
+
+          Con esta parte de la aplicación, realizamos este proceso.
+
+08.-Respaldar/Recuperar copia de seguridad.
+
+    Mediante esta utilidad, podemos hacer copia de cualquier parte
+    del equipo, ya que estamos como root y por omisión, tambien 
+    podemos restaurar cualquier dato respaldado anteriormente.
+
+    8.1.-Salvaguarda de datos.
+
+         Se elige que guardar y donde y automaticamente comienza 
+         el proceso de salvaguarda.
+
+    8.2.-Restaurar datos.
+
+         En esta parte del proceso, se restauran los ficheros
+         comprimidos que hayamos elegido.
+
+09.-Guardar/Recuperar ficheros de configuración.
+
+    En el directorio /etc que cuelga de la raiz, tenemos todas
+    las configuraciones de nuestro equipo, tanto de usuarios,
+    como de discos duros y un largo etc de procesos que no nos
+    gustaria perder, por lo que con esta utilidad, podemos 
+    guardarlos para más tarde poder disponer de ellos.
+
+    9.1.-Guardar ficheros de configuración.
+
+         Se guardan automaticamente los ficheros del directorio
+         /etc y todos sus subdirectorios.
+
+    9.2.-Recuperar ficheros de configuración.
+
+         Como su nombre indica, se recuperan los ficheros de
+         configuración a su destino.
+
+10.-Instalar escritorios.
+
+    Podemos instalar todos los escritorios que queramos con esta
+    utilidad, tanto kde, gnome y demás, con solo utilizar su
+    metapaquete.
+
+    10.1.-KDE.
+
+          Uno de los escritorios más potentes y el que utiliza 
+          por defecto Mandriva.
+
+          Debido a su calidad y robusted, se necesita de un
+          gran equipo para poder sacarle todo el rendimiento 
+          de lo que es capaz.
+
+          Tiene una gran comunidad muy activa, detrás de este
+          maravillo escritorio, el cual ha sido copia en su
+          estilo por el inombrable 7.
+
+          Altamente recomendable.
+
+    10.2.-GNOME.
+
+          Otros de los escritorios más potentes y versatiles
+          que hay para Linux.
+
+          Tambien es recomendable tenerlo instalado, ya que 
+          nos puede sacar de algún apuro.
+
+    10.3.-E17.
+
+          Tambien conocido como Enlightenment, es un escritorio
+          que utiliza pocos recursos.
+
+    10.4.-Xfce.
+
+          Personalmente este escritorio me gusta esteticamente,
+          pero he de reconocer que no es mi principal.
+
+          Tiene un buen estilo, según mi criterio, me recuerda
+          bastante al sistema Mac.
+
+    10.5.-EDE.
+
+          Personalmente nunca lo he utilizado, pero como esta, lo
+          pongo.
+
+    10.6.-lxde.
+
+          Basado en Kde, pero mucho más sencillo y ocupa muchos 
+          menos recursos.
+
+    10.7.-Moblin.
+
+          Es un escritorio orientado a notebook, por su sencillez
+          ya que tienes todo lo que quieres a un simple click de
+          ratón.
+
+    10.8.-Sugar.
+
+          Un escritorio basado en gtk, pero que tampoco lo he 
+          utilizado, por lo que no puedo decir como es, pero 
+          estar...esta.
+
+11.-Instalar drivers wifi con ndiswrapper
+
+   Puede que nuestra red necesite de los drivers nativos de guindows,
+   por cualquier motivo, ya sea que no es reconocido el driver/modulo
+   de Linux o por errores en el mismo.
+
+   La solución pasa por instalar el fichero .ini y .sys de nuestro
+   sistema operativo del lado oscuro.
+   
+   NOTA: Va a utilizar un driver privativo en su sistema.
+
+12.-Solución a problemas conocidos.
+
+    En este apartado hay soluciones a problemas conocidos, que dan
+    fallo y siguen dandolo, por lo que se ha automatizado la 
+    solución.
+
+    12.01.-Problemas con Wifi.
+
+           Problemas solucionados en referencia a sistemas Wifi.
+
+	   12.1.1.-Wifi intermitente WEB/WPA.
+
+                   Cuando la wifi, se cae de manera intermitente,
+                   mediante la instalación de esta utilidad, se
+                   pretende de que siempre este activa.
+
+                   Esta versión sirve para wifi encriptada.
+
+	   12.1.2.-Wifi intermitente abierta.
+          
+                   Similar al del apartado anterior, pero para 
+                   wifi abierta.
+
+    12.02.-Codecs (No se pueden ver videos ni oir musica).
+
+           Paquete de codecs para el sistema multimedia, incluidos
+           los de win32, por lo que se podrá ver y oir videos,
+           musica, etc.
+
+    12.03.-Vista previa Dolphin (Se ralentizan los procesos).
+
+           Cuando intentamos visualizar videos o vista previa de los
+           mismos, el equipo crea un proceso denominado kio_thumbnail
+           por cada uno y puede llegar a desestabilizar el sistema,
+           pero mediante esta utilidad, matará todos los procesos con
+	   dicha denominación para agilizar la carga de procesos.
+
+    12.04.-sopcast/qsopcast (Instalar).
+
+           Esta utilidad, sirve para ver eventos deportivos, que en
+           teoria son canales abiertos via internet.
+
+           Se instala sopcast y su "gui" qsopcast para modo grafico.
+
+           ADVERTENCIA: Consulte las leyes de su pais, para saber si
+                        puede utilizar dicho software.
+
+    12.05.-Firefox (Sin adobe reader).
+
+           A veces puede pasar que al intentar ver un archivo .pdf, 
+           que no se pueda visualizar, pues con esta utilidad, se
+           soluciona dicho problema.
+
+    12.06.-Recuperar contraseña de usuario.
+
+           Puede pasar que olvidemos las contraseñas de nuestros
+           usuarios, cuando tenemos varios.
+ 
+           Con este proceso, podremos recuperar el usuario, con solo
+           cambiar la contraseña que no recordamos.
+
+           NOTA IMPORTANTE: Si la intención es recuperar la clave root, 
+                            se deberá hacer de la siguiente manera...
+ 
+                            Lo primero a hacer es reiniciar la máquina, ya 
+                            en Grub hay que pulsar (F3)
+                            Luego colocarse sobre la opción (Ajustes seguros)
+                            y pulsar (Intro), separamos con un espacio el
+                            texto final y escribimos (single) y presionamos
+                            (Intro).
+
+                            Comenzará la carga en modo terminal y tendremos
+                            la cuenta root, por lo que sólo necesitamos 
+                            cambiar la contraseña con el comando:
+                            passwd root
+                            y despues reinicia el sistema para que surtan 
+                            efecto los cambios mediante el comando (reboot)
+                            
+    12.07.-VirtualBox (No inicia).
+
+           Cuando instalamos el VirtualBox, puede que nos de error de inicio o
+           al actualizar un kernel nuevo, por lo que con esta utilidad se 
+           soluciona dicho problema.
+
+    12.08.-RPM database bloqued.
+
+           En alguna ocasión puede pasar que por alguna razón la base de datos
+           de urmpi se quede trabada o bloqueada, por lo que es necesario
+           desbloquearla o no se podrá utilizar.
+
+           Mediante esta utilidad se soluciona dicho problema.
+
+    12.09.-Excluir actualización de paquete.
+
+          A veces, hay paquetes que no se actualizan de forma
+          correcta o fallan las dependencias y siempre 
+          aparecen para actualizar aunque no pueden ser 
+          instalados, por lo que es preciso excluirlos de 
+          las actualizaciones.
+      
+          Con esta utilidad, se puede hacer con el simple 
+          hecho de introducir su nombre simple.
+                            
+          Ejemplo:rhymthbox
+
+          Si por lo contrario quiere excluir un nombre y 
+          todas sus variantes, debe introducirlo de la 
+          siguiente manera...
+
+          Ejemplo: /^rhymthbox/ 
+
+          Tal cual se muestra con las barras / y el signo ^
+
+          12.09.1.-Excluir paquete.
+
+                   Realiza la exclusión de cualquier paquete con el simple hecho
+                   de introducir su nombre.
+
+          12.09.2.-Recuperar un paquete.
+
+                   Puede que quieras recuperar la actualización de un paquete en
+                   particular, por lo que con solo poner su nombre se volverá a
+                   activar.
+
+          12.09.3.-Vaciar fichero de exclusiones.
+
+                   Con una nueva actualización es posible que quiera actualizar
+                   un paquete excluido.
+
+                   Con esta utilidad se regenerá el fichero original, vaciando
+                   todas las exclusiones.
+
+    12.10.-KTTSD no se esta ejecutando.
+     
+           Por algún motivo las nuevas versiones de kttsd y de jovie hacen que
+           no funcione el lector de voces festival, lanzando un mensaje de que
+           no se esta ejecutando KTTSD.
+
+           La solución pasa por utilizar esta utilidad.
+
+    12.11.-NTFS no se pudieron montar permisos
+
+           Se ha apreciado un error en las unidades NTFS, en el que despues de
+           escribir en ellas, aparece el mensaje:
+
+           No se pudieron cambiar los permisos...
+
+           no siendo problematico es bastante molesto y más si estas pasando
+           varios archivos a la vez, ya que en cada una de los archivos aparecerá
+           dicho mensaje.
+
+           12.11.1.-Permisos para NTFS.
+
+                    Con esta opción se buscarán todos las configuraciones para
+                    ntfs-3g y se le darán todos los privilegios a la vez que se
+                    realizará una salvaguarda del fichero fstab original..
+
+           12.11.2.-Recuperar fstab.   
+
+                    Como su nombre indica, se vuelve a recuperar el fichero
+                    fstab original.
+
+    12.12.-Preparar kernel para autocompilación (DKMS).
+    
+          A quien no le ha pasado, que al intentar compilar los DKMS le han dado 
+          error, por la necesidad de fuentes y codigo source sobre el kernel
+          activo, a la vez de no tener instaladas la librerias de compilación
+          gcc.
+
+          Para poder solucionarlo, solo hay que ejecutar esta utilidad y quedará
+          resuelto.
+
+    12.13.-kdeinit4 (Error al inicio).
+        
+          12.13.1.-Solucionar kdeinit4.
+
+                  Al intentar entra en KDE, puede que nos de este error y no 
+                  podamos acceder a nuestro escritorio favorito.
+
+                  Este error es debido a la configuración de algún plasma de
+                  escritorio, por lo que la solución pasa por volver a configurar
+                  el estilo visual de kde.
+
+                  Se realiza una copia del directorio oculto para poder recuperar.
+
+          12.13.2.-Recuperar configuración.
+
+                  Con esta opción volveremos a recuperar nuestro kde, antes del
+                  error con toda la configuración que teniamos.
+
+Pues nada de momento esto es lo que hay, aunque se iran incluyendo nuevas soluciones
+o utilidades.
+
+Gracias por su utilización y recordar que el que lo utiliza es el responsable.
+
+changelog:
+
+* Wed Oct 13 2010 <kapyderi@eresmas.com> 0.5.0.3bdk
+- Elección de ruta para copiar los rpm's y tambien para el volcado
+- Generación de fichero de cambios realizados durante el volcado
+- Instalación de dependencias
+- Instalación de versiones inestables o no soportados de kde y restauracion
+- Instalación de cualquier escritorio (necesario por si falla un escritorio)
+- Instalación de drivers wifi con ndiswrapper
+- Guardar configuraciones de sistema y restauracion
+- Copia de seguridad y restauracion 
+- Solución a problemas conocidos: Desconexion Wifi WEB/WPA
+- Solución a problemas conocidos: Desconexion Wifi Abierta
+- Solución a problemas conocidos: Codecs audio/video
+- Solución a problemas conocidos: Exceso de memoria en procesos con Dolphin
+- Solución a problemas conocidos: Configurar sopcast/qsopcast
+- Solución a problemas conocidos: Firefox con pdf
+- Solución a problemas conocidos: kdeinit4 inicia con error
+- Solución a problemas conocidos: Recuperar configuración de kde
+- Solución a problemas conocidos: VirtualBox no se ejecuta
+- Solución a problemas conocidos: RPM database bloqued
+- Solución a problemas conocidos: Excluir actualización de paquete
+- Solución a problemas conocidos: KTTSD no se esta ejecutando
+- Solución a problemas conocidos: NTFS sin permisos
+- Solución a problemas conocidos: Preparar para autocompilar (DKMS)
+- Modificación automatica del fichero .lst con la versión de Mandriva que se este utilizando Free, One, Flash o Powerpack
+- Bugs corregidos
+
+* Sat Jun 12 2010 <kapyderi@eresmas.com> 0.3.0-2bdk
+- Modo interactivo.
+- Edición de repositorios.
+
+* Fri Apr 23 2010 <kapyderi@eresmas.com> 0.2.0-2bdk
+- Introducción de repositorios de forma manual.
+- Bugs corregidos.
+- Comentarios en consola para todas las opciones.
+- Volcado totalmente automatico.
+
+* Sun Apr 4 2010 <kapyderi@eresmas.com> 0.1.3-2bdk
+- Introducción de nombre de usuario para evitar conflictos.
+
+* Sun Apr 4 2010 <kapyderi@eresmas.com> 0.1.2-2bdk
+- Correccion de usuarios con nombre muy largo.
+
+* Sat Apr 3 2010 <kapyderi@eresmas.com> 0.1.1-2bdk
+- Reducción ventana de bienvenida.
+- Instalación de dependencias.
+
+* Mon Mar 22 2010 <kapyderi@eresmas.com> 0.1.0-2bdk
+- Se puede ejecutar abriendo una consola para ver los resultados
+
+* Sat Feb 27 2010 <kapyderi@eresmas.com> 0.1.1-1bdk
+- Bugs corregidos
+- Opción de auto-orphans
+- Opción de confirmación de actualizar repositorios
+
+* Sat Feb 19 2010 <kapyderi@eresmas.com> 0.1.0-1bdk
+- Comienzo del Script
+
+Agradecimientos:
+
+No por ultimo menos importante, quiero agradecer a...
+
+katnatek, por parte de su codigo y por la ayuda desinteresada
+SinnerBOFH, por su experiencia
+Drakor, por su ayuda e interes
+Will, por servir de conejillo de indias
+Paky, mi mujer por soportarme en el teclado
+Athenea, mi hija mayor por su admiración por mi hobbie
+Minerva, mi hija menor por los ratos sentada en mi regazo mientras programo
+Motitos, por sus reflesiones de como deberia ser RecoverDrake
+Blogdrake, porque sin ella, no habria sido lo que es ahora RecoverDrake
+
+...si me dejo alguien que me perdone, pero es muuu tarde. 

@@ -1,0 +1,42 @@
+#!/bin/bash
+# Nombre: RecoverDrake -- RecoverRpm
+# Parte: Recuperar Rpm's
+# Versión: 1.6.0
+
+user=`who|awk 'NR<(NF-NR) {print $1}'|cut -d ' ' -f2`
+fecha=`date +%d%m%y`
+      
+    echo "Realizando salvaguarda..."
+    (
+    echo "10" ; sleep 1
+    echo "# Actualizando los rpm's del sistema"
+    FILE=`zenity --save --filename=/home/$user/Documentos/PackAnt$fecha.lst --file-selection --title="Seleccione donde guardar el fichero de salvaguarda"`
+
+        case $? in
+                 0)
+                        echo "\"$FILE\" seleccionado.";;
+                 1)
+                        echo "No ha seleccionado ningún archivo.";
+			exit 1;;
+                -1)
+                        echo "No ha seleccionado ningún archivo.";
+			exit 1;;
+        esac
+    echo "20" 
+    echo "# Creando fichero .lst"
+    (rpm -qa --queryformat='%{N} ' >> $FILE)  
+    echo "50" 
+    echo "Esta linea sera ignorada" 
+    echo "75" 
+    echo "# Fichero creado correctamente en la ruta $FILE"
+    echo "100" 
+    ) |
+    zenity --progress \
+    --title="Salvando rpm's del sistema" \
+    --text="Rastreando los rpm's instalados..." \
+    --percentage=0
+    if [ "$?" = -1 ] ; then
+     zenity --error \
+     --text="Actualización cancelada."
+    fi
+    echo Proceso realizado con exito

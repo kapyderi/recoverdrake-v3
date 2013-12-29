@@ -1,0 +1,14 @@
+#!/bin/bash
+# Nombre: RecoverDrake -- RecoverAntivirus
+# Parte: Generación de ficheros de virus (logs)
+# Versión: 1.6.0
+
+user=`who|awk 'NR<(NF-NR) {print $1}'|cut -d ' ' -f2`
+   
+    grep Removed /home/$user/RecoverDrake.log >> /home/$user/AntivirusReg.log
+    grep FOUND /home/$user/RecoverDrake.log >> /home/$user/AntivirusReg.log
+    awk '!_[$1,$2]++' /home/$user/AntivirusReg.log >> /home/$user/AntivirusTemp.log
+    rm -f /home/$user/AntivirusReg.log
+    mv /home/$user/AntivirusTemp.log /home/$user/AntivirusReg.log
+
+    echo Proceso realizado con exito
