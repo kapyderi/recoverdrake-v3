@@ -9443,7 +9443,7 @@ public:
 
         retranslateUi(recoverdrake);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(9);
         tabWidget_8->setCurrentIndex(0);
         tabWidget_6->setCurrentIndex(0);
         tabWidget_7->setCurrentIndex(1);

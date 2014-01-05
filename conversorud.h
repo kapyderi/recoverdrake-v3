@@ -103,6 +103,21 @@ private slots:
     void on_lineEdit_45_textChanged(const QString &arg1);
     void on_comboBox_24_activated(const QString &arg1);
     void on_comboBox_30_activated(const QString &arg1);
+    void on_pushButton_18_clicked();
+    void on_lineEdit_42_returnPressed();
+    void on_lineEdit_42_textChanged(const QString &arg1);
+    void on_comboBox_21_activated(const QString &arg1);
+    void on_comboBox_22_activated(const QString &arg1);
+    void on_lineEdit_12_textChanged(const QString &arg1);
+    void on_lineEdit_12_returnPressed();
+    void on_comboBox_14_activated(const QString &arg1);
+    void on_comboBox_15_activated(const QString &arg1);
+
+    void on_lineEdit_50_textChanged(const QString &arg1);
+
+    void on_pushButton_22_clicked();
+
+    void on_lineEdit_50_returnPressed();
 
 private:
     Ui::ConversorUD *ui;
@@ -132,6 +147,8 @@ private:
     QString QuitarMil(QString Valor);
     QString CuotaCarencia;
     int CalculoDC(int Numero, int Digit);
+    int GetCalc(QString Valor, int Posicion, QString Tipo);
+    QString tabla(QString Valor);
 
 };
 

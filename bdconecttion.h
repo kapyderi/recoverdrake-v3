@@ -254,62 +254,24 @@ static bool createConnection()
                                {
                                    QString cantidad3, cantidad4, cantidad5, cantidad6, cantidad7, cantidad8, cantidad9, cantidad10, cantidad11, cantidad12, cantidad13;
                                    QSqlQuery query3(db);
-                                   query3.exec("SELECT camouflage_pa FROM Opcion2 WHERE id=2");
+                                   query3.exec("SELECT camouflage_pa,efsplitter,generico_pa,hacha1_pa,hacha2_pa,hachapro_pa,mxs_pa,sf_pa,zip_pa,camaleon1_pa,camaleon2_pa FROM Opcion2 WHERE id=2");
                                    query3.first();
                                    if (query3.isValid())
+                                   {
                                         cantidad3=query3.value(0).toString();
-                                   QSqlQuery query4(db);
-                                   query4.exec("SELECT efsplitter_pa FROM Opcion2 WHERE id=2");
-                                   query4.first();
-                                   if (query4.isValid())
-                                        cantidad4=query4.value(0).toString();
-                                   QSqlQuery query5(db);
-                                   query5.exec("SELECT generico_pa FROM Opcion2 WHERE id=2");
-                                   query5.first();
-                                   if (query5.isValid())
-                                        cantidad5=query5.value(0).toString();
-                                   QSqlQuery query6(db);
-                                   query6.exec("SELECT hacha1_pa FROM Opcion2 WHERE id=2");
-                                   query6.first();
-                                   if (query6.isValid())
-                                        cantidad6=query6.value(0).toString();
-                                   QSqlQuery query7(db);
-                                   query7.exec("SELECT hacha2_pa FROM Opcion2 WHERE id=2");
-                                   query7.first();
-                                   if (query7.isValid())
-                                        cantidad7=query7.value(0).toString();
-                                   QSqlQuery query8(db);
-                                   query8.exec("SELECT hachapro_pa FROM Opcion2 WHERE id=2");
-                                   query8.first();
-                                   if (query8.isValid())
-                                        cantidad8=query8.value(0).toString();
-                                   QSqlQuery query9(db);
-                                   query9.exec("SELECT mxs_pa FROM Opcion2 WHERE id=2");
-                                   query9.first();
-                                   if (query9.isValid())
-                                        cantidad9=query9.value(0).toString();
-                                   QSqlQuery query10(db);
-                                   query10.exec("SELECT sf_pa FROM Opcion2 WHERE id=2");
-                                   query10.first();
-                                   if (query10.isValid())
-                                        cantidad10=query10.value(0).toString();
-                                   QSqlQuery query11(db);
-                                   query11.exec("SELECT zip_pa FROM Opcion2 WHERE id=2");
-                                   query11.first();
-                                   if (query11.isValid())
-                                        cantidad11=query11.value(0).toString();
-                                   QSqlQuery query12(db);
-                                   query12.exec("SELECT camaleon1_pa FROM Opcion2 WHERE id=2");
-                                   query12.first();
-                                   if (query12.isValid())
-                                        cantidad12=query12.value(0).toString();
-                                   QSqlQuery query13(db);
-                                   query13.exec("SELECT camaleon2_pa FROM Opcion2 WHERE id=2");
-                                   query13.first();
-                                   if (query13.isValid())
-                                        cantidad13=query13.value(0).toString();
-                                   QSqlQuery Opcion2(DB);
-                                   Opcion2.exec("UPDATE Opcion2 SET camouflage_pa='"+cantidad3+"',efsplitter_pa='"+cantidad4+"',generico_pa='"+cantidad5+"',hacha1_pa='"+cantidad6+"',hacha2_pa='"+cantidad7+"',hachapro_pa='"+cantidad8+"',mxs_pa='"+cantidad9+"',sf_pa='"+cantidad10+"',zip_pa='"+cantidad11+"',camaleon1_pa='"+cantidad12+"',camaleon2_pa='"+cantidad13+"' WHERE id=2");
+                                        cantidad4=query3.value(1).toString();
+                                        cantidad5=query3.value(2).toString();
+                                        cantidad6=query3.value(3).toString();
+                                        cantidad7=query3.value(4).toString();
+                                        cantidad8=query3.value(5).toString();
+                                        cantidad9=query3.value(6).toString();
+                                        cantidad10=query3.value(7).toString();
+                                        cantidad11=query3.value(8).toString();
+                                        cantidad12=query3.value(9).toString();
+                                        cantidad13=query3.value(10).toString();
+                                        QSqlQuery Opcion2(DB);
+                                        Opcion2.exec("UPDATE Opcion2 SET camouflage_pa='"+cantidad3+"',efsplitter_pa='"+cantidad4+"',generico_pa='"+cantidad5+"',hacha1_pa='"+cantidad6+"',hacha2_pa='"+cantidad7+"',hachapro_pa='"+cantidad8+"',mxs_pa='"+cantidad9+"',sf_pa='"+cantidad10+"',zip_pa='"+cantidad11+"',camaleon1_pa='"+cantidad12+"',camaleon2_pa='"+cantidad13+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==1)
@@ -324,9 +286,11 @@ static bool createConnection()
                                    query38.exec("SELECT conexion FROM ethernet WHERE id=2");
                                    query38.first();
                                    if (query38.isValid())
+                                   {
                                         cantidad40=query38.value(0).toString();
-                                   QSqlQuery ethernet(DB);
-                                   ethernet.exec("UPDATE ethernet SET conexion='"+cantidad40+"' WHERE id=2");
+                                        QSqlQuery ethernet(DB);
+                                        ethernet.exec("UPDATE ethernet SET conexion='"+cantidad40+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==2)
@@ -338,17 +302,15 @@ static bool createConnection()
                                {
                                    QString cantidad41, cantidad42;
                                    QSqlQuery query39(db);
-                                   query39.exec("SELECT ethernet FROM red WHERE id=2");
+                                   query39.exec("SELECT ethernet,wifi FROM red WHERE id=2");
                                    query39.first();
                                    if (query39.isValid())
+                                   {
                                         cantidad41=query39.value(0).toString();
-                                   QSqlQuery query40(db);
-                                   query40.exec("SELECT wifi FROM red WHERE id=2");
-                                   query40.first();
-                                   if (query40.isValid())
-                                        cantidad42=query40.value(0).toString();
-                                   QSqlQuery red(DB);
-                                   red.exec("UPDATE red SET ethernet='"+cantidad41+"',wifi='"+cantidad42+"' WHERE id=2");
+                                        cantidad42=query39.value(1).toString();
+                                        QSqlQuery red(DB);
+                                        red.exec("UPDATE red SET ethernet='"+cantidad41+"',wifi='"+cantidad42+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==3)
@@ -360,17 +322,15 @@ static bool createConnection()
                                {
                                    QString cantidad43, cantidad44;
                                    QSqlQuery query41(db);
-                                   query41.exec("SELECT spanish FROM Idioma WHERE id=2");
+                                   query41.exec("SELECT spanish,english FROM Idioma WHERE id=2");
                                    query41.first();
                                    if (query41.isValid())
+                                   {
                                         cantidad43=query41.value(0).toString();
-                                   QSqlQuery query42(db);
-                                   query42.exec("SELECT english FROM Idioma WHERE id=2");
-                                   query42.first();
-                                   if (query42.isValid())
-                                        cantidad44=query42.value(0).toString();
-                                   QSqlQuery Idioma(DB);
-                                   Idioma.exec("UPDATE Idioma SET spanish='"+cantidad43+"',english='"+cantidad44+"' WHERE id=2");
+                                        cantidad44=query41.value(1).toString();
+                                        QSqlQuery Idioma(DB);
+                                        Idioma.exec("UPDATE Idioma SET spanish='"+cantidad43+"',english='"+cantidad44+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==4)
@@ -543,17 +503,15 @@ static bool createConnection()
                                {
                                    QString cantidad43, cantidad44;
                                    QSqlQuery query41(db);
-                                   query41.exec("SELECT vlc FROM Video WHERE id=2");
+                                   query41.exec("SELECT vlc,parole FROM Video WHERE id=2");
                                    query41.first();
                                    if (query41.isValid())
+                                   {
                                         cantidad43=query41.value(0).toString();
-                                   QSqlQuery query42(db);
-                                   query42.exec("SELECT parole FROM Video WHERE id=2");
-                                   query42.first();
-                                   if (query42.isValid())
-                                        cantidad44=query42.value(0).toString();
-                                   QSqlQuery Video(DB);
-                                   Video.exec("UPDATE Video SET vlc='"+cantidad43+"',parole='"+cantidad44+"' WHERE id=2");
+                                        cantidad44=query41.value(1).toString();
+                                        QSqlQuery Video(DB);
+                                        Video.exec("UPDATE Video SET vlc='"+cantidad43+"',parole='"+cantidad44+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==8)
@@ -565,22 +523,16 @@ static bool createConnection()
                                {
                                    QString cantidad43, cantidad44, cantidad45;
                                    QSqlQuery query41(db);
-                                   query41.exec("SELECT Fuente FROM Font WHERE id=2");
+                                   query41.exec("SELECT Fuente,Estilo,Talla FROM Font WHERE id=2");
                                    query41.first();
                                    if (query41.isValid())
+                                   {
                                         cantidad43=query41.value(0).toString();
-                                   QSqlQuery query42(db);
-                                   query42.exec("SELECT Estilo FROM Font WHERE id=2");
-                                   query42.first();
-                                   if (query42.isValid())
-                                        cantidad44=query42.value(0).toString();
-                                   QSqlQuery query43(db);
-                                   query43.exec("SELECT Talla FROM Font WHERE id=2");
-                                   query43.first();
-                                   if (query43.isValid())
-                                        cantidad45=query43.value(0).toString();
-                                   QSqlQuery Font(DB);
-                                   Font.exec("UPDATE Font SET Fuente='"+cantidad43+"',Estilo='"+cantidad44+"',Talla='"+cantidad45+"' WHERE id=2");
+                                        cantidad44=query41.value(1).toString();
+                                        cantidad45=query41.value(2).toString();
+                                        QSqlQuery Font(DB);
+                                        Font.exec("UPDATE Font SET Fuente='"+cantidad43+"',Estilo='"+cantidad44+"',Talla='"+cantidad45+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==9)
@@ -592,17 +544,15 @@ static bool createConnection()
                                {
                                    QString cantidad43, cantidad44;
                                    QSqlQuery query41(db);
-                                   query41.exec("SELECT ColorTexto FROM Color WHERE id=2");
+                                   query41.exec("SELECT ColorTexto,ColorFondo FROM Color WHERE id=2");
                                    query41.first();
                                    if (query41.isValid())
+                                   {
                                         cantidad43=query41.value(0).toString();
-                                   QSqlQuery query42(db);
-                                   query42.exec("SELECT ColorFondo FROM Color WHERE id=2");
-                                   query42.first();
-                                   if (query42.isValid())
-                                        cantidad44=query42.value(0).toString();
-                                   QSqlQuery Color(DB);
-                                   Color.exec("UPDATE Color SET ColorTexto='"+cantidad43+"',ColorFondo='"+cantidad44+"' WHERE id=2");
+                                        cantidad44=query41.value(1).toString();
+                                        QSqlQuery Color(DB);
+                                        Color.exec("UPDATE Color SET ColorTexto='"+cantidad43+"',ColorFondo='"+cantidad44+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==10)
@@ -614,22 +564,16 @@ static bool createConnection()
                                {
                                    QString cantidad43, cantidad44, cantidad45;
                                    QSqlQuery query41(db);
-                                   query41.exec("SELECT Defecto FROM Miscelanea WHERE id=2");
+                                   query41.exec("SELECT Defecto,inicio,Dependencias FROM Miscelanea WHERE id=2");
                                    query41.first();
                                    if (query41.isValid())
+                                   {
                                         cantidad43=query41.value(0).toString();
-                                   QSqlQuery query42(db);
-                                   query42.exec("SELECT inicio FROM Miscelanea WHERE id=2");
-                                   query42.first();
-                                   if (query42.isValid())
-                                        cantidad44=query42.value(0).toString();
-                                   QSqlQuery query43(db);
-                                   query43.exec("SELECT Dependencias FROM Miscelanea WHERE id=2");
-                                   query43.first();
-                                   if (query43.isValid())
-                                        cantidad45=query43.value(0).toString();
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE Miscelanea SET Defecto='"+cantidad43+"',inicio='"+cantidad44+"',Dependencias='"+cantidad45+"' WHERE id=2");
+                                        cantidad44=query41.value(1).toString();
+                                        cantidad45=query41.value(2).toString();
+                                        QSqlQuery Miscelanea(DB);
+                                        Miscelanea.exec("UPDATE Miscelanea SET Defecto='"+cantidad43+"',inicio='"+cantidad44+"',Dependencias='"+cantidad45+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==11)
@@ -641,22 +585,16 @@ static bool createConnection()
                                {
                                    QString cantidad43, cantidad44, cantidad45;
                                    QSqlQuery query41(db);
-                                   query41.exec("SELECT Audio128 FROM Opcion WHERE id=2");
+                                   query41.exec("SELECT Audio128,Audio192,Audio320 FROM Opcion WHERE id=2");
                                    query41.first();
                                    if (query41.isValid())
+                                   {
                                         cantidad43=query41.value(0).toString();
-                                   QSqlQuery query42(db);
-                                   query42.exec("SELECT Audio192 FROM Opcion WHERE id=2");
-                                   query42.first();
-                                   if (query42.isValid())
-                                        cantidad44=query42.value(0).toString();
-                                   QSqlQuery query43(db);
-                                   query43.exec("SELECT Audio320 FROM Opcion WHERE id=2");
-                                   query43.first();
-                                   if (query43.isValid())
-                                        cantidad45=query43.value(0).toString();
-                                   QSqlQuery Opcion(DB);
-                                   Opcion.exec("UPDATE Opcion SET Audio128='"+cantidad43+"',Audio192='"+cantidad44+"',Audio320='"+cantidad45+"' WHERE id=2");
+                                        cantidad44=query41.value(1).toString();
+                                        cantidad45=query41.value(2).toString();
+                                        QSqlQuery Opcion(DB);
+                                        Opcion.exec("UPDATE Opcion SET Audio128='"+cantidad43+"',Audio192='"+cantidad44+"',Audio320='"+cantidad45+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==12)
@@ -671,9 +609,11 @@ static bool createConnection()
                                    query41.exec("SELECT Posicion FROM Cancion WHERE id=1");
                                    query41.first();
                                    if (query41.isValid())
+                                   {
                                         cantidad43=query41.value(0).toString();
-                                   QSqlQuery Cancion(DB);
-                                   Cancion.exec("UPDATE Cancion SET Posicion='"+cantidad43+"' WHERE id=1");
+                                        QSqlQuery Cancion(DB);
+                                        Cancion.exec("UPDATE Cancion SET Posicion='"+cantidad43+"' WHERE id=1");
+                                   }
                                }
                            }
                            if (i==13)
@@ -741,9 +681,11 @@ static bool createConnection()
                                    query41.exec("SELECT Posicion FROM PosRadio WHERE id=1");
                                    query41.first();
                                    if (query41.isValid())
+                                   {
                                         cantidad43=query41.value(0).toString();
-                                   QSqlQuery Cancion(DB);
-                                   Cancion.exec("UPDATE PosRadio SET Posicion='"+cantidad43+"' WHERE id=1");
+                                        QSqlQuery Cancion(DB);
+                                        Cancion.exec("UPDATE PosRadio SET Posicion='"+cantidad43+"' WHERE id=1");
+                                   }
                                }
                            }
                            if (i==15)
@@ -886,9 +828,11 @@ static bool createConnection()
                                    query41.exec("SELECT Posicion FROM PosTele WHERE id=1");
                                    query41.first();
                                    if (query41.isValid())
+                                   {
                                         cantidad43=query41.value(0).toString();
-                                   QSqlQuery Cancion(DB);
-                                   Cancion.exec("UPDATE PosTele SET Posicion='"+cantidad43+"' WHERE id=1");
+                                        QSqlQuery Cancion(DB);
+                                        Cancion.exec("UPDATE PosTele SET Posicion='"+cantidad43+"' WHERE id=1");
+                                   }
                                }
                            }
                            if (i==18)
@@ -975,9 +919,9 @@ static bool createConnection()
                                    if (query.isValid())
                                    {
                                        Cantidad=query.value(0).toString();
-                                   }
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE consola SET Fondo='"+Cantidad+"' WHERE id=2");
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE consola SET Fondo='"+Cantidad+"' WHERE id=2");
+                                   }                                   
                                }
                            }
                            if (i==20)
@@ -1046,32 +990,18 @@ static bool createConnection()
                                {
                                    QString cantidad43, cantidad44, cantidad45, cantidad46, cantidad47;
                                    QSqlQuery query41(db);
-                                   query41.exec("SELECT tamano1 FROM opcion1 WHERE id=2");
+                                   query41.exec("SELECT tamano1,tamano2,tamano3,tamano4,tamano5 FROM opcion1 WHERE id=2");
                                    query41.first();
                                    if (query41.isValid())
+                                   {
                                         cantidad43=query41.value(0).toString();
-                                   QSqlQuery query42(db);
-                                   query42.exec("SELECT tamano2 FROM opcion1 WHERE id=2");
-                                   query42.first();
-                                   if (query42.isValid())
-                                        cantidad44=query42.value(0).toString();
-                                   QSqlQuery query43(db);
-                                   query43.exec("SELECT tamano3 FROM opcion1 WHERE id=2");
-                                   query43.first();
-                                   if (query43.isValid())
-                                        cantidad45=query43.value(0).toString();
-                                   QSqlQuery query44(db);
-                                   query44.exec("SELECT tamano4 FROM opcion1 WHERE id=2");
-                                   query44.first();
-                                   if (query44.isValid())
-                                        cantidad46=query44.value(0).toString();
-                                   QSqlQuery query45(db);
-                                   query45.exec("SELECT tamano5 FROM opcion1 WHERE id=2");
-                                   query45.first();
-                                   if (query45.isValid())
-                                        cantidad47=query45.value(0).toString();
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE opcion1 SET tamano1='"+cantidad43+"',tamano2='"+cantidad44+"',tamano3='"+cantidad45+"',tamano4='"+cantidad46+"',tamano5='"+cantidad47+"' WHERE id=2");
+                                        cantidad44=query41.value(1).toString();
+                                        cantidad45=query41.value(2).toString();
+                                        cantidad46=query41.value(3).toString();
+                                        cantidad47=query41.value(4).toString();
+                                        QSqlQuery Miscelanea(DB);
+                                        Miscelanea.exec("UPDATE opcion1 SET tamano1='"+cantidad43+"',tamano2='"+cantidad44+"',tamano3='"+cantidad45+"',tamano4='"+cantidad46+"',tamano5='"+cantidad47+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==22)
@@ -1083,22 +1013,16 @@ static bool createConnection()
                                {
                                    QString cantidad43, cantidad44, cantidad45;
                                    QSqlQuery query41(db);
-                                   query41.exec("SELECT Numero1 FROM opcion3 WHERE id=2");
+                                   query41.exec("SELECT Numero1,Numero2,Numero3 FROM opcion3 WHERE id=2");
                                    query41.first();
                                    if (query41.isValid())
+                                   {
                                         cantidad43=query41.value(0).toString();
-                                   QSqlQuery query42(db);
-                                   query42.exec("SELECT Numero2 FROM opcion3 WHERE id=2");
-                                   query42.first();
-                                   if (query42.isValid())
-                                        cantidad44=query42.value(0).toString();
-                                   QSqlQuery query43(db);
-                                   query43.exec("SELECT Numero3 FROM opcion3 WHERE id=2");
-                                   query43.first();
-                                   if (query43.isValid())
-                                        cantidad45=query43.value(0).toString();
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE opcion3 SET Numero1='"+cantidad43+"',Numero2='"+cantidad44+"',Numero3='"+cantidad45+"' WHERE id=2");
+                                        cantidad44=query41.value(1).toString();
+                                        cantidad45=query41.value(2).toString();
+                                        QSqlQuery Miscelanea(DB);
+                                        Miscelanea.exec("UPDATE opcion3 SET Numero1='"+cantidad43+"',Numero2='"+cantidad44+"',Numero3='"+cantidad45+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==23)
@@ -1110,32 +1034,18 @@ static bool createConnection()
                                {
                                    QString cantidad43, cantidad44, cantidad45, cantidad46, cantidad47;
                                    QSqlQuery query41(db);
-                                   query41.exec("SELECT Velocidad2x FROM opcion4 WHERE id=2");
+                                   query41.exec("SELECT Velocidad2x,Velocidad4x,Velocidad8x,Velocidad16x,Velocidad32x, FROM opcion4 WHERE id=2");
                                    query41.first();
                                    if (query41.isValid())
+                                   {
                                         cantidad43=query41.value(0).toString();
-                                   QSqlQuery query42(db);
-                                   query42.exec("SELECT Velocidad4x FROM opcion4 WHERE id=2");
-                                   query42.first();
-                                   if (query42.isValid())
-                                        cantidad44=query42.value(0).toString();
-                                   QSqlQuery query43(db);
-                                   query43.exec("SELECT Velocidad8x FROM opcion4 WHERE id=2");
-                                   query43.first();
-                                   if (query43.isValid())
-                                        cantidad45=query43.value(0).toString();
-                                   QSqlQuery query44(db);
-                                   query44.exec("SELECT Velocidad16x FROM opcion4 WHERE id=2");
-                                   query44.first();
-                                   if (query44.isValid())
-                                        cantidad46=query44.value(0).toString();
-                                   QSqlQuery query45(db);
-                                   query45.exec("SELECT Velocidad32x FROM opcion4 WHERE id=2");
-                                   query45.first();
-                                   if (query45.isValid())
-                                        cantidad47=query45.value(0).toString();
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE opcion4 SET Velocidad2x='"+cantidad43+"',Velocidad4x='"+cantidad44+"',Velocidad8x='"+cantidad45+"',Velocidad16x='"+cantidad46+"',Velocidad32x='"+cantidad47+"' WHERE id=2");
+                                        cantidad44=query41.value(1).toString();
+                                        cantidad45=query41.value(2).toString();
+                                        cantidad46=query41.value(3).toString();
+                                        cantidad47=query41.value(4).toString();
+                                        QSqlQuery Miscelanea(DB);
+                                        Miscelanea.exec("UPDATE opcion4 SET Velocidad2x='"+cantidad43+"',Velocidad4x='"+cantidad44+"',Velocidad8x='"+cantidad45+"',Velocidad16x='"+cantidad46+"',Velocidad32x='"+cantidad47+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==24)
@@ -1147,37 +1057,19 @@ static bool createConnection()
                                {
                                    QString cantidad43, cantidad44, cantidad45, cantidad46, cantidad47, cantidad48;
                                    QSqlQuery query41(db);
-                                   query41.exec("SELECT i480 FROM opcion5 WHERE id=2");
+                                   query41.exec("SELECT i480,i576.i2_576.p720,p1080,kapy FROM opcion5 WHERE id=2");
                                    query41.first();
                                    if (query41.isValid())
+                                   {
                                         cantidad43=query41.value(0).toString();
-                                   QSqlQuery query42(db);
-                                   query42.exec("SELECT i576 FROM opcion5 WHERE id=2");
-                                   query42.first();
-                                   if (query42.isValid())
-                                        cantidad44=query42.value(0).toString();
-                                   QSqlQuery query43(db);
-                                   query43.exec("SELECT i2_576 FROM opcion5 WHERE id=2");
-                                   query43.first();
-                                   if (query43.isValid())
-                                        cantidad45=query43.value(0).toString();
-                                   QSqlQuery query44(db);
-                                   query44.exec("SELECT p720 FROM opcion5 WHERE id=2");
-                                   query44.first();
-                                   if (query44.isValid())
-                                        cantidad46=query44.value(0).toString();
-                                   QSqlQuery query45(db);
-                                   query45.exec("SELECT p1080 FROM opcion5 WHERE id=2");
-                                   query45.first();
-                                   if (query45.isValid())
-                                        cantidad47=query45.value(0).toString();
-                                   QSqlQuery query46(db);
-                                   query46.exec("SELECT kapy FROM opcion5 WHERE id=2");
-                                   query46.first();
-                                   if (query46.isValid())
-                                        cantidad48=query46.value(0).toString();
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE opcion5 SET i480='"+cantidad43+"',i576='"+cantidad44+"',i2_576='"+cantidad45+"',p720='"+cantidad46+"',p1080='"+cantidad47+"',kapy='"+cantidad48+"' WHERE id=2");
+                                        cantidad44=query41.value(1).toString();
+                                        cantidad45=query41.value(2).toString();
+                                        cantidad46=query41.value(3).toString();
+                                        cantidad47=query41.value(4).toString();
+                                        cantidad48=query41.value(5).toString();
+                                        QSqlQuery Miscelanea(DB);
+                                        Miscelanea.exec("UPDATE opcion5 SET i480='"+cantidad43+"',i576='"+cantidad44+"',i2_576='"+cantidad45+"',p720='"+cantidad46+"',p1080='"+cantidad47+"',kapy='"+cantidad48+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==25)
@@ -1252,27 +1144,17 @@ static bool createConnection()
                                {
                                    QString cantidad43, cantidad44, cantidad45, cantidad46;
                                    QSqlQuery query41(db);
-                                   query41.exec("SELECT tiempo120 FROM Parental WHERE id=2");
+                                   query41.exec("SELECT tiempo120,tiempo90,tiempo60,tiempo30 FROM Parental WHERE id=2");
                                    query41.first();
                                    if (query41.isValid())
-                                        cantidad43=query41.value(0).toString();
-                                   QSqlQuery query42(db);
-                                   query42.exec("SELECT tiempo90 FROM Parental WHERE id=2");
-                                   query42.first();
-                                   if (query42.isValid())
-                                        cantidad44=query42.value(0).toString();
-                                   QSqlQuery query43(db);
-                                   query43.exec("SELECT tiempo60 FROM Parental WHERE id=2");
-                                   query43.first();
-                                   if (query43.isValid())
-                                        cantidad45=query43.value(0).toString();
-                                   QSqlQuery query44(db);
-                                   query44.exec("SELECT tiempo30 FROM Parental WHERE id=2");
-                                   query44.first();
-                                   if (query44.isValid())
-                                        cantidad46=query44.value(0).toString();
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE Parental SET tiempo120='"+cantidad43+"',tiempo90='"+cantidad44+"',tiempo60='"+cantidad45+"',tiempo30='"+cantidad46+"' WHERE id=2");
+                                   {
+                                       cantidad43=query41.value(0).toString();
+                                       cantidad44=query41.value(1).toString();
+                                       cantidad45=query41.value(2).toString();
+                                       cantidad46=query41.value(4).toString();
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE Parental SET tiempo120='"+cantidad43+"',tiempo90='"+cantidad44+"',tiempo60='"+cantidad45+"',tiempo30='"+cantidad46+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==27)
@@ -1284,17 +1166,15 @@ static bool createConnection()
                                {
                                    QString cantidad43, cantidad44;
                                    QSqlQuery query41(db);
-                                   query41.exec("SELECT conexion FROM Wifi WHERE id=2");
+                                   query41.exec("SELECT conexion,essid FROM Wifi WHERE id=2");
                                    query41.first();
                                    if (query41.isValid())
-                                        cantidad43=query41.value(0).toString();
-                                   QSqlQuery query42(db);
-                                   query42.exec("SELECT essid FROM Wifi WHERE id=2");
-                                   query42.first();
-                                   if (query42.isValid())
-                                        cantidad44=query42.value(0).toString();
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE Wifi SET conexion='"+cantidad43+"',essid='"+cantidad44+"' WHERE id=2");
+                                   {
+                                       cantidad43=query41.value(0).toString();
+                                       cantidad44=query41.value(1).toString();
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE Wifi SET conexion='"+cantidad43+"',essid='"+cantidad44+"' WHERE id=2");
+                                   }
                                }
                            }
                            if (i==28)
@@ -1424,22 +1304,16 @@ static bool createConnection()
                                {
                                    QString dat, clv, seri;
                                    QSqlQuery dato(db);
-                                   dato.exec("SELECT dato FROM Registro WHERE id=1");
+                                   dato.exec("SELECT dato,clave,serie FROM Registro WHERE id=1");
                                    dato.first();
                                    if (dato.isValid())
-                                        dat=dato.value(0).toString();
-                                   QSqlQuery clav(db);
-                                   clav.exec("SELECT clave FROM Registro WHERE id=1");
-                                   clav.first();
-                                   if (clav.isValid())
-                                        clv=clav.value(0).toString();
-                                   QSqlQuery Serie(db);
-                                   Serie.exec("SELECT serie FROM Registro WHERE id=1");
-                                   Serie.first();
-                                   if (Serie.isValid())
-                                        seri=Serie.value(0).toString();
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE Registro SET dato='"+dat+"',clave='"+clv+"',serie='"+seri+"' WHERE id=1");
+                                   {
+                                       dat=dato.value(0).toString();
+                                       clv=dato.value(1).toString();
+                                       seri=dato.value(2).toString();
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE Registro SET dato='"+dat+"',clave='"+clv+"',serie='"+seri+"' WHERE id=1");
+                                   }
                                }
                            }
                            if (i==30)
@@ -1514,9 +1388,9 @@ static bool createConnection()
                                        Cantidad5=query.value(5).toString();
                                        Cantidad6=query.value(6).toString();
                                        Cantidad7=query.value(7).toString();
-                                   }
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE DatosVnc SET tipoIp='"+Cantidad+"',clave='"+Cantidad1+"',contraclave='"+Cantidad2+"',segundoplano='"+Cantidad3+"',menuGrafico='"+Cantidad4+"',escuchar='"+Cantidad5+"',soloVisual='"+Cantidad6+"',LimitarIp='"+Cantidad7+"' WHERE id=2");
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE DatosVnc SET tipoIp='"+Cantidad+"',clave='"+Cantidad1+"',contraclave='"+Cantidad2+"',segundoplano='"+Cantidad3+"',menuGrafico='"+Cantidad4+"',escuchar='"+Cantidad5+"',soloVisual='"+Cantidad6+"',LimitarIp='"+Cantidad7+"' WHERE id=2");
+                                   }                                   
                                }
                            }
                            if (i==32)
@@ -1536,9 +1410,9 @@ static bool createConnection()
                                        Cantidad1=query.value(1).toString();
                                        Cantidad2=query.value(2).toString();
                                        Cantidad3=query.value(3).toString();
-                                   }
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE Correo SET Correo='"+Cantidad+"',smtp='"+Cantidad1+"',pass='"+Cantidad2+"',destino='"+Cantidad3+"' WHERE id=1");
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE Correo SET Correo='"+Cantidad+"',smtp='"+Cantidad1+"',pass='"+Cantidad2+"',destino='"+Cantidad3+"' WHERE id=1");
+                                   }                                   
                                }
                            }
                            if (i==33)
@@ -1555,9 +1429,9 @@ static bool createConnection()
                                    if (query.isValid())
                                    {
                                        Cantidad=query.value(0).toString();
-                                   }
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE Menus SET Tipo_Menu='"+Cantidad+"' WHERE id=2");
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE Menus SET Tipo_Menu='"+Cantidad+"' WHERE id=2");
+                                   }                                   
                                }
                            }
                            if (i==34)
@@ -1574,9 +1448,9 @@ static bool createConnection()
                                    if (query.isValid())
                                    {
                                        Cantidad=query.value(0).toString();
-                                   }
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE Aplicacion SET Aplicacion='"+Cantidad+"' WHERE id=2");
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE Aplicacion SET Aplicacion='"+Cantidad+"' WHERE id=2");
+                                   }                                   
                                }
                            }
                            if (i==35)
@@ -1593,9 +1467,9 @@ static bool createConnection()
                                    if (query.isValid())
                                    {
                                        Cantidad=query.value(0).toString();
-                                   }
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE chat SET visionado='"+Cantidad+"' WHERE id=2");
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE chat SET visionado='"+Cantidad+"' WHERE id=2");
+                                   }                                  
                                }
                            }
                            if (i==36)
@@ -1612,9 +1486,9 @@ static bool createConnection()
                                    if (query.isValid())
                                    {
                                        Cantidad=query.value(0).toString();
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE Formato SET Aspecto='"+Cantidad+"' WHERE id=2");
                                    }
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE Formato SET Aspecto='"+Cantidad+"' WHERE id=2");
                                }
                            }
                            if (i==37)
@@ -1631,9 +1505,9 @@ static bool createConnection()
                                    if (query.isValid())
                                    {
                                        Cantidad=query.value(0).toString();
-                                   }
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE Estilo SET Style='"+Cantidad+"' WHERE id=2");
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE Estilo SET Style='"+Cantidad+"' WHERE id=2");
+                                   }                                   
                                }
                            }
                            if (i==38)
@@ -1724,9 +1598,9 @@ static bool createConnection()
                                        banda9=query.value(9).toString();
                                        banda10=query.value(10).toString();
                                        Volumen=query.value(11).toString();
-                                   }
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE Ecualizador SET activo='"+Cantidad+"',banda1='"+banda1+"',banda2='"+banda2+"',banda3='"+banda3+"',banda4='"+banda4+"',banda5='"+banda5+"',banda6='"+banda6+"',banda7='"+banda7+"',banda8='"+banda8+"',banda9='"+banda9+"',banda10='"+banda10+"',Volume='"+Volumen+"' WHERE id=2");
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE Ecualizador SET activo='"+Cantidad+"',banda1='"+banda1+"',banda2='"+banda2+"',banda3='"+banda3+"',banda4='"+banda4+"',banda5='"+banda5+"',banda6='"+banda6+"',banda7='"+banda7+"',banda8='"+banda8+"',banda9='"+banda9+"',banda10='"+banda10+"',Volume='"+Volumen+"' WHERE id=2");
+                                   }                                   
                                }
                            }
                            if (i==40)
@@ -1795,9 +1669,9 @@ static bool createConnection()
                                    {
                                        Digitos=query.value(0).toString();
                                        Decimales=query.value(1).toString();
-                                   }
-                                   QSqlQuery Miscelanea(DB);
-                                   Miscelanea.exec("UPDATE Calculadora SET Digitos='"+Digitos+"',Decimales='"+Decimales+"' WHERE id=2");
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE Calculadora SET Digitos='"+Digitos+"',Decimales='"+Decimales+"' WHERE id=2");
+                                   }                                   
                                }
                            }
                        }
