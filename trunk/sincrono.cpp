@@ -91,6 +91,9 @@ sincrono::sincrono(QWidget *parent) :
     this->installEventFilter(this);
     Comprueba = "No";
     Counter = 0;
+    Contad = new QTimer(this);
+    connect(Contad, SIGNAL(timeout()), this, SLOT(Montaje()));
+    Contad->start(5000);
 }
 
 sincrono::~sincrono()
@@ -113,10 +116,7 @@ void sincrono::changeEvent(QEvent *e)
 }
 
 void sincrono::Valor(QString Ref, QString Valor1, QString Valor2, QString Valor3, QString Valor4, QString Valor5, QString Valor6, int Value, QString Log)
-{   
-    Contad = new QTimer(this);
-    connect(Contad, SIGNAL(timeout()), this, SLOT(Montaje()));
-    Contad->start(5000);
+{      
     Referencia = Ref;
     ui->lineEdit_3->setText(Referencia);
     ui->lineEdit->setText(Valor1);

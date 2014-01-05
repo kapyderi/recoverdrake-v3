@@ -82,6 +82,8 @@ install -m0644 $RPM_BUILD_DIR/%{name}-%{version}/qsopcast.tar.gz $RPM_BUILD_ROOT
 install -m0644 $RPM_BUILD_DIR/%{name}-%{version}/kttsd.tar.gz $RPM_BUILD_ROOT/root/kttsd.tar.gz
 install -m0644 $RPM_BUILD_DIR/%{name}-%{version}/wifi-firmware.tar.gz $RPM_BUILD_ROOT/root/wifi-firmware.tar.gz
 install -m0755 $RPM_BUILD_DIR/%{name}-%{version}/Miscelanea.RecoverDrake.db.sqlite $RPM_BUILD_ROOT/root/Miscelanea.RecoverDrake.db.sqlite
+install -m0755 $RPM_BUILD_DIR/%{name}-%{version}/codigo-ascii $RPM_BUILD_ROOT/usr/share/RecoverDrake/codigo-ascii
+codigo-ascii
 #ln -sf consolehelper $RPM_BUILD_ROOT/usr/bin/RecoverDrake
 
 %clean  
@@ -122,6 +124,7 @@ rm -rf $RPM_BUILD_ROOT $RPM_BUILD_DIR/
 /usr/sbin/RecoverAntivirus
 /usr/share/RecoverDrake/Miscelanea.RecoverDrake.db.sqlite
 /usr/share/RecoverDrake/RecoverDrake_en.qm
+/usr/share/RecoverDrake/codigo-ascii
 /usr/share/RecoverDrake/logo.png
 /root/Miscelanea.RecoverDrake.db.sqlite
 /usr/share/applications/RecoverDrake.desktop

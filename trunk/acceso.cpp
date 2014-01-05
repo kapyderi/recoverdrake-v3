@@ -512,6 +512,7 @@ void acceso::User()
 
 void acceso::tecla()
 {
+    QTest::qWait(200);
     QString Caps = getCaps();
     QStringList Capslock = Caps.split("0");
     for (int a=0;a<Capslock.count();a++)
@@ -1162,6 +1163,7 @@ void acceso::on_lineEdit_2_textChanged(QString Value)
                 m.exec();
                 Valor = 1;
             }
+            this->tecla();
         }
     }
 }

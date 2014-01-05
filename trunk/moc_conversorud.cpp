@@ -22,7 +22,7 @@ static const uint qt_meta_data_ConversorUD[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      77,   14, // methods
+      86,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -109,6 +109,15 @@ static const uint qt_meta_data_ConversorUD[] = {
     2286,   72,   12,   12, 0x08,
     2322,   72,   12,   12, 0x08,
     2356,   72,   12,   12, 0x08,
+    2390,   12,   12,   12, 0x08,
+    2417,   12,   12,   12, 0x08,
+    2448,   72,   12,   12, 0x08,
+    2484,   72,   12,   12, 0x08,
+    2518,   72,   12,   12, 0x08,
+    2552,   72,   12,   12, 0x08,
+    2588,   12,   12,   12, 0x08,
+    2619,   72,   12,   12, 0x08,
+    2653,   72,   12,   12, 0x08,
 
        0        // eod
 };
@@ -186,6 +195,15 @@ static const char qt_meta_stringdata_ConversorUD[] = {
     "on_lineEdit_45_textChanged(QString)\0"
     "on_comboBox_24_activated(QString)\0"
     "on_comboBox_30_activated(QString)\0"
+    "on_pushButton_18_clicked()\0"
+    "on_lineEdit_42_returnPressed()\0"
+    "on_lineEdit_42_textChanged(QString)\0"
+    "on_comboBox_21_activated(QString)\0"
+    "on_comboBox_22_activated(QString)\0"
+    "on_lineEdit_12_textChanged(QString)\0"
+    "on_lineEdit_12_returnPressed()\0"
+    "on_comboBox_14_activated(QString)\0"
+    "on_comboBox_15_activated(QString)\0"
 };
 
 void ConversorUD::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -271,6 +289,15 @@ void ConversorUD::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 74: _t->on_lineEdit_45_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 75: _t->on_comboBox_24_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 76: _t->on_comboBox_30_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 77: _t->on_pushButton_18_clicked(); break;
+        case 78: _t->on_lineEdit_42_returnPressed(); break;
+        case 79: _t->on_lineEdit_42_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 80: _t->on_comboBox_21_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 81: _t->on_comboBox_22_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 82: _t->on_lineEdit_12_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 83: _t->on_lineEdit_12_returnPressed(); break;
+        case 84: _t->on_comboBox_14_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 85: _t->on_comboBox_15_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -308,9 +335,9 @@ int ConversorUD::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 77)
+        if (_id < 86)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 77;
+        _id -= 86;
     }
     return _id;
 }
