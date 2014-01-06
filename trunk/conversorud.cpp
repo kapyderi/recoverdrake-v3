@@ -2847,6 +2847,10 @@ void ConversorUD::on_pushButton_9_clicked()
     ui->lineEdit_12->setFocus();
     ui->lineEdit_11->setText("");
     ui->lineEdit_11->setToolTip("");
+    ui->label_14->setText("");
+    ui->label_15->setText("");
+    ui->textEdit->setText("");
+    ui->textEdit_2->setText("");
 }
 
 void ConversorUD::on_pushButton_5_clicked()
@@ -5426,6 +5430,10 @@ void ConversorUD::on_comboBox_3_activated(const QString &arg1)
 
 void ConversorUD::on_comboBox_25_activated(const QString &arg1)
 {
+    ui->label_14->setText("");
+    ui->label_15->setText("");
+    ui->textEdit->setText("");
+    ui->textEdit_2->setText("");
     if (arg1 == tr("Aceleracion"))
     {
         ui->tabWidget->setCurrentPage(0);
@@ -5451,10 +5459,17 @@ void ConversorUD::on_comboBox_25_activated(const QString &arg1)
         ui->tabWidget->setCurrentPage(1);
         ui->lineEdit_42->setFocus();
     }
+    if (arg1 == tr("Sistema de numeracion"))
+    {
+        ui->tabWidget->setCurrentPage(0);
+        ui->lineEdit_12->setFocus();
+    }
 }
 
 void ConversorUD::Reprobar(QString Tipo)
 {
+    ui->label_14->setText("");
+    ui->label_15->setText("");
     ui->textEdit->setText("");
     ui->textEdit_2->setText("");
     if (Tipo == "Longitud")
@@ -6858,6 +6873,11 @@ void ConversorUD::on_comboBox_22_activated(const QString &arg1)
 
 void ConversorUD::on_lineEdit_12_textChanged(const QString &arg1)
 {
+    ui->label_14->setText("");
+    ui->label_15->setText("");
+    ui->textEdit->setText("");
+    ui->textEdit_2->setText("");
+    ui->label_14->setText(tr("Sistema de numeracion: Convertir a...")+ui->comboBox_14->currentText()+"");
     int Value = 0;
     if (arg1 != "")
     {
@@ -6997,6 +7017,121 @@ void ConversorUD::on_lineEdit_12_textChanged(const QString &arg1)
                     Resto.chop(1);
                     ui->lineEdit_12->setText(Resto);
                     return;
+                }
+            }
+        }
+        for(int b=0;b<4;b++)
+        {
+            if (b == 0)
+            {
+                QString Valor, VBinario, Parte;
+                double Resto, Fin;
+                int Parcial, Final;
+                QString Valorar = QString::number(Value,'f',1);
+                Fin = Valorar.toDouble();
+                Final = 1;
+                while (Final != 0)
+                {
+                    Resto = Fin/2;
+                    Valor = QString::number(Resto);
+                    QStringList Valor1 = Valor.split(".");
+                    Final = Valor1.value(0).toInt();
+                    Fin = Valor1.value(0).toDouble();
+                    Parte = "0."+Valor1.value(1);
+                    Parcial = Parte.toDouble()*2;
+                    if ( Parcial > 0 )
+                        VBinario.append("1");
+                    else
+                        VBinario.append("0");
+                }
+                QString aux;
+                for (int i = VBinario.length()-1;i>-1;i--)
+                {
+                    aux += VBinario[i];
+                }
+                ui->textEdit->append(""+arg1+" "+ui->comboBox_14->currentText()+tr(" es igual a ")+aux+tr(" en Binario"));
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            if (b == 1)
+            {
+                QString Valor, VBinario, Parte;
+                double Resto, Fin;
+                int Parcial, Final;
+                QString Valorar = QString::number(Value,'f',1);
+                Fin = Valorar.toDouble();
+                Final = 1;
+                while (Final != 0)
+                {
+                    Resto = Fin/8;
+                    Valor = QString::number(Resto);
+                    QStringList Valor1 = Valor.split(".");
+                    Final = Valor1.value(0).toInt();
+                    Fin = Valor1.value(0).toDouble();
+                    Parte = "0."+Valor1.value(1);
+                    Parcial = Parte.toDouble()*8;
+                    VBinario.append(QString::number(Parcial));
+                }
+                QString aux;
+                for (int i = VBinario.length()-1;i>-1;i--)
+                {
+                    aux += VBinario[i];
+                }
+                ui->textEdit->append(""+arg1+" "+ui->comboBox_14->currentText()+tr(" es igual a ")+aux+tr(" en Octal"));
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            if (b == 2)
+            {
+                ui->textEdit->append(""+arg1+" "+ui->comboBox_14->currentText()+tr(" es igual a ")+QString::number(Value)+tr(" en Decimal"));
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            if (b == 3)
+            {
+                QString Valor, VBinario, Parte, Resultado;
+                double Resto, Fin;
+                int Parcial, Final;
+                QString Valorar = QString::number(Value,'f',1);
+                Fin = Valorar.toDouble();
+                Final = 1;
+                while (Final != 0)
+                {
+                    Resto = Fin/16;
+                    Valor = QString::number(Resto);
+                    QStringList Valor1 = Valor.split(".");
+                    Final = Valor1.value(0).toInt();
+                    Fin = Valor1.value(0).toDouble();
+                    Parte = "0."+Valor1.value(1);
+                    Parcial = Parte.toDouble()*16;
+                    Resultado = QString::number(Parcial);
+                    if (Parcial == 10)
+                        Resultado = "A";
+                    if (Parcial == 11)
+                        Resultado = "B";
+                    if (Parcial == 12)
+                        Resultado = "C";
+                    if (Parcial == 13)
+                        Resultado = "D";
+                    if (Parcial == 14)
+                        Resultado = "E";
+                    VBinario.append(Resultado);
+                }
+                QString aux;
+                for (int i = VBinario.length()-1;i>-1;i--)
+                {
+                    aux += VBinario[i];
+                }
+                ui->textEdit->append(""+arg1+" "+ui->comboBox_14->currentText()+tr(" es igual a ")+aux+tr(" en Hexadecimal"));
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
                 }
             }
         }
