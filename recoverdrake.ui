@@ -114,7 +114,7 @@
            <enum>QTabWidget::Triangular</enum>
           </property>
           <property name="currentIndex">
-           <number>9</number>
+           <number>0</number>
           </property>
           <property name="iconSize">
            <size>
@@ -21748,6 +21748,7 @@ p, li { white-space: pre-wrap; }
     <addaction name="menuCompiz_Fussion"/>
     <addaction name="menuNTFS"/>
     <addaction name="menuSkype"/>
+    <addaction name="actionVlc_3"/>
     <addaction name="actionAmule_2"/>
     <addaction name="actionRecuperar_ficheros_de_audio_video_con_errores"/>
     <addaction name="actionCambiar_nombre_de_etiqueta_a_Pendrive"/>
@@ -28731,6 +28732,15 @@ default connected 1280x1024+0+0 0mm x 0mm
    </property>
    <property name="text">
     <string>Calculadora</string>
+   </property>
+  </action>
+  <action name="actionVlc_3">
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/VLC.png</normaloff>:/Imagenes/VLC.png</iconset>
+   </property>
+   <property name="text">
+    <string>Vlc</string>
    </property>
   </action>
  </widget>

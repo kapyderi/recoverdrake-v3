@@ -28687,6 +28687,7 @@ void recoverdrake::on_actionAmule_2_triggered()
         return;
     }
 }
+
 QMdiSubWindow *recoverdrake::buscarConversor()
 {
     foreach (QMdiSubWindow *window, ui->mdiArea_22->subWindowList())
@@ -28740,6 +28741,55 @@ void recoverdrake::on_actionCalculadora_triggered()
             if (ValorCierre == "Si")
                 Calculo = "Si";
         }
+    }
+}
+
+void recoverdrake::on_actionVlc_3_triggered()
+{
+    QString hora = QTime::currentTime().toString("hh:mm:ss");
+    ui->textEdit_4->append(""+hora+tr("-- Accion: Solucionar error inicio vlc."));
+    Refrescar();
+    int respuesta = 0;
+    if (Mensaka!="Activo")
+    {
+        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Error inicio de vlc")),
+               QString::fromUtf8(tr("<center><b>Solucionar error de inicio de vlc</b></center><p>"
+                  "Es posible que inicies vlc y no inicie, debido a un problema con un fichero "
+                  "corrupto de configuracion.<p>"
+                  "Con esta utilidad se eliminar el problema y podras volver a utilizarlo como antes, pero "
+                  "con la configuracion por defecto.<p>"
+                  "<B>NOTA: Debes esperar a que termine completamente el proceso seleccionado, "
+                  "el cual te sera notificado cuando finalice en la consola de procesos.</B><p>"
+                  "&iquest;Solucionar error inicio de vlc?")), QMessageBox::Ok, QMessageBox::No);
+    }
+    else
+    {
+        respuesta = QMessageBox::Ok;
+    }
+    if (respuesta == QMessageBox::Ok)
+    {
+        QString cmd =QString::fromUtf8(tr("echo Reseteando archivo de configuracion..."));
+        QString cmd1="su - %1 -c \"vlc --reset-config\"";
+        cmd1=cmd1.arg(user);
+        QString cmd2 =QString::fromUtf8(tr("echo Fichero reseteado correctamente."));
+        QStringList comandos;
+        comandos<< cmd << cmd1 << cmd2;
+        if (mib != 0)
+            delete otros;
+        mib = new DrakeProcesos(comandos, this);
+        connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
+        connect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
+        connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
+        int valor= comandos.count();
+        mib->Valor(valor,0);
+        mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+        mib->iniciarProceso();
+    }
+    else
+    {
+        ui->tabWidget->setCurrentPage(pagina);
+        ui->tabWidget_8->setCurrentPage(0);
+        return;
     }
 }
 

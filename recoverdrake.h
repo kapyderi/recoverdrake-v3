@@ -962,6 +962,7 @@ private slots:
     void on_pushButton_64_clicked();
     void on_actionAmule_2_triggered();
     void on_actionCalculadora_triggered();
+    void on_actionVlc_3_triggered();
 
 public:
     Ui::recoverdrake *uil;

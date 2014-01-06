@@ -509,6 +509,7 @@ public:
     QAction *actionActivar_control_de_vigilancia_de_error_de_sesiones;
     QAction *actionAmule_2;
     QAction *actionCalculadora;
+    QAction *actionVlc_3;
     QWidget *centralWidget;
     QGridLayout *gridLayout_65;
     QScrollArea *scrollArea;
@@ -3266,6 +3267,9 @@ public:
         QIcon icon220;
         icon220.addFile(QString::fromUtf8(":/Imagenes/calculadora.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionCalculadora->setIcon(icon220);
+        actionVlc_3 = new QAction(recoverdrake);
+        actionVlc_3->setObjectName(QString::fromUtf8("actionVlc_3"));
+        actionVlc_3->setIcon(icon92);
         centralWidget = new QWidget(recoverdrake);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         centralWidget->setFocusPolicy(Qt::WheelFocus);
@@ -9017,6 +9021,7 @@ public:
         menuSoluci_n_a_problemas->addAction(menuCompiz_Fussion->menuAction());
         menuSoluci_n_a_problemas->addAction(menuNTFS->menuAction());
         menuSoluci_n_a_problemas->addAction(menuSkype->menuAction());
+        menuSoluci_n_a_problemas->addAction(actionVlc_3);
         menuSoluci_n_a_problemas->addAction(actionAmule_2);
         menuSoluci_n_a_problemas->addAction(actionRecuperar_ficheros_de_audio_video_con_errores);
         menuSoluci_n_a_problemas->addAction(actionCambiar_nombre_de_etiqueta_a_Pendrive);
@@ -9443,7 +9448,7 @@ public:
 
         retranslateUi(recoverdrake);
 
-        tabWidget->setCurrentIndex(9);
+        tabWidget->setCurrentIndex(0);
         tabWidget_8->setCurrentIndex(0);
         tabWidget_6->setCurrentIndex(0);
         tabWidget_7->setCurrentIndex(1);
@@ -11018,6 +11023,7 @@ public:
         actionActivar_control_de_vigilancia_de_error_de_sesiones->setText(QApplication::translate("recoverdrake", "Activar control de vigilancia de error de sesiones", 0, QApplication::UnicodeUTF8));
         actionAmule_2->setText(QApplication::translate("recoverdrake", "Amule", 0, QApplication::UnicodeUTF8));
         actionCalculadora->setText(QApplication::translate("recoverdrake", "Calculadora", 0, QApplication::UnicodeUTF8));
+        actionVlc_3->setText(QApplication::translate("recoverdrake", "Vlc", 0, QApplication::UnicodeUTF8));
         groupBox_21->setTitle(QString());
         pushButton_73->setText(QString());
         pushButton_63->setText(QString());
