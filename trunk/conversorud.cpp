@@ -7,19 +7,15 @@
 #include <QBuffer>
 #include <QTest>
 #include <QProgressDialog>
-
-
-
+#include <QProcess>
+#include <QFuture>
+#include <QtConcurrentRun>
 
 
 
 
 // http://www.convertworld.com/es/almacenamiento-de-datos/?c=a
-// http://platea.pntic.mec.es/~lgonzale/tic/binarios/numeracion.html
-// http://ascii.cl/es/
-
-
-
+// falta saber porque falla cuando se ponen decimales en el dato de entrada ya que no hace nada la salida cuando lleva separador de miles.
 
 
 
@@ -116,6 +112,12 @@ ConversorUD::ConversorUD(QWidget *parent) :
     ui->comboBox_30->setCurrentIndex(ui->comboBox_30->findText(tr("Kilobyte por segundo (kB/s)")));
     ui->comboBox_21->setCurrentIndex(ui->comboBox_21->findText(tr("Circulo")));
     ui->comboBox_22->setCurrentIndex(ui->comboBox_22->findText(tr("Giro")));
+    ui->comboBox_4->setCurrentIndex(ui->comboBox_4->findText(tr("Metro cuadrado (m²)")));
+    ui->comboBox_6->setCurrentIndex(ui->comboBox_6->findText(tr("Metro cuadrado (m²)")));
+    ui->comboBox_17->setCurrentIndex(ui->comboBox_17->findText(tr("Lumen hora (lm·h)")));
+    ui->comboBox_31->setCurrentIndex(ui->comboBox_31->findText(tr("Lumen hora (lm·h)")));
+    ui->comboBox_50->setCurrentIndex(ui->comboBox_50->findText(tr("Mol (mol)")));
+    ui->comboBox_51->setCurrentIndex(ui->comboBox_51->findText(tr("Mol (mol)")));
     Decimales = 20;
     ui->comboBox->insertSeparator(11);
     ui->comboBox->insertSeparator(25);
@@ -129,6 +131,14 @@ ConversorUD::ConversorUD(QWidget *parent) :
     ui->comboBox_24->insertSeparator(37);
     ui->comboBox_30->insertSeparator(18);
     ui->comboBox_30->insertSeparator(37);
+    ui->comboBox_4->insertSeparator(9);
+    ui->comboBox_6->insertSeparator(9);
+    ui->comboBox_4->insertSeparator(20);
+    ui->comboBox_6->insertSeparator(20);
+    ui->comboBox_4->insertSeparator(25);
+    ui->comboBox_6->insertSeparator(25);
+    ui->comboBox_50->insertSeparator(3);
+    ui->comboBox_51->insertSeparator(3);
     ui->comboBox_3->setCurrentIndex(ui->comboBox_3->findText(QString::number(Decimales)));
     connect(ui->radioButton,SIGNAL(clicked()),this,SLOT(Comprobar()));
     connect(ui->radioButton_2,SIGNAL(clicked()),this,SLOT(Comprobar()));
@@ -152,6 +162,7 @@ ConversorUD::ConversorUD(QWidget *parent) :
     AmortizacionP = 0;
     ui->groupBox_12->setVisible(false);
     ui->comboBox_25->setCurrentText(tr("Distancia o Longitud"));
+    ui->lineEdit_55->setText("28");
     ui->lineEdit->installEventFilter(this);
     ui->lineEdit_14->installEventFilter(this);
     ui->lineEdit_19->installEventFilter(this);
@@ -173,7 +184,13 @@ ConversorUD::ConversorUD(QWidget *parent) :
     ui->lineEdit_45->installEventFilter(this);
     ui->lineEdit_42->installEventFilter(this);
     ui->lineEdit_50->installEventFilter(this);
+    ui->lineEdit_4->installEventFilter(this);
+    ui->lineEdit_39->installEventFilter(this);
+    ui->lineEdit_55->installEventFilter(this);
+    ui->lineEdit_37->installEventFilter(this);
+    ui->lineEdit_156->installEventFilter(this);
     this->installEventFilter(this);
+    QFuture<void> f1 = QtConcurrent::run(this, &ConversorUD::Divisa);
 }
 
 ConversorUD::~ConversorUD()
@@ -680,6 +697,56 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         {
             ui->lineEdit_50->setFocus();
             ui->lineEdit_50->selectAll();
+            return true;
+        }
+        return false;
+    }
+    if (obj == ui->lineEdit_4)
+    {
+        if (event->type() == QEvent::MouseButtonPress)
+        {
+            ui->lineEdit_4->setFocus();
+            ui->lineEdit_4->selectAll();
+            return true;
+        }
+        return false;
+    }
+    if (obj == ui->lineEdit_39)
+    {
+        if (event->type() == QEvent::MouseButtonPress)
+        {
+            ui->lineEdit_39->setFocus();
+            ui->lineEdit_39->selectAll();
+            return true;
+        }
+        return false;
+    }
+    if (obj == ui->lineEdit_55)
+    {
+        if (event->type() == QEvent::MouseButtonPress)
+        {
+            ui->lineEdit_55->setFocus();
+            ui->lineEdit_55->selectAll();
+            return true;
+        }
+        return false;
+    }
+    if (obj == ui->lineEdit_37)
+    {
+        if (event->type() == QEvent::MouseButtonPress)
+        {
+            ui->lineEdit_37->setFocus();
+            ui->lineEdit_37->selectAll();
+            return true;
+        }
+        return false;
+    }
+    if (obj == ui->lineEdit_156)
+    {
+        if (event->type() == QEvent::MouseButtonPress)
+        {
+            ui->lineEdit_156->setFocus();
+            ui->lineEdit_156->selectAll();
             return true;
         }
         return false;
@@ -5090,1787 +5157,6 @@ void ConversorUD::on_comboBox_30_activated(const QString &arg1)
     Reprobar("Ancho banda");
 }
 
-void ConversorUD::on_pushButton_2_clicked()
-{
-    ui->lineEdit->setText("");
-    ui->lineEdit_2->setText("");
-    ui->lineEdit_46->setToolTip("");
-    ui->lineEdit_3->setText("");
-    ui->lineEdit_4->setText("");
-    ui->lineEdit_7->setText("");
-    ui->lineEdit_8->setText("");
-    ui->lineEdit_9->setText("");
-    ui->lineEdit_10->setText("");
-    ui->lineEdit_11->setText("");
-    ui->lineEdit_12->setText("");
-    ui->lineEdit_13->setText("");
-    ui->lineEdit_14->setText("");
-    ui->lineEdit_15->setText("");
-    ui->lineEdit_16->setText("");
-    ui->lineEdit_17->setText("");
-    ui->lineEdit_18->setText("");
-    ui->lineEdit_19->setText("");
-    ui->lineEdit_20->setText("");
-    ui->lineEdit_21->setText("");
-    ui->lineEdit_22->setText("");
-    ui->lineEdit_23->setText("");
-    ui->lineEdit_24->setText("");
-    ui->lineEdit_25->setText("");
-    ui->lineEdit_26->setText("");
-    ui->lineEdit_5->setText("");
-    ui->lineEdit_6->setText("");
-    AmortizacionP = 0;
-    ui->lineEdit_27->setText("");
-    ui->lineEdit_28->setText("");
-    ui->lineEdit_29->setText("");
-    ui->lineEdit_30->setText("");
-    ui->lineEdit_31->setText("");
-    ui->lineEdit_32->setText("");
-    ui->lineEdit_33->setText("");
-    ui->lineEdit_34->setText("");
-    ui->lineEdit_35->setText("");
-    ui->lineEdit_46->setText("");
-    ui->lineEdit_46->setToolTip("");
-    ui->lineEdit_47->setText("");
-    ui->label_14->setText("");
-    ui->label_15->setText("");
-    ui->textEdit->setText("");
-    ui->textEdit_2->setText("");
-    ui->lineEdit_40->setText("");
-    ui->lineEdit_41->setText("");
-    ui->lineEdit_41->setToolTip("");
-    ui->lineEdit_45->setText("");
-    ui->lineEdit_44->setText("");
-    ui->lineEdit_45->setToolTip("");
-    ui->lineEdit_42->setText("");
-    ui->lineEdit_43->setText("");
-    ui->lineEdit_43->setToolTip("");
-    ui->lineEdit_50->setText("");
-    ui->lineEdit_52->setText("");
-    ui->lineEdit_52->setToolTip("");
-    int Borrado, x;
-    Borrado = ui->tableWidget->rowCount();
-    for(x=0;x<Borrado;x++)
-    {
-         ui->tableWidget->removeRow(x);
-         x=x-1;
-         Borrado=Borrado-1;
-    }
-}
-
-void ConversorUD::on_comboBox_3_activated(const QString &arg1)
-{
-    Decimales = arg1.toInt();
-    if (ui->lineEdit->text() == "")
-    {
-        ui->lineEdit_2->setText("");
-        ui->lineEdit_2->setToolTip("");
-    }
-    else
-    {
-        QString Valor = ui->comboBox->currentText();
-        double Cantidad = ui->lineEdit->text().toFloat();
-        double Resto = Referencia(Valor,"Longitud");
-        QString Valor1 = ui->comboBox_2->currentText();
-        double Resto1 = Referencia(Valor1,"Longitud");
-        if (Valor == Valor1)
-        {
-            double ValorF = Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_2->setText(Zero);
-            ui->lineEdit_2->setToolTip(Zero);
-        }
-        else
-        {
-            double ValorF = (Resto/Resto1)*Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_2->setText(Zero);
-            ui->lineEdit_2->setToolTip(Zero);
-        }
-    }
-    if (ui->lineEdit_47->text() == "")
-    {
-        ui->lineEdit_46->setText("");
-        ui->lineEdit_46->setToolTip("");
-    }
-    else
-    {
-        QString Valor = ui->comboBox_26->currentText();
-        double Cantidad = ui->lineEdit_47->text().toFloat();
-        double Resto = Referencia(Valor,"Aceleracion");
-        QString Valor1 = ui->comboBox_27->currentText();
-        double Resto1 = Referencia(Valor1,"Aceleracion");
-        if (Valor == Valor1)
-        {
-            double ValorF = Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_46->setText(Zero);
-            ui->lineEdit_46->setToolTip(Zero);
-        }
-        else
-        {
-            double ValorF = (Resto1/Resto)*Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_46->setText(Zero);
-            ui->lineEdit_46->setToolTip(Zero);
-        }
-    }
-    if (ui->lineEdit_40->text() == "")
-    {
-        ui->lineEdit_41->setText("");
-        ui->lineEdit_41->setToolTip("");
-    }
-    else
-    {
-        QString Valor = ui->comboBox_19->currentText();
-        double Cantidad = ui->lineEdit_40->text().toFloat();
-        double Resto = Referencia(Valor,"Almacenamiento");
-        QString Valor1 = ui->comboBox_20->currentText();
-        double Resto1 = Referencia(Valor1,"Almacenamiento");
-        if (Valor == Valor1)
-        {
-            double ValorF = Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_41->setText(Zero);
-            ui->lineEdit_41->setToolTip(Zero);
-        }
-        else
-        {
-            double ValorF = (Resto1/Resto)*Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_41->setText(Zero);
-            ui->lineEdit_41->setToolTip(Zero);
-        }
-    }
-    if (ui->lineEdit_45->text() == "")
-    {
-        ui->lineEdit_44->setText("");
-        ui->lineEdit_44->setToolTip("");
-    }
-    else
-    {
-        QString Valor = ui->comboBox_24->currentText();
-        double Cantidad = ui->lineEdit_45->text().toFloat();
-        double Resto = Referencia(Valor,"Ancho banda");
-        QString Valor1 = ui->comboBox_30->currentText();
-        double Resto1 = Referencia(Valor1,"Ancho banda");
-        if (Valor == Valor1)
-        {
-            double ValorF = Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_44->setText(Zero);
-            ui->lineEdit_44->setToolTip(Zero);
-        }
-        else
-        {
-            double ValorF = (Resto1/Resto)*Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_44->setText(Zero);
-            ui->lineEdit_44->setToolTip(Zero);
-        }
-    }
-    if (ui->lineEdit_42->text() == "")
-    {
-        ui->lineEdit_43->setText("");
-        ui->lineEdit_43->setToolTip("");
-    }
-    else
-    {
-        QString Valor = ui->comboBox_21->currentText();
-        double Cantidad = ui->lineEdit_42->text().toFloat();
-        double Resto = Referencia(Valor,"Ancho banda");
-        QString Valor1 = ui->comboBox_22->currentText();
-        double Resto1 = Referencia(Valor1,"Ancho banda");
-        if (Valor == Valor1)
-        {
-            double ValorF = Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_43->setText(Zero);
-            ui->lineEdit_43->setToolTip(Zero);
-        }
-        else
-        {
-            double ValorF = (Resto1/Resto)*Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_43->setText(Zero);
-            ui->lineEdit_43->setToolTip(Zero);
-        }
-    }
-    if (ui->label_14->text().contains(tr("Distancia o Longitud")))
-        Reprobar("Longitud");
-    if (ui->label_14->text().contains(tr("Aceleracion")))
-        Reprobar("Aceleracion");
-    if (ui->label_14->text().contains(tr("Almacenamiento")))
-        Reprobar("Almacenamiento");
-    if (ui->label_14->text().contains(tr("Ancho de banda")))
-        Reprobar("Ancho banda");
-    if (ui->label_14->text().contains(tr("Angulo")))
-        Reprobar("Angulo");
-}
-
-void ConversorUD::on_comboBox_25_activated(const QString &arg1)
-{
-    ui->label_14->setText("");
-    ui->label_15->setText("");
-    ui->textEdit->setText("");
-    ui->textEdit_2->setText("");
-    if (arg1 == tr("Aceleracion"))
-    {
-        ui->tabWidget->setCurrentPage(0);
-        ui->lineEdit_47->setFocus();
-    }
-    if (arg1 == tr("Distancia o Longitud"))
-    {
-        ui->tabWidget->setCurrentPage(0);
-        ui->lineEdit->setFocus();
-    }
-    if (arg1 == tr("Almacenamiento de datos"))
-    {
-        ui->tabWidget->setCurrentPage(1);
-        ui->lineEdit_40->setFocus();
-    }
-    if (arg1 == tr("Ancho de banda"))
-    {
-        ui->tabWidget->setCurrentPage(1);
-        ui->lineEdit_45->setFocus();
-    }
-    if (arg1 == tr("Angulo"))
-    {
-        ui->tabWidget->setCurrentPage(1);
-        ui->lineEdit_42->setFocus();
-    }
-    if (arg1 == tr("Sistema de numeracion"))
-    {
-        ui->tabWidget->setCurrentPage(0);
-        ui->lineEdit_12->setFocus();
-    }
-}
-
-void ConversorUD::Reprobar(QString Tipo)
-{
-    ui->label_14->setText("");
-    ui->label_15->setText("");
-    ui->textEdit->setText("");
-    ui->textEdit_2->setText("");
-    if (Tipo == "Longitud")
-    {
-        QString Value = ui->comboBox->currentText();
-        double Cantidad = ui->lineEdit->text().toFloat();
-        double Resto = Referencia(Value,"Longitud");
-        Unidad(Resto,0.0000000001,Cantidad,tr("Angstrom (Å)"),"Longitud");
-        Unidad1(Resto,0.0000000001,Cantidad,tr("Angstrom (Å)"),"Longitud");
-        Unidad(Resto,0.000000001,Cantidad,tr("Nanometro (nm)"),"Longitud");
-        Unidad1(Resto,0.000000001,Cantidad,tr("Nanometro (nm)"),"Longitud");
-        Unidad(Resto,0.000001,Cantidad,tr("Micrometro (µm)"),"Longitud");
-        Unidad1(Resto,0.00001,Cantidad,tr("Micrometro (µm)"),"Longitud");
-        Unidad(Resto,0.001,Cantidad,tr("Milimetro (mm)"),"Longitud");
-        Unidad1(Resto,0.001,Cantidad,tr("Milimetro (mm)"),"Longitud");
-        Unidad(Resto,0.01,Cantidad,tr("Centimetro (cm)"),"Longitud");
-        Unidad1(Resto,0.01,Cantidad,tr("Centimetro (cm)"),"Longitud");
-        Unidad(Resto,0.1,Cantidad,tr("Decimetro (dm)"),"Longitud");
-        Unidad1(Resto,0.1,Cantidad,tr("Decimetro (dm)"),"Longitud");
-        Unidad(Resto,1,Cantidad,tr("Metro (m)"),"Longitud");
-        Unidad1(Resto,1,Cantidad,tr("Metro (m)"),"Longitud");
-        Unidad(Resto,10,Cantidad,tr("Decametro (dam)"),"Longitud");
-        Unidad1(Resto,10,Cantidad,tr("Decametro (dam)"),"Longitud");
-        Unidad(Resto,100,Cantidad,tr("Hectometro (hm)"),"Longitud");
-        Unidad1(Resto,100,Cantidad,tr("Hectometro (hm)"),"Longitud");
-        Unidad(Resto,1000,Cantidad,tr("Kilometro (km)"),"Longitud");
-        Unidad1(Resto,1000,Cantidad,tr("Kilometro (km)"),"Longitud");
-        Unidad(Resto,10000,Cantidad,tr("Miriametro (mam)"),"Longitud");
-        Unidad1(Resto,10000,Cantidad,tr("Miriametro (mam)"),"Longitud");
-        Unidad(Resto,4828.0320,Cantidad,tr("Legua"),"Longitud");
-        Unidad1(Resto,0.001,Cantidad,tr("Legua"),"Longitud");
-        Unidad(Resto,1609.344,Cantidad,tr("Milla (mi)"),"Longitud");
-        Unidad1(Resto,1609.344,Cantidad,tr("Milla (mi)"),"Longitud");
-        Unidad(Resto,201.168,Cantidad,tr("Estadio"),"Longitud");
-        Unidad1(Resto,201.168,Cantidad,tr("Estadio"),"Longitud");
-        Unidad(Resto,20.1168,Cantidad,tr("Cadena"),"Longitud");
-        Unidad1(Resto,20.1168,Cantidad,tr("Cadena"),"Longitud");
-        Unidad(Resto,5.0292,Cantidad,tr("Barra (rd)"),"Longitud");
-        Unidad1(Resto,5.0292,Cantidad,tr("Barra (rd)"),"Longitud");
-        Unidad(Resto,0.9144,Cantidad,tr("Yarda (yd)"),"Longitud");
-        Unidad1(Resto,0.9144,Cantidad,tr("Yarda (yd)"),"Longitud");
-        Unidad(Resto,0.3048,Cantidad,tr("Pie (ft)"),"Longitud");
-        Unidad1(Resto,0.3048,Cantidad,tr("Pie (ft)"),"Longitud");
-        Unidad(Resto,0.201168,Cantidad,tr("Link"),"Longitud");
-        Unidad1(Resto,0.201168,Cantidad,tr("Link"),"Longitud");
-        Unidad(Resto,0.1016,Cantidad,tr("Mano"),"Longitud");
-        Unidad1(Resto,0.1016,Cantidad,tr("Mano"),"Longitud");
-        Unidad(Resto,0.0254,Cantidad,tr("Pulgada (in)"),"Longitud");
-        Unidad1(Resto,0.0254,Cantidad,tr("Pulgada (in)"),"Longitud");
-        Unidad(Resto,0.00254,Cantidad,tr("Linea"),"Longitud");
-        Unidad1(Resto,0.00254,Cantidad,tr("Linea"),"Longitud");
-        Unidad(Resto,0.0000254,Cantidad,tr("Mil (mil)"),"Longitud");
-        Unidad1(Resto,0.0000254,Cantidad,tr("Mil (mil)"),"Longitud");
-        Unidad(Resto,0.0000254,Cantidad,tr("Thou (thou)"),"Longitud");
-        Unidad1(Resto,0.0000254,Cantidad,tr("Thou (thou)"),"Longitud");
-        Unidad(Resto,1852,Cantidad,tr("Milla nautica"),"Longitud");
-        Unidad1(Resto,1852,Cantidad,tr("Milla nautica"),"Longitud");
-        Unidad(Resto,1.8288,Cantidad,tr("Braza"),"Longitud");
-        Unidad1(Resto,1.8288,Cantidad,tr("Braza"),"Longitud");
-        Unidad(Resto,30857000000000000,Cantidad,tr("Parsec (pc)"),"Longitud");
-        Unidad1(Resto,30857000000000000,Cantidad,tr("Parsec (pc)"),"Longitud");
-        Unidad(Resto,9454254955488000,Cantidad,tr("Ano luz"),"Longitud");
-        Unidad1(Resto,9454254955488000,Cantidad,tr("Ano luz"),"Longitud");
-        Unidad(Resto,147597870610,Cantidad,tr("Unidad astronomica (AE)"),"Longitud");
-        Unidad1(Resto,147597870610,Cantidad,tr("Unidad astronomica (AE)"),"Longitud");
-        Unidad(Resto,17987547480,Cantidad,tr("Minuto luz"),"Longitud");
-        Unidad1(Resto,17987547480,Cantidad,tr("Minuto luz"),"Longitud");
-        Unidad(Resto,299792458,Cantidad,tr("Segundo luz"),"Longitud");
-        Unidad1(Resto,299792458,Cantidad,tr("Segundo luz"),"Longitud");
-        ui->label_14->setText(tr("Distancia o Longitud: Convertir a...")+ui->comboBox->currentText()+"");
-        ui->label_15->setText(tr("Distancia o Longitud: Convertir de...")+ui->comboBox->currentText()+"");
-    }
-    if (Tipo == "Aceleracion")
-    {
-        QString Value = ui->comboBox_26->currentText();
-        double Cantidad = ui->lineEdit_47->text().toFloat();
-        double Resto = Referencia(Value,"Aceleracion");
-        Unidad(Resto,0.01,Cantidad,tr("Metros por segundo cuadrado (m/s²)"),"Aceleracion");
-        Unidad1(Resto,0.01,Cantidad,tr("Metros por segundo cuadrado (m/s²)"),"Aceleracion");
-        Unidad(Resto,0.0328083333,Cantidad,tr("Pies por segundo cuadrado (ft/s²)"),"Aceleracion");
-        Unidad1(Resto,0.0328083333,Cantidad,tr("Pies por segundo cuadrado (ft/s²)"),"Aceleracion");
-        Unidad(Resto,1,Cantidad,tr("Gal"),"Aceleracion");
-        Unidad1(Resto,1,Cantidad,tr("Gal"),"Aceleracion");
-        Unidad(Resto,1000,Cantidad,tr("Miligal"),"Aceleracion");
-        Unidad1(Resto,1000,Cantidad,tr("Miligal"),"Aceleracion");
-        Unidad(Resto,0.0010197162,Cantidad,tr("Gravedad estandar"),"Aceleracion");
-        Unidad1(Resto,0.0010197162,Cantidad,tr("Gravedad estandar"),"Aceleracion");
-        Unidad(Resto,0.0010197162,Cantidad,tr("Almacenamiento (g)"),"Aceleracion");
-        Unidad1(Resto,0.0010197162,Cantidad,tr("Fuerza G (g)"),"Aceleracion");
-        ui->label_14->setText(tr("Aceleracion: Convertir a...")+ui->comboBox_26->currentText()+"");
-        ui->label_15->setText(tr("Aceleracion: Convertir de...")+ui->comboBox_26->currentText()+"");
-    }
-    if (Tipo == "Almacenamiento")
-    {
-        QString Value = ui->comboBox_19->currentText();
-        double Cantidad = ui->lineEdit_40->text().toFloat();
-        double Resto = Referencia(Value,"Almacenamiento");
-        Unidad(Resto,8,Cantidad,tr("Bit"),"Almacenamiento");
-        Unidad1(Resto,8,Cantidad,tr("Bit"),"Almacenamiento");
-        Unidad(Resto,2,Cantidad,tr("Nibble"),"Almacenamiento");
-        Unidad1(Resto,2,Cantidad,tr("Nibble"),"Almacenamiento");
-        Unidad(Resto,0.0078125,Cantidad,tr("Kilobit"),"Almacenamiento");
-        Unidad1(Resto,0.0078125,Cantidad,tr("Kilobit"),"Almacenamiento");
-        Unidad(Resto,0.0000076294,Cantidad,tr("Megabit"),"Almacenamiento");
-        Unidad1(Resto,0.0000076294,Cantidad,tr("Megabit"),"Almacenamiento");
-        Unidad(Resto,0.00000000074505805969,Cantidad,tr("Gigabit"),"Almacenamiento");
-        Unidad1(Resto,0.00000000074505805969,Cantidad,tr("Gigabit"),"Almacenamiento");
-        Unidad(Resto,0.00000000000072759580612,Cantidad,tr("Terabit"),"Almacenamiento");
-        Unidad1(Resto,0.00000000000072759580612,Cantidad,tr("Terabit"),"Almacenamiento");
-        Unidad(Resto,0.0000000000000007105427742,Cantidad,tr("Petabit"),"Almacenamiento");
-        Unidad1(Resto,0.0000000000000007105427742,Cantidad,tr("Petabit"),"Almacenamiento");
-        Unidad(Resto,0.000000000000000000769388942719,Cantidad,tr("Exabit"),"Almacenamiento");
-        Unidad1(Resto,0.000000000000000000769388942719,Cantidad,tr("Exabit"),"Almacenamiento");
-        Unidad(Resto,1,Cantidad,tr("Byte (B)"),"Almacenamiento");
-        Unidad1(Resto,1,Cantidad,tr("Byte (B)"),"Almacenamiento");
-        Unidad(Resto,0.0009765625,Cantidad,tr("Kilobyte (KB)"),"Almacenamiento");
-        Unidad1(Resto,0.0009765625,Cantidad,tr("Kilobyte (KB)"),"Almacenamiento");
-        Unidad(Resto,0.000000095367431641,Cantidad,tr("Megabyte (MB)"),"Almacenamiento");
-        Unidad1(Resto,0.000000095367431641,Cantidad,tr("Megabyte (MB)"),"Almacenamiento");
-        Unidad(Resto,0.000000000093132257462,Cantidad,tr("Gigabyte (GB)"),"Almacenamiento");
-        Unidad1(Resto,0.000000000093132257462,Cantidad,tr("Gigabyte (GB)"),"Almacenamiento");
-        Unidad(Resto,0.000000000000090949478149,Cantidad,tr("Terabyte (TB)"),"Almacenamiento");
-        Unidad1(Resto,0.000000000000090949478149,Cantidad,tr("Terabyte (TB)"),"Almacenamiento");
-        Unidad(Resto,0.000000000000000088817853928,Cantidad,tr("Petabyte (PB)"),"Almacenamiento");
-        Unidad1(Resto,0.000000000000000088817853928,Cantidad,tr("Petabyte (PB)"),"Almacenamiento");
-        Unidad(Resto,0.000000000000000000086736183167,Cantidad,tr("Exabyte (EB)"),"Almacenamiento");
-        Unidad1(Resto,0.000000000000000000086736183167,Cantidad,tr("Exabyte (EB)"),"Almacenamiento");
-        ui->label_14->setText(tr("Almacenamiento: Convertir a...")+ui->comboBox_19->currentText()+"");
-        ui->label_15->setText(tr("Almacenamiento: Convertir de...")+ui->comboBox_19->currentText()+"");
-    }
-    if (Tipo == "Ancho banda")
-    {
-        QString Value = ui->comboBox_24->currentText();
-        double Cantidad = ui->lineEdit_45->text().toFloat();
-        double Resto = Referencia(Value,"Ancho banda");
-        Unidad(Resto,8000000000,Cantidad,tr("Bit por segundo (bit/s)"),"Ancho banda");
-        Unidad1(Resto,8000000000,Cantidad,tr("Bit por segundo (bit/s)"),"Ancho banda");
-        Unidad(Resto,8000000,Cantidad,tr("Kilobit por segundo (kbit/s)"),"Ancho banda");
-        Unidad1(Resto,8000000,Cantidad,tr("Kilobit por segundo (kbit/s)"),"Ancho banda");
-        Unidad(Resto,8000,Cantidad,tr("Megabit por segundo (Mbit/s)"),"Ancho banda");
-        Unidad1(Resto,8000,Cantidad,tr("Megabit por segundo (Mbit/s)"),"Ancho banda");
-        Unidad(Resto,8,Cantidad,tr("Gigabit por segundo (Gbit/s)"),"Ancho banda");
-        Unidad1(Resto,8,Cantidad,tr("Gigabit por segundo (Gbit/s)"),"Ancho banda");
-        Unidad(Resto,0.008,Cantidad,tr("Terabit por segundo (Tbit/s)"),"Ancho banda");
-        Unidad1(Resto,0.008,Cantidad,tr("Terabit por segundo (Tbit/s)"),"Ancho banda");
-        Unidad(Resto,7812500,Cantidad,tr("Kibibit por segundo (Kibit/s)"),"Ancho banda");
-        Unidad1(Resto,7812500,Cantidad,tr("Kibibit por segundo (Kibit/s)"),"Ancho banda");
-        Unidad(Resto,0.0000078125,Cantidad,tr("Mebibit por segundo (Mibit/s)"),"Ancho banda");
-        Unidad1(Resto,0.0000078125,Cantidad,tr("Mebibit por segundo (Mibit/s)"),"Ancho banda");
-        Unidad(Resto,7.4505806,Cantidad,tr("Gibibit por segundo (Gibit/s)"),"Ancho banda");
-        Unidad1(Resto,7.4505806,Cantidad,tr("Gibibit por segundo (Gibit/s)"),"Ancho banda");
-        Unidad(Resto,0.00727596,Cantidad,tr("Tebibit por segundo (Tibit/s)"),"Ancho banda");
-        Unidad1(Resto,0.00727596,Cantidad,tr("Tebibit por segundo (Tibit/s)"),"Ancho banda");
-        Unidad(Resto,1000000000,Cantidad,tr("Byte por segundo (B/s)"),"Ancho banda");
-        Unidad1(Resto,1000000000,Cantidad,tr("Byte por segundo (B/s)"),"Ancho banda");
-        Unidad(Resto,1000000,Cantidad,tr("Kilobyte por segundo (kB/s)"),"Ancho banda");
-        Unidad1(Resto,1000000,Cantidad,tr("Kilobyte por segundo (kB/s)"),"Ancho banda");
-        Unidad(Resto,1000,Cantidad,tr("Megabyte por segundo (MB/s)"),"Ancho banda");
-        Unidad1(Resto,1000,Cantidad,tr("Megabyte por segundo (MB/s)"),"Ancho banda");
-        Unidad(Resto,1,Cantidad,tr("Gigabyte por segundo (GB/s)"),"Ancho banda");
-        Unidad1(Resto,1,Cantidad,tr("Gigabyte por segundo (GB/s)"),"Ancho banda");
-        Unidad(Resto,0.001,Cantidad,tr("Terabyte por segundo (TB/s)"),"Ancho banda");
-        Unidad1(Resto,0.001,Cantidad,tr("Terabyte por segundo (TB/s)"),"Ancho banda");
-        Unidad(Resto,976562.5,Cantidad,tr("Kibibyte por segundo (KiB/s)"),"Ancho banda");
-        Unidad1(Resto,976562.5,Cantidad,tr("Kibibyte por segundo (KiB/s)"),"Ancho banda");
-        Unidad(Resto,953.67431641,Cantidad,tr("Mebibyte por segundo (MiB/s)"),"Ancho banda");
-        Unidad1(Resto,953.67431641,Cantidad,tr("Mebibyte por segundo (MiB/s)"),"Ancho banda");
-        Unidad(Resto,0.93132257,Cantidad,tr("Gibibyte por segundo (GiB/s)"),"Ancho banda");
-        Unidad1(Resto,0.93132257,Cantidad,tr("Gibibyte por segundo (GiB/s)"),"Ancho banda");
-        Unidad(Resto,0.00090949,Cantidad,tr("Tebibyte por segundo (TiB/s)"),"Ancho banda");
-        Unidad1(Resto,0.00090949,Cantidad,tr("Tebibyte por segundo (TiB/s)"),"Ancho banda");
-        Unidad(Resto,2880000000000,Cantidad,tr("Bit por hora"),"Ancho banda");
-        Unidad1(Resto,2880000000000,Cantidad,tr("Bit por hora"),"Ancho banda");
-        Unidad(Resto,28800000000,Cantidad,tr("Kilobit por hora"),"Ancho banda");
-        Unidad1(Resto,28800000000,Cantidad,tr("Kilobit por hora"),"Ancho banda");
-        Unidad(Resto,2880000,Cantidad,tr("Megabit por hora"),"Ancho banda");
-        Unidad1(Resto,2880000,Cantidad,tr("Megabit por hora"),"Ancho banda");
-        Unidad(Resto,28800,Cantidad,tr("Gigabit por hora"),"Ancho banda");
-        Unidad1(Resto,28800,Cantidad,tr("Gigabit por hora"),"Ancho banda");
-        Unidad(Resto,28.8,Cantidad,tr("Terabit por hora"),"Ancho banda");
-        Unidad1(Resto,28.8,Cantidad,tr("Terabit por hora"),"Ancho banda");
-        Unidad(Resto,28125000000,Cantidad,tr("Kibibit por hora"),"Ancho banda");
-        Unidad1(Resto,28125000000,Cantidad,tr("Kibibit por hora"),"Ancho banda");
-        Unidad(Resto,27465820.3,Cantidad,tr("Mebibit por hora"),"Ancho banda");
-        Unidad1(Resto,27465820.3,Cantidad,tr("Mebibit por hora"),"Ancho banda");
-        Unidad(Resto,26822.0901,Cantidad,tr("Gibibit por hora"),"Ancho banda");
-        Unidad1(Resto,26822.0901,Cantidad,tr("Gibibit por hora"),"Ancho banda");
-        Unidad(Resto,26.19344741,Cantidad,tr("Tebibit por hora"),"Ancho banda");
-        Unidad1(Resto,26.19344741,Cantidad,tr("Tebibit por hora"),"Ancho banda");
-        Unidad(Resto,3600000000000,Cantidad,tr("Byte por hora"),"Ancho banda");
-        Unidad1(Resto,3600000000000,Cantidad,tr("Byte por hora"),"Ancho banda");
-        Unidad(Resto,3600000000,Cantidad,tr("Kilobyte por hora"),"Ancho banda");
-        Unidad1(Resto,3600000000,Cantidad,tr("Kilobyte por hora"),"Ancho banda");
-        Unidad(Resto,3600000,Cantidad,tr("Megabyte por hora"),"Ancho banda");
-        Unidad1(Resto,3600000,Cantidad,tr("Megabyte por hora"),"Ancho banda");
-        Unidad(Resto,3600,Cantidad,tr("Gigabyte por hora"),"Ancho banda");
-        Unidad1(Resto,3600,Cantidad,tr("Gigabyte por hora"),"Ancho banda");
-        Unidad(Resto,3.6,Cantidad,tr("Terabyte por hora"),"Ancho banda");
-        Unidad1(Resto,3.6,Cantidad,tr("Terabyte por hora"),"Ancho banda");
-        Unidad(Resto,3515625000,Cantidad,tr("Kibibyte por hora"),"Ancho banda");
-        Unidad1(Resto,3516625000,Cantidad,tr("Kibibyte por hora"),"Ancho banda");
-        Unidad(Resto,3433227.54,Cantidad,tr("Mebibyte por hora"),"Ancho banda");
-        Unidad1(Resto,3433227.54,Cantidad,tr("Mebibyte por hora"),"Ancho banda");
-        Unidad(Resto,3352.76127,Cantidad,tr("Gibibyte por hora"),"Ancho banda");
-        Unidad1(Resto,3352.76127,Cantidad,tr("Gibibyte por hora"),"Ancho banda");
-        Unidad(Resto,3.27418093,Cantidad,tr("Tebibyte por hora"),"Ancho banda");
-        Unidad1(Resto,3.27418093,Cantidad,tr("Tebibyte por hora"),"Ancho banda");
-        Unidad(Resto,69120000000000,Cantidad,tr("Bit por dia"),"Ancho banda");
-        Unidad1(Resto,69120000000000,Cantidad,tr("Bit por dia"),"Ancho banda");
-        Unidad(Resto,691200000000,Cantidad,tr("Kilobit por dia"),"Ancho banda");
-        Unidad1(Resto,691200000000,Cantidad,tr("Kilobit por dia"),"Ancho banda");
-        Unidad(Resto,691200000,Cantidad,tr("Megabit por dia"),"Ancho banda");
-        Unidad1(Resto,691200000,Cantidad,tr("Megabit por dia"),"Ancho banda");
-        Unidad(Resto,691200,Cantidad,tr("Gigabit por dia"),"Ancho banda");
-        Unidad1(Resto,691200,Cantidad,tr("Gigabit por dia"),"Ancho banda");
-        Unidad(Resto,691.2,Cantidad,tr("Terabit por dia"),"Ancho banda");
-        Unidad1(Resto,691.2,Cantidad,tr("Terabit por dia"),"Ancho banda");
-        Unidad(Resto,675000000000,Cantidad,tr("Kibibit por dia"),"Ancho banda");
-        Unidad1(Resto,675000000000,Cantidad,tr("Kibibit por dia"),"Ancho banda");
-        Unidad(Resto,659179687.5,Cantidad,tr("Mebibit por dia"),"Ancho banda");
-        Unidad1(Resto,659179687.5,Cantidad,tr("Mebibit por dia"),"Ancho banda");
-        Unidad(Resto,643730.164,Cantidad,tr("Gibibit por dia"),"Ancho banda");
-        Unidad1(Resto,643730.164,Cantidad,tr("Gibibit por dia"),"Ancho banda");
-        Unidad(Resto,628.64273787,Cantidad,tr("Tebibit por dia"),"Ancho banda");
-        Unidad1(Resto,628.64273787,Cantidad,tr("Tebibit por dia"),"Ancho banda");
-        Unidad(Resto,8640000000000,Cantidad,tr("Byte por dia"),"Ancho banda");
-        Unidad1(Resto,8640000000000,Cantidad,tr("Byte por dia"),"Ancho banda");
-        Unidad(Resto,86400000000,Cantidad,tr("Kilobyte por dia"),"Ancho banda");
-        Unidad1(Resto,86400000000,Cantidad,tr("Kilobyte por dia"),"Ancho banda");
-        Unidad(Resto,86400000,Cantidad,tr("Megabyte por dia"),"Ancho banda");
-        Unidad1(Resto,86400000,Cantidad,tr("Megabyte por dia"),"Ancho banda");
-        Unidad(Resto,86400,Cantidad,tr("Gigabyte por dia"),"Ancho banda");
-        Unidad1(Resto,86400,Cantidad,tr("Gigabyte por dia"),"Ancho banda");
-        Unidad(Resto,86.4,Cantidad,tr("Terabyte por dia"),"Ancho banda");
-        Unidad1(Resto,86.4,Cantidad,tr("Terabyte por dia"),"Ancho banda");
-        Unidad(Resto,84375000000,Cantidad,tr("Kibibyte por dia"),"Ancho banda");
-        Unidad1(Resto,84375000000,Cantidad,tr("Kibibyte por dia"),"Ancho banda");
-        Unidad(Resto,82397460.9,Cantidad,tr("Mebibyte por dia"),"Ancho banda");
-        Unidad1(Resto,82397460.9,Cantidad,tr("Mebibyte por dia"),"Ancho banda");
-        Unidad(Resto,80466.2704,Cantidad,tr("Gibibyte por dia"),"Ancho banda");
-        Unidad1(Resto,80466.2704,Cantidad,tr("Gibibyte por dia"),"Ancho banda");
-        Unidad(Resto,78.58034223,Cantidad,tr("Tebibyte por dia"),"Ancho banda");
-        Unidad1(Resto,78.58034223,Cantidad,tr("Tebibyte por dia"),"Ancho banda");
-        ui->label_14->setText(tr("Ancho de banda: Convertir a...")+ui->comboBox_24->currentText()+"");
-        ui->label_15->setText(tr("Ancho de banda: Convertir de...")+ui->comboBox_24->currentText()+"");
-    }
-    if (Tipo == "Angulo")
-    {
-        QString Value = ui->comboBox_21->currentText();
-        double Cantidad = ui->lineEdit_42->text().toFloat();
-        double Resto = Referencia(Value,"Angulo");
-        Unidad(Resto,360,Cantidad,tr("Grado sexagesimal"),"Angulo");
-        Unidad1(Resto,360,Cantidad,tr("Grado sexagesimal"),"Angulo");
-        Unidad(Resto,6.2831853072,Cantidad,tr("Radian"),"Angulo");
-        Unidad1(Resto,6.2831853072,Cantidad,tr("Radian)"),"Angulo");
-        Unidad(Resto,1,Cantidad,tr("Circulo"),"Angulo");
-        Unidad1(Resto,1,Cantidad,tr("Circulo"),"Angulo");
-        Unidad(Resto,1,Cantidad,tr("Giro"),"Angulo");
-        Unidad1(Resto,1,Cantidad,tr("Giro"),"Angulo");
-        Unidad(Resto,1,Cantidad,tr("Ciclo"),"Angulo");
-        Unidad1(Resto,1,Cantidad,tr("Ciclo"),"Angulo");
-        Unidad(Resto,1,Cantidad,tr("Rotacion"),"Angulo");
-        Unidad1(Resto,1,Cantidad,tr("Rotacion"),"Angulo");
-        Unidad(Resto,1,Cantidad,tr("Revolucion"),"Angulo");
-        Unidad1(Resto,1,Cantidad,tr("Revolucion"),"Angulo");
-        Unidad(Resto,4,Cantidad,tr("Angulo recto"),"Angulo");
-        Unidad1(Resto,4,Cantidad,tr("Angulo recto"),"Angulo");
-        Unidad(Resto,6400,Cantidad,tr("Milesimal (OTAN)"),"Angulo");
-        Unidad1(Resto,6400,Cantidad,tr("Milesimal (OTAN)"),"Angulo");
-        Unidad(Resto,6000,Cantidad,tr("Milesimal (Union Sovietica)"),"Angulo");
-        Unidad1(Resto,6000,Cantidad,tr("Milesimal (Union Sovietica)"),"Angulo");
-        Unidad(Resto,6300,Cantidad,tr("Milesimal (Suecia)"),"Angulo");
-        Unidad1(Resto,6300,Cantidad,tr("Milesimal (Suecia)"),"Angulo");
-        Unidad(Resto,400,Cantidad,tr("Grado centesimal"),"Angulo");
-        Unidad1(Resto,400,Cantidad,tr("Grado centesimal"),"Angulo");
-        Unidad(Resto,400,Cantidad,tr("Gon"),"Angulo");
-        Unidad1(Resto,400,Cantidad,tr("Gon"),"Angulo");
-        Unidad(Resto,32,Cantidad,tr("Punto"),"Angulo");
-        Unidad1(Resto,32,Cantidad,tr("Punto"),"Angulo");
-        Unidad(Resto,24,Cantidad,tr("Angulo horario"),"Angulo");
-        Unidad1(Resto,24,Cantidad,tr("Angulo horario"),"Angulo");
-        ui->label_14->setText(tr("Angulo: Convertir a...")+ui->comboBox_21->currentText()+"");
-        ui->label_15->setText(tr("Angulo: Convertir de...")+ui->comboBox_21->currentText()+"");
-    }
-}
-
-double ConversorUD::Referencia(QString Value,QString Tipo)
-{
-    double Valor;
-    if (Tipo == "Longitud")
-    {
-        if (Value == tr("Angstrom (Å)"))
-            Valor = 0.0000000001;
-        if (Value == tr("Nanometro (nm)"))
-            Valor = 0.000000001;
-        if (Value == tr("Micrometro (µm)"))
-            Valor = 0.000001;
-        if (Value == tr("Milimetro (mm)"))
-            Valor = 0.001;
-        if (Value == tr("Centimetro (cm)"))
-            Valor = 0.01;
-        if (Value == tr("Decimetro (dm)"))
-            Valor = 0.1;
-        if (Value == tr("Metro (m)"))
-            Valor = 1;
-        if (Value == tr("Decametro (dam)"))
-            Valor = 10;
-        if (Value == tr("Hectometro (hm)"))
-            Valor = 100;
-        if (Value == tr("Kilometro (km)"))
-            Valor = 1000;
-        if (Value == tr("Miriametro (mam)"))
-            Valor = 10000;
-        if (Value == tr("Legua"))
-            Valor = 4828.032;
-        if (Value == tr("Milla (mi)"))
-            Valor = 1609.344;
-        if (Value == tr("Estadio"))
-            Valor = 201.168;
-        if (Value == tr("Cadena"))
-            Valor = 20.1168;
-        if (Value == tr("Barra (rd)"))
-            Valor = 5.0292;
-        if (Value == tr("Yarda (yd)"))
-            Valor = 0.9144;
-        if (Value == tr("Pie (ft)"))
-            Valor = 0.3048;
-        if (Value == tr("Link"))
-            Valor = 0.201168;
-        if (Value == tr("Mano"))
-            Valor = 0.1016;
-        if (Value == tr("Pulgada (in)"))
-            Valor = 0.0254;
-        if (Value == tr("Linea"))
-            Valor = 0.00254;
-        if (Value == tr("Mil (mil)"))
-            Valor = 0.0000254;
-        if (Value == tr("Thou (thou)"))
-            Valor = 0.0000254;
-        if (Value == tr("Milla nautica"))
-            Valor = 1852;
-        if (Value == tr("Braza"))
-            Valor = 1.8288;
-        if (Value == tr("Parsec (pc)"))
-            Valor = 30857000000000000;
-        if (Value == tr("Ano luz"))
-            Valor = 9454254955488000;
-        if (Value == tr("Unidad astronomica (AE)"))
-            Valor = 147597870610;
-        if (Value == tr("Minuto luz"))
-            Valor = 17987547480;
-        if (Value == tr("Segundo luz"))
-            Valor = 299792458;
-    }
-    if (Tipo == "Aceleracion")
-    {
-        if (Value == tr("Metros por segundo cuadrado (m/s²)"))
-            Valor = 0.01;
-        if (Value == tr("Pies por segundo cuadrado (ft/s²)"))
-            Valor = 0.0328083333;
-        if (Value == tr("Gal"))
-            Valor = 1;
-        if (Value == tr("Miligal"))
-            Valor = 1000;
-        if (Value == tr("Gravedad estandar"))
-            Valor = 0.0010197162;
-        if (Value == tr("Fuerza G (g)"))
-            Valor = 0.0010197162;
-    }
-    if (Tipo == "Almacenamiento")
-    {
-        if (Value == tr("Bit"))
-            Valor = 8;
-        if (Value == tr("Nibble"))
-            Valor = 2;
-        if (Value == tr("Kilobit"))
-            Valor = 0.0078125;
-        if (Value == tr("Megabit"))
-            Valor = 0.0000076294;
-        if (Value == tr("Gigabit"))
-            Valor = 0.00000000074505805969;
-        if (Value == tr("Terabit"))
-            Valor = 0.00000000000072759580612;
-        if (Value == tr("Petabit"))
-            Valor = 0.0000000000000007105427742;
-        if (Value == tr("Exabit"))
-            Valor = 0.000000000000000000769388942719;
-        if (Value == tr("Byte (B)"))
-            Valor = 1;
-        if (Value == tr("Kilobyte (KB)"))
-            Valor = 0.0009765625;
-        if (Value == tr("Megabyte (MB)"))
-            Valor = 0.000000095367431641;
-        if (Value == tr("Gigabyte (GB)"))
-            Valor = 0.000000000093132257462;
-        if (Value == tr("Terabyte (TB)"))
-            Valor = 0.000000000000090949478149;
-        if (Value == tr("Petabyte (PB)"))
-            Valor = 0.000000000000000088817853928;
-        if (Value == tr("Exabyte (EB)"))
-            Valor = 0.000000000000000000086736183167;
-    }
-    if (Tipo == "Ancho banda")
-    {
-        if (Value == tr("Bit por segundo (bit/s)"))
-            Valor = 8000000000;
-        if (Value == tr("Kilobit por segundo (kbit/s)"))
-            Valor = 8000000;
-        if (Value == tr("Megabit por segundo (Mbit/s)"))
-            Valor = 8000;
-        if (Value == tr("Gigabit por segundo (Gbit/s)"))
-            Valor = 8;
-        if (Value == tr("Terabit por segundo (Tbit/s)"))
-            Valor = 0.008;
-        if (Value == tr("Kibibit por segundo (Kibit/s)"))
-            Valor = 7812500;
-        if (Value == tr("Mebibit por segundo (Mibit/s)"))
-            Valor = 0.0000078125;
-        if (Value == tr("Gibibit por segundo (Gibit/s"))
-            Valor = 7.4505806;
-        if (Value == tr("Tebibit por segundo (Tibit/s)"))
-            Valor = 0.00727596;
-        if (Value == tr("Byte por segundo (B/s)"))
-            Valor = 1000000000;
-        if (Value == tr("Kilobyte por segundo (kB/s)"))
-            Valor = 1000000;
-        if (Value == tr("Megabyte por segundo (MB/s)"))
-            Valor = 1000;
-        if (Value == tr("Gigabyte por segundo (GB/s)"))
-            Valor = 1;
-        if (Value == tr("Terabyte por segundo (TB/s)"))
-            Valor = 0.001;
-        if (Value == tr("Kibibyte por segundo (KiB/s)"))
-            Valor = 976562.5;
-        if (Value == tr("Mebibyte por segundo (MiB/s)"))
-            Valor = 953.67431641;
-        if (Value == tr("Gibibyte por segundo (GiB/s)"))
-            Valor = 0.93132257;
-        if (Value == tr("Tebibyte por segundo (TiB/s)"))
-            Valor = 0.00090949;
-        if (Value == tr("Bit por hora"))
-            Valor = 2880000000000;
-        if (Value == tr("Kilobit por hora"))
-            Valor = 28800000000;
-        if (Value == tr("Megabit por hora"))
-            Valor = 2880000;
-        if (Value == tr("Gigabit por hora"))
-            Valor = 28800;
-        if (Value == tr("Terabit por hora"))
-            Valor = 28.8;
-        if (Value == tr("Kibibit por hora"))
-            Valor = 28125000000;
-        if (Value == tr("Mebibit por hora"))
-            Valor = 27465820.3;
-        if (Value == tr("Gibibit por hora"))
-            Valor = 26822.0901;
-        if (Value == tr("Tebibit por hora"))
-            Valor = 26.19344741;
-        if (Value == tr("Byte por hora"))
-            Valor = 3600000000000;
-        if (Value == tr("Kilobyte por hora"))
-            Valor = 3600000000;
-        if (Value == tr("Megabyte por hora"))
-            Valor = 3600000;
-        if (Value == tr("Gigabyte por hora"))
-            Valor = 3600;
-        if (Value == tr("Terabyte por hora"))
-            Valor = 3.6;
-        if (Value == tr("Kibibyte por hora"))
-            Valor = 3516625000;
-        if (Value == tr("Mebibyte por hora"))
-            Valor = 3433227.54;
-        if (Value == tr("Gibibyte por hora"))
-            Valor = 3352.76127;
-        if (Value == tr("Tebibyte por hora"))
-            Valor = 3.27418093;
-        if (Value == tr("Bit por dia"))
-            Valor = 69120000000000;
-        if (Value == tr("Kilobit por dia"))
-            Valor = 691200000000;
-        if (Value == tr("Megabit por dia"))
-            Valor = 691200000;
-        if (Value == tr("Gigabit por dia"))
-            Valor = 691200;
-        if (Value == tr("Terabit por dia"))
-            Valor = 691.2;
-        if (Value == tr("Kibibit por dia"))
-            Valor = 675000000000;
-        if (Value == tr("Mebibit por dia"))
-            Valor = 659179687.5;
-        if (Value == tr("Gibibit por dia"))
-            Valor = 643730.164;
-        if (Value == tr("Tebibit por dia"))
-            Valor = 628.64273787;
-        if (Value == tr("Byte por dia"))
-            Valor = 8640000000000;
-        if (Value == tr("Kilobyte por dia"))
-            Valor = 86400000000;
-        if (Value == tr("Megabyte por dia"))
-            Valor = 86400000;
-        if (Value == tr("Gigabyte por dia"))
-            Valor = 86400;
-        if (Value == tr("Terabyte por dia"))
-            Valor = 86.4;
-        if (Value == tr("Kibibyte por dia"))
-            Valor = 84375000000;
-        if (Value == tr("Mebibyte por dia"))
-            Valor = 82397460.9;
-        if (Value == tr("Gibibyte por dia"))
-            Valor = 80466.2704;
-        if (Value == tr("Tebibyte por dia"))
-            Valor = 78.58034223;
-    }
-    if (Tipo == "Angulo")
-    {
-        if (Value == tr("Grado sexagesimal"))
-            Valor = 360;
-        if (Value == tr("Radian"))
-            Valor = 6.2831853072;
-        if (Value == tr("Circulo"))
-            Valor = 1;
-        if (Value == tr("Giro"))
-            Valor = 1;
-        if (Value == tr("Ciclo"))
-            Valor = 1;
-        if (Value == tr("Rotacion"))
-            Valor = 1;
-        if (Value == tr("Revolucion"))
-            Valor = 1;
-        if (Value == tr("Angulo recto"))
-            Valor = 4;
-        if (Value == tr("Milesimal (OTAN)"))
-            Valor = 6400;
-        if (Value == tr("Milesimal (Union Sovietica)"))
-            Valor = 6000;
-        if (Value == tr("MIlesimal (Suecia)"))
-            Valor = 6300;
-        if (Value == tr("Grado centesimal"))
-            Valor = 400;
-        if (Value == tr("Gon"))
-            Valor = 400;
-        if (Value == tr("Punto"))
-            Valor = 32;
-        if (Value == tr("Angulo horario"))
-            Valor = 24;
-    }
-    return Valor;
-}
-
-void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString Nombre, QString Base)
-{
-    if (Base == "Longitud")
-    {
-        if (ui->lineEdit->text() != "")
-        {
-            QString Zero;
-            if (ui->comboBox->currentText() == Nombre)
-            {
-                double ValorF = Cantidad;
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit->append(""+Zero+" "+ui->comboBox->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-            else
-            {
-                double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
-                if (Valor.right(1) == "0")
-                    Valor = Valor.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Valor.right(1) == ",")
-                        Valor = Valor.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Valor.right(1) == ".")
-                        Valor = Valor.remove(".");
-                }
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit->append(""+Valor+" "+ui->comboBox->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-        }
-    }
-    if (Base == "Aceleracion")
-    {
-        if (ui->lineEdit_47->text() != "")
-        {
-            QString Zero;
-            if (ui->comboBox_26->currentText() == Nombre)
-            {
-                double ValorF = Cantidad;
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit->append(""+Zero+" "+ui->comboBox_26->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-            else
-            {
-                double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
-                if (Valor.right(1) == "0")
-                    Valor = Valor.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Valor.right(1) == ",")
-                        Valor = Valor.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Valor.right(1) == ".")
-                        Valor = Valor.remove(".");
-                }
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit->append(""+Valor+" "+ui->comboBox_26->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-        }
-    }
-    if (Base == "Almacenamiento")
-    {
-        if (ui->lineEdit_40->text() != "")
-        {
-            QString Zero;
-            if (ui->comboBox_19->currentText() == Nombre)
-            {
-                double ValorF = Cantidad;
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit->append(""+Zero+" "+ui->comboBox_19->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-            else
-            {
-                double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
-                if (Valor.right(1) == "0")
-                    Valor = Valor.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Valor.right(1) == ",")
-                        Valor = Valor.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Valor.right(1) == ".")
-                        Valor = Valor.remove(".");
-                }
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit->append(""+Valor+" "+ui->comboBox_19->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-        }
-    }
-    if (Base == "Ancho banda")
-    {
-        if (ui->lineEdit_45->text() != "")
-        {
-            QString Zero;
-            if (ui->comboBox_24->currentText() == Nombre)
-            {
-                double ValorF = Cantidad;
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit->append(""+Zero+" "+ui->comboBox_24->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-            else
-            {
-                double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
-                if (Valor.right(1) == "0")
-                    Valor = Valor.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Valor.right(1) == ",")
-                        Valor = Valor.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Valor.right(1) == ".")
-                        Valor = Valor.remove(".");
-                }
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit->append(""+Valor+" "+ui->comboBox_24->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-        }
-    }
-    if (Base == "Angulo")
-    {
-        if (ui->lineEdit_42->text() != "")
-        {
-            QString Zero;
-            if (ui->comboBox_21->currentText() == Nombre)
-            {
-                double ValorF = Cantidad;
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit->append(""+Zero+" "+ui->comboBox_21->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-            else
-            {
-                double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
-                if (Valor.right(1) == "0")
-                    Valor = Valor.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Valor.right(1) == ",")
-                        Valor = Valor.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Valor.right(1) == ".")
-                        Valor = Valor.remove(".");
-                }
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit->append(""+Valor+" "+ui->comboBox_21->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-        }
-    }
-}
-void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString Nombre, QString Base)
-{
-    if (Base == "Longitud")
-    {
-        if (ui->lineEdit->text() != "")
-        {
-            QString Zero;
-            if (ui->comboBox->currentText() == Nombre)
-            {
-                double ValorF = Cantidad;
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit_2->append(""+Zero+" "+ui->comboBox->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-            else
-            {
-                double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
-                if (Valor.right(1) == "0")
-                    Valor = Valor.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Valor.right(1) == ",")
-                        Valor = Valor.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Valor.right(1) == ".")
-                        Valor = Valor.remove(".");
-                }
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit_2->append(""+Zero+" "+ui->comboBox->currentText()+tr(" son ")+Valor+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-        }
-    }
-    if (Base == "Aceleracion")
-    {
-        if (ui->lineEdit_47->text() != "")
-        {
-            QString Zero;
-            if (ui->comboBox_26->currentText() == Nombre)
-            {
-                double ValorF = Cantidad;
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_26->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-            else
-            {
-                double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
-                if (Valor.right(1) == "0")
-                    Valor = Valor.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Valor.right(1) == ",")
-                        Valor = Valor.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Valor.right(1) == ".")
-                        Valor = Valor.remove(".");
-                }
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_26->currentText()+tr(" son ")+Valor+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-        }
-    }
-    if (Base == "Almacenamiento")
-    {
-        if (ui->lineEdit_40->text() != "")
-        {
-            QString Zero;
-            if (ui->comboBox_19->currentText() == Nombre)
-            {
-                double ValorF = Cantidad;
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_19->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-            else
-            {
-                double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
-                if (Valor.right(1) == "0")
-                    Valor = Valor.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Valor.right(1) == ",")
-                        Valor = Valor.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Valor.right(1) == ".")
-                        Valor = Valor.remove(".");
-                }
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_19->currentText()+tr(" son ")+Valor+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-        }
-    }
-    if (Base == "Ancho banda")
-    {
-        if (ui->lineEdit_45->text() != "")
-        {
-            QString Zero;
-            if (ui->comboBox_24->currentText() == Nombre)
-            {
-                double ValorF = Cantidad;
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_24->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-            else
-            {
-                double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
-                if (Valor.right(1) == "0")
-                    Valor = Valor.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Valor.right(1) == ",")
-                        Valor = Valor.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Valor.right(1) == ".")
-                        Valor = Valor.remove(".");
-                }
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_24->currentText()+tr(" son ")+Valor+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-        }
-    }
-    if (Base == "Angulo")
-    {
-        if (ui->lineEdit_42->text() != "")
-        {
-            QString Zero;
-            if (ui->comboBox_21->currentText() == Nombre)
-            {
-                double ValorF = Cantidad;
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_21->currentText()+tr(" son ")+Zero+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-            else
-            {
-                double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
-                if (Valor.right(1) == "0")
-                    Valor = Valor.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Valor.right(1) == ",")
-                        Valor = Valor.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Valor.right(1) == ".")
-                        Valor = Valor.remove(".");
-                }
-                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
-                if (Idioma == "Es")
-                {
-                    if (Zero.right(1) == ",")
-                        Zero = Zero.remove(",");
-                }
-                else if (Idioma == "En")
-                {
-                    if (Zero.right(1) == ".")
-                        Zero = Zero.remove(".");
-                }
-                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_21->currentText()+tr(" son ")+Valor+" "+Nombre+"");
-                if (Log == "S")
-                {
-                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-                }
-            }
-        }
-    }
-}
-
-void ConversorUD::on_pushButton_18_clicked()
-{
-    ui->lineEdit_42->setText("");
-    ui->lineEdit_42->setFocus();
-    ui->lineEdit_43->setText("");
-    ui->lineEdit_43->setToolTip("");
-    ui->label_14->setText("");
-    ui->label_15->setText("");
-    ui->textEdit->setText("");
-    ui->textEdit_2->setText("");
-}
-
-void ConversorUD::on_lineEdit_42_returnPressed()
-{
-    ui->lineEdit_42->setFocus();
-    ui->lineEdit_42->selectAll();
-}
-
-void ConversorUD::on_lineEdit_42_textChanged(const QString &arg1)
-{
-    if (arg1 != "")
-    {
-        QString Valor = VerNum(arg1,1);
-        if (Valor == "No")
-            {
-            if (ui->lineEdit_42->text() == "")
-            {
-                ui->lineEdit_43->setText("");
-                ui->lineEdit_43->setToolTip("");
-            }
-            else
-            {
-                QString Valor = ui->comboBox_21->currentText();
-                double Cantidad = arg1.toDouble();
-                double Resto = Referencia(Valor,"Angulo");
-                QString Valor1 = ui->comboBox_22->currentText();
-                double Resto1 = Referencia(Valor1,"Angulo");
-                if (Valor == Valor1)
-                {
-                    double ValorF = Cantidad;
-                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                    if (Zero.right(1) == "0")
-                        Zero = Zero.remove(QRegExp("0+$"));
-                    if (Idioma == "Es")
-                    {
-                        if (Zero.right(1) == ",")
-                            Zero = Zero.remove(",");
-                    }
-                    else if (Idioma == "En")
-                    {
-                        if (Zero.right(1) == ".")
-                            Zero = Zero.remove(".");
-                    }
-                    ui->lineEdit_43->setText(Zero);
-                    ui->lineEdit_43->setToolTip(Zero);
-                }
-                else
-                {
-                    double ValorF = (Resto1/Resto)*Cantidad;
-                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                    if (Zero.right(1) == "0")
-                        Zero = Zero.remove(QRegExp("0+$"));
-                    if (Idioma == "Es")
-                    {
-                        if (Zero.right(1) == ",")
-                            Zero = Zero.remove(",");
-                    }
-                    else if (Idioma == "En")
-                    {
-                        if (Zero.right(1) == ".")
-                            Zero = Zero.remove(".");
-                    }
-                    ui->lineEdit_43->setText(Zero);
-                    ui->lineEdit_43->setToolTip(Zero);
-                }
-            }
-            Reprobar("Angulo");
-        }
-        else
-        {
-            QMessageBox m;
-            m.setWindowTitle(tr("Advertencia!!!"));
-            m.setText(tr("Has introducido un caracter no valido."));
-            m.exec();
-            ui->lineEdit_42->setFocus();
-            QString Resto = ui->lineEdit_42->text();
-            Resto.chop(1);
-            ui->lineEdit_42->setText(Resto);
-            return;
-        }
-    }
-}
-
-void ConversorUD::on_comboBox_21_activated(const QString &arg1)
-{
-    if (ui->lineEdit_42->text() == "")
-    {
-        ui->lineEdit_43->setText("");
-        ui->lineEdit_43->setToolTip("");
-    }
-    else
-    {
-        QString Valor = arg1;
-        double Cantidad = ui->lineEdit_42->text().toFloat();
-        double Resto = Referencia(Valor,"Angulo");
-        QString Valor1 = ui->comboBox_22->currentText();
-        double Resto1 = Referencia(Valor1,"Angulo");
-        if (Valor == Valor1)
-        {
-            double ValorF = Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_43->setText(Zero);
-            ui->lineEdit_43->setToolTip(Zero);
-        }
-        else
-        {
-            double ValorF = (Resto1/Resto)*Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_43->setText(Zero);
-            ui->lineEdit_43->setToolTip(Zero);
-        }
-    }
-    Reprobar("Angulo");
-}
-
-void ConversorUD::on_comboBox_22_activated(const QString &arg1)
-{
-    if (ui->lineEdit_42->text() == "")
-    {
-        ui->lineEdit_43->setText("");
-        ui->lineEdit_43->setToolTip("");
-    }
-    else
-    {
-        QString Valor = ui->comboBox_21->currentText();
-        double Cantidad = ui->lineEdit_42->text().toFloat();
-        double Resto = Referencia(Valor,"Angulo");
-        QString Valor1 = arg1;
-        double Resto1 = Referencia(Valor1,"Angulo");
-        if (Valor == Valor1)
-        {
-            double ValorF = Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_43->setText(Zero);
-            ui->lineEdit_43->setToolTip(Zero);
-        }
-        else
-        {
-            double ValorF = (Resto1/Resto)*Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_43->setText(Zero);
-            ui->lineEdit_43->setToolTip(Zero);
-        }
-    }
-    Reprobar("Angulo");
-}
-
 void ConversorUD::on_lineEdit_12_textChanged(const QString &arg1)
 {
     ui->label_14->setText("");
@@ -7423,6 +5709,1356 @@ QString ConversorUD::tabla(QString Valor)
     return Value;
 }
 
+void ConversorUD::on_calendarWidget_clicked(const QDate &date)
+{
+    QString Fecha, Final;
+    int Value;
+    if (Idioma == "Es")
+    {
+        Fecha = date.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Fecha = date.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_56->setText(Fecha);
+    int Diferencia;
+    if (ui->lineEdit_55->text() == "28")
+    {
+        Value = 0;
+        Diferencia = QDate::currentDate().toJulianDay() - date.toJulianDay()+Value;
+    }
+    else
+    {
+        Value = ui->lineEdit_55->text().toInt() - 28;
+        Diferencia = QDate::currentDate().toJulianDay() - (date.toJulianDay()+Value);
+    }
+    if (Diferencia >=0)
+        ui->lineEdit_54->setText(QString::number(Diferencia));
+    else
+        ui->calendarWidget->setSelectedDate(QDate::currentDate());
+    int Resto = 280-Diferencia;
+    ui->lineEdit_51->setText(QString::number(Resto));
+    int Ratio = (Diferencia * 100) / 280;
+    ui->lineEdit_53->setText(QString::number(Ratio));
+    int ValorF = 280+Value;
+    QDate FechaF = date.addDays(ValorF);
+    if (Idioma == "Es")
+    {
+        Final = FechaF.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaF.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_57->setText(Final);
+    this->Semanas();
+}
+
+void ConversorUD::on_lineEdit_55_returnPressed()
+{
+    if (ui->lineEdit_55->text() == "")
+        ui->lineEdit_55->setText("28");
+    else
+    {
+        int Valor = ui->lineEdit_55->text().toInt();
+        if (Valor < 14)
+            ui->lineEdit_55->setText("28");
+        else
+        {
+            if (Valor > 60)
+                ui->lineEdit_55->setText("28");
+            else
+            {
+                int Diferencia, Value;
+                QString Final;
+                if (ui->lineEdit_55->text() == "28")
+                {
+                    Value = 0;
+                    Diferencia = QDate::currentDate().toJulianDay() - ui->calendarWidget->selectedDate().toJulianDay()+Value;
+                }
+                else
+                {
+                    Value = ui->lineEdit_55->text().toInt() - 28;
+                    Diferencia = QDate::currentDate().toJulianDay() - (ui->calendarWidget->selectedDate().toJulianDay()+Value);
+                }
+                ui->lineEdit_54->setText(QString::number(Diferencia));
+                int Resto = 280-Diferencia;
+                ui->lineEdit_51->setText(QString::number(Resto));
+                int Ratio = (Diferencia * 100) / 280;
+                ui->lineEdit_53->setText(QString::number(Ratio));
+                int ValorF = 280+Value;
+                QDate FechaF = ui->calendarWidget->selectedDate().addDays(ValorF);
+                if (Idioma == "Es")
+                {
+                    Final = FechaF.toString("dd-MM-yyyy");
+                }
+                else if (Idioma == "En")
+                {
+                    Final = FechaF.toString("MM-dd-yyyy");
+                }
+                ui->lineEdit_57->setText(Final);
+            }
+        }
+    }
+    ui->lineEdit_55->setFocus();
+    ui->lineEdit_55->selectAll();
+    this->Semanas();
+}
+
+void ConversorUD::Semanas()
+{
+    int Value, Posicion;
+    QString Final;
+    QDate FechaS, FechaS1, FechaS2, FechaS3, FechaS4, FechaS5, FechaS6, FechaS7, FechaS8, FechaS9, FechaS10, FechaS11, FechaS12, FechaS13, FechaS14, FechaS15;
+    QDate FechaS16, FechaS17, FechaS18, FechaS19, FechaS20, FechaS21, FechaS22, FechaS23, FechaS24, FechaS25, FechaS26, FechaS27, FechaS28, FechaS29, FechaS30;
+    QDate FechaS31, FechaS32, FechaS33, FechaS34, FechaS35, FechaS36, FechaS37, FechaS38, FechaS39, FechaS40, FechaS41, FechaS42, FechaS43, FechaS44, FechaS45;
+    QDate FechaS46, FechaS47, FechaS48, FechaS49, FechaS50, FechaS51, FechaS52, FechaS53, FechaS54, FechaS55, FechaS56, FechaS57, FechaS58, FechaS59, FechaS60;
+    QDate FechaS61, FechaS62, FechaS63, FechaS64, FechaS65, FechaS66, FechaS67, FechaS68, FechaS69, FechaS70, FechaS71, FechaS72, FechaS73, FechaS74, FechaS75;
+    QDate FechaS76, FechaS77, FechaS78, FechaS79;
+    Value = ui->lineEdit_55->text().toInt() - 28;
+    Posicion = 0;
+    FechaS = ui->calendarWidget->selectedDate().addDays(Value);
+    if (Idioma == "Es")
+    {
+        Final = FechaS.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_58->setText(Final);
+    FechaS1 = FechaS.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS1.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS1.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_59->setText(Final);
+    if (FechaS1.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_2->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS2 = FechaS1.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS2.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS2.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_61->setText(Final);
+    FechaS3 = FechaS2.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS3.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS3.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_60->setText(Final);
+    if (FechaS3.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_3->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS4 = FechaS3.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS4.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS4.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_63->setText(Final);
+    FechaS5 = FechaS4.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS5.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS5.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_62->setText(Final);
+    if (FechaS5.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_4->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS6 = FechaS5.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS6.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS6.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_65->setText(Final);
+    FechaS7 = FechaS6.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS7.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS7.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_64->setText(Final);
+    if (FechaS7.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_5->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS8 = FechaS7.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS8.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS8.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_67->setText(Final);
+    FechaS9 = FechaS8.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS9.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS9.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_66->setText(Final);
+    if (FechaS9.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_6->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS10 = FechaS9.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS10.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS10.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_69->setText(Final);
+    FechaS11 = FechaS10.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS11.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS11.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_68->setText(Final);
+    if (FechaS11.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_7->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS12 = FechaS11.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS12.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS12.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_71->setText(Final);
+    FechaS13 = FechaS12.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS13.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS13.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_70->setText(Final);
+    if (FechaS13.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_8->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS14 = FechaS13.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS14.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS14.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_73->setText(Final);
+    FechaS15 = FechaS14.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS15.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS15.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_72->setText(Final);
+    if (FechaS15.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_9->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS16 = FechaS15.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS16.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS16.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_75->setText(Final);
+    FechaS17 = FechaS16.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS17.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS17.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_74->setText(Final);
+    if (FechaS17.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_10->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS18 = FechaS17.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS18.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS18.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_77->setText(Final);
+    FechaS19 = FechaS18.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS19.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS19.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_76->setText(Final);
+    if (FechaS19.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_11->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS20 = FechaS19.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS20.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS20.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_79->setText(Final);
+    FechaS21 = FechaS20.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS21.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS21.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_78->setText(Final);
+    if (FechaS21.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_12->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS22 = FechaS21.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS22.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS22.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_81->setText(Final);
+    FechaS23 = FechaS22.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS23.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS23.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_80->setText(Final);
+    if (FechaS23.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_13->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS24 = FechaS23.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS24.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS24.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_83->setText(Final);
+    FechaS25 = FechaS24.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS25.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS25.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_82->setText(Final);
+    if (FechaS25.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_14->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS26 = FechaS25.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS26.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS26.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_85->setText(Final);
+    FechaS27 = FechaS26.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS27.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS27.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_84->setText(Final);
+    if (FechaS27.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_15->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS28 = FechaS27.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS28.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS28.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_87->setText(Final);
+    FechaS29 = FechaS28.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS29.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS29.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_86->setText(Final);
+    if (FechaS29.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_16->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS30 = FechaS29.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS30.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS30.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_89->setText(Final);
+    FechaS31 = FechaS30.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS31.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS31.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_88->setText(Final);
+    if (FechaS31.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_17->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS32 = FechaS31.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS32.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS32.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_91->setText(Final);
+    FechaS33 = FechaS32.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS33.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS33.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_90->setText(Final);
+    if (FechaS33.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_18->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS34 = FechaS33.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS34.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS34.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_93->setText(Final);
+    FechaS35 = FechaS34.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS35.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS35.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_92->setText(Final);
+    if (FechaS35.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_19->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS36 = FechaS35.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS36.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS36.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_95->setText(Final);
+    FechaS37 = FechaS36.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS37.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS37.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_94->setText(Final);
+    if (FechaS37.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_20->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS38 = FechaS37.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS38.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS38.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_97->setText(Final);
+    FechaS39 = FechaS38.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS39.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS39.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_96->setText(Final);
+    if (FechaS39.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_21->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS40 = FechaS39.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS40.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS40.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_99->setText(Final);
+    FechaS41 = FechaS40.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS41.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS41.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_98->setText(Final);
+    if (FechaS41.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_22->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS42 = FechaS41.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS42.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS42.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_101->setText(Final);
+    FechaS43 = FechaS42.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS43.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS43.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_100->setText(Final);
+    if (FechaS43.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_23->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS44 = FechaS43.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS44.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS44.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_103->setText(Final);
+    FechaS45 = FechaS44.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS45.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS45.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_102->setText(Final);
+    if (FechaS45.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_24->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS46 = FechaS45.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS46.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS46.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_105->setText(Final);
+    FechaS47 = FechaS46.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS47.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS47.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_104->setText(Final);
+    if (FechaS47.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_25->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS48 = FechaS47.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS48.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS48.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_107->setText(Final);
+    FechaS49 = FechaS48.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS49.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS49.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_106->setText(Final);
+    if (FechaS49.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_26->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS50 = FechaS49.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS50.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS50.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_109->setText(Final);
+    FechaS51 = FechaS50.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS51.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS51.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_108->setText(Final);
+    if (FechaS51.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_27->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS52 = FechaS51.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS52.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS52.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_111->setText(Final);
+    FechaS53 = FechaS52.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS53.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS53.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_110->setText(Final);
+    if (FechaS53.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_29->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS54 = FechaS53.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS54.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS54.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_113->setText(Final);
+    FechaS55 = FechaS54.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS55.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS55.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_112->setText(Final);
+    if (FechaS55.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_30->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS56 = FechaS55.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS56.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS56.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_115->setText(Final);
+    FechaS57 = FechaS56.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS57.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS57.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_114->setText(Final);
+    if (FechaS57.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_31->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS58 = FechaS57.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS58.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS58.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_117->setText(Final);
+    FechaS59 = FechaS58.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS59.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS59.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_116->setText(Final);
+    if (FechaS59.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_32->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS60 = FechaS59.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS60.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS60.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_119->setText(Final);
+    FechaS61 = FechaS60.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS61.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS61.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_118->setText(Final);
+    if (FechaS61.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_33->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS62 = FechaS61.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS62.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS62.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_121->setText(Final);
+    FechaS63 = FechaS62.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS63.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS63.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_120->setText(Final);
+    if (FechaS63.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_34->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS64 = FechaS63.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS64.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS64.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_123->setText(Final);
+    FechaS65 = FechaS64.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS65.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS65.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_122->setText(Final);
+    if (FechaS65.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_35->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS66 = FechaS65.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS66.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS66.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_137->setText(Final);
+    FechaS67 = FechaS66.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS67.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS67.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_136->setText(Final);
+    if (FechaS67.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_42->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS68 = FechaS67.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS68.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS68.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_139->setText(Final);
+    FechaS69 = FechaS68.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS69.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS69.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_138->setText(Final);
+    if (FechaS69.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_43->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS70 = FechaS69.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS70.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS70.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_141->setText(Final);
+    FechaS71 = FechaS70.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS71.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS71.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_140->setText(Final);
+    if (FechaS71.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_44->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS72 = FechaS71.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS72.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS72.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_143->setText(Final);
+    FechaS73 = FechaS72.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS73.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS73.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_142->setText(Final);
+    if (FechaS73.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_45->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS74 = FechaS73.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS74.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS74.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_145->setText(Final);
+    FechaS75 = FechaS74.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS75.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS75.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_144->setText(Final);
+    if (FechaS75.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_46->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS76 = FechaS75.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS76.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS76.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_147->setText(Final);
+    FechaS77 = FechaS76.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS77.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS77.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_146->setText(Final);
+    if (FechaS77.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_47->setChecked(true);
+        Posicion++;
+    }
+    //--//
+    FechaS78 = FechaS77.addDays(1);
+    if (Idioma == "Es")
+    {
+        Final = FechaS78.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS78.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_149->setText(Final);
+    FechaS79 = FechaS78.addDays(6);
+    if (Idioma == "Es")
+    {
+        Final = FechaS79.toString("dd-MM-yyyy");
+    }
+    else if (Idioma == "En")
+    {
+        Final = FechaS79.toString("MM-dd-yyyy");
+    }
+    ui->lineEdit_148->setText(Final);
+    if (FechaS79.toJulianDay() <= QDate::currentDate().toJulianDay())
+    {
+        ui->checkBox_48->setChecked(true);
+        Posicion++;
+    }
+    if (Posicion == 1)
+    {
+        ui->toolBox->setCurrentIndex(0);
+        ui->tabWidget_2->setCurrentPage(0);
+    }
+    if (Posicion == 2)
+    {
+        ui->toolBox->setCurrentIndex(0);
+        ui->tabWidget_2->setCurrentPage(1);
+    }
+    if (Posicion == 3)
+    {
+        ui->toolBox->setCurrentIndex(0);
+        ui->tabWidget_2->setCurrentPage(2);
+    }
+    if (Posicion == 4)
+    {
+        ui->toolBox->setCurrentIndex(0);
+        ui->tabWidget_2->setCurrentPage(3);
+    }
+    if (Posicion == 5)
+    {
+        ui->toolBox->setCurrentIndex(0);
+        ui->tabWidget_2->setCurrentPage(4);
+    }
+    if (Posicion == 6)
+    {
+        ui->toolBox->setCurrentIndex(0);
+        ui->tabWidget_2->setCurrentPage(5);
+    }
+    if (Posicion == 7)
+    {
+        ui->toolBox->setCurrentIndex(0);
+        ui->tabWidget_2->setCurrentPage(6);
+    }
+    if (Posicion == 8)
+    {
+        ui->toolBox->setCurrentIndex(0);
+        ui->tabWidget_2->setCurrentPage(7);
+    }
+    if (Posicion == 9)
+    {
+        ui->toolBox->setCurrentIndex(0);
+        ui->tabWidget_2->setCurrentPage(8);
+    }
+    if (Posicion == 10)
+    {
+        ui->toolBox->setCurrentIndex(0);
+        ui->tabWidget_2->setCurrentPage(9);
+    }
+    if (Posicion == 11)
+    {
+        ui->toolBox->setCurrentIndex(0);
+        ui->tabWidget_2->setCurrentPage(10);
+    }
+    if (Posicion == 12)
+    {
+        ui->toolBox->setCurrentIndex(0);
+        ui->tabWidget_2->setCurrentPage(11);
+    }
+    if (Posicion == 13)
+    {
+        ui->toolBox->setCurrentIndex(0);
+        ui->tabWidget_3->setCurrentPage(12);
+    }
+    if (Posicion == 14)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(0);
+    }
+    if (Posicion == 15)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(1);
+    }
+    if (Posicion == 16)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(2);
+    }
+    if (Posicion == 17)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(3);
+    }
+    if (Posicion == 18)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(4);
+    }
+    if (Posicion == 19)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(5);
+    }
+    if (Posicion == 20)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(6);
+    }
+    if (Posicion == 21)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(7);
+    }
+    if (Posicion == 22)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(8);
+    }
+    if (Posicion == 23)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(9);
+    }
+    if (Posicion == 24)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(10);
+    }
+    if (Posicion == 25)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(11);
+    }
+    if (Posicion == 26)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(12);
+    }
+    if (Posicion == 27)
+    {
+        ui->toolBox->setCurrentIndex(1);
+        ui->tabWidget_3->setCurrentPage(13);
+    }
+    if (Posicion == 28)
+    {
+        ui->toolBox->setCurrentIndex(2);
+        ui->tabWidget_4->setCurrentPage(0);
+    }
+    if (Posicion == 29)
+    {
+        ui->toolBox->setCurrentIndex(2);
+        ui->tabWidget_4->setCurrentPage(1);
+    }
+    if (Posicion == 30)
+    {
+        ui->toolBox->setCurrentIndex(2);
+        ui->tabWidget_4->setCurrentPage(2);
+    }
+    if (Posicion == 31)
+    {
+        ui->toolBox->setCurrentIndex(2);
+        ui->tabWidget_4->setCurrentPage(3);
+    }
+    if (Posicion == 32)
+    {
+        ui->toolBox->setCurrentIndex(2);
+        ui->tabWidget_4->setCurrentPage(4);
+    }
+    if (Posicion == 33)
+    {
+        ui->toolBox->setCurrentIndex(2);
+        ui->tabWidget_4->setCurrentPage(5);
+    }
+    if (Posicion == 34)
+    {
+        ui->toolBox->setCurrentIndex(2);
+        ui->tabWidget_4->setCurrentPage(6);
+    }
+    if (Posicion == 35)
+    {
+        ui->toolBox->setCurrentIndex(2);
+        ui->tabWidget_4->setCurrentPage(7);
+    }
+    if (Posicion == 36)
+    {
+        ui->toolBox->setCurrentIndex(2);
+        ui->tabWidget_4->setCurrentPage(8);
+    }
+    if (Posicion == 37)
+    {
+        ui->toolBox->setCurrentIndex(2);
+        ui->tabWidget_4->setCurrentPage(9);
+    }
+    if (Posicion == 38)
+    {
+        ui->toolBox->setCurrentIndex(2);
+        ui->tabWidget_4->setCurrentPage(10);
+    }
+    if (Posicion == 39)
+    {
+        ui->toolBox->setCurrentIndex(2);
+        ui->tabWidget_4->setCurrentPage(11);
+    }
+    if (Posicion == 40)
+    {
+        ui->toolBox->setCurrentIndex(2);
+        ui->tabWidget_4->setCurrentPage(12);
+    }
+}
+
 void ConversorUD::on_pushButton_22_clicked()
 {
     ui->lineEdit_50->setText("");
@@ -7434,4 +7070,3721 @@ void ConversorUD::on_lineEdit_50_returnPressed()
 {
     ui->lineEdit_50->setFocus();
     ui->lineEdit_50->selectAll();
+}
+
+void ConversorUD::on_pushButton_18_clicked()
+{
+    ui->lineEdit_42->setText("");
+    ui->lineEdit_42->setFocus();
+    ui->lineEdit_43->setText("");
+    ui->lineEdit_43->setToolTip("");
+    ui->label_14->setText("");
+    ui->label_15->setText("");
+    ui->textEdit->setText("");
+    ui->textEdit_2->setText("");
+}
+
+void ConversorUD::on_lineEdit_42_returnPressed()
+{
+    ui->lineEdit_42->setFocus();
+    ui->lineEdit_42->selectAll();
+}
+
+void ConversorUD::on_lineEdit_42_textChanged(const QString &arg1)
+{
+    if (arg1 != "")
+    {
+        QString Valor = VerNum(arg1,1);
+        if (Valor == "No")
+            {
+            if (ui->lineEdit_42->text() == "")
+            {
+                ui->lineEdit_43->setText("");
+                ui->lineEdit_43->setToolTip("");
+            }
+            else
+            {
+                QString Valor = ui->comboBox_21->currentText();
+                double Cantidad = arg1.toDouble();
+                double Resto = Referencia(Valor,"Angulo");
+                QString Valor1 = ui->comboBox_22->currentText();
+                double Resto1 = Referencia(Valor1,"Angulo");
+                if (Valor == Valor1)
+                {
+                    double ValorF = Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_43->setText(Zero);
+                    ui->lineEdit_43->setToolTip(Zero);
+                }
+                else
+                {
+                    double ValorF = (Resto1/Resto)*Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_43->setText(Zero);
+                    ui->lineEdit_43->setToolTip(Zero);
+                }
+            }
+            Reprobar("Angulo");
+        }
+        else
+        {
+            QMessageBox m;
+            m.setWindowTitle(tr("Advertencia!!!"));
+            m.setText(tr("Has introducido un caracter no valido."));
+            m.exec();
+            ui->lineEdit_42->setFocus();
+            QString Resto = ui->lineEdit_42->text();
+            Resto.chop(1);
+            ui->lineEdit_42->setText(Resto);
+            return;
+        }
+    }
+}
+
+void ConversorUD::on_comboBox_21_activated(const QString &arg1)
+{
+    if (ui->lineEdit_42->text() == "")
+    {
+        ui->lineEdit_43->setText("");
+        ui->lineEdit_43->setToolTip("");
+    }
+    else
+    {
+        QString Valor = arg1;
+        double Cantidad = ui->lineEdit_42->text().toFloat();
+        double Resto = Referencia(Valor,"Angulo");
+        QString Valor1 = ui->comboBox_22->currentText();
+        double Resto1 = Referencia(Valor1,"Angulo");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_43->setText(Zero);
+            ui->lineEdit_43->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_43->setText(Zero);
+            ui->lineEdit_43->setToolTip(Zero);
+        }
+    }
+    Reprobar("Angulo");
+}
+
+void ConversorUD::on_comboBox_22_activated(const QString &arg1)
+{
+    if (ui->lineEdit_42->text() == "")
+    {
+        ui->lineEdit_43->setText("");
+        ui->lineEdit_43->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_21->currentText();
+        double Cantidad = ui->lineEdit_42->text().toFloat();
+        double Resto = Referencia(Valor,"Angulo");
+        QString Valor1 = arg1;
+        double Resto1 = Referencia(Valor1,"Angulo");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_43->setText(Zero);
+            ui->lineEdit_43->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_43->setText(Zero);
+            ui->lineEdit_43->setToolTip(Zero);
+        }
+    }
+    Reprobar("Angulo");
+}
+
+void ConversorUD::on_lineEdit_4_returnPressed()
+{
+    ui->lineEdit_4->setFocus();
+    ui->lineEdit_4->selectAll();
+}
+
+void ConversorUD::on_lineEdit_4_textChanged(const QString &arg1)
+{
+    if (arg1 != "")
+    {
+        QString Valor = VerNum(arg1,1);
+        if (Valor == "No")
+            {
+            if (ui->lineEdit_4->text() == "")
+            {
+                ui->lineEdit_3->setText("");
+                ui->lineEdit_3->setToolTip("");
+            }
+            else
+            {
+                QString Valor = ui->comboBox_4->currentText();
+                double Cantidad = arg1.toDouble();
+                double Resto = Referencia(Valor,"Area");
+                QString Valor1 = ui->comboBox_6->currentText();
+                double Resto1 = Referencia(Valor1,"Area");
+                if (Valor == Valor1)
+                {
+                    double ValorF = Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_3->setText(Zero);
+                    ui->lineEdit_3->setToolTip(Zero);
+                }
+                else
+                {
+                    double ValorF = (Resto1/Resto)*Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_3->setText(Zero);
+                    ui->lineEdit_3->setToolTip(Zero);
+                }
+            }
+            Reprobar("Area");
+        }
+        else
+        {
+            QMessageBox m;
+            m.setWindowTitle(tr("Advertencia!!!"));
+            m.setText(tr("Has introducido un caracter no valido."));
+            m.exec();
+            ui->lineEdit_4->setFocus();
+            QString Resto = ui->lineEdit_4->text();
+            Resto.chop(1);
+            ui->lineEdit_4->setText(Resto);
+            return;
+        }
+    }
+}
+
+void ConversorUD::on_comboBox_4_activated(const QString &arg1)
+{
+    if (ui->lineEdit_4->text() == "")
+    {
+        ui->lineEdit_3->setText("");
+        ui->lineEdit_3->setToolTip("");
+    }
+    else
+    {
+        QString Valor = arg1;
+        double Cantidad = ui->lineEdit_4->text().toFloat();
+        double Resto = Referencia(Valor,"Area");
+        QString Valor1 = ui->comboBox_6->currentText();
+        double Resto1 = Referencia(Valor1,"Area");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_3->setText(Zero);
+            ui->lineEdit_3->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_3->setText(Zero);
+            ui->lineEdit_3->setToolTip(Zero);
+        }
+    }
+    Reprobar("Area");
+}
+
+void ConversorUD::on_comboBox_6_activated(const QString &arg1)
+{
+    if (ui->lineEdit_4->text() == "")
+    {
+        ui->lineEdit_3->setText("");
+        ui->lineEdit_3->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_4->currentText();
+        double Cantidad = ui->lineEdit_4->text().toFloat();
+        double Resto = Referencia(Valor,"Area");
+        QString Valor1 = arg1;
+        double Resto1 = Referencia(Valor1,"Area");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_3->setText(Zero);
+            ui->lineEdit_3->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_3->setText(Zero);
+            ui->lineEdit_3->setToolTip(Zero);
+        }
+    }
+    Reprobar("Area");
+}
+
+void ConversorUD::on_pushButton_16_clicked()
+{
+    ui->lineEdit_39->setText("");
+    ui->lineEdit_39->setFocus();
+    ui->lineEdit_38->setText("");
+    ui->lineEdit_38->setToolTip("");
+    ui->label_14->setText("");
+    ui->label_15->setText("");
+    ui->textEdit->setText("");
+    ui->textEdit_2->setText("");
+}
+
+void ConversorUD::on_lineEdit_39_returnPressed()
+{
+    ui->lineEdit_39->setFocus();
+    ui->lineEdit_39->selectAll();
+}
+
+void ConversorUD::on_lineEdit_39_textChanged(const QString &arg1)
+{
+    if (arg1 != "")
+    {
+        QString Valor = VerNum(arg1,1);
+        if (Valor == "No")
+            {
+            if (ui->lineEdit_39->text() == "")
+            {
+                ui->lineEdit_38->setText("");
+                ui->lineEdit_38->setToolTip("");
+            }
+            else
+            {
+                QString Valor = ui->comboBox_18->currentText();
+                double Cantidad = arg1.toDouble();
+                double Resto = Referencia(Valor,"Campo");
+                QString Valor1 = ui->comboBox_23->currentText();
+                double Resto1 = Referencia(Valor1,"Campo");
+                if (Valor == Valor1)
+                {
+                    double ValorF = Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_38->setText(Zero);
+                    ui->lineEdit_38->setToolTip(Zero);
+                }
+                else
+                {
+                    double ValorF = (Resto1/Resto)*Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_38->setText(Zero);
+                    ui->lineEdit_38->setToolTip(Zero);
+                }
+            }
+            Reprobar("Campo");
+        }
+        else
+        {
+            QMessageBox m;
+            m.setWindowTitle(tr("Advertencia!!!"));
+            m.setText(tr("Has introducido un caracter no valido."));
+            m.exec();
+            ui->lineEdit_39->setFocus();
+            QString Resto = ui->lineEdit_39->text();
+            Resto.chop(1);
+            ui->lineEdit_39->setText(Resto);
+            return;
+        }
+    }
+}
+
+void ConversorUD::on_comboBox_18_activated(const QString &arg1)
+{
+    if (ui->lineEdit_39->text() == "")
+    {
+        ui->lineEdit_38->setText("");
+        ui->lineEdit_38->setToolTip("");
+    }
+    else
+    {
+        QString Valor = arg1;
+        double Cantidad = ui->lineEdit_39->text().toFloat();
+        double Resto = Referencia(Valor,"Campo");
+        QString Valor1 = ui->comboBox_23->currentText();
+        double Resto1 = Referencia(Valor1,"Campo");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_38->setText(Zero);
+            ui->lineEdit_38->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_38->setText(Zero);
+            ui->lineEdit_38->setToolTip(Zero);
+        }
+    }
+    Reprobar("Campo");
+}
+
+void ConversorUD::on_comboBox_23_activated(const QString &arg1)
+{
+    if (ui->lineEdit_39->text() == "")
+    {
+        ui->lineEdit_38->setText("");
+        ui->lineEdit_38->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_18->currentText();
+        double Cantidad = ui->lineEdit_39->text().toFloat();
+        double Resto = Referencia(Valor,"Campo");
+        QString Valor1 = arg1;
+        double Resto1 = Referencia(Valor1,"Campo");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_38->setText(Zero);
+            ui->lineEdit_38->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_38->setText(Zero);
+            ui->lineEdit_38->setToolTip(Zero);
+        }
+    }
+    Reprobar("Campo");
+}
+
+void ConversorUD::on_pushButton_15_clicked()
+{
+    ui->lineEdit_37->setText("");
+    ui->lineEdit_37->setFocus();
+    ui->lineEdit_36->setText("");
+    ui->lineEdit_36->setToolTip("");
+    ui->label_14->setText("");
+    ui->label_15->setText("");
+    ui->textEdit->setText("");
+    ui->textEdit_2->setText("");
+}
+
+void ConversorUD::on_lineEdit_37_returnPressed()
+{
+    ui->lineEdit_37->setFocus();
+    ui->lineEdit_37->selectAll();
+}
+
+void ConversorUD::on_lineEdit_37_textChanged(const QString &arg1)
+{
+    if (arg1 != "")
+    {
+        QString Valor = VerNum(arg1,1);
+        if (Valor == "No")
+            {
+            if (ui->lineEdit_37->text() == "")
+            {
+                ui->lineEdit_36->setText("");
+                ui->lineEdit_36->setToolTip("");
+            }
+            else
+            {
+                QString Valor = ui->comboBox_17->currentText();
+                double Cantidad = arg1.toDouble();
+                double Resto = Referencia(Valor,"Luz");
+                QString Valor1 = ui->comboBox_31->currentText();
+                double Resto1 = Referencia(Valor1,"Luz");
+                if (Valor == Valor1)
+                {
+                    double ValorF = Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_36->setText(Zero);
+                    ui->lineEdit_36->setToolTip(Zero);
+                }
+                else
+                {
+                    double ValorF = (Resto1/Resto)*Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_36->setText(Zero);
+                    ui->lineEdit_36->setToolTip(Zero);
+                }
+            }
+            Reprobar("Luz");
+        }
+        else
+        {
+            QMessageBox m;
+            m.setWindowTitle(tr("Advertencia!!!"));
+            m.setText(tr("Has introducido un caracter no valido."));
+            m.exec();
+            ui->lineEdit_37->setFocus();
+            QString Resto = ui->lineEdit_37->text();
+            Resto.chop(1);
+            ui->lineEdit_37->setText(Resto);
+            return;
+        }
+    }
+}
+
+void ConversorUD::on_comboBox_17_activated(const QString &arg1)
+{
+    if (ui->lineEdit_37->text() == "")
+    {
+        ui->lineEdit_36->setText("");
+        ui->lineEdit_36->setToolTip("");
+    }
+    else
+    {
+        QString Valor = arg1;
+        double Cantidad = ui->lineEdit_37->text().toFloat();
+        double Resto = Referencia(Valor,"Luz");
+        QString Valor1 = ui->comboBox_31->currentText();
+        double Resto1 = Referencia(Valor1,"Luz");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_36->setText(Zero);
+            ui->lineEdit_36->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_36->setText(Zero);
+            ui->lineEdit_36->setToolTip(Zero);
+        }
+    }
+    Reprobar("Luz");
+}
+
+void ConversorUD::on_comboBox_31_activated(const QString &arg1)
+{
+    if (ui->lineEdit_37->text() == "")
+    {
+        ui->lineEdit_36->setText("");
+        ui->lineEdit_36->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_17->currentText();
+        double Cantidad = ui->lineEdit_37->text().toFloat();
+        double Resto = Referencia(Valor,"Luz");
+        QString Valor1 = arg1;
+        double Resto1 = Referencia(Valor1,"Luz");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_36->setText(Zero);
+            ui->lineEdit_36->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_36->setText(Zero);
+            ui->lineEdit_36->setToolTip(Zero);
+        }
+    }
+    Reprobar("Luz");
+}
+
+void ConversorUD::on_pushButton_2_clicked()
+{
+    ui->lineEdit->setText("");
+    ui->lineEdit_2->setText("");
+    ui->lineEdit_46->setToolTip("");
+    ui->lineEdit_3->setText("");
+    ui->lineEdit_4->setText("");
+    ui->lineEdit_4->setToolTip("");
+    ui->lineEdit_7->setText("");
+    ui->lineEdit_8->setText("");
+    ui->lineEdit_9->setText("");
+    ui->lineEdit_10->setText("");
+    ui->lineEdit_11->setText("");
+    ui->lineEdit_12->setText("");
+    ui->lineEdit_13->setText("");
+    ui->lineEdit_14->setText("");
+    ui->lineEdit_15->setText("");
+    ui->lineEdit_16->setText("");
+    ui->lineEdit_17->setText("");
+    ui->lineEdit_18->setText("");
+    ui->lineEdit_19->setText("");
+    ui->lineEdit_20->setText("");
+    ui->lineEdit_21->setText("");
+    ui->lineEdit_22->setText("");
+    ui->lineEdit_23->setText("");
+    ui->lineEdit_24->setText("");
+    ui->lineEdit_25->setText("");
+    ui->lineEdit_26->setText("");
+    ui->lineEdit_5->setText("");
+    ui->lineEdit_6->setText("");
+    AmortizacionP = 0;
+    ui->lineEdit_27->setText("");
+    ui->lineEdit_28->setText("");
+    ui->lineEdit_29->setText("");
+    ui->lineEdit_30->setText("");
+    ui->lineEdit_31->setText("");
+    ui->lineEdit_32->setText("");
+    ui->lineEdit_33->setText("");
+    ui->lineEdit_34->setText("");
+    ui->lineEdit_35->setText("");
+    ui->lineEdit_46->setText("");
+    ui->lineEdit_46->setToolTip("");
+    ui->lineEdit_47->setText("");
+    ui->label_14->setText("");
+    ui->label_15->setText("");
+    ui->textEdit->setText("");
+    ui->textEdit_2->setText("");
+    ui->lineEdit_40->setText("");
+    ui->lineEdit_41->setText("");
+    ui->lineEdit_41->setToolTip("");
+    ui->lineEdit_45->setText("");
+    ui->lineEdit_44->setText("");
+    ui->lineEdit_45->setToolTip("");
+    ui->lineEdit_42->setText("");
+    ui->lineEdit_43->setText("");
+    ui->lineEdit_43->setToolTip("");
+    ui->lineEdit_50->setText("");
+    ui->lineEdit_52->setText("");
+    ui->lineEdit_52->setToolTip("");
+    ui->lineEdit_39->setText("");
+    ui->lineEdit_38->setText("");
+    ui->lineEdit_38->setToolTip("");
+    ui->lineEdit_56->setText("");
+    ui->lineEdit_57->setText("");
+    ui->lineEdit_54->setText("");
+    ui->lineEdit_53->setText("");
+    ui->lineEdit_51->setText("");
+    ui->lineEdit_55->setText("28");
+    ui->lineEdit_58->setText("");
+    ui->lineEdit_59->setText("");
+    ui->lineEdit_60->setText("");
+    ui->lineEdit_61->setText("");
+    ui->lineEdit_62->setText("");
+    ui->lineEdit_63->setText("");
+    ui->lineEdit_64->setText("");
+    ui->lineEdit_65->setText("");
+    ui->lineEdit_66->setText("");
+    ui->lineEdit_67->setText("");
+    ui->lineEdit_68->setText("");
+    ui->lineEdit_69->setText("");
+    ui->lineEdit_70->setText("");
+    ui->lineEdit_71->setText("");
+    ui->lineEdit_72->setText("");
+    ui->lineEdit_73->setText("");
+    ui->lineEdit_74->setText("");
+    ui->lineEdit_75->setText("");
+    ui->lineEdit_76->setText("");
+    ui->lineEdit_77->setText("");
+    ui->lineEdit_78->setText("");
+    ui->lineEdit_79->setText("");
+    ui->lineEdit_80->setText("");
+    ui->lineEdit_81->setText("");
+    ui->lineEdit_82->setText("");
+    ui->lineEdit_83->setText("");
+    ui->lineEdit_84->setText("");
+    ui->lineEdit_85->setText("");
+    ui->lineEdit_86->setText("");
+    ui->lineEdit_87->setText("");
+    ui->lineEdit_88->setText("");
+    ui->lineEdit_89->setText("");
+    ui->lineEdit_90->setText("");
+    ui->lineEdit_91->setText("");
+    ui->lineEdit_92->setText("");
+    ui->lineEdit_93->setText("");
+    ui->lineEdit_94->setText("");
+    ui->lineEdit_95->setText("");
+    ui->lineEdit_96->setText("");
+    ui->lineEdit_97->setText("");
+    ui->lineEdit_98->setText("");
+    ui->lineEdit_99->setText("");
+    ui->lineEdit_100->setText("");
+    ui->lineEdit_101->setText("");
+    ui->lineEdit_102->setText("");
+    ui->lineEdit_103->setText("");
+    ui->lineEdit_104->setText("");
+    ui->lineEdit_105->setText("");
+    ui->lineEdit_106->setText("");
+    ui->lineEdit_107->setText("");
+    ui->lineEdit_108->setText("");
+    ui->lineEdit_109->setText("");
+    ui->lineEdit_110->setText("");
+    ui->lineEdit_111->setText("");
+    ui->lineEdit_112->setText("");
+    ui->lineEdit_113->setText("");
+    ui->lineEdit_114->setText("");
+    ui->lineEdit_115->setText("");
+    ui->lineEdit_116->setText("");
+    ui->lineEdit_117->setText("");
+    ui->lineEdit_118->setText("");
+    ui->lineEdit_119->setText("");
+    ui->lineEdit_120->setText("");
+    ui->lineEdit_121->setText("");
+    ui->lineEdit_122->setText("");
+    ui->lineEdit_123->setText("");
+    ui->lineEdit_136->setText("");
+    ui->lineEdit_137->setText("");
+    ui->lineEdit_138->setText("");
+    ui->lineEdit_139->setText("");
+    ui->lineEdit_140->setText("");
+    ui->lineEdit_141->setText("");
+    ui->lineEdit_142->setText("");
+    ui->lineEdit_143->setText("");
+    ui->lineEdit_144->setText("");
+    ui->lineEdit_145->setText("");
+    ui->lineEdit_146->setText("");
+    ui->lineEdit_147->setText("");
+    ui->lineEdit_148->setText("");
+    ui->lineEdit_149->setText("");
+    ui->calendarWidget->setSelectedDate(QDate::currentDate());
+    ui->calendarWidget_2->setSelectedDate(QDate::currentDate());
+    ui->checkBox_2->setChecked(false);
+    ui->checkBox_3->setChecked(false);
+    ui->checkBox_4->setChecked(false);
+    ui->checkBox_5->setChecked(false);
+    ui->checkBox_6->setChecked(false);
+    ui->checkBox_7->setChecked(false);
+    ui->checkBox_8->setChecked(false);
+    ui->checkBox_9->setChecked(false);
+    ui->checkBox_10->setChecked(false);
+    ui->checkBox_11->setChecked(false);
+    ui->checkBox_12->setChecked(false);
+    ui->checkBox_13->setChecked(false);
+    ui->checkBox_14->setChecked(false);
+    ui->checkBox_15->setChecked(false);
+    ui->checkBox_16->setChecked(false);
+    ui->checkBox_17->setChecked(false);
+    ui->checkBox_18->setChecked(false);
+    ui->checkBox_19->setChecked(false);
+    ui->checkBox_20->setChecked(false);
+    ui->checkBox_21->setChecked(false);
+    ui->checkBox_22->setChecked(false);
+    ui->checkBox_23->setChecked(false);
+    ui->checkBox_24->setChecked(false);
+    ui->checkBox_25->setChecked(false);
+    ui->checkBox_26->setChecked(false);
+    ui->checkBox_27->setChecked(false);
+    ui->checkBox_29->setChecked(false);
+    ui->checkBox_30->setChecked(false);
+    ui->checkBox_31->setChecked(false);
+    ui->checkBox_32->setChecked(false);
+    ui->checkBox_33->setChecked(false);
+    ui->checkBox_34->setChecked(false);
+    ui->checkBox_35->setChecked(false);
+    ui->checkBox_42->setChecked(false);
+    ui->checkBox_43->setChecked(false);
+    ui->checkBox_44->setChecked(false);
+    ui->checkBox_45->setChecked(false);
+    ui->checkBox_46->setChecked(false);
+    ui->checkBox_47->setChecked(false);
+    ui->checkBox_48->setChecked(false);
+    ui->toolBox->setCurrentIndex(0);
+    ui->tabWidget_2->setCurrentPage(0);
+    ui->lineEdit_37->setText("");
+    ui->lineEdit_36->setText("");
+    ui->lineEdit_36->setToolTip("");
+    ui->lineEdit_156->setText("");
+    ui->lineEdit_157->setText("");
+    ui->lineEdit_157->setToolTip("");
+    int Borrado, x;
+    Borrado = ui->tableWidget->rowCount();
+    for(x=0;x<Borrado;x++)
+    {
+         ui->tableWidget->removeRow(x);
+         x=x-1;
+         Borrado=Borrado-1;
+    }
+}
+
+void ConversorUD::on_comboBox_3_activated(const QString &arg1)
+{
+    Decimales = arg1.toInt();
+    if (ui->lineEdit->text() == "")
+    {
+        ui->lineEdit_2->setText("");
+        ui->lineEdit_2->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox->currentText();
+        double Cantidad = ui->lineEdit->text().toFloat();
+        double Resto = Referencia(Valor,"Longitud");
+        QString Valor1 = ui->comboBox_2->currentText();
+        double Resto1 = Referencia(Valor1,"Longitud");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_2->setText(Zero);
+            ui->lineEdit_2->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto/Resto1)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_2->setText(Zero);
+            ui->lineEdit_2->setToolTip(Zero);
+        }
+    }
+    if (ui->lineEdit_47->text() == "")
+    {
+        ui->lineEdit_46->setText("");
+        ui->lineEdit_46->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_26->currentText();
+        double Cantidad = ui->lineEdit_47->text().toFloat();
+        double Resto = Referencia(Valor,"Aceleracion");
+        QString Valor1 = ui->comboBox_27->currentText();
+        double Resto1 = Referencia(Valor1,"Aceleracion");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_46->setText(Zero);
+            ui->lineEdit_46->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_46->setText(Zero);
+            ui->lineEdit_46->setToolTip(Zero);
+        }
+    }
+    if (ui->lineEdit_40->text() == "")
+    {
+        ui->lineEdit_41->setText("");
+        ui->lineEdit_41->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_19->currentText();
+        double Cantidad = ui->lineEdit_40->text().toFloat();
+        double Resto = Referencia(Valor,"Almacenamiento");
+        QString Valor1 = ui->comboBox_20->currentText();
+        double Resto1 = Referencia(Valor1,"Almacenamiento");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_41->setText(Zero);
+            ui->lineEdit_41->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_41->setText(Zero);
+            ui->lineEdit_41->setToolTip(Zero);
+        }
+    }
+    if (ui->lineEdit_45->text() == "")
+    {
+        ui->lineEdit_44->setText("");
+        ui->lineEdit_44->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_24->currentText();
+        double Cantidad = ui->lineEdit_45->text().toFloat();
+        double Resto = Referencia(Valor,"Ancho banda");
+        QString Valor1 = ui->comboBox_30->currentText();
+        double Resto1 = Referencia(Valor1,"Ancho banda");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_44->setText(Zero);
+            ui->lineEdit_44->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_44->setText(Zero);
+            ui->lineEdit_44->setToolTip(Zero);
+        }
+    }
+    if (ui->lineEdit_42->text() == "")
+    {
+        ui->lineEdit_43->setText("");
+        ui->lineEdit_43->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_21->currentText();
+        double Cantidad = ui->lineEdit_42->text().toFloat();
+        double Resto = Referencia(Valor,"Angulo");
+        QString Valor1 = ui->comboBox_22->currentText();
+        double Resto1 = Referencia(Valor1,"Angulo");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_43->setText(Zero);
+            ui->lineEdit_43->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_43->setText(Zero);
+            ui->lineEdit_43->setToolTip(Zero);
+        }
+    }
+    if (ui->lineEdit_4->text() == "")
+    {
+        ui->lineEdit_3->setText("");
+        ui->lineEdit_3->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_4->currentText();
+        double Cantidad = ui->lineEdit_4->text().toFloat();
+        double Resto = Referencia(Valor,"Area");
+        QString Valor1 = ui->comboBox_6->currentText();
+        double Resto1 = Referencia(Valor1,"Area");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_3->setText(Zero);
+            ui->lineEdit_3->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_3->setText(Zero);
+            ui->lineEdit_3->setToolTip(Zero);
+        }
+    }
+    if (ui->lineEdit_39->text() == "")
+    {
+        ui->lineEdit_38->setText("");
+        ui->lineEdit_38->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_18->currentText();
+        double Cantidad = ui->lineEdit_39->text().toFloat();
+        double Resto = Referencia(Valor,"Campo");
+        QString Valor1 = ui->comboBox_23->currentText();
+        double Resto1 = Referencia(Valor1,"Campo");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_38->setText(Zero);
+            ui->lineEdit_38->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_38->setText(Zero);
+            ui->lineEdit_38->setToolTip(Zero);
+        }
+    }
+    if (ui->lineEdit_37->text() == "")
+    {
+        ui->lineEdit_36->setText("");
+        ui->lineEdit_36->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_17->currentText();
+        double Cantidad = ui->lineEdit_37->text().toFloat();
+        double Resto = Referencia(Valor,"Luz");
+        QString Valor1 = ui->comboBox_31->currentText();
+        double Resto1 = Referencia(Valor1,"Luz");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_36->setText(Zero);
+            ui->lineEdit_36->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_36->setText(Zero);
+            ui->lineEdit_36->setToolTip(Zero);
+        }
+    }
+    if (ui->lineEdit_156->text() == "")
+    {
+        ui->lineEdit_157->setText("");
+        ui->lineEdit_157->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_50->currentText();
+        double Cantidad = ui->lineEdit_156->text().toFloat();
+        double Resto = Referencia(Valor,"Sustancia");
+        QString Valor1 = ui->comboBox_51->currentText();
+        double Resto1 = Referencia(Valor1,"Sustancia");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_157->setText(Zero);
+            ui->lineEdit_157->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_157->setText(Zero);
+            ui->lineEdit_157->setToolTip(Zero);
+        }
+    }
+    if (ui->label_14->text().contains(tr("Distancia o Longitud")))
+        Reprobar("Longitud");
+    if (ui->label_14->text().contains(tr("Aceleracion")))
+        Reprobar("Aceleracion");
+    if (ui->label_14->text().contains(tr("Almacenamiento")))
+        Reprobar("Almacenamiento");
+    if (ui->label_14->text().contains(tr("Ancho de banda")))
+        Reprobar("Ancho banda");
+    if (ui->label_14->text().contains(tr("Angulo")))
+        Reprobar("Angulo");
+    if (ui->label_14->text().contains(tr("Superficie o Area")))
+        Reprobar("Area");
+    if (ui->label_14->text().contains(tr("Campo magnetico")))
+        Reprobar("Campo");
+    if (ui->label_14->text().contains(tr("Cantidad de luz")))
+        Reprobar("Luz");
+    if (ui->label_14->text().contains(tr("Cantidad de sustancia")))
+        Reprobar("Sustancia");
+}
+
+void ConversorUD::on_comboBox_25_activated(const QString &arg1)
+{
+    ui->label_14->setText("");
+    ui->label_15->setText("");
+    ui->textEdit->setText("");
+    ui->textEdit_2->setText("");
+    if (arg1 == tr("Aceleracion"))
+    {
+        ui->tabWidget->setCurrentPage(0);
+        ui->lineEdit_47->setFocus();
+    }
+    if (arg1 == tr("Distancia o Longitud"))
+    {
+        ui->tabWidget->setCurrentPage(0);
+        ui->lineEdit->setFocus();
+    }
+    if (arg1 == tr("Almacenamiento de datos"))
+    {
+        ui->tabWidget->setCurrentPage(1);
+        ui->lineEdit_40->setFocus();
+    }
+    if (arg1 == tr("Ancho de banda"))
+    {
+        ui->tabWidget->setCurrentPage(1);
+        ui->lineEdit_45->setFocus();
+    }
+    if (arg1 == tr("Angulo"))
+    {
+        ui->tabWidget->setCurrentPage(1);
+        ui->lineEdit_42->setFocus();
+    }
+    if (arg1 == tr("Sistema de numeracion"))
+    {
+        ui->tabWidget->setCurrentPage(0);
+        ui->lineEdit_12->setFocus();
+    }
+    if (arg1 == tr("Superficie o Area"))
+    {
+        ui->tabWidget->setCurrentPage(0);
+        ui->lineEdit_4->setFocus();
+    }
+    if (arg1 == tr("Campo magnetico"))
+    {
+        ui->tabWidget->setCurrentPage(1);
+        ui->lineEdit_39->setFocus();
+    }
+    if (arg1 == tr("Calendario de embarazo"))
+    {
+        ui->tabWidget->setCurrentPage(2);
+    }
+    if (arg1 == tr("Cantidad de luz"))
+    {
+        ui->tabWidget->setCurrentPage(1);
+        ui->lineEdit_37->setFocus();
+    }
+    if (arg1 == tr("Cantidad de sustancia"))
+    {
+        ui->tabWidget->setCurrentPage(3);
+        ui->lineEdit_156->setFocus();
+    }
+}
+
+void ConversorUD::Reprobar(QString Tipo)
+{
+    ui->label_14->setText("");
+    ui->label_15->setText("");
+    ui->textEdit->setText("");
+    ui->textEdit_2->setText("");
+    if (Tipo == "Longitud")
+    {
+        QString Value = ui->comboBox->currentText();
+        double Cantidad = ui->lineEdit->text().toFloat();
+        double Resto = Referencia(Value,"Longitud");
+        Unidad(Resto,0.0000000001,Cantidad,tr("Angstrom (Å)"),"Longitud");
+        Unidad1(Resto,0.0000000001,Cantidad,tr("Angstrom (Å)"),"Longitud");
+        Unidad(Resto,0.000000001,Cantidad,tr("Nanometro (nm)"),"Longitud");
+        Unidad1(Resto,0.000000001,Cantidad,tr("Nanometro (nm)"),"Longitud");
+        Unidad(Resto,0.000001,Cantidad,tr("Micrometro (µm)"),"Longitud");
+        Unidad1(Resto,0.00001,Cantidad,tr("Micrometro (µm)"),"Longitud");
+        Unidad(Resto,0.001,Cantidad,tr("Milimetro (mm)"),"Longitud");
+        Unidad1(Resto,0.001,Cantidad,tr("Milimetro (mm)"),"Longitud");
+        Unidad(Resto,0.01,Cantidad,tr("Centimetro (cm)"),"Longitud");
+        Unidad1(Resto,0.01,Cantidad,tr("Centimetro (cm)"),"Longitud");
+        Unidad(Resto,0.1,Cantidad,tr("Decimetro (dm)"),"Longitud");
+        Unidad1(Resto,0.1,Cantidad,tr("Decimetro (dm)"),"Longitud");
+        Unidad(Resto,1,Cantidad,tr("Metro (m)"),"Longitud");
+        Unidad1(Resto,1,Cantidad,tr("Metro (m)"),"Longitud");
+        Unidad(Resto,10,Cantidad,tr("Decametro (dam)"),"Longitud");
+        Unidad1(Resto,10,Cantidad,tr("Decametro (dam)"),"Longitud");
+        Unidad(Resto,100,Cantidad,tr("Hectometro (hm)"),"Longitud");
+        Unidad1(Resto,100,Cantidad,tr("Hectometro (hm)"),"Longitud");
+        Unidad(Resto,1000,Cantidad,tr("Kilometro (km)"),"Longitud");
+        Unidad1(Resto,1000,Cantidad,tr("Kilometro (km)"),"Longitud");
+        Unidad(Resto,10000,Cantidad,tr("Miriametro (mam)"),"Longitud");
+        Unidad1(Resto,10000,Cantidad,tr("Miriametro (mam)"),"Longitud");
+        Unidad(Resto,4828.0320,Cantidad,tr("Legua"),"Longitud");
+        Unidad1(Resto,0.001,Cantidad,tr("Legua"),"Longitud");
+        Unidad(Resto,1609.344,Cantidad,tr("Milla (mi)"),"Longitud");
+        Unidad1(Resto,1609.344,Cantidad,tr("Milla (mi)"),"Longitud");
+        Unidad(Resto,201.168,Cantidad,tr("Estadio"),"Longitud");
+        Unidad1(Resto,201.168,Cantidad,tr("Estadio"),"Longitud");
+        Unidad(Resto,20.1168,Cantidad,tr("Cadena"),"Longitud");
+        Unidad1(Resto,20.1168,Cantidad,tr("Cadena"),"Longitud");
+        Unidad(Resto,5.0292,Cantidad,tr("Barra (rd)"),"Longitud");
+        Unidad1(Resto,5.0292,Cantidad,tr("Barra (rd)"),"Longitud");
+        Unidad(Resto,0.9144,Cantidad,tr("Yarda (yd)"),"Longitud");
+        Unidad1(Resto,0.9144,Cantidad,tr("Yarda (yd)"),"Longitud");
+        Unidad(Resto,0.3048,Cantidad,tr("Pie (ft)"),"Longitud");
+        Unidad1(Resto,0.3048,Cantidad,tr("Pie (ft)"),"Longitud");
+        Unidad(Resto,0.201168,Cantidad,tr("Link"),"Longitud");
+        Unidad1(Resto,0.201168,Cantidad,tr("Link"),"Longitud");
+        Unidad(Resto,0.1016,Cantidad,tr("Mano"),"Longitud");
+        Unidad1(Resto,0.1016,Cantidad,tr("Mano"),"Longitud");
+        Unidad(Resto,0.0254,Cantidad,tr("Pulgada (in)"),"Longitud");
+        Unidad1(Resto,0.0254,Cantidad,tr("Pulgada (in)"),"Longitud");
+        Unidad(Resto,0.00254,Cantidad,tr("Linea"),"Longitud");
+        Unidad1(Resto,0.00254,Cantidad,tr("Linea"),"Longitud");
+        Unidad(Resto,0.0000254,Cantidad,tr("Mil (mil)"),"Longitud");
+        Unidad1(Resto,0.0000254,Cantidad,tr("Mil (mil)"),"Longitud");
+        Unidad(Resto,0.0000254,Cantidad,tr("Thou (thou)"),"Longitud");
+        Unidad1(Resto,0.0000254,Cantidad,tr("Thou (thou)"),"Longitud");
+        Unidad(Resto,1852,Cantidad,tr("Milla nautica"),"Longitud");
+        Unidad1(Resto,1852,Cantidad,tr("Milla nautica"),"Longitud");
+        Unidad(Resto,1.8288,Cantidad,tr("Braza"),"Longitud");
+        Unidad1(Resto,1.8288,Cantidad,tr("Braza"),"Longitud");
+        Unidad(Resto,30857000000000000,Cantidad,tr("Parsec (pc)"),"Longitud");
+        Unidad1(Resto,30857000000000000,Cantidad,tr("Parsec (pc)"),"Longitud");
+        Unidad(Resto,9454254955488000,Cantidad,tr("Ano luz"),"Longitud");
+        Unidad1(Resto,9454254955488000,Cantidad,tr("Ano luz"),"Longitud");
+        Unidad(Resto,147597870610,Cantidad,tr("Unidad astronomica (AE)"),"Longitud");
+        Unidad1(Resto,147597870610,Cantidad,tr("Unidad astronomica (AE)"),"Longitud");
+        Unidad(Resto,17987547480,Cantidad,tr("Minuto luz"),"Longitud");
+        Unidad1(Resto,17987547480,Cantidad,tr("Minuto luz"),"Longitud");
+        Unidad(Resto,299792458,Cantidad,tr("Segundo luz"),"Longitud");
+        Unidad1(Resto,299792458,Cantidad,tr("Segundo luz"),"Longitud");
+        ui->label_14->setText(tr("Distancia o Longitud: Convertir a...")+ui->comboBox->currentText()+"");
+        ui->label_15->setText(tr("Distancia o Longitud: Convertir de...")+ui->comboBox->currentText()+"");
+    }
+    if (Tipo == "Aceleracion")
+    {
+        QString Value = ui->comboBox_26->currentText();
+        double Cantidad = ui->lineEdit_47->text().toFloat();
+        double Resto = Referencia(Value,"Aceleracion");
+        Unidad(Resto,0.01,Cantidad,tr("Metros por segundo cuadrado (m/s²)"),"Aceleracion");
+        Unidad1(Resto,0.01,Cantidad,tr("Metros por segundo cuadrado (m/s²)"),"Aceleracion");
+        Unidad(Resto,0.0328083333,Cantidad,tr("Pies por segundo cuadrado (ft/s²)"),"Aceleracion");
+        Unidad1(Resto,0.0328083333,Cantidad,tr("Pies por segundo cuadrado (ft/s²)"),"Aceleracion");
+        Unidad(Resto,1,Cantidad,tr("Gal"),"Aceleracion");
+        Unidad1(Resto,1,Cantidad,tr("Gal"),"Aceleracion");
+        Unidad(Resto,1000,Cantidad,tr("Miligal"),"Aceleracion");
+        Unidad1(Resto,1000,Cantidad,tr("Miligal"),"Aceleracion");
+        Unidad(Resto,0.0010197162,Cantidad,tr("Gravedad estandar"),"Aceleracion");
+        Unidad1(Resto,0.0010197162,Cantidad,tr("Gravedad estandar"),"Aceleracion");
+        Unidad(Resto,0.0010197162,Cantidad,tr("Almacenamiento (g)"),"Aceleracion");
+        Unidad1(Resto,0.0010197162,Cantidad,tr("Fuerza G (g)"),"Aceleracion");
+        ui->label_14->setText(tr("Aceleracion: Convertir a...")+ui->comboBox_26->currentText()+"");
+        ui->label_15->setText(tr("Aceleracion: Convertir de...")+ui->comboBox_26->currentText()+"");
+    }
+    if (Tipo == "Almacenamiento")
+    {
+        QString Value = ui->comboBox_19->currentText();
+        double Cantidad = ui->lineEdit_40->text().toFloat();
+        double Resto = Referencia(Value,"Almacenamiento");
+        Unidad(Resto,8,Cantidad,tr("Bit"),"Almacenamiento");
+        Unidad1(Resto,8,Cantidad,tr("Bit"),"Almacenamiento");
+        Unidad(Resto,2,Cantidad,tr("Nibble"),"Almacenamiento");
+        Unidad1(Resto,2,Cantidad,tr("Nibble"),"Almacenamiento");
+        Unidad(Resto,0.0078125,Cantidad,tr("Kilobit"),"Almacenamiento");
+        Unidad1(Resto,0.0078125,Cantidad,tr("Kilobit"),"Almacenamiento");
+        Unidad(Resto,0.0000076294,Cantidad,tr("Megabit"),"Almacenamiento");
+        Unidad1(Resto,0.0000076294,Cantidad,tr("Megabit"),"Almacenamiento");
+        Unidad(Resto,0.00000000074505805969,Cantidad,tr("Gigabit"),"Almacenamiento");
+        Unidad1(Resto,0.00000000074505805969,Cantidad,tr("Gigabit"),"Almacenamiento");
+        Unidad(Resto,0.00000000000072759580612,Cantidad,tr("Terabit"),"Almacenamiento");
+        Unidad1(Resto,0.00000000000072759580612,Cantidad,tr("Terabit"),"Almacenamiento");
+        Unidad(Resto,0.0000000000000007105427742,Cantidad,tr("Petabit"),"Almacenamiento");
+        Unidad1(Resto,0.0000000000000007105427742,Cantidad,tr("Petabit"),"Almacenamiento");
+        Unidad(Resto,0.000000000000000000769388942719,Cantidad,tr("Exabit"),"Almacenamiento");
+        Unidad1(Resto,0.000000000000000000769388942719,Cantidad,tr("Exabit"),"Almacenamiento");
+        Unidad(Resto,1,Cantidad,tr("Byte (B)"),"Almacenamiento");
+        Unidad1(Resto,1,Cantidad,tr("Byte (B)"),"Almacenamiento");
+        Unidad(Resto,0.0009765625,Cantidad,tr("Kilobyte (KB)"),"Almacenamiento");
+        Unidad1(Resto,0.0009765625,Cantidad,tr("Kilobyte (KB)"),"Almacenamiento");
+        Unidad(Resto,0.000000095367431641,Cantidad,tr("Megabyte (MB)"),"Almacenamiento");
+        Unidad1(Resto,0.000000095367431641,Cantidad,tr("Megabyte (MB)"),"Almacenamiento");
+        Unidad(Resto,0.000000000093132257462,Cantidad,tr("Gigabyte (GB)"),"Almacenamiento");
+        Unidad1(Resto,0.000000000093132257462,Cantidad,tr("Gigabyte (GB)"),"Almacenamiento");
+        Unidad(Resto,0.000000000000090949478149,Cantidad,tr("Terabyte (TB)"),"Almacenamiento");
+        Unidad1(Resto,0.000000000000090949478149,Cantidad,tr("Terabyte (TB)"),"Almacenamiento");
+        Unidad(Resto,0.000000000000000088817853928,Cantidad,tr("Petabyte (PB)"),"Almacenamiento");
+        Unidad1(Resto,0.000000000000000088817853928,Cantidad,tr("Petabyte (PB)"),"Almacenamiento");
+        Unidad(Resto,0.000000000000000000086736183167,Cantidad,tr("Exabyte (EB)"),"Almacenamiento");
+        Unidad1(Resto,0.000000000000000000086736183167,Cantidad,tr("Exabyte (EB)"),"Almacenamiento");
+        ui->label_14->setText(tr("Almacenamiento: Convertir a...")+ui->comboBox_19->currentText()+"");
+        ui->label_15->setText(tr("Almacenamiento: Convertir de...")+ui->comboBox_19->currentText()+"");
+    }
+    if (Tipo == "Ancho banda")
+    {
+        QString Value = ui->comboBox_24->currentText();
+        double Cantidad = ui->lineEdit_45->text().toFloat();
+        double Resto = Referencia(Value,"Ancho banda");
+        Unidad(Resto,8000000000,Cantidad,tr("Bit por segundo (bit/s)"),"Ancho banda");
+        Unidad1(Resto,8000000000,Cantidad,tr("Bit por segundo (bit/s)"),"Ancho banda");
+        Unidad(Resto,8000000,Cantidad,tr("Kilobit por segundo (kbit/s)"),"Ancho banda");
+        Unidad1(Resto,8000000,Cantidad,tr("Kilobit por segundo (kbit/s)"),"Ancho banda");
+        Unidad(Resto,8000,Cantidad,tr("Megabit por segundo (Mbit/s)"),"Ancho banda");
+        Unidad1(Resto,8000,Cantidad,tr("Megabit por segundo (Mbit/s)"),"Ancho banda");
+        Unidad(Resto,8,Cantidad,tr("Gigabit por segundo (Gbit/s)"),"Ancho banda");
+        Unidad1(Resto,8,Cantidad,tr("Gigabit por segundo (Gbit/s)"),"Ancho banda");
+        Unidad(Resto,0.008,Cantidad,tr("Terabit por segundo (Tbit/s)"),"Ancho banda");
+        Unidad1(Resto,0.008,Cantidad,tr("Terabit por segundo (Tbit/s)"),"Ancho banda");
+        Unidad(Resto,7812500,Cantidad,tr("Kibibit por segundo (Kibit/s)"),"Ancho banda");
+        Unidad1(Resto,7812500,Cantidad,tr("Kibibit por segundo (Kibit/s)"),"Ancho banda");
+        Unidad(Resto,0.0000078125,Cantidad,tr("Mebibit por segundo (Mibit/s)"),"Ancho banda");
+        Unidad1(Resto,0.0000078125,Cantidad,tr("Mebibit por segundo (Mibit/s)"),"Ancho banda");
+        Unidad(Resto,7.4505806,Cantidad,tr("Gibibit por segundo (Gibit/s)"),"Ancho banda");
+        Unidad1(Resto,7.4505806,Cantidad,tr("Gibibit por segundo (Gibit/s)"),"Ancho banda");
+        Unidad(Resto,0.00727596,Cantidad,tr("Tebibit por segundo (Tibit/s)"),"Ancho banda");
+        Unidad1(Resto,0.00727596,Cantidad,tr("Tebibit por segundo (Tibit/s)"),"Ancho banda");
+        Unidad(Resto,1000000000,Cantidad,tr("Byte por segundo (B/s)"),"Ancho banda");
+        Unidad1(Resto,1000000000,Cantidad,tr("Byte por segundo (B/s)"),"Ancho banda");
+        Unidad(Resto,1000000,Cantidad,tr("Kilobyte por segundo (kB/s)"),"Ancho banda");
+        Unidad1(Resto,1000000,Cantidad,tr("Kilobyte por segundo (kB/s)"),"Ancho banda");
+        Unidad(Resto,1000,Cantidad,tr("Megabyte por segundo (MB/s)"),"Ancho banda");
+        Unidad1(Resto,1000,Cantidad,tr("Megabyte por segundo (MB/s)"),"Ancho banda");
+        Unidad(Resto,1,Cantidad,tr("Gigabyte por segundo (GB/s)"),"Ancho banda");
+        Unidad1(Resto,1,Cantidad,tr("Gigabyte por segundo (GB/s)"),"Ancho banda");
+        Unidad(Resto,0.001,Cantidad,tr("Terabyte por segundo (TB/s)"),"Ancho banda");
+        Unidad1(Resto,0.001,Cantidad,tr("Terabyte por segundo (TB/s)"),"Ancho banda");
+        Unidad(Resto,976562.5,Cantidad,tr("Kibibyte por segundo (KiB/s)"),"Ancho banda");
+        Unidad1(Resto,976562.5,Cantidad,tr("Kibibyte por segundo (KiB/s)"),"Ancho banda");
+        Unidad(Resto,953.67431641,Cantidad,tr("Mebibyte por segundo (MiB/s)"),"Ancho banda");
+        Unidad1(Resto,953.67431641,Cantidad,tr("Mebibyte por segundo (MiB/s)"),"Ancho banda");
+        Unidad(Resto,0.93132257,Cantidad,tr("Gibibyte por segundo (GiB/s)"),"Ancho banda");
+        Unidad1(Resto,0.93132257,Cantidad,tr("Gibibyte por segundo (GiB/s)"),"Ancho banda");
+        Unidad(Resto,0.00090949,Cantidad,tr("Tebibyte por segundo (TiB/s)"),"Ancho banda");
+        Unidad1(Resto,0.00090949,Cantidad,tr("Tebibyte por segundo (TiB/s)"),"Ancho banda");
+        Unidad(Resto,2880000000000,Cantidad,tr("Bit por hora"),"Ancho banda");
+        Unidad1(Resto,2880000000000,Cantidad,tr("Bit por hora"),"Ancho banda");
+        Unidad(Resto,28800000000,Cantidad,tr("Kilobit por hora"),"Ancho banda");
+        Unidad1(Resto,28800000000,Cantidad,tr("Kilobit por hora"),"Ancho banda");
+        Unidad(Resto,2880000,Cantidad,tr("Megabit por hora"),"Ancho banda");
+        Unidad1(Resto,2880000,Cantidad,tr("Megabit por hora"),"Ancho banda");
+        Unidad(Resto,28800,Cantidad,tr("Gigabit por hora"),"Ancho banda");
+        Unidad1(Resto,28800,Cantidad,tr("Gigabit por hora"),"Ancho banda");
+        Unidad(Resto,28.8,Cantidad,tr("Terabit por hora"),"Ancho banda");
+        Unidad1(Resto,28.8,Cantidad,tr("Terabit por hora"),"Ancho banda");
+        Unidad(Resto,28125000000,Cantidad,tr("Kibibit por hora"),"Ancho banda");
+        Unidad1(Resto,28125000000,Cantidad,tr("Kibibit por hora"),"Ancho banda");
+        Unidad(Resto,27465820.3,Cantidad,tr("Mebibit por hora"),"Ancho banda");
+        Unidad1(Resto,27465820.3,Cantidad,tr("Mebibit por hora"),"Ancho banda");
+        Unidad(Resto,26822.0901,Cantidad,tr("Gibibit por hora"),"Ancho banda");
+        Unidad1(Resto,26822.0901,Cantidad,tr("Gibibit por hora"),"Ancho banda");
+        Unidad(Resto,26.19344741,Cantidad,tr("Tebibit por hora"),"Ancho banda");
+        Unidad1(Resto,26.19344741,Cantidad,tr("Tebibit por hora"),"Ancho banda");
+        Unidad(Resto,3600000000000,Cantidad,tr("Byte por hora"),"Ancho banda");
+        Unidad1(Resto,3600000000000,Cantidad,tr("Byte por hora"),"Ancho banda");
+        Unidad(Resto,3600000000,Cantidad,tr("Kilobyte por hora"),"Ancho banda");
+        Unidad1(Resto,3600000000,Cantidad,tr("Kilobyte por hora"),"Ancho banda");
+        Unidad(Resto,3600000,Cantidad,tr("Megabyte por hora"),"Ancho banda");
+        Unidad1(Resto,3600000,Cantidad,tr("Megabyte por hora"),"Ancho banda");
+        Unidad(Resto,3600,Cantidad,tr("Gigabyte por hora"),"Ancho banda");
+        Unidad1(Resto,3600,Cantidad,tr("Gigabyte por hora"),"Ancho banda");
+        Unidad(Resto,3.6,Cantidad,tr("Terabyte por hora"),"Ancho banda");
+        Unidad1(Resto,3.6,Cantidad,tr("Terabyte por hora"),"Ancho banda");
+        Unidad(Resto,3515625000,Cantidad,tr("Kibibyte por hora"),"Ancho banda");
+        Unidad1(Resto,3516625000,Cantidad,tr("Kibibyte por hora"),"Ancho banda");
+        Unidad(Resto,3433227.54,Cantidad,tr("Mebibyte por hora"),"Ancho banda");
+        Unidad1(Resto,3433227.54,Cantidad,tr("Mebibyte por hora"),"Ancho banda");
+        Unidad(Resto,3352.76127,Cantidad,tr("Gibibyte por hora"),"Ancho banda");
+        Unidad1(Resto,3352.76127,Cantidad,tr("Gibibyte por hora"),"Ancho banda");
+        Unidad(Resto,3.27418093,Cantidad,tr("Tebibyte por hora"),"Ancho banda");
+        Unidad1(Resto,3.27418093,Cantidad,tr("Tebibyte por hora"),"Ancho banda");
+        Unidad(Resto,69120000000000,Cantidad,tr("Bit por dia"),"Ancho banda");
+        Unidad1(Resto,69120000000000,Cantidad,tr("Bit por dia"),"Ancho banda");
+        Unidad(Resto,691200000000,Cantidad,tr("Kilobit por dia"),"Ancho banda");
+        Unidad1(Resto,691200000000,Cantidad,tr("Kilobit por dia"),"Ancho banda");
+        Unidad(Resto,691200000,Cantidad,tr("Megabit por dia"),"Ancho banda");
+        Unidad1(Resto,691200000,Cantidad,tr("Megabit por dia"),"Ancho banda");
+        Unidad(Resto,691200,Cantidad,tr("Gigabit por dia"),"Ancho banda");
+        Unidad1(Resto,691200,Cantidad,tr("Gigabit por dia"),"Ancho banda");
+        Unidad(Resto,691.2,Cantidad,tr("Terabit por dia"),"Ancho banda");
+        Unidad1(Resto,691.2,Cantidad,tr("Terabit por dia"),"Ancho banda");
+        Unidad(Resto,675000000000,Cantidad,tr("Kibibit por dia"),"Ancho banda");
+        Unidad1(Resto,675000000000,Cantidad,tr("Kibibit por dia"),"Ancho banda");
+        Unidad(Resto,659179687.5,Cantidad,tr("Mebibit por dia"),"Ancho banda");
+        Unidad1(Resto,659179687.5,Cantidad,tr("Mebibit por dia"),"Ancho banda");
+        Unidad(Resto,643730.164,Cantidad,tr("Gibibit por dia"),"Ancho banda");
+        Unidad1(Resto,643730.164,Cantidad,tr("Gibibit por dia"),"Ancho banda");
+        Unidad(Resto,628.64273787,Cantidad,tr("Tebibit por dia"),"Ancho banda");
+        Unidad1(Resto,628.64273787,Cantidad,tr("Tebibit por dia"),"Ancho banda");
+        Unidad(Resto,8640000000000,Cantidad,tr("Byte por dia"),"Ancho banda");
+        Unidad1(Resto,8640000000000,Cantidad,tr("Byte por dia"),"Ancho banda");
+        Unidad(Resto,86400000000,Cantidad,tr("Kilobyte por dia"),"Ancho banda");
+        Unidad1(Resto,86400000000,Cantidad,tr("Kilobyte por dia"),"Ancho banda");
+        Unidad(Resto,86400000,Cantidad,tr("Megabyte por dia"),"Ancho banda");
+        Unidad1(Resto,86400000,Cantidad,tr("Megabyte por dia"),"Ancho banda");
+        Unidad(Resto,86400,Cantidad,tr("Gigabyte por dia"),"Ancho banda");
+        Unidad1(Resto,86400,Cantidad,tr("Gigabyte por dia"),"Ancho banda");
+        Unidad(Resto,86.4,Cantidad,tr("Terabyte por dia"),"Ancho banda");
+        Unidad1(Resto,86.4,Cantidad,tr("Terabyte por dia"),"Ancho banda");
+        Unidad(Resto,84375000000,Cantidad,tr("Kibibyte por dia"),"Ancho banda");
+        Unidad1(Resto,84375000000,Cantidad,tr("Kibibyte por dia"),"Ancho banda");
+        Unidad(Resto,82397460.9,Cantidad,tr("Mebibyte por dia"),"Ancho banda");
+        Unidad1(Resto,82397460.9,Cantidad,tr("Mebibyte por dia"),"Ancho banda");
+        Unidad(Resto,80466.2704,Cantidad,tr("Gibibyte por dia"),"Ancho banda");
+        Unidad1(Resto,80466.2704,Cantidad,tr("Gibibyte por dia"),"Ancho banda");
+        Unidad(Resto,78.58034223,Cantidad,tr("Tebibyte por dia"),"Ancho banda");
+        Unidad1(Resto,78.58034223,Cantidad,tr("Tebibyte por dia"),"Ancho banda");
+        ui->label_14->setText(tr("Ancho de banda: Convertir a...")+ui->comboBox_24->currentText()+"");
+        ui->label_15->setText(tr("Ancho de banda: Convertir de...")+ui->comboBox_24->currentText()+"");
+    }
+    if (Tipo == "Angulo")
+    {
+        QString Value = ui->comboBox_21->currentText();
+        double Cantidad = ui->lineEdit_42->text().toFloat();
+        double Resto = Referencia(Value,"Angulo");
+        Unidad(Resto,360,Cantidad,tr("Grado sexagesimal"),"Angulo");
+        Unidad1(Resto,360,Cantidad,tr("Grado sexagesimal"),"Angulo");
+        Unidad(Resto,6.2831853072,Cantidad,tr("Radian"),"Angulo");
+        Unidad1(Resto,6.2831853072,Cantidad,tr("Radian)"),"Angulo");
+        Unidad(Resto,1,Cantidad,tr("Circulo"),"Angulo");
+        Unidad1(Resto,1,Cantidad,tr("Circulo"),"Angulo");
+        Unidad(Resto,1,Cantidad,tr("Giro"),"Angulo");
+        Unidad1(Resto,1,Cantidad,tr("Giro"),"Angulo");
+        Unidad(Resto,1,Cantidad,tr("Ciclo"),"Angulo");
+        Unidad1(Resto,1,Cantidad,tr("Ciclo"),"Angulo");
+        Unidad(Resto,1,Cantidad,tr("Rotacion"),"Angulo");
+        Unidad1(Resto,1,Cantidad,tr("Rotacion"),"Angulo");
+        Unidad(Resto,1,Cantidad,tr("Revolucion"),"Angulo");
+        Unidad1(Resto,1,Cantidad,tr("Revolucion"),"Angulo");
+        Unidad(Resto,4,Cantidad,tr("Angulo recto"),"Angulo");
+        Unidad1(Resto,4,Cantidad,tr("Angulo recto"),"Angulo");
+        Unidad(Resto,6400,Cantidad,tr("Milesimal (OTAN)"),"Angulo");
+        Unidad1(Resto,6400,Cantidad,tr("Milesimal (OTAN)"),"Angulo");
+        Unidad(Resto,6000,Cantidad,tr("Milesimal (Union Sovietica)"),"Angulo");
+        Unidad1(Resto,6000,Cantidad,tr("Milesimal (Union Sovietica)"),"Angulo");
+        Unidad(Resto,6300,Cantidad,tr("Milesimal (Suecia)"),"Angulo");
+        Unidad1(Resto,6300,Cantidad,tr("Milesimal (Suecia)"),"Angulo");
+        Unidad(Resto,400,Cantidad,tr("Grado centesimal"),"Angulo");
+        Unidad1(Resto,400,Cantidad,tr("Grado centesimal"),"Angulo");
+        Unidad(Resto,400,Cantidad,tr("Gon"),"Angulo");
+        Unidad1(Resto,400,Cantidad,tr("Gon"),"Angulo");
+        Unidad(Resto,32,Cantidad,tr("Punto"),"Angulo");
+        Unidad1(Resto,32,Cantidad,tr("Punto"),"Angulo");
+        Unidad(Resto,24,Cantidad,tr("Angulo horario"),"Angulo");
+        Unidad1(Resto,24,Cantidad,tr("Angulo horario"),"Angulo");
+        ui->label_14->setText(tr("Angulo: Convertir a...")+ui->comboBox_21->currentText()+"");
+        ui->label_15->setText(tr("Angulo: Convertir de...")+ui->comboBox_21->currentText()+"");
+    }
+    if (Tipo == "Area")
+    {
+        QString Value = ui->comboBox_4->currentText();
+        double Cantidad = ui->lineEdit_4->text().toFloat();
+        double Resto = Referencia(Value,"Area");
+        Unidad(Resto,100000000000000000000,Cantidad,tr("Nanometro cuadrado (nm²)"),"Area");
+        Unidad1(Resto,100000000000000000000,Cantidad,tr("Nanometro cuadrado (nm²)"),"Area");
+        Unidad(Resto,100000000000000,Cantidad,tr("Micrometro cuadrado (µm²)"),"Area");
+        Unidad1(Resto,100000000000000,Cantidad,tr("Micrometro cuadrado (µm²)"),"Area");
+        Unidad(Resto,100000000,Cantidad,tr("Milimetro cuadrado (mm²)"),"Area");
+        Unidad1(Resto,100000000,Cantidad,tr("Milimetro cuadrado (mm²)"),"Area");
+        Unidad(Resto,1000000,Cantidad,tr("Centimetro cuadrado (cm²)"),"Area");
+        Unidad1(Resto,1000000,Cantidad,tr("Centimetro cuadrado (cm²)"),"Area");
+        Unidad(Resto,10000,Cantidad,tr("Decimetro cuadrado (dm²)"),"Area");
+        Unidad1(Resto,10000,Cantidad,tr("Decimetro cuadrado (dm²)"),"Area");
+        Unidad(Resto,100,Cantidad,tr("Metro cuadrado (m²)"),"Area");
+        Unidad1(Resto,100,Cantidad,tr("Metro cuadrado (m²)"),"Area");
+        Unidad(Resto,1,Cantidad,tr("Area (a)"),"Area");
+        Unidad1(Resto,1,Cantidad,tr("Area (a)"),"Area");
+        Unidad(Resto,0.01,Cantidad,tr("Hectarea (ha)"),"Area");
+        Unidad1(Resto,0.01,Cantidad,tr("Hectarea (ha)"),"Area");
+        Unidad(Resto,0.0001,Cantidad,tr("Kilometro cuadrado (km²)"),"Area");
+        Unidad1(Resto,0.0001,Cantidad,tr("Kilometro cuadrado (km²)"),"Area");
+        Unidad(Resto,0.0000010725,Cantidad,tr("Municipio"),"Area");
+        Unidad1(Resto,0.0000010725,Cantidad,tr("Municipio"),"Area");
+        Unidad(Resto,0.0000386102,Cantidad,tr("Milla cuadrada"),"Area");
+        Unidad1(Resto,0.0000386102,Cantidad,tr("Milla cuadrada"),"Area");
+        Unidad(Resto,0.0001544409,Cantidad,tr("Patrimonio familiar"),"Area");
+        Unidad1(Resto,0.0001544409,Cantidad,tr("Patrimonio familiar"),"Area");
+        Unidad(Resto,0.02471055,Cantidad,tr("Acre"),"Area");
+        Unidad1(Resto,0.02471055,Cantidad,tr("Acre"),"Area");
+        Unidad(Resto,0.0988422,Cantidad,tr("Rood"),"Area");
+        Unidad1(Resto,0.0988422,Cantidad,tr("Rood"),"Area");
+        Unidad(Resto,3.953687,Cantidad,tr("Rod cuadrada"),"Area");
+        Unidad1(Resto,3.953687,Cantidad,tr("Rod cuadrada"),"Area");
+        Unidad(Resto,10.76391,Cantidad,tr("Cuadrado"),"Area");
+        Unidad1(Resto,10.76391,Cantidad,tr("Cuadrado"),"Area");
+        Unidad(Resto,119.599,Cantidad,tr("Yarda cuadrada (yd²)"),"Area");
+        Unidad1(Resto,119.599,Cantidad,tr("Yarda cuadrada (yd²)"),"Area");
+        Unidad(Resto,1076.391,Cantidad,tr("Pie cuadrado (ft²)"),"Area");
+        Unidad1(Resto,1076.391,Cantidad,tr("Pie cuadrado (ft²)"),"Area");
+        Unidad(Resto,155000.3,Cantidad,tr("Pulgada cuadrada (in²)"),"Area");
+        Unidad1(Resto,155000.3,Cantidad,tr("Pulgada cuadrada (in²)"),"Area");
+        Unidad(Resto,30.24999,Cantidad,tr("Tsubo"),"Area");
+        Unidad1(Resto,30.24999,Cantidad,tr("Tsubo"),"Area");
+        Unidad(Resto,10083.33,Cantidad,tr("Cho"),"Area");
+        Unidad1(Resto,10083.33,Cantidad,tr("Cho"),"Area");
+        Unidad(Resto,100833.3,Cantidad,tr("Tann"),"Area");
+        Unidad1(Resto,100833.3,Cantidad,tr("Tann"),"Area");
+        Unidad(Resto,1008333,Cantidad,tr("Se"),"Area");
+        Unidad1(Resto,1008333,Cantidad,tr("Se"),"Area");
+        Unidad(Resto,0.1,Cantidad,tr("Donum metrico"),"Area");
+        Unidad1(Resto,0.1,Cantidad,tr("Donum metrico"),"Area");
+        Unidad(Resto,0.074749375,Cantidad,tr("Donum de Chipre"),"Area");
+        Unidad1(Resto,0.074749375,Cantidad,tr("Donum de Chipre"),"Area");
+        Unidad(Resto,0.04,Cantidad,tr("Donum iraqui"),"Area");
+        Unidad1(Resto,0.04,Cantidad,tr("Donum iraqui"),"Area");
+        Unidad(Resto,0.01,Cantidad,tr("Estrema griego"),"Area");
+        Unidad1(Resto,0.01,Cantidad,tr("Estrema griego"),"Area");
+        Unidad(Resto,0.0140056,Cantidad,tr("Campo de futbol"),"Area");
+        Unidad1(Resto,0.0140056,Cantidad,tr("Campo de futbol"),"Area");
+        ui->label_14->setText(tr("Superficie o Area: Convertir a...")+ui->comboBox_4->currentText()+"");
+        ui->label_15->setText(tr("Superficie o Area: Convertir de...")+ui->comboBox_4->currentText()+"");
+    }
+    if (Tipo == "Campo")
+    {
+        QString Value = ui->comboBox_18->currentText();
+        double Cantidad = ui->lineEdit_39->text().toFloat();
+        double Resto = Referencia(Value,"Campo");
+        Unidad(Resto,0.7957747155,Cantidad,tr("Amperio por metro (A/m)"),"Campo");
+        Unidad1(Resto,0.7957747155,Cantidad,tr("Amperio por metro (A/m)"),"Campo");
+        Unidad(Resto,0.7957747155,Cantidad,tr("Amperio-vuelta por metro (AT/m)"),"Campo");
+        Unidad1(Resto,0.7957747155,Cantidad,tr("Amperio-vuelta por metro (AT/m)"),"Campo");
+        Unidad(Resto,0.01,Cantidad,tr("Oersted (Oe)"),"Campo");
+        Unidad1(Resto,0.01,Cantidad,tr("Oersted (Oe)"),"Campo");
+        Unidad(Resto,1,Cantidad,tr("Gilbert por metro (Gi/m)"),"Campo");
+        Unidad1(Resto,1,Cantidad,tr("Gilbert por metro (Gi/m)"),"Campo");
+        ui->label_14->setText(tr("Campo magnetico: Convertir a...")+ui->comboBox_18->currentText()+"");
+        ui->label_15->setText(tr("Campo magnetico: Convertir de...")+ui->comboBox_18->currentText()+"");
+    }
+    if (Tipo == "Luz")
+    {
+        QString Value = ui->comboBox_17->currentText();
+        double Cantidad = ui->lineEdit_37->text().toFloat();
+        double Resto = Referencia(Value,"Luz");
+        Unidad(Resto,3600,Cantidad,tr("Talbot (T)"),"Luz");
+        Unidad1(Resto,3600,Cantidad,tr("Talbot (T)"),"Luz");
+        Unidad(Resto,3600,Cantidad,tr("Lumen segundo (lm·s)"),"Luz");
+        Unidad1(Resto,3600,Cantidad,tr("Lumen segundo (lm·s)"),"Luz");
+        Unidad(Resto,60,Cantidad,tr("Lumen minuto (lm·min)"),"Luz");
+        Unidad1(Resto,60,Cantidad,tr("Lumen minuto (lm·min)"),"Luz");
+        Unidad(Resto,1,Cantidad,tr("Lumen hora (lm·h)"),"Luz");
+        Unidad1(Resto,1,Cantidad,tr("Lumen hora (lm·h)"),"Luz");
+        ui->label_14->setText(tr("Cantidad de luz: Convertir a...")+ui->comboBox_17->currentText()+"");
+        ui->label_15->setText(tr("Cantidad de luz: Convertir de...")+ui->comboBox_17->currentText()+"");
+    }
+    if (Tipo == "Sustancia")
+    {
+        QString Value = ui->comboBox_50->currentText();
+        double Cantidad = ui->lineEdit_156->text().toFloat();
+        double Resto = Referencia(Value,"Sustancia");
+        Unidad(Resto,1000,Cantidad,tr("Milimol (mmol)"),"Sustancia");
+        Unidad1(Resto,1000,Cantidad,tr("Milimol (mmol)"),"Sustancia");
+        Unidad(Resto,1,Cantidad,tr("Mol (mol)"),"Sustancia");
+        Unidad1(Resto,1,Cantidad,tr("Mol (mol)"),"Sustancia");
+        Unidad(Resto,0.001,Cantidad,tr("Kilomol (kmol)"),"Sustancia");
+        Unidad1(Resto,0.001,Cantidad,tr("Kilomol (kmol)"),"Sustancia");
+        Unidad(Resto,0.0022046226,Cantidad,tr("Libra mol (lb-mol)"),"Sustancia");
+        Unidad1(Resto,0.0022046226,Cantidad,tr("Libra mol (lb-mol)"),"Sustancia");
+        ui->label_14->setText(tr("Cantidad de sustancia: Convertir a...")+ui->comboBox_50->currentText()+"");
+        ui->label_15->setText(tr("Cantidad de sustancia: Convertir de...")+ui->comboBox_50->currentText()+"");
+    }
+}
+
+double ConversorUD::Referencia(QString Value,QString Tipo)
+{
+    double Valor;
+    if (Tipo == "Longitud")
+    {
+        if (Value == tr("Angstrom (Å)"))
+            Valor = 0.0000000001;
+        if (Value == tr("Nanometro (nm)"))
+            Valor = 0.000000001;
+        if (Value == tr("Micrometro (µm)"))
+            Valor = 0.000001;
+        if (Value == tr("Milimetro (mm)"))
+            Valor = 0.001;
+        if (Value == tr("Centimetro (cm)"))
+            Valor = 0.01;
+        if (Value == tr("Decimetro (dm)"))
+            Valor = 0.1;
+        if (Value == tr("Metro (m)"))
+            Valor = 1;
+        if (Value == tr("Decametro (dam)"))
+            Valor = 10;
+        if (Value == tr("Hectometro (hm)"))
+            Valor = 100;
+        if (Value == tr("Kilometro (km)"))
+            Valor = 1000;
+        if (Value == tr("Miriametro (mam)"))
+            Valor = 10000;
+        if (Value == tr("Legua"))
+            Valor = 4828.032;
+        if (Value == tr("Milla (mi)"))
+            Valor = 1609.344;
+        if (Value == tr("Estadio"))
+            Valor = 201.168;
+        if (Value == tr("Cadena"))
+            Valor = 20.1168;
+        if (Value == tr("Barra (rd)"))
+            Valor = 5.0292;
+        if (Value == tr("Yarda (yd)"))
+            Valor = 0.9144;
+        if (Value == tr("Pie (ft)"))
+            Valor = 0.3048;
+        if (Value == tr("Link"))
+            Valor = 0.201168;
+        if (Value == tr("Mano"))
+            Valor = 0.1016;
+        if (Value == tr("Pulgada (in)"))
+            Valor = 0.0254;
+        if (Value == tr("Linea"))
+            Valor = 0.00254;
+        if (Value == tr("Mil (mil)"))
+            Valor = 0.0000254;
+        if (Value == tr("Thou (thou)"))
+            Valor = 0.0000254;
+        if (Value == tr("Milla nautica"))
+            Valor = 1852;
+        if (Value == tr("Braza"))
+            Valor = 1.8288;
+        if (Value == tr("Parsec (pc)"))
+            Valor = 30857000000000000;
+        if (Value == tr("Ano luz"))
+            Valor = 9454254955488000;
+        if (Value == tr("Unidad astronomica (AE)"))
+            Valor = 147597870610;
+        if (Value == tr("Minuto luz"))
+            Valor = 17987547480;
+        if (Value == tr("Segundo luz"))
+            Valor = 299792458;
+    }
+    if (Tipo == "Aceleracion")
+    {
+        if (Value == tr("Metros por segundo cuadrado (m/s²)"))
+            Valor = 0.01;
+        if (Value == tr("Pies por segundo cuadrado (ft/s²)"))
+            Valor = 0.0328083333;
+        if (Value == tr("Gal"))
+            Valor = 1;
+        if (Value == tr("Miligal"))
+            Valor = 1000;
+        if (Value == tr("Gravedad estandar"))
+            Valor = 0.0010197162;
+        if (Value == tr("Fuerza G (g)"))
+            Valor = 0.0010197162;
+    }
+    if (Tipo == "Almacenamiento")
+    {
+        if (Value == tr("Bit"))
+            Valor = 8;
+        if (Value == tr("Nibble"))
+            Valor = 2;
+        if (Value == tr("Kilobit"))
+            Valor = 0.0078125;
+        if (Value == tr("Megabit"))
+            Valor = 0.0000076294;
+        if (Value == tr("Gigabit"))
+            Valor = 0.00000000074505805969;
+        if (Value == tr("Terabit"))
+            Valor = 0.00000000000072759580612;
+        if (Value == tr("Petabit"))
+            Valor = 0.0000000000000007105427742;
+        if (Value == tr("Exabit"))
+            Valor = 0.000000000000000000769388942719;
+        if (Value == tr("Byte (B)"))
+            Valor = 1;
+        if (Value == tr("Kilobyte (KB)"))
+            Valor = 0.0009765625;
+        if (Value == tr("Megabyte (MB)"))
+            Valor = 0.000000095367431641;
+        if (Value == tr("Gigabyte (GB)"))
+            Valor = 0.000000000093132257462;
+        if (Value == tr("Terabyte (TB)"))
+            Valor = 0.000000000000090949478149;
+        if (Value == tr("Petabyte (PB)"))
+            Valor = 0.000000000000000088817853928;
+        if (Value == tr("Exabyte (EB)"))
+            Valor = 0.000000000000000000086736183167;
+    }
+    if (Tipo == "Ancho banda")
+    {
+        if (Value == tr("Bit por segundo (bit/s)"))
+            Valor = 8000000000;
+        if (Value == tr("Kilobit por segundo (kbit/s)"))
+            Valor = 8000000;
+        if (Value == tr("Megabit por segundo (Mbit/s)"))
+            Valor = 8000;
+        if (Value == tr("Gigabit por segundo (Gbit/s)"))
+            Valor = 8;
+        if (Value == tr("Terabit por segundo (Tbit/s)"))
+            Valor = 0.008;
+        if (Value == tr("Kibibit por segundo (Kibit/s)"))
+            Valor = 7812500;
+        if (Value == tr("Mebibit por segundo (Mibit/s)"))
+            Valor = 0.0000078125;
+        if (Value == tr("Gibibit por segundo (Gibit/s"))
+            Valor = 7.4505806;
+        if (Value == tr("Tebibit por segundo (Tibit/s)"))
+            Valor = 0.00727596;
+        if (Value == tr("Byte por segundo (B/s)"))
+            Valor = 1000000000;
+        if (Value == tr("Kilobyte por segundo (kB/s)"))
+            Valor = 1000000;
+        if (Value == tr("Megabyte por segundo (MB/s)"))
+            Valor = 1000;
+        if (Value == tr("Gigabyte por segundo (GB/s)"))
+            Valor = 1;
+        if (Value == tr("Terabyte por segundo (TB/s)"))
+            Valor = 0.001;
+        if (Value == tr("Kibibyte por segundo (KiB/s)"))
+            Valor = 976562.5;
+        if (Value == tr("Mebibyte por segundo (MiB/s)"))
+            Valor = 953.67431641;
+        if (Value == tr("Gibibyte por segundo (GiB/s)"))
+            Valor = 0.93132257;
+        if (Value == tr("Tebibyte por segundo (TiB/s)"))
+            Valor = 0.00090949;
+        if (Value == tr("Bit por hora"))
+            Valor = 2880000000000;
+        if (Value == tr("Kilobit por hora"))
+            Valor = 28800000000;
+        if (Value == tr("Megabit por hora"))
+            Valor = 2880000;
+        if (Value == tr("Gigabit por hora"))
+            Valor = 28800;
+        if (Value == tr("Terabit por hora"))
+            Valor = 28.8;
+        if (Value == tr("Kibibit por hora"))
+            Valor = 28125000000;
+        if (Value == tr("Mebibit por hora"))
+            Valor = 27465820.3;
+        if (Value == tr("Gibibit por hora"))
+            Valor = 26822.0901;
+        if (Value == tr("Tebibit por hora"))
+            Valor = 26.19344741;
+        if (Value == tr("Byte por hora"))
+            Valor = 3600000000000;
+        if (Value == tr("Kilobyte por hora"))
+            Valor = 3600000000;
+        if (Value == tr("Megabyte por hora"))
+            Valor = 3600000;
+        if (Value == tr("Gigabyte por hora"))
+            Valor = 3600;
+        if (Value == tr("Terabyte por hora"))
+            Valor = 3.6;
+        if (Value == tr("Kibibyte por hora"))
+            Valor = 3516625000;
+        if (Value == tr("Mebibyte por hora"))
+            Valor = 3433227.54;
+        if (Value == tr("Gibibyte por hora"))
+            Valor = 3352.76127;
+        if (Value == tr("Tebibyte por hora"))
+            Valor = 3.27418093;
+        if (Value == tr("Bit por dia"))
+            Valor = 69120000000000;
+        if (Value == tr("Kilobit por dia"))
+            Valor = 691200000000;
+        if (Value == tr("Megabit por dia"))
+            Valor = 691200000;
+        if (Value == tr("Gigabit por dia"))
+            Valor = 691200;
+        if (Value == tr("Terabit por dia"))
+            Valor = 691.2;
+        if (Value == tr("Kibibit por dia"))
+            Valor = 675000000000;
+        if (Value == tr("Mebibit por dia"))
+            Valor = 659179687.5;
+        if (Value == tr("Gibibit por dia"))
+            Valor = 643730.164;
+        if (Value == tr("Tebibit por dia"))
+            Valor = 628.64273787;
+        if (Value == tr("Byte por dia"))
+            Valor = 8640000000000;
+        if (Value == tr("Kilobyte por dia"))
+            Valor = 86400000000;
+        if (Value == tr("Megabyte por dia"))
+            Valor = 86400000;
+        if (Value == tr("Gigabyte por dia"))
+            Valor = 86400;
+        if (Value == tr("Terabyte por dia"))
+            Valor = 86.4;
+        if (Value == tr("Kibibyte por dia"))
+            Valor = 84375000000;
+        if (Value == tr("Mebibyte por dia"))
+            Valor = 82397460.9;
+        if (Value == tr("Gibibyte por dia"))
+            Valor = 80466.2704;
+        if (Value == tr("Tebibyte por dia"))
+            Valor = 78.58034223;
+    }
+    if (Tipo == "Angulo")
+    {
+        if (Value == tr("Grado sexagesimal"))
+            Valor = 360;
+        if (Value == tr("Radian"))
+            Valor = 6.2831853072;
+        if (Value == tr("Circulo"))
+            Valor = 1;
+        if (Value == tr("Giro"))
+            Valor = 1;
+        if (Value == tr("Ciclo"))
+            Valor = 1;
+        if (Value == tr("Rotacion"))
+            Valor = 1;
+        if (Value == tr("Revolucion"))
+            Valor = 1;
+        if (Value == tr("Angulo recto"))
+            Valor = 4;
+        if (Value == tr("Milesimal (OTAN)"))
+            Valor = 6400;
+        if (Value == tr("Milesimal (Union Sovietica)"))
+            Valor = 6000;
+        if (Value == tr("Milesimal (Suecia)"))
+            Valor = 6300;
+        if (Value == tr("Grado centesimal"))
+            Valor = 400;
+        if (Value == tr("Gon"))
+            Valor = 400;
+        if (Value == tr("Punto"))
+            Valor = 32;
+        if (Value == tr("Angulo horario"))
+            Valor = 24;
+    }
+    if (Tipo == "Area")
+    {
+        if (Value == tr("Nanometro cuadrado (nm²)"))
+            Valor = 100000000000000000000;
+        if (Value == tr("Micrometro cuadrado (µm²)"))
+            Valor = 100000000000000;
+        if (Value == tr("Milimetro cuadrado (mm²)"))
+            Valor = 100000000;
+        if (Value == tr("Centimetro cuadrado (cm²)"))
+            Valor = 1000000;
+        if (Value == tr("Decimetro cuadrado (dm²)"))
+            Valor = 10000;
+        if (Value == tr("Metro cuadrado (m²)"))
+            Valor = 100;
+        if (Value == tr("Area (a)"))
+            Valor = 1;
+        if (Value == tr("Hectarea (ha)"))
+            Valor = 0.01;
+        if (Value == tr("Kilometro cuadrado (km²)"))
+            Valor = 0.0001;
+        if (Value == tr("Municipio"))
+            Valor = 0.0000010725;
+        if (Value == tr("Milla cuadrada"))
+            Valor = 0.0000386102;
+        if (Value == tr("Patrimonio familiar"))
+            Valor = 0.0001544409;
+        if (Value == tr("Acre"))
+            Valor = 0.02471055;
+        if (Value == tr("Rood"))
+            Valor = 0.0988422;
+        if (Value == tr("Rod cuadrada"))
+            Valor = 3.953687;
+        if (Value == tr("Cuadrado"))
+            Valor = 10.76391;
+        if (Value == tr("Yarda cuadrada (yd²)"))
+            Valor = 119.599;
+        if (Value == tr("Pie cuadrado (ft²)"))
+            Valor = 1076.391;
+        if (Value == tr("Pulgada cuadrada (in²)"))
+            Valor = 155000.3;
+        if (Value == tr("Tsubo"))
+            Valor = 30.24999;
+        if (Value == tr("Cho"))
+            Valor = 10083.33;
+        if (Value == tr("Tann"))
+            Valor = 100833.3;
+        if (Value == tr("Se"))
+            Valor = 1008333;
+        if (Value == tr("Donum metrico"))
+            Valor = 0.1;
+        if (Value == tr("Donum de Chipre"))
+            Valor = 0.074749375;
+        if (Value == tr("Donum iraqui"))
+            Valor = 0.04;
+        if (Value == tr("Estrema griego"))
+            Valor = 0.01;
+        if (Value == tr("Campo de futbol"))
+            Valor = 0.0140056;
+    }
+    if (Tipo == "Campo")
+    {
+        if (Value == tr("Amperio por metro (A/m)"))
+            Valor = 0.7957747155;
+        if (Value == tr("Amperio-vuelta por metro (AT/m)"))
+            Valor = 0.7957747155;
+        if (Value == tr("Oersted (Oe)"))
+            Valor = 0.01;
+        if (Value == tr("Gilbert por metro (Gi/m)"))
+            Valor = 1;
+    }
+    if (Tipo == "Luz")
+    {
+        if (Value == tr("Talbot (T)"))
+            Valor = 3600;
+        if (Value == tr("Lumen segundo (lm·s)"))
+            Valor = 3600;
+        if (Value == tr("Lumen minuto (lm·min)"))
+            Valor = 60;
+        if (Value == tr("Lumen hora (lm·h)"))
+            Valor = 1;
+    }
+    if (Tipo == "Sustancia")
+    {
+        if (Value == tr("Milimol (mmol)"))
+            Valor = 1000;
+        if (Value == tr("Mol (mol)"))
+            Valor = 1;
+        if (Value == tr("Kilomol (kmol)"))
+            Valor = 0.001;
+        if (Value == tr("Libra mol (lb-mol)"))
+            Valor = 0.0022046226;
+    }
+    return Valor;
+}
+
+void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString Nombre, QString Base)
+{
+    if (Base == "Longitud")
+    {
+        if (ui->lineEdit->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Zero+" "+ui->comboBox->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value/Value1)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Valor+" "+ui->comboBox->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Aceleracion")
+    {
+        if (ui->lineEdit_47->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_26->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Zero+" "+ui->comboBox_26->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value1/Value)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Valor+" "+ui->comboBox_26->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Almacenamiento")
+    {
+        if (ui->lineEdit_40->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_19->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Zero+" "+ui->comboBox_19->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value1/Value)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Valor+" "+ui->comboBox_19->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Ancho banda")
+    {
+        if (ui->lineEdit_45->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_24->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Zero+" "+ui->comboBox_24->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value1/Value)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Valor+" "+ui->comboBox_24->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Angulo")
+    {
+        if (ui->lineEdit_42->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_21->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Zero+" "+ui->comboBox_21->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value1/Value)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Valor+" "+ui->comboBox_21->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Area")
+    {
+        if (ui->lineEdit_4->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_4->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Zero+" "+ui->comboBox_4->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value1/Value)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Valor+" "+ui->comboBox_4->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Campo")
+    {
+        if (ui->lineEdit_39->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_18->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Zero+" "+ui->comboBox_18->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value1/Value)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Valor+" "+ui->comboBox_18->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Luz")
+    {
+        if (ui->lineEdit_37->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_17->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Zero+" "+ui->comboBox_17->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value1/Value)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Valor+" "+ui->comboBox_17->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Sustancia")
+    {
+        if (ui->lineEdit_156->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_50->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Zero+" "+ui->comboBox_50->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value1/Value)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Valor+" "+ui->comboBox_50->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+}
+void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString Nombre, QString Base)
+{
+    if (Base == "Longitud")
+    {
+        if (ui->lineEdit->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value1/Value)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox->currentText()+tr(" son ")+Valor+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Aceleracion")
+    {
+        if (ui->lineEdit_47->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_26->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_26->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value/Value1)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_26->currentText()+tr(" son ")+Valor+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Almacenamiento")
+    {
+        if (ui->lineEdit_40->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_19->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_19->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value/Value1)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_19->currentText()+tr(" son ")+Valor+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Ancho banda")
+    {
+        if (ui->lineEdit_45->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_24->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_24->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value/Value1)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_24->currentText()+tr(" son ")+Valor+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Angulo")
+    {
+        if (ui->lineEdit_42->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_21->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_21->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value/Value1)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_21->currentText()+tr(" son ")+Valor+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Area")
+    {
+        if (ui->lineEdit_4->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_4->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_4->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value/Value1)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_4->currentText()+tr(" son ")+Valor+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Campo")
+    {
+        if (ui->lineEdit_39->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_18->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_18->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value/Value1)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_18->currentText()+tr(" son ")+Valor+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Luz")
+    {
+        if (ui->lineEdit_37->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_17->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_17->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value/Value1)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_17->currentText()+tr(" son ")+Valor+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Sustancia")
+    {
+        if (ui->lineEdit_156->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_50->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_50->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value/Value1)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_50->currentText()+tr(" son ")+Valor+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+}
+
+void ConversorUD::on_pushButton_32_clicked()
+{
+    ui->lineEdit_156->setText("");
+    ui->lineEdit_156->setFocus();
+    ui->lineEdit_157->setText("");
+    ui->lineEdit_157->setToolTip("");
+    ui->label_14->setText("");
+    ui->label_15->setText("");
+    ui->textEdit->setText("");
+    ui->textEdit_2->setText("");
+}
+
+void ConversorUD::on_lineEdit_156_returnPressed()
+{
+    ui->lineEdit_156->setFocus();
+    ui->lineEdit_156->selectAll();
+}
+
+void ConversorUD::on_lineEdit_156_textChanged(const QString &arg1)
+{
+    if (arg1 != "")
+    {
+        QString Valor = VerNum(arg1,1);
+        if (Valor == "No")
+            {
+            if (ui->lineEdit_156->text() == "")
+            {
+                ui->lineEdit_157->setText("");
+                ui->lineEdit_157->setToolTip("");
+            }
+            else
+            {
+                QString Valor = ui->comboBox_50->currentText();
+                double Cantidad = arg1.toDouble();
+                double Resto = Referencia(Valor,"Sustancia");
+                QString Valor1 = ui->comboBox_51->currentText();
+                double Resto1 = Referencia(Valor1,"Sustancia");
+                if (Valor == Valor1)
+                {
+                    double ValorF = Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_157->setText(Zero);
+                    ui->lineEdit_157->setToolTip(Zero);
+                }
+                else
+                {
+                    double ValorF = (Resto1/Resto)*Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_157->setText(Zero);
+                    ui->lineEdit_157->setToolTip(Zero);
+                }
+            }
+            Reprobar("Sustancia");
+        }
+        else
+        {
+            QMessageBox m;
+            m.setWindowTitle(tr("Advertencia!!!"));
+            m.setText(tr("Has introducido un caracter no valido."));
+            m.exec();
+            ui->lineEdit_156->setFocus();
+            QString Resto = ui->lineEdit_156->text();
+            Resto.chop(1);
+            ui->lineEdit_156->setText(Resto);
+            return;
+        }
+    }
+}
+
+void ConversorUD::on_comboBox_50_activated(const QString &arg1)
+{
+    if (ui->lineEdit_156->text() == "")
+    {
+        ui->lineEdit_157->setText("");
+        ui->lineEdit_157->setToolTip("");
+    }
+    else
+    {
+        QString Valor = arg1;
+        double Cantidad = ui->lineEdit_156->text().toFloat();
+        double Resto = Referencia(Valor,"Sustancia");
+        QString Valor1 = ui->comboBox_51->currentText();
+        double Resto1 = Referencia(Valor1,"Sustancia");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_157->setText(Zero);
+            ui->lineEdit_157->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_157->setText(Zero);
+            ui->lineEdit_157->setToolTip(Zero);
+        }
+    }
+    Reprobar("Sustancia");
+}
+
+void ConversorUD::on_comboBox_51_activated(const QString &arg1)
+{
+    if (ui->lineEdit_156->text() == "")
+    {
+        ui->lineEdit_157->setText("");
+        ui->lineEdit_157->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_50->currentText();
+        double Cantidad = ui->lineEdit_156->text().toFloat();
+        double Resto = Referencia(Valor,"Sustancia");
+        QString Valor1 = arg1;
+        double Resto1 = Referencia(Valor1,"Sustancia");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_157->setText(Zero);
+            ui->lineEdit_157->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_157->setText(Zero);
+            ui->lineEdit_157->setToolTip(Zero);
+        }
+    }
+    Reprobar("Sustancia");
+}
+
+QString ConversorUD::getDivisa()
+{
+    QProcess *procesoFree;
+    QStringList argumentosFree;
+    QByteArray ip;
+    procesoFree=new QProcess(this);
+    argumentosFree << "http://www.convertworld.com/es/moneda/";
+    procesoFree->start("curl", argumentosFree);
+    if (! procesoFree->waitForStarted())
+        return QString("");
+    procesoFree->waitForFinished();
+    ip = procesoFree->readAllStandardOutput();
+    delete procesoFree;
+    QString res = QString(ip);
+    res.chop(0);
+    return res;
+}
+
+void ConversorUD::Divisa()
+{
+    QString Comprobar;
+    QStringList Resto;
+    QString Valor = getDivisa();
+    QStringList Depurar = Valor.split("\n");
+    for (int a=0;a<Depurar.count();a++)
+    {
+        Comprobar = Depurar.value(a);
+        if (Comprobar.contains("<option value="))
+        {
+            Resto << Comprobar;
+        }
+    }
+    qDebug() << Resto;
 }
