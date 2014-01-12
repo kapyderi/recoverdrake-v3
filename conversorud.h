@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 #include "ayuda.h"
 #include "calculadora.h"
+#include <QDate>
 
 namespace Ui {
 class ConversorUD;
@@ -112,12 +113,32 @@ private slots:
     void on_lineEdit_12_returnPressed();
     void on_comboBox_14_activated(const QString &arg1);
     void on_comboBox_15_activated(const QString &arg1);
-
     void on_lineEdit_50_textChanged(const QString &arg1);
-
     void on_pushButton_22_clicked();
-
     void on_lineEdit_50_returnPressed();
+    void on_lineEdit_4_returnPressed();
+    void on_lineEdit_4_textChanged(const QString &arg1);
+    void on_comboBox_4_activated(const QString &arg1);
+    void on_comboBox_6_activated(const QString &arg1);
+    void on_pushButton_16_clicked();
+    void on_lineEdit_39_returnPressed();
+    void on_lineEdit_39_textChanged(const QString &arg1);
+    void on_comboBox_18_activated(const QString &arg1);
+    void on_comboBox_23_activated(const QString &arg1);
+    void on_calendarWidget_clicked(const QDate &date);
+    void on_lineEdit_55_returnPressed();
+    void Semanas();
+    void on_pushButton_15_clicked();
+    void on_lineEdit_37_returnPressed();
+    void on_lineEdit_37_textChanged(const QString &arg1);
+    void on_comboBox_17_activated(const QString &arg1);
+    void on_comboBox_31_activated(const QString &arg1);
+    void on_pushButton_32_clicked();
+    void on_lineEdit_156_returnPressed();
+    void on_lineEdit_156_textChanged(const QString &arg1);
+    void on_comboBox_50_activated(const QString &arg1);
+    void on_comboBox_51_activated(const QString &arg1);
+    void Divisa();
 
 private:
     Ui::ConversorUD *ui;
@@ -149,6 +170,7 @@ private:
     int CalculoDC(int Numero, int Digit);
     int GetCalc(QString Valor, int Posicion, QString Tipo);
     QString tabla(QString Valor);
+    QString getDivisa();
 
 };
 
