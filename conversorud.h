@@ -140,6 +140,16 @@ private slots:
     void on_comboBox_51_activated(const QString &arg1);
     void Divisa();
 
+    void on_pushButton_31_clicked();
+
+    void on_lineEdit_154_returnPressed();
+
+    void on_lineEdit_154_textChanged(const QString &arg1);
+
+    void on_comboBox_48_activated(const QString &arg1);
+
+    void on_comboBox_49_activated(const QString &arg1);
+
 private:
     Ui::ConversorUD *ui;
     double Referencia(QString Value,QString Tipo);    

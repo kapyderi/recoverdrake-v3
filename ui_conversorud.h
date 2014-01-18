@@ -71,6 +71,8 @@ public:
     QLabel *label_19;
     QLabel *label_21;
     QPushButton *pushButton_6;
+    QLabel *label_133;
+    QLineEdit *lineEdit_124;
     QGroupBox *groupBox_6;
     QGridLayout *gridLayout_21;
     QGridLayout *gridLayout_19;
@@ -682,7 +684,7 @@ public:
     QPushButton *pushButton_32;
     QComboBox *comboBox_51;
     QGroupBox *groupBox_31;
-    QGridLayout *gridLayout_140;
+    QGridLayout *gridLayout_107;
     QGridLayout *gridLayout_141;
     QComboBox *comboBox_48;
     QLineEdit *lineEdit_154;
@@ -733,12 +735,14 @@ public:
     QComboBox *comboBox_53;
     QLineEdit *lineEdit_159;
     QLabel *label_158;
+    QFrame *line_10;
+    QFrame *line_11;
 
     void setupUi(QDialog *ConversorUD)
     {
         if (ConversorUD->objectName().isEmpty())
             ConversorUD->setObjectName(QString::fromUtf8("ConversorUD"));
-        ConversorUD->resize(1203, 1156);
+        ConversorUD->resize(1203, 1192);
         QFont font;
         font.setPointSize(7);
         ConversorUD->setFont(font);
@@ -849,7 +853,7 @@ public:
         groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
         gridLayout_20 = new QGridLayout(groupBox_7);
         gridLayout_20->setObjectName(QString::fromUtf8("gridLayout_20"));
-        gridLayout_20->setContentsMargins(0, 0, 0, 0);
+        gridLayout_20->setContentsMargins(9, 9, 9, 9);
         gridLayout_23 = new QGridLayout();
         gridLayout_23->setObjectName(QString::fromUtf8("gridLayout_23"));
         lineEdit_17 = new QLineEdit(groupBox_7);
@@ -859,6 +863,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(lineEdit_17->sizePolicy().hasHeightForWidth());
         lineEdit_17->setSizePolicy(sizePolicy);
+        lineEdit_17->setMinimumSize(QSize(200, 0));
         QFont font1;
         font1.setPointSize(15);
         font1.setBold(true);
@@ -950,11 +955,29 @@ public:
 
         gridLayout_23->addWidget(pushButton_6, 1, 8, 1, 1);
 
+        label_133 = new QLabel(groupBox_7);
+        label_133->setObjectName(QString::fromUtf8("label_133"));
+        label_133->setAlignment(Qt::AlignCenter);
+
+        gridLayout_23->addWidget(label_133, 0, 0, 1, 1);
+
+        lineEdit_124 = new QLineEdit(groupBox_7);
+        lineEdit_124->setObjectName(QString::fromUtf8("lineEdit_124"));
+        lineEdit_124->setMinimumSize(QSize(80, 0));
+        QFont font2;
+        font2.setPointSize(15);
+        lineEdit_124->setFont(font2);
+        lineEdit_124->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_124->setAlignment(Qt::AlignCenter);
+
+        gridLayout_23->addWidget(lineEdit_124, 1, 0, 1, 1);
+
 
         gridLayout_20->addLayout(gridLayout_23, 0, 0, 1, 1);
 
 
-        gridLayout_9->addWidget(groupBox_7, 8, 0, 1, 1);
+        gridLayout_9->addWidget(groupBox_7, 9, 0, 1, 1);
 
         groupBox_6 = new QGroupBox(ConversorUD);
         groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
@@ -965,7 +988,7 @@ public:
         groupBox_6->setSizePolicy(sizePolicy1);
         gridLayout_21 = new QGridLayout(groupBox_6);
         gridLayout_21->setObjectName(QString::fromUtf8("gridLayout_21"));
-        gridLayout_21->setContentsMargins(0, 0, 0, 0);
+        gridLayout_21->setContentsMargins(9, 9, 9, 9);
         gridLayout_19 = new QGridLayout();
         gridLayout_19->setObjectName(QString::fromUtf8("gridLayout_19"));
         lineEdit_14 = new QLineEdit(groupBox_6);
@@ -1023,7 +1046,7 @@ public:
         gridLayout_21->addLayout(gridLayout_19, 0, 0, 1, 1);
 
 
-        gridLayout_9->addWidget(groupBox_6, 8, 1, 1, 1);
+        gridLayout_9->addWidget(groupBox_6, 9, 1, 1, 1);
 
         groupBox_9 = new QGroupBox(ConversorUD);
         groupBox_9->setObjectName(QString::fromUtf8("groupBox_9"));
@@ -1031,7 +1054,7 @@ public:
         groupBox_9->setSizePolicy(sizePolicy1);
         gridLayout_27 = new QGridLayout(groupBox_9);
         gridLayout_27->setObjectName(QString::fromUtf8("gridLayout_27"));
-        gridLayout_27->setContentsMargins(0, 0, 0, 0);
+        gridLayout_27->setContentsMargins(9, 9, 9, 9);
         radioButton_3 = new QRadioButton(groupBox_9);
         radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
 
@@ -1051,8 +1074,6 @@ public:
 
         label_25 = new QLabel(groupBox_9);
         label_25->setObjectName(QString::fromUtf8("label_25"));
-        QFont font2;
-        font2.setPointSize(15);
         label_25->setFont(font2);
 
         gridLayout_26->addWidget(label_25, 1, 4, 1, 1);
@@ -1522,7 +1543,7 @@ public:
         gridLayout_31->addWidget(checkBox, 4, 20, 1, 1);
 
 
-        gridLayout_9->addWidget(groupBox_10, 9, 0, 1, 2);
+        gridLayout_9->addWidget(groupBox_10, 11, 0, 1, 2);
 
         label_14 = new QLabel(ConversorUD);
         label_14->setObjectName(QString::fromUtf8("label_14"));
@@ -1533,7 +1554,7 @@ public:
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
         gridLayout_7 = new QGridLayout(groupBox_8);
         gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
-        gridLayout_7->setContentsMargins(0, 0, 0, 0);
+        gridLayout_7->setContentsMargins(9, 9, 9, 9);
         radioButton = new QRadioButton(groupBox_8);
         radioButton->setObjectName(QString::fromUtf8("radioButton"));
 
@@ -2537,7 +2558,7 @@ public:
         toolBox->setFrameShape(QFrame::NoFrame);
         page = new QWidget();
         page->setObjectName(QString::fromUtf8("page"));
-        page->setGeometry(QRect(0, 0, 576, 241));
+        page->setGeometry(QRect(0, 0, 459, 198));
         gridLayout_69 = new QGridLayout(page);
         gridLayout_69->setObjectName(QString::fromUtf8("gridLayout_69"));
         tabWidget_2 = new QTabWidget(page);
@@ -3968,7 +3989,7 @@ public:
         toolBox->addItem(page_2, QString::fromUtf8("Trimestre 2"));
         page_3 = new QWidget();
         page_3->setObjectName(QString::fromUtf8("page_3"));
-        page_3->setGeometry(QRect(0, 0, 576, 241));
+        page_3->setGeometry(QRect(0, 0, 459, 180));
         gridLayout_71 = new QGridLayout(page_3);
         gridLayout_71->setObjectName(QString::fromUtf8("gridLayout_71"));
         tabWidget_4 = new QTabWidget(page_3);
@@ -4912,9 +4933,9 @@ public:
         groupBox_31 = new QGroupBox(tab_30);
         groupBox_31->setObjectName(QString::fromUtf8("groupBox_31"));
         groupBox_31->setMaximumSize(QSize(16777215, 82));
-        gridLayout_140 = new QGridLayout(groupBox_31);
-        gridLayout_140->setObjectName(QString::fromUtf8("gridLayout_140"));
-        gridLayout_140->setContentsMargins(0, 0, 0, 0);
+        gridLayout_107 = new QGridLayout(groupBox_31);
+        gridLayout_107->setObjectName(QString::fromUtf8("gridLayout_107"));
+        gridLayout_107->setContentsMargins(0, 0, 0, 0);
         gridLayout_141 = new QGridLayout();
         gridLayout_141->setObjectName(QString::fromUtf8("gridLayout_141"));
         comboBox_48 = new QComboBox(groupBox_31);
@@ -4931,13 +4952,13 @@ public:
         gridLayout_141->addWidget(lineEdit_154, 1, 0, 1, 1);
 
 
-        gridLayout_140->addLayout(gridLayout_141, 0, 0, 1, 1);
+        gridLayout_107->addLayout(gridLayout_141, 0, 0, 1, 1);
 
         label_156 = new QLabel(groupBox_31);
         label_156->setObjectName(QString::fromUtf8("label_156"));
         label_156->setFont(font1);
 
-        gridLayout_140->addWidget(label_156, 0, 1, 1, 1);
+        gridLayout_107->addWidget(label_156, 0, 1, 1, 1);
 
         gridLayout_142 = new QGridLayout();
         gridLayout_142->setObjectName(QString::fromUtf8("gridLayout_142"));
@@ -4967,7 +4988,7 @@ public:
         gridLayout_142->addWidget(comboBox_49, 0, 0, 1, 1);
 
 
-        gridLayout_140->addLayout(gridLayout_142, 0, 2, 1, 1);
+        gridLayout_107->addLayout(gridLayout_142, 0, 2, 1, 1);
 
 
         gridLayout_152->addWidget(groupBox_31, 0, 1, 1, 1);
@@ -5245,6 +5266,20 @@ public:
 
         gridLayout_9->addWidget(tabWidget, 0, 0, 1, 2);
 
+        line_10 = new QFrame(ConversorUD);
+        line_10->setObjectName(QString::fromUtf8("line_10"));
+        line_10->setFrameShape(QFrame::HLine);
+        line_10->setFrameShadow(QFrame::Sunken);
+
+        gridLayout_9->addWidget(line_10, 8, 0, 1, 2);
+
+        line_11 = new QFrame(ConversorUD);
+        line_11->setObjectName(QString::fromUtf8("line_11"));
+        line_11->setFrameShape(QFrame::HLine);
+        line_11->setFrameShadow(QFrame::Sunken);
+
+        gridLayout_9->addWidget(line_11, 10, 0, 1, 2);
+
 
         gridLayout_25->addLayout(gridLayout_9, 1, 0, 1, 2);
 
@@ -5349,9 +5384,10 @@ public:
          << QApplication::translate("ConversorUD", "Ancho de banda", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Angulo", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Calendario de embarazo", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Campo magnetico", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Cantidad de luz", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Cantidad de sustancia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Campo magnetico", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Capacidad electrica", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Distancia o Longitud", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Sistema de numeracion", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Superficie o Area", 0, QApplication::UnicodeUTF8)
@@ -5367,6 +5403,7 @@ public:
         label_19->setText(QApplication::translate("ConversorUD", "-", 0, QApplication::UnicodeUTF8));
         label_21->setText(QApplication::translate("ConversorUD", "-", 0, QApplication::UnicodeUTF8));
         pushButton_6->setText(QString());
+        label_133->setText(QApplication::translate("ConversorUD", "IBAN", 0, QApplication::UnicodeUTF8));
         groupBox_6->setTitle(QApplication::translate("ConversorUD", "D.N.I. (Calcular letra)", 0, QApplication::UnicodeUTF8));
         pushButton_5->setText(QString());
         label_8->setText(QApplication::translate("ConversorUD", "D.N.I.", 0, QApplication::UnicodeUTF8));
@@ -6696,23 +6733,63 @@ public:
          << QApplication::translate("ConversorUD", "Kilomol (kmol)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Libra mol (lb-mol)", 0, QApplication::UnicodeUTF8)
         );
-        groupBox_31->setTitle(QApplication::translate("ConversorUD", "()", 0, QApplication::UnicodeUTF8));
+        groupBox_31->setTitle(QApplication::translate("ConversorUD", "Capacidad electrica", 0, QApplication::UnicodeUTF8));
         comboBox_48->clear();
         comboBox_48->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Amperio por metro (A/m)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Amperio-vuelta por metro (AT/m)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Oersted (Oe)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gilbert por metro (Gi/m)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Faradio (F)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Decafaradio (daF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Hectofaradio (hF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilofaradio (kF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megafaradio (MF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigafaradio (GF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terafaradio (TF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Petafaradio (PF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Exafaradio (EF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Zettafaradio (ZF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Yottafaradio (YF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Decifaradio (dF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Centifaradio (cF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Milifaradio (mF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Microfaradio (\302\265F)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Nanofaradio (nF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Picofaradio (pF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Femtofaradio (fF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Attofaradio (aF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Zeptofaradio (zF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Yoctofaradio (yF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Culombio por voltio", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Abfaradio (abF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Statfaradio (statF)", 0, QApplication::UnicodeUTF8)
         );
         label_156->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
         comboBox_49->clear();
         comboBox_49->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Amperio por metro (A/m)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Amperio-vuelta por metro (AT/m)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Oersted (Oe)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gilbert por metro (Gi/m)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Faradio (F)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Decafaradio (daF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Hectofaradio (hF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilofaradio (kF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megafaradio (MF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Gigafaradio (GF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Terafaradio (TF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Petafaradio (PF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Exafaradio (EF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Zettafaradio (ZF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Yottafaradio (YF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Decifaradio (dF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Centifaradio (cF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Milifaradio (mF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Microfaradio (\302\265F)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Nanofaradio (nF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Picofaradio (pF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Femtofaradio (fF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Attofaradio (aF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Zeptofaradio (zF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Yoctofaradio (yF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Culombio por voltio", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Abfaradio (abF)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Statfaradio (statF)", 0, QApplication::UnicodeUTF8)
         );
-        groupBox_30->setTitle(QApplication::translate("ConversorUD", "()", 0, QApplication::UnicodeUTF8));
+        groupBox_30->setTitle(QApplication::translate("ConversorUD", "Carga electrica", 0, QApplication::UnicodeUTF8));
         comboBox_46->clear();
         comboBox_46->insertItems(0, QStringList()
          << QApplication::translate("ConversorUD", "Talbot (T)", 0, QApplication::UnicodeUTF8)

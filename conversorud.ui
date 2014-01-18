@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1203</width>
-    <height>1156</height>
+    <height>1192</height>
    </rect>
   </property>
   <property name="font">
@@ -313,6 +313,11 @@
           </item>
           <item>
            <property name="text">
+            <string>Campo magnetico</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
             <string>Cantidad de luz</string>
            </property>
           </item>
@@ -323,7 +328,7 @@
           </item>
           <item>
            <property name="text">
-            <string>Campo magnetico</string>
+            <string>Capacidad electrica</string>
            </property>
           </item>
           <item>
@@ -400,23 +405,23 @@
        </property>
       </widget>
      </item>
-     <item row="8" column="0">
+     <item row="9" column="0">
       <widget class="QGroupBox" name="groupBox_7">
        <property name="title">
         <string>CCC (Calcular DC bancario)</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_20">
         <property name="leftMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="topMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="rightMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="bottomMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <item row="0" column="0">
          <layout class="QGridLayout" name="gridLayout_23">
@@ -427,6 +432,12 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>0</height>
+             </size>
             </property>
             <property name="font">
              <font>
@@ -618,12 +629,44 @@ background-color: rgb(255, 251, 239);</string>
             </property>
            </widget>
           </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_133">
+            <property name="text">
+             <string>IBAN</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLineEdit" name="lineEdit_124">
+            <property name="minimumSize">
+             <size>
+              <width>80</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>15</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
       </widget>
      </item>
-     <item row="8" column="1">
+     <item row="9" column="1">
       <widget class="QGroupBox" name="groupBox_6">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -636,16 +679,16 @@ background-color: rgb(255, 251, 239);</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_21">
         <property name="leftMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="topMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="rightMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="bottomMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <item row="0" column="0">
          <layout class="QGridLayout" name="gridLayout_19">
@@ -774,16 +817,16 @@ background-color: rgb(255, 251, 239);</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_27">
         <property name="leftMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="topMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="rightMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="bottomMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <item row="0" column="0">
          <widget class="QRadioButton" name="radioButton_3">
@@ -1039,7 +1082,7 @@ color: rgb(255, 0, 0);</string>
        </property>
       </widget>
      </item>
-     <item row="9" column="0" colspan="2">
+     <item row="11" column="0" colspan="2">
       <widget class="QGroupBox" name="groupBox_10">
        <property name="title">
         <string>Calculo interes bancario</string>
@@ -1729,16 +1772,16 @@ background-color: rgb(255, 251, 239);</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_7">
         <property name="leftMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="topMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="rightMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="bottomMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <item row="0" column="0">
          <widget class="QRadioButton" name="radioButton">
@@ -5429,8 +5472,8 @@ background-color: rgb(255, 251, 239);</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>576</width>
-              <height>241</height>
+              <width>459</width>
+              <height>198</height>
              </rect>
             </property>
             <attribute name="label">
@@ -8622,8 +8665,8 @@ p, li { white-space: pre-wrap; }
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>576</width>
-              <height>241</height>
+              <width>459</width>
+              <height>180</height>
              </rect>
             </property>
             <attribute name="label">
@@ -10700,9 +10743,9 @@ background-color: rgb(255, 251, 239);</string>
               </size>
              </property>
              <property name="title">
-              <string>()</string>
+              <string>Capacidad electrica</string>
              </property>
-             <layout class="QGridLayout" name="gridLayout_140">
+             <layout class="QGridLayout" name="gridLayout_107">
               <property name="leftMargin">
                <number>0</number>
               </property>
@@ -10724,22 +10767,122 @@ background-color: rgb(255, 251, 239);</string>
                   </property>
                   <item>
                    <property name="text">
-                    <string>Amperio por metro (A/m)</string>
+                    <string>Faradio (F)</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>Amperio-vuelta por metro (AT/m)</string>
+                    <string>Decafaradio (daF)</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>Oersted (Oe)</string>
+                    <string>Hectofaradio (hF)</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>Gilbert por metro (Gi/m)</string>
+                    <string>Kilofaradio (kF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Megafaradio (MF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Gigafaradio (GF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Terafaradio (TF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Petafaradio (PF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Exafaradio (EF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Zettafaradio (ZF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Yottafaradio (YF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Decifaradio (dF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Centifaradio (cF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Milifaradio (mF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Microfaradio (µF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Nanofaradio (nF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Picofaradio (pF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Femtofaradio (fF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Attofaradio (aF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Zeptofaradio (zF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Yoctofaradio (yF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Culombio por voltio</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Abfaradio (abF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Statfaradio (statF)</string>
                    </property>
                   </item>
                  </widget>
@@ -10823,22 +10966,122 @@ background-color: rgb(255, 251, 239);</string>
                   </property>
                   <item>
                    <property name="text">
-                    <string>Amperio por metro (A/m)</string>
+                    <string>Faradio (F)</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>Amperio-vuelta por metro (AT/m)</string>
+                    <string>Decafaradio (daF)</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>Oersted (Oe)</string>
+                    <string>Hectofaradio (hF)</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>Gilbert por metro (Gi/m)</string>
+                    <string>Kilofaradio (kF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Megafaradio (MF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Gigafaradio (GF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Terafaradio (TF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Petafaradio (PF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Exafaradio (EF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Zettafaradio (ZF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Yottafaradio (YF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Decifaradio (dF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Centifaradio (cF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Milifaradio (mF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Microfaradio (µF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Nanofaradio (nF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Picofaradio (pF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Femtofaradio (fF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Attofaradio (aF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Zeptofaradio (zF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Yoctofaradio (yF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Culombio por voltio</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Abfaradio (abF)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Statfaradio (statF)</string>
                    </property>
                   </item>
                  </widget>
@@ -10867,7 +11110,7 @@ background-color: rgb(255, 251, 239);</string>
               </size>
              </property>
              <property name="title">
-              <string>()</string>
+              <string>Carga electrica</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_137">
               <property name="leftMargin">
@@ -12103,6 +12346,20 @@ background-color: rgb(255, 251, 239);</string>
          </item>
         </layout>
        </widget>
+      </widget>
+     </item>
+     <item row="8" column="0" colspan="2">
+      <widget class="Line" name="line_10">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0" colspan="2">
+      <widget class="Line" name="line_11">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
       </widget>
      </item>
     </layout>
