@@ -15,8 +15,6 @@
 
 
 // http://www.convertworld.com/es/almacenamiento-de-datos/?c=a
-// falta saber porque falla cuando se ponen decimales en el dato de entrada ya que no hace nada la salida cuando lleva separador de miles.
-
 
 
 
@@ -139,6 +137,10 @@ ConversorUD::ConversorUD(QWidget *parent) :
     ui->comboBox_6->insertSeparator(25);
     ui->comboBox_50->insertSeparator(3);
     ui->comboBox_51->insertSeparator(3);
+    ui->comboBox_48->insertSeparator(11);
+    ui->comboBox_49->insertSeparator(11);
+    ui->comboBox_48->insertSeparator(22);
+    ui->comboBox_49->insertSeparator(22);
     ui->comboBox_3->setCurrentIndex(ui->comboBox_3->findText(QString::number(Decimales)));
     connect(ui->radioButton,SIGNAL(clicked()),this,SLOT(Comprobar()));
     connect(ui->radioButton_2,SIGNAL(clicked()),this,SLOT(Comprobar()));
@@ -189,6 +191,7 @@ ConversorUD::ConversorUD(QWidget *parent) :
     ui->lineEdit_55->installEventFilter(this);
     ui->lineEdit_37->installEventFilter(this);
     ui->lineEdit_156->installEventFilter(this);
+    ui->lineEdit_154->installEventFilter(this);
     this->installEventFilter(this);
     QFuture<void> f1 = QtConcurrent::run(this, &ConversorUD::Divisa);
 }
@@ -283,7 +286,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Right)
+            if (keyEvent->key() == Qt::Key_Up)
             {
                 if (ui->lineEdit_19->text() != "")
                 {
@@ -306,7 +309,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Right)
+            if (keyEvent->key() == Qt::Key_Up)
             {
                 if (ui->lineEdit_21->text() != "")
                 {
@@ -319,7 +322,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Left)
+            if (keyEvent->key() == Qt::Key_Down)
             {
                 ui->lineEdit_19->setFocus();
                 ui->lineEdit_19->selectAll();
@@ -339,7 +342,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Right)
+            if (keyEvent->key() == Qt::Key_Up)
             {
                 if (ui->lineEdit_6->text() != "")
                 {
@@ -352,7 +355,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Left)
+            if (keyEvent->key() == Qt::Key_Down)
             {
                 ui->lineEdit_21->setFocus();
                 ui->lineEdit_21->selectAll();
@@ -372,7 +375,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Left)
+            if (keyEvent->key() == Qt::Key_Up)
             {
                 ui->lineEdit_6->setFocus();
                 ui->lineEdit_6->selectAll();
@@ -392,7 +395,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Right)
+            if (keyEvent->key() == Qt::Key_Up)
             {
                 if (ui->lineEdit_25->text() != "")
                 {
@@ -415,7 +418,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Right)
+            if (keyEvent->key() == Qt::Key_Up)
             {
                 if (ui->lineEdit_22->text() != "")
                 {
@@ -428,7 +431,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Left)
+            if (keyEvent->key() == Qt::Key_Down)
             {
                 ui->lineEdit_25->setFocus();
                 ui->lineEdit_25->selectAll();
@@ -448,7 +451,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Right)
+            if (keyEvent->key() == Qt::Key_Up)
             {
                 if (ui->lineEdit_26->text() != "")
                 {
@@ -461,7 +464,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Left)
+            if (keyEvent->key() == Qt::Key_Down)
             {
                 ui->lineEdit_22->setFocus();
                 ui->lineEdit_22->selectAll();
@@ -481,7 +484,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Left)
+            if (keyEvent->key() == Qt::Key_Down)
             {
                 ui->lineEdit_26->setFocus();
                 ui->lineEdit_26->selectAll();
@@ -504,7 +507,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Right)
+            if (keyEvent->key() == Qt::Key_Up)
             {
                 if (ui->lineEdit_27->text() != "")
                 {
@@ -530,7 +533,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Left)
+            if (keyEvent->key() == Qt::Key_Down)
             {
                 AmortizacionP = 0;
                 QString Value = QuitarMil(ui->lineEdit_27->text());
@@ -543,7 +546,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Right)
+            if (keyEvent->key() == Qt::Key_Up)
             {
                 if (ui->lineEdit_29->text() != "")
                 {
@@ -566,7 +569,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Left)
+            if (keyEvent->key() == Qt::Key_Down)
             {
                 ui->lineEdit_29->setFocus();
                 ui->lineEdit_29->selectAll();
@@ -586,7 +589,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Right)
+            if (keyEvent->key() == Qt::Key_Up)
             {
                 if (ui->lineEdit_15->text() != "")
                 {
@@ -609,7 +612,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Left)
+            if (keyEvent->key() == Qt::Key_Down)
             {
                 ui->lineEdit_15->setFocus();
                 ui->lineEdit_15->selectAll();
@@ -619,7 +622,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Right)
+            if (keyEvent->key() == Qt::Key_Up)
             {
                 if (ui->lineEdit_18->text() != "")
                 {
@@ -642,7 +645,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         if (event->type() == QEvent::KeyPress)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Left)
+            if (keyEvent->key() == Qt::Key_Down)
             {
                 ui->lineEdit_18->setFocus();
                 ui->lineEdit_18->selectAll();
@@ -747,6 +750,16 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         {
             ui->lineEdit_156->setFocus();
             ui->lineEdit_156->selectAll();
+            return true;
+        }
+        return false;
+    }
+    if (obj == ui->lineEdit_154)
+    {
+        if (event->type() == QEvent::MouseButtonPress)
+        {
+            ui->lineEdit_154->setFocus();
+            ui->lineEdit_154->selectAll();
             return true;
         }
         return false;
@@ -3124,77 +3137,86 @@ void ConversorUD::on_lineEdit_25_textChanged(const QString &arg1)
 
 void ConversorUD::on_pushButton_14_clicked()
 {
-    if (ui->comboBox_7->currentText() == tr("Metodo Frances"))
+    if (ui->lineEdit_27->text() != "" && ui->lineEdit_29->text() != "" && ui->lineEdit_31->text() != "")
     {
-        double Intereses, Parte1, Parte2, Parte31, Result, Resultado, Parte41, Total, Parte, Resto, TotCuotas, TotInteres;
-        double Tipo, Anual, Cuota, Amort, tae, tae1, tae2, TAE, ValorTAE;
-        int Unidad = 1;
-        QString Valor, Value1, Value, Value2, Value3;
-        Valor = ui->comboBox_5->currentText();
-        Tipo = Periodo(Valor);
-        Anual = ui->lineEdit_31->text().toInt();
-        Cuota = Tipo*Anual;
-        Parte = ui->lineEdit_29->text().toDouble();
-        Resto = (Parte/Tipo)/100;
-        ui->lineEdit_30->setText(QString::number(Resto));
-        ui->lineEdit_32->setText(QString::number(Cuota));
-        Value = QuitarMil(ui->lineEdit_27->text());
-        Amort = Value.toDouble();
-        Intereses = ui->lineEdit_30->text().toDouble();
-        Parte1 = Amort*Intereses;
-        Parte2 = Unidad+Intereses;
-        Resultado = Parte2;
-        QProgressDialog progress("Realizando los calculos de la cuota... Espera por favor", "Cancelar", 0, Cuota);
-        if (Stilo == "A")
-            progress.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        progress.setWindowModality(Qt::WindowModal);
-        progress.show();
-        QTest::qWait(20);
-        for(int a=1;a<Cuota;a++)
+        if (ui->comboBox_7->currentText() == tr("Metodo Frances"))
         {
-            progress.setValue(a);
-            if (progress.wasCanceled())
+            double Intereses, Parte1, Parte2, Parte31, Result, Resultado, Parte41, Total, Parte, Resto, TotCuotas, TotInteres;
+            double Tipo, Anual, Cuota, Amort, tae, tae1, tae2, TAE, ValorTAE;
+            int Unidad = 1;
+            QString Valor, Value1, Value, Value2, Value3;
+            Valor = ui->comboBox_5->currentText();
+            Tipo = Periodo(Valor);
+            Anual = ui->lineEdit_31->text().toInt();
+            Cuota = Tipo*Anual;
+            Parte = ui->lineEdit_29->text().toDouble();
+            Resto = (Parte/Tipo)/100;
+            ui->lineEdit_30->setText(QString::number(Resto));
+            ui->lineEdit_32->setText(QString::number(Cuota));
+            Value = QuitarMil(ui->lineEdit_27->text());
+            Amort = Value.toDouble();
+            Intereses = ui->lineEdit_30->text().toDouble();
+            Parte1 = Amort*Intereses;
+            Parte2 = Unidad+Intereses;
+            Resultado = Parte2;
+            QProgressDialog progress("Realizando los calculos de la cuota... Espera por favor", "Cancelar", 0, Cuota);
+            if (Stilo == "A")
+                progress.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+            progress.setWindowModality(Qt::WindowModal);
+            progress.show();
+            QTest::qWait(20);
+            for(int a=1;a<Cuota;a++)
             {
-                AmortizacionP = 0;
-                ui->lineEdit_27->setText("");
-                ui->lineEdit_28->setText("");
-                ui->lineEdit_29->setText("");
-                ui->lineEdit_30->setText("");
-                ui->lineEdit_31->setText("");
-                ui->lineEdit_32->setText("");
-                ui->lineEdit_33->setText("");
-                ui->lineEdit_34->setText("");
-                ui->lineEdit_35->setText("");
-                ui->lineEdit_27->setFocus();
-                int Borrado, x;
-                Borrado = ui->tableWidget->rowCount();
-                for(x=0;x<Borrado;x++)
+                progress.setValue(a);
+                if (progress.wasCanceled())
                 {
-                     ui->tableWidget->removeRow(x);
-                     x=x-1;
-                     Borrado=Borrado-1;
+                    AmortizacionP = 0;
+                    ui->lineEdit_27->setText("");
+                    ui->lineEdit_28->setText("");
+                    ui->lineEdit_29->setText("");
+                    ui->lineEdit_30->setText("");
+                    ui->lineEdit_31->setText("");
+                    ui->lineEdit_32->setText("");
+                    ui->lineEdit_33->setText("");
+                    ui->lineEdit_34->setText("");
+                    ui->lineEdit_35->setText("");
+                    ui->lineEdit_27->setFocus();
+                    int Borrado, x;
+                    Borrado = ui->tableWidget->rowCount();
+                    for(x=0;x<Borrado;x++)
+                    {
+                         ui->tableWidget->removeRow(x);
+                         x=x-1;
+                         Borrado=Borrado-1;
+                    }
+                    break;
                 }
-                break;
+                Result = Resultado*Parte2;
+                QString Parcial = QString::number(Result,'f',9);
+                double Valor = Parcial.toDouble();
+                Resultado = Valor;
             }
-            Result = Resultado*Parte2;
-            QString Parcial = QString::number(Result,'f',9);
-            double Valor = Parcial.toDouble();
-            Resultado = Valor;
-        }      
-        progress.setValue(Cuota);
-        Parte31 = Unidad/Resultado;
-        double Parte3=static_cast<double>(static_cast<int>(Parte31*1000000000+0.5))/1000000000.0;
-        Parte41 = Unidad-Parte3;
-        double Parte4=static_cast<double>(static_cast<int>(Parte41*1000000000+0.5))/1000000000.0;
-        Total = Parte1/Parte4;
-        Value1 = PonerMil(QString::number(Total));
-        if (ui->checkBox->isChecked())
-        {
-            if (ui->comboBox_10->currentText().toInt() != 0)
+            progress.setValue(Cuota);
+            Parte31 = Unidad/Resultado;
+            double Parte3=static_cast<double>(static_cast<int>(Parte31*1000000000+0.5))/1000000000.0;
+            Parte41 = Unidad-Parte3;
+            double Parte4=static_cast<double>(static_cast<int>(Parte41*1000000000+0.5))/1000000000.0;
+            Total = Parte1/Parte4;
+            Value1 = PonerMil(QString::number(Total));
+            if (ui->checkBox->isChecked())
             {
-                ui->lineEdit_28->setAlignment(Qt::AlignHCenter);
-                ui->lineEdit_28->setText(tr("Ver tabla"));
-                CuotaCarencia = Value1;
+                if (ui->comboBox_10->currentText().toInt() != 0)
+                {
+                    ui->lineEdit_28->setAlignment(Qt::AlignHCenter);
+                    ui->lineEdit_28->setText(tr("Ver tabla"));
+                    CuotaCarencia = Value1;
+                }
+                else
+                {
+                    ui->lineEdit_28->setAlignment(Qt::AlignRight);
+                    ui->lineEdit_28->setText(Value1);
+                    CuotaCarencia = Value1;
+                }
             }
             else
             {
@@ -3202,126 +3224,120 @@ void ConversorUD::on_pushButton_14_clicked()
                 ui->lineEdit_28->setText(Value1);
                 CuotaCarencia = Value1;
             }
+            this->Tabla();
+            TotCuotas = Total*Cuota;
+            Value2 = PonerMil(QString::number(TotCuotas,'f',2));
+            ui->lineEdit_33->setText(Value2);
+            TotInteres = TotCuotas-Amort;
+            Value3 = PonerMil(QString::number(TotInteres,'f',2));
+            ui->lineEdit_34->setText(Value3);
+            tae1 = Unidad+Resto;
+            tae2 = tae1;
+            for(int a=1;a<12;a++)
+            {
+                tae = tae1*tae2;
+                ValorTAE = tae;
+                tae1 = ValorTAE;
+            }
+            TAE = (tae-Unidad)*100;
+            ui->lineEdit_35->setText(QString::number(TAE,'f',2));
         }
-        else
+        if (ui->comboBox_7->currentText() == tr("Metodo Americano"))
         {
+            double Intereses, Parte1, Parte, Resto, TotCuotas, TotInteres, Total;
+            double Tipo, Anual, Cuota, Cuotas, Amort, Interes, tae, tae1, tae2, TAE, ValorTAE;
+            QString Valor, Value1, Value, Value2, Value3, Value4, Value5;
+            int Unidad = 1;
+            Valor = ui->comboBox_5->currentText();
+            Tipo = Periodo(Valor);
+            Anual = ui->lineEdit_31->text().toDouble();
+            Cuota = Tipo*Anual;
+            Parte = ui->lineEdit_29->text().toDouble();
+            Resto = (Parte/Tipo)/100;
+            ui->lineEdit_30->setText(QString::number(Resto));
+            ui->lineEdit_32->setText(QString::number(Cuota));
+            Value = QuitarMil(ui->lineEdit_27->text());
+            Amort = Value.toDouble();
+            Intereses = ui->lineEdit_30->text().toDouble();
+            Parte1 = Amort*Intereses;
+            Value1 = PonerMil(QString::number(Parte1,'f',2));
             ui->lineEdit_28->setAlignment(Qt::AlignRight);
             ui->lineEdit_28->setText(Value1);
-            CuotaCarencia = Value1;
+            this->Tabla();
+            Value4 = QuitarMil(ui->lineEdit_28->text());
+            Cuotas = Value4.toDouble();
+            TotCuotas = (Cuotas*Cuota)+Amort;
+            TotInteres = TotCuotas-Amort;
+            Value3 = PonerMil(QString::number(TotInteres,'f',2));
+            ui->lineEdit_34->setText(Value3);
+            Value5 = QuitarMil(ui->lineEdit_34->text());
+            Interes = Value5.toDouble();
+            Total = Interes+Amort;
+            Value2 = PonerMil(QString::number(Total,'f',2));
+            ui->lineEdit_33->setText(Value2);
+            tae1 = Unidad+Resto;
+            tae2 = tae1;
+            for(int a=1;a<12;a++)
+            {
+                tae = tae1*tae2;
+                ValorTAE = tae;
+                tae1 = ValorTAE;
+            }
+            TAE = (tae-Unidad)*100;
+            ui->lineEdit_35->setText(QString::number(TAE,'f',2));
         }
-        this->Tabla();
-        TotCuotas = Total*Cuota;
-        Value2 = PonerMil(QString::number(TotCuotas,'f',2));
-        ui->lineEdit_33->setText(Value2);
-        TotInteres = TotCuotas-Amort;
-        Value3 = PonerMil(QString::number(TotInteres,'f',2));
-        ui->lineEdit_34->setText(Value3);
-        tae1 = Unidad+Resto;
-        tae2 = tae1;
-        for(int a=1;a<12;a++)
+        if (ui->comboBox_7->currentText() == tr("Metodo Aleman"))
         {
-            tae = tae1*tae2;
-            ValorTAE = tae;
-            tae1 = ValorTAE;
+            double Intereses, Parte, Resto, Total, ParcInt, ParcAmort;
+            double Tipo, Anual, Cuota, Amort, tae, tae1, tae2, TAE, ValorTAE;
+            QString Valor, Value, Value1, Value2, Value3, Value4, Value5;
+            int Unidad = 1;
+            Valor = ui->comboBox_5->currentText();
+            Tipo = Periodo(Valor);
+            Anual = ui->lineEdit_31->text().toDouble();
+            Cuota = Tipo*Anual;
+            Parte = ui->lineEdit_29->text().toDouble();
+            Resto = (Parte/Tipo)/100;
+            ui->lineEdit_30->setText(QString::number(Resto));
+            ui->lineEdit_32->setText(QString::number(Cuota));
+            ui->lineEdit_28->setAlignment(Qt::AlignHCenter);
+            ui->lineEdit_28->setText(tr("Ver tabla"));
+            this->Tabla();
+            int itemCount = ui->tableWidget->rowCount();
+            Intereses = 0;
+            Amort = 0;
+            QTableWidgetItem *item, *item1;
+            for(int i=0;i<itemCount;i++)
+            {
+                item=new QTableWidgetItem;
+                item1=new QTableWidgetItem;
+                item = ui->tableWidget->item(i,2);
+                item1 = ui->tableWidget->item(i,3);
+                Value4 = QuitarMil(item->text());
+                ParcInt = Value4.toDouble();
+                Intereses = Intereses + ParcInt;
+                Value5 = QuitarMil(item1->text());
+                ParcAmort = Value5.toDouble();
+                Amort = Amort + ParcAmort;
+            }
+            Value = QuitarMil(QString::number(Intereses,'f',2));
+            Value3 = PonerMil(Value);
+            ui->lineEdit_34->setText(Value3);
+            Value1 = QuitarMil(QString::number(Amort,'f',2));
+            Total = Value.toDouble() + Value1.toDouble();
+            Value2 = PonerMil(QString::number(Total,'f',2));
+            ui->lineEdit_33->setText(Value2);
+            tae1 = Unidad+Resto;
+            tae2 = tae1;
+            for(int a=1;a<12;a++)
+            {
+                tae = tae1*tae2;
+                ValorTAE = tae;
+                tae1 = ValorTAE;
+            }
+            TAE = (tae-Unidad)*100;
+            ui->lineEdit_35->setText(QString::number(TAE,'f',2));
         }
-        TAE = (tae-Unidad)*100;
-        ui->lineEdit_35->setText(QString::number(TAE,'f',2));
-    }
-    if (ui->comboBox_7->currentText() == tr("Metodo Americano"))
-    {
-        double Intereses, Parte1, Parte, Resto, TotCuotas, TotInteres, Total;
-        double Tipo, Anual, Cuota, Cuotas, Amort, Interes, tae, tae1, tae2, TAE, ValorTAE;
-        QString Valor, Value1, Value, Value2, Value3, Value4, Value5;
-        int Unidad = 1;
-        Valor = ui->comboBox_5->currentText();
-        Tipo = Periodo(Valor);
-        Anual = ui->lineEdit_31->text().toDouble();
-        Cuota = Tipo*Anual;
-        Parte = ui->lineEdit_29->text().toDouble();
-        Resto = (Parte/Tipo)/100;
-        ui->lineEdit_30->setText(QString::number(Resto));
-        ui->lineEdit_32->setText(QString::number(Cuota));
-        Value = QuitarMil(ui->lineEdit_27->text());
-        Amort = Value.toDouble();
-        Intereses = ui->lineEdit_30->text().toDouble();
-        Parte1 = Amort*Intereses;
-        Value1 = PonerMil(QString::number(Parte1,'f',2));
-        ui->lineEdit_28->setAlignment(Qt::AlignRight);
-        ui->lineEdit_28->setText(Value1);
-        this->Tabla();
-        Value4 = QuitarMil(ui->lineEdit_28->text());
-        Cuotas = Value4.toDouble();
-        TotCuotas = (Cuotas*Cuota)+Amort;
-        TotInteres = TotCuotas-Amort;
-        Value3 = PonerMil(QString::number(TotInteres,'f',2));
-        ui->lineEdit_34->setText(Value3);
-        Value5 = QuitarMil(ui->lineEdit_34->text());
-        Interes = Value5.toDouble();
-        Total = Interes+Amort;
-        Value2 = PonerMil(QString::number(Total,'f',2));
-        ui->lineEdit_33->setText(Value2);
-        tae1 = Unidad+Resto;
-        tae2 = tae1;
-        for(int a=1;a<12;a++)
-        {
-            tae = tae1*tae2;
-            ValorTAE = tae;
-            tae1 = ValorTAE;
-        }
-        TAE = (tae-Unidad)*100;
-        ui->lineEdit_35->setText(QString::number(TAE,'f',2));
-    }
-    if (ui->comboBox_7->currentText() == tr("Metodo Aleman"))
-    {
-        double Intereses, Parte, Resto, Total, ParcInt, ParcAmort;
-        double Tipo, Anual, Cuota, Amort, tae, tae1, tae2, TAE, ValorTAE;
-        QString Valor, Value, Value1, Value2, Value3, Value4, Value5;
-        int Unidad = 1;
-        Valor = ui->comboBox_5->currentText();
-        Tipo = Periodo(Valor);
-        Anual = ui->lineEdit_31->text().toDouble();
-        Cuota = Tipo*Anual;
-        Parte = ui->lineEdit_29->text().toDouble();
-        Resto = (Parte/Tipo)/100;
-        ui->lineEdit_30->setText(QString::number(Resto));
-        ui->lineEdit_32->setText(QString::number(Cuota));
-        ui->lineEdit_28->setAlignment(Qt::AlignHCenter);
-        ui->lineEdit_28->setText(tr("Ver tabla"));
-        this->Tabla();
-        int itemCount = ui->tableWidget->rowCount();
-        Intereses = 0;
-        Amort = 0;
-        QTableWidgetItem *item, *item1;
-        for(int i=0;i<itemCount;i++)
-        {
-            item=new QTableWidgetItem;
-            item1=new QTableWidgetItem;
-            item = ui->tableWidget->item(i,2);
-            item1 = ui->tableWidget->item(i,3);
-            Value4 = QuitarMil(item->text());
-            ParcInt = Value4.toDouble();
-            Intereses = Intereses + ParcInt;
-            Value5 = QuitarMil(item1->text());
-            ParcAmort = Value5.toDouble();
-            Amort = Amort + ParcAmort;
-        }
-        Value = QuitarMil(QString::number(Intereses,'f',2));
-        Value3 = PonerMil(Value);
-        ui->lineEdit_34->setText(Value3);
-        Value1 = QuitarMil(QString::number(Amort,'f',2));
-        Total = Value.toDouble() + Value1.toDouble();
-        Value2 = PonerMil(QString::number(Total,'f',2));
-        ui->lineEdit_33->setText(Value2);
-        tae1 = Unidad+Resto;
-        tae2 = tae1;
-        for(int a=1;a<12;a++)
-        {
-            tae = tae1*tae2;
-            ValorTAE = tae;
-            tae1 = ValorTAE;
-        }
-        TAE = (tae-Unidad)*100;
-        ui->lineEdit_35->setText(QString::number(TAE,'f',2));
     }
 }
 
@@ -4143,7 +4159,8 @@ void ConversorUD::on_checkBox_clicked()
     {
         ui->groupBox_12->setVisible(false);
         ui->comboBox_10->clear();
-        this->on_pushButton_14_clicked();
+        if (ui->lineEdit_28->text() != "")
+            this->on_pushButton_14_clicked();
     }
 }
 
@@ -4303,8 +4320,8 @@ void ConversorUD::on_lineEdit_17_returnPressed()
         Resultado1 = DigitX1/11;
         Resultado2 = DigitX2/11;
         QString Resulta1 = QString::number(Resultado1,'f',2);
-        QStringList Resto1 = Resulta1.split(".");
-        QString VResto1 = "0."+Resto1.value(1);
+        QStringList Resta1 = Resulta1.split(".");
+        QString VResto1 = "0."+Resta1.value(1);
         int ValorResto1 = VResto1.toDouble()*11;
         int ValorDigito = 11-ValorResto1;
         if (ValorDigito == 10)
@@ -4312,8 +4329,8 @@ void ConversorUD::on_lineEdit_17_returnPressed()
         if (ValorDigito == 11)
             ValorDigito = 0;
         QString Resulta2 = QString::number(Resultado2);
-        QStringList Resto2 = Resulta2.split(".");
-        QString VResto2 = "0."+Resto2.value(1);
+        QStringList Resta2 = Resulta2.split(".");
+        QString VResto2 = "0."+Resta2.value(1);
         int ValorResto2 = VResto2.toFloat()*11;
         int ValorDigito1 = 11-ValorResto2;
         if (ValorDigito1 == 10)
@@ -4321,6 +4338,46 @@ void ConversorUD::on_lineEdit_17_returnPressed()
         if (ValorDigito1 == 11)
             ValorDigito1 = 0;
         ui->lineEdit_16->setText(""+QString::number(ValorDigito)+""+QString::number(ValorDigito1)+"");
+        QString ValorIban = ui->lineEdit_15->text()+ui->lineEdit_18->text()+ui->lineEdit_16->text()+ui->lineEdit_17->text()+"142800";                
+        QString Parte1 = ValorIban.mid(1,9);
+        QString Parte2 = ValorIban.mid(10,7);
+        QString Parte3 = ValorIban.mid(17,7);
+        QString Parte4 = ValorIban.mid(24,3);
+        double Resto1Iban = Parte1.toDouble()/97;
+        QString Resto1 = QString::number(Resto1Iban,'f',10);
+        QStringList Resto1Calc = Resto1.split(".");
+        double RestoPar1 = Resto1Calc.value(0).toDouble();
+        double Final1 = Parte1.toDouble()-(RestoPar1*97);
+        QString Value1 = QString::number(Final1);
+        QString Valor2 = Value1+Parte2;
+        double Resto2Iban = Valor2.toDouble()/97;
+        QString Resto2 = QString::number(Resto2Iban,'f',10);
+        QStringList Resto2Calc = Resto2.split(".");
+        double RestoPar2 = Resto2Calc.value(0).toDouble();
+        double Final2 = Valor2.toDouble()-(RestoPar2*97);
+        QString Value2 = QString::number(Final2);
+        QString Valor3 = Value2+Parte3;
+        double Resto3Iban = Valor3.toDouble()/97;
+        QString Resto3 = QString::number(Resto3Iban,'f',10);
+        QStringList Resto3Calc = Resto3.split(".");
+        double RestoPar3 = Resto3Calc.value(0).toDouble();
+        double Final3 = Valor3.toDouble()-(RestoPar3*97);
+        QString Value3 = QString::number(Final3);
+        QString Valor4 = Value3+Parte4;
+        double Resto4Iban = Valor4.toDouble()/97;
+        QString Resto4 = QString::number(Resto4Iban,'f',10);
+        QStringList Resto4Calc = Resto4.split(".");
+        double RestoPar4 = Resto4Calc.value(0).toDouble();
+        double Final4 = Valor4.toDouble()-(RestoPar4*97);
+        QString Value4 = QString::number(Final4);
+        int Total = 98-Value4.toInt();
+        QString ValorES;
+        if (Total < 10)
+            ValorES = "0"+QString::number(Total);
+        else
+            ValorES = QString::number(Total);
+        QString Resultado = "ES"+ValorES;
+        ui->lineEdit_124->setText(Resultado);
     }
 }
 
@@ -5842,8 +5899,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_2->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS2 = FechaS1.addDays(1);
     if (Idioma == "Es")
     {
@@ -5868,8 +5924,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_3->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS4 = FechaS3.addDays(1);
     if (Idioma == "Es")
     {
@@ -5894,8 +5949,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_4->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }   
     FechaS6 = FechaS5.addDays(1);
     if (Idioma == "Es")
     {
@@ -5920,8 +5974,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_5->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS8 = FechaS7.addDays(1);
     if (Idioma == "Es")
     {
@@ -5946,8 +5999,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_6->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS10 = FechaS9.addDays(1);
     if (Idioma == "Es")
     {
@@ -5972,8 +6024,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_7->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS12 = FechaS11.addDays(1);
     if (Idioma == "Es")
     {
@@ -5998,8 +6049,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_8->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS14 = FechaS13.addDays(1);
     if (Idioma == "Es")
     {
@@ -6024,8 +6074,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_9->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS16 = FechaS15.addDays(1);
     if (Idioma == "Es")
     {
@@ -6050,8 +6099,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_10->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS18 = FechaS17.addDays(1);
     if (Idioma == "Es")
     {
@@ -6076,8 +6124,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_11->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS20 = FechaS19.addDays(1);
     if (Idioma == "Es")
     {
@@ -6102,8 +6149,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_12->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS22 = FechaS21.addDays(1);
     if (Idioma == "Es")
     {
@@ -6128,8 +6174,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_13->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS24 = FechaS23.addDays(1);
     if (Idioma == "Es")
     {
@@ -6154,8 +6199,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_14->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS26 = FechaS25.addDays(1);
     if (Idioma == "Es")
     {
@@ -6180,8 +6224,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_15->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS28 = FechaS27.addDays(1);
     if (Idioma == "Es")
     {
@@ -6206,8 +6249,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_16->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS30 = FechaS29.addDays(1);
     if (Idioma == "Es")
     {
@@ -6232,8 +6274,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_17->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS32 = FechaS31.addDays(1);
     if (Idioma == "Es")
     {
@@ -6258,8 +6299,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_18->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS34 = FechaS33.addDays(1);
     if (Idioma == "Es")
     {
@@ -6284,8 +6324,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_19->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS36 = FechaS35.addDays(1);
     if (Idioma == "Es")
     {
@@ -6310,8 +6349,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_20->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }   
     FechaS38 = FechaS37.addDays(1);
     if (Idioma == "Es")
     {
@@ -6336,8 +6374,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_21->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS40 = FechaS39.addDays(1);
     if (Idioma == "Es")
     {
@@ -6362,8 +6399,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_22->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS42 = FechaS41.addDays(1);
     if (Idioma == "Es")
     {
@@ -6388,8 +6424,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_23->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS44 = FechaS43.addDays(1);
     if (Idioma == "Es")
     {
@@ -6414,8 +6449,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_24->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS46 = FechaS45.addDays(1);
     if (Idioma == "Es")
     {
@@ -6440,8 +6474,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_25->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS48 = FechaS47.addDays(1);
     if (Idioma == "Es")
     {
@@ -6466,8 +6499,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_26->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS50 = FechaS49.addDays(1);
     if (Idioma == "Es")
     {
@@ -6492,8 +6524,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_27->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS52 = FechaS51.addDays(1);
     if (Idioma == "Es")
     {
@@ -6518,8 +6549,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_29->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS54 = FechaS53.addDays(1);
     if (Idioma == "Es")
     {
@@ -6544,8 +6574,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_30->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS56 = FechaS55.addDays(1);
     if (Idioma == "Es")
     {
@@ -6570,8 +6599,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_31->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS58 = FechaS57.addDays(1);
     if (Idioma == "Es")
     {
@@ -6596,8 +6624,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_32->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS60 = FechaS59.addDays(1);
     if (Idioma == "Es")
     {
@@ -6622,8 +6649,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_33->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS62 = FechaS61.addDays(1);
     if (Idioma == "Es")
     {
@@ -6649,7 +6675,6 @@ void ConversorUD::Semanas()
         ui->checkBox_34->setChecked(true);
         Posicion++;
     }
-    //--//
     FechaS64 = FechaS63.addDays(1);
     if (Idioma == "Es")
     {
@@ -6674,8 +6699,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_35->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS66 = FechaS65.addDays(1);
     if (Idioma == "Es")
     {
@@ -6700,8 +6724,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_42->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS68 = FechaS67.addDays(1);
     if (Idioma == "Es")
     {
@@ -6726,8 +6749,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_43->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS70 = FechaS69.addDays(1);
     if (Idioma == "Es")
     {
@@ -6752,8 +6774,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_44->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS72 = FechaS71.addDays(1);
     if (Idioma == "Es")
     {
@@ -6778,8 +6799,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_45->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS74 = FechaS73.addDays(1);
     if (Idioma == "Es")
     {
@@ -6804,8 +6824,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_46->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }   
     FechaS76 = FechaS75.addDays(1);
     if (Idioma == "Es")
     {
@@ -6830,8 +6849,7 @@ void ConversorUD::Semanas()
     {
         ui->checkBox_47->setChecked(true);
         Posicion++;
-    }
-    //--//
+    }    
     FechaS78 = FechaS77.addDays(1);
     if (Idioma == "Es")
     {
@@ -7880,6 +7898,211 @@ void ConversorUD::on_comboBox_31_activated(const QString &arg1)
     Reprobar("Luz");
 }
 
+void ConversorUD::on_pushButton_32_clicked()
+{
+    ui->lineEdit_156->setText("");
+    ui->lineEdit_156->setFocus();
+    ui->lineEdit_157->setText("");
+    ui->lineEdit_157->setToolTip("");
+    ui->label_14->setText("");
+    ui->label_15->setText("");
+    ui->textEdit->setText("");
+    ui->textEdit_2->setText("");
+}
+
+void ConversorUD::on_lineEdit_156_returnPressed()
+{
+    ui->lineEdit_156->setFocus();
+    ui->lineEdit_156->selectAll();
+}
+
+void ConversorUD::on_lineEdit_156_textChanged(const QString &arg1)
+{
+    if (arg1 != "")
+    {
+        QString Valor = VerNum(arg1,1);
+        if (Valor == "No")
+            {
+            if (ui->lineEdit_156->text() == "")
+            {
+                ui->lineEdit_157->setText("");
+                ui->lineEdit_157->setToolTip("");
+            }
+            else
+            {
+                QString Valor = ui->comboBox_50->currentText();
+                double Cantidad = arg1.toDouble();
+                double Resto = Referencia(Valor,"Sustancia");
+                QString Valor1 = ui->comboBox_51->currentText();
+                double Resto1 = Referencia(Valor1,"Sustancia");
+                if (Valor == Valor1)
+                {
+                    double ValorF = Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_157->setText(Zero);
+                    ui->lineEdit_157->setToolTip(Zero);
+                }
+                else
+                {
+                    double ValorF = (Resto1/Resto)*Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_157->setText(Zero);
+                    ui->lineEdit_157->setToolTip(Zero);
+                }
+            }
+            Reprobar("Sustancia");
+        }
+        else
+        {
+            QMessageBox m;
+            m.setWindowTitle(tr("Advertencia!!!"));
+            m.setText(tr("Has introducido un caracter no valido."));
+            m.exec();
+            ui->lineEdit_156->setFocus();
+            QString Resto = ui->lineEdit_156->text();
+            Resto.chop(1);
+            ui->lineEdit_156->setText(Resto);
+            return;
+        }
+    }
+}
+
+void ConversorUD::on_comboBox_50_activated(const QString &arg1)
+{
+    if (ui->lineEdit_156->text() == "")
+    {
+        ui->lineEdit_157->setText("");
+        ui->lineEdit_157->setToolTip("");
+    }
+    else
+    {
+        QString Valor = arg1;
+        double Cantidad = ui->lineEdit_156->text().toFloat();
+        double Resto = Referencia(Valor,"Sustancia");
+        QString Valor1 = ui->comboBox_51->currentText();
+        double Resto1 = Referencia(Valor1,"Sustancia");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_157->setText(Zero);
+            ui->lineEdit_157->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_157->setText(Zero);
+            ui->lineEdit_157->setToolTip(Zero);
+        }
+    }
+    Reprobar("Sustancia");
+}
+
+void ConversorUD::on_comboBox_51_activated(const QString &arg1)
+{
+    if (ui->lineEdit_156->text() == "")
+    {
+        ui->lineEdit_157->setText("");
+        ui->lineEdit_157->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_50->currentText();
+        double Cantidad = ui->lineEdit_156->text().toFloat();
+        double Resto = Referencia(Valor,"Sustancia");
+        QString Valor1 = arg1;
+        double Resto1 = Referencia(Valor1,"Sustancia");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_157->setText(Zero);
+            ui->lineEdit_157->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_157->setText(Zero);
+            ui->lineEdit_157->setToolTip(Zero);
+        }
+    }
+    Reprobar("Sustancia");
+}
+
 void ConversorUD::on_pushButton_2_clicked()
 {
     ui->lineEdit->setText("");
@@ -8078,6 +8301,9 @@ void ConversorUD::on_pushButton_2_clicked()
     ui->lineEdit_156->setText("");
     ui->lineEdit_157->setText("");
     ui->lineEdit_157->setToolTip("");
+    ui->lineEdit_154->setText("");
+    ui->lineEdit_155->setText("");
+    ui->lineEdit_155->setToolTip("");
     int Borrado, x;
     Borrado = ui->tableWidget->rowCount();
     for(x=0;x<Borrado;x++)
@@ -8550,6 +8776,57 @@ void ConversorUD::on_comboBox_3_activated(const QString &arg1)
             ui->lineEdit_157->setToolTip(Zero);
         }
     }
+    if (ui->lineEdit_154->text() == "")
+    {
+        ui->lineEdit_155->setText("");
+        ui->lineEdit_155->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_48->currentText();
+        double Cantidad = ui->lineEdit_154->text().toFloat();
+        double Resto = Referencia(Valor,"Electrica");
+        QString Valor1 = ui->comboBox_49->currentText();
+        double Resto1 = Referencia(Valor1,"Electrica");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_155->setText(Zero);
+            ui->lineEdit_155->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_155->setText(Zero);
+            ui->lineEdit_155->setToolTip(Zero);
+        }
+    }
     if (ui->label_14->text().contains(tr("Distancia o Longitud")))
         Reprobar("Longitud");
     if (ui->label_14->text().contains(tr("Aceleracion")))
@@ -8568,6 +8845,8 @@ void ConversorUD::on_comboBox_3_activated(const QString &arg1)
         Reprobar("Luz");
     if (ui->label_14->text().contains(tr("Cantidad de sustancia")))
         Reprobar("Sustancia");
+    if (ui->label_14->text().contains(tr("Capacidad electrica")))
+        Reprobar("Electrica");
 }
 
 void ConversorUD::on_comboBox_25_activated(const QString &arg1)
@@ -8629,6 +8908,11 @@ void ConversorUD::on_comboBox_25_activated(const QString &arg1)
     {
         ui->tabWidget->setCurrentPage(3);
         ui->lineEdit_156->setFocus();
+    }
+    if (arg1 == tr("Capacidad electrica"))
+    {
+        ui->tabWidget->setCurrentPage(3);
+        ui->lineEdit_154->setFocus();
     }
 }
 
@@ -8925,8 +9209,8 @@ void ConversorUD::Reprobar(QString Tipo)
         QString Value = ui->comboBox_4->currentText();
         double Cantidad = ui->lineEdit_4->text().toFloat();
         double Resto = Referencia(Value,"Area");
-        Unidad(Resto,100000000000000000000,Cantidad,tr("Nanometro cuadrado (nm²)"),"Area");
-        Unidad1(Resto,100000000000000000000,Cantidad,tr("Nanometro cuadrado (nm²)"),"Area");
+        Unidad(Resto,100000000000000000000.00,Cantidad,tr("Nanometro cuadrado (nm²)"),"Area");
+        Unidad1(Resto,100000000000000000000.00,Cantidad,tr("Nanometro cuadrado (nm²)"),"Area");
         Unidad(Resto,100000000000000,Cantidad,tr("Micrometro cuadrado (µm²)"),"Area");
         Unidad1(Resto,100000000000000,Cantidad,tr("Micrometro cuadrado (µm²)"),"Area");
         Unidad(Resto,100000000,Cantidad,tr("Milimetro cuadrado (mm²)"),"Area");
@@ -9032,6 +9316,78 @@ void ConversorUD::Reprobar(QString Tipo)
         ui->label_14->setText(tr("Cantidad de sustancia: Convertir a...")+ui->comboBox_50->currentText()+"");
         ui->label_15->setText(tr("Cantidad de sustancia: Convertir de...")+ui->comboBox_50->currentText()+"");
     }
+    if (Tipo == "Electrica")
+    {
+        QString Value = ui->comboBox_48->currentText();
+        double Cantidad = ui->lineEdit_154->text().toFloat();
+        double Resto = Referencia(Value,"Electrica");
+        Unidad(Resto,1,Cantidad,tr("Faradio (F)"),"Electrica");
+        Unidad1(Resto,1,Cantidad,tr("Faradio (F)"),"Electrica");
+        Unidad(Resto,0.1,Cantidad,tr("Decafaradio (daF)"),"Electrica");
+        Unidad1(Resto,0.1,Cantidad,tr("Decafaradio (daF)"),"Electrica");
+        Unidad(Resto,0.01,Cantidad,tr("Hectofaradio (hF)"),"Electrica");
+        Unidad1(Resto,0.01,Cantidad,tr("Hectofaradio (hF)"),"Electrica");
+        Unidad(Resto,0.001,Cantidad,tr("Kilofaradio (kF)"),"Electrica");
+        Unidad1(Resto,0.001,Cantidad,tr("Kilofaradio (kF)"),"Electrica");
+        Unidad(Resto,0.000001,Cantidad,tr("Megafaradio (MF)"),"Electrica");
+        Unidad1(Resto,0.000001,Cantidad,tr("Megafaradio (MF)"),"Electrica");
+        Unidad(Resto,0.000000001,Cantidad,tr("Gigafaradio (GF)"),"Electrica");
+        Unidad1(Resto,0.000000001,Cantidad,tr("Gigafaradio (GF)"),"Electrica");
+        Unidad(Resto,0.000000000001,Cantidad,tr("Terafaradio (TF)"),"Electrica");
+        Unidad1(Resto,0.000000000001,Cantidad,tr("Terafaradio (TF)"),"Electrica");
+        Unidad(Resto,0.000000000000001,Cantidad,tr("Petafaradio (PF)"),"Electrica");
+        Unidad1(Resto,0.000000000000001,Cantidad,tr("Petafaradio (PF)"),"Electrica");
+        Unidad(Resto,0.000000000000000001,Cantidad,tr("Exafaradio (EF)"),"Electrica");
+        Unidad1(Resto,0.000000000000000001,Cantidad,tr("Exafaradio (EF)"),"Electrica");
+        Unidad(Resto,0.000000000000000000001,Cantidad,tr("Zettafaradio (ZF)"),"Electrica");
+        Unidad1(Resto,0.000000000000000000001,Cantidad,tr("Zettafaradio (ZF)"),"Electrica");
+        Unidad(Resto,0.000000000000000000000001,Cantidad,tr("Yottafaradio (YF)"),"Electrica");
+        Unidad1(Resto,0.000000000000000000000001,Cantidad,tr("Yottafaradio (YF)"),"Electrica");
+        Unidad(Resto,10,Cantidad,tr("Decifaradio (dF)"),"Electrica");
+        Unidad1(Resto,10,Cantidad,tr("Decifaradio (dF)"),"Electrica");
+        Unidad(Resto,100,Cantidad,tr("Centifaradio (cF)"),"Electrica");
+        Unidad1(Resto,100,Cantidad,tr("Centifaradio (cF)"),"Electrica");
+        Unidad(Resto,1000,Cantidad,tr("Milifaradio (mF)"),"Electrica");
+        Unidad1(Resto,1000,Cantidad,tr("Milifaradio (mF)"),"Electrica");
+        Unidad(Resto,1000000,Cantidad,tr("Microfaradio (µF)"),"Electrica");
+        Unidad1(Resto,1000000,Cantidad,tr("Microfaradio (µF)"),"Electrica");
+        Unidad(Resto,1000000000,Cantidad,tr("Nanofaradio (nF)"),"Electrica");
+        Unidad1(Resto,1000000000,Cantidad,tr("Nanofaradio (nF)"),"Electrica");
+        Unidad(Resto,1000000000000,Cantidad,tr("Picofaradio (pF)"),"Electrica");
+        Unidad1(Resto,1000000000000,Cantidad,tr("Picofaradio (pF)"),"Electrica");
+        Unidad(Resto,1000000000000000,Cantidad,tr("Femtofaradio (fF)"),"Electrica");
+        Unidad1(Resto,1000000000000000,Cantidad,tr("Femtofaradio (fF)"),"Electrica");
+        Unidad(Resto,1000000000000000000,Cantidad,tr("Attofaradio (aF)"),"Electrica");
+        Unidad1(Resto,1000000000000000000,Cantidad,tr("Attofaradio (aF)"),"Electrica");
+        Unidad(Resto,1000000000000000000000.00,Cantidad,tr("Zeptofaradio (zF)"),"Electrica");
+        Unidad1(Resto,1000000000000000000000.00,Cantidad,tr("Zeptofaradio (zF)"),"Electrica");
+        Unidad(Resto,1000000000000000000000000.00,Cantidad,tr("Yoctofaradio (yF)"),"Electrica");
+        Unidad1(Resto,1000000000000000000000000.00,Cantidad,tr("Yoctofaradio (yF)"),"Electrica");
+        Unidad(Resto,1,Cantidad,tr("Culombio por voltio"),"Electrica");
+        Unidad1(Resto,1,Cantidad,tr("Culombio por voltio"),"Electrica");
+        Unidad(Resto,0.000000001,Cantidad,tr("Abfaradio (abF)"),"Electrica");
+        Unidad1(Resto,0.000000001,Cantidad,tr("Abfaradio (abF)"),"Electrica");
+        Unidad(Resto,898755178736.5,Cantidad,tr("Statfaradio (statF)"),"Electrica");
+        Unidad1(Resto,898755178736.5,Cantidad,tr("Statfaradio (statF)"),"Electrica");
+        ui->label_14->setText(tr("Capacidad electrica: Convertir a...")+ui->comboBox_48->currentText()+"");
+        ui->label_15->setText(tr("Capacidad electrica: Convertir de...")+ui->comboBox_48->currentText()+"");
+    }
+
+
+//    <select name="unit_from" onchange="execute_electric_charge_ext(true);">
+//    <option value="1000000000||nC">Nanoculombios (nC)</option>
+//    <option value="1000000||µC">Microculombios (µC)</option>
+//    <option value="1000||mC">Miliculombios (mC)</option>
+//    <option value="1||C" selected="selected">Culombios (C)</option>
+//    <option value="0.001||kC">Kiloculombios (kC)</option>
+//    <option value="0.000001||MC">Megaculombios (MC)</option>
+//    <option disabled="disabled">&nbsp;</option>
+//    <option value="0.1||abC">Abculombios (abC)</option>
+//    <option value="0,277777777778||mAh">Miliamperios-hora (mAh)</option>
+//    <option value="0,000277777777778||Ah">Amperios-hora (Ah)</option>
+//    <option value="0,00001036426864904||F">Faraday (F)</option>
+//    <option value="2997924580||statC">Statculombios (statC)</option>
+//    <option value="6241509474153816705||e">Carga Elemental (e)</option>
 }
 
 double ConversorUD::Referencia(QString Value,QString Tipo)
@@ -9297,7 +9653,7 @@ double ConversorUD::Referencia(QString Value,QString Tipo)
     if (Tipo == "Area")
     {
         if (Value == tr("Nanometro cuadrado (nm²)"))
-            Valor = 100000000000000000000;
+            Valor = 100000000000000000000.00;
         if (Value == tr("Micrometro cuadrado (µm²)"))
             Valor = 100000000000000;
         if (Value == tr("Milimetro cuadrado (mm²)"))
@@ -9385,6 +9741,57 @@ double ConversorUD::Referencia(QString Value,QString Tipo)
             Valor = 0.001;
         if (Value == tr("Libra mol (lb-mol)"))
             Valor = 0.0022046226;
+    }
+    if (Tipo == "Electrica")
+    {
+        if (Value == tr("Faradio (F)"))
+            Valor = 1;
+        if (Value == tr("Decafaradio (daF)"))
+            Valor = 0.1;
+        if (Value == tr("Hectofaradio (hF)"))
+            Valor = 0.01;
+        if (Value == tr("Kilofaradio (kF)"))
+            Valor = 0.001;
+        if (Value == tr("Megafaradio (MF)"))
+            Valor = 0.000001;
+        if (Value == tr("Gigafaradio (GF)"))
+            Valor = 0.000000001;
+        if (Value == tr("Terafaradio (TF)"))
+            Valor = 0.000000000001;
+        if (Value == tr("Petafaradio (PF)"))
+            Valor = 0.000000000000001;
+        if (Value == tr("Exafaradio (EF)"))
+            Valor = 0.000000000000000001;
+        if (Value == tr("Zettafaradio (ZF)"))
+            Valor = 0.000000000000000000001;
+        if (Value == tr("Yottafaradio (YF)"))
+            Valor = 0.000000000000000000000001;
+        if (Value == tr("Decifaradio (dF)"))
+            Valor = 10;
+        if (Value == tr("Centifaradio (cF)"))
+            Valor = 100;
+        if (Value == tr("Milifaradio (mF)"))
+            Valor = 1000;
+        if (Value == tr("Microfaradio (µF)"))
+            Valor = 1000000;
+        if (Value == tr("Nanofaradio (nF)"))
+            Valor = 1000000000;
+        if (Value == tr("Picofaradio (pF)"))
+            Valor = 1000000000000;
+        if (Value == tr("Femtofaradio (fF)"))
+            Valor = 1000000000000000;
+        if (Value == tr("Attofaradio (aF)"))
+            Valor = 1000000000000000000;
+        if (Value == tr("Zeptofaradio (zF)"))
+            Valor = 1000000000000000000000.00;
+        if (Value == tr("Yoctofaradio (yF)"))
+            Valor = 1000000000000000000000000.00;
+        if (Value == tr("Culombio por voltio"))
+            Valor = 1;
+        if (Value == tr("Abfaradio (abF)"))
+            Valor = 0.000000001;
+        if (Value == tr("Statfaradio (statF)"))
+            Valor = 898755178736.5;
     }
     return Valor;
 }
@@ -9961,6 +10368,70 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
                         Zero = Zero.remove(".");
                 }
                 ui->textEdit->append(""+Valor+" "+ui->comboBox_50->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
+    if (Base == "Electrica")
+    {
+        if (ui->lineEdit_154->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_48->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Zero+" "+ui->comboBox_48->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value1/Value)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Valor+" "+ui->comboBox_48->currentText()+tr(" son ")+Zero+" "+Nombre+"");
                 if (Log == "S")
                 {
                     system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
@@ -10547,45 +11018,109 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             }
         }
     }
+    if (Base == "Electrica")
+    {
+        if (ui->lineEdit_154->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_48->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_48->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value/Value1)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_48->currentText()+tr(" son ")+Valor+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
 }
 
-void ConversorUD::on_pushButton_32_clicked()
+void ConversorUD::on_pushButton_31_clicked()
 {
-    ui->lineEdit_156->setText("");
-    ui->lineEdit_156->setFocus();
-    ui->lineEdit_157->setText("");
-    ui->lineEdit_157->setToolTip("");
+    ui->lineEdit_154->setText("");
+    ui->lineEdit_154->setFocus();
+    ui->lineEdit_155->setText("");
+    ui->lineEdit_155->setToolTip("");
     ui->label_14->setText("");
     ui->label_15->setText("");
     ui->textEdit->setText("");
     ui->textEdit_2->setText("");
 }
 
-void ConversorUD::on_lineEdit_156_returnPressed()
+void ConversorUD::on_lineEdit_154_returnPressed()
 {
-    ui->lineEdit_156->setFocus();
-    ui->lineEdit_156->selectAll();
+    ui->lineEdit_154->setFocus();
+    ui->lineEdit_154->selectAll();
 }
 
-void ConversorUD::on_lineEdit_156_textChanged(const QString &arg1)
+void ConversorUD::on_lineEdit_154_textChanged(const QString &arg1)
 {
     if (arg1 != "")
     {
         QString Valor = VerNum(arg1,1);
         if (Valor == "No")
             {
-            if (ui->lineEdit_156->text() == "")
+            if (ui->lineEdit_154->text() == "")
             {
-                ui->lineEdit_157->setText("");
-                ui->lineEdit_157->setToolTip("");
+                ui->lineEdit_155->setText("");
+                ui->lineEdit_155->setToolTip("");
             }
             else
             {
-                QString Valor = ui->comboBox_50->currentText();
+                QString Valor = ui->comboBox_48->currentText();
                 double Cantidad = arg1.toDouble();
-                double Resto = Referencia(Valor,"Sustancia");
-                QString Valor1 = ui->comboBox_51->currentText();
-                double Resto1 = Referencia(Valor1,"Sustancia");
+                double Resto = Referencia(Valor,"Electrica");
+                QString Valor1 = ui->comboBox_49->currentText();
+                double Resto1 = Referencia(Valor1,"Electrica");
                 if (Valor == Valor1)
                 {
                     double ValorF = Cantidad;
@@ -10602,8 +11137,8 @@ void ConversorUD::on_lineEdit_156_textChanged(const QString &arg1)
                         if (Zero.right(1) == ".")
                             Zero = Zero.remove(".");
                     }
-                    ui->lineEdit_157->setText(Zero);
-                    ui->lineEdit_157->setToolTip(Zero);
+                    ui->lineEdit_155->setText(Zero);
+                    ui->lineEdit_155->setToolTip(Zero);
                 }
                 else
                 {
@@ -10621,11 +11156,11 @@ void ConversorUD::on_lineEdit_156_textChanged(const QString &arg1)
                         if (Zero.right(1) == ".")
                             Zero = Zero.remove(".");
                     }
-                    ui->lineEdit_157->setText(Zero);
-                    ui->lineEdit_157->setToolTip(Zero);
+                    ui->lineEdit_155->setText(Zero);
+                    ui->lineEdit_155->setToolTip(Zero);
                 }
             }
-            Reprobar("Sustancia");
+            Reprobar("Electrica");
         }
         else
         {
@@ -10633,29 +11168,29 @@ void ConversorUD::on_lineEdit_156_textChanged(const QString &arg1)
             m.setWindowTitle(tr("Advertencia!!!"));
             m.setText(tr("Has introducido un caracter no valido."));
             m.exec();
-            ui->lineEdit_156->setFocus();
-            QString Resto = ui->lineEdit_156->text();
+            ui->lineEdit_154->setFocus();
+            QString Resto = ui->lineEdit_154->text();
             Resto.chop(1);
-            ui->lineEdit_156->setText(Resto);
+            ui->lineEdit_154->setText(Resto);
             return;
         }
     }
 }
 
-void ConversorUD::on_comboBox_50_activated(const QString &arg1)
+void ConversorUD::on_comboBox_48_activated(const QString &arg1)
 {
-    if (ui->lineEdit_156->text() == "")
+    if (ui->lineEdit_154->text() == "")
     {
-        ui->lineEdit_157->setText("");
-        ui->lineEdit_157->setToolTip("");
+        ui->lineEdit_155->setText("");
+        ui->lineEdit_155->setToolTip("");
     }
     else
     {
         QString Valor = arg1;
-        double Cantidad = ui->lineEdit_156->text().toFloat();
-        double Resto = Referencia(Valor,"Sustancia");
-        QString Valor1 = ui->comboBox_51->currentText();
-        double Resto1 = Referencia(Valor1,"Sustancia");
+        double Cantidad = ui->lineEdit_154->text().toFloat();
+        double Resto = Referencia(Valor,"Electrica");
+        QString Valor1 = ui->comboBox_49->currentText();
+        double Resto1 = Referencia(Valor1,"Electrica");
         if (Valor == Valor1)
         {
             double ValorF = Cantidad;
@@ -10672,8 +11207,8 @@ void ConversorUD::on_comboBox_50_activated(const QString &arg1)
                 if (Zero.right(1) == ".")
                     Zero = Zero.remove(".");
             }
-            ui->lineEdit_157->setText(Zero);
-            ui->lineEdit_157->setToolTip(Zero);
+            ui->lineEdit_155->setText(Zero);
+            ui->lineEdit_155->setToolTip(Zero);
         }
         else
         {
@@ -10691,27 +11226,27 @@ void ConversorUD::on_comboBox_50_activated(const QString &arg1)
                 if (Zero.right(1) == ".")
                     Zero = Zero.remove(".");
             }
-            ui->lineEdit_157->setText(Zero);
-            ui->lineEdit_157->setToolTip(Zero);
+            ui->lineEdit_155->setText(Zero);
+            ui->lineEdit_155->setToolTip(Zero);
         }
     }
-    Reprobar("Sustancia");
+    Reprobar("Electrica");
 }
 
-void ConversorUD::on_comboBox_51_activated(const QString &arg1)
+void ConversorUD::on_comboBox_49_activated(const QString &arg1)
 {
-    if (ui->lineEdit_156->text() == "")
+    if (ui->lineEdit_154->text() == "")
     {
-        ui->lineEdit_157->setText("");
-        ui->lineEdit_157->setToolTip("");
+        ui->lineEdit_155->setText("");
+        ui->lineEdit_155->setToolTip("");
     }
     else
     {
-        QString Valor = ui->comboBox_50->currentText();
-        double Cantidad = ui->lineEdit_156->text().toFloat();
-        double Resto = Referencia(Valor,"Sustancia");
+        QString Valor = ui->comboBox_48->currentText();
+        double Cantidad = ui->lineEdit_154->text().toFloat();
+        double Resto = Referencia(Valor,"Electrica");
         QString Valor1 = arg1;
-        double Resto1 = Referencia(Valor1,"Sustancia");
+        double Resto1 = Referencia(Valor1,"Electrica");
         if (Valor == Valor1)
         {
             double ValorF = Cantidad;
@@ -10728,8 +11263,8 @@ void ConversorUD::on_comboBox_51_activated(const QString &arg1)
                 if (Zero.right(1) == ".")
                     Zero = Zero.remove(".");
             }
-            ui->lineEdit_157->setText(Zero);
-            ui->lineEdit_157->setToolTip(Zero);
+            ui->lineEdit_155->setText(Zero);
+            ui->lineEdit_155->setToolTip(Zero);
         }
         else
         {
@@ -10747,11 +11282,11 @@ void ConversorUD::on_comboBox_51_activated(const QString &arg1)
                 if (Zero.right(1) == ".")
                     Zero = Zero.remove(".");
             }
-            ui->lineEdit_157->setText(Zero);
-            ui->lineEdit_157->setToolTip(Zero);
+            ui->lineEdit_155->setText(Zero);
+            ui->lineEdit_155->setToolTip(Zero);
         }
     }
-    Reprobar("Sustancia");
+    Reprobar("Electrica");
 }
 
 QString ConversorUD::getDivisa()
@@ -10787,4 +11322,6 @@ void ConversorUD::Divisa()
         }
     }
     qDebug() << Resto;
+
+    // falta esta parte para las monedas
 }

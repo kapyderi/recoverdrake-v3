@@ -278,7 +278,7 @@ public:
     void retranslateUi(QDialog *notas)
     {
         notas->setWindowTitle(QApplication::translate("notas", "Acerca de...", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("notas", "Version 3.121.85 T.E.U. La Version final", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("notas", "Version 3.139.85 T.E.U. La Version final", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("notas", "RecoverDrake -- Proyecto Derix", 0, QApplication::UnicodeUTF8));
         textEdit_5->setHtml(QApplication::translate("notas", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
