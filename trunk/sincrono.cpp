@@ -1370,7 +1370,7 @@ void sincrono::on_pushButton_4_clicked()
     ui->tableWidget_2->resizeRowsToContents();
     Contad->start(5000);
     Value = 0;
-    int Total = items1.count()+items1.count()+items2.count();
+    int Total = items1.count()+items.count()+items2.count();
     if (Total == 0)
         Counter = 1;
     else
@@ -1603,8 +1603,8 @@ void sincrono::on_pushButton_5_clicked()
     this->on_pushButton_7_clicked();
     QString Root = ui->lineEdit_2->text();
     int Contador = ui->tableWidget_2->rowCount();
-    QList<QTableWidgetItem *> itemsa = ui->tableWidget_2->findItems(tr("Sin cambios") , Qt::MatchExactly);
-    if (Contador == itemsa.count())
+    QList<QTableWidgetItem *> items = ui->tableWidget_2->findItems(tr("Sin cambios") , Qt::MatchExactly);
+    if (Contador == items.count())
     {
         if (Contador > 0)
         {
@@ -1867,7 +1867,6 @@ void sincrono::on_pushButton_5_clicked()
                 drakeSistema drake;
                 QString Valor = "ls -ld \"%1%2\"";
                 Valor = Valor.arg(ui->lineEdit_2->text()).arg(RutaObj);
-                Valor = Valor.remove("\"");
                 QString Buscar = drake.getStart(Valor);
                 if (Buscar == "")
                 {

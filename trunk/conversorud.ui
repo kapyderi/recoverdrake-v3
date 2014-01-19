@@ -333,6 +333,11 @@
           </item>
           <item>
            <property name="text">
+            <string>Carga electrica</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
             <string>Distancia o Longitud</string>
            </property>
           </item>
@@ -2136,7 +2141,7 @@ background-color: rgb(255, 251, 239);</string>
         </sizepolicy>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tab_3">
         <attribute name="title">
@@ -2585,6 +2590,9 @@ background-color: rgb(255, 251, 239);</string>
                <width>16777215</width>
                <height>82</height>
               </size>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;El area es la magnitud geometrica que expresa la extension de un cuerpo en dos dimensiones: largo y ancho.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="title">
               <string>Superficie o Area</string>
@@ -3575,6 +3583,9 @@ background-color: rgb(255, 251, 239);</string>
                <height>82</height>
               </size>
              </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;La aceleracion es la magnitud fisica que mide la tasa de variacion de la velocidad respecto del tiempo. Las unidades para expresar la aceleracion seran unidades de velocidad divididas por las unidades de tiempo: longitud/tiempo² (en unidades del sistema internacional se usa generalmente [m/s²]). No debe confundirse la velocidad con la aceleracion, pues son conceptos distintos, acelerar no significa ir mas rapido, sino cambiar de velocidad.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
              <property name="title">
               <string>Aceleracion</string>
              </property>
@@ -3762,6 +3773,9 @@ background-color: rgb(255, 251, 239);</string>
                <width>16777215</width>
                <height>82</height>
               </size>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;La memoria de ordenador es la parte del hardware que retiene durante cierto periodo de tiempo informacion que necesita el sistema para funcionar correctamente&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="title">
               <string>Almacenamiento de datos</string>
@@ -4035,6 +4049,9 @@ background-color: rgb(255, 251, 239);</string>
                <width>16777215</width>
                <height>82</height>
               </size>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Es comun denominar ancho de banda digital a la cantidad de datos que se pueden transmitir en una unidad de tiempo. Por ejemplo, una linea ADSL de 256 kbps puede, teoricamente, enviar 256000 bits (no bytes) por segundo. Esto es en realidad la tasa de transferencia maxima permitida por el sistema, que depende del ancho de banda analogico, de la potencia de la senal, de la potencia de ruido y de la codificacion de canal.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="title">
               <string>Ancho de banda</string>
@@ -4697,6 +4714,9 @@ background-color: rgb(255, 251, 239);</string>
                <height>82</height>
               </size>
              </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;El nombre campo magnetico se ha usado informalmente para dos tipos de campos vectoriales diferentes, que se denotan normalmente como H y B. El primero es el que tecnicamente se denomino &amp;quot;campo magnetico&amp;quot;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
              <property name="title">
               <string>Campo Magnetico</string>
              </property>
@@ -4859,6 +4879,9 @@ background-color: rgb(255, 251, 239);</string>
                <width>16777215</width>
                <height>82</height>
               </size>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se denomina angulo plano a la porcion de plano comprendida entre dos semirrectas con un origen en comun denominado vertice. Otra concepcion de angulo dice que este es la figura formada por dos rayos con origen comun. Para ambos casos el angulo no se puede medir (son subconjuntos de puntos del plano, por lo tanto infinitos), solo se puede medir la abertura del ángulo. Las unidades de medida son grados o radianes. Se subentendera que cuando hablamos de &amp;quot;medida del angulo&amp;quot; estamos hablando de medir su abertura.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="title">
               <string>Angulo</string>
@@ -5287,6 +5310,9 @@ background-color: rgb(255, 251, 239);</string>
                <height>82</height>
               </size>
              </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;La cantidad de luz o energia luminosa solo tiene importancia para conocer el flujo luminoso que es capaz de dar un flash fotografico o para comparar diferentes lamparas segun la luz que emiten durante un cierto periodo. Su símbolo es Q v y su unidad es el lumen por segundo (lm·s). &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
              <property name="title">
               <string>Cantidad de luz</string>
              </property>
@@ -5462,7 +5488,7 @@ background-color: rgb(255, 251, 239);</string>
             <enum>QFrame::NoFrame</enum>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="tabSpacing">
             <number>0</number>
@@ -5472,8 +5498,8 @@ background-color: rgb(255, 251, 239);</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>459</width>
-              <height>198</height>
+              <width>576</width>
+              <height>241</height>
              </rect>
             </property>
             <attribute name="label">
@@ -8665,8 +8691,8 @@ p, li { white-space: pre-wrap; }
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>459</width>
-              <height>180</height>
+              <width>576</width>
+              <height>241</height>
              </rect>
             </property>
             <attribute name="label">
@@ -8676,7 +8702,7 @@ p, li { white-space: pre-wrap; }
              <item row="0" column="0">
               <widget class="QTabWidget" name="tabWidget_4">
                <property name="currentIndex">
-                <number>0</number>
+                <number>12</number>
                </property>
                <property name="movable">
                 <bool>false</bool>
@@ -10573,17 +10599,14 @@ color: rgb(255, 0, 0);</string>
           <layout class="QGridLayout" name="gridLayout_152">
            <item row="0" column="0">
             <widget class="QGroupBox" name="groupBox_32">
-             <property name="minimumSize">
-              <size>
-               <width>500</width>
-               <height>0</height>
-              </size>
-             </property>
              <property name="maximumSize">
               <size>
                <width>16777215</width>
                <height>82</height>
               </size>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;En las ciencias fisicas, la cantidad de sustancia, n, de una muestra se puede definir informalmente como el numero de alguna entidad elemental especifica (por lo general atomos, moleculas, o iones, o electrones) presentes en la muestra, pero cuando este numero se expresa en terminos de alguna cantidad estandar tamano.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="title">
               <string>Cantidad de sustancia</string>
@@ -10741,6 +10764,9 @@ background-color: rgb(255, 251, 239);</string>
                <width>16777215</width>
                <height>82</height>
               </size>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;En el estudio de la electricidad, se denomina capacidad (a veces se denomina capacitancia, aunque esta palabra no esta registrada en el diccionario RAE, Real Academia Española), a la propiedad de un conductor de adquirir carga electrica cuando es sometido a un potencial electrico con respecto a otro en estado neutro. La capacidad queda definida numericamente por la carga que adquiere por cada unidad de potencial. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="title">
               <string>Capacidad electrica</string>
@@ -11097,22 +11123,19 @@ background-color: rgb(255, 251, 239);</string>
           <layout class="QGridLayout" name="gridLayout_153">
            <item row="0" column="0">
             <widget class="QGroupBox" name="groupBox_30">
-             <property name="minimumSize">
-              <size>
-               <width>500</width>
-               <height>0</height>
-              </size>
-             </property>
              <property name="maximumSize">
               <size>
                <width>16777215</width>
                <height>82</height>
               </size>
              </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;La carga electrica es una propiedad intrinseca de algunas particulas sub-atomicas que se manifiesta mediante atracciones y repulsiones y que determina las interacciones electromagneticas entre ellas. La materia cargada electricamente es influida por los campos electromagneticos siendo, a su vez, generadora de ellos. La interaccion entre carga y campo electrico es la fuente de una de las cuatro fuerzas fundamentales, la fuerza electromagnetica.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
              <property name="title">
               <string>Carga electrica</string>
              </property>
-             <layout class="QGridLayout" name="gridLayout_137">
+             <layout class="QGridLayout" name="gridLayout_108">
               <property name="leftMargin">
                <number>0</number>
               </property>
@@ -11134,22 +11157,62 @@ background-color: rgb(255, 251, 239);</string>
                   </property>
                   <item>
                    <property name="text">
-                    <string>Talbot (T)</string>
+                    <string>Nanoculombios (nC)</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>Lumen segundo (lm·s)</string>
+                    <string>Microculombios (µC)</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>Lumen minuto (lm·min)</string>
+                    <string>Miliculombios (mC)</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>Lumen hora (lm·h)</string>
+                    <string>Culombios (C)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Kiloculombios (kC)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Megaculombios (MC)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Abculombios (abC)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Miliamperios-hora (mAh)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Amperios-hora (Ah)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Faraday (F)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Statculombios (statC)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Carga Elemental (e)</string>
                    </property>
                   </item>
                  </widget>
@@ -11233,22 +11296,62 @@ background-color: rgb(255, 251, 239);</string>
                   </property>
                   <item>
                    <property name="text">
-                    <string>Talbot (T)</string>
+                    <string>Nanoculombios (nC)</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>Lumen segundo (lm·s)</string>
+                    <string>Microculombios (µC)</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>Lumen minuto (lm·min)</string>
+                    <string>Miliculombios (mC)</string>
                    </property>
                   </item>
                   <item>
                    <property name="text">
-                    <string>Lumen hora (lm·h)</string>
+                    <string>Culombios (C)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Kiloculombios (kC)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Megaculombios (MC)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Abculombios (abC)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Miliamperios-hora (mAh)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Amperios-hora (Ah)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Faraday (F)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Statculombios (statC)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Carga Elemental (e)</string>
                    </property>
                   </item>
                  </widget>
@@ -11289,276 +11392,6 @@ background-color: rgb(255, 251, 239);</string>
                   <property name="focusPolicy">
                    <enum>Qt::NoFocus</enum>
                   </property>
-                  <item>
-                   <property name="text">
-                    <string>Bit por segundo (bit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobit por segundo (kbit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabit por segundo (Mbit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabit por segundo (Gbit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabit por segundo (Tbit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kibibit por segundo (Kibit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Mebibit por segundo (Mibit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gibibit por segundo (Gibit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tebibit por segundo (Tibit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Byte por segundo (B/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobyte por segundo (kB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabyte por segundo (MB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabyte por segundo (GB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabyte por segundo (TB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kibibyte por segundo (KiB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Mebibyte por segundo (MiB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gibibyte por segundo (GiB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tebibyte por segundo (TiB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Bit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kibibit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Mebibit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gibibit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tebibit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Byte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kibibyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Mebibyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gibibyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tebibyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Bit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kibibit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Mebibit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gibibit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tebibit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Byte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kibibyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Mebibyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gibibyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tebibyte por dia</string>
-                   </property>
-                  </item>
                  </widget>
                 </item>
                 <item row="1" column="0">
@@ -11638,276 +11471,6 @@ background-color: rgb(255, 251, 239);</string>
                   <property name="focusPolicy">
                    <enum>Qt::NoFocus</enum>
                   </property>
-                  <item>
-                   <property name="text">
-                    <string>Bit por segundo (bit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobit por segundo (kbit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabit por segundo (Mbit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabit por segundo (Gbit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabit por segundo (Tbit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kibibit por segundo (Kibit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Mebibit por segundo (Mibit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gibibit por segundo (Gibit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tebibit por segundo (Tibit/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Byte por segundo (B/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobyte por segundo (kB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabyte por segundo (MB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabyte por segundo (GB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabyte por segundo (TB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kibibyte por segundo (KiB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Mebibyte por segundo (MiB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gibibyte por segundo (GiB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tebibyte por segundo (TiB/s)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Bit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kibibit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Mebibit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gibibit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tebibit por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Byte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kibibyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Mebibyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gibibyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tebibyte por hora</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Bit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kibibit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Mebibit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gibibit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tebibit por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Byte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kibibyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Mebibyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gibibyte por dia</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Tebibyte por dia</string>
-                   </property>
-                  </item>
                  </widget>
                 </item>
                </layout>
@@ -11967,81 +11530,6 @@ background-color: rgb(255, 251, 239);</string>
                   <property name="maxVisibleItems">
                    <number>33</number>
                   </property>
-                  <item>
-                   <property name="text">
-                    <string>Bit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Nibble</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Petabit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Exabit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Byte (B)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobyte (KB)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabyte (MB)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabyte (GB)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabyte (TB)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Petabyte (PB)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Exabyte (EB)</string>
-                   </property>
-                  </item>
                  </widget>
                 </item>
                </layout>
@@ -12110,81 +11598,6 @@ background-color: rgb(255, 251, 239);</string>
                   <property name="maxVisibleItems">
                    <number>33</number>
                   </property>
-                  <item>
-                   <property name="text">
-                    <string>Bit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Nibble</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Petabit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Exabit</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Byte (B)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Kilobyte (KB)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Megabyte (MB)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Gigabyte (GB)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Terabyte (TB)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Petabyte (PB)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>Exabyte (EB)</string>
-                   </property>
-                  </item>
                  </widget>
                 </item>
                </layout>
@@ -12252,21 +11665,6 @@ background-color: rgb(255, 251, 239);</string>
                   <property name="focusPolicy">
                    <enum>Qt::NoFocus</enum>
                   </property>
-                  <item>
-                   <property name="text">
-                    <string>ºC (Celsius)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>K (Kelvin)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>ºF (Fahrenheit)</string>
-                   </property>
-                  </item>
                  </widget>
                 </item>
                 <item row="0" column="1" rowspan="2">
@@ -12292,21 +11690,6 @@ background-color: rgb(255, 251, 239);</string>
                   <property name="focusPolicy">
                    <enum>Qt::NoFocus</enum>
                   </property>
-                  <item>
-                   <property name="text">
-                    <string>ºC (Celsius)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>K (Kelvin)</string>
-                   </property>
-                  </item>
-                  <item>
-                   <property name="text">
-                    <string>ºF (Fahrenheit)</string>
-                   </property>
-                  </item>
                  </widget>
                 </item>
                 <item row="1" column="0">
