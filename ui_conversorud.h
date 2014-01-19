@@ -695,7 +695,7 @@ public:
     QComboBox *comboBox_49;
     QGridLayout *gridLayout_153;
     QGroupBox *groupBox_30;
-    QGridLayout *gridLayout_137;
+    QGridLayout *gridLayout_108;
     QGridLayout *gridLayout_138;
     QComboBox *comboBox_46;
     QLineEdit *lineEdit_152;
@@ -2558,7 +2558,7 @@ public:
         toolBox->setFrameShape(QFrame::NoFrame);
         page = new QWidget();
         page->setObjectName(QString::fromUtf8("page"));
-        page->setGeometry(QRect(0, 0, 459, 198));
+        page->setGeometry(QRect(0, 0, 576, 241));
         gridLayout_69 = new QGridLayout(page);
         gridLayout_69->setObjectName(QString::fromUtf8("gridLayout_69"));
         tabWidget_2 = new QTabWidget(page);
@@ -3989,7 +3989,7 @@ public:
         toolBox->addItem(page_2, QString::fromUtf8("Trimestre 2"));
         page_3 = new QWidget();
         page_3->setObjectName(QString::fromUtf8("page_3"));
-        page_3->setGeometry(QRect(0, 0, 459, 180));
+        page_3->setGeometry(QRect(0, 0, 576, 241));
         gridLayout_71 = new QGridLayout(page_3);
         gridLayout_71->setObjectName(QString::fromUtf8("gridLayout_71"));
         tabWidget_4 = new QTabWidget(page_3);
@@ -4868,7 +4868,6 @@ public:
         gridLayout_152->setObjectName(QString::fromUtf8("gridLayout_152"));
         groupBox_32 = new QGroupBox(tab_30);
         groupBox_32->setObjectName(QString::fromUtf8("groupBox_32"));
-        groupBox_32->setMinimumSize(QSize(500, 0));
         groupBox_32->setMaximumSize(QSize(16777215, 82));
         gridLayout_143 = new QGridLayout(groupBox_32);
         gridLayout_143->setObjectName(QString::fromUtf8("gridLayout_143"));
@@ -5000,11 +4999,10 @@ public:
         gridLayout_153->setObjectName(QString::fromUtf8("gridLayout_153"));
         groupBox_30 = new QGroupBox(tab_30);
         groupBox_30->setObjectName(QString::fromUtf8("groupBox_30"));
-        groupBox_30->setMinimumSize(QSize(500, 0));
         groupBox_30->setMaximumSize(QSize(16777215, 82));
-        gridLayout_137 = new QGridLayout(groupBox_30);
-        gridLayout_137->setObjectName(QString::fromUtf8("gridLayout_137"));
-        gridLayout_137->setContentsMargins(0, 0, 0, 0);
+        gridLayout_108 = new QGridLayout(groupBox_30);
+        gridLayout_108->setObjectName(QString::fromUtf8("gridLayout_108"));
+        gridLayout_108->setContentsMargins(0, 0, 0, 0);
         gridLayout_138 = new QGridLayout();
         gridLayout_138->setObjectName(QString::fromUtf8("gridLayout_138"));
         comboBox_46 = new QComboBox(groupBox_30);
@@ -5021,13 +5019,13 @@ public:
         gridLayout_138->addWidget(lineEdit_152, 1, 0, 1, 1);
 
 
-        gridLayout_137->addLayout(gridLayout_138, 0, 0, 1, 1);
+        gridLayout_108->addLayout(gridLayout_138, 0, 0, 1, 1);
 
         label_140 = new QLabel(groupBox_30);
         label_140->setObjectName(QString::fromUtf8("label_140"));
         label_140->setFont(font1);
 
-        gridLayout_137->addWidget(label_140, 0, 1, 1, 1);
+        gridLayout_108->addWidget(label_140, 0, 1, 1, 1);
 
         gridLayout_139 = new QGridLayout();
         gridLayout_139->setObjectName(QString::fromUtf8("gridLayout_139"));
@@ -5057,7 +5055,7 @@ public:
         gridLayout_139->addWidget(comboBox_47, 0, 0, 1, 1);
 
 
-        gridLayout_137->addLayout(gridLayout_139, 0, 2, 1, 1);
+        gridLayout_108->addLayout(gridLayout_139, 0, 2, 1, 1);
 
 
         gridLayout_153->addWidget(groupBox_30, 0, 0, 1, 1);
@@ -5327,12 +5325,12 @@ public:
 
         retranslateUi(ConversorUD);
 
-        tabWidget->setCurrentIndex(3);
-        toolBox->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
+        toolBox->setCurrentIndex(0);
         toolBox->layout()->setSpacing(0);
         tabWidget_2->setCurrentIndex(0);
         tabWidget_3->setCurrentIndex(0);
-        tabWidget_4->setCurrentIndex(0);
+        tabWidget_4->setCurrentIndex(12);
 
 
         QMetaObject::connectSlotsByName(ConversorUD);
@@ -5388,6 +5386,7 @@ public:
          << QApplication::translate("ConversorUD", "Cantidad de luz", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Cantidad de sustancia", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Capacidad electrica", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Carga electrica", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Distancia o Longitud", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Sistema de numeracion", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Superficie o Area", 0, QApplication::UnicodeUTF8)
@@ -5556,6 +5555,9 @@ public:
          << QApplication::translate("ConversorUD", "Minuto luz", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Segundo luz", 0, QApplication::UnicodeUTF8)
         );
+#ifndef QT_NO_WHATSTHIS
+        groupBox_2->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>El area es la magnitud geometrica que expresa la extension de un cuerpo en dos dimensiones: largo y ancho.</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
         groupBox_2->setTitle(QApplication::translate("ConversorUD", "Superficie o Area", 0, QApplication::UnicodeUTF8));
         comboBox_4->clear();
         comboBox_4->insertItems(0, QStringList()
@@ -5690,6 +5692,9 @@ public:
          << QApplication::translate("ConversorUD", "Hexadecimal", 0, QApplication::UnicodeUTF8)
         );
         label_6->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        groupBox_18->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>La aceleracion es la magnitud fisica que mide la tasa de variacion de la velocidad respecto del tiempo. Las unidades para expresar la aceleracion seran unidades de velocidad divididas por las unidades de tiempo: longitud/tiempo\302\262 (en unidades del sistema internacional se usa generalmente [m/s\302\262]). No debe confundirse la velocidad con la aceleracion, pues son conceptos distintos, acelerar no significa ir mas rapido, sino cambiar de velocidad.</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
         groupBox_18->setTitle(QApplication::translate("ConversorUD", "Aceleracion", 0, QApplication::UnicodeUTF8));
         comboBox_26->clear();
         comboBox_26->insertItems(0, QStringList()
@@ -5711,6 +5716,9 @@ public:
          << QApplication::translate("ConversorUD", "Fuerza G (g)", 0, QApplication::UnicodeUTF8)
         );
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("ConversorUD", "Conversores 1/10", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        groupBox_15->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>La memoria de ordenador es la parte del hardware que retiene durante cierto periodo de tiempo informacion que necesita el sistema para funcionar correctamente</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
         groupBox_15->setTitle(QApplication::translate("ConversorUD", "Almacenamiento de datos", 0, QApplication::UnicodeUTF8));
         comboBox_19->clear();
         comboBox_19->insertItems(0, QStringList()
@@ -5749,6 +5757,9 @@ public:
          << QApplication::translate("ConversorUD", "Petabyte (PB)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Exabyte (EB)", 0, QApplication::UnicodeUTF8)
         );
+#ifndef QT_NO_WHATSTHIS
+        groupBox_17->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>Es comun denominar ancho de banda digital a la cantidad de datos que se pueden transmitir en una unidad de tiempo. Por ejemplo, una linea ADSL de 256 kbps puede, teoricamente, enviar 256000 bits (no bytes) por segundo. Esto es en realidad la tasa de transferencia maxima permitida por el sistema, que depende del ancho de banda analogico, de la potencia de la senal, de la potencia de ruido y de la codificacion de canal.</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
         groupBox_17->setTitle(QApplication::translate("ConversorUD", "Ancho de banda", 0, QApplication::UnicodeUTF8));
         comboBox_24->clear();
         comboBox_24->insertItems(0, QStringList()
@@ -5865,6 +5876,9 @@ public:
          << QApplication::translate("ConversorUD", "Gibibyte por dia", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Tebibyte por dia", 0, QApplication::UnicodeUTF8)
         );
+#ifndef QT_NO_WHATSTHIS
+        groupBox_14->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>El nombre campo magnetico se ha usado informalmente para dos tipos de campos vectoriales diferentes, que se denotan normalmente como H y B. El primero es el que tecnicamente se denomino &quot;campo magnetico&quot;.</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
         groupBox_14->setTitle(QApplication::translate("ConversorUD", "Campo Magnetico", 0, QApplication::UnicodeUTF8));
         comboBox_18->clear();
         comboBox_18->insertItems(0, QStringList()
@@ -5881,6 +5895,9 @@ public:
          << QApplication::translate("ConversorUD", "Oersted (Oe)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Gilbert por metro (Gi/m)", 0, QApplication::UnicodeUTF8)
         );
+#ifndef QT_NO_WHATSTHIS
+        groupBox_16->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>Se denomina angulo plano a la porcion de plano comprendida entre dos semirrectas con un origen en comun denominado vertice. Otra concepcion de angulo dice que este es la figura formada por dos rayos con origen comun. Para ambos casos el angulo no se puede medir (son subconjuntos de puntos del plano, por lo tanto infinitos), solo se puede medir la abertura del \303\241ngulo. Las unidades de medida son grados o radianes. Se subentendera que cuando hablamos de &quot;medida del angulo&quot; estamos hablando de medir su abertura.</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
         groupBox_16->setTitle(QApplication::translate("ConversorUD", "Angulo", 0, QApplication::UnicodeUTF8));
         comboBox_21->clear();
         comboBox_21->insertItems(0, QStringList()
@@ -5933,6 +5950,9 @@ public:
          << QApplication::translate("ConversorUD", "\302\272F (Fahrenheit)", 0, QApplication::UnicodeUTF8)
         );
         label_53->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        groupBox_13->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>La cantidad de luz o energia luminosa solo tiene importancia para conocer el flujo luminoso que es capaz de dar un flash fotografico o para comparar diferentes lamparas segun la luz que emiten durante un cierto periodo. Su s\303\255mbolo es Q v y su unidad es el lumen por segundo (lm\302\267s). </p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
         groupBox_13->setTitle(QApplication::translate("ConversorUD", "Cantidad de luz", 0, QApplication::UnicodeUTF8));
         comboBox_17->clear();
         comboBox_17->insertItems(0, QStringList()
@@ -6717,6 +6737,9 @@ public:
         label_131->setText(QApplication::translate("ConversorUD", "Dias", 0, QApplication::UnicodeUTF8));
         label_143->setText(QApplication::translate("ConversorUD", "* Estos son datos aproximados, no soy Dios.  No se cuando puede nacer vuestro hijo o si estais embarazados. xD", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("ConversorUD", "Conversores 3/10", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        groupBox_32->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>En las ciencias fisicas, la cantidad de sustancia, n, de una muestra se puede definir informalmente como el numero de alguna entidad elemental especifica (por lo general atomos, moleculas, o iones, o electrones) presentes en la muestra, pero cuando este numero se expresa en terminos de alguna cantidad estandar tamano.</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
         groupBox_32->setTitle(QApplication::translate("ConversorUD", "Cantidad de sustancia", 0, QApplication::UnicodeUTF8));
         comboBox_50->clear();
         comboBox_50->insertItems(0, QStringList()
@@ -6733,6 +6756,9 @@ public:
          << QApplication::translate("ConversorUD", "Kilomol (kmol)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Libra mol (lb-mol)", 0, QApplication::UnicodeUTF8)
         );
+#ifndef QT_NO_WHATSTHIS
+        groupBox_31->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>En el estudio de la electricidad, se denomina capacidad (a veces se denomina capacitancia, aunque esta palabra no esta registrada en el diccionario RAE, Real Academia Espa\303\261ola), a la propiedad de un conductor de adquirir carga electrica cuando es sometido a un potencial electrico con respecto a otro en estado neutro. La capacidad queda definida numericamente por la carga que adquiere por cada unidad de potencial. </p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
         groupBox_31->setTitle(QApplication::translate("ConversorUD", "Capacidad electrica", 0, QApplication::UnicodeUTF8));
         comboBox_48->clear();
         comboBox_48->insertItems(0, QStringList()
@@ -6789,189 +6815,46 @@ public:
          << QApplication::translate("ConversorUD", "Abfaradio (abF)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Statfaradio (statF)", 0, QApplication::UnicodeUTF8)
         );
+#ifndef QT_NO_WHATSTHIS
+        groupBox_30->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>La carga electrica es una propiedad intrinseca de algunas particulas sub-atomicas que se manifiesta mediante atracciones y repulsiones y que determina las interacciones electromagneticas entre ellas. La materia cargada electricamente es influida por los campos electromagneticos siendo, a su vez, generadora de ellos. La interaccion entre carga y campo electrico es la fuente de una de las cuatro fuerzas fundamentales, la fuerza electromagnetica.</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
         groupBox_30->setTitle(QApplication::translate("ConversorUD", "Carga electrica", 0, QApplication::UnicodeUTF8));
         comboBox_46->clear();
         comboBox_46->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Talbot (T)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Lumen segundo (lm\302\267s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Lumen minuto (lm\302\267min)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Lumen hora (lm\302\267h)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Nanoculombios (nC)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Microculombios (\302\265C)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Miliculombios (mC)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Culombios (C)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kiloculombios (kC)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megaculombios (MC)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Abculombios (abC)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Miliamperios-hora (mAh)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Amperios-hora (Ah)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Faraday (F)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Statculombios (statC)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Carga Elemental (e)", 0, QApplication::UnicodeUTF8)
         );
         label_140->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
         comboBox_47->clear();
         comboBox_47->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Talbot (T)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Lumen segundo (lm\302\267s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Lumen minuto (lm\302\267min)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Lumen hora (lm\302\267h)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Nanoculombios (nC)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Microculombios (\302\265C)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Miliculombios (mC)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Culombios (C)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kiloculombios (kC)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Megaculombios (MC)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Abculombios (abC)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Miliamperios-hora (mAh)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Amperios-hora (Ah)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Faraday (F)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Statculombios (statC)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Carga Elemental (e)", 0, QApplication::UnicodeUTF8)
         );
         groupBox_29->setTitle(QApplication::translate("ConversorUD", "()", 0, QApplication::UnicodeUTF8));
-        comboBox_44->clear();
-        comboBox_44->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Bit por segundo (bit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobit por segundo (kbit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabit por segundo (Mbit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabit por segundo (Gbit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabit por segundo (Tbit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kibibit por segundo (Kibit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mebibit por segundo (Mibit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gibibit por segundo (Gibit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Tebibit por segundo (Tibit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Byte por segundo (B/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobyte por segundo (kB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabyte por segundo (MB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabyte por segundo (GB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabyte por segundo (TB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kibibyte por segundo (KiB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mebibyte por segundo (MiB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gibibyte por segundo (GiB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Tebibyte por segundo (TiB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Bit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kibibit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mebibit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gibibit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Tebibit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Byte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kibibyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mebibyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gibibyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Tebibyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Bit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kibibit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mebibit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gibibit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Tebibit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Byte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kibibyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mebibyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gibibyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Tebibyte por dia", 0, QApplication::UnicodeUTF8)
-        );
         label_139->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
-        comboBox_45->clear();
-        comboBox_45->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Bit por segundo (bit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobit por segundo (kbit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabit por segundo (Mbit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabit por segundo (Gbit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabit por segundo (Tbit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kibibit por segundo (Kibit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mebibit por segundo (Mibit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gibibit por segundo (Gibit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Tebibit por segundo (Tibit/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Byte por segundo (B/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobyte por segundo (kB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabyte por segundo (MB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabyte por segundo (GB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabyte por segundo (TB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kibibyte por segundo (KiB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mebibyte por segundo (MiB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gibibyte por segundo (GiB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Tebibyte por segundo (TiB/s)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Bit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kibibit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mebibit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gibibit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Tebibit por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Byte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kibibyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mebibyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gibibyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Tebibyte por hora", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Bit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kibibit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mebibit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gibibit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Tebibit por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Byte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kibibyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Mebibyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gibibyte por dia", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Tebibyte por dia", 0, QApplication::UnicodeUTF8)
-        );
         groupBox_34->setTitle(QApplication::translate("ConversorUD", "()", 0, QApplication::UnicodeUTF8));
-        comboBox_54->clear();
-        comboBox_54->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Bit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Nibble", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Petabit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Exabit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Byte (B)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobyte (KB)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabyte (MB)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabyte (GB)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabyte (TB)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Petabyte (PB)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Exabyte (EB)", 0, QApplication::UnicodeUTF8)
-        );
         label_159->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
-        comboBox_55->clear();
-        comboBox_55->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "Bit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Nibble", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Petabit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Exabit", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Byte (B)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Kilobyte (KB)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Megabyte (MB)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Gigabyte (GB)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Terabyte (TB)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Petabyte (PB)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "Exabyte (EB)", 0, QApplication::UnicodeUTF8)
-        );
         groupBox_33->setTitle(QApplication::translate("ConversorUD", "()", 0, QApplication::UnicodeUTF8));
-        comboBox_52->clear();
-        comboBox_52->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "\302\272C (Celsius)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "K (Kelvin)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "\302\272F (Fahrenheit)", 0, QApplication::UnicodeUTF8)
-        );
-        comboBox_53->clear();
-        comboBox_53->insertItems(0, QStringList()
-         << QApplication::translate("ConversorUD", "\302\272C (Celsius)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "K (Kelvin)", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("ConversorUD", "\302\272F (Fahrenheit)", 0, QApplication::UnicodeUTF8)
-        );
         label_158->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_30), QApplication::translate("ConversorUD", "Conversores 4/10", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
