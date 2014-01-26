@@ -61,6 +61,7 @@
 #include "ayuda.h"
 #include "conversorud.h"
 #include "calculadora.h"
+#include "dbclaves.h"
 
 namespace Ui {
     class recoverdrake;
@@ -112,6 +113,7 @@ private:
     QMdiSubWindow *buscarid3mp3();
     QMdiSubWindow *buscarGrabador();
     QMdiSubWindow *buscarConversor();
+    QMdiSubWindow *buscarClaves();
     QStringList listaArchivos;
     Phonon::Effect *effect;
     Phonon::MediaObject *mediaObject;
@@ -261,6 +263,7 @@ private:
     int Pagina20;
     int Pagina21;
     int Pagina22;
+    int Pagina23;
     int Dato1;
     int Dato2;
     int CerrarP;
@@ -318,6 +321,7 @@ private:
     Grabador *graba;
     ConversorUD *ConvUD;
     Calculadora *Calcula;
+    dbclaves *Claves;
     int filaAudio;
     int filaAudioRadio;
     int i;
@@ -948,6 +952,7 @@ private slots:
     void CerrarNucleo();
     void CerrarMakefile();
     void CerrarCompara();
+    void CerrarClaves();
     void on_pushButton_58_clicked();
     void on_actionCrea_tu_propio_kernel_personalizado_triggered();
     void on_actionAjustes_de_ecualizacion_triggered();
@@ -963,6 +968,8 @@ private slots:
     void on_actionAmule_2_triggered();
     void on_actionCalculadora_triggered();
     void on_actionVlc_3_triggered();
+    void on_actionClaves_triggered();
+    void on_pushButton_65_clicked();
 
 public:
     Ui::recoverdrake *uil;

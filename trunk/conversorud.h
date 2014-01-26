@@ -149,6 +149,16 @@ private slots:
     void on_lineEdit_152_textChanged(const QString &arg1);
     void on_comboBox_46_activated(const QString &arg1);
     void on_comboBox_47_activated(const QString &arg1);
+    void on_pushButton_29_clicked();
+    void on_lineEdit_150_returnPressed();
+    void on_lineEdit_150_textChanged(const QString &arg1);
+    void on_comboBox_44_activated(const QString &arg1);
+    void on_comboBox_45_activated(const QString &arg1);
+    void on_pushButton_34_clicked();
+    void on_lineEdit_160_returnPressed();
+    void on_lineEdit_160_textChanged(const QString &arg1);
+    void on_comboBox_54_activated(const QString &arg1);
+    void on_comboBox_55_activated(const QString &arg1);
 
 private:
     Ui::ConversorUD *ui;

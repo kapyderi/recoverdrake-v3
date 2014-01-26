@@ -75,17 +75,6 @@ public:
     QTableWidget *tableWidget;
     QGroupBox *groupBox_26;
     QGridLayout *gridLayout_93;
-    QGridLayout *gridLayout_98;
-    QLabel *label_169;
-    QLabel *label_170;
-    QLabel *label_171;
-    QLabel *label_172;
-    QLabel *label_173;
-    QLineEdit *lineEdit_30;
-    QLineEdit *lineEdit_31;
-    QLineEdit *lineEdit_32;
-    QLineEdit *lineEdit_33;
-    QLineEdit *lineEdit_34;
     QGridLayout *gridLayout_97;
     QSpacerItem *horizontalSpacer_14;
     QLineEdit *lineEdit_29;
@@ -97,6 +86,17 @@ public:
     QLineEdit *lineEdit_27;
     QLabel *label_165;
     QSpacerItem *verticalSpacer;
+    QGridLayout *gridLayout_98;
+    QLabel *label_169;
+    QLabel *label_170;
+    QLabel *label_171;
+    QLabel *label_172;
+    QLabel *label_173;
+    QLineEdit *lineEdit_30;
+    QLineEdit *lineEdit_31;
+    QLineEdit *lineEdit_32;
+    QLineEdit *lineEdit_33;
+    QLineEdit *lineEdit_34;
     QGroupBox *groupBox_6;
     QGridLayout *gridLayout_11;
     QGridLayout *gridLayout_13;
@@ -382,10 +382,9 @@ public:
         sizePolicy.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
         tableWidget->setSizePolicy(sizePolicy);
         tableWidget->setMinimumSize(QSize(500, 0));
-        tableWidget->setEditTriggers(QAbstractItemView::AnyKeyPressed);
+        tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tableWidget->setAlternatingRowColors(true);
         tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
-        tableWidget->setSortingEnabled(true);
 
         gridLayout_7->addWidget(tableWidget, 0, 0, 1, 5);
 
@@ -399,6 +398,74 @@ public:
         gridLayout_93 = new QGridLayout(groupBox_26);
         gridLayout_93->setObjectName(QString::fromUtf8("gridLayout_93"));
         gridLayout_93->setContentsMargins(0, 0, 0, 0);
+        gridLayout_97 = new QGridLayout();
+        gridLayout_97->setObjectName(QString::fromUtf8("gridLayout_97"));
+        horizontalSpacer_14 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_97->addItem(horizontalSpacer_14, 0, 1, 1, 1);
+
+        lineEdit_29 = new QLineEdit(groupBox_26);
+        lineEdit_29->setObjectName(QString::fromUtf8("lineEdit_29"));
+        lineEdit_29->setEnabled(false);
+        lineEdit_29->setMaximumSize(QSize(50, 16777215));
+
+        gridLayout_97->addWidget(lineEdit_29, 0, 7, 1, 1);
+
+        label_168 = new QLabel(groupBox_26);
+        label_168->setObjectName(QString::fromUtf8("label_168"));
+        QFont font1;
+        font1.setBold(true);
+        font1.setWeight(75);
+        label_168->setFont(font1);
+
+        gridLayout_97->addWidget(label_168, 0, 4, 1, 1);
+
+        label_167 = new QLabel(groupBox_26);
+        label_167->setObjectName(QString::fromUtf8("label_167"));
+        label_167->setFont(font1);
+
+        gridLayout_97->addWidget(label_167, 0, 6, 1, 1);
+
+        comboBox_2 = new QComboBox(groupBox_26);
+        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
+        comboBox_2->setEnabled(false);
+
+        gridLayout_97->addWidget(comboBox_2, 0, 3, 1, 1);
+
+        label_166 = new QLabel(groupBox_26);
+        label_166->setObjectName(QString::fromUtf8("label_166"));
+        label_166->setFont(font1);
+        label_166->setAlignment(Qt::AlignCenter);
+
+        gridLayout_97->addWidget(label_166, 0, 8, 1, 1);
+
+        lineEdit_28 = new QLineEdit(groupBox_26);
+        lineEdit_28->setObjectName(QString::fromUtf8("lineEdit_28"));
+        lineEdit_28->setEnabled(false);
+        lineEdit_28->setMaximumSize(QSize(50, 16777215));
+
+        gridLayout_97->addWidget(lineEdit_28, 0, 5, 1, 1);
+
+        lineEdit_27 = new QLineEdit(groupBox_26);
+        lineEdit_27->setObjectName(QString::fromUtf8("lineEdit_27"));
+        lineEdit_27->setEnabled(false);
+        lineEdit_27->setMaximumSize(QSize(50, 16777215));
+
+        gridLayout_97->addWidget(lineEdit_27, 0, 9, 1, 1);
+
+        label_165 = new QLabel(groupBox_26);
+        label_165->setObjectName(QString::fromUtf8("label_165"));
+        label_165->setFont(font1);
+
+        gridLayout_97->addWidget(label_165, 0, 2, 1, 1);
+
+
+        gridLayout_93->addLayout(gridLayout_97, 3, 0, 1, 2);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_93->addItem(verticalSpacer, 4, 0, 1, 1);
+
         gridLayout_98 = new QGridLayout();
         gridLayout_98->setObjectName(QString::fromUtf8("gridLayout_98"));
         label_169 = new QLabel(groupBox_26);
@@ -408,9 +475,6 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(label_169->sizePolicy().hasHeightForWidth());
         label_169->setSizePolicy(sizePolicy1);
-        QFont font1;
-        font1.setBold(true);
-        font1.setWeight(75);
         label_169->setFont(font1);
 
         gridLayout_98->addWidget(label_169, 0, 1, 1, 1);
@@ -472,71 +536,6 @@ public:
 
 
         gridLayout_93->addLayout(gridLayout_98, 1, 0, 2, 2);
-
-        gridLayout_97 = new QGridLayout();
-        gridLayout_97->setObjectName(QString::fromUtf8("gridLayout_97"));
-        horizontalSpacer_14 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_97->addItem(horizontalSpacer_14, 0, 1, 1, 1);
-
-        lineEdit_29 = new QLineEdit(groupBox_26);
-        lineEdit_29->setObjectName(QString::fromUtf8("lineEdit_29"));
-        lineEdit_29->setEnabled(false);
-        lineEdit_29->setMaximumSize(QSize(50, 16777215));
-
-        gridLayout_97->addWidget(lineEdit_29, 0, 7, 1, 1);
-
-        label_168 = new QLabel(groupBox_26);
-        label_168->setObjectName(QString::fromUtf8("label_168"));
-        label_168->setFont(font1);
-
-        gridLayout_97->addWidget(label_168, 0, 4, 1, 1);
-
-        label_167 = new QLabel(groupBox_26);
-        label_167->setObjectName(QString::fromUtf8("label_167"));
-        label_167->setFont(font1);
-
-        gridLayout_97->addWidget(label_167, 0, 6, 1, 1);
-
-        comboBox_2 = new QComboBox(groupBox_26);
-        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
-        comboBox_2->setEnabled(false);
-
-        gridLayout_97->addWidget(comboBox_2, 0, 3, 1, 1);
-
-        label_166 = new QLabel(groupBox_26);
-        label_166->setObjectName(QString::fromUtf8("label_166"));
-        label_166->setFont(font1);
-        label_166->setAlignment(Qt::AlignCenter);
-
-        gridLayout_97->addWidget(label_166, 0, 8, 1, 1);
-
-        lineEdit_28 = new QLineEdit(groupBox_26);
-        lineEdit_28->setObjectName(QString::fromUtf8("lineEdit_28"));
-        lineEdit_28->setEnabled(false);
-        lineEdit_28->setMaximumSize(QSize(50, 16777215));
-
-        gridLayout_97->addWidget(lineEdit_28, 0, 5, 1, 1);
-
-        lineEdit_27 = new QLineEdit(groupBox_26);
-        lineEdit_27->setObjectName(QString::fromUtf8("lineEdit_27"));
-        lineEdit_27->setEnabled(false);
-        lineEdit_27->setMaximumSize(QSize(50, 16777215));
-
-        gridLayout_97->addWidget(lineEdit_27, 0, 9, 1, 1);
-
-        label_165 = new QLabel(groupBox_26);
-        label_165->setObjectName(QString::fromUtf8("label_165"));
-        label_165->setFont(font1);
-
-        gridLayout_97->addWidget(label_165, 0, 2, 1, 1);
-
-
-        gridLayout_93->addLayout(gridLayout_97, 3, 0, 1, 2);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_93->addItem(verticalSpacer, 4, 0, 1, 1);
 
 
         gridLayout_6->addWidget(groupBox_26, 0, 1, 1, 1);
@@ -1202,6 +1201,46 @@ public:
         groupBox_26->setWhatsThis(QApplication::translate("Grabador", "Informacion de archivo de audio", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         groupBox_26->setTitle(QApplication::translate("Grabador", "Informacion del archivo", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        lineEdit_29->setToolTip(QApplication::translate("Grabador", "Numero de pista", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_STATUSTIP
+        lineEdit_29->setStatusTip(QApplication::translate("Grabador", "Numero de pista", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_STATUSTIP
+#ifndef QT_NO_WHATSTHIS
+        lineEdit_29->setWhatsThis(QApplication::translate("Grabador", "Numero de pista", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        label_168->setText(QApplication::translate("Grabador", "Ano", 0, QApplication::UnicodeUTF8));
+        label_167->setText(QApplication::translate("Grabador", "Numero de pista/Total pistas", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        comboBox_2->setToolTip(QApplication::translate("Grabador", "Tipo de genero musical", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_STATUSTIP
+        comboBox_2->setStatusTip(QApplication::translate("Grabador", "Tipo de genero musical", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_STATUSTIP
+#ifndef QT_NO_WHATSTHIS
+        comboBox_2->setWhatsThis(QApplication::translate("Grabador", "Tipo de genero musical", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        label_166->setText(QApplication::translate("Grabador", " /", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        lineEdit_28->setToolTip(QApplication::translate("Grabador", "Anuario de la cancion", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_STATUSTIP
+        lineEdit_28->setStatusTip(QApplication::translate("Grabador", "Anuario de la cancion", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_STATUSTIP
+#ifndef QT_NO_WHATSTHIS
+        lineEdit_28->setWhatsThis(QApplication::translate("Grabador", "Anuario de la cancion", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+#ifndef QT_NO_TOOLTIP
+        lineEdit_27->setToolTip(QApplication::translate("Grabador", "Pistas totales", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_STATUSTIP
+        lineEdit_27->setStatusTip(QApplication::translate("Grabador", "Pistas totales", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_STATUSTIP
+#ifndef QT_NO_WHATSTHIS
+        lineEdit_27->setWhatsThis(QApplication::translate("Grabador", "Pistas totales", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        label_165->setText(QApplication::translate("Grabador", "Genero", 0, QApplication::UnicodeUTF8));
         label_169->setText(QApplication::translate("Grabador", "Nombre mp3", 0, QApplication::UnicodeUTF8));
         label_170->setText(QApplication::translate("Grabador", "Titulo Cancion", 0, QApplication::UnicodeUTF8));
         label_171->setText(QApplication::translate("Grabador", "Titulo Album", 0, QApplication::UnicodeUTF8));
@@ -1252,46 +1291,6 @@ public:
 #ifndef QT_NO_WHATSTHIS
         lineEdit_34->setWhatsThis(QApplication::translate("Grabador", "Comentarios del archivo", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
-#ifndef QT_NO_TOOLTIP
-        lineEdit_29->setToolTip(QApplication::translate("Grabador", "Numero de pista", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_TOOLTIP
-#ifndef QT_NO_STATUSTIP
-        lineEdit_29->setStatusTip(QApplication::translate("Grabador", "Numero de pista", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_STATUSTIP
-#ifndef QT_NO_WHATSTHIS
-        lineEdit_29->setWhatsThis(QApplication::translate("Grabador", "Numero de pista", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        label_168->setText(QApplication::translate("Grabador", "Ano", 0, QApplication::UnicodeUTF8));
-        label_167->setText(QApplication::translate("Grabador", "Numero de pista/Total pistas", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_TOOLTIP
-        comboBox_2->setToolTip(QApplication::translate("Grabador", "Tipo de genero musical", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_TOOLTIP
-#ifndef QT_NO_STATUSTIP
-        comboBox_2->setStatusTip(QApplication::translate("Grabador", "Tipo de genero musical", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_STATUSTIP
-#ifndef QT_NO_WHATSTHIS
-        comboBox_2->setWhatsThis(QApplication::translate("Grabador", "Tipo de genero musical", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        label_166->setText(QApplication::translate("Grabador", " /", 0, QApplication::UnicodeUTF8));
-#ifndef QT_NO_TOOLTIP
-        lineEdit_28->setToolTip(QApplication::translate("Grabador", "Anuario de la cancion", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_TOOLTIP
-#ifndef QT_NO_STATUSTIP
-        lineEdit_28->setStatusTip(QApplication::translate("Grabador", "Anuario de la cancion", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_STATUSTIP
-#ifndef QT_NO_WHATSTHIS
-        lineEdit_28->setWhatsThis(QApplication::translate("Grabador", "Anuario de la cancion", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-#ifndef QT_NO_TOOLTIP
-        lineEdit_27->setToolTip(QApplication::translate("Grabador", "Pistas totales", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_TOOLTIP
-#ifndef QT_NO_STATUSTIP
-        lineEdit_27->setStatusTip(QApplication::translate("Grabador", "Pistas totales", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_STATUSTIP
-#ifndef QT_NO_WHATSTHIS
-        lineEdit_27->setWhatsThis(QApplication::translate("Grabador", "Pistas totales", 0, QApplication::UnicodeUTF8));
-#endif // QT_NO_WHATSTHIS
-        label_165->setText(QApplication::translate("Grabador", "Genero", 0, QApplication::UnicodeUTF8));
         groupBox_6->setTitle(QApplication::translate("Grabador", "Controles", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
         pushButton_12->setToolTip(QApplication::translate("Grabador", "Lanza la cancion seleccionada", 0, QApplication::UnicodeUTF8));

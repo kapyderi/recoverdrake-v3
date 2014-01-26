@@ -285,7 +285,7 @@
        <string>Ventana de ayuda</string>
       </property>
       <property name="currentIndex">
-       <number>10</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="tab_1">
        <attribute name="title">

@@ -2083,6 +2083,7 @@ void sincrono::ProcesarValor(QString ValorComand)
             QString Ruta = ""+ui->lineEdit->text()+""+valor+"";
             QFile file(Ruta);
             QString Value = QFileInfo(file).absoluteFilePath();
+            Value = Value.replace(" ", "\\ ").replace("&","\\&").replace("'","\\'").replace("(","\\(").replace(")","\\)");
             if (ValorComand.contains(Value))
             {
                 if(ValorComand.contains("/.Sincrono") == false)

@@ -319,7 +319,7 @@ public:
         retranslateUi(Ayuda);
 
         tabWidget_2->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(10);
+        tabWidget->setCurrentIndex(7);
 
 
         QMetaObject::connectSlotsByName(Ayuda);

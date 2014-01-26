@@ -133,6 +133,13 @@ void Ayuda::Valor(QString valor)
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(ui->listWidget->currentItem()->text());
     }
+    if (ui->lineEdit->text() == "")
+    {
+        ui->tabWidget_2->setCurrentPage(1);
+        ui->listWidget_2->setCurrentRow(0);
+        ui->listWidget->setCurrentRow(0);
+        ui->lineEdit->setText(ui->listWidget->currentItem()->text());
+    }
 }
 
 void Ayuda::on_listWidget_currentTextChanged(const QString &currentText)
@@ -169,9 +176,7 @@ void Ayuda::on_listWidget_currentTextChanged(const QString &currentText)
         ui->tabWidget->setCurrentPage(0);
     }
     if (currentText == "VideoDrake")
-    {        this->Comprobar();
-        //        QString Valor;
-        //        Valor = ui->listWidget_2->currentItem()->text();
+    {
         ui->tabWidget->insertTab(0,ui->tab_7,"VideoDrake");
         ui->tabWidget->setCurrentPage(0);
     }

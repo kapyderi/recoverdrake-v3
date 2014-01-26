@@ -74,7 +74,8 @@ SOURCES += main.cpp \
     comparador.cpp \
     grabador.cpp \
     conversorud.cpp \
-    calculadora.cpp
+    calculadora.cpp \
+    dbclaves.cpp
 HEADERS += recoverdrake.h \
     drakesistema.h \
     drakeprocesos.h \
@@ -132,7 +133,8 @@ HEADERS += recoverdrake.h \
     comparador.h \
     grabador.h \
     conversorud.h \
-    calculadora.h
+    calculadora.h \
+    dbclaves.h
 FORMS += recoverdrake.ui \
     acceso.ui \
     claves.ui \
@@ -186,7 +188,8 @@ FORMS += recoverdrake.ui \
     comparador.ui \
     grabador.ui \
     conversorud.ui \
-    calculadora.ui
+    calculadora.ui \
+    dbclaves.ui
 RESOURCES += recoverdrake.qrc
 OTHER_FILES += 
 TRANSLATIONS += RecoverDrake_en.ts \

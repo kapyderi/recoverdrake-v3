@@ -269,7 +269,7 @@ public:
 
         retranslateUi(notas);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(notas);
@@ -278,7 +278,7 @@ public:
     void retranslateUi(QDialog *notas)
     {
         notas->setWindowTitle(QApplication::translate("notas", "Acerca de...", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("notas", "Version 3.141.85 T.E.U. La Version final", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("notas", "Version 3.146.88 T.E.U. La Version final", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("notas", "RecoverDrake -- Proyecto Derix", 0, QApplication::UnicodeUTF8));
         textEdit_5->setHtml(QApplication::translate("notas", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -612,7 +612,7 @@ public:
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:400;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:400;\">...si me dejo alguien que me perdone, pero es que es &quot;muuu&quot; tarde.</span></p></body></html>", 0, QApplication::UnicodeUTF8));
         pushButton_3->setText(QApplication::translate("notas", "www.blogdrake.net", 0, QApplication::UnicodeUTF8));
-        pushButton_4->setText(QApplication::translate("notas", "www.zonaqt.com", 0, QApplication::UnicodeUTF8));
+        pushButton_4->setText(QApplication::translate("notas", "www.codigoqt.com", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("notas", "Agradecimientos", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("notas", "Salir", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
