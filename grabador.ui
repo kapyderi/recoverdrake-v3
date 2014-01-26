@@ -577,16 +577,13 @@
            <string>Ventana de lista de archivos cargados</string>
           </property>
           <property name="editTriggers">
-           <set>QAbstractItemView::AnyKeyPressed</set>
+           <set>QAbstractItemView::NoEditTriggers</set>
           </property>
           <property name="alternatingRowColors">
            <bool>true</bool>
           </property>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
-          </property>
-          <property name="sortingEnabled">
-           <bool>true</bool>
           </property>
           <column>
            <property name="text">
@@ -646,164 +643,6 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item row="1" column="0" rowspan="2" colspan="2">
-         <layout class="QGridLayout" name="gridLayout_98">
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_169">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Nombre mp3</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="label_170">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Titulo Cancion</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="label_171">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Titulo Album</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="label_172">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Nombre Artista</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLabel" name="label_173">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
-            <property name="text">
-             <string>Comentarios</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="2" colspan="3">
-           <widget class="QLineEdit" name="lineEdit_30">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Nombre del artista</string>
-            </property>
-            <property name="statusTip">
-             <string>Nombre del artista</string>
-            </property>
-            <property name="whatsThis">
-             <string>Nombre del artista</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2" colspan="3">
-           <widget class="QLineEdit" name="lineEdit_31">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Titulo del album</string>
-            </property>
-            <property name="statusTip">
-             <string>Titulo del album</string>
-            </property>
-            <property name="whatsThis">
-             <string>Titulo del album</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2" colspan="3">
-           <widget class="QLineEdit" name="lineEdit_32">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Titulo de la cancion</string>
-            </property>
-            <property name="statusTip">
-             <string>Titulo de la cancion</string>
-            </property>
-            <property name="whatsThis">
-             <string>Titulo de la cancion</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2" colspan="3">
-           <widget class="QLineEdit" name="lineEdit_33">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Nombre del archivo</string>
-            </property>
-            <property name="statusTip">
-             <string>Nombre del archivo</string>
-            </property>
-            <property name="whatsThis">
-             <string>Nombre del archivo</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="2" colspan="3">
-           <widget class="QLineEdit" name="lineEdit_34">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="toolTip">
-             <string>Comentarios del archivo</string>
-            </property>
-            <property name="statusTip">
-             <string>Comentarios del archivo</string>
-            </property>
-            <property name="whatsThis">
-             <string>Comentarios del archivo</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
         <item row="3" column="0" colspan="2">
          <layout class="QGridLayout" name="gridLayout_97">
           <item row="0" column="1">
@@ -973,6 +812,164 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item row="1" column="0" rowspan="2" colspan="2">
+         <layout class="QGridLayout" name="gridLayout_98">
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_169">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Nombre mp3</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="label_170">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Titulo Cancion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="label_171">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Titulo Album</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLabel" name="label_172">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Nombre Artista</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLabel" name="label_173">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>Comentarios</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_30">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Nombre del artista</string>
+            </property>
+            <property name="statusTip">
+             <string>Nombre del artista</string>
+            </property>
+            <property name="whatsThis">
+             <string>Nombre del artista</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_31">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Titulo del album</string>
+            </property>
+            <property name="statusTip">
+             <string>Titulo del album</string>
+            </property>
+            <property name="whatsThis">
+             <string>Titulo del album</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_32">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Titulo de la cancion</string>
+            </property>
+            <property name="statusTip">
+             <string>Titulo de la cancion</string>
+            </property>
+            <property name="whatsThis">
+             <string>Titulo de la cancion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_33">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Nombre del archivo</string>
+            </property>
+            <property name="statusTip">
+             <string>Nombre del archivo</string>
+            </property>
+            <property name="whatsThis">
+             <string>Nombre del archivo</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_34">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Comentarios del archivo</string>
+            </property>
+            <property name="statusTip">
+             <string>Comentarios del archivo</string>
+            </property>
+            <property name="whatsThis">
+             <string>Comentarios del archivo</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
        <zorder></zorder>

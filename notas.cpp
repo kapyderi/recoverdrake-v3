@@ -36,7 +36,7 @@ void notas::on_pushButton_clicked()
 
 void notas::on_pushButton_4_clicked()
 {
-    system("su - "+user+" -c \"firefox http://www.zonaqt.com\"");
+    system("su - "+user+" -c \"firefox http://www.codigoqt.com\"");
     return;
 }
 

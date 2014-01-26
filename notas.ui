@@ -83,7 +83,7 @@ font: bold Italic;
 color: rgb(0, 0, 255);</string>
      </property>
      <property name="text">
-      <string>Version 3.141.85 T.E.U. La Version final</string>
+      <string>Version 3.146.88 T.E.U. La Version final</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -539,7 +539,7 @@ color: rgb(0, 0, 255);</string>
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <property name="elideMode">
       <enum>Qt::ElideNone</enum>
@@ -949,7 +949,7 @@ p, li { white-space: pre-wrap; }
           <string notr="true">color: rgb(0, 0, 255);</string>
          </property>
          <property name="text">
-          <string>www.zonaqt.com</string>
+          <string>www.codigoqt.com</string>
          </property>
         </widget>
        </item>

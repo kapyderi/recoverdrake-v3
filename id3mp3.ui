@@ -1330,7 +1330,17 @@
     </widget>
    </item>
    <item row="6" column="0" colspan="2">
-    <widget class="QTextEdit" name="textEdit"/>
+    <widget class="QTextEdit" name="textEdit">
+     <property name="toolTip">
+      <string>Consola de procesos</string>
+     </property>
+     <property name="statusTip">
+      <string>Consola de procesos</string>
+     </property>
+     <property name="whatsThis">
+      <string>Consola de procesos</string>
+     </property>
+    </widget>
    </item>
    <item row="2" column="0" colspan="2">
     <widget class="QGroupBox" name="groupBox">

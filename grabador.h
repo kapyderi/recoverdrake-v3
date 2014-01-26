@@ -72,6 +72,10 @@ private slots:
    void on_spinBox_10_valueChanged(int arg1);
    void on_spinBox_11_valueChanged(int arg1);
    void hora();
+   void on_pushButton_13_clicked();
+   void CtrlRec();
+   void CtrlFin();
+   void EjecutarTempo();
 
 private:
     Ui::Grabador *ui;
@@ -107,9 +111,17 @@ private:
     QString Hora, Hora1;
     QString Minuto, Minuto1;
     QString Segundo, Segundo1;
-    QString Revisar(QDateTime HoraI, QDateTime HoraII);
+    QString Revisar(QDateTime HoraI, int ValorI, int Posicion);
     QTimer *timer1;
     int Desbloqueo, Desbloqueo1;
+    int Graba;
+    QTimer *ControlRec;
+    QTimer *ControlFin;
+    QDateTime Inicio;
+    QDateTime Final;
+    QString PathI;
+    QString Source;
+    int Control;
 
 };
 

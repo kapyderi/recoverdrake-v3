@@ -556,36 +556,38 @@ public:
     QLabel *label_150;
     QPushButton *pushButton_108;
     QLabel *label_151;
+    QPushButton *pushButton_106;
     QPushButton *pushButton_109;
     QLabel *label_152;
-    QPushButton *pushButton_106;
     QPushButton *pushButton_110;
     QLabel *label_153;
     QPushButton *pushButton_111;
     QLabel *label_149;
     QPushButton *pushButton_112;
-    QLabel *label_154;
     QPushButton *pushButton_113;
-    QLabel *label_155;
+    QLabel *label_154;
     QPushButton *pushButton_114;
+    QLabel *label_155;
     QSpacerItem *horizontalSpacer_29;
     QLabel *label_156;
     QPushButton *pushButton_115;
-    QLabel *label_157;
     QPushButton *pushButton_117;
+    QLabel *label_157;
     QLabel *label_137;
     QPushButton *pushButton_55;
-    QLabel *label_158;
     QPushButton *pushButton_58;
-    QLabel *label_159;
+    QLabel *label_158;
     QPushButton *pushButton_60;
-    QLabel *label_160;
+    QLabel *label_159;
     QPushButton *pushButton_61;
+    QLabel *label_160;
     QLabel *label_163;
+    QPushButton *pushButton_64;
     QLabel *label_164;
     QLabel *label_174;
-    QPushButton *pushButton_64;
+    QPushButton *pushButton_65;
     QLabel *label_175;
+    QLabel *label_177;
     QWidget *tab_56;
     QGridLayout *gridLayout_3;
     QSplitter *splitter_7;
@@ -1196,6 +1198,9 @@ public:
     QWidget *tab_68;
     QGridLayout *gridLayout_101;
     QMdiArea *mdiArea_22;
+    QWidget *tab_69;
+    QGridLayout *gridLayout_102;
+    QMdiArea *mdiArea_23;
     QMenuBar *menuBar;
     QMenu *menuPrincipal;
     QMenu *menuUtilidades;
@@ -3118,7 +3123,7 @@ public:
         actionConfigurar_VNC->setIcon(icon37);
         actionClaves = new QAction(recoverdrake);
         actionClaves->setObjectName(QString::fromUtf8("actionClaves"));
-        actionClaves->setEnabled(false);
+        actionClaves->setEnabled(true);
         QIcon icon209;
         icon209.addFile(QString::fromUtf8(":/Imagenes/security-mdk.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionClaves->setIcon(icon209);
@@ -3285,7 +3290,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1018, 838));
+        scrollAreaWidgetContents->setGeometry(QRect(0, -225, 1018, 838));
         gridLayout_82 = new QGridLayout(scrollAreaWidgetContents);
         gridLayout_82->setSpacing(0);
         gridLayout_82->setContentsMargins(11, 11, 11, 11);
@@ -3573,11 +3578,22 @@ public:
 
         gridLayout_26->addWidget(label_151, 8, 1, 1, 1);
 
-        pushButton_109 = new QPushButton(groupBox_21);
-        pushButton_109->setObjectName(QString::fromUtf8("pushButton_109"));
+        pushButton_106 = new QPushButton(groupBox_21);
+        pushButton_106->setObjectName(QString::fromUtf8("pushButton_106"));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(pushButton_106->sizePolicy().hasHeightForWidth());
+        pushButton_106->setSizePolicy(sizePolicy1);
+        pushButton_106->setMinimumSize(QSize(75, 75));
+        pushButton_106->setMaximumSize(QSize(75, 75));
+        pushButton_106->setIcon(icon178);
+        pushButton_106->setIconSize(QSize(60, 60));
+
+        gridLayout_26->addWidget(pushButton_106, 7, 7, 1, 1);
+
+        pushButton_109 = new QPushButton(groupBox_21);
+        pushButton_109->setObjectName(QString::fromUtf8("pushButton_109"));
         sizePolicy1.setHeightForWidth(pushButton_109->sizePolicy().hasHeightForWidth());
         pushButton_109->setSizePolicy(sizePolicy1);
         pushButton_109->setMinimumSize(QSize(75, 75));
@@ -3592,17 +3608,6 @@ public:
         label_152->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
 
         gridLayout_26->addWidget(label_152, 8, 3, 1, 1);
-
-        pushButton_106 = new QPushButton(groupBox_21);
-        pushButton_106->setObjectName(QString::fromUtf8("pushButton_106"));
-        sizePolicy1.setHeightForWidth(pushButton_106->sizePolicy().hasHeightForWidth());
-        pushButton_106->setSizePolicy(sizePolicy1);
-        pushButton_106->setMinimumSize(QSize(75, 75));
-        pushButton_106->setMaximumSize(QSize(75, 75));
-        pushButton_106->setIcon(icon178);
-        pushButton_106->setIconSize(QSize(60, 60));
-
-        gridLayout_26->addWidget(pushButton_106, 7, 7, 1, 1);
 
         pushButton_110 = new QPushButton(groupBox_21);
         pushButton_110->setObjectName(QString::fromUtf8("pushButton_110"));
@@ -3643,12 +3648,6 @@ public:
 
         gridLayout_26->addWidget(pushButton_112, 7, 11, 1, 1);
 
-        label_154 = new QLabel(groupBox_21);
-        label_154->setObjectName(QString::fromUtf8("label_154"));
-        label_154->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-
-        gridLayout_26->addWidget(label_154, 8, 9, 1, 1);
-
         pushButton_113 = new QPushButton(groupBox_21);
         pushButton_113->setObjectName(QString::fromUtf8("pushButton_113"));
         pushButton_113->setEnabled(false);
@@ -3659,11 +3658,11 @@ public:
 
         gridLayout_26->addWidget(pushButton_113, 0, 13, 1, 1);
 
-        label_155 = new QLabel(groupBox_21);
-        label_155->setObjectName(QString::fromUtf8("label_155"));
-        label_155->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        label_154 = new QLabel(groupBox_21);
+        label_154->setObjectName(QString::fromUtf8("label_154"));
+        label_154->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
 
-        gridLayout_26->addWidget(label_155, 8, 11, 1, 1);
+        gridLayout_26->addWidget(label_154, 8, 9, 1, 1);
 
         pushButton_114 = new QPushButton(groupBox_21);
         pushButton_114->setObjectName(QString::fromUtf8("pushButton_114"));
@@ -3674,6 +3673,12 @@ public:
         pushButton_114->setIconSize(QSize(60, 60));
 
         gridLayout_26->addWidget(pushButton_114, 4, 13, 1, 1);
+
+        label_155 = new QLabel(groupBox_21);
+        label_155->setObjectName(QString::fromUtf8("label_155"));
+        label_155->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+
+        gridLayout_26->addWidget(label_155, 8, 11, 1, 1);
 
         horizontalSpacer_29 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -3696,12 +3701,6 @@ public:
 
         gridLayout_26->addWidget(pushButton_115, 7, 13, 1, 1);
 
-        label_157 = new QLabel(groupBox_21);
-        label_157->setObjectName(QString::fromUtf8("label_157"));
-        label_157->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-
-        gridLayout_26->addWidget(label_157, 5, 13, 1, 1);
-
         pushButton_117 = new QPushButton(groupBox_21);
         pushButton_117->setObjectName(QString::fromUtf8("pushButton_117"));
         pushButton_117->setMinimumSize(QSize(75, 75));
@@ -3710,6 +3709,12 @@ public:
         pushButton_117->setIconSize(QSize(60, 60));
 
         gridLayout_26->addWidget(pushButton_117, 9, 1, 1, 1);
+
+        label_157 = new QLabel(groupBox_21);
+        label_157->setObjectName(QString::fromUtf8("label_157"));
+        label_157->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+
+        gridLayout_26->addWidget(label_157, 5, 13, 1, 1);
 
         label_137 = new QLabel(groupBox_21);
         label_137->setObjectName(QString::fromUtf8("label_137"));
@@ -3726,12 +3731,6 @@ public:
 
         gridLayout_26->addWidget(pushButton_55, 9, 3, 1, 1);
 
-        label_158 = new QLabel(groupBox_21);
-        label_158->setObjectName(QString::fromUtf8("label_158"));
-        label_158->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-
-        gridLayout_26->addWidget(label_158, 10, 1, 1, 1);
-
         pushButton_58 = new QPushButton(groupBox_21);
         pushButton_58->setObjectName(QString::fromUtf8("pushButton_58"));
         pushButton_58->setMinimumSize(QSize(75, 75));
@@ -3741,11 +3740,11 @@ public:
 
         gridLayout_26->addWidget(pushButton_58, 9, 5, 1, 1);
 
-        label_159 = new QLabel(groupBox_21);
-        label_159->setObjectName(QString::fromUtf8("label_159"));
-        label_159->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        label_158 = new QLabel(groupBox_21);
+        label_158->setObjectName(QString::fromUtf8("label_158"));
+        label_158->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
 
-        gridLayout_26->addWidget(label_159, 10, 3, 1, 1);
+        gridLayout_26->addWidget(label_158, 10, 1, 1, 1);
 
         pushButton_60 = new QPushButton(groupBox_21);
         pushButton_60->setObjectName(QString::fromUtf8("pushButton_60"));
@@ -3758,11 +3757,11 @@ public:
 
         gridLayout_26->addWidget(pushButton_60, 9, 7, 1, 1);
 
-        label_160 = new QLabel(groupBox_21);
-        label_160->setObjectName(QString::fromUtf8("label_160"));
-        label_160->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+        label_159 = new QLabel(groupBox_21);
+        label_159->setObjectName(QString::fromUtf8("label_159"));
+        label_159->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
 
-        gridLayout_26->addWidget(label_160, 10, 5, 1, 1);
+        gridLayout_26->addWidget(label_159, 10, 3, 1, 1);
 
         pushButton_61 = new QPushButton(groupBox_21);
         pushButton_61->setObjectName(QString::fromUtf8("pushButton_61"));
@@ -3773,11 +3772,26 @@ public:
 
         gridLayout_26->addWidget(pushButton_61, 9, 9, 1, 1);
 
+        label_160 = new QLabel(groupBox_21);
+        label_160->setObjectName(QString::fromUtf8("label_160"));
+        label_160->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+
+        gridLayout_26->addWidget(label_160, 10, 5, 1, 1);
+
         label_163 = new QLabel(groupBox_21);
         label_163->setObjectName(QString::fromUtf8("label_163"));
         label_163->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
 
         gridLayout_26->addWidget(label_163, 10, 7, 1, 1);
+
+        pushButton_64 = new QPushButton(groupBox_21);
+        pushButton_64->setObjectName(QString::fromUtf8("pushButton_64"));
+        pushButton_64->setMinimumSize(QSize(75, 75));
+        pushButton_64->setMaximumSize(QSize(75, 75));
+        pushButton_64->setIcon(icon219);
+        pushButton_64->setIconSize(QSize(60, 60));
+
+        gridLayout_26->addWidget(pushButton_64, 9, 13, 1, 1);
 
         label_164 = new QLabel(groupBox_21);
         label_164->setObjectName(QString::fromUtf8("label_164"));
@@ -3792,20 +3806,26 @@ public:
 
         gridLayout_26->addWidget(label_174, 10, 11, 1, 1);
 
-        pushButton_64 = new QPushButton(groupBox_21);
-        pushButton_64->setObjectName(QString::fromUtf8("pushButton_64"));
-        pushButton_64->setMinimumSize(QSize(75, 75));
-        pushButton_64->setMaximumSize(QSize(75, 75));
-        pushButton_64->setIcon(icon219);
-        pushButton_64->setIconSize(QSize(60, 60));
+        pushButton_65 = new QPushButton(groupBox_21);
+        pushButton_65->setObjectName(QString::fromUtf8("pushButton_65"));
+        pushButton_65->setMinimumSize(QSize(75, 75));
+        pushButton_65->setMaximumSize(QSize(75, 75));
+        pushButton_65->setIcon(icon209);
+        pushButton_65->setIconSize(QSize(60, 60));
 
-        gridLayout_26->addWidget(pushButton_64, 9, 13, 1, 1);
+        gridLayout_26->addWidget(pushButton_65, 11, 1, 1, 1);
 
         label_175 = new QLabel(groupBox_21);
         label_175->setObjectName(QString::fromUtf8("label_175"));
         label_175->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
 
         gridLayout_26->addWidget(label_175, 10, 13, 1, 1);
+
+        label_177 = new QLabel(groupBox_21);
+        label_177->setObjectName(QString::fromUtf8("label_177"));
+        label_177->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+
+        gridLayout_26->addWidget(label_177, 12, 1, 1, 1);
 
 
         gridLayout_64->addLayout(gridLayout_26, 1, 0, 1, 1);
@@ -8470,6 +8490,18 @@ public:
         gridLayout_101->addWidget(mdiArea_22, 0, 0, 1, 1);
 
         tabWidget->addTab(tab_68, icon219, QString());
+        tab_69 = new QWidget();
+        tab_69->setObjectName(QString::fromUtf8("tab_69"));
+        gridLayout_102 = new QGridLayout(tab_69);
+        gridLayout_102->setSpacing(6);
+        gridLayout_102->setContentsMargins(11, 11, 11, 11);
+        gridLayout_102->setObjectName(QString::fromUtf8("gridLayout_102"));
+        mdiArea_23 = new QMdiArea(tab_69);
+        mdiArea_23->setObjectName(QString::fromUtf8("mdiArea_23"));
+
+        gridLayout_102->addWidget(mdiArea_23, 0, 0, 1, 1);
+
+        tabWidget->addTab(tab_69, icon209, QString());
 
         gridLayout_82->addWidget(tabWidget, 0, 0, 1, 1);
 
@@ -11153,6 +11185,7 @@ public:
                         "gin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">de </span></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">Audio</span></p>\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600; font-style:italic;\"></p></body></html>", 0, QApplication::UnicodeUTF8));
+        pushButton_106->setText(QString());
         pushButton_109->setText(QString());
         label_152->setText(QApplication::translate("recoverdrake", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -11163,7 +11196,6 @@ public:
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">Video</span></p>\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:em"
                         "pty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600; font-style:italic;\"></p></body></html>", 0, QApplication::UnicodeUTF8));
-        pushButton_106->setText(QString());
         pushButton_110->setText(QString());
         label_153->setText(QApplication::translate("recoverdrake", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -11226,6 +11258,7 @@ public:
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">Sincronizador</span></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">de</span></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">datos</span></p></body></html>", 0, QApplication::UnicodeUTF8));
+        pushButton_60->setText(QString());
         label_159->setText(QApplication::translate("recoverdrake", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -11235,7 +11268,7 @@ public:
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">Fecha</span></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; "
                         "margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">Permisos</span></p></body></html>", 0, QApplication::UnicodeUTF8));
-        pushButton_60->setText(QString());
+        pushButton_61->setText(QString());
         label_160->setText(QApplication::translate("recoverdrake", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -11243,7 +11276,6 @@ public:
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">Configurar</span></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">y compilar</span></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">el Kernel</span></p></body></html>", 0, QApplication::UnicodeUTF8));
-        pushButton_61->setText(QString());
         label_163->setText(QApplication::translate("recoverdrake", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -11270,6 +11302,13 @@ public:
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">Conversores </span></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">y</span></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">calculadoras</span></p></body></html>", 0, QApplication::UnicodeUTF8));
+        label_177->setText(QApplication::translate("recoverdrake", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Sans Serif'; font-size:7pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">DB</span></p>\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">de</span></p>\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic;\">Claves</span></p></body></html>", 0, QApplication::UnicodeUTF8));
         tabWidget_8->setTabText(tabWidget_8->indexOf(tab_8), QApplication::translate("recoverdrake", "Inicio rapido", 0, QApplication::UnicodeUTF8));
         groupBox_10->setTitle(QApplication::translate("recoverdrake", "Procesos", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
@@ -18112,6 +18151,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_66), QApplication::translate("recoverdrake", "Etiquetador de mp3", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_67), QApplication::translate("recoverdrake", "Grabador", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab_68), QApplication::translate("recoverdrake", "Conversor", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab_69), QApplication::translate("recoverdrake", "DB Claves", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
         menuBar->setToolTip(QApplication::translate("recoverdrake", "Menu principal y submenus.", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP

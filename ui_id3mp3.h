@@ -1559,6 +1559,15 @@ public:
         pushButton_7->setWhatsThis(QApplication::translate("id3mp3", "Elimina el archivo seleccionado", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         pushButton_7->setText(QApplication::translate("id3mp3", "Eliminar seleccionado", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_TOOLTIP
+        textEdit->setToolTip(QApplication::translate("id3mp3", "Consola de procesos", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_STATUSTIP
+        textEdit->setStatusTip(QApplication::translate("id3mp3", "Consola de procesos", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_STATUSTIP
+#ifndef QT_NO_WHATSTHIS
+        textEdit->setWhatsThis(QApplication::translate("id3mp3", "Consola de procesos", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
         groupBox->setTitle(QApplication::translate("id3mp3", "Individual", 0, QApplication::UnicodeUTF8));
         label_18->setText(QApplication::translate("id3mp3", "Genero", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP

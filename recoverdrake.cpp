@@ -60,6 +60,7 @@ recoverdrake::recoverdrake(QWidget *parent) :
     ui->radioButton_4->setChecked(true);
     ui->radioButton_5->setChecked(true);
     ui->checkBox_7->setChecked(true);
+    ui->tabWidget->removeTab(24);
     ui->tabWidget->removeTab(23);
     ui->tabWidget->removeTab(22);
     ui->tabWidget->removeTab(21);
@@ -107,6 +108,7 @@ recoverdrake::recoverdrake(QWidget *parent) :
     Pagina20=0;
     Pagina21=0;
     Pagina22=0;
+    Pagina23=0;
     CerrarP=0;
     Puntero = 0;
     Puntero1 = 0;
@@ -26092,6 +26094,7 @@ void recoverdrake::on_actionPeliculas_triggered()
                 if (Stilo == "A")
                     pelis->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: 7pt; font-style: "+DatoTalla+"; font-family: Sans Serif; font-weight: bold");
                 pelis->showMaximized();
+                pelis->Valor("");
                 pelis->exec();
             }
             else if (Window == 1)
@@ -28790,6 +28793,91 @@ void recoverdrake::on_actionVlc_3_triggered()
         ui->tabWidget->setCurrentPage(pagina);
         ui->tabWidget_8->setCurrentPage(0);
         return;
+    }
+}
+
+void recoverdrake::on_pushButton_65_clicked()
+{
+    this->on_actionClaves_triggered();
+}
+
+void recoverdrake::on_actionClaves_triggered()
+{
+    QString hora = QTime::currentTime().toString("hh:mm:ss");
+    ui->textEdit_4->append(""+hora+tr("-- Accion: DB de claves."));
+    int respuesta = 0;
+    if (Mensaka!="Activo")
+    {
+        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("DB de claves")),
+                       QString::fromUtf8(tr("<center><b>Claves</center><p>"
+                       "Guarda todas tus claves para tenerlas a mano, pudiendo encriptarlas para que nadie "
+                       "pueda levantarlas.<p>"
+                       "&iquest;Acceder a DB de claves?")), QMessageBox::Ok, QMessageBox::No);
+    }
+    else
+    {
+        respuesta=QMessageBox::Ok;
+    }
+    if (respuesta == QMessageBox::Ok)
+    {
+        if (Window == 0)
+        {
+            dbclaves *Claves=new dbclaves(this);
+            if (Stilo == "A")
+                Claves->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+            Claves->showMaximized();
+            Claves->Valor("");
+            Claves->exec();
+        }
+        else if (Window == 1)
+        {
+            QMdiSubWindow *existing = buscarClaves();
+            if(!existing)
+            {
+                Conectar();
+                Claves = new dbclaves;
+                ui->tabWidget->insertTab(Pestanas,ui->tab_69,"DB Claves");
+                ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/security-mdk.png"));
+                ui->tabWidget->setCurrentPage(Pestanas);
+                Pagina23 = Pestanas;
+                ui->mdiArea_23->addSubWindow(Claves);
+                connect(Claves, SIGNAL(Cerrar()), this, SLOT(CerrarClaves()));
+                if (Stilo == "A")
+                    Claves->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                Claves->showMaximized();
+                Claves->Valor("Quitar");
+                Claves->exec();
+            }
+            else
+            {
+                ui->tabWidget->setCurrentPage(Pagina23);
+                ui->mdiArea_23->setActiveSubWindow(existing);
+            }
+            Claves->setWindowState(Qt::WindowMaximized);
+        }
+    }
+}
+
+QMdiSubWindow *recoverdrake::buscarClaves()
+{
+    foreach (QMdiSubWindow *window, ui->mdiArea_23->subWindowList())
+    {
+        if(dbclaves *a= qobject_cast<dbclaves *>(window->widget()))
+        {
+            return window;
+        }
+    }
+    return 0;
+}
+
+void recoverdrake::CerrarClaves()
+{
+    if (Pagina23 != 0)
+    {
+        ui->mdiArea_23->removeSubWindow(Claves);
+        ui->tabWidget->removeTab(ui->tabWidget->currentIndex());
+        Pagina23=0;
+        Desconectar();
     }
 }
 

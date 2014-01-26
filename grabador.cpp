@@ -168,6 +168,9 @@ Grabador::Grabador(QWidget *parent) :
     }
     Desbloqueo = 0;
     Desbloqueo = 1;
+    Graba = 0;
+    Control = 0;
+    ui->pushButton_13->setEnabled(false);
     this->installEventFilter(this);
 }
 
@@ -1393,18 +1396,18 @@ void Grabador::on_pushButton_8_clicked()
     QString SegundoF = QString::number(ui->spinBox_12->value());
     QDateTime FechaInicio(QDate(AnyoD.toInt(),MesD.toInt(),DiaD.toInt()), QTime(HoraD.toInt(),MinutoD.toInt(),SegundoD.toInt()));
     QDateTime FechaFinal(QDate(AnyoF.toInt(),MesF.toInt(),DiaF.toInt()), QTime(HoraF.toInt(),MinutoF.toInt(),SegundoF.toInt()));
-    time =QDateTime::currentDateTime().addSecs(300);
+    time =QDateTime::currentDateTime().addSecs(60);
     if (FechaInicio <= time)
     {
         int respuesta = 0;
         respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Advertencia!!!")),
                        QString::fromUtf8(tr("<center><b>Fecha de inicio incorrecta</center><p>"
-                       "La fecha de inicio tiene que ser como minimo 5 minutos superior a la fecha actual del sistema.<p>"
+                       "La fecha de inicio tiene que ser como minimo 1 minuto superior a la fecha actual del sistema.<p>"
                        "&iquest;Ajustar fecha de inicio a la del sistema?")), QMessageBox::Ok, QMessageBox::No);
         if (respuesta == QMessageBox::Ok)
         {
-            FechaInicio = QDateTime::currentDateTime().addSecs(300);
-            time =QDateTime::currentDateTime().addSecs(300);
+            FechaInicio = QDateTime::currentDateTime().addSecs(60);
+            time =QDateTime::currentDateTime().addSecs(60);
             Dia = time.toString("dd");
             Mes = time.toString("MM");
             Anyo = time.toString("yyyy");
@@ -1448,17 +1451,32 @@ void Grabador::on_pushButton_8_clicked()
         item2->setText(""+DiaD+"/"+MesD+"/"+AnyoD+" "+HoraD+":"+MinutoD+":"+SegundoD+"");
         item3->setText(""+DiaF+"/"+MesF+"/"+AnyoF+" "+HoraF+":"+MinutoF+":"+SegundoF+"");
     }
-    //this->Revisar(FechaInicio,FechaFinal);
-    int iFilas=ui->tableWidget->rowCount();
-    ui->tableWidget->insertRow(iFilas);
-    ui->tableWidget->setItem(iFilas,0,item);
-    ui->tableWidget->setItem(iFilas,1,item1);
-    ui->tableWidget->setItem(iFilas,2,item2);
-    ui->tableWidget->setItem(iFilas,3,item3);
-    ui->tableWidget->setSortingEnabled(true);
-    ui->tableWidget->sortByColumn(2,Qt::DescendingOrder);
-    ui->tableWidget->resizeRowsToContents();
-    ui->tableWidget->resizeColumnsToContents();
+    QString valor = Revisar(FechaInicio,0,0);
+    if (valor == "Si")
+    {
+        int iFilas=ui->tableWidget->rowCount();
+        ui->tableWidget->insertRow(iFilas);
+        ui->tableWidget->setItem(iFilas,0,item);
+        ui->tableWidget->setItem(iFilas,1,item1);
+        ui->tableWidget->setItem(iFilas,2,item2);
+        ui->tableWidget->setItem(iFilas,3,item3);
+        ui->tableWidget->setSortingEnabled(true);
+        ui->tableWidget->resizeRowsToContents();
+        ui->tableWidget->resizeColumnsToContents();
+    }
+    else
+    {
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr(QString::fromUtf8("La fecha de inicio tiene que ser superior a la fecha final anterior.")));
+        m.exec();
+        return;
+    }
+    int Total = ui->tableWidget->rowCount();
+    if (Total > 0)
+        ui->pushButton_13->setEnabled(true);
+    else
+        ui->pushButton_13->setEnabled(false);
 }
 
 void Grabador::on_pushButton_16_clicked()
@@ -1481,53 +1499,59 @@ void Grabador::on_pushButton_16_clicked()
 
 void Grabador::on_tableWidget_itemSelectionChanged()
 {
-    QString Ruta, Fuente, HorarioI, HorarioF, HoraIni, HoraFin;
+    QString Ruta, Fuente, HorarioI, HorarioF;
     int iFilas;
     iFilas=ui->tableWidget->currentRow();
-    QTableWidgetItem *item, *item1, *item2, *item3;
-    item=new QTableWidgetItem;
-    item1=new QTableWidgetItem;
-    item2=new QTableWidgetItem;
-    item3=new QTableWidgetItem;
-    item=ui->tableWidget->item(iFilas,0);
-    item1=ui->tableWidget->item(iFilas,1);
-    item2=ui->tableWidget->item(iFilas,2);
-    item3=ui->tableWidget->item(iFilas,3);
-    Ruta = item->text();
-    Fuente = item1->text();
-    HorarioI = item2->text();
-    HorarioF = item3->text();
-    QStringList HorI = HorarioI.split(" ");
-    QString Fecha1 = HorI.value(0);
-    QString Hora1 = HorI.value(1);
-    QStringList Fecha1I, Hora1I;
-    Fecha1I = Fecha1.split("/");
-    Hora1I = Hora1.split(":");
-    ui->spinBox->setValue(Fecha1I.value(0).toInt());
-    ui->spinBox_2->setValue(Fecha1I.value(1).toInt());
-    ui->spinBox_3->setValue(Fecha1I.value(2).toInt());
-    ui->spinBox_6->setValue(Hora1I.value(0).toInt());
-    ui->spinBox_4->setValue(Hora1I.value(1).toInt());
-    ui->spinBox_5->setValue(Hora1I.value(2).toInt());
-    QStringList HorF = HorarioF.split(" ");
-    QString Fecha2 = HorF.value(0);
-    QString Hora2 = HorF.value(1);
-    QStringList Fecha2F, Hora2F;
-    Fecha2F = Fecha2.split("/");
-    Hora2F = Hora2.split(":");
-    ui->spinBox_7->setValue(Fecha2F.value(0).toInt());
-    ui->spinBox_8->setValue(Fecha2F.value(1).toInt());
-    ui->spinBox_9->setValue(Fecha2F.value(2).toInt());
-    ui->spinBox_10->setValue(Hora2F.value(0).toInt());
-    ui->spinBox_11->setValue(Hora2F.value(1).toInt());
-    ui->spinBox_12->setValue(Hora2F.value(2).toInt());
-    ui->lineEdit_3->setText(Ruta);
-    ui->lineEdit_4->setText(Fuente);
+    if (iFilas == -1)
+    {
+        return;
+    }
+    else
+    {
+        QTableWidgetItem *item, *item1, *item2, *item3;
+        item=new QTableWidgetItem;
+        item1=new QTableWidgetItem;
+        item2=new QTableWidgetItem;
+        item3=new QTableWidgetItem;
+        item=ui->tableWidget->item(iFilas,0);
+        item1=ui->tableWidget->item(iFilas,1);
+        item2=ui->tableWidget->item(iFilas,2);
+        item3=ui->tableWidget->item(iFilas,3);
+        Ruta = item->text();
+        Fuente = item1->text();
+        HorarioI = item2->text();
+        HorarioF = item3->text();
+        QStringList HorI = HorarioI.split(" ");
+        QString Fecha1 = HorI.value(0);
+        QString Hora1 = HorI.value(1);
+        QStringList Fecha1I, Hora1I;
+        Fecha1I = Fecha1.split("/");
+        Hora1I = Hora1.split(":");
+        ui->spinBox->setValue(Fecha1I.value(0).toInt());
+        ui->spinBox_2->setValue(Fecha1I.value(1).toInt());
+        ui->spinBox_3->setValue(Fecha1I.value(2).toInt());
+        ui->spinBox_6->setValue(Hora1I.value(0).toInt());
+        ui->spinBox_4->setValue(Hora1I.value(1).toInt());
+        ui->spinBox_5->setValue(Hora1I.value(2).toInt());
+        QStringList HorF = HorarioF.split(" ");
+        QString Fecha2 = HorF.value(0);
+        QString Hora2 = HorF.value(1);
+        QStringList Fecha2F, Hora2F;
+        Fecha2F = Fecha2.split("/");
+        Hora2F = Hora2.split(":");
+        ui->spinBox_7->setValue(Fecha2F.value(0).toInt());
+        ui->spinBox_8->setValue(Fecha2F.value(1).toInt());
+        ui->spinBox_9->setValue(Fecha2F.value(2).toInt());
+        ui->spinBox_10->setValue(Hora2F.value(0).toInt());
+        ui->spinBox_11->setValue(Hora2F.value(1).toInt());
+        ui->spinBox_12->setValue(Hora2F.value(2).toInt());
+        ui->lineEdit_3->setText(Ruta);
+        ui->lineEdit_4->setText(Fuente);
+    }
 }
 
 void Grabador::on_pushButton_9_clicked()
 {
-    ui->tableWidget->setSortingEnabled(false);
     int iFilas;
     iFilas=ui->tableWidget->currentRow();
     if (iFilas == -1)
@@ -1613,18 +1637,18 @@ void Grabador::on_pushButton_9_clicked()
         QString SegundoF = QString::number(ui->spinBox_12->value());
         QDateTime FechaInicio(QDate(AnyoD.toInt(),MesD.toInt(),DiaD.toInt()), QTime(HoraD.toInt(),MinutoD.toInt(),SegundoD.toInt()));
         QDateTime FechaFinal(QDate(AnyoF.toInt(),MesF.toInt(),DiaF.toInt()), QTime(HoraF.toInt(),MinutoF.toInt(),SegundoF.toInt()));
-        time =QDateTime::currentDateTime().addSecs(300);
+        time =QDateTime::currentDateTime().addSecs(60);
         if (FechaInicio <= time)
         {
             int respuesta = 0;
             respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Advertencia!!!")),
                            QString::fromUtf8(tr("<center><b>Fecha de inicio incorrecta</center><p>"
-                           "La fecha de inicio tiene que ser como minimo 5 minutos superior a la fecha actual del sistema.<p>"
+                           "La fecha de inicio tiene que ser como minimo 1 minuto superior a la fecha actual del sistema.<p>"
                            "&iquest;Ajustar fecha de inicio a la del sistema?")), QMessageBox::Ok, QMessageBox::No);
             if (respuesta == QMessageBox::Ok)
             {
-                FechaInicio = QDateTime::currentDateTime().addSecs(300);
-                time =QDateTime::currentDateTime().addSecs(300);
+                FechaInicio = QDateTime::currentDateTime().addSecs(60);
+                time =QDateTime::currentDateTime().addSecs(60);
                 Dia = time.toString("dd");
                 Mes = time.toString("MM");
                 Anyo = time.toString("yyyy");
@@ -1668,21 +1692,34 @@ void Grabador::on_pushButton_9_clicked()
             item2->setText(""+DiaD+"/"+MesD+"/"+AnyoD+" "+HoraD+":"+MinutoD+":"+SegundoD+"");
             item3->setText(""+DiaF+"/"+MesF+"/"+AnyoF+" "+HoraF+":"+MinutoF+":"+SegundoF+"");
         }
-        //this->Revisar(FechaInicio,FechaFinal);
-        ui->tableWidget->setItem(iFilas,0,item);
-        ui->tableWidget->setItem(iFilas,1,item1);
-        ui->tableWidget->setItem(iFilas,2,item2);
-        ui->tableWidget->setItem(iFilas,3,item3);
-        ui->tableWidget->setSortingEnabled(true);
-        ui->tableWidget->sortByColumn(2,Qt::AscendingOrder);
-        ui->tableWidget->resizeRowsToContents();
-        ui->tableWidget->resizeColumnsToContents();
+        QString valor = Revisar(FechaInicio,1,iFilas);
+        if (valor == "Si")
+        {
+            ui->tableWidget->setItem(iFilas,0,item);
+            ui->tableWidget->setItem(iFilas,1,item1);
+            ui->tableWidget->setItem(iFilas,2,item2);
+            ui->tableWidget->setItem(iFilas,3,item3);
+            ui->tableWidget->resizeRowsToContents();
+            ui->tableWidget->resizeColumnsToContents();
+        }
+        else
+        {
+            if (Stilo == "A")
+                m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+            m.setText(tr(QString::fromUtf8("La fecha de inicio tiene que ser superior a la fecha final anterior.")));
+            m.exec();
+            return;
+        }
     }
+    int Total = ui->tableWidget->rowCount();
+    if (Total > 0)
+        ui->pushButton_13->setEnabled(true);
+    else
+        ui->pushButton_13->setEnabled(false);
 }
 
 void Grabador::on_pushButton_10_clicked()
 {
-    ui->tableWidget->setSortingEnabled(false);
     int j;
     j=ui->tableWidget->currentRow();
     if (j == -1)
@@ -1695,67 +1732,60 @@ void Grabador::on_pushButton_10_clicked()
     else
     {
         ui->tableWidget->removeRow(j);
-        ui->tableWidget->setSortingEnabled(true);
-        ui->tableWidget->sortByColumn(2,Qt::AscendingOrder);
         ui->tableWidget->resizeRowsToContents();
         ui->tableWidget->resizeColumnsToContents();
     }
+    int Total = ui->tableWidget->rowCount();
+    if (Total > 0)
+        ui->pushButton_13->setEnabled(true);
+    else
+        ui->pushButton_13->setEnabled(false);
 }
 
-QString Grabador::Revisar(QDateTime HoraI, QDateTime HoraII)
+QString Grabador::Revisar(QDateTime HoraI, int ValorI, int Posicion)
 {
-    int iFilas;
+    int iFilas, ValueI;
+    QString HorarioF, valor;
     iFilas=ui->tableWidget->rowCount();
-    QString HorarioI, HorarioF;
-    QMessageBox m;
-    QTableWidgetItem *item, *item1;
-    item=new QTableWidgetItem;
-    item1=new QTableWidgetItem;
-    for(int i=0;i<iFilas;i++)
+    if (ValorI == 0)
+        ValueI = iFilas-1;
+    else if (ValorI == 1)
     {
-        item=ui->tableWidget->item(i,2);
-        item1=ui->tableWidget->item(i,3);
-        HorarioI = item->text();
-        HorarioF = item1->text();
-        QStringList HorI = HorarioI.split(" ");
-        QString Fecha1 = HorI.value(0);
-        QString Hora1 = HorI.value(1);
-        QStringList Fecha1I, Hora1I;
-        Fecha1I = Fecha1.split("/");
-        Hora1I = Hora1.split(":");
-        QStringList HorF = HorarioF.split(" ");
-        QString Fecha2 = HorF.value(0);
-        QString Hora2 = HorF.value(1);
-        QStringList Fecha2F, Hora2F;
-        Fecha2F = Fecha2.split("/");
-        Hora2F = Hora2.split(":");
-        int DiaD = Fecha1I.value(0).toInt();
-        int MesD = Fecha1I.value(1).toInt();
-        int AnyoD = Fecha1I.value(2).toInt();
-        int HoraD = Hora1I.value(0).toInt();
-        int MinutoD = Hora1I.value(1).toInt();
-        int SegundoD = Hora1I.value(2).toInt();
-        int DiaF = Fecha2F.value(0).toInt();
-        int MesF = Fecha2F.value(1).toInt();
-        int AnyoF = Fecha2F.value(2).toInt();
-        int HoraF = Hora2F.value(0).toInt();
-        int MinutoF = Hora2F.value(1).toInt();
-        int SegundoF = Hora2F.value(2).toInt();
-        QDateTime FechaInicio(QDate(AnyoD,MesD,DiaD), QTime(HoraD,MinutoD,SegundoD));
-        QDateTime FechaFinal(QDate(AnyoF,MesF,DiaF), QTime(HoraF,MinutoF,SegundoF));
-        if (FechaInicio > HoraI)
+        iFilas = Posicion;
+        ValueI = iFilas-1;
+    }
+    if (iFilas > 0)
+    {
+        QTableWidgetItem *item1;
+        item1=new QTableWidgetItem;
+        for(int i=ValueI;i<iFilas;i++)
         {
-            time =QDateTime::currentDateTime();
-            qDebug() << FechaInicio << FechaFinal << time;
+            item1=ui->tableWidget->item(i,3);
+            HorarioF = item1->text();
+            QStringList HorF = HorarioF.split(" ");
+            QString Fecha2 = HorF.value(0);
+            QString Hora2 = HorF.value(1);
+            QStringList Fecha2F, Hora2F;
+            Fecha2F = Fecha2.split("/");
+            Hora2F = Hora2.split(":");
+            int DiaF = Fecha2F.value(0).toInt();
+            int MesF = Fecha2F.value(1).toInt();
+            int AnyoF = Fecha2F.value(2).toInt();
+            int HoraF = Hora2F.value(0).toInt();
+            int MinutoF = Hora2F.value(1).toInt();
+            int SegundoF = Hora2F.value(2).toInt();
+            QDateTime FechaFinal(QDate(AnyoF,MesF,DiaF), QTime(HoraF,MinutoF,SegundoF));
+            if (FechaFinal < HoraI)
+            {
+                valor = "Si";
+            }
+            else
+                valor = "No";
         }
     }
-
-
-
-  //falta esta parte
-
-
-
+    else
+        valor = "Si";
+    return valor;
 }
 
 void Grabador::on_spinBox_valueChanged(int arg1)
@@ -1887,115 +1917,126 @@ void Grabador::hora()
     }
 }
 
+void Grabador::on_pushButton_13_clicked()
+{
+    if (Graba == 0)
+        Graba = 1;
+    else if (Graba == 1)
+        Graba = 0;
+    if (Graba == 0)
+    {
+        ui->pushButton_13->setText(tr("Iniciar temporizador"));
+        if (ControlRec->isActive())
+            ControlRec->stop();
+        if (Control == 1)
+        {
+            ControlFin->stop();
+            this->KillProceso();
+            system("killall firefox");
+        }
 
-//QString DiaD = QString::number(LocDia);
-//QString MesD = QString::number(LocMes);
-//QString AnyoD = QString::number(LocAno);
-//QString HoraD = QString::number(LocHora);
-//QString MinutoD = QString::number(LocMinuto);
-//QString SegundoD = QString::number(LocSegundo);
-//Loc = ""+DiaD+"/"+MesD+"/"+AnyoD+" "+HoraD+":"+MinutoD+":"+SegundoD+"";
-//if (Loc == "0/0/0 0:0:0")
-//{
-//    QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-//    m.setText(tr(QString::fromUtf8("No has programado ningún cierre.")));
-//    m.exec();
-//    ui->tabWidget->setCurrentPage(pagina);
-//    ui->tabWidget_8->setCurrentPage(0);
-//    return;
-//}
-//else if (Loc != "0/0/0 0:0:0")
-//{
-//    ui->checkBox_3->setEnabled(true);
-//    ui->checkBox_3->setChecked(true);
-//    ui->tabWidget_2->setCurrentPage(5);
-//    ui->textEdit_2->setText(tr("<center><span style='font-size:12pt'><b>Alarmas activas"));
-//    ControlCierre = new QTimer(this);
-//    connect(ControlCierre, SIGNAL(timeout()), this, SLOT(CtrlApagado()));
-//    CerrarP=1;
-//    ControlCierre->start(1000);
-//}
+    }
+    else if (Graba == 1)
+    {
+        ui->pushButton_13->setText(tr("Parar temporizador"));
+        this->EjecutarTempo();
+    }
+}
 
+void Grabador::EjecutarTempo()
+{
+    QTableWidgetItem *item, *item1, *item2, *item3;
+    item=new QTableWidgetItem;
+    item1=new QTableWidgetItem;
+    item2=new QTableWidgetItem;
+    item3=new QTableWidgetItem;
+    item=ui->tableWidget->item(0,2);
+    item1=ui->tableWidget->item(0,3);
+    item2=ui->tableWidget->item(0,0);
+    item3=ui->tableWidget->item(0,1);
+    PathI = item2->text();
+    Source = item3->text();
+    QString Horario = item->text();
+    QStringList Hor = Horario.split(" ");
+    QString Fecha = Hor.value(0);
+    QString HoraI = Hor.value(1);
+    QStringList Fecha1, Hora1;
+    Fecha1 = Fecha.split("/");
+    Hora1 = HoraI.split(":");
+    int Dia = Fecha1.value(0).toInt();
+    int Mes = Fecha1.value(1).toInt();
+    int Anyo = Fecha1.value(2).toInt();
+    int Hora = Hora1.value(0).toInt();
+    int Minuto = Hora1.value(1).toInt();
+    int Segundo = Hora1.value(2).toInt();
+    QDateTime FechaInicio(QDate(Anyo,Mes,Dia), QTime(Hora,Minuto,Segundo));
+    Inicio = FechaInicio;
+    QString HorarioF = item1->text();
+    QStringList HorF = HorarioF.split(" ");
+    QString Fecha2 = HorF.value(0);
+    QString Hora2 = HorF.value(1);
+    QStringList Fecha2F, Hora2F;
+    Fecha2F = Fecha2.split("/");
+    Hora2F = Hora2.split(":");
+    int DiaF = Fecha2F.value(0).toInt();
+    int MesF = Fecha2F.value(1).toInt();
+    int AnyoF = Fecha2F.value(2).toInt();
+    int HoraF = Hora2F.value(0).toInt();
+    int MinutoF = Hora2F.value(1).toInt();
+    int SegundoF = Hora2F.value(2).toInt();
+    QDateTime FechaFinal(QDate(AnyoF,MesF,DiaF), QTime(HoraF,MinutoF,SegundoF));
+    Final = FechaFinal;
+    ControlRec = new QTimer(this);
+    connect(ControlRec, SIGNAL(timeout()), this, SLOT(CtrlRec()));
+    ControlRec->start(1000);
+}
 
+void Grabador::CtrlRec()
+{    
+    QDateTime FechaInicio = QDateTime::currentDateTime();
+    if (FechaInicio >= Inicio)
+    {
+        system("su - "+user+" -c \"firefox "+Source+"\"");
+        QStringList comandos;
+        QString cmd1 = "su - "+user+" -c \"ffmpeg -f alsa -i pulse -ac 2 -ab 128k -y %1\"";
+        cmd1=cmd1.arg(PathI);
+        comandos<< cmd1;
+        mib = new DrakeProcesos1(comandos, this);
+        connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
+        connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
+        int valor= comandos.count();
+        mib->Valor(valor,3);
+        mib->iniciarProceso();
+        ControlRec->stop();
+        ControlFin = new QTimer(this);
+        connect(ControlFin, SIGNAL(timeout()), this, SLOT(CtrlFin()));
+        ControlFin->start(1000);
+        Control = 1;
+    }
+}
 
-
-
-//QDateTime FechaInicio = QDateTime::currentDateTime();
-//QDateTime FechaFinal(QDate(LocAno,LocMes,LocDia),QTime(LocHora,LocMinuto,LocSegundo));
-//if (FechaInicio >= FechaFinal)
-//{
-//    ui->label_62->setText(tr("Apagando sistema..."));
-//    system("halt");
-//}
-//else
-//{
-//    double TotalSegundos = FechaInicio.secsTo(FechaFinal);
-//    double RHora = TotalSegundos / 3600;
-//    int RestoHora = RHora;
-//    double RMinutos = (RHora-RestoHora) * 60;
-//    int RestoMinutos = RMinutos;
-//    double RSegundos = (RMinutos-RestoMinutos) *60;
-//    int RestoSegundos = RSegundos;
-//    QString Valor1, Valor2, Valor3;
-//    if (RestoHora > 0)
-//    {
-//        if (RestoHora > 1)
-//        {
-//            Valor1 = "Horas";
-//        }
-//        else
-//        {
-//            Valor1 = "Hora";
-//        }
-//        if (RestoMinutos > 1)
-//        {
-//            Valor2 = "Minutos";
-//        }
-//        else
-//        {
-//            Valor2 = "Minuto";
-//        }
-//        if (RestoSegundos > 1)
-//        {
-//            Valor3 = "Segundos";
-//        }
-//        else
-//        {
-//            Valor3 = "Segundo";
-//        }
-//        ui->label_62->setText(tr("El sistema se apagara en... ")+QString::number(RestoHora)+" "+Valor1+" : "+QString::number(RestoMinutos)+" "+Valor2+" : "+QString::number(RestoSegundos)+" "+Valor3+".");
-//    }
-//    else if (RestoMinutos > 0)
-//    {
-//        if (RestoMinutos > 1)
-//        {
-//            Valor2 = "Minutos";
-//        }
-//        else
-//        {
-//            Valor2 = "Minuto";
-//        }
-//        if (RestoSegundos > 1)
-//        {
-//            Valor3 = "Segundos";
-//        }
-//        else
-//        {
-//            Valor3 = "Segundo";
-//        }
-//        ui->label_62->setText(tr("El sistema se apagara en... ")+QString::number(RestoMinutos)+" "+Valor2+" : "+QString::number(RestoSegundos)+" "+Valor3+".");
-//    }
-//    else
-//    {
-//        if (RestoSegundos > 1)
-//        {
-//            Valor3 = "Segundos";
-//        }
-//        else
-//        {
-//            Valor3 = "Segundo";
-//        }
-//        ui->label_62->setText(tr("El sistema se apagara en... ")+QString::number(RestoSegundos)+" "+Valor3+".");
-//    }
-//    ui->dateTimeEdit_3->setDateTime(FechaFinal);
-//}
+void Grabador::CtrlFin()
+{
+    QDateTime FechaInicio = QDateTime::currentDateTime();
+    if (Final <= FechaInicio)
+    {
+        this->KillProceso();
+        system("killall firefox");
+        ControlFin->stop();
+        Control = 0;
+        ui->tableWidget->removeRow(0);
+        ui->tableWidget->resizeRowsToContents();
+        ui->tableWidget->resizeColumnsToContents();
+        int Total = ui->tableWidget->rowCount();
+        if (Total > 0)
+        {
+            ui->pushButton_13->setEnabled(true);
+            this->EjecutarTempo();
+        }
+        else
+        {
+            ui->pushButton_13->setText(tr("Iniciar temporizador"));
+            ui->pushButton_13->setEnabled(false);
+        }
+    }
+}
