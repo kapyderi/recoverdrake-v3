@@ -30,9 +30,17 @@ static bool createConnection()
         QFile file("/usr/share/RecoverDrake/Miscelanea.RecoverDrake.db.sqlite");
         if (file.exists() == false)
         {
-            m.setText("Es la primera vez que utilizas RecoverDrake por lo que se creara una base de datos con las configuraciones por defecto.");
-            m.exec();
-            system("cp -v /root/Miscelanea.RecoverDrake.db.sqlite /usr/share/RecoverDrake/Miscelanea.RecoverDrake.db.sqlite");
+            QFile file1("/usr/share/RecoverDrake/Miscelanea.RecoverDrake.db.sqlite.backup");
+            if (file1.exists() == false)
+            {
+                m.setText("Es la primera vez que utilizas RecoverDrake por lo que se creara una base de datos con las configuraciones por defecto.");
+                m.exec();
+                system("cp -v /root/Miscelanea.RecoverDrake.db.sqlite /usr/share/RecoverDrake/Miscelanea.RecoverDrake.db.sqlite");
+            }
+            else
+            {
+                system("cp -v /usr/share/RecoverDrake/Miscelanea.RecoverDrake.db.sqlite.backup /usr/share/RecoverDrake/Miscelanea.RecoverDrake.db.sqlite");
+            }
         }
         QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE","PRINCIPAL");
         QSqlDatabase DB = QSqlDatabase::addDatabase("QSQLITE","COMPARA");
@@ -237,10 +245,10 @@ static bool createConnection()
                        DB.close();
                        system("cp -v /root/Miscelanea.RecoverDrake.db.sqlite /root/Miscelanea.RecoverDrake.db.sqlite.backup");
                        DB.open();
-                       QProgressDialog progress("Encontrada nueva version "+Ver+", actualizando Base de datos de RecoverDrake... Espera por favor", "Cancelar", 0, 42);
+                       QProgressDialog progress("Encontrada nueva version "+Ver+", actualizando Base de datos de RecoverDrake... Espera por favor", "Cancelar", 0, 44);
                        progress.setWindowModality(Qt::WindowModal);
                        progress.show();
-                       for(int i=0;i<42;i++ )
+                       for(int i=0;i<44;i++ )
                        {
                            progress.setValue(i);
                            if (progress.wasCanceled())
@@ -1674,8 +1682,130 @@ static bool createConnection()
                                    }                                   
                                }
                            }
+                           if (i == 42)
+                           {
+                               QSqlQuery queryA(SM);
+                               queryA.exec("SELECT count() FROM sqlite_master WHERE type='table' AND name='Clave'");
+                               queryA.first();
+                               if (queryA.isValid())
+                               {
+                                   QSqlQuery wlistanegr(db);
+                                   wlistanegr.exec("SELECT COUNT(id) as Cantidad FROM Clave");
+                                   int cuenta, comienzo;
+                                   wlistanegr.first();
+                                   cuenta = wlistanegr.value(0).toInt();
+                                   QSqlQuery wlistanegra(db);
+                                   wlistanegra.exec("SELECT Usuario,Password,Enc1,Enc2,Enc3,Tipo,Ubicacion,UserRD,Encriptado FROM Clave");
+                                   QProgressDialog progressMenu("Actualizando Listado de claves... Espera por favor", "Cancelar", 0, cuenta);
+                                   progressMenu.setWindowModality(Qt::WindowModal);
+                                   progressMenu.show();
+                                   QTest::qWait(20);
+                                   comienzo=0;
+                                   int cantidad=1;
+                                   while(wlistanegra.next())
+                                   {
+                                        if (cantidad == 1)
+                                        {
+                                            DB.transaction();
+                                        }
+                                        progressMenu.setValue(comienzo++);
+                                        if (progressMenu.wasCanceled())
+                                            break;
+                                        QString DatUsuario = wlistanegra.value(0).toString();
+                                        QString DatPassword = wlistanegra.value(1).toString();
+                                        QString DatEnc1 = wlistanegra.value(2).toString();
+                                        QString DatEnc2 = wlistanegra.value(3).toString();
+                                        QString DatEnc3 = wlistanegra.value(4).toString();
+                                        QString Tipo = wlistanegra.value(5).toString();
+                                        QString Ubicacion = wlistanegra.value(6).toString();
+                                        QString UserRD = wlistanegra.value(7).toString();
+                                        QString Encriptado = wlistanegra.value(8).toString();
+                                        QSqlQuery RecDat(DB);
+                                        RecDat.exec("SELECT Usuario,Password,Enc1,Enc2,Enc3,Tipo,Ubicacion,UserRD,Encriptado FROM Clave WHERE Ubicacion='"+Ubicacion+"'");
+                                        RecDat.first();
+                                        if (RecDat.isSelect())
+                                        {
+                                            QSqlQuery Wdark(DB);
+                                            Wdark.prepare("INSERT INTO Clave (Usuario,Password,Enc1,Enc2,Enc3,Tipo,Ubicacion,UserRD,Encriptado)"
+                                                          "VALUES (:Usuario,:Password,:Enc1,:Enc2,:Enc3,:Tipo,:Ubicacion,:UserRD,:Encriptado)");
+                                            Wdark.bindValue(":Usuario", DatUsuario);
+                                            Wdark.bindValue(":Password", DatPassword);
+                                            Wdark.bindValue(":Enc1", DatEnc1);
+                                            Wdark.bindValue(":Enc2", DatEnc2);
+                                            Wdark.bindValue(":Enc3", DatEnc3);
+                                            Wdark.bindValue(":Tipo", Tipo);
+                                            Wdark.bindValue(":Ubicacion", Ubicacion);
+                                            Wdark.bindValue(":UserRD", UserRD);
+                                            Wdark.bindValue(":Encriptado", Encriptado);
+                                            Wdark.exec();
+                                        }
+                                        cantidad++;
+                                        if (cantidad == 50)
+                                        {
+                                            cantidad=1;
+                                            DB.commit();
+                                        }
+                                   }
+                                   progressMenu.setValue(cuenta);
+                                   DB.commit();
+                               }
+                           }
+                           if (i == 43)
+                           {
+                               QSqlQuery queryA(SM);
+                               queryA.exec("SELECT count() FROM sqlite_master WHERE type='table' AND name='Ascii'");
+                               queryA.first();
+                               if (queryA.isValid())
+                               {
+                                   QSqlQuery wlistanegr(db);
+                                   wlistanegr.exec("SELECT COUNT(id) as Cantidad FROM Ascii");
+                                   int cuenta, comienzo;
+                                   wlistanegr.first();
+                                   cuenta = wlistanegr.value(0).toInt();
+                                   QSqlQuery wlistanegra(db);
+                                   wlistanegra.exec("SELECT Decimal, Unicode FROM Ascii");
+                                   QProgressDialog progressMenu("Actualizando Listado de codigos Ascii... Espera por favor", "Cancelar", 0, cuenta);
+                                   progressMenu.setWindowModality(Qt::WindowModal);
+                                   progressMenu.show();
+                                   QTest::qWait(20);
+                                   comienzo=0;
+                                   int cantidad=1;
+                                   while(wlistanegra.next())
+                                   {
+                                        if (cantidad == 1)
+                                        {
+                                            DB.transaction();
+                                        }
+                                        progressMenu.setValue(comienzo++);
+                                        if (progressMenu.wasCanceled())
+                                            break;
+                                        QString DatDecimal = wlistanegra.value(0).toString();
+                                        QString DatUnicode = wlistanegra.value(1).toString();
+                                        QSqlQuery RecDat(DB);
+                                        RecDat.exec("SELECT Decimal,Unicode FROM Ascii WHERE Decimal='"+DatDecimal+"'");
+                                        RecDat.first();
+                                        if (RecDat.isSelect())
+                                        {
+                                            QSqlQuery Wdark(DB);
+                                            Wdark.prepare("INSERT INTO Ascii (Decimal,Unicode)"
+                                                          "VALUES (:Decimal,:Unicode)");
+                                            Wdark.bindValue(":Decimal", DatDecimal);
+                                            Wdark.bindValue(":Unicode", DatUnicode);
+                                            Wdark.exec();
+                                        }
+                                        cantidad++;
+                                        if (cantidad == 50)
+                                        {
+                                            cantidad=1;
+                                            DB.commit();
+                                        }
+                                   }
+                                   progressMenu.setValue(cuenta);
+                                   DB.commit();
+                               }
+                           }
                        }
-                       progress.setValue(42);
+                       progress.setValue(43);
                        DB.close();
                        db.close();
                        SM.close();

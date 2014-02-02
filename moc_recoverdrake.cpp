@@ -22,7 +22,7 @@ static const uint qt_meta_data_recoverdrake[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-     551,   14, // methods
+     555,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -568,19 +568,23 @@ static const uint qt_meta_data_recoverdrake[] = {
     17481,   13,   13,   13, 0x08,
     17498,   13,   13,   13, 0x08,
     17514,   13,   13,   13, 0x08,
-    17541,   13,   13,   13, 0x08,
-    17598,   13,   13,   13, 0x08,
-    17643,   13,   13,   13, 0x08,
-    17680,   13,   13,   13, 0x08,
-    17712,   13,   13,   13, 0x08,
-    17739,   13,   13,   13, 0x08,
-    17766,   13,   13,   13, 0x08,
-    17793,   13,   13,   13, 0x08,
-    17835,   13,   13,   13, 0x08,
-    17862,   13,   13,   13, 0x08,
-    17906,   13,   13,   13, 0x08,
-    17933,   13,   13,   13, 0x08,
-    17962,   13,   13,   13, 0x08,
+    17529,   13,   13,   13, 0x08,
+    17556,   13,   13,   13, 0x08,
+    17613,   13,   13,   13, 0x08,
+    17658,   13,   13,   13, 0x08,
+    17695,   13,   13,   13, 0x08,
+    17727,   13,   13,   13, 0x08,
+    17754,   13,   13,   13, 0x08,
+    17781,   13,   13,   13, 0x08,
+    17808,   13,   13,   13, 0x08,
+    17850,   13,   13,   13, 0x08,
+    17877,   13,   13,   13, 0x08,
+    17921,   13,   13,   13, 0x08,
+    17948,   13,   13,   13, 0x08,
+    17977,   13,   13,   13, 0x08,
+    18010,   13,   13,   13, 0x08,
+    18037,   13,   13,   13, 0x08,
+    18065,   13,   13,   13, 0x08,
 
        0        // eod
 };
@@ -1081,7 +1085,8 @@ static const char qt_meta_stringdata_recoverdrake[] = {
     "CerrarRpminst()\0CerrarKernel()\0"
     "CerrarHuerfanos()\0CerrarRpm()\0"
     "CerrarNucleo()\0CerrarMakefile()\0"
-    "CerrarCompara()\0on_pushButton_58_clicked()\0"
+    "CerrarCompara()\0CerrarClaves()\0"
+    "on_pushButton_58_clicked()\0"
     "on_actionCrea_tu_propio_kernel_personalizado_triggered()\0"
     "on_actionAjustes_de_ecualizacion_triggered()\0"
     "on_actionWifi_no_conecta_triggered()\0"
@@ -1095,6 +1100,9 @@ static const char qt_meta_stringdata_recoverdrake[] = {
     "on_pushButton_64_clicked()\0"
     "on_actionAmule_2_triggered()\0"
     "on_actionCalculadora_triggered()\0"
+    "on_actionVlc_3_triggered()\0"
+    "on_actionClaves_triggered()\0"
+    "on_pushButton_65_clicked()\0"
 };
 
 void recoverdrake::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -1641,20 +1649,24 @@ void recoverdrake::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 534: _t->CerrarNucleo(); break;
         case 535: _t->CerrarMakefile(); break;
         case 536: _t->CerrarCompara(); break;
-        case 537: _t->on_pushButton_58_clicked(); break;
-        case 538: _t->on_actionCrea_tu_propio_kernel_personalizado_triggered(); break;
-        case 539: _t->on_actionAjustes_de_ecualizacion_triggered(); break;
-        case 540: _t->on_actionWifi_no_conecta_triggered(); break;
-        case 541: _t->on_actionComparador_triggered(); break;
-        case 542: _t->on_pushButton_60_clicked(); break;
-        case 543: _t->on_pushButton_61_clicked(); break;
-        case 544: _t->on_pushButton_62_clicked(); break;
-        case 545: _t->on_actionGrabadora_de_sonidos_triggered(); break;
-        case 546: _t->on_pushButton_63_clicked(); break;
-        case 547: _t->on_actionConvertidor_de_medidas_triggered(); break;
-        case 548: _t->on_pushButton_64_clicked(); break;
-        case 549: _t->on_actionAmule_2_triggered(); break;
-        case 550: _t->on_actionCalculadora_triggered(); break;
+        case 537: _t->CerrarClaves(); break;
+        case 538: _t->on_pushButton_58_clicked(); break;
+        case 539: _t->on_actionCrea_tu_propio_kernel_personalizado_triggered(); break;
+        case 540: _t->on_actionAjustes_de_ecualizacion_triggered(); break;
+        case 541: _t->on_actionWifi_no_conecta_triggered(); break;
+        case 542: _t->on_actionComparador_triggered(); break;
+        case 543: _t->on_pushButton_60_clicked(); break;
+        case 544: _t->on_pushButton_61_clicked(); break;
+        case 545: _t->on_pushButton_62_clicked(); break;
+        case 546: _t->on_actionGrabadora_de_sonidos_triggered(); break;
+        case 547: _t->on_pushButton_63_clicked(); break;
+        case 548: _t->on_actionConvertidor_de_medidas_triggered(); break;
+        case 549: _t->on_pushButton_64_clicked(); break;
+        case 550: _t->on_actionAmule_2_triggered(); break;
+        case 551: _t->on_actionCalculadora_triggered(); break;
+        case 552: _t->on_actionVlc_3_triggered(); break;
+        case 553: _t->on_actionClaves_triggered(); break;
+        case 554: _t->on_pushButton_65_clicked(); break;
         default: ;
         }
     }
@@ -1692,9 +1704,9 @@ int recoverdrake::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 551)
+        if (_id < 555)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 551;
+        _id -= 555;
     }
     return _id;
 }

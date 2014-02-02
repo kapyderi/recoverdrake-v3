@@ -726,15 +726,80 @@ public:
     QPushButton *pushButton_34;
     QComboBox *comboBox_55;
     QGroupBox *groupBox_33;
-    QGridLayout *gridLayout_146;
-    QGridLayout *gridLayout_147;
-    QLineEdit *lineEdit_158;
-    QComboBox *comboBox_52;
-    QPushButton *pushButton_33;
+    QGridLayout *gridLayout_111;
     QGridLayout *gridLayout_148;
     QComboBox *comboBox_53;
     QLineEdit *lineEdit_159;
     QLabel *label_158;
+    QGridLayout *gridLayout_147;
+    QLineEdit *lineEdit_158;
+    QPushButton *pushButton_33;
+    QComboBox *comboBox_56;
+    QWidget *tab_45;
+    QGridLayout *gridLayout_128;
+    QGridLayout *gridLayout_168;
+    QGroupBox *groupBox_41;
+    QGridLayout *gridLayout_169;
+    QGridLayout *gridLayout_170;
+    QComboBox *comboBox_68;
+    QLineEdit *lineEdit_174;
+    QLabel *label_166;
+    QGridLayout *gridLayout_171;
+    QLineEdit *lineEdit_175;
+    QPushButton *pushButton_41;
+    QComboBox *comboBox_69;
+    QGroupBox *groupBox_42;
+    QGridLayout *gridLayout_123;
+    QGridLayout *gridLayout_172;
+    QComboBox *comboBox_70;
+    QLineEdit *lineEdit_176;
+    QLabel *label_167;
+    QGridLayout *gridLayout_173;
+    QLineEdit *lineEdit_177;
+    QPushButton *pushButton_42;
+    QComboBox *comboBox_71;
+    QGridLayout *gridLayout_174;
+    QGroupBox *groupBox_43;
+    QGridLayout *gridLayout_124;
+    QGridLayout *gridLayout_175;
+    QComboBox *comboBox_72;
+    QLineEdit *lineEdit_178;
+    QLabel *label_168;
+    QGridLayout *gridLayout_176;
+    QLineEdit *lineEdit_179;
+    QPushButton *pushButton_43;
+    QComboBox *comboBox_73;
+    QGroupBox *groupBox_44;
+    QGridLayout *gridLayout_125;
+    QGridLayout *gridLayout_177;
+    QComboBox *comboBox_74;
+    QLineEdit *lineEdit_180;
+    QLabel *label_169;
+    QGridLayout *gridLayout_178;
+    QLineEdit *lineEdit_181;
+    QPushButton *pushButton_44;
+    QComboBox *comboBox_75;
+    QGridLayout *gridLayout_179;
+    QGroupBox *groupBox_45;
+    QGridLayout *gridLayout_126;
+    QGridLayout *gridLayout_180;
+    QLineEdit *lineEdit_182;
+    QComboBox *comboBox_76;
+    QLabel *label_170;
+    QGridLayout *gridLayout_181;
+    QLineEdit *lineEdit_183;
+    QPushButton *pushButton_45;
+    QComboBox *comboBox_77;
+    QGroupBox *groupBox_46;
+    QGridLayout *gridLayout_127;
+    QGridLayout *gridLayout_182;
+    QComboBox *comboBox_78;
+    QLineEdit *lineEdit_184;
+    QLabel *label_171;
+    QGridLayout *gridLayout_183;
+    QLineEdit *lineEdit_185;
+    QPushButton *pushButton_46;
+    QComboBox *comboBox_79;
     QFrame *line_10;
     QFrame *line_11;
 
@@ -5196,40 +5261,9 @@ public:
         groupBox_33 = new QGroupBox(tab_30);
         groupBox_33->setObjectName(QString::fromUtf8("groupBox_33"));
         groupBox_33->setMaximumSize(QSize(16777215, 82));
-        gridLayout_146 = new QGridLayout(groupBox_33);
-        gridLayout_146->setObjectName(QString::fromUtf8("gridLayout_146"));
-        gridLayout_146->setSizeConstraint(QLayout::SetMinAndMaxSize);
-        gridLayout_146->setContentsMargins(0, 0, 0, 0);
-        gridLayout_147 = new QGridLayout();
-        gridLayout_147->setObjectName(QString::fromUtf8("gridLayout_147"));
-        lineEdit_158 = new QLineEdit(groupBox_33);
-        lineEdit_158->setObjectName(QString::fromUtf8("lineEdit_158"));
-        lineEdit_158->setEnabled(true);
-        lineEdit_158->setFont(font5);
-        lineEdit_158->setFocusPolicy(Qt::NoFocus);
-        lineEdit_158->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
-"background-color: rgb(255, 251, 239);"));
-        lineEdit_158->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-        lineEdit_158->setReadOnly(true);
-
-        gridLayout_147->addWidget(lineEdit_158, 1, 0, 1, 1);
-
-        comboBox_52 = new QComboBox(groupBox_33);
-        comboBox_52->setObjectName(QString::fromUtf8("comboBox_52"));
-        comboBox_52->setFocusPolicy(Qt::NoFocus);
-
-        gridLayout_147->addWidget(comboBox_52, 0, 0, 1, 1);
-
-        pushButton_33 = new QPushButton(groupBox_33);
-        pushButton_33->setObjectName(QString::fromUtf8("pushButton_33"));
-        pushButton_33->setIcon(icon2);
-        pushButton_33->setIconSize(QSize(25, 25));
-
-        gridLayout_147->addWidget(pushButton_33, 0, 1, 2, 1);
-
-
-        gridLayout_146->addLayout(gridLayout_147, 1, 2, 1, 1);
-
+        gridLayout_111 = new QGridLayout(groupBox_33);
+        gridLayout_111->setObjectName(QString::fromUtf8("gridLayout_111"));
+        gridLayout_111->setContentsMargins(0, 0, 0, 0);
         gridLayout_148 = new QGridLayout();
         gridLayout_148->setObjectName(QString::fromUtf8("gridLayout_148"));
         comboBox_53 = new QComboBox(groupBox_33);
@@ -5246,13 +5280,43 @@ public:
         gridLayout_148->addWidget(lineEdit_159, 1, 0, 1, 1);
 
 
-        gridLayout_146->addLayout(gridLayout_148, 1, 0, 1, 1);
+        gridLayout_111->addLayout(gridLayout_148, 0, 0, 1, 1);
 
         label_158 = new QLabel(groupBox_33);
         label_158->setObjectName(QString::fromUtf8("label_158"));
         label_158->setFont(font1);
 
-        gridLayout_146->addWidget(label_158, 1, 1, 1, 1);
+        gridLayout_111->addWidget(label_158, 0, 1, 1, 1);
+
+        gridLayout_147 = new QGridLayout();
+        gridLayout_147->setObjectName(QString::fromUtf8("gridLayout_147"));
+        lineEdit_158 = new QLineEdit(groupBox_33);
+        lineEdit_158->setObjectName(QString::fromUtf8("lineEdit_158"));
+        lineEdit_158->setEnabled(true);
+        lineEdit_158->setFont(font5);
+        lineEdit_158->setFocusPolicy(Qt::NoFocus);
+        lineEdit_158->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_158->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_158->setReadOnly(true);
+
+        gridLayout_147->addWidget(lineEdit_158, 1, 0, 1, 1);
+
+        pushButton_33 = new QPushButton(groupBox_33);
+        pushButton_33->setObjectName(QString::fromUtf8("pushButton_33"));
+        pushButton_33->setIcon(icon2);
+        pushButton_33->setIconSize(QSize(25, 25));
+
+        gridLayout_147->addWidget(pushButton_33, 0, 1, 2, 1);
+
+        comboBox_56 = new QComboBox(groupBox_33);
+        comboBox_56->setObjectName(QString::fromUtf8("comboBox_56"));
+        comboBox_56->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_147->addWidget(comboBox_56, 0, 0, 1, 1);
+
+
+        gridLayout_111->addLayout(gridLayout_147, 0, 2, 1, 1);
 
 
         gridLayout_154->addWidget(groupBox_33, 0, 1, 1, 1);
@@ -5261,6 +5325,406 @@ public:
         gridLayout_155->addLayout(gridLayout_154, 2, 0, 1, 1);
 
         tabWidget->addTab(tab_30, QString());
+        tab_45 = new QWidget();
+        tab_45->setObjectName(QString::fromUtf8("tab_45"));
+        gridLayout_128 = new QGridLayout(tab_45);
+        gridLayout_128->setObjectName(QString::fromUtf8("gridLayout_128"));
+        gridLayout_168 = new QGridLayout();
+        gridLayout_168->setObjectName(QString::fromUtf8("gridLayout_168"));
+        groupBox_41 = new QGroupBox(tab_45);
+        groupBox_41->setObjectName(QString::fromUtf8("groupBox_41"));
+        groupBox_41->setMaximumSize(QSize(16777215, 82));
+        gridLayout_169 = new QGridLayout(groupBox_41);
+        gridLayout_169->setObjectName(QString::fromUtf8("gridLayout_169"));
+        gridLayout_169->setContentsMargins(0, 0, 0, 0);
+        gridLayout_170 = new QGridLayout();
+        gridLayout_170->setObjectName(QString::fromUtf8("gridLayout_170"));
+        comboBox_68 = new QComboBox(groupBox_41);
+        comboBox_68->setObjectName(QString::fromUtf8("comboBox_68"));
+        comboBox_68->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_170->addWidget(comboBox_68, 0, 0, 1, 1);
+
+        lineEdit_174 = new QLineEdit(groupBox_41);
+        lineEdit_174->setObjectName(QString::fromUtf8("lineEdit_174"));
+        lineEdit_174->setFont(font1);
+        lineEdit_174->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_170->addWidget(lineEdit_174, 1, 0, 1, 1);
+
+
+        gridLayout_169->addLayout(gridLayout_170, 0, 0, 1, 1);
+
+        label_166 = new QLabel(groupBox_41);
+        label_166->setObjectName(QString::fromUtf8("label_166"));
+        label_166->setFont(font1);
+
+        gridLayout_169->addWidget(label_166, 0, 1, 1, 1);
+
+        gridLayout_171 = new QGridLayout();
+        gridLayout_171->setObjectName(QString::fromUtf8("gridLayout_171"));
+        lineEdit_175 = new QLineEdit(groupBox_41);
+        lineEdit_175->setObjectName(QString::fromUtf8("lineEdit_175"));
+        lineEdit_175->setEnabled(true);
+        lineEdit_175->setFont(font5);
+        lineEdit_175->setFocusPolicy(Qt::NoFocus);
+        lineEdit_175->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_175->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_175->setReadOnly(true);
+
+        gridLayout_171->addWidget(lineEdit_175, 1, 0, 1, 1);
+
+        pushButton_41 = new QPushButton(groupBox_41);
+        pushButton_41->setObjectName(QString::fromUtf8("pushButton_41"));
+        pushButton_41->setIcon(icon2);
+        pushButton_41->setIconSize(QSize(25, 25));
+
+        gridLayout_171->addWidget(pushButton_41, 0, 1, 2, 1);
+
+        comboBox_69 = new QComboBox(groupBox_41);
+        comboBox_69->setObjectName(QString::fromUtf8("comboBox_69"));
+        comboBox_69->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_171->addWidget(comboBox_69, 0, 0, 1, 1);
+
+
+        gridLayout_169->addLayout(gridLayout_171, 0, 2, 1, 1);
+
+
+        gridLayout_168->addWidget(groupBox_41, 0, 0, 1, 1);
+
+        groupBox_42 = new QGroupBox(tab_45);
+        groupBox_42->setObjectName(QString::fromUtf8("groupBox_42"));
+        groupBox_42->setMaximumSize(QSize(16777215, 82));
+        gridLayout_123 = new QGridLayout(groupBox_42);
+        gridLayout_123->setObjectName(QString::fromUtf8("gridLayout_123"));
+        gridLayout_123->setContentsMargins(0, 0, 0, 0);
+        gridLayout_172 = new QGridLayout();
+        gridLayout_172->setObjectName(QString::fromUtf8("gridLayout_172"));
+        comboBox_70 = new QComboBox(groupBox_42);
+        comboBox_70->setObjectName(QString::fromUtf8("comboBox_70"));
+        comboBox_70->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_172->addWidget(comboBox_70, 0, 0, 1, 1);
+
+        lineEdit_176 = new QLineEdit(groupBox_42);
+        lineEdit_176->setObjectName(QString::fromUtf8("lineEdit_176"));
+        lineEdit_176->setFont(font1);
+        lineEdit_176->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_172->addWidget(lineEdit_176, 1, 0, 1, 1);
+
+
+        gridLayout_123->addLayout(gridLayout_172, 0, 0, 1, 1);
+
+        label_167 = new QLabel(groupBox_42);
+        label_167->setObjectName(QString::fromUtf8("label_167"));
+        label_167->setFont(font1);
+
+        gridLayout_123->addWidget(label_167, 0, 1, 1, 1);
+
+        gridLayout_173 = new QGridLayout();
+        gridLayout_173->setObjectName(QString::fromUtf8("gridLayout_173"));
+        lineEdit_177 = new QLineEdit(groupBox_42);
+        lineEdit_177->setObjectName(QString::fromUtf8("lineEdit_177"));
+        lineEdit_177->setEnabled(true);
+        lineEdit_177->setFont(font5);
+        lineEdit_177->setFocusPolicy(Qt::NoFocus);
+        lineEdit_177->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_177->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_177->setReadOnly(true);
+
+        gridLayout_173->addWidget(lineEdit_177, 1, 0, 1, 1);
+
+        pushButton_42 = new QPushButton(groupBox_42);
+        pushButton_42->setObjectName(QString::fromUtf8("pushButton_42"));
+        pushButton_42->setIcon(icon2);
+        pushButton_42->setIconSize(QSize(25, 25));
+
+        gridLayout_173->addWidget(pushButton_42, 0, 1, 2, 1);
+
+        comboBox_71 = new QComboBox(groupBox_42);
+        comboBox_71->setObjectName(QString::fromUtf8("comboBox_71"));
+        comboBox_71->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_173->addWidget(comboBox_71, 0, 0, 1, 1);
+
+
+        gridLayout_123->addLayout(gridLayout_173, 0, 2, 1, 1);
+
+
+        gridLayout_168->addWidget(groupBox_42, 0, 1, 1, 1);
+
+
+        gridLayout_128->addLayout(gridLayout_168, 0, 0, 1, 1);
+
+        gridLayout_174 = new QGridLayout();
+        gridLayout_174->setObjectName(QString::fromUtf8("gridLayout_174"));
+        groupBox_43 = new QGroupBox(tab_45);
+        groupBox_43->setObjectName(QString::fromUtf8("groupBox_43"));
+        groupBox_43->setMaximumSize(QSize(16777215, 82));
+        gridLayout_124 = new QGridLayout(groupBox_43);
+        gridLayout_124->setObjectName(QString::fromUtf8("gridLayout_124"));
+        gridLayout_124->setContentsMargins(0, 0, 0, 0);
+        gridLayout_175 = new QGridLayout();
+        gridLayout_175->setObjectName(QString::fromUtf8("gridLayout_175"));
+        comboBox_72 = new QComboBox(groupBox_43);
+        comboBox_72->setObjectName(QString::fromUtf8("comboBox_72"));
+        comboBox_72->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_175->addWidget(comboBox_72, 0, 0, 1, 1);
+
+        lineEdit_178 = new QLineEdit(groupBox_43);
+        lineEdit_178->setObjectName(QString::fromUtf8("lineEdit_178"));
+        lineEdit_178->setFont(font1);
+        lineEdit_178->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_175->addWidget(lineEdit_178, 1, 0, 1, 1);
+
+
+        gridLayout_124->addLayout(gridLayout_175, 0, 0, 1, 1);
+
+        label_168 = new QLabel(groupBox_43);
+        label_168->setObjectName(QString::fromUtf8("label_168"));
+        label_168->setFont(font1);
+
+        gridLayout_124->addWidget(label_168, 0, 1, 1, 1);
+
+        gridLayout_176 = new QGridLayout();
+        gridLayout_176->setObjectName(QString::fromUtf8("gridLayout_176"));
+        lineEdit_179 = new QLineEdit(groupBox_43);
+        lineEdit_179->setObjectName(QString::fromUtf8("lineEdit_179"));
+        lineEdit_179->setEnabled(true);
+        lineEdit_179->setFont(font5);
+        lineEdit_179->setFocusPolicy(Qt::NoFocus);
+        lineEdit_179->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_179->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_179->setReadOnly(true);
+
+        gridLayout_176->addWidget(lineEdit_179, 1, 0, 1, 1);
+
+        pushButton_43 = new QPushButton(groupBox_43);
+        pushButton_43->setObjectName(QString::fromUtf8("pushButton_43"));
+        pushButton_43->setIcon(icon2);
+        pushButton_43->setIconSize(QSize(25, 25));
+
+        gridLayout_176->addWidget(pushButton_43, 0, 1, 2, 1);
+
+        comboBox_73 = new QComboBox(groupBox_43);
+        comboBox_73->setObjectName(QString::fromUtf8("comboBox_73"));
+        comboBox_73->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_176->addWidget(comboBox_73, 0, 0, 1, 1);
+
+
+        gridLayout_124->addLayout(gridLayout_176, 0, 2, 1, 1);
+
+
+        gridLayout_174->addWidget(groupBox_43, 0, 0, 1, 1);
+
+        groupBox_44 = new QGroupBox(tab_45);
+        groupBox_44->setObjectName(QString::fromUtf8("groupBox_44"));
+        groupBox_44->setMaximumSize(QSize(16777215, 82));
+        gridLayout_125 = new QGridLayout(groupBox_44);
+        gridLayout_125->setObjectName(QString::fromUtf8("gridLayout_125"));
+        gridLayout_125->setContentsMargins(0, 0, 0, 0);
+        gridLayout_177 = new QGridLayout();
+        gridLayout_177->setObjectName(QString::fromUtf8("gridLayout_177"));
+        comboBox_74 = new QComboBox(groupBox_44);
+        comboBox_74->setObjectName(QString::fromUtf8("comboBox_74"));
+        comboBox_74->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_177->addWidget(comboBox_74, 0, 0, 1, 1);
+
+        lineEdit_180 = new QLineEdit(groupBox_44);
+        lineEdit_180->setObjectName(QString::fromUtf8("lineEdit_180"));
+        lineEdit_180->setFont(font1);
+        lineEdit_180->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_177->addWidget(lineEdit_180, 1, 0, 1, 1);
+
+
+        gridLayout_125->addLayout(gridLayout_177, 0, 0, 1, 1);
+
+        label_169 = new QLabel(groupBox_44);
+        label_169->setObjectName(QString::fromUtf8("label_169"));
+        label_169->setFont(font1);
+
+        gridLayout_125->addWidget(label_169, 0, 1, 1, 1);
+
+        gridLayout_178 = new QGridLayout();
+        gridLayout_178->setObjectName(QString::fromUtf8("gridLayout_178"));
+        lineEdit_181 = new QLineEdit(groupBox_44);
+        lineEdit_181->setObjectName(QString::fromUtf8("lineEdit_181"));
+        lineEdit_181->setEnabled(true);
+        lineEdit_181->setFont(font5);
+        lineEdit_181->setFocusPolicy(Qt::NoFocus);
+        lineEdit_181->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_181->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_181->setReadOnly(true);
+
+        gridLayout_178->addWidget(lineEdit_181, 1, 0, 1, 1);
+
+        pushButton_44 = new QPushButton(groupBox_44);
+        pushButton_44->setObjectName(QString::fromUtf8("pushButton_44"));
+        pushButton_44->setIcon(icon2);
+        pushButton_44->setIconSize(QSize(25, 25));
+
+        gridLayout_178->addWidget(pushButton_44, 0, 1, 2, 1);
+
+        comboBox_75 = new QComboBox(groupBox_44);
+        comboBox_75->setObjectName(QString::fromUtf8("comboBox_75"));
+        comboBox_75->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_178->addWidget(comboBox_75, 0, 0, 1, 1);
+
+
+        gridLayout_125->addLayout(gridLayout_178, 0, 2, 1, 1);
+
+
+        gridLayout_174->addWidget(groupBox_44, 0, 1, 1, 1);
+
+
+        gridLayout_128->addLayout(gridLayout_174, 1, 0, 1, 1);
+
+        gridLayout_179 = new QGridLayout();
+        gridLayout_179->setObjectName(QString::fromUtf8("gridLayout_179"));
+        groupBox_45 = new QGroupBox(tab_45);
+        groupBox_45->setObjectName(QString::fromUtf8("groupBox_45"));
+        groupBox_45->setMaximumSize(QSize(16777215, 82));
+        gridLayout_126 = new QGridLayout(groupBox_45);
+        gridLayout_126->setObjectName(QString::fromUtf8("gridLayout_126"));
+        gridLayout_126->setContentsMargins(0, 0, 0, 0);
+        gridLayout_180 = new QGridLayout();
+        gridLayout_180->setObjectName(QString::fromUtf8("gridLayout_180"));
+        lineEdit_182 = new QLineEdit(groupBox_45);
+        lineEdit_182->setObjectName(QString::fromUtf8("lineEdit_182"));
+        lineEdit_182->setFont(font1);
+        lineEdit_182->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_180->addWidget(lineEdit_182, 1, 0, 1, 1);
+
+        comboBox_76 = new QComboBox(groupBox_45);
+        comboBox_76->setObjectName(QString::fromUtf8("comboBox_76"));
+        comboBox_76->setFocusPolicy(Qt::NoFocus);
+        comboBox_76->setMaxVisibleItems(33);
+
+        gridLayout_180->addWidget(comboBox_76, 0, 0, 1, 1);
+
+
+        gridLayout_126->addLayout(gridLayout_180, 0, 0, 1, 1);
+
+        label_170 = new QLabel(groupBox_45);
+        label_170->setObjectName(QString::fromUtf8("label_170"));
+        label_170->setFont(font1);
+
+        gridLayout_126->addWidget(label_170, 0, 1, 1, 1);
+
+        gridLayout_181 = new QGridLayout();
+        gridLayout_181->setObjectName(QString::fromUtf8("gridLayout_181"));
+        lineEdit_183 = new QLineEdit(groupBox_45);
+        lineEdit_183->setObjectName(QString::fromUtf8("lineEdit_183"));
+        lineEdit_183->setEnabled(true);
+        lineEdit_183->setFont(font5);
+        lineEdit_183->setFocusPolicy(Qt::NoFocus);
+        lineEdit_183->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_183->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_183->setReadOnly(true);
+
+        gridLayout_181->addWidget(lineEdit_183, 1, 0, 1, 1);
+
+        pushButton_45 = new QPushButton(groupBox_45);
+        pushButton_45->setObjectName(QString::fromUtf8("pushButton_45"));
+        pushButton_45->setIcon(icon2);
+        pushButton_45->setIconSize(QSize(25, 25));
+
+        gridLayout_181->addWidget(pushButton_45, 0, 1, 2, 1);
+
+        comboBox_77 = new QComboBox(groupBox_45);
+        comboBox_77->setObjectName(QString::fromUtf8("comboBox_77"));
+        comboBox_77->setFocusPolicy(Qt::NoFocus);
+        comboBox_77->setMaxVisibleItems(33);
+
+        gridLayout_181->addWidget(comboBox_77, 0, 0, 1, 1);
+
+
+        gridLayout_126->addLayout(gridLayout_181, 0, 2, 1, 1);
+
+
+        gridLayout_179->addWidget(groupBox_45, 0, 0, 1, 1);
+
+        groupBox_46 = new QGroupBox(tab_45);
+        groupBox_46->setObjectName(QString::fromUtf8("groupBox_46"));
+        groupBox_46->setMaximumSize(QSize(16777215, 82));
+        gridLayout_127 = new QGridLayout(groupBox_46);
+        gridLayout_127->setObjectName(QString::fromUtf8("gridLayout_127"));
+        gridLayout_127->setContentsMargins(0, 0, 0, 0);
+        gridLayout_182 = new QGridLayout();
+        gridLayout_182->setObjectName(QString::fromUtf8("gridLayout_182"));
+        comboBox_78 = new QComboBox(groupBox_46);
+        comboBox_78->setObjectName(QString::fromUtf8("comboBox_78"));
+        comboBox_78->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_182->addWidget(comboBox_78, 0, 0, 1, 1);
+
+        lineEdit_184 = new QLineEdit(groupBox_46);
+        lineEdit_184->setObjectName(QString::fromUtf8("lineEdit_184"));
+        lineEdit_184->setFont(font1);
+        lineEdit_184->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        gridLayout_182->addWidget(lineEdit_184, 1, 0, 1, 1);
+
+
+        gridLayout_127->addLayout(gridLayout_182, 0, 0, 1, 1);
+
+        label_171 = new QLabel(groupBox_46);
+        label_171->setObjectName(QString::fromUtf8("label_171"));
+        label_171->setFont(font1);
+
+        gridLayout_127->addWidget(label_171, 0, 1, 1, 1);
+
+        gridLayout_183 = new QGridLayout();
+        gridLayout_183->setObjectName(QString::fromUtf8("gridLayout_183"));
+        lineEdit_185 = new QLineEdit(groupBox_46);
+        lineEdit_185->setObjectName(QString::fromUtf8("lineEdit_185"));
+        lineEdit_185->setEnabled(true);
+        lineEdit_185->setFont(font5);
+        lineEdit_185->setFocusPolicy(Qt::NoFocus);
+        lineEdit_185->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 255);\n"
+"background-color: rgb(255, 251, 239);"));
+        lineEdit_185->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEdit_185->setReadOnly(true);
+
+        gridLayout_183->addWidget(lineEdit_185, 1, 0, 1, 1);
+
+        pushButton_46 = new QPushButton(groupBox_46);
+        pushButton_46->setObjectName(QString::fromUtf8("pushButton_46"));
+        pushButton_46->setIcon(icon2);
+        pushButton_46->setIconSize(QSize(25, 25));
+
+        gridLayout_183->addWidget(pushButton_46, 0, 1, 2, 1);
+
+        comboBox_79 = new QComboBox(groupBox_46);
+        comboBox_79->setObjectName(QString::fromUtf8("comboBox_79"));
+        comboBox_79->setFocusPolicy(Qt::NoFocus);
+
+        gridLayout_183->addWidget(comboBox_79, 0, 0, 1, 1);
+
+
+        gridLayout_127->addLayout(gridLayout_183, 0, 2, 1, 1);
+
+
+        gridLayout_179->addWidget(groupBox_46, 0, 1, 1, 1);
+
+
+        gridLayout_128->addLayout(gridLayout_179, 2, 0, 1, 1);
+
+        tabWidget->addTab(tab_45, QString());
 
         gridLayout_9->addWidget(tabWidget, 0, 0, 1, 2);
 
@@ -5325,7 +5789,7 @@ public:
 
         retranslateUi(ConversorUD);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(2);
         toolBox->setCurrentIndex(0);
         toolBox->layout()->setSpacing(0);
         tabWidget_2->setCurrentIndex(0);
@@ -5389,6 +5853,7 @@ public:
          << QApplication::translate("ConversorUD", "Carga electrica", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Caudal volumetrico", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Conductancia electrica", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Consumo de combustible", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Distancia o Longitud", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Sistema de numeracion", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Superficie o Area", 0, QApplication::UnicodeUTF8)
@@ -5991,7 +6456,7 @@ public:
                         "\"><a name=\"cita\"></a><span style=\" font-size:10pt;\">A</span><span style=\" font-size:10pt;\">l ser fertilizado por los espermatozoides, el ovulo comienza a dividirse y forma una bola, que en los primeros dias puede llegar a tener mas de cien celulas.</span></p>\n"
 "<p align=\"justify\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">A los cinco dias, las celulas empiezan a separarse en dos grupos. El grupo de celulas del aro exterior formara la placenta que acogera a tu bebe. Las celulas del aro interior se convertiran en el embrion en si mismo. Estas celulas interiores son las llamadas </span><span style=\" font-size:10pt; font-style:italic;\">celulas madre</span><span style=\" font-size:10pt;\">, que tienen la extraordinaria capacidad de transformarse en mas de 200 clases de celulas de cualquier parte del cuerpo (por eso son tan interesantes para investigar tratamientos de determinadas enfermedades)."
                         "</span></p>\n"
-"<p align=\"justify\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">Ya ha pasado mas de </span><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\">una semana desde la concepcion</span><span style=\" font-size:10pt;\">, aunque hasta que tengas la primera falta en la regla, no sabras nada sobre tu embarazo. Aunque, todo hay que decirlo, hay mamas que notan cambios hormonales enseguida. Sea como sea, est\303\241s embarazada.</span></p>\n"
+"<p align=\"justify\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">Ya ha pasado mas de </span><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\">una semana desde la concepcion</span><span style=\" font-size:10pt;\">, aunque hasta que tengas la primera falta en la regla, no sabras nada sobre tu embarazo. Aunque, todo hay que decirlo, hay mamas que notan cambios hormonales enseguida. Sea como sea, estas embarazada.</span></p>\n"
 "<p align=\"justify\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">Enhorabuena!</span></p></body></html>", 0, QApplication::UnicodeUTF8));
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_2), QApplication::translate("ConversorUD", "Semana 1", 0, QApplication::UnicodeUTF8));
         label_64->setText(QApplication::translate("ConversorUD", "Trimestre 1 - Semana 2 - Mes 0 -> 1", 0, QApplication::UnicodeUTF8));
@@ -7020,9 +7485,67 @@ public:
          << QApplication::translate("ConversorUD", "Mho (\342\204\247)", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("ConversorUD", "Amperios por voltios (A/V)", 0, QApplication::UnicodeUTF8)
         );
-        groupBox_33->setTitle(QApplication::translate("ConversorUD", "()", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        groupBox_33->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>Un combustible es cualquier sustancia que reacciona con el oxIgeno de forma violenta, con producci\303\263n de calor, llamas y gases. Supone la liberacion de una energIa de su forma potencial a una forma utilizable (por ser una reaccion quimica, se conoce como energia quimica). En general se trata de algo susceptible de quemarse, aunque no siempre es asi.</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        groupBox_33->setTitle(QApplication::translate("ConversorUD", "Consumo de combustible", 0, QApplication::UnicodeUTF8));
+        comboBox_53->clear();
+        comboBox_53->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Litros por kilometro (l/km)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Litros por 10 kilometros (l/10 km)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Litros por 100 kilometros (l/100 km)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilometros por litro (km/l)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Millas por galon Americano (mpg)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Galones por 100 millas", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Millas por galon Britanico (mpg:1)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Millas por litro (mpl)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Galones por 100 millas", 0, QApplication::UnicodeUTF8)
+        );
         label_158->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+        comboBox_56->clear();
+        comboBox_56->insertItems(0, QStringList()
+         << QApplication::translate("ConversorUD", "Litros por kilometro (l/km)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Litros por 10 kilometros (l/10 km)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Litros por 100 kilometros (l/100 km)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Kilometros por litro (km/l)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Millas por galon Americano (mpg)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Galones por 100 millas", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Millas por galon Britanico (mpg:1)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Millas por litro (mpl)", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("ConversorUD", "Galones por 100 millas", 0, QApplication::UnicodeUTF8)
+        );
         tabWidget->setTabText(tabWidget->indexOf(tab_30), QApplication::translate("ConversorUD", "Conversores 4/10", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        groupBox_41->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>En las ciencias fisicas, la cantidad de sustancia, n, de una muestra se puede definir informalmente como el numero de alguna entidad elemental especifica (por lo general atomos, moleculas, o iones, o electrones) presentes en la muestra, pero cuando este numero se expresa en terminos de alguna cantidad estandar tamano.</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        groupBox_41->setTitle(QApplication::translate("ConversorUD", "()", 0, QApplication::UnicodeUTF8));
+        label_166->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        groupBox_42->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>En el estudio de la electricidad, se denomina capacidad (a veces se denomina capacitancia, aunque esta palabra no esta registrada en el diccionario RAE, Real Academia Espa\303\261ola), a la propiedad de un conductor de adquirir carga electrica cuando es sometido a un potencial electrico con respecto a otro en estado neutro. La capacidad queda definida numericamente por la carga que adquiere por cada unidad de potencial. </p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        groupBox_42->setTitle(QApplication::translate("ConversorUD", "()", 0, QApplication::UnicodeUTF8));
+        label_167->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        groupBox_43->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>La carga electrica es una propiedad intrinseca de algunas particulas sub-atomicas que se manifiesta mediante atracciones y repulsiones y que determina las interacciones electromagneticas entre ellas. La materia cargada electricamente es influida por los campos electromagneticos siendo, a su vez, generadora de ellos. La interaccion entre carga y campo electrico es la fuente de una de las cuatro fuerzas fundamentales, la fuerza electromagnetica.</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        groupBox_43->setTitle(QApplication::translate("ConversorUD", "()", 0, QApplication::UnicodeUTF8));
+        label_168->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        groupBox_44->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>En dinamica de fluidos, caudal es la cantidad de fluido que pasa por determinado elemento en la unidad de tiempo. Normalmente se identifica con el flujo volumetrico o volumen que pasa por un area dada en la unidad de tiempo. Menos frecuentemente, se identifica con el flujo masico o masa que pasa por un area dada en la unidad de tiempo.</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        groupBox_44->setTitle(QApplication::translate("ConversorUD", "()", 0, QApplication::UnicodeUTF8));
+        label_169->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        groupBox_45->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>Se denomina Conductancia electrica (G) de un conductor a la inversa de la oposicion que dicho conductor presenta al movimiento de los electrones en su seno, esto es, a la inversa de su resistencia electrica (R)</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        groupBox_45->setTitle(QApplication::translate("ConversorUD", "()", 0, QApplication::UnicodeUTF8));
+        label_170->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+#ifndef QT_NO_WHATSTHIS
+        groupBox_46->setWhatsThis(QApplication::translate("ConversorUD", "<html><head/><body><p>Un combustible es cualquier sustancia que reacciona con el oxIgeno de forma violenta, con producci\303\263n de calor, llamas y gases. Supone la liberacion de una energIa de su forma potencial a una forma utilizable (por ser una reaccion quimica, se conoce como energia quimica). En general se trata de algo susceptible de quemarse, aunque no siempre es asi.</p></body></html>", 0, QApplication::UnicodeUTF8));
+#endif // QT_NO_WHATSTHIS
+        groupBox_46->setTitle(QApplication::translate("ConversorUD", "()", 0, QApplication::UnicodeUTF8));
+        label_171->setText(QApplication::translate("ConversorUD", "=", 0, QApplication::UnicodeUTF8));
+        tabWidget->setTabText(tabWidget->indexOf(tab_45), QApplication::translate("ConversorUD", "Conversores 5/10", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

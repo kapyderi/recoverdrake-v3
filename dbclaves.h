@@ -31,8 +31,14 @@ protected:
     
 private slots:
     void on_pushButton_4_clicked();
-
     void on_pushButton_6_clicked();
+    void Comprobar();
+    void on_comboBox_2_activated(const QString &arg1);
+    void on_lineEdit_textChanged(const QString &arg1);
+    int randInt(int low, int high);
+    void ramdomize();
+
+    void on_lineEdit_2_textChanged(const QString &arg1);
 
 private:
     Ui::dbclaves *ui;

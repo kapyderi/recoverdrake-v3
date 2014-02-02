@@ -36,8 +36,8 @@ private slots:
     void on_lineEdit_returnPressed();
     void on_comboBox_3_activated(const QString &arg1);
     void Reprobar(QString Tipo);
-    void Unidad(double Value,double Value1,double Cantidad,QString Nombre, QString Base);
-    void Unidad1(double Value,double Value1,double Cantidad, QString Nombre, QString Base);
+    void Unidad(double Value,double Value1,double Cantidad,QString Nombre, QString Base, QString Compara);
+    void Unidad1(double Value,double Value1,double Cantidad, QString Nombre, QString Base, QString Compara);
     void on_lineEdit_14_textChanged(const QString &arg1);
     void on_lineEdit_14_returnPressed();
     void on_lineEdit_5_textChanged(const QString &arg1);
@@ -159,6 +159,11 @@ private slots:
     void on_lineEdit_160_textChanged(const QString &arg1);
     void on_comboBox_54_activated(const QString &arg1);
     void on_comboBox_55_activated(const QString &arg1);
+    void on_lineEdit_159_returnPressed();
+    void on_lineEdit_159_textChanged(const QString &arg1);
+    void on_pushButton_33_clicked();
+    void on_comboBox_53_activated(const QString &arg1);
+    void on_comboBox_56_activated(const QString &arg1);
 
 private:
     Ui::ConversorUD *ui;

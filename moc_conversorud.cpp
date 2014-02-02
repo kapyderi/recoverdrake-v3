@@ -22,7 +22,7 @@ static const uint qt_meta_data_ConversorUD[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      86,   14, // methods
+     137,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -41,83 +41,134 @@ static const uint qt_meta_data_ConversorUD[] = {
      174,   12,   12,   12, 0x08,
      202,   72,   12,   12, 0x08,
      240,  235,   12,   12, 0x08,
-     292,  258,   12,   12, 0x08,
-     337,  258,   12,   12, 0x08,
-     383,   72,   12,   12, 0x08,
-     419,   12,   12,   12, 0x08,
-     450,   72,   12,   12, 0x08,
-     485,   12,   12,   12, 0x08,
-     516,   12,   12,   12, 0x08,
-     547,   12,   12,   12, 0x08,
-     577,   12,   12,   12, 0x08,
-     607,   72,   12,   12, 0x08,
-     643,   72,   12,   12, 0x08,
-     678,   12,   12,   12, 0x08,
-     690,   12,   12,   12, 0x08,
-     703,   12,   12,   12, 0x08,
-     734,   12,   12,   12, 0x08,
-     765,   12,   12,   12, 0x08,
-     796,   12,   12,   12, 0x08,
-     827,   72,   12,   12, 0x08,
-     863,   72,   12,   12, 0x08,
-     899,   72,   12,   12, 0x08,
-     935,   12,   12,   12, 0x08,
-     961,   12,   12,   12, 0x08,
-     987,   12,   12,   12, 0x08,
-    1013,   12,   12,   12, 0x08,
-    1039,   12,   12,   12, 0x08,
-    1065,   12,   12,   12, 0x08,
-    1091,   12,   12,   12, 0x08,
-    1118,   12,   12,   12, 0x08,
-    1145,   12,   12,   12, 0x08,
-    1171,   12,   12,   12, 0x08,
-    1198,   72,   12,   12, 0x08,
-    1234,   72,   12,   12, 0x08,
-    1270,   12,   12,   12, 0x08,
-    1297,   72,   12,   12, 0x08,
-    1333,   12,   12,   12, 0x08,
-    1364,   72,   12,   12, 0x08,
-    1400,   12,   12,   12, 0x08,
-    1431,   72,   12,   12, 0x08,
-    1467,   12,   12,   12, 0x08,
-    1504, 1498,   12,   12, 0x08,
-    1543, 1498,   12,   12, 0x08,
-    1582,   12,   12,   12, 0x08,
-    1590,   12,   12,   12, 0x08,
-    1617,   12,   12,   12, 0x08,
-    1630,   12,   12,   12, 0x08,
-    1652,   12,   12,   12, 0x08,
-    1665, 1498,   12,   12, 0x08,
-    1705,   12,   12,   12, 0x08,
-    1736,   72,   12,   12, 0x08,
-    1772,   12,   12,   12, 0x08,
-    1803,   72,   12,   12, 0x08,
-    1839,   12,   12,   12, 0x08,
-    1870,   12,   12,   12, 0x08,
-    1897,   12,   12,   12, 0x08,
-    1928,   72,   12,   12, 0x08,
-    1964,   72,   12,   12, 0x08,
-    1998,   72,   12,   12, 0x08,
-    2032,   72,   12,   12, 0x08,
-    2066,   12,   12,   12, 0x08,
-    2093,   12,   12,   12, 0x08,
-    2124,   72,   12,   12, 0x08,
-    2160,   72,   12,   12, 0x08,
-    2194,   72,   12,   12, 0x08,
-    2228,   12,   12,   12, 0x08,
-    2255,   12,   12,   12, 0x08,
-    2286,   72,   12,   12, 0x08,
-    2322,   72,   12,   12, 0x08,
-    2356,   72,   12,   12, 0x08,
-    2390,   12,   12,   12, 0x08,
-    2417,   12,   12,   12, 0x08,
-    2448,   72,   12,   12, 0x08,
-    2484,   72,   12,   12, 0x08,
-    2518,   72,   12,   12, 0x08,
-    2552,   72,   12,   12, 0x08,
-    2588,   12,   12,   12, 0x08,
-    2619,   72,   12,   12, 0x08,
-    2653,   72,   12,   12, 0x08,
+     300,  258,   12,   12, 0x08,
+     353,  258,   12,   12, 0x08,
+     407,   72,   12,   12, 0x08,
+     443,   12,   12,   12, 0x08,
+     474,   72,   12,   12, 0x08,
+     509,   12,   12,   12, 0x08,
+     540,   12,   12,   12, 0x08,
+     571,   12,   12,   12, 0x08,
+     601,   12,   12,   12, 0x08,
+     631,   72,   12,   12, 0x08,
+     667,   72,   12,   12, 0x08,
+     702,   12,   12,   12, 0x08,
+     714,   12,   12,   12, 0x08,
+     727,   12,   12,   12, 0x08,
+     758,   12,   12,   12, 0x08,
+     789,   12,   12,   12, 0x08,
+     820,   12,   12,   12, 0x08,
+     851,   72,   12,   12, 0x08,
+     887,   72,   12,   12, 0x08,
+     923,   72,   12,   12, 0x08,
+     959,   12,   12,   12, 0x08,
+     985,   12,   12,   12, 0x08,
+    1011,   12,   12,   12, 0x08,
+    1037,   12,   12,   12, 0x08,
+    1063,   12,   12,   12, 0x08,
+    1089,   12,   12,   12, 0x08,
+    1115,   12,   12,   12, 0x08,
+    1142,   12,   12,   12, 0x08,
+    1169,   12,   12,   12, 0x08,
+    1195,   12,   12,   12, 0x08,
+    1222,   72,   12,   12, 0x08,
+    1258,   72,   12,   12, 0x08,
+    1294,   12,   12,   12, 0x08,
+    1321,   72,   12,   12, 0x08,
+    1357,   12,   12,   12, 0x08,
+    1388,   72,   12,   12, 0x08,
+    1424,   12,   12,   12, 0x08,
+    1455,   72,   12,   12, 0x08,
+    1491,   12,   12,   12, 0x08,
+    1528, 1522,   12,   12, 0x08,
+    1567, 1522,   12,   12, 0x08,
+    1606,   12,   12,   12, 0x08,
+    1614,   12,   12,   12, 0x08,
+    1641,   12,   12,   12, 0x08,
+    1654,   12,   12,   12, 0x08,
+    1676,   12,   12,   12, 0x08,
+    1689, 1522,   12,   12, 0x08,
+    1729,   12,   12,   12, 0x08,
+    1760,   72,   12,   12, 0x08,
+    1796,   12,   12,   12, 0x08,
+    1827,   72,   12,   12, 0x08,
+    1863,   12,   12,   12, 0x08,
+    1894,   12,   12,   12, 0x08,
+    1921,   12,   12,   12, 0x08,
+    1952,   72,   12,   12, 0x08,
+    1988,   72,   12,   12, 0x08,
+    2022,   72,   12,   12, 0x08,
+    2056,   72,   12,   12, 0x08,
+    2090,   12,   12,   12, 0x08,
+    2117,   12,   12,   12, 0x08,
+    2148,   72,   12,   12, 0x08,
+    2184,   72,   12,   12, 0x08,
+    2218,   72,   12,   12, 0x08,
+    2252,   12,   12,   12, 0x08,
+    2279,   12,   12,   12, 0x08,
+    2310,   72,   12,   12, 0x08,
+    2346,   72,   12,   12, 0x08,
+    2380,   72,   12,   12, 0x08,
+    2414,   12,   12,   12, 0x08,
+    2441,   12,   12,   12, 0x08,
+    2472,   72,   12,   12, 0x08,
+    2508,   72,   12,   12, 0x08,
+    2542,   72,   12,   12, 0x08,
+    2576,   72,   12,   12, 0x08,
+    2612,   12,   12,   12, 0x08,
+    2643,   72,   12,   12, 0x08,
+    2677,   72,   12,   12, 0x08,
+    2711,   72,   12,   12, 0x08,
+    2747,   12,   12,   12, 0x08,
+    2774,   12,   12,   12, 0x08,
+    2805,   12,   12,   12, 0x08,
+    2835,   72,   12,   12, 0x08,
+    2870,   72,   12,   12, 0x08,
+    2903,   72,   12,   12, 0x08,
+    2936,   12,   12,   12, 0x08,
+    2963,   12,   12,   12, 0x08,
+    2994,   72,   12,   12, 0x08,
+    3030,   72,   12,   12, 0x08,
+    3064,   72,   12,   12, 0x08,
+    3103, 3098,   12,   12, 0x08,
+    3136,   12,   12,   12, 0x08,
+    3167,   12,   12,   12, 0x08,
+    3177,   12,   12,   12, 0x08,
+    3204,   12,   12,   12, 0x08,
+    3235,   72,   12,   12, 0x08,
+    3271,   72,   12,   12, 0x08,
+    3305,   72,   12,   12, 0x08,
+    3339,   12,   12,   12, 0x08,
+    3366,   12,   12,   12, 0x08,
+    3398,   72,   12,   12, 0x08,
+    3435,   72,   12,   12, 0x08,
+    3469,   72,   12,   12, 0x08,
+    3503,   12,   12,   12, 0x08,
+    3512,   12,   12,   12, 0x08,
+    3539,   12,   12,   12, 0x08,
+    3571,   72,   12,   12, 0x08,
+    3608,   72,   12,   12, 0x08,
+    3642,   72,   12,   12, 0x08,
+    3676,   12,   12,   12, 0x08,
+    3703,   12,   12,   12, 0x08,
+    3735,   72,   12,   12, 0x08,
+    3772,   72,   12,   12, 0x08,
+    3806,   72,   12,   12, 0x08,
+    3840,   12,   12,   12, 0x08,
+    3867,   12,   12,   12, 0x08,
+    3899,   72,   12,   12, 0x08,
+    3936,   72,   12,   12, 0x08,
+    3970,   72,   12,   12, 0x08,
+    4004,   12,   12,   12, 0x08,
+    4031,   12,   12,   12, 0x08,
+    4063,   72,   12,   12, 0x08,
+    4100,   72,   12,   12, 0x08,
+    4134,   72,   12,   12, 0x08,
+    4168,   12,   12,   12, 0x08,
+    4200,   72,   12,   12, 0x08,
+    4237,   12,   12,   12, 0x08,
+    4264,   72,   12,   12, 0x08,
+    4298,   72,   12,   12, 0x08,
 
        0        // eod
 };
@@ -130,9 +181,10 @@ static const char qt_meta_stringdata_ConversorUD[] = {
     "on_comboBox_2_activated(QString)\0"
     "on_lineEdit_returnPressed()\0"
     "on_comboBox_3_activated(QString)\0Tipo\0"
-    "Reprobar(QString)\0Value,Value1,Cantidad,Nombre,Base\0"
-    "Unidad(double,double,double,QString,QString)\0"
-    "Unidad1(double,double,double,QString,QString)\0"
+    "Reprobar(QString)\0"
+    "Value,Value1,Cantidad,Nombre,Base,Compara\0"
+    "Unidad(double,double,double,QString,QString,QString)\0"
+    "Unidad1(double,double,double,QString,QString,QString)\0"
     "on_lineEdit_14_textChanged(QString)\0"
     "on_lineEdit_14_returnPressed()\0"
     "on_lineEdit_5_textChanged(QString)\0"
@@ -204,6 +256,55 @@ static const char qt_meta_stringdata_ConversorUD[] = {
     "on_lineEdit_12_returnPressed()\0"
     "on_comboBox_14_activated(QString)\0"
     "on_comboBox_15_activated(QString)\0"
+    "on_lineEdit_50_textChanged(QString)\0"
+    "on_pushButton_22_clicked()\0"
+    "on_lineEdit_50_returnPressed()\0"
+    "on_lineEdit_4_returnPressed()\0"
+    "on_lineEdit_4_textChanged(QString)\0"
+    "on_comboBox_4_activated(QString)\0"
+    "on_comboBox_6_activated(QString)\0"
+    "on_pushButton_16_clicked()\0"
+    "on_lineEdit_39_returnPressed()\0"
+    "on_lineEdit_39_textChanged(QString)\0"
+    "on_comboBox_18_activated(QString)\0"
+    "on_comboBox_23_activated(QString)\0"
+    "date\0on_calendarWidget_clicked(QDate)\0"
+    "on_lineEdit_55_returnPressed()\0Semanas()\0"
+    "on_pushButton_15_clicked()\0"
+    "on_lineEdit_37_returnPressed()\0"
+    "on_lineEdit_37_textChanged(QString)\0"
+    "on_comboBox_17_activated(QString)\0"
+    "on_comboBox_31_activated(QString)\0"
+    "on_pushButton_32_clicked()\0"
+    "on_lineEdit_156_returnPressed()\0"
+    "on_lineEdit_156_textChanged(QString)\0"
+    "on_comboBox_50_activated(QString)\0"
+    "on_comboBox_51_activated(QString)\0"
+    "Divisa()\0on_pushButton_31_clicked()\0"
+    "on_lineEdit_154_returnPressed()\0"
+    "on_lineEdit_154_textChanged(QString)\0"
+    "on_comboBox_48_activated(QString)\0"
+    "on_comboBox_49_activated(QString)\0"
+    "on_pushButton_30_clicked()\0"
+    "on_lineEdit_152_returnPressed()\0"
+    "on_lineEdit_152_textChanged(QString)\0"
+    "on_comboBox_46_activated(QString)\0"
+    "on_comboBox_47_activated(QString)\0"
+    "on_pushButton_29_clicked()\0"
+    "on_lineEdit_150_returnPressed()\0"
+    "on_lineEdit_150_textChanged(QString)\0"
+    "on_comboBox_44_activated(QString)\0"
+    "on_comboBox_45_activated(QString)\0"
+    "on_pushButton_34_clicked()\0"
+    "on_lineEdit_160_returnPressed()\0"
+    "on_lineEdit_160_textChanged(QString)\0"
+    "on_comboBox_54_activated(QString)\0"
+    "on_comboBox_55_activated(QString)\0"
+    "on_lineEdit_159_returnPressed()\0"
+    "on_lineEdit_159_textChanged(QString)\0"
+    "on_pushButton_33_clicked()\0"
+    "on_comboBox_53_activated(QString)\0"
+    "on_comboBox_56_activated(QString)\0"
 };
 
 void ConversorUD::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -221,8 +322,8 @@ void ConversorUD::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 6: _t->on_lineEdit_returnPressed(); break;
         case 7: _t->on_comboBox_3_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 8: _t->Reprobar((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 9: _t->Unidad((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< QString(*)>(_a[5]))); break;
-        case 10: _t->Unidad1((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< QString(*)>(_a[5]))); break;
+        case 9: _t->Unidad((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< QString(*)>(_a[5])),(*reinterpret_cast< QString(*)>(_a[6]))); break;
+        case 10: _t->Unidad1((*reinterpret_cast< double(*)>(_a[1])),(*reinterpret_cast< double(*)>(_a[2])),(*reinterpret_cast< double(*)>(_a[3])),(*reinterpret_cast< QString(*)>(_a[4])),(*reinterpret_cast< QString(*)>(_a[5])),(*reinterpret_cast< QString(*)>(_a[6]))); break;
         case 11: _t->on_lineEdit_14_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 12: _t->on_lineEdit_14_returnPressed(); break;
         case 13: _t->on_lineEdit_5_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
@@ -298,6 +399,57 @@ void ConversorUD::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 83: _t->on_lineEdit_12_returnPressed(); break;
         case 84: _t->on_comboBox_14_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 85: _t->on_comboBox_15_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 86: _t->on_lineEdit_50_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 87: _t->on_pushButton_22_clicked(); break;
+        case 88: _t->on_lineEdit_50_returnPressed(); break;
+        case 89: _t->on_lineEdit_4_returnPressed(); break;
+        case 90: _t->on_lineEdit_4_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 91: _t->on_comboBox_4_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 92: _t->on_comboBox_6_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 93: _t->on_pushButton_16_clicked(); break;
+        case 94: _t->on_lineEdit_39_returnPressed(); break;
+        case 95: _t->on_lineEdit_39_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 96: _t->on_comboBox_18_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 97: _t->on_comboBox_23_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 98: _t->on_calendarWidget_clicked((*reinterpret_cast< const QDate(*)>(_a[1]))); break;
+        case 99: _t->on_lineEdit_55_returnPressed(); break;
+        case 100: _t->Semanas(); break;
+        case 101: _t->on_pushButton_15_clicked(); break;
+        case 102: _t->on_lineEdit_37_returnPressed(); break;
+        case 103: _t->on_lineEdit_37_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 104: _t->on_comboBox_17_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 105: _t->on_comboBox_31_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 106: _t->on_pushButton_32_clicked(); break;
+        case 107: _t->on_lineEdit_156_returnPressed(); break;
+        case 108: _t->on_lineEdit_156_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 109: _t->on_comboBox_50_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 110: _t->on_comboBox_51_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 111: _t->Divisa(); break;
+        case 112: _t->on_pushButton_31_clicked(); break;
+        case 113: _t->on_lineEdit_154_returnPressed(); break;
+        case 114: _t->on_lineEdit_154_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 115: _t->on_comboBox_48_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 116: _t->on_comboBox_49_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 117: _t->on_pushButton_30_clicked(); break;
+        case 118: _t->on_lineEdit_152_returnPressed(); break;
+        case 119: _t->on_lineEdit_152_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 120: _t->on_comboBox_46_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 121: _t->on_comboBox_47_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 122: _t->on_pushButton_29_clicked(); break;
+        case 123: _t->on_lineEdit_150_returnPressed(); break;
+        case 124: _t->on_lineEdit_150_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 125: _t->on_comboBox_44_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 126: _t->on_comboBox_45_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 127: _t->on_pushButton_34_clicked(); break;
+        case 128: _t->on_lineEdit_160_returnPressed(); break;
+        case 129: _t->on_lineEdit_160_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 130: _t->on_comboBox_54_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 131: _t->on_comboBox_55_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 132: _t->on_lineEdit_159_returnPressed(); break;
+        case 133: _t->on_lineEdit_159_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 134: _t->on_pushButton_33_clicked(); break;
+        case 135: _t->on_comboBox_53_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 136: _t->on_comboBox_56_activated((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -335,9 +487,9 @@ int ConversorUD::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 86)
+        if (_id < 137)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 86;
+        _id -= 137;
     }
     return _id;
 }

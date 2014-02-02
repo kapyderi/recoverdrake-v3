@@ -12,10 +12,19 @@ dbclaves::dbclaves(QWidget *parent) :
     ui->setupUi(this);
     import=0;
     db=QSqlDatabase::database("PRINCIPAL");
-
-    //...falta
-
+    Model= new QSqlTableModel(0,db);
+    Model->setTable("Clave");
+    Model->select();    
+    Model->setHeaderData(2,Qt::Horizontal,"Clave");
+    Model->setHeaderData(3,Qt::Horizontal,"Encriptacion: Simple");
+    Model->setHeaderData(4,Qt::Horizontal,"Encriptacion: Doble");
+    Model->setHeaderData(5,Qt::Horizontal,"Encriptacion: Tripe");
+    Model->setHeaderData(8,Qt::Horizontal,"Usuario de RecoverDrake");
+    ui->tableView->setModel(Model);
+    ui->tableView->resizeColumnsToContents();
     Stilo = "B";
+    connect(ui->tableView->selectionModel(),SIGNAL(currentChanged(QModelIndex,
+    QModelIndex)),this,SLOT(cambiaFila(QModelIndex)));
     QSqlQuery queryDefecto(db);
     queryDefecto.exec("SELECT Defecto FROM Miscelanea WHERE id=2");
     queryDefecto.first();
@@ -70,6 +79,23 @@ dbclaves::dbclaves(QWidget *parent) :
             cantidad51=query51.value(0).toString();
         Stilo = "A";
     }
+    ui->radioButton_2->setChecked(true);
+    connect(ui->radioButton,SIGNAL(clicked()),this,SLOT(Comprobar()));
+    connect(ui->radioButton_2,SIGNAL(clicked()),this,SLOT(Comprobar()));
+    connect(ui->radioButton_3,SIGNAL(clicked()),this,SLOT(Comprobar()));
+    connect(ui->radioButton_4,SIGNAL(clicked()),this,SLOT(Comprobar()));
+    this->Comprobar();
+    if ( ui->comboBox_2->currentText() == tr("Web"))
+    {
+        if (ui->lineEdit_6->text() != "")
+            ui->pushButton_10->setVisible(true);
+        else
+            ui->pushButton_10->setVisible(false);
+    }
+    else
+    {
+        ui->pushButton_10->setVisible(false);
+    }
     this->installEventFilter(this);
     CierreTotal = 0;
 }
@@ -77,6 +103,9 @@ dbclaves::dbclaves(QWidget *parent) :
 dbclaves::~dbclaves()
 {
     delete ui;
+    delete Model;
+    if (import != 0)
+        delete import;
 }
 
 void dbclaves::on_pushButton_4_clicked()
@@ -139,6 +168,148 @@ bool dbclaves::eventFilter(QObject* obj, QEvent *event)
         return false;
     }
     return QDialog::eventFilter(obj, event);
+}
+
+void dbclaves::Comprobar()
+{
+    if (ui->radioButton->isChecked())
+    {
+        ui->lineEdit_3->setText("0");
+        ui->lineEdit_4->setText("0");
+        ui->lineEdit_5->setText("0");
+        ui->pushButton_13->setVisible(false);
+    }
+    if (ui->radioButton_2->isChecked())
+    {
+        QString User;
+        User = ui->lineEdit->text();
+        if (User.count() > 0)
+            ui->lineEdit_3->setText(QString::number(User.count()));
+        else
+            ui->lineEdit_3->setText("1");
+        ui->lineEdit_4->setText("0");
+        ui->lineEdit_5->setText("0");
+        ui->pushButton_13->setVisible(true);
+    }
+    if (ui->radioButton_3->isChecked())
+    {
+        QString User,Pass;
+        User = ui->lineEdit->text();
+        if (User.count() > 0)
+            ui->lineEdit_3->setText(QString::number(User.count()));
+        else
+            ui->lineEdit_3->setText("1");
+        Pass = ui->lineEdit_2->text();
+        int Total = User.count() + Pass.count();
+        if (Total > 0)
+            ui->lineEdit_4->setText(QString::number(Total));
+        else
+            ui->lineEdit_4->setText("1");
+        ui->lineEdit_5->setText("0");
+        ui->pushButton_13->setVisible(true);
+    }
+    if (ui->radioButton_4->isChecked())
+    {
+        QString User,Pass;
+        User = ui->lineEdit->text();
+        if (User.count() > 0)
+            ui->lineEdit_3->setText(QString::number(User.count()));
+        else
+            ui->lineEdit_3->setText("1");
+        Pass = ui->lineEdit_2->text();
+        int Total = User.count() + Pass.count();
+        if (Total > 0)
+            ui->lineEdit_4->setText(QString::number(Total));
+        else
+            ui->lineEdit_4->setText("1");
+        ui->pushButton_13->setVisible(true);
+        this->ramdomize();
+    }
+}
+
+void dbclaves::on_comboBox_2_activated(const QString &arg1)
+{
+    if (arg1 == tr("Web"))
+    {
+        if (ui->lineEdit_6->text() != "")
+            ui->pushButton_10->setVisible(true);
+    }
+    else
+        ui->pushButton_10->setVisible(false);
+}
+
+void dbclaves::ramdomize()
+{
+    int total;
+    total = randInt(11,99);
+    ui->lineEdit_5->setText(QString::number(total));
+}
+
+int dbclaves::randInt(int low, int high)
+{
+    return qrand() % ((high + 1) - low) + low;
+}
+
+void dbclaves::on_lineEdit_textChanged(const QString &arg1)
+{
+    if (ui->radioButton_2->isChecked())
+    {
+      ui->lineEdit_3->setText(QString::number(arg1.count()));
+    }
+    if (ui->radioButton_3->isChecked())
+    {
+        ui->lineEdit_3->setText(QString::number(arg1.count()));
+        QString Clave;
+        Clave = ui->lineEdit_2->text();
+        int Total = arg1.count() + Clave.count();
+        if (Total > 0)
+            ui->lineEdit_4->setText(QString::number(Total));
+        else
+            ui->lineEdit_4->setText("1");
+    }
+    if (ui->radioButton_4->isChecked())
+    {
+        ui->lineEdit_3->setText(QString::number(arg1.count()));
+        QString Clave;
+        Clave = ui->lineEdit_2->text();
+        int Total = arg1.count() + Clave.count();
+        if (Total > 0)
+            ui->lineEdit_4->setText(QString::number(Total));
+        else
+            ui->lineEdit_4->setText("1");
+    }
+}
+
+void dbclaves::on_lineEdit_2_textChanged(const QString &arg1)
+{
+    if (ui->radioButton_3->isChecked())
+    {
+        QString User;
+        User = ui->lineEdit->text();
+        if (User.count() > 0)
+            ui->lineEdit_3->setText(QString::number(User.count()));
+        else
+            ui->lineEdit_3->setText("1");
+        int Total = User.count() + arg1.count();
+        if (Total > 0)
+            ui->lineEdit_4->setText(QString::number(Total));
+        else
+            ui->lineEdit_4->setText("1");
+    }
+    if (ui->radioButton_4->isChecked())
+    {
+        QString User;
+        User = ui->lineEdit->text();
+        if (User.count() > 0)
+            ui->lineEdit_3->setText(QString::number(User.count()));
+        else
+            ui->lineEdit_3->setText("1");
+        int Total = User.count() + arg1.count();
+        if (Total > 0)
+            ui->lineEdit_4->setText(QString::number(Total));
+        else
+            ui->lineEdit_4->setText("1");
+    }
 }
 
 void dbclaves::on_pushButton_6_clicked()

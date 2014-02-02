@@ -644,6 +644,26 @@
                </property>
               </widget>
              </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="checkBox_88">
+               <property name="text">
+                <string>Lista de claves</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QCheckBox" name="checkBox_89">
+               <property name="text">
+                <string>Lista de codigos Ascii</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -1295,6 +1315,26 @@
               <widget class="QCheckBox" name="checkBox_84">
                <property name="text">
                 <string>Lista de generos para mp3/ogg</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="checkBox_87">
+               <property name="text">
+                <string>Lista de claves</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QCheckBox" name="checkBox_90">
+               <property name="text">
+                <string>Lista de codigos Ascii</string>
                </property>
                <property name="checked">
                 <bool>true</bool>

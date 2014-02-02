@@ -348,6 +348,11 @@
           </item>
           <item>
            <property name="text">
+            <string>Consumo de combustible</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
             <string>Distancia o Longitud</string>
            </property>
           </item>
@@ -2151,7 +2156,7 @@ background-color: rgb(255, 251, 239);</string>
         </sizepolicy>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="tab_3">
         <attribute name="title">
@@ -5662,7 +5667,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a name=&quot;cita&quot;&gt;&lt;/a&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;A&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;l ser fertilizado por los espermatozoides, el ovulo comienza a dividirse y forma una bola, que en los primeros dias puede llegar a tener mas de cien celulas.&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;A los cinco dias, las celulas empiezan a separarse en dos grupos. El grupo de celulas del aro exterior formara la placenta que acogera a tu bebe. Las celulas del aro interior se convertiran en el embrion en si mismo. Estas celulas interiores son las llamadas &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;celulas madre&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;, que tienen la extraordinaria capacidad de transformarse en mas de 200 clases de celulas de cualquier parte del cuerpo (por eso son tan interesantes para investigar tratamientos de determinadas enfermedades).&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Ya ha pasado mas de &lt;/span&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;una semana desde la concepcion&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;, aunque hasta que tengas la primera falta en la regla, no sabras nada sobre tu embarazo. Aunque, todo hay que decirlo, hay mamas que notan cambios hormonales enseguida. Sea como sea, estás embarazada.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Ya ha pasado mas de &lt;/span&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;una semana desde la concepcion&lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;, aunque hasta que tengas la primera falta en la regla, no sabras nada sobre tu embarazo. Aunque, todo hay que decirlo, hay mamas que notan cambios hormonales enseguida. Sea como sea, estas embarazada.&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Enhorabuena!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                       </property>
                      </widget>
@@ -12409,13 +12414,13 @@ background-color: rgb(255, 251, 239);</string>
                <height>82</height>
               </size>
              </property>
-             <property name="title">
-              <string>()</string>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Un combustible es cualquier sustancia que reacciona con el oxIgeno de forma violenta, con producción de calor, llamas y gases. Supone la liberacion de una energIa de su forma potencial a una forma utilizable (por ser una reaccion quimica, se conoce como energia quimica). En general se trata de algo susceptible de quemarse, aunque no siempre es asi.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
-             <layout class="QGridLayout" name="gridLayout_146">
-              <property name="sizeConstraint">
-               <enum>QLayout::SetMinAndMaxSize</enum>
-              </property>
+             <property name="title">
+              <string>Consumo de combustible</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_111">
               <property name="leftMargin">
                <number>0</number>
               </property>
@@ -12428,7 +12433,91 @@ background-color: rgb(255, 251, 239);</string>
               <property name="bottomMargin">
                <number>0</number>
               </property>
-              <item row="1" column="2">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_148">
+                <item row="0" column="0">
+                 <widget class="QComboBox" name="comboBox_53">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Litros por kilometro (l/km)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Litros por 10 kilometros (l/10 km)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Litros por 100 kilometros (l/100 km)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Kilometros por litro (km/l)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Millas por galon Americano (mpg)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Galones por 100 millas</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Millas por galon Britanico (mpg:1)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Millas por litro (mpl)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Galones por 100 millas</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLineEdit" name="lineEdit_159">
+                  <property name="font">
+                   <font>
+                    <pointsize>15</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_158">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>=</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
                <layout class="QGridLayout" name="gridLayout_147">
                 <item row="1" column="0">
                  <widget class="QLineEdit" name="lineEdit_158">
@@ -12456,13 +12545,6 @@ background-color: rgb(255, 251, 239);</string>
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="0">
-                 <widget class="QComboBox" name="comboBox_52">
-                  <property name="focusPolicy">
-                   <enum>Qt::NoFocus</enum>
-                  </property>
-                 </widget>
-                </item>
                 <item row="0" column="1" rowspan="2">
                  <widget class="QPushButton" name="pushButton_33">
                   <property name="icon">
@@ -12477,19 +12559,112 @@ background-color: rgb(255, 251, 239);</string>
                   </property>
                  </widget>
                 </item>
+                <item row="0" column="0">
+                 <widget class="QComboBox" name="comboBox_56">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Litros por kilometro (l/km)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Litros por 10 kilometros (l/10 km)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Litros por 100 kilometros (l/100 km)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Kilometros por litro (km/l)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Millas por galon Americano (mpg)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Galones por 100 millas</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Millas por galon Britanico (mpg:1)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Millas por litro (mpl)</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Galones por 100 millas</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
                </layout>
               </item>
-              <item row="1" column="0">
-               <layout class="QGridLayout" name="gridLayout_148">
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_45">
+        <attribute name="title">
+         <string>Conversores 5/10</string>
+        </attribute>
+        <layout class="QGridLayout" name="gridLayout_128">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_168">
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="groupBox_41">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>82</height>
+              </size>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;En las ciencias fisicas, la cantidad de sustancia, n, de una muestra se puede definir informalmente como el numero de alguna entidad elemental especifica (por lo general atomos, moleculas, o iones, o electrones) presentes en la muestra, pero cuando este numero se expresa en terminos de alguna cantidad estandar tamano.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="title">
+              <string>()</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_169">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_170">
                 <item row="0" column="0">
-                 <widget class="QComboBox" name="comboBox_53">
+                 <widget class="QComboBox" name="comboBox_68">
                   <property name="focusPolicy">
                    <enum>Qt::NoFocus</enum>
                   </property>
                  </widget>
                 </item>
                 <item row="1" column="0">
-                 <widget class="QLineEdit" name="lineEdit_159">
+                 <widget class="QLineEdit" name="lineEdit_174">
                   <property name="font">
                    <font>
                     <pointsize>15</pointsize>
@@ -12504,8 +12679,8 @@ background-color: rgb(255, 251, 239);</string>
                 </item>
                </layout>
               </item>
-              <item row="1" column="1">
-               <widget class="QLabel" name="label_158">
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_166">
                 <property name="font">
                  <font>
                   <pointsize>15</pointsize>
@@ -12517,6 +12692,671 @@ background-color: rgb(255, 251, 239);</string>
                  <string>=</string>
                 </property>
                </widget>
+              </item>
+              <item row="0" column="2">
+               <layout class="QGridLayout" name="gridLayout_171">
+                <item row="1" column="0">
+                 <widget class="QLineEdit" name="lineEdit_175">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1" rowspan="2">
+                 <widget class="QPushButton" name="pushButton_41">
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QComboBox" name="comboBox_69">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QGroupBox" name="groupBox_42">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>82</height>
+              </size>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;En el estudio de la electricidad, se denomina capacidad (a veces se denomina capacitancia, aunque esta palabra no esta registrada en el diccionario RAE, Real Academia Española), a la propiedad de un conductor de adquirir carga electrica cuando es sometido a un potencial electrico con respecto a otro en estado neutro. La capacidad queda definida numericamente por la carga que adquiere por cada unidad de potencial. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="title">
+              <string>()</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_123">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_172">
+                <item row="0" column="0">
+                 <widget class="QComboBox" name="comboBox_70">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLineEdit" name="lineEdit_176">
+                  <property name="font">
+                   <font>
+                    <pointsize>15</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_167">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>=</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <layout class="QGridLayout" name="gridLayout_173">
+                <item row="1" column="0">
+                 <widget class="QLineEdit" name="lineEdit_177">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1" rowspan="2">
+                 <widget class="QPushButton" name="pushButton_42">
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QComboBox" name="comboBox_71">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0">
+          <layout class="QGridLayout" name="gridLayout_174">
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="groupBox_43">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>82</height>
+              </size>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;La carga electrica es una propiedad intrinseca de algunas particulas sub-atomicas que se manifiesta mediante atracciones y repulsiones y que determina las interacciones electromagneticas entre ellas. La materia cargada electricamente es influida por los campos electromagneticos siendo, a su vez, generadora de ellos. La interaccion entre carga y campo electrico es la fuente de una de las cuatro fuerzas fundamentales, la fuerza electromagnetica.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="title">
+              <string>()</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_124">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_175">
+                <item row="0" column="0">
+                 <widget class="QComboBox" name="comboBox_72">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLineEdit" name="lineEdit_178">
+                  <property name="font">
+                   <font>
+                    <pointsize>15</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_168">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>=</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <layout class="QGridLayout" name="gridLayout_176">
+                <item row="1" column="0">
+                 <widget class="QLineEdit" name="lineEdit_179">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1" rowspan="2">
+                 <widget class="QPushButton" name="pushButton_43">
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QComboBox" name="comboBox_73">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QGroupBox" name="groupBox_44">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>82</height>
+              </size>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;En dinamica de fluidos, caudal es la cantidad de fluido que pasa por determinado elemento en la unidad de tiempo. Normalmente se identifica con el flujo volumetrico o volumen que pasa por un area dada en la unidad de tiempo. Menos frecuentemente, se identifica con el flujo masico o masa que pasa por un area dada en la unidad de tiempo.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="title">
+              <string>()</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_125">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_177">
+                <item row="0" column="0">
+                 <widget class="QComboBox" name="comboBox_74">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLineEdit" name="lineEdit_180">
+                  <property name="font">
+                   <font>
+                    <pointsize>15</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_169">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>=</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <layout class="QGridLayout" name="gridLayout_178">
+                <item row="1" column="0">
+                 <widget class="QLineEdit" name="lineEdit_181">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1" rowspan="2">
+                 <widget class="QPushButton" name="pushButton_44">
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QComboBox" name="comboBox_75">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="2" column="0">
+          <layout class="QGridLayout" name="gridLayout_179">
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="groupBox_45">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>82</height>
+              </size>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Se denomina Conductancia electrica (G) de un conductor a la inversa de la oposicion que dicho conductor presenta al movimiento de los electrones en su seno, esto es, a la inversa de su resistencia electrica (R)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="title">
+              <string>()</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_126">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_180">
+                <item row="1" column="0">
+                 <widget class="QLineEdit" name="lineEdit_182">
+                  <property name="font">
+                   <font>
+                    <pointsize>15</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QComboBox" name="comboBox_76">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="maxVisibleItems">
+                   <number>33</number>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_170">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>=</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <layout class="QGridLayout" name="gridLayout_181">
+                <item row="1" column="0">
+                 <widget class="QLineEdit" name="lineEdit_183">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1" rowspan="2">
+                 <widget class="QPushButton" name="pushButton_45">
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QComboBox" name="comboBox_77">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="maxVisibleItems">
+                   <number>33</number>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QGroupBox" name="groupBox_46">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>82</height>
+              </size>
+             </property>
+             <property name="whatsThis">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Un combustible es cualquier sustancia que reacciona con el oxIgeno de forma violenta, con producción de calor, llamas y gases. Supone la liberacion de una energIa de su forma potencial a una forma utilizable (por ser una reaccion quimica, se conoce como energia quimica). En general se trata de algo susceptible de quemarse, aunque no siempre es asi.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="title">
+              <string>()</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_127">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_182">
+                <item row="0" column="0">
+                 <widget class="QComboBox" name="comboBox_78">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLineEdit" name="lineEdit_184">
+                  <property name="font">
+                   <font>
+                    <pointsize>15</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_171">
+                <property name="font">
+                 <font>
+                  <pointsize>15</pointsize>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>=</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <layout class="QGridLayout" name="gridLayout_183">
+                <item row="1" column="0">
+                 <widget class="QLineEdit" name="lineEdit_185">
+                  <property name="enabled">
+                   <bool>true</bool>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                  </property>
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1" rowspan="2">
+                 <widget class="QPushButton" name="pushButton_46">
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QComboBox" name="comboBox_79">
+                  <property name="focusPolicy">
+                   <enum>Qt::NoFocus</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </widget>
