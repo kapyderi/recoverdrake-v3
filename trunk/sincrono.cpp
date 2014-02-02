@@ -115,12 +115,13 @@ void sincrono::changeEvent(QEvent *e)
     }
 }
 
-void sincrono::Valor(QString Ref, QString Valor1, QString Valor2, QString Valor3, QString Valor4, QString Valor5, QString Valor6, int Value, QString Log)
+void sincrono::Valor(QString Ref, QString Valor1, QString Valor2, QString Valor3, QString Valor4, QString Valor5, QString Valor6, int Value, QString Log, QString Pos)
 {      
     Referencia = Ref;
     ui->lineEdit_3->setText(Referencia);
     ui->lineEdit->setText(Valor1);
     ui->lineEdit_2->setText(Valor2);
+    ui->lineEdit_4->setText(Pos);
     if (Valor3 == "Si")
     {
         ui->checkBox->setChecked(true);
@@ -1563,8 +1564,11 @@ void sincrono::on_pushButton_10_clicked()
 {
     QString Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Final;
     QSqlQuery Compara(db);
-    Compara.exec("SELECT Referencia FROM Sincrono WHERE Objetivo='"+ui->lineEdit->text()+"' AND Destino='"+ui->lineEdit_2->text()+"'");
+    Compara.exec("SELECT Referencia FROM Sincrono WHERE Id='"+ui->lineEdit_4->text()+"'"); // AND Destino='"+ui->lineEdit_2->text()+"'");
     Compara.first();
+// COMPROBAR ESTO
+
+
     Referencia = Compara.value(0).toString();
     if (Referencia == "")
     {

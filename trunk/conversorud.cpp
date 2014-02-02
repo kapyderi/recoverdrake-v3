@@ -122,6 +122,8 @@ ConversorUD::ConversorUD(QWidget *parent) :
     ui->comboBox_45->setCurrentIndex(ui->comboBox_45->findText(tr("Metros cubicos por segundo (m³/s)")));
     ui->comboBox_54->setCurrentIndex(ui->comboBox_54->findText(tr("Siemens (S)")));
     ui->comboBox_55->setCurrentIndex(ui->comboBox_55->findText(tr("Siemens (S)")));
+    ui->comboBox_53->setCurrentIndex(ui->comboBox_53->findText(tr("Litros por 100 kilometros (l/100 km)")));
+    ui->comboBox_56->setCurrentIndex(ui->comboBox_56->findText(tr("Litros por 100 kilometros (l/100 km)")));
     Decimales = 20;
     ui->comboBox->insertSeparator(11);
     ui->comboBox->insertSeparator(25);
@@ -159,6 +161,10 @@ ConversorUD::ConversorUD(QWidget *parent) :
     ui->comboBox_45->insertSeparator(58);
     ui->comboBox_54->insertSeparator(7);
     ui->comboBox_55->insertSeparator(7);
+    ui->comboBox_53->insertSeparator(4);
+    ui->comboBox_56->insertSeparator(4);
+    ui->comboBox_53->insertSeparator(7);
+    ui->comboBox_56->insertSeparator(7);
     ui->comboBox_3->setCurrentIndex(ui->comboBox_3->findText(QString::number(Decimales)));
     connect(ui->radioButton,SIGNAL(clicked()),this,SLOT(Comprobar()));
     connect(ui->radioButton_2,SIGNAL(clicked()),this,SLOT(Comprobar()));
@@ -213,6 +219,7 @@ ConversorUD::ConversorUD(QWidget *parent) :
     ui->lineEdit_152->installEventFilter(this);
     ui->lineEdit_150->installEventFilter(this);
     ui->lineEdit_160->installEventFilter(this);
+    ui->lineEdit_159->installEventFilter(this);
     this->installEventFilter(this);
     QFuture<void> f1 = QtConcurrent::run(this, &ConversorUD::Divisa);
 }
@@ -811,6 +818,16 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
         {
             ui->lineEdit_160->setFocus();
             ui->lineEdit_160->selectAll();
+            return true;
+        }
+        return false;
+    }
+    if (obj == ui->lineEdit_159)
+    {
+        if (event->type() == QEvent::MouseButtonPress)
+        {
+            ui->lineEdit_159->setFocus();
+            ui->lineEdit_159->selectAll();
             return true;
         }
         return false;
@@ -8564,6 +8581,211 @@ void ConversorUD::on_comboBox_47_activated(const QString &arg1)
     Reprobar("Carga");
 }
 
+void ConversorUD::on_pushButton_29_clicked()
+{
+    ui->lineEdit_150->setText("");
+    ui->lineEdit_150->setFocus();
+    ui->lineEdit_151->setText("");
+    ui->lineEdit_151->setToolTip("");
+    ui->label_14->setText("");
+    ui->label_15->setText("");
+    ui->textEdit->setText("");
+    ui->textEdit_2->setText("");
+}
+
+void ConversorUD::on_lineEdit_150_returnPressed()
+{
+    ui->lineEdit_150->setFocus();
+    ui->lineEdit_150->selectAll();
+}
+
+void ConversorUD::on_lineEdit_150_textChanged(const QString &arg1)
+{
+    if (arg1 != "")
+    {
+        QString Valor = VerNum(arg1,1);
+        if (Valor == "No")
+            {
+            if (ui->lineEdit_150->text() == "")
+            {
+                ui->lineEdit_151->setText("");
+                ui->lineEdit_151->setToolTip("");
+            }
+            else
+            {
+                QString Valor = ui->comboBox_44->currentText();
+                double Cantidad = arg1.toDouble();
+                double Resto = Referencia(Valor,"Caudal");
+                QString Valor1 = ui->comboBox_45->currentText();
+                double Resto1 = Referencia(Valor1,"Caudal");
+                if (Valor == Valor1)
+                {
+                    double ValorF = Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_151->setText(Zero);
+                    ui->lineEdit_151->setToolTip(Zero);
+                }
+                else
+                {
+                    double ValorF = (Resto1/Resto)*Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_151->setText(Zero);
+                    ui->lineEdit_151->setToolTip(Zero);
+                }
+            }
+            Reprobar("Caudal");
+        }
+        else
+        {
+            QMessageBox m;
+            m.setWindowTitle(tr("Advertencia!!!"));
+            m.setText(tr("Has introducido un caracter no valido."));
+            m.exec();
+            ui->lineEdit_150->setFocus();
+            QString Resto = ui->lineEdit_150->text();
+            Resto.chop(1);
+            ui->lineEdit_150->setText(Resto);
+            return;
+        }
+    }
+}
+
+void ConversorUD::on_comboBox_44_activated(const QString &arg1)
+{
+    if (ui->lineEdit_150->text() == "")
+    {
+        ui->lineEdit_151->setText("");
+        ui->lineEdit_151->setToolTip("");
+    }
+    else
+    {
+        QString Valor = arg1;
+        double Cantidad = ui->lineEdit_150->text().toFloat();
+        double Resto = Referencia(Valor,"Caudal");
+        QString Valor1 = ui->comboBox_45->currentText();
+        double Resto1 = Referencia(Valor1,"Caudal");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_151->setText(Zero);
+            ui->lineEdit_151->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_151->setText(Zero);
+            ui->lineEdit_151->setToolTip(Zero);
+        }
+    }
+    Reprobar("Caudal");
+}
+
+void ConversorUD::on_comboBox_45_activated(const QString &arg1)
+{
+    if (ui->lineEdit_150->text() == "")
+    {
+        ui->lineEdit_151->setText("");
+        ui->lineEdit_151->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_44->currentText();
+        double Cantidad = ui->lineEdit_150->text().toFloat();
+        double Resto = Referencia(Valor,"Caudal");
+        QString Valor1 = arg1;
+        double Resto1 = Referencia(Valor1,"Caudal");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_151->setText(Zero);
+            ui->lineEdit_151->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_151->setText(Zero);
+            ui->lineEdit_151->setToolTip(Zero);
+        }
+    }
+    Reprobar("Caudal");
+}
+
 void ConversorUD::on_pushButton_2_clicked()
 {
     ui->lineEdit->setText("");
@@ -8774,6 +8996,9 @@ void ConversorUD::on_pushButton_2_clicked()
     ui->lineEdit_160->setText("");
     ui->lineEdit_161->setText("");
     ui->lineEdit_161->setToolTip("");
+    ui->lineEdit_159->setText("");
+    ui->lineEdit_158->setText("");
+    ui->lineEdit_158->setToolTip("");
     int Borrado, x;
     Borrado = ui->tableWidget->rowCount();
     for(x=0;x<Borrado;x++)
@@ -8782,6 +9007,32 @@ void ConversorUD::on_pushButton_2_clicked()
          x=x-1;
          Borrado=Borrado-1;
     }
+    ui->comboBox_11->setCurrentIndex(ui->comboBox_11->findText(tr("Ano")));
+    ui->comboBox_12->setCurrentIndex(ui->comboBox_12->findText(tr("Ano")));
+    ui->comboBox->setCurrentIndex(ui->comboBox->findText(tr("Metro (m)")));
+    ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText(tr("Centimetro (cm)")));
+    ui->comboBox_26->setCurrentIndex(ui->comboBox_26->findText(tr("Gal")));
+    ui->comboBox_27->setCurrentIndex(ui->comboBox_27->findText(tr("Fuerza G (g)")));
+    ui->comboBox_19->setCurrentIndex(ui->comboBox_19->findText(tr("Byte (B)")));
+    ui->comboBox_20->setCurrentIndex(ui->comboBox_20->findText(tr("Kilobyte (KB)")));
+    ui->comboBox_24->setCurrentIndex(ui->comboBox_24->findText(tr("Gigabyte por segundo (GB/s)")));
+    ui->comboBox_30->setCurrentIndex(ui->comboBox_30->findText(tr("Kilobyte por segundo (kB/s)")));
+    ui->comboBox_21->setCurrentIndex(ui->comboBox_21->findText(tr("Circulo")));
+    ui->comboBox_22->setCurrentIndex(ui->comboBox_22->findText(tr("Giro")));
+    ui->comboBox_4->setCurrentIndex(ui->comboBox_4->findText(tr("Metro cuadrado (m²)")));
+    ui->comboBox_6->setCurrentIndex(ui->comboBox_6->findText(tr("Metro cuadrado (m²)")));
+    ui->comboBox_17->setCurrentIndex(ui->comboBox_17->findText(tr("Lumen hora (lm·h)")));
+    ui->comboBox_31->setCurrentIndex(ui->comboBox_31->findText(tr("Lumen hora (lm·h)")));
+    ui->comboBox_50->setCurrentIndex(ui->comboBox_50->findText(tr("Mol (mol)")));
+    ui->comboBox_51->setCurrentIndex(ui->comboBox_51->findText(tr("Mol (mol)")));
+    ui->comboBox_46->setCurrentIndex(ui->comboBox_46->findText(tr("Culombios (C)")));
+    ui->comboBox_47->setCurrentIndex(ui->comboBox_47->findText(tr("Culombios (C)")));
+    ui->comboBox_44->setCurrentIndex(ui->comboBox_44->findText(tr("Metros cubicos por segundo (m³/s)")));
+    ui->comboBox_45->setCurrentIndex(ui->comboBox_45->findText(tr("Metros cubicos por segundo (m³/s)")));
+    ui->comboBox_54->setCurrentIndex(ui->comboBox_54->findText(tr("Siemens (S)")));
+    ui->comboBox_55->setCurrentIndex(ui->comboBox_55->findText(tr("Siemens (S)")));
+    ui->comboBox_53->setCurrentIndex(ui->comboBox_53->findText(tr("Litros por 100 kilometros (l/100 km)")));
+    ui->comboBox_56->setCurrentIndex(ui->comboBox_56->findText(tr("Litros por 100 kilometros (l/100 km)")));
 }
 
 void ConversorUD::on_comboBox_3_activated(const QString &arg1)
@@ -9450,6 +9701,57 @@ void ConversorUD::on_comboBox_3_activated(const QString &arg1)
             ui->lineEdit_161->setToolTip(Zero);
         }
     }
+    if (ui->lineEdit_159->text() == "")
+    {
+        ui->lineEdit_158->setText("");
+        ui->lineEdit_158->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_53->currentText();
+        double Cantidad = ui->lineEdit_159->text().toFloat();
+        double Resto = Referencia(Valor,"Combustible");
+        QString Valor1 = ui->comboBox_56->currentText();
+        double Resto1 = Referencia(Valor1,"Combustible");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_158->setText(Zero);
+            ui->lineEdit_158->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_158->setText(Zero);
+            ui->lineEdit_158->setToolTip(Zero);
+        }
+    }
     if (ui->label_14->text().contains(tr("Distancia o Longitud")))
         Reprobar("Longitud");
     if (ui->label_14->text().contains(tr("Aceleracion")))
@@ -9476,6 +9778,8 @@ void ConversorUD::on_comboBox_3_activated(const QString &arg1)
         Reprobar("Caudal");
     if (ui->label_14->text().contains(tr("Conductancia electrica")))
         Reprobar("Conductancia");
+    if (ui->label_14->text().contains(tr("Consumo de combustible")))
+        Reprobar("Combustible");
 }
 
 void ConversorUD::on_comboBox_25_activated(const QString &arg1)
@@ -9558,6 +9862,11 @@ void ConversorUD::on_comboBox_25_activated(const QString &arg1)
         ui->tabWidget->setCurrentPage(3);
         ui->lineEdit_160->setFocus();
     }
+    if (arg1 == tr("Consumo de combustible"))
+    {
+        ui->tabWidget->setCurrentPage(3);
+        ui->lineEdit_159->setFocus();
+    }
 }
 
 void ConversorUD::Reprobar(QString Tipo)
@@ -9569,658 +9878,698 @@ void ConversorUD::Reprobar(QString Tipo)
     if (Tipo == "Longitud")
     {
         QString Value = ui->comboBox->currentText();
-        double Cantidad = ui->lineEdit->text().toFloat();
+        QString Valor = ui->lineEdit->text();
+        double Cantidad = ui->lineEdit->text().toDouble();
         double Resto = Referencia(Value,"Longitud");
-        Unidad(Resto,0.0000000001,Cantidad,tr("Angstrom (Å)"),"Longitud");
-        Unidad1(Resto,0.0000000001,Cantidad,tr("Angstrom (Å)"),"Longitud");
-        Unidad(Resto,0.000000001,Cantidad,tr("Nanometro (nm)"),"Longitud");
-        Unidad1(Resto,0.000000001,Cantidad,tr("Nanometro (nm)"),"Longitud");
-        Unidad(Resto,0.000001,Cantidad,tr("Micrometro (µm)"),"Longitud");
-        Unidad1(Resto,0.00001,Cantidad,tr("Micrometro (µm)"),"Longitud");
-        Unidad(Resto,0.001,Cantidad,tr("Milimetro (mm)"),"Longitud");
-        Unidad1(Resto,0.001,Cantidad,tr("Milimetro (mm)"),"Longitud");
-        Unidad(Resto,0.01,Cantidad,tr("Centimetro (cm)"),"Longitud");
-        Unidad1(Resto,0.01,Cantidad,tr("Centimetro (cm)"),"Longitud");
-        Unidad(Resto,0.1,Cantidad,tr("Decimetro (dm)"),"Longitud");
-        Unidad1(Resto,0.1,Cantidad,tr("Decimetro (dm)"),"Longitud");
-        Unidad(Resto,1,Cantidad,tr("Metro (m)"),"Longitud");
-        Unidad1(Resto,1,Cantidad,tr("Metro (m)"),"Longitud");
-        Unidad(Resto,10,Cantidad,tr("Decametro (dam)"),"Longitud");
-        Unidad1(Resto,10,Cantidad,tr("Decametro (dam)"),"Longitud");
-        Unidad(Resto,100,Cantidad,tr("Hectometro (hm)"),"Longitud");
-        Unidad1(Resto,100,Cantidad,tr("Hectometro (hm)"),"Longitud");
-        Unidad(Resto,1000,Cantidad,tr("Kilometro (km)"),"Longitud");
-        Unidad1(Resto,1000,Cantidad,tr("Kilometro (km)"),"Longitud");
-        Unidad(Resto,10000,Cantidad,tr("Miriametro (mam)"),"Longitud");
-        Unidad1(Resto,10000,Cantidad,tr("Miriametro (mam)"),"Longitud");
-        Unidad(Resto,4828.0320,Cantidad,tr("Legua"),"Longitud");
-        Unidad1(Resto,0.001,Cantidad,tr("Legua"),"Longitud");
-        Unidad(Resto,1609.344,Cantidad,tr("Milla (mi)"),"Longitud");
-        Unidad1(Resto,1609.344,Cantidad,tr("Milla (mi)"),"Longitud");
-        Unidad(Resto,201.168,Cantidad,tr("Estadio"),"Longitud");
-        Unidad1(Resto,201.168,Cantidad,tr("Estadio"),"Longitud");
-        Unidad(Resto,20.1168,Cantidad,tr("Cadena"),"Longitud");
-        Unidad1(Resto,20.1168,Cantidad,tr("Cadena"),"Longitud");
-        Unidad(Resto,5.0292,Cantidad,tr("Barra (rd)"),"Longitud");
-        Unidad1(Resto,5.0292,Cantidad,tr("Barra (rd)"),"Longitud");
-        Unidad(Resto,0.9144,Cantidad,tr("Yarda (yd)"),"Longitud");
-        Unidad1(Resto,0.9144,Cantidad,tr("Yarda (yd)"),"Longitud");
-        Unidad(Resto,0.3048,Cantidad,tr("Pie (ft)"),"Longitud");
-        Unidad1(Resto,0.3048,Cantidad,tr("Pie (ft)"),"Longitud");
-        Unidad(Resto,0.201168,Cantidad,tr("Link"),"Longitud");
-        Unidad1(Resto,0.201168,Cantidad,tr("Link"),"Longitud");
-        Unidad(Resto,0.1016,Cantidad,tr("Mano"),"Longitud");
-        Unidad1(Resto,0.1016,Cantidad,tr("Mano"),"Longitud");
-        Unidad(Resto,0.0254,Cantidad,tr("Pulgada (in)"),"Longitud");
-        Unidad1(Resto,0.0254,Cantidad,tr("Pulgada (in)"),"Longitud");
-        Unidad(Resto,0.00254,Cantidad,tr("Linea"),"Longitud");
-        Unidad1(Resto,0.00254,Cantidad,tr("Linea"),"Longitud");
-        Unidad(Resto,0.0000254,Cantidad,tr("Mil (mil)"),"Longitud");
-        Unidad1(Resto,0.0000254,Cantidad,tr("Mil (mil)"),"Longitud");
-        Unidad(Resto,0.0000254,Cantidad,tr("Thou (thou)"),"Longitud");
-        Unidad1(Resto,0.0000254,Cantidad,tr("Thou (thou)"),"Longitud");
-        Unidad(Resto,1852,Cantidad,tr("Milla nautica"),"Longitud");
-        Unidad1(Resto,1852,Cantidad,tr("Milla nautica"),"Longitud");
-        Unidad(Resto,1.8288,Cantidad,tr("Braza"),"Longitud");
-        Unidad1(Resto,1.8288,Cantidad,tr("Braza"),"Longitud");
-        Unidad(Resto,30857000000000000,Cantidad,tr("Parsec (pc)"),"Longitud");
-        Unidad1(Resto,30857000000000000,Cantidad,tr("Parsec (pc)"),"Longitud");
-        Unidad(Resto,9454254955488000,Cantidad,tr("Ano luz"),"Longitud");
-        Unidad1(Resto,9454254955488000,Cantidad,tr("Ano luz"),"Longitud");
-        Unidad(Resto,147597870610,Cantidad,tr("Unidad astronomica (AE)"),"Longitud");
-        Unidad1(Resto,147597870610,Cantidad,tr("Unidad astronomica (AE)"),"Longitud");
-        Unidad(Resto,17987547480,Cantidad,tr("Minuto luz"),"Longitud");
-        Unidad1(Resto,17987547480,Cantidad,tr("Minuto luz"),"Longitud");
-        Unidad(Resto,299792458,Cantidad,tr("Segundo luz"),"Longitud");
-        Unidad1(Resto,299792458,Cantidad,tr("Segundo luz"),"Longitud");
+        Unidad(Resto,0.0000000001,Cantidad,tr("Angstrom (Å)"),"Longitud",Valor);
+        Unidad1(Resto,0.0000000001,Cantidad,tr("Angstrom (Å)"),"Longitud",Valor);
+        Unidad(Resto,0.000000001,Cantidad,tr("Nanometro (nm)"),"Longitud",Valor);
+        Unidad1(Resto,0.000000001,Cantidad,tr("Nanometro (nm)"),"Longitud",Valor);
+        Unidad(Resto,0.000001,Cantidad,tr("Micrometro (µm)"),"Longitud",Valor);
+        Unidad1(Resto,0.00001,Cantidad,tr("Micrometro (µm)"),"Longitud",Valor);
+        Unidad(Resto,0.001,Cantidad,tr("Milimetro (mm)"),"Longitud",Valor);
+        Unidad1(Resto,0.001,Cantidad,tr("Milimetro (mm)"),"Longitud",Valor);
+        Unidad(Resto,0.01,Cantidad,tr("Centimetro (cm)"),"Longitud",Valor);
+        Unidad1(Resto,0.01,Cantidad,tr("Centimetro (cm)"),"Longitud",Valor);
+        Unidad(Resto,0.1,Cantidad,tr("Decimetro (dm)"),"Longitud",Valor);
+        Unidad1(Resto,0.1,Cantidad,tr("Decimetro (dm)"),"Longitud",Valor);
+        Unidad(Resto,1,Cantidad,tr("Metro (m)"),"Longitud",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Metro (m)"),"Longitud",Valor);
+        Unidad(Resto,10,Cantidad,tr("Decametro (dam)"),"Longitud",Valor);
+        Unidad1(Resto,10,Cantidad,tr("Decametro (dam)"),"Longitud",Valor);
+        Unidad(Resto,100,Cantidad,tr("Hectometro (hm)"),"Longitud",Valor);
+        Unidad1(Resto,100,Cantidad,tr("Hectometro (hm)"),"Longitud",Valor);
+        Unidad(Resto,1000,Cantidad,tr("Kilometro (km)"),"Longitud",Valor);
+        Unidad1(Resto,1000,Cantidad,tr("Kilometro (km)"),"Longitud",Valor);
+        Unidad(Resto,10000,Cantidad,tr("Miriametro (mam)"),"Longitud",Valor);
+        Unidad1(Resto,10000,Cantidad,tr("Miriametro (mam)"),"Longitud",Valor);
+        Unidad(Resto,4828.0320,Cantidad,tr("Legua"),"Longitud",Valor);
+        Unidad1(Resto,0.001,Cantidad,tr("Legua"),"Longitud",Valor);
+        Unidad(Resto,1609.344,Cantidad,tr("Milla (mi)"),"Longitud",Valor);
+        Unidad1(Resto,1609.344,Cantidad,tr("Milla (mi)"),"Longitud",Valor);
+        Unidad(Resto,201.168,Cantidad,tr("Estadio"),"Longitud",Valor);
+        Unidad1(Resto,201.168,Cantidad,tr("Estadio"),"Longitud",Valor);
+        Unidad(Resto,20.1168,Cantidad,tr("Cadena"),"Longitud",Valor);
+        Unidad1(Resto,20.1168,Cantidad,tr("Cadena"),"Longitud",Valor);
+        Unidad(Resto,5.0292,Cantidad,tr("Barra (rd)"),"Longitud",Valor);
+        Unidad1(Resto,5.0292,Cantidad,tr("Barra (rd)"),"Longitud",Valor);
+        Unidad(Resto,0.9144,Cantidad,tr("Yarda (yd)"),"Longitud",Valor);
+        Unidad1(Resto,0.9144,Cantidad,tr("Yarda (yd)"),"Longitud",Valor);
+        Unidad(Resto,0.3048,Cantidad,tr("Pie (ft)"),"Longitud",Valor);
+        Unidad1(Resto,0.3048,Cantidad,tr("Pie (ft)"),"Longitud",Valor);
+        Unidad(Resto,0.201168,Cantidad,tr("Link"),"Longitud",Valor);
+        Unidad1(Resto,0.201168,Cantidad,tr("Link"),"Longitud",Valor);
+        Unidad(Resto,0.1016,Cantidad,tr("Mano"),"Longitud",Valor);
+        Unidad1(Resto,0.1016,Cantidad,tr("Mano"),"Longitud",Valor);
+        Unidad(Resto,0.0254,Cantidad,tr("Pulgada (in)"),"Longitud",Valor);
+        Unidad1(Resto,0.0254,Cantidad,tr("Pulgada (in)"),"Longitud",Valor);
+        Unidad(Resto,0.00254,Cantidad,tr("Linea"),"Longitud",Valor);
+        Unidad1(Resto,0.00254,Cantidad,tr("Linea"),"Longitud",Valor);
+        Unidad(Resto,0.0000254,Cantidad,tr("Mil (mil)"),"Longitud",Valor);
+        Unidad1(Resto,0.0000254,Cantidad,tr("Mil (mil)"),"Longitud",Valor);
+        Unidad(Resto,0.0000254,Cantidad,tr("Thou (thou)"),"Longitud",Valor);
+        Unidad1(Resto,0.0000254,Cantidad,tr("Thou (thou)"),"Longitud",Valor);
+        Unidad(Resto,1852,Cantidad,tr("Milla nautica"),"Longitud",Valor);
+        Unidad1(Resto,1852,Cantidad,tr("Milla nautica"),"Longitud",Valor);
+        Unidad(Resto,1.8288,Cantidad,tr("Braza"),"Longitud",Valor);
+        Unidad1(Resto,1.8288,Cantidad,tr("Braza"),"Longitud",Valor);
+        Unidad(Resto,30857000000000000,Cantidad,tr("Parsec (pc)"),"Longitud",Valor);
+        Unidad1(Resto,30857000000000000,Cantidad,tr("Parsec (pc)"),"Longitud",Valor);
+        Unidad(Resto,9454254955488000,Cantidad,tr("Ano luz"),"Longitud",Valor);
+        Unidad1(Resto,9454254955488000,Cantidad,tr("Ano luz"),"Longitud",Valor);
+        Unidad(Resto,147597870610,Cantidad,tr("Unidad astronomica (AE)"),"Longitud",Valor);
+        Unidad1(Resto,147597870610,Cantidad,tr("Unidad astronomica (AE)"),"Longitud",Valor);
+        Unidad(Resto,17987547480,Cantidad,tr("Minuto luz"),"Longitud",Valor);
+        Unidad1(Resto,17987547480,Cantidad,tr("Minuto luz"),"Longitud",Valor);
+        Unidad(Resto,299792458,Cantidad,tr("Segundo luz"),"Longitud",Valor);
+        Unidad1(Resto,299792458,Cantidad,tr("Segundo luz"),"Longitud",Valor);
         ui->label_14->setText(tr("Distancia o Longitud: Convertir a...")+ui->comboBox->currentText()+"");
         ui->label_15->setText(tr("Distancia o Longitud: Convertir de...")+ui->comboBox->currentText()+"");
     }
     if (Tipo == "Aceleracion")
     {
         QString Value = ui->comboBox_26->currentText();
-        double Cantidad = ui->lineEdit_47->text().toFloat();
+        QString Valor = ui->lineEdit_47->text();
+        double Cantidad = ui->lineEdit_47->text().toDouble();
         double Resto = Referencia(Value,"Aceleracion");
-        Unidad(Resto,0.01,Cantidad,tr("Metros por segundo cuadrado (m/s²)"),"Aceleracion");
-        Unidad1(Resto,0.01,Cantidad,tr("Metros por segundo cuadrado (m/s²)"),"Aceleracion");
-        Unidad(Resto,0.0328083333,Cantidad,tr("Pies por segundo cuadrado (ft/s²)"),"Aceleracion");
-        Unidad1(Resto,0.0328083333,Cantidad,tr("Pies por segundo cuadrado (ft/s²)"),"Aceleracion");
-        Unidad(Resto,1,Cantidad,tr("Gal"),"Aceleracion");
-        Unidad1(Resto,1,Cantidad,tr("Gal"),"Aceleracion");
-        Unidad(Resto,1000,Cantidad,tr("Miligal"),"Aceleracion");
-        Unidad1(Resto,1000,Cantidad,tr("Miligal"),"Aceleracion");
-        Unidad(Resto,0.0010197162,Cantidad,tr("Gravedad estandar"),"Aceleracion");
-        Unidad1(Resto,0.0010197162,Cantidad,tr("Gravedad estandar"),"Aceleracion");
-        Unidad(Resto,0.0010197162,Cantidad,tr("Almacenamiento (g)"),"Aceleracion");
-        Unidad1(Resto,0.0010197162,Cantidad,tr("Fuerza G (g)"),"Aceleracion");
+        Unidad(Resto,0.01,Cantidad,tr("Metros por segundo cuadrado (m/s²)"),"Aceleracion",Valor);
+        Unidad1(Resto,0.01,Cantidad,tr("Metros por segundo cuadrado (m/s²)"),"Aceleracion",Valor);
+        Unidad(Resto,0.0328083333,Cantidad,tr("Pies por segundo cuadrado (ft/s²)"),"Aceleracion",Valor);
+        Unidad1(Resto,0.0328083333,Cantidad,tr("Pies por segundo cuadrado (ft/s²)"),"Aceleracion",Valor);
+        Unidad(Resto,1,Cantidad,tr("Gal"),"Aceleracion",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Gal"),"Aceleracion",Valor);
+        Unidad(Resto,1000,Cantidad,tr("Miligal"),"Aceleracion",Valor);
+        Unidad1(Resto,1000,Cantidad,tr("Miligal"),"Aceleracion",Valor);
+        Unidad(Resto,0.0010197162,Cantidad,tr("Gravedad estandar"),"Aceleracion",Valor);
+        Unidad1(Resto,0.0010197162,Cantidad,tr("Gravedad estandar"),"Aceleracion",Valor);
+        Unidad(Resto,0.0010197162,Cantidad,tr("Almacenamiento (g)"),"Aceleracion",Valor);
+        Unidad1(Resto,0.0010197162,Cantidad,tr("Fuerza G (g)"),"Aceleracion",Valor);
         ui->label_14->setText(tr("Aceleracion: Convertir a...")+ui->comboBox_26->currentText()+"");
         ui->label_15->setText(tr("Aceleracion: Convertir de...")+ui->comboBox_26->currentText()+"");
     }
     if (Tipo == "Almacenamiento")
     {
         QString Value = ui->comboBox_19->currentText();
-        double Cantidad = ui->lineEdit_40->text().toFloat();
+        QString Valor = ui->lineEdit_40->text();
+        double Cantidad = ui->lineEdit_40->text().toDouble();
         double Resto = Referencia(Value,"Almacenamiento");
-        Unidad(Resto,8,Cantidad,tr("Bit"),"Almacenamiento");
-        Unidad1(Resto,8,Cantidad,tr("Bit"),"Almacenamiento");
-        Unidad(Resto,2,Cantidad,tr("Nibble"),"Almacenamiento");
-        Unidad1(Resto,2,Cantidad,tr("Nibble"),"Almacenamiento");
-        Unidad(Resto,0.0078125,Cantidad,tr("Kilobit"),"Almacenamiento");
-        Unidad1(Resto,0.0078125,Cantidad,tr("Kilobit"),"Almacenamiento");
-        Unidad(Resto,0.0000076294,Cantidad,tr("Megabit"),"Almacenamiento");
-        Unidad1(Resto,0.0000076294,Cantidad,tr("Megabit"),"Almacenamiento");
-        Unidad(Resto,0.00000000074505805969,Cantidad,tr("Gigabit"),"Almacenamiento");
-        Unidad1(Resto,0.00000000074505805969,Cantidad,tr("Gigabit"),"Almacenamiento");
-        Unidad(Resto,0.00000000000072759580612,Cantidad,tr("Terabit"),"Almacenamiento");
-        Unidad1(Resto,0.00000000000072759580612,Cantidad,tr("Terabit"),"Almacenamiento");
-        Unidad(Resto,0.0000000000000007105427742,Cantidad,tr("Petabit"),"Almacenamiento");
-        Unidad1(Resto,0.0000000000000007105427742,Cantidad,tr("Petabit"),"Almacenamiento");
-        Unidad(Resto,0.000000000000000000769388942719,Cantidad,tr("Exabit"),"Almacenamiento");
-        Unidad1(Resto,0.000000000000000000769388942719,Cantidad,tr("Exabit"),"Almacenamiento");
-        Unidad(Resto,1,Cantidad,tr("Byte (B)"),"Almacenamiento");
-        Unidad1(Resto,1,Cantidad,tr("Byte (B)"),"Almacenamiento");
-        Unidad(Resto,0.0009765625,Cantidad,tr("Kilobyte (KB)"),"Almacenamiento");
-        Unidad1(Resto,0.0009765625,Cantidad,tr("Kilobyte (KB)"),"Almacenamiento");
-        Unidad(Resto,0.000000095367431641,Cantidad,tr("Megabyte (MB)"),"Almacenamiento");
-        Unidad1(Resto,0.000000095367431641,Cantidad,tr("Megabyte (MB)"),"Almacenamiento");
-        Unidad(Resto,0.000000000093132257462,Cantidad,tr("Gigabyte (GB)"),"Almacenamiento");
-        Unidad1(Resto,0.000000000093132257462,Cantidad,tr("Gigabyte (GB)"),"Almacenamiento");
-        Unidad(Resto,0.000000000000090949478149,Cantidad,tr("Terabyte (TB)"),"Almacenamiento");
-        Unidad1(Resto,0.000000000000090949478149,Cantidad,tr("Terabyte (TB)"),"Almacenamiento");
-        Unidad(Resto,0.000000000000000088817853928,Cantidad,tr("Petabyte (PB)"),"Almacenamiento");
-        Unidad1(Resto,0.000000000000000088817853928,Cantidad,tr("Petabyte (PB)"),"Almacenamiento");
-        Unidad(Resto,0.000000000000000000086736183167,Cantidad,tr("Exabyte (EB)"),"Almacenamiento");
-        Unidad1(Resto,0.000000000000000000086736183167,Cantidad,tr("Exabyte (EB)"),"Almacenamiento");
+        Unidad(Resto,8,Cantidad,tr("Bit"),"Almacenamiento",Valor);
+        Unidad1(Resto,8,Cantidad,tr("Bit"),"Almacenamiento",Valor);
+        Unidad(Resto,2,Cantidad,tr("Nibble"),"Almacenamiento",Valor);
+        Unidad1(Resto,2,Cantidad,tr("Nibble"),"Almacenamiento",Valor);
+        Unidad(Resto,0.0078125,Cantidad,tr("Kilobit"),"Almacenamiento",Valor);
+        Unidad1(Resto,0.0078125,Cantidad,tr("Kilobit"),"Almacenamiento",Valor);
+        Unidad(Resto,0.0000076294,Cantidad,tr("Megabit"),"Almacenamiento",Valor);
+        Unidad1(Resto,0.0000076294,Cantidad,tr("Megabit"),"Almacenamiento",Valor);
+        Unidad(Resto,0.00000000074505805969,Cantidad,tr("Gigabit"),"Almacenamiento",Valor);
+        Unidad1(Resto,0.00000000074505805969,Cantidad,tr("Gigabit"),"Almacenamiento",Valor);
+        Unidad(Resto,0.00000000000072759580612,Cantidad,tr("Terabit"),"Almacenamiento",Valor);
+        Unidad1(Resto,0.00000000000072759580612,Cantidad,tr("Terabit"),"Almacenamiento",Valor);
+        Unidad(Resto,0.0000000000000007105427742,Cantidad,tr("Petabit"),"Almacenamiento",Valor);
+        Unidad1(Resto,0.0000000000000007105427742,Cantidad,tr("Petabit"),"Almacenamiento",Valor);
+        Unidad(Resto,0.000000000000000000769388942719,Cantidad,tr("Exabit"),"Almacenamiento",Valor);
+        Unidad1(Resto,0.000000000000000000769388942719,Cantidad,tr("Exabit"),"Almacenamiento",Valor);
+        Unidad(Resto,1,Cantidad,tr("Byte (B)"),"Almacenamiento",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Byte (B)"),"Almacenamiento",Valor);
+        Unidad(Resto,0.0009765625,Cantidad,tr("Kilobyte (KB)"),"Almacenamiento",Valor);
+        Unidad1(Resto,0.0009765625,Cantidad,tr("Kilobyte (KB)"),"Almacenamiento",Valor);
+        Unidad(Resto,0.000000095367431641,Cantidad,tr("Megabyte (MB)"),"Almacenamiento",Valor);
+        Unidad1(Resto,0.000000095367431641,Cantidad,tr("Megabyte (MB)"),"Almacenamiento",Valor);
+        Unidad(Resto,0.000000000093132257462,Cantidad,tr("Gigabyte (GB)"),"Almacenamiento",Valor);
+        Unidad1(Resto,0.000000000093132257462,Cantidad,tr("Gigabyte (GB)"),"Almacenamiento",Valor);
+        Unidad(Resto,0.000000000000090949478149,Cantidad,tr("Terabyte (TB)"),"Almacenamiento",Valor);
+        Unidad1(Resto,0.000000000000090949478149,Cantidad,tr("Terabyte (TB)"),"Almacenamiento",Valor);
+        Unidad(Resto,0.000000000000000088817853928,Cantidad,tr("Petabyte (PB)"),"Almacenamiento",Valor);
+        Unidad1(Resto,0.000000000000000088817853928,Cantidad,tr("Petabyte (PB)"),"Almacenamiento",Valor);
+        Unidad(Resto,0.000000000000000000086736183167,Cantidad,tr("Exabyte (EB)"),"Almacenamiento",Valor);
+        Unidad1(Resto,0.000000000000000000086736183167,Cantidad,tr("Exabyte (EB)"),"Almacenamiento",Valor);
         ui->label_14->setText(tr("Almacenamiento: Convertir a...")+ui->comboBox_19->currentText()+"");
         ui->label_15->setText(tr("Almacenamiento: Convertir de...")+ui->comboBox_19->currentText()+"");
     }
     if (Tipo == "Ancho banda")
     {
         QString Value = ui->comboBox_24->currentText();
-        double Cantidad = ui->lineEdit_45->text().toFloat();
+        QString Valor = ui->lineEdit_45->text();
+        double Cantidad = ui->lineEdit_45->text().toDouble();
         double Resto = Referencia(Value,"Ancho banda");
-        Unidad(Resto,8000000000,Cantidad,tr("Bit por segundo (bit/s)"),"Ancho banda");
-        Unidad1(Resto,8000000000,Cantidad,tr("Bit por segundo (bit/s)"),"Ancho banda");
-        Unidad(Resto,8000000,Cantidad,tr("Kilobit por segundo (kbit/s)"),"Ancho banda");
-        Unidad1(Resto,8000000,Cantidad,tr("Kilobit por segundo (kbit/s)"),"Ancho banda");
-        Unidad(Resto,8000,Cantidad,tr("Megabit por segundo (Mbit/s)"),"Ancho banda");
-        Unidad1(Resto,8000,Cantidad,tr("Megabit por segundo (Mbit/s)"),"Ancho banda");
-        Unidad(Resto,8,Cantidad,tr("Gigabit por segundo (Gbit/s)"),"Ancho banda");
-        Unidad1(Resto,8,Cantidad,tr("Gigabit por segundo (Gbit/s)"),"Ancho banda");
-        Unidad(Resto,0.008,Cantidad,tr("Terabit por segundo (Tbit/s)"),"Ancho banda");
-        Unidad1(Resto,0.008,Cantidad,tr("Terabit por segundo (Tbit/s)"),"Ancho banda");
-        Unidad(Resto,7812500,Cantidad,tr("Kibibit por segundo (Kibit/s)"),"Ancho banda");
-        Unidad1(Resto,7812500,Cantidad,tr("Kibibit por segundo (Kibit/s)"),"Ancho banda");
-        Unidad(Resto,0.0000078125,Cantidad,tr("Mebibit por segundo (Mibit/s)"),"Ancho banda");
-        Unidad1(Resto,0.0000078125,Cantidad,tr("Mebibit por segundo (Mibit/s)"),"Ancho banda");
-        Unidad(Resto,7.4505806,Cantidad,tr("Gibibit por segundo (Gibit/s)"),"Ancho banda");
-        Unidad1(Resto,7.4505806,Cantidad,tr("Gibibit por segundo (Gibit/s)"),"Ancho banda");
-        Unidad(Resto,0.00727596,Cantidad,tr("Tebibit por segundo (Tibit/s)"),"Ancho banda");
-        Unidad1(Resto,0.00727596,Cantidad,tr("Tebibit por segundo (Tibit/s)"),"Ancho banda");
-        Unidad(Resto,1000000000,Cantidad,tr("Byte por segundo (B/s)"),"Ancho banda");
-        Unidad1(Resto,1000000000,Cantidad,tr("Byte por segundo (B/s)"),"Ancho banda");
-        Unidad(Resto,1000000,Cantidad,tr("Kilobyte por segundo (kB/s)"),"Ancho banda");
-        Unidad1(Resto,1000000,Cantidad,tr("Kilobyte por segundo (kB/s)"),"Ancho banda");
-        Unidad(Resto,1000,Cantidad,tr("Megabyte por segundo (MB/s)"),"Ancho banda");
-        Unidad1(Resto,1000,Cantidad,tr("Megabyte por segundo (MB/s)"),"Ancho banda");
-        Unidad(Resto,1,Cantidad,tr("Gigabyte por segundo (GB/s)"),"Ancho banda");
-        Unidad1(Resto,1,Cantidad,tr("Gigabyte por segundo (GB/s)"),"Ancho banda");
-        Unidad(Resto,0.001,Cantidad,tr("Terabyte por segundo (TB/s)"),"Ancho banda");
-        Unidad1(Resto,0.001,Cantidad,tr("Terabyte por segundo (TB/s)"),"Ancho banda");
-        Unidad(Resto,976562.5,Cantidad,tr("Kibibyte por segundo (KiB/s)"),"Ancho banda");
-        Unidad1(Resto,976562.5,Cantidad,tr("Kibibyte por segundo (KiB/s)"),"Ancho banda");
-        Unidad(Resto,953.67431641,Cantidad,tr("Mebibyte por segundo (MiB/s)"),"Ancho banda");
-        Unidad1(Resto,953.67431641,Cantidad,tr("Mebibyte por segundo (MiB/s)"),"Ancho banda");
-        Unidad(Resto,0.93132257,Cantidad,tr("Gibibyte por segundo (GiB/s)"),"Ancho banda");
-        Unidad1(Resto,0.93132257,Cantidad,tr("Gibibyte por segundo (GiB/s)"),"Ancho banda");
-        Unidad(Resto,0.00090949,Cantidad,tr("Tebibyte por segundo (TiB/s)"),"Ancho banda");
-        Unidad1(Resto,0.00090949,Cantidad,tr("Tebibyte por segundo (TiB/s)"),"Ancho banda");
-        Unidad(Resto,2880000000000,Cantidad,tr("Bit por hora"),"Ancho banda");
-        Unidad1(Resto,2880000000000,Cantidad,tr("Bit por hora"),"Ancho banda");
-        Unidad(Resto,28800000000,Cantidad,tr("Kilobit por hora"),"Ancho banda");
-        Unidad1(Resto,28800000000,Cantidad,tr("Kilobit por hora"),"Ancho banda");
-        Unidad(Resto,2880000,Cantidad,tr("Megabit por hora"),"Ancho banda");
-        Unidad1(Resto,2880000,Cantidad,tr("Megabit por hora"),"Ancho banda");
-        Unidad(Resto,28800,Cantidad,tr("Gigabit por hora"),"Ancho banda");
-        Unidad1(Resto,28800,Cantidad,tr("Gigabit por hora"),"Ancho banda");
-        Unidad(Resto,28.8,Cantidad,tr("Terabit por hora"),"Ancho banda");
-        Unidad1(Resto,28.8,Cantidad,tr("Terabit por hora"),"Ancho banda");
-        Unidad(Resto,28125000000,Cantidad,tr("Kibibit por hora"),"Ancho banda");
-        Unidad1(Resto,28125000000,Cantidad,tr("Kibibit por hora"),"Ancho banda");
-        Unidad(Resto,27465820.3,Cantidad,tr("Mebibit por hora"),"Ancho banda");
-        Unidad1(Resto,27465820.3,Cantidad,tr("Mebibit por hora"),"Ancho banda");
-        Unidad(Resto,26822.0901,Cantidad,tr("Gibibit por hora"),"Ancho banda");
-        Unidad1(Resto,26822.0901,Cantidad,tr("Gibibit por hora"),"Ancho banda");
-        Unidad(Resto,26.19344741,Cantidad,tr("Tebibit por hora"),"Ancho banda");
-        Unidad1(Resto,26.19344741,Cantidad,tr("Tebibit por hora"),"Ancho banda");
-        Unidad(Resto,3600000000000,Cantidad,tr("Byte por hora"),"Ancho banda");
-        Unidad1(Resto,3600000000000,Cantidad,tr("Byte por hora"),"Ancho banda");
-        Unidad(Resto,3600000000.00,Cantidad,tr("Kilobyte por hora"),"Ancho banda");
-        Unidad1(Resto,3600000000.00,Cantidad,tr("Kilobyte por hora"),"Ancho banda");
-        Unidad(Resto,3600000,Cantidad,tr("Megabyte por hora"),"Ancho banda");
-        Unidad1(Resto,3600000,Cantidad,tr("Megabyte por hora"),"Ancho banda");
-        Unidad(Resto,3600,Cantidad,tr("Gigabyte por hora"),"Ancho banda");
-        Unidad1(Resto,3600,Cantidad,tr("Gigabyte por hora"),"Ancho banda");
-        Unidad(Resto,3.6,Cantidad,tr("Terabyte por hora"),"Ancho banda");
-        Unidad1(Resto,3.6,Cantidad,tr("Terabyte por hora"),"Ancho banda");
-        Unidad(Resto,3515625000.00,Cantidad,tr("Kibibyte por hora"),"Ancho banda");
-        Unidad1(Resto,3516625000.00,Cantidad,tr("Kibibyte por hora"),"Ancho banda");
-        Unidad(Resto,3433227.54,Cantidad,tr("Mebibyte por hora"),"Ancho banda");
-        Unidad1(Resto,3433227.54,Cantidad,tr("Mebibyte por hora"),"Ancho banda");
-        Unidad(Resto,3352.76127,Cantidad,tr("Gibibyte por hora"),"Ancho banda");
-        Unidad1(Resto,3352.76127,Cantidad,tr("Gibibyte por hora"),"Ancho banda");
-        Unidad(Resto,3.27418093,Cantidad,tr("Tebibyte por hora"),"Ancho banda");
-        Unidad1(Resto,3.27418093,Cantidad,tr("Tebibyte por hora"),"Ancho banda");
-        Unidad(Resto,69120000000000,Cantidad,tr("Bit por dia"),"Ancho banda");
-        Unidad1(Resto,69120000000000,Cantidad,tr("Bit por dia"),"Ancho banda");
-        Unidad(Resto,691200000000,Cantidad,tr("Kilobit por dia"),"Ancho banda");
-        Unidad1(Resto,691200000000,Cantidad,tr("Kilobit por dia"),"Ancho banda");
-        Unidad(Resto,691200000,Cantidad,tr("Megabit por dia"),"Ancho banda");
-        Unidad1(Resto,691200000,Cantidad,tr("Megabit por dia"),"Ancho banda");
-        Unidad(Resto,691200,Cantidad,tr("Gigabit por dia"),"Ancho banda");
-        Unidad1(Resto,691200,Cantidad,tr("Gigabit por dia"),"Ancho banda");
-        Unidad(Resto,691.2,Cantidad,tr("Terabit por dia"),"Ancho banda");
-        Unidad1(Resto,691.2,Cantidad,tr("Terabit por dia"),"Ancho banda");
-        Unidad(Resto,675000000000,Cantidad,tr("Kibibit por dia"),"Ancho banda");
-        Unidad1(Resto,675000000000,Cantidad,tr("Kibibit por dia"),"Ancho banda");
-        Unidad(Resto,659179687.5,Cantidad,tr("Mebibit por dia"),"Ancho banda");
-        Unidad1(Resto,659179687.5,Cantidad,tr("Mebibit por dia"),"Ancho banda");
-        Unidad(Resto,643730.164,Cantidad,tr("Gibibit por dia"),"Ancho banda");
-        Unidad1(Resto,643730.164,Cantidad,tr("Gibibit por dia"),"Ancho banda");
-        Unidad(Resto,628.64273787,Cantidad,tr("Tebibit por dia"),"Ancho banda");
-        Unidad1(Resto,628.64273787,Cantidad,tr("Tebibit por dia"),"Ancho banda");
-        Unidad(Resto,8640000000000,Cantidad,tr("Byte por dia"),"Ancho banda");
-        Unidad1(Resto,8640000000000,Cantidad,tr("Byte por dia"),"Ancho banda");
-        Unidad(Resto,86400000000,Cantidad,tr("Kilobyte por dia"),"Ancho banda");
-        Unidad1(Resto,86400000000,Cantidad,tr("Kilobyte por dia"),"Ancho banda");
-        Unidad(Resto,86400000,Cantidad,tr("Megabyte por dia"),"Ancho banda");
-        Unidad1(Resto,86400000,Cantidad,tr("Megabyte por dia"),"Ancho banda");
-        Unidad(Resto,86400,Cantidad,tr("Gigabyte por dia"),"Ancho banda");
-        Unidad1(Resto,86400,Cantidad,tr("Gigabyte por dia"),"Ancho banda");
-        Unidad(Resto,86.4,Cantidad,tr("Terabyte por dia"),"Ancho banda");
-        Unidad1(Resto,86.4,Cantidad,tr("Terabyte por dia"),"Ancho banda");
-        Unidad(Resto,84375000000,Cantidad,tr("Kibibyte por dia"),"Ancho banda");
-        Unidad1(Resto,84375000000,Cantidad,tr("Kibibyte por dia"),"Ancho banda");
-        Unidad(Resto,82397460.9,Cantidad,tr("Mebibyte por dia"),"Ancho banda");
-        Unidad1(Resto,82397460.9,Cantidad,tr("Mebibyte por dia"),"Ancho banda");
-        Unidad(Resto,80466.2704,Cantidad,tr("Gibibyte por dia"),"Ancho banda");
-        Unidad1(Resto,80466.2704,Cantidad,tr("Gibibyte por dia"),"Ancho banda");
-        Unidad(Resto,78.58034223,Cantidad,tr("Tebibyte por dia"),"Ancho banda");
-        Unidad1(Resto,78.58034223,Cantidad,tr("Tebibyte por dia"),"Ancho banda");
+        Unidad(Resto,8000000000,Cantidad,tr("Bit por segundo (bit/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,8000000000,Cantidad,tr("Bit por segundo (bit/s)"),"Ancho banda",Valor);
+        Unidad(Resto,8000000,Cantidad,tr("Kilobit por segundo (kbit/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,8000000,Cantidad,tr("Kilobit por segundo (kbit/s)"),"Ancho banda",Valor);
+        Unidad(Resto,8000,Cantidad,tr("Megabit por segundo (Mbit/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,8000,Cantidad,tr("Megabit por segundo (Mbit/s)"),"Ancho banda",Valor);
+        Unidad(Resto,8,Cantidad,tr("Gigabit por segundo (Gbit/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,8,Cantidad,tr("Gigabit por segundo (Gbit/s)"),"Ancho banda",Valor);
+        Unidad(Resto,0.008,Cantidad,tr("Terabit por segundo (Tbit/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,0.008,Cantidad,tr("Terabit por segundo (Tbit/s)"),"Ancho banda",Valor);
+        Unidad(Resto,7812500,Cantidad,tr("Kibibit por segundo (Kibit/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,7812500,Cantidad,tr("Kibibit por segundo (Kibit/s)"),"Ancho banda",Valor);
+        Unidad(Resto,0.0000078125,Cantidad,tr("Mebibit por segundo (Mibit/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,0.0000078125,Cantidad,tr("Mebibit por segundo (Mibit/s)"),"Ancho banda",Valor);
+        Unidad(Resto,7.4505806,Cantidad,tr("Gibibit por segundo (Gibit/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,7.4505806,Cantidad,tr("Gibibit por segundo (Gibit/s)"),"Ancho banda",Valor);
+        Unidad(Resto,0.00727596,Cantidad,tr("Tebibit por segundo (Tibit/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,0.00727596,Cantidad,tr("Tebibit por segundo (Tibit/s)"),"Ancho banda",Valor);
+        Unidad(Resto,1000000000,Cantidad,tr("Byte por segundo (B/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,1000000000,Cantidad,tr("Byte por segundo (B/s)"),"Ancho banda",Valor);
+        Unidad(Resto,1000000,Cantidad,tr("Kilobyte por segundo (kB/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,1000000,Cantidad,tr("Kilobyte por segundo (kB/s)"),"Ancho banda",Valor);
+        Unidad(Resto,1000,Cantidad,tr("Megabyte por segundo (MB/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,1000,Cantidad,tr("Megabyte por segundo (MB/s)"),"Ancho banda",Valor);
+        Unidad(Resto,1,Cantidad,tr("Gigabyte por segundo (GB/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Gigabyte por segundo (GB/s)"),"Ancho banda",Valor);
+        Unidad(Resto,0.001,Cantidad,tr("Terabyte por segundo (TB/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,0.001,Cantidad,tr("Terabyte por segundo (TB/s)"),"Ancho banda",Valor);
+        Unidad(Resto,976562.5,Cantidad,tr("Kibibyte por segundo (KiB/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,976562.5,Cantidad,tr("Kibibyte por segundo (KiB/s)"),"Ancho banda",Valor);
+        Unidad(Resto,953.67431641,Cantidad,tr("Mebibyte por segundo (MiB/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,953.67431641,Cantidad,tr("Mebibyte por segundo (MiB/s)"),"Ancho banda",Valor);
+        Unidad(Resto,0.93132257,Cantidad,tr("Gibibyte por segundo (GiB/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,0.93132257,Cantidad,tr("Gibibyte por segundo (GiB/s)"),"Ancho banda",Valor);
+        Unidad(Resto,0.00090949,Cantidad,tr("Tebibyte por segundo (TiB/s)"),"Ancho banda",Valor);
+        Unidad1(Resto,0.00090949,Cantidad,tr("Tebibyte por segundo (TiB/s)"),"Ancho banda",Valor);
+        Unidad(Resto,2880000000000,Cantidad,tr("Bit por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,2880000000000,Cantidad,tr("Bit por hora"),"Ancho banda",Valor);
+        Unidad(Resto,28800000000,Cantidad,tr("Kilobit por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,28800000000,Cantidad,tr("Kilobit por hora"),"Ancho banda",Valor);
+        Unidad(Resto,2880000,Cantidad,tr("Megabit por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,2880000,Cantidad,tr("Megabit por hora"),"Ancho banda",Valor);
+        Unidad(Resto,28800,Cantidad,tr("Gigabit por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,28800,Cantidad,tr("Gigabit por hora"),"Ancho banda",Valor);
+        Unidad(Resto,28.8,Cantidad,tr("Terabit por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,28.8,Cantidad,tr("Terabit por hora"),"Ancho banda",Valor);
+        Unidad(Resto,28125000000,Cantidad,tr("Kibibit por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,28125000000,Cantidad,tr("Kibibit por hora"),"Ancho banda",Valor);
+        Unidad(Resto,27465820.3,Cantidad,tr("Mebibit por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,27465820.3,Cantidad,tr("Mebibit por hora"),"Ancho banda",Valor);
+        Unidad(Resto,26822.0901,Cantidad,tr("Gibibit por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,26822.0901,Cantidad,tr("Gibibit por hora"),"Ancho banda",Valor);
+        Unidad(Resto,26.19344741,Cantidad,tr("Tebibit por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,26.19344741,Cantidad,tr("Tebibit por hora"),"Ancho banda",Valor);
+        Unidad(Resto,3600000000000,Cantidad,tr("Byte por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,3600000000000,Cantidad,tr("Byte por hora"),"Ancho banda",Valor);
+        Unidad(Resto,3600000000.00,Cantidad,tr("Kilobyte por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,3600000000.00,Cantidad,tr("Kilobyte por hora"),"Ancho banda",Valor);
+        Unidad(Resto,3600000,Cantidad,tr("Megabyte por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,3600000,Cantidad,tr("Megabyte por hora"),"Ancho banda",Valor);
+        Unidad(Resto,3600,Cantidad,tr("Gigabyte por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,3600,Cantidad,tr("Gigabyte por hora"),"Ancho banda",Valor);
+        Unidad(Resto,3.6,Cantidad,tr("Terabyte por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,3.6,Cantidad,tr("Terabyte por hora"),"Ancho banda",Valor);
+        Unidad(Resto,3515625000.00,Cantidad,tr("Kibibyte por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,3516625000.00,Cantidad,tr("Kibibyte por hora"),"Ancho banda",Valor);
+        Unidad(Resto,3433227.54,Cantidad,tr("Mebibyte por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,3433227.54,Cantidad,tr("Mebibyte por hora"),"Ancho banda",Valor);
+        Unidad(Resto,3352.76127,Cantidad,tr("Gibibyte por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,3352.76127,Cantidad,tr("Gibibyte por hora"),"Ancho banda",Valor);
+        Unidad(Resto,3.27418093,Cantidad,tr("Tebibyte por hora"),"Ancho banda",Valor);
+        Unidad1(Resto,3.27418093,Cantidad,tr("Tebibyte por hora"),"Ancho banda",Valor);
+        Unidad(Resto,69120000000000,Cantidad,tr("Bit por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,69120000000000,Cantidad,tr("Bit por dia"),"Ancho banda",Valor);
+        Unidad(Resto,691200000000,Cantidad,tr("Kilobit por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,691200000000,Cantidad,tr("Kilobit por dia"),"Ancho banda",Valor);
+        Unidad(Resto,691200000,Cantidad,tr("Megabit por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,691200000,Cantidad,tr("Megabit por dia"),"Ancho banda",Valor);
+        Unidad(Resto,691200,Cantidad,tr("Gigabit por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,691200,Cantidad,tr("Gigabit por dia"),"Ancho banda",Valor);
+        Unidad(Resto,691.2,Cantidad,tr("Terabit por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,691.2,Cantidad,tr("Terabit por dia"),"Ancho banda",Valor);
+        Unidad(Resto,675000000000,Cantidad,tr("Kibibit por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,675000000000,Cantidad,tr("Kibibit por dia"),"Ancho banda",Valor);
+        Unidad(Resto,659179687.5,Cantidad,tr("Mebibit por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,659179687.5,Cantidad,tr("Mebibit por dia"),"Ancho banda",Valor);
+        Unidad(Resto,643730.164,Cantidad,tr("Gibibit por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,643730.164,Cantidad,tr("Gibibit por dia"),"Ancho banda",Valor);
+        Unidad(Resto,628.64273787,Cantidad,tr("Tebibit por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,628.64273787,Cantidad,tr("Tebibit por dia"),"Ancho banda",Valor);
+        Unidad(Resto,8640000000000,Cantidad,tr("Byte por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,8640000000000,Cantidad,tr("Byte por dia"),"Ancho banda",Valor);
+        Unidad(Resto,86400000000,Cantidad,tr("Kilobyte por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,86400000000,Cantidad,tr("Kilobyte por dia"),"Ancho banda",Valor);
+        Unidad(Resto,86400000,Cantidad,tr("Megabyte por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,86400000,Cantidad,tr("Megabyte por dia"),"Ancho banda",Valor);
+        Unidad(Resto,86400,Cantidad,tr("Gigabyte por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,86400,Cantidad,tr("Gigabyte por dia"),"Ancho banda",Valor);
+        Unidad(Resto,86.4,Cantidad,tr("Terabyte por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,86.4,Cantidad,tr("Terabyte por dia"),"Ancho banda",Valor);
+        Unidad(Resto,84375000000,Cantidad,tr("Kibibyte por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,84375000000,Cantidad,tr("Kibibyte por dia"),"Ancho banda",Valor);
+        Unidad(Resto,82397460.9,Cantidad,tr("Mebibyte por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,82397460.9,Cantidad,tr("Mebibyte por dia"),"Ancho banda",Valor);
+        Unidad(Resto,80466.2704,Cantidad,tr("Gibibyte por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,80466.2704,Cantidad,tr("Gibibyte por dia"),"Ancho banda",Valor);
+        Unidad(Resto,78.58034223,Cantidad,tr("Tebibyte por dia"),"Ancho banda",Valor);
+        Unidad1(Resto,78.58034223,Cantidad,tr("Tebibyte por dia"),"Ancho banda",Valor);
         ui->label_14->setText(tr("Ancho de banda: Convertir a...")+ui->comboBox_24->currentText()+"");
         ui->label_15->setText(tr("Ancho de banda: Convertir de...")+ui->comboBox_24->currentText()+"");
     }
     if (Tipo == "Angulo")
     {
         QString Value = ui->comboBox_21->currentText();
-        double Cantidad = ui->lineEdit_42->text().toFloat();
+        QString Valor = ui->lineEdit_42->text();
+        double Cantidad = ui->lineEdit_42->text().toDouble();
         double Resto = Referencia(Value,"Angulo");
-        Unidad(Resto,360,Cantidad,tr("Grado sexagesimal"),"Angulo");
-        Unidad1(Resto,360,Cantidad,tr("Grado sexagesimal"),"Angulo");
-        Unidad(Resto,6.2831853072,Cantidad,tr("Radian"),"Angulo");
-        Unidad1(Resto,6.2831853072,Cantidad,tr("Radian)"),"Angulo");
-        Unidad(Resto,1,Cantidad,tr("Circulo"),"Angulo");
-        Unidad1(Resto,1,Cantidad,tr("Circulo"),"Angulo");
-        Unidad(Resto,1,Cantidad,tr("Giro"),"Angulo");
-        Unidad1(Resto,1,Cantidad,tr("Giro"),"Angulo");
-        Unidad(Resto,1,Cantidad,tr("Ciclo"),"Angulo");
-        Unidad1(Resto,1,Cantidad,tr("Ciclo"),"Angulo");
-        Unidad(Resto,1,Cantidad,tr("Rotacion"),"Angulo");
-        Unidad1(Resto,1,Cantidad,tr("Rotacion"),"Angulo");
-        Unidad(Resto,1,Cantidad,tr("Revolucion"),"Angulo");
-        Unidad1(Resto,1,Cantidad,tr("Revolucion"),"Angulo");
-        Unidad(Resto,4,Cantidad,tr("Angulo recto"),"Angulo");
-        Unidad1(Resto,4,Cantidad,tr("Angulo recto"),"Angulo");
-        Unidad(Resto,6400,Cantidad,tr("Milesimal (OTAN)"),"Angulo");
-        Unidad1(Resto,6400,Cantidad,tr("Milesimal (OTAN)"),"Angulo");
-        Unidad(Resto,6000,Cantidad,tr("Milesimal (Union Sovietica)"),"Angulo");
-        Unidad1(Resto,6000,Cantidad,tr("Milesimal (Union Sovietica)"),"Angulo");
-        Unidad(Resto,6300,Cantidad,tr("Milesimal (Suecia)"),"Angulo");
-        Unidad1(Resto,6300,Cantidad,tr("Milesimal (Suecia)"),"Angulo");
-        Unidad(Resto,400,Cantidad,tr("Grado centesimal"),"Angulo");
-        Unidad1(Resto,400,Cantidad,tr("Grado centesimal"),"Angulo");
-        Unidad(Resto,400,Cantidad,tr("Gon"),"Angulo");
-        Unidad1(Resto,400,Cantidad,tr("Gon"),"Angulo");
-        Unidad(Resto,32,Cantidad,tr("Punto"),"Angulo");
-        Unidad1(Resto,32,Cantidad,tr("Punto"),"Angulo");
-        Unidad(Resto,24,Cantidad,tr("Angulo horario"),"Angulo");
-        Unidad1(Resto,24,Cantidad,tr("Angulo horario"),"Angulo");
+        Unidad(Resto,360,Cantidad,tr("Grado sexagesimal"),"Angulo",Valor);
+        Unidad1(Resto,360,Cantidad,tr("Grado sexagesimal"),"Angulo",Valor);
+        Unidad(Resto,6.2831853072,Cantidad,tr("Radian"),"Angulo",Valor);
+        Unidad1(Resto,6.2831853072,Cantidad,tr("Radian)"),"Angulo",Valor);
+        Unidad(Resto,1,Cantidad,tr("Circulo"),"Angulo",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Circulo"),"Angulo",Valor);
+        Unidad(Resto,1,Cantidad,tr("Giro"),"Angulo",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Giro"),"Angulo",Valor);
+        Unidad(Resto,1,Cantidad,tr("Ciclo"),"Angulo",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Ciclo"),"Angulo",Valor);
+        Unidad(Resto,1,Cantidad,tr("Rotacion"),"Angulo",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Rotacion"),"Angulo",Valor);
+        Unidad(Resto,1,Cantidad,tr("Revolucion"),"Angulo",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Revolucion"),"Angulo",Valor);
+        Unidad(Resto,4,Cantidad,tr("Angulo recto"),"Angulo",Valor);
+        Unidad1(Resto,4,Cantidad,tr("Angulo recto"),"Angulo",Valor);
+        Unidad(Resto,6400,Cantidad,tr("Milesimal (OTAN)"),"Angulo",Valor);
+        Unidad1(Resto,6400,Cantidad,tr("Milesimal (OTAN)"),"Angulo",Valor);
+        Unidad(Resto,6000,Cantidad,tr("Milesimal (Union Sovietica)"),"Angulo",Valor);
+        Unidad1(Resto,6000,Cantidad,tr("Milesimal (Union Sovietica)"),"Angulo",Valor);
+        Unidad(Resto,6300,Cantidad,tr("Milesimal (Suecia)"),"Angulo",Valor);
+        Unidad1(Resto,6300,Cantidad,tr("Milesimal (Suecia)"),"Angulo",Valor);
+        Unidad(Resto,400,Cantidad,tr("Grado centesimal"),"Angulo",Valor);
+        Unidad1(Resto,400,Cantidad,tr("Grado centesimal"),"Angulo",Valor);
+        Unidad(Resto,400,Cantidad,tr("Gon"),"Angulo",Valor);
+        Unidad1(Resto,400,Cantidad,tr("Gon"),"Angulo",Valor);
+        Unidad(Resto,32,Cantidad,tr("Punto"),"Angulo",Valor);
+        Unidad1(Resto,32,Cantidad,tr("Punto"),"Angulo",Valor);
+        Unidad(Resto,24,Cantidad,tr("Angulo horario"),"Angulo",Valor);
+        Unidad1(Resto,24,Cantidad,tr("Angulo horario"),"Angulo",Valor);
         ui->label_14->setText(tr("Angulo: Convertir a...")+ui->comboBox_21->currentText()+"");
         ui->label_15->setText(tr("Angulo: Convertir de...")+ui->comboBox_21->currentText()+"");
     }
     if (Tipo == "Area")
     {
         QString Value = ui->comboBox_4->currentText();
-        double Cantidad = ui->lineEdit_4->text().toFloat();
+        QString Valor = ui->lineEdit_4->text();
+        double Cantidad = ui->lineEdit_4->text().toDouble();
         double Resto = Referencia(Value,"Area");
-        Unidad(Resto,100000000000000000000.00,Cantidad,tr("Nanometro cuadrado (nm²)"),"Area");
-        Unidad1(Resto,100000000000000000000.00,Cantidad,tr("Nanometro cuadrado (nm²)"),"Area");
-        Unidad(Resto,100000000000000,Cantidad,tr("Micrometro cuadrado (µm²)"),"Area");
-        Unidad1(Resto,100000000000000,Cantidad,tr("Micrometro cuadrado (µm²)"),"Area");
-        Unidad(Resto,100000000,Cantidad,tr("Milimetro cuadrado (mm²)"),"Area");
-        Unidad1(Resto,100000000,Cantidad,tr("Milimetro cuadrado (mm²)"),"Area");
-        Unidad(Resto,1000000,Cantidad,tr("Centimetro cuadrado (cm²)"),"Area");
-        Unidad1(Resto,1000000,Cantidad,tr("Centimetro cuadrado (cm²)"),"Area");
-        Unidad(Resto,10000,Cantidad,tr("Decimetro cuadrado (dm²)"),"Area");
-        Unidad1(Resto,10000,Cantidad,tr("Decimetro cuadrado (dm²)"),"Area");
-        Unidad(Resto,100,Cantidad,tr("Metro cuadrado (m²)"),"Area");
-        Unidad1(Resto,100,Cantidad,tr("Metro cuadrado (m²)"),"Area");
-        Unidad(Resto,1,Cantidad,tr("Area (a)"),"Area");
-        Unidad1(Resto,1,Cantidad,tr("Area (a)"),"Area");
-        Unidad(Resto,0.01,Cantidad,tr("Hectarea (ha)"),"Area");
-        Unidad1(Resto,0.01,Cantidad,tr("Hectarea (ha)"),"Area");
-        Unidad(Resto,0.0001,Cantidad,tr("Kilometro cuadrado (km²)"),"Area");
-        Unidad1(Resto,0.0001,Cantidad,tr("Kilometro cuadrado (km²)"),"Area");
-        Unidad(Resto,0.0000010725,Cantidad,tr("Municipio"),"Area");
-        Unidad1(Resto,0.0000010725,Cantidad,tr("Municipio"),"Area");
-        Unidad(Resto,0.0000386102,Cantidad,tr("Milla cuadrada"),"Area");
-        Unidad1(Resto,0.0000386102,Cantidad,tr("Milla cuadrada"),"Area");
-        Unidad(Resto,0.0001544409,Cantidad,tr("Patrimonio familiar"),"Area");
-        Unidad1(Resto,0.0001544409,Cantidad,tr("Patrimonio familiar"),"Area");
-        Unidad(Resto,0.02471055,Cantidad,tr("Acre"),"Area");
-        Unidad1(Resto,0.02471055,Cantidad,tr("Acre"),"Area");
-        Unidad(Resto,0.0988422,Cantidad,tr("Rood"),"Area");
-        Unidad1(Resto,0.0988422,Cantidad,tr("Rood"),"Area");
-        Unidad(Resto,3.953687,Cantidad,tr("Rod cuadrada"),"Area");
-        Unidad1(Resto,3.953687,Cantidad,tr("Rod cuadrada"),"Area");
-        Unidad(Resto,10.76391,Cantidad,tr("Cuadrado"),"Area");
-        Unidad1(Resto,10.76391,Cantidad,tr("Cuadrado"),"Area");
-        Unidad(Resto,119.599,Cantidad,tr("Yarda cuadrada (yd²)"),"Area");
-        Unidad1(Resto,119.599,Cantidad,tr("Yarda cuadrada (yd²)"),"Area");
-        Unidad(Resto,1076.391,Cantidad,tr("Pie cuadrado (ft²)"),"Area");
-        Unidad1(Resto,1076.391,Cantidad,tr("Pie cuadrado (ft²)"),"Area");
-        Unidad(Resto,155000.3,Cantidad,tr("Pulgada cuadrada (in²)"),"Area");
-        Unidad1(Resto,155000.3,Cantidad,tr("Pulgada cuadrada (in²)"),"Area");
-        Unidad(Resto,30.24999,Cantidad,tr("Tsubo"),"Area");
-        Unidad1(Resto,30.24999,Cantidad,tr("Tsubo"),"Area");
-        Unidad(Resto,10083.33,Cantidad,tr("Cho"),"Area");
-        Unidad1(Resto,10083.33,Cantidad,tr("Cho"),"Area");
-        Unidad(Resto,100833.3,Cantidad,tr("Tann"),"Area");
-        Unidad1(Resto,100833.3,Cantidad,tr("Tann"),"Area");
-        Unidad(Resto,1008333,Cantidad,tr("Se"),"Area");
-        Unidad1(Resto,1008333,Cantidad,tr("Se"),"Area");
-        Unidad(Resto,0.1,Cantidad,tr("Donum metrico"),"Area");
-        Unidad1(Resto,0.1,Cantidad,tr("Donum metrico"),"Area");
-        Unidad(Resto,0.074749375,Cantidad,tr("Donum de Chipre"),"Area");
-        Unidad1(Resto,0.074749375,Cantidad,tr("Donum de Chipre"),"Area");
-        Unidad(Resto,0.04,Cantidad,tr("Donum iraqui"),"Area");
-        Unidad1(Resto,0.04,Cantidad,tr("Donum iraqui"),"Area");
-        Unidad(Resto,0.01,Cantidad,tr("Estrema griego"),"Area");
-        Unidad1(Resto,0.01,Cantidad,tr("Estrema griego"),"Area");
-        Unidad(Resto,0.0140056,Cantidad,tr("Campo de futbol"),"Area");
-        Unidad1(Resto,0.0140056,Cantidad,tr("Campo de futbol"),"Area");
+        Unidad(Resto,100000000000000000000.00,Cantidad,tr("Nanometro cuadrado (nm²)"),"Area",Valor);
+        Unidad1(Resto,100000000000000000000.00,Cantidad,tr("Nanometro cuadrado (nm²)"),"Area",Valor);
+        Unidad(Resto,100000000000000,Cantidad,tr("Micrometro cuadrado (µm²)"),"Area",Valor);
+        Unidad1(Resto,100000000000000,Cantidad,tr("Micrometro cuadrado (µm²)"),"Area",Valor);
+        Unidad(Resto,100000000,Cantidad,tr("Milimetro cuadrado (mm²)"),"Area",Valor);
+        Unidad1(Resto,100000000,Cantidad,tr("Milimetro cuadrado (mm²)"),"Area",Valor);
+        Unidad(Resto,1000000,Cantidad,tr("Centimetro cuadrado (cm²)"),"Area",Valor);
+        Unidad1(Resto,1000000,Cantidad,tr("Centimetro cuadrado (cm²)"),"Area",Valor);
+        Unidad(Resto,10000,Cantidad,tr("Decimetro cuadrado (dm²)"),"Area",Valor);
+        Unidad1(Resto,10000,Cantidad,tr("Decimetro cuadrado (dm²)"),"Area",Valor);
+        Unidad(Resto,100,Cantidad,tr("Metro cuadrado (m²)"),"Area",Valor);
+        Unidad1(Resto,100,Cantidad,tr("Metro cuadrado (m²)"),"Area",Valor);
+        Unidad(Resto,1,Cantidad,tr("Area (a)"),"Area",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Area (a)"),"Area",Valor);
+        Unidad(Resto,0.01,Cantidad,tr("Hectarea (ha)"),"Area",Valor);
+        Unidad1(Resto,0.01,Cantidad,tr("Hectarea (ha)"),"Area",Valor);
+        Unidad(Resto,0.0001,Cantidad,tr("Kilometro cuadrado (km²)"),"Area",Valor);
+        Unidad1(Resto,0.0001,Cantidad,tr("Kilometro cuadrado (km²)"),"Area",Valor);
+        Unidad(Resto,0.0000010725,Cantidad,tr("Municipio"),"Area",Valor);
+        Unidad1(Resto,0.0000010725,Cantidad,tr("Municipio"),"Area",Valor);
+        Unidad(Resto,0.0000386102,Cantidad,tr("Milla cuadrada"),"Area",Valor);
+        Unidad1(Resto,0.0000386102,Cantidad,tr("Milla cuadrada"),"Area",Valor);
+        Unidad(Resto,0.0001544409,Cantidad,tr("Patrimonio familiar"),"Area",Valor);
+        Unidad1(Resto,0.0001544409,Cantidad,tr("Patrimonio familiar"),"Area",Valor);
+        Unidad(Resto,0.02471055,Cantidad,tr("Acre"),"Area",Valor);
+        Unidad1(Resto,0.02471055,Cantidad,tr("Acre"),"Area",Valor);
+        Unidad(Resto,0.0988422,Cantidad,tr("Rood"),"Area",Valor);
+        Unidad1(Resto,0.0988422,Cantidad,tr("Rood"),"Area",Valor);
+        Unidad(Resto,3.953687,Cantidad,tr("Rod cuadrada"),"Area",Valor);
+        Unidad1(Resto,3.953687,Cantidad,tr("Rod cuadrada"),"Area",Valor);
+        Unidad(Resto,10.76391,Cantidad,tr("Cuadrado"),"Area",Valor);
+        Unidad1(Resto,10.76391,Cantidad,tr("Cuadrado"),"Area",Valor);
+        Unidad(Resto,119.599,Cantidad,tr("Yarda cuadrada (yd²)"),"Area",Valor);
+        Unidad1(Resto,119.599,Cantidad,tr("Yarda cuadrada (yd²)"),"Area",Valor);
+        Unidad(Resto,1076.391,Cantidad,tr("Pie cuadrado (ft²)"),"Area",Valor);
+        Unidad1(Resto,1076.391,Cantidad,tr("Pie cuadrado (ft²)"),"Area",Valor);
+        Unidad(Resto,155000.3,Cantidad,tr("Pulgada cuadrada (in²)"),"Area",Valor);
+        Unidad1(Resto,155000.3,Cantidad,tr("Pulgada cuadrada (in²)"),"Area",Valor);
+        Unidad(Resto,30.24999,Cantidad,tr("Tsubo"),"Area",Valor);
+        Unidad1(Resto,30.24999,Cantidad,tr("Tsubo"),"Area",Valor);
+        Unidad(Resto,10083.33,Cantidad,tr("Cho"),"Area",Valor);
+        Unidad1(Resto,10083.33,Cantidad,tr("Cho"),"Area",Valor);
+        Unidad(Resto,100833.3,Cantidad,tr("Tann"),"Area",Valor);
+        Unidad1(Resto,100833.3,Cantidad,tr("Tann"),"Area",Valor);
+        Unidad(Resto,1008333,Cantidad,tr("Se"),"Area",Valor);
+        Unidad1(Resto,1008333,Cantidad,tr("Se"),"Area",Valor);
+        Unidad(Resto,0.1,Cantidad,tr("Donum metrico"),"Area",Valor);
+        Unidad1(Resto,0.1,Cantidad,tr("Donum metrico"),"Area",Valor);
+        Unidad(Resto,0.074749375,Cantidad,tr("Donum de Chipre"),"Area",Valor);
+        Unidad1(Resto,0.074749375,Cantidad,tr("Donum de Chipre"),"Area",Valor);
+        Unidad(Resto,0.04,Cantidad,tr("Donum iraqui"),"Area",Valor);
+        Unidad1(Resto,0.04,Cantidad,tr("Donum iraqui"),"Area",Valor);
+        Unidad(Resto,0.01,Cantidad,tr("Estrema griego"),"Area",Valor);
+        Unidad1(Resto,0.01,Cantidad,tr("Estrema griego"),"Area",Valor);
+        Unidad(Resto,0.0140056,Cantidad,tr("Campo de futbol"),"Area",Valor);
+        Unidad1(Resto,0.0140056,Cantidad,tr("Campo de futbol"),"Area",Valor);
         ui->label_14->setText(tr("Superficie o Area: Convertir a...")+ui->comboBox_4->currentText()+"");
         ui->label_15->setText(tr("Superficie o Area: Convertir de...")+ui->comboBox_4->currentText()+"");
     }
     if (Tipo == "Campo")
     {
         QString Value = ui->comboBox_18->currentText();
-        double Cantidad = ui->lineEdit_39->text().toFloat();
+        QString Valor = ui->lineEdit_39->text();
+        double Cantidad = ui->lineEdit_39->text().toDouble();
         double Resto = Referencia(Value,"Campo");
-        Unidad(Resto,0.7957747155,Cantidad,tr("Amperio por metro (A/m)"),"Campo");
-        Unidad1(Resto,0.7957747155,Cantidad,tr("Amperio por metro (A/m)"),"Campo");
-        Unidad(Resto,0.7957747155,Cantidad,tr("Amperio-vuelta por metro (AT/m)"),"Campo");
-        Unidad1(Resto,0.7957747155,Cantidad,tr("Amperio-vuelta por metro (AT/m)"),"Campo");
-        Unidad(Resto,0.01,Cantidad,tr("Oersted (Oe)"),"Campo");
-        Unidad1(Resto,0.01,Cantidad,tr("Oersted (Oe)"),"Campo");
-        Unidad(Resto,1,Cantidad,tr("Gilbert por metro (Gi/m)"),"Campo");
-        Unidad1(Resto,1,Cantidad,tr("Gilbert por metro (Gi/m)"),"Campo");
+        Unidad(Resto,0.7957747155,Cantidad,tr("Amperio por metro (A/m)"),"Campo",Valor);
+        Unidad1(Resto,0.7957747155,Cantidad,tr("Amperio por metro (A/m)"),"Campo",Valor);
+        Unidad(Resto,0.7957747155,Cantidad,tr("Amperio-vuelta por metro (AT/m)"),"Campo",Valor);
+        Unidad1(Resto,0.7957747155,Cantidad,tr("Amperio-vuelta por metro (AT/m)"),"Campo",Valor);
+        Unidad(Resto,0.01,Cantidad,tr("Oersted (Oe)"),"Campo",Valor);
+        Unidad1(Resto,0.01,Cantidad,tr("Oersted (Oe)"),"Campo",Valor);
+        Unidad(Resto,1,Cantidad,tr("Gilbert por metro (Gi/m)"),"Campo",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Gilbert por metro (Gi/m)"),"Campo",Valor);
         ui->label_14->setText(tr("Campo magnetico: Convertir a...")+ui->comboBox_18->currentText()+"");
         ui->label_15->setText(tr("Campo magnetico: Convertir de...")+ui->comboBox_18->currentText()+"");
     }
     if (Tipo == "Luz")
     {
         QString Value = ui->comboBox_17->currentText();
-        double Cantidad = ui->lineEdit_37->text().toFloat();
+        QString Valor = ui->lineEdit_37->text();
+        double Cantidad = ui->lineEdit_37->text().toDouble();
         double Resto = Referencia(Value,"Luz");
-        Unidad(Resto,3600,Cantidad,tr("Talbot (T)"),"Luz");
-        Unidad1(Resto,3600,Cantidad,tr("Talbot (T)"),"Luz");
-        Unidad(Resto,3600,Cantidad,tr("Lumen segundo (lm·s)"),"Luz");
-        Unidad1(Resto,3600,Cantidad,tr("Lumen segundo (lm·s)"),"Luz");
-        Unidad(Resto,60,Cantidad,tr("Lumen minuto (lm·min)"),"Luz");
-        Unidad1(Resto,60,Cantidad,tr("Lumen minuto (lm·min)"),"Luz");
-        Unidad(Resto,1,Cantidad,tr("Lumen hora (lm·h)"),"Luz");
-        Unidad1(Resto,1,Cantidad,tr("Lumen hora (lm·h)"),"Luz");
+        Unidad(Resto,3600,Cantidad,tr("Talbot (T)"),"Luz",Valor);
+        Unidad1(Resto,3600,Cantidad,tr("Talbot (T)"),"Luz",Valor);
+        Unidad(Resto,3600,Cantidad,tr("Lumen segundo (lm·s)"),"Luz",Valor);
+        Unidad1(Resto,3600,Cantidad,tr("Lumen segundo (lm·s)"),"Luz",Valor);
+        Unidad(Resto,60,Cantidad,tr("Lumen minuto (lm·min)"),"Luz",Valor);
+        Unidad1(Resto,60,Cantidad,tr("Lumen minuto (lm·min)"),"Luz",Valor);
+        Unidad(Resto,1,Cantidad,tr("Lumen hora (lm·h)"),"Luz",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Lumen hora (lm·h)"),"Luz",Valor);
         ui->label_14->setText(tr("Cantidad de luz: Convertir a...")+ui->comboBox_17->currentText()+"");
         ui->label_15->setText(tr("Cantidad de luz: Convertir de...")+ui->comboBox_17->currentText()+"");
     }
     if (Tipo == "Sustancia")
     {
         QString Value = ui->comboBox_50->currentText();
-        double Cantidad = ui->lineEdit_156->text().toFloat();
+        QString Valor = ui->lineEdit_156->text();
+        double Cantidad = ui->lineEdit_156->text().toDouble();
         double Resto = Referencia(Value,"Sustancia");
-        Unidad(Resto,1000,Cantidad,tr("Milimol (mmol)"),"Sustancia");
-        Unidad1(Resto,1000,Cantidad,tr("Milimol (mmol)"),"Sustancia");
-        Unidad(Resto,1,Cantidad,tr("Mol (mol)"),"Sustancia");
-        Unidad1(Resto,1,Cantidad,tr("Mol (mol)"),"Sustancia");
-        Unidad(Resto,0.001,Cantidad,tr("Kilomol (kmol)"),"Sustancia");
-        Unidad1(Resto,0.001,Cantidad,tr("Kilomol (kmol)"),"Sustancia");
-        Unidad(Resto,0.0022046226,Cantidad,tr("Libra mol (lb-mol)"),"Sustancia");
-        Unidad1(Resto,0.0022046226,Cantidad,tr("Libra mol (lb-mol)"),"Sustancia");
+        Unidad(Resto,1000,Cantidad,tr("Milimol (mmol)"),"Sustancia",Valor);
+        Unidad1(Resto,1000,Cantidad,tr("Milimol (mmol)"),"Sustancia",Valor);
+        Unidad(Resto,1,Cantidad,tr("Mol (mol)"),"Sustancia",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Mol (mol)"),"Sustancia",Valor);
+        Unidad(Resto,0.001,Cantidad,tr("Kilomol (kmol)"),"Sustancia",Valor);
+        Unidad1(Resto,0.001,Cantidad,tr("Kilomol (kmol)"),"Sustancia",Valor);
+        Unidad(Resto,0.0022046226,Cantidad,tr("Libra mol (lb-mol)"),"Sustancia",Valor);
+        Unidad1(Resto,0.0022046226,Cantidad,tr("Libra mol (lb-mol)"),"Sustancia",Valor);
         ui->label_14->setText(tr("Cantidad de sustancia: Convertir a...")+ui->comboBox_50->currentText()+"");
         ui->label_15->setText(tr("Cantidad de sustancia: Convertir de...")+ui->comboBox_50->currentText()+"");
     }
     if (Tipo == "Electrica")
     {
         QString Value = ui->comboBox_48->currentText();
-        double Cantidad = ui->lineEdit_154->text().toFloat();
+        QString Valor = ui->lineEdit_154->text();
+        double Cantidad = ui->lineEdit_154->text().toDouble();
         double Resto = Referencia(Value,"Electrica");
-        Unidad(Resto,1,Cantidad,tr("Faradio (F)"),"Electrica");
-        Unidad1(Resto,1,Cantidad,tr("Faradio (F)"),"Electrica");
-        Unidad(Resto,0.1,Cantidad,tr("Decafaradio (daF)"),"Electrica");
-        Unidad1(Resto,0.1,Cantidad,tr("Decafaradio (daF)"),"Electrica");
-        Unidad(Resto,0.01,Cantidad,tr("Hectofaradio (hF)"),"Electrica");
-        Unidad1(Resto,0.01,Cantidad,tr("Hectofaradio (hF)"),"Electrica");
-        Unidad(Resto,0.001,Cantidad,tr("Kilofaradio (kF)"),"Electrica");
-        Unidad1(Resto,0.001,Cantidad,tr("Kilofaradio (kF)"),"Electrica");
-        Unidad(Resto,0.000001,Cantidad,tr("Megafaradio (MF)"),"Electrica");
-        Unidad1(Resto,0.000001,Cantidad,tr("Megafaradio (MF)"),"Electrica");
-        Unidad(Resto,0.000000001,Cantidad,tr("Gigafaradio (GF)"),"Electrica");
-        Unidad1(Resto,0.000000001,Cantidad,tr("Gigafaradio (GF)"),"Electrica");
-        Unidad(Resto,0.000000000001,Cantidad,tr("Terafaradio (TF)"),"Electrica");
-        Unidad1(Resto,0.000000000001,Cantidad,tr("Terafaradio (TF)"),"Electrica");
-        Unidad(Resto,0.000000000000001,Cantidad,tr("Petafaradio (PF)"),"Electrica");
-        Unidad1(Resto,0.000000000000001,Cantidad,tr("Petafaradio (PF)"),"Electrica");
-        Unidad(Resto,0.000000000000000001,Cantidad,tr("Exafaradio (EF)"),"Electrica");
-        Unidad1(Resto,0.000000000000000001,Cantidad,tr("Exafaradio (EF)"),"Electrica");
-        Unidad(Resto,0.000000000000000000001,Cantidad,tr("Zettafaradio (ZF)"),"Electrica");
-        Unidad1(Resto,0.000000000000000000001,Cantidad,tr("Zettafaradio (ZF)"),"Electrica");
-        Unidad(Resto,0.000000000000000000000001,Cantidad,tr("Yottafaradio (YF)"),"Electrica");
-        Unidad1(Resto,0.000000000000000000000001,Cantidad,tr("Yottafaradio (YF)"),"Electrica");
-        Unidad(Resto,10,Cantidad,tr("Decifaradio (dF)"),"Electrica");
-        Unidad1(Resto,10,Cantidad,tr("Decifaradio (dF)"),"Electrica");
-        Unidad(Resto,100,Cantidad,tr("Centifaradio (cF)"),"Electrica");
-        Unidad1(Resto,100,Cantidad,tr("Centifaradio (cF)"),"Electrica");
-        Unidad(Resto,1000,Cantidad,tr("Milifaradio (mF)"),"Electrica");
-        Unidad1(Resto,1000,Cantidad,tr("Milifaradio (mF)"),"Electrica");
-        Unidad(Resto,1000000,Cantidad,tr("Microfaradio (µF)"),"Electrica");
-        Unidad1(Resto,1000000,Cantidad,tr("Microfaradio (µF)"),"Electrica");
-        Unidad(Resto,1000000000,Cantidad,tr("Nanofaradio (nF)"),"Electrica");
-        Unidad1(Resto,1000000000,Cantidad,tr("Nanofaradio (nF)"),"Electrica");
-        Unidad(Resto,1000000000000,Cantidad,tr("Picofaradio (pF)"),"Electrica");
-        Unidad1(Resto,1000000000000,Cantidad,tr("Picofaradio (pF)"),"Electrica");
-        Unidad(Resto,1000000000000000,Cantidad,tr("Femtofaradio (fF)"),"Electrica");
-        Unidad1(Resto,1000000000000000,Cantidad,tr("Femtofaradio (fF)"),"Electrica");
-        Unidad(Resto,1000000000000000000,Cantidad,tr("Attofaradio (aF)"),"Electrica");
-        Unidad1(Resto,1000000000000000000,Cantidad,tr("Attofaradio (aF)"),"Electrica");
-        Unidad(Resto,1000000000000000000000.00,Cantidad,tr("Zeptofaradio (zF)"),"Electrica");
-        Unidad1(Resto,1000000000000000000000.00,Cantidad,tr("Zeptofaradio (zF)"),"Electrica");
-        Unidad(Resto,1000000000000000000000000.00,Cantidad,tr("Yoctofaradio (yF)"),"Electrica");
-        Unidad1(Resto,1000000000000000000000000.00,Cantidad,tr("Yoctofaradio (yF)"),"Electrica");
-        Unidad(Resto,1,Cantidad,tr("Culombio por voltio"),"Electrica");
-        Unidad1(Resto,1,Cantidad,tr("Culombio por voltio"),"Electrica");
-        Unidad(Resto,0.000000001,Cantidad,tr("Abfaradio (abF)"),"Electrica");
-        Unidad1(Resto,0.000000001,Cantidad,tr("Abfaradio (abF)"),"Electrica");
-        Unidad(Resto,898755178736.5,Cantidad,tr("Statfaradio (statF)"),"Electrica");
-        Unidad1(Resto,898755178736.5,Cantidad,tr("Statfaradio (statF)"),"Electrica");
+        Unidad(Resto,1,Cantidad,tr("Faradio (F)"),"Electrica",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Faradio (F)"),"Electrica",Valor);
+        Unidad(Resto,0.1,Cantidad,tr("Decafaradio (daF)"),"Electrica",Valor);
+        Unidad1(Resto,0.1,Cantidad,tr("Decafaradio (daF)"),"Electrica",Valor);
+        Unidad(Resto,0.01,Cantidad,tr("Hectofaradio (hF)"),"Electrica",Valor);
+        Unidad1(Resto,0.01,Cantidad,tr("Hectofaradio (hF)"),"Electrica",Valor);
+        Unidad(Resto,0.001,Cantidad,tr("Kilofaradio (kF)"),"Electrica",Valor);
+        Unidad1(Resto,0.001,Cantidad,tr("Kilofaradio (kF)"),"Electrica",Valor);
+        Unidad(Resto,0.000001,Cantidad,tr("Megafaradio (MF)"),"Electrica",Valor);
+        Unidad1(Resto,0.000001,Cantidad,tr("Megafaradio (MF)"),"Electrica",Valor);
+        Unidad(Resto,0.000000001,Cantidad,tr("Gigafaradio (GF)"),"Electrica",Valor);
+        Unidad1(Resto,0.000000001,Cantidad,tr("Gigafaradio (GF)"),"Electrica",Valor);
+        Unidad(Resto,0.000000000001,Cantidad,tr("Terafaradio (TF)"),"Electrica",Valor);
+        Unidad1(Resto,0.000000000001,Cantidad,tr("Terafaradio (TF)"),"Electrica",Valor);
+        Unidad(Resto,0.000000000000001,Cantidad,tr("Petafaradio (PF)"),"Electrica",Valor);
+        Unidad1(Resto,0.000000000000001,Cantidad,tr("Petafaradio (PF)"),"Electrica",Valor);
+        Unidad(Resto,0.000000000000000001,Cantidad,tr("Exafaradio (EF)"),"Electrica",Valor);
+        Unidad1(Resto,0.000000000000000001,Cantidad,tr("Exafaradio (EF)"),"Electrica",Valor);
+        Unidad(Resto,0.000000000000000000001,Cantidad,tr("Zettafaradio (ZF)"),"Electrica",Valor);
+        Unidad1(Resto,0.000000000000000000001,Cantidad,tr("Zettafaradio (ZF)"),"Electrica",Valor);
+        Unidad(Resto,0.000000000000000000000001,Cantidad,tr("Yottafaradio (YF)"),"Electrica",Valor);
+        Unidad1(Resto,0.000000000000000000000001,Cantidad,tr("Yottafaradio (YF)"),"Electrica",Valor);
+        Unidad(Resto,10,Cantidad,tr("Decifaradio (dF)"),"Electrica",Valor);
+        Unidad1(Resto,10,Cantidad,tr("Decifaradio (dF)"),"Electrica",Valor);
+        Unidad(Resto,100,Cantidad,tr("Centifaradio (cF)"),"Electrica",Valor);
+        Unidad1(Resto,100,Cantidad,tr("Centifaradio (cF)"),"Electrica",Valor);
+        Unidad(Resto,1000,Cantidad,tr("Milifaradio (mF)"),"Electrica",Valor);
+        Unidad1(Resto,1000,Cantidad,tr("Milifaradio (mF)"),"Electrica",Valor);
+        Unidad(Resto,1000000,Cantidad,tr("Microfaradio (µF)"),"Electrica",Valor);
+        Unidad1(Resto,1000000,Cantidad,tr("Microfaradio (µF)"),"Electrica",Valor);
+        Unidad(Resto,1000000000,Cantidad,tr("Nanofaradio (nF)"),"Electrica",Valor);
+        Unidad1(Resto,1000000000,Cantidad,tr("Nanofaradio (nF)"),"Electrica",Valor);
+        Unidad(Resto,1000000000000,Cantidad,tr("Picofaradio (pF)"),"Electrica",Valor);
+        Unidad1(Resto,1000000000000,Cantidad,tr("Picofaradio (pF)"),"Electrica",Valor);
+        Unidad(Resto,1000000000000000,Cantidad,tr("Femtofaradio (fF)"),"Electrica",Valor);
+        Unidad1(Resto,1000000000000000,Cantidad,tr("Femtofaradio (fF)"),"Electrica",Valor);
+        Unidad(Resto,1000000000000000000,Cantidad,tr("Attofaradio (aF)"),"Electrica",Valor);
+        Unidad1(Resto,1000000000000000000,Cantidad,tr("Attofaradio (aF)"),"Electrica",Valor);
+        Unidad(Resto,1000000000000000000000.00,Cantidad,tr("Zeptofaradio (zF)"),"Electrica",Valor);
+        Unidad1(Resto,1000000000000000000000.00,Cantidad,tr("Zeptofaradio (zF)"),"Electrica",Valor);
+        Unidad(Resto,1000000000000000000000000.00,Cantidad,tr("Yoctofaradio (yF)"),"Electrica",Valor);
+        Unidad1(Resto,1000000000000000000000000.00,Cantidad,tr("Yoctofaradio (yF)"),"Electrica",Valor);
+        Unidad(Resto,1,Cantidad,tr("Culombio por voltio"),"Electrica",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Culombio por voltio"),"Electrica",Valor);
+        Unidad(Resto,0.000000001,Cantidad,tr("Abfaradio (abF)"),"Electrica",Valor);
+        Unidad1(Resto,0.000000001,Cantidad,tr("Abfaradio (abF)"),"Electrica",Valor);
+        Unidad(Resto,898755178736.5,Cantidad,tr("Statfaradio (statF)"),"Electrica",Valor);
+        Unidad1(Resto,898755178736.5,Cantidad,tr("Statfaradio (statF)"),"Electrica",Valor);
         ui->label_14->setText(tr("Capacidad electrica: Convertir a...")+ui->comboBox_48->currentText()+"");
         ui->label_15->setText(tr("Capacidad electrica: Convertir de...")+ui->comboBox_48->currentText()+"");
     }
     if (Tipo == "Carga")
     {
         QString Value = ui->comboBox_46->currentText();
-        double Cantidad = ui->lineEdit_152->text().toFloat();
+        QString Valor = ui->lineEdit_152->text();
+        double Cantidad = ui->lineEdit_152->text().toDouble();
         double Resto = Referencia(Value,"Carga");
-        Unidad(Resto,1000000000,Cantidad,tr("Nanoculombios (nC)"),"Carga");
-        Unidad1(Resto,1000000000,Cantidad,tr("Nanoculombios (nC)"),"Carga");
-        Unidad(Resto,1000000,Cantidad,tr("Microculombios (µC)"),"Carga");
-        Unidad1(Resto,1000000,Cantidad,tr("Microculombios (µC)"),"Carga");
-        Unidad(Resto,1000,Cantidad,tr("Miliculombios (mC)"),"Carga");
-        Unidad1(Resto,1000,Cantidad,tr("Miliculombios (mC)"),"Carga");
-        Unidad(Resto,1,Cantidad,tr("Culombios (C)"),"Carga");
-        Unidad1(Resto,1,Cantidad,tr("Culombios (C)"),"Carga");
-        Unidad(Resto,0.001,Cantidad,tr("Kiloculombios (kC)"),"Carga");
-        Unidad1(Resto,0.001,Cantidad,tr("Kiloculombios (kC)"),"Carga");
-        Unidad(Resto,0.000001,Cantidad,tr("Megaculombios (MC)"),"Carga");
-        Unidad1(Resto,0.000001,Cantidad,tr("Megaculombios (MC)"),"Carga");
-        Unidad(Resto,0.1,Cantidad,tr("Abculombios (abC)"),"Carga");
-        Unidad1(Resto,0.1,Cantidad,tr("Abculombios (abC)"),"Carga");
-        Unidad(Resto,0.277777777778,Cantidad,tr("Miliamperios-hora (mAh)"),"Carga");
-        Unidad1(Resto,0.277777777778,Cantidad,tr("Miliamperios-hora (mAh)"),"Carga");
-        Unidad(Resto,0.000277777777778,Cantidad,tr("Amperios-hora (Ah)"),"Carga");
-        Unidad1(Resto,0.000277777777778,Cantidad,tr("Amperios-hora (Ah)"),"Carga");
-        Unidad(Resto,0.00001036426864904,Cantidad,tr("Faraday (F)"),"Carga");
-        Unidad1(Resto,0.00001036426864904,Cantidad,tr("Faraday (F)"),"Carga");
-        Unidad(Resto,2997924580.00,Cantidad,tr("Statculombios (statC)"),"Carga");
-        Unidad1(Resto,2997924580.00,Cantidad,tr("Statculombios (statC)"),"Carga");
-        Unidad(Resto,6241509474153816705,Cantidad,tr("Carga Elemental (e)"),"Carga");
-        Unidad1(Resto,6241509474153816705,Cantidad,tr("Carga Elemental (e)"),"Carga");
+        Unidad(Resto,1000000000,Cantidad,tr("Nanoculombios (nC)"),"Carga",Valor);
+        Unidad1(Resto,1000000000,Cantidad,tr("Nanoculombios (nC)"),"Carga",Valor);
+        Unidad(Resto,1000000,Cantidad,tr("Microculombios (µC)"),"Carga",Valor);
+        Unidad1(Resto,1000000,Cantidad,tr("Microculombios (µC)"),"Carga",Valor);
+        Unidad(Resto,1000,Cantidad,tr("Miliculombios (mC)"),"Carga",Valor);
+        Unidad1(Resto,1000,Cantidad,tr("Miliculombios (mC)"),"Carga",Valor);
+        Unidad(Resto,1,Cantidad,tr("Culombios (C)"),"Carga",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Culombios (C)"),"Carga",Valor);
+        Unidad(Resto,0.001,Cantidad,tr("Kiloculombios (kC)"),"Carga",Valor);
+        Unidad1(Resto,0.001,Cantidad,tr("Kiloculombios (kC)"),"Carga",Valor);
+        Unidad(Resto,0.000001,Cantidad,tr("Megaculombios (MC)"),"Carga",Valor);
+        Unidad1(Resto,0.000001,Cantidad,tr("Megaculombios (MC)"),"Carga",Valor);
+        Unidad(Resto,0.1,Cantidad,tr("Abculombios (abC)"),"Carga",Valor);
+        Unidad1(Resto,0.1,Cantidad,tr("Abculombios (abC)"),"Carga",Valor);
+        Unidad(Resto,0.277777777778,Cantidad,tr("Miliamperios-hora (mAh)"),"Carga",Valor);
+        Unidad1(Resto,0.277777777778,Cantidad,tr("Miliamperios-hora (mAh)"),"Carga",Valor);
+        Unidad(Resto,0.000277777777778,Cantidad,tr("Amperios-hora (Ah)"),"Carga",Valor);
+        Unidad1(Resto,0.000277777777778,Cantidad,tr("Amperios-hora (Ah)"),"Carga",Valor);
+        Unidad(Resto,0.00001036426864904,Cantidad,tr("Faraday (F)"),"Carga",Valor);
+        Unidad1(Resto,0.00001036426864904,Cantidad,tr("Faraday (F)"),"Carga",Valor);
+        Unidad(Resto,2997924580.00,Cantidad,tr("Statculombios (statC)"),"Carga",Valor);
+        Unidad1(Resto,2997924580.00,Cantidad,tr("Statculombios (statC)"),"Carga",Valor);
+        Unidad(Resto,6241509474153816705,Cantidad,tr("Carga Elemental (e)"),"Carga",Valor);
+        Unidad1(Resto,6241509474153816705,Cantidad,tr("Carga Elemental (e)"),"Carga",Valor);
         ui->label_14->setText(tr("Carga electrica: Convertir a...")+ui->comboBox_46->currentText()+"");
         ui->label_15->setText(tr("Carga electrica: Convertir de...")+ui->comboBox_46->currentText()+"");
     }
     if (Tipo == "Caudal")
     {
         QString Value = ui->comboBox_44->currentText();
-        double Cantidad = ui->lineEdit_150->text().toFloat();
+        QString Valor = ui->lineEdit_150->text();
+        double Cantidad = ui->lineEdit_150->text().toDouble();
         double Resto = Referencia(Value,"Caudal");
-        Unidad(Resto,0.000000001,Cantidad,tr("Kilometros cubicos por segundo (km³/s)"),"Caudal");
-        Unidad1(Resto,0.000000001,Cantidad,tr("Kilometros cubicos por segundo (km³/s)"),"Caudal");
-        Unidad(Resto,1,Cantidad,tr("Metros cubicos por segundo (m³/s)"),"Caudal");
-        Unidad1(Resto,1,Cantidad,tr("Metros cubicos por segundo (m³/s)"),"Caudal");
-        Unidad(Resto,1000,Cantidad,tr("Decimetros cubicos por segundo (dm³/s)"),"Caudal");
-        Unidad1(Resto,1000,Cantidad,tr("Decimetros cubicos por segundo (dm³/s)"),"Caudal");
-        Unidad(Resto,1000000,Cantidad,tr("Centimetros cubicos por segundo (cm³/s)"),"Caudal");
-        Unidad1(Resto,1000000,Cantidad,tr("Centimetros cubicos por segundo (cm³/s)"),"Caudal");
-        Unidad(Resto,1000000000,Cantidad,tr("Milimetros cubicos por segundo (mm³/s)"),"Caudal");
-        Unidad1(Resto,1000000000,Cantidad,tr("Milimetros cubicos por segundo (mm³/s)"),"Caudal");
-        Unidad(Resto,61023.7440947319,Cantidad,tr("Pulgadas cubicas por segundo (in³/s)"),"Caudal");
-        Unidad1(Resto,61023.7440947319,Cantidad,tr("Pulgadas cubicas por segundo (in³/s)"),"Caudal");
-        Unidad(Resto,35.3146667214884,Cantidad,tr("Pies cubicos por segundo (ft³/s)"),"Caudal");
-        Unidad1(Resto,35.3146667214884,Cantidad,tr("Pies cubicos por segundo (ft³/s)"),"Caudal");
-        Unidad(Resto,264.172052358147,Cantidad,tr("Galones por el segundo (Liquido EE.UU.)"),"Caudal");
-        Unidad1(Resto,264.172052358147,Cantidad,tr("Galones por el segundo (Liquido EE.UU.)"),"Caudal");
-        Unidad(Resto,219.969248299088,Cantidad,tr("Galones por segundo (Imperial)"),"Caudal");
-        Unidad1(Resto,219.969248299088,Cantidad,tr("Galones por segundo (Imperial)"),"Caudal");
-        Unidad(Resto,1000,Cantidad,tr("Litros por segundo (l/s)"),"Caudal");
-        Unidad1(Resto,1000,Cantidad,tr("Litros por segundo (l/s)"),"Caudal");
-        Unidad(Resto,0.000000000239912758578926,Cantidad,tr("Millas cubicas por segundo"),"Caudal");
-        Unidad1(Resto,0.000000000239912758578926,Cantidad,tr("Millas cubicas por segundo"),"Caudal");
-        Unidad(Resto,0.000810713193789908,Cantidad,tr("Acre-pies por segundo"),"Caudal");
-        Unidad1(Resto,0.000810713193789908,Cantidad,tr("Acre-pies por segundo"),"Caudal");
-        Unidad(Resto,28.3775932584017,Cantidad,tr("Bushels por segundo (EE.UU,)"),"Caudal");
-        Unidad1(Resto,28.3775932584017,Cantidad,tr("Bushels por segundo (EE.UU,)"),"Caudal");
-        Unidad(Resto,27.496156037386,Cantidad,tr("Bushels por segundo (Imperial)"),"Caudal");
-        Unidad1(Resto,27.496156037386,Cantidad,tr("Bushels por segundo (Imperial)"),"Caudal");        
-        Unidad(Resto,0.000000006,Cantidad,tr("Kilometros cubicos por minuto (km³/min)"),"Caudal");
-        Unidad1(Resto,0.000000006,Cantidad,tr("Kilometros cubicos por minuto (km³/min)"),"Caudal");
-        Unidad(Resto,60,Cantidad,tr("Metros cubicos por minuto (m³/min)"),"Caudal");
-        Unidad1(Resto,60,Cantidad,tr("Metros cubicos por minuto (m³/min)"),"Caudal");
-        Unidad(Resto,60000,Cantidad,tr("Decimetros cubicos por minuto (dm³/min)"),"Caudal");
-        Unidad1(Resto,60000,Cantidad,tr("Decimetros cubicos por minuto (dm³/min)"),"Caudal");
-        Unidad(Resto,60000000,Cantidad,tr("Centimetros cubicos por minuto (cm³/min)"),"Caudal");
-        Unidad1(Resto,60000000,Cantidad,tr("Centimetros cubicos por minuto (cm³/min)"),"Caudal");
-        Unidad(Resto,60000000000,Cantidad,tr("Milimetros cubicos por minuto (mm³/min)"),"Caudal");
-        Unidad1(Resto,60000000000,Cantidad,tr("Milimetros cubicos por minuto (mm³/min)"),"Caudal");
-        Unidad(Resto,3661424.64568392,Cantidad,tr("Pulgadas cubicas por minuto (in³/min)"),"Caudal");
-        Unidad1(Resto,3661424.64568392,Cantidad,tr("Pulgadas cubicas por minuto (in³/min)"),"Caudal");
-        Unidad(Resto,2118.8800032893,Cantidad,tr("Pies cubicos por minuto (ft³/min)"),"Caudal");
-        Unidad1(Resto,2118.8800032893,Cantidad,tr("Pies cubicos por minuto (ft³/min)"),"Caudal");
-        Unidad(Resto,15850.3231414888,Cantidad,tr("Galones por el minuto (Liquido EE.UU.)"),"Caudal");
-        Unidad1(Resto,15850.3231414888,Cantidad,tr("Galones por el minuto (Liquido EE.UU.)"),"Caudal");
-        Unidad(Resto,13198.1548979453,Cantidad,tr("Galones por minuto (Imperial)"),"Caudal");
-        Unidad1(Resto,13198.1548979453,Cantidad,tr("Galones por minuto (Imperial)"),"Caudal");
-        Unidad(Resto,60000,Cantidad,tr("Litros por minuto (l/min)"),"Caudal");
-        Unidad1(Resto,60000,Cantidad,tr("Litros por minuto (l/min)"),"Caudal");
-        Unidad(Resto,0.0000000143947655147356,Cantidad,tr("Millas cubicas por minuto"),"Caudal");
-        Unidad1(Resto,0.0000000143947655147356,Cantidad,tr("Millas cubicas por minuto"),"Caudal");
-        Unidad(Resto,0.0486427916273945,Cantidad,tr("Acre-pies por minuto"),"Caudal");
-        Unidad1(Resto,0.0486427916273945,Cantidad,tr("Acre-pies por minuto"),"Caudal");
-        Unidad(Resto,1702.6555955041,Cantidad,tr("Bushels por minuto (EE.UU,)"),"Caudal");
-        Unidad1(Resto,1702.6555955041,Cantidad,tr("Bushels por minuto (EE.UU,)"),"Caudal");
-        Unidad(Resto,1649.76936224316,Cantidad,tr("Bushels por minuto (Imperial)"),"Caudal");
-        Unidad1(Resto,1649.76936224316,Cantidad,tr("Bushels por minuto (Imperial)"),"Caudal");
-        Unidad(Resto,0.0000036,Cantidad,tr("Kilometros cubicos por hora (km³/h)"),"Caudal");
-        Unidad1(Resto,0.0000036,Cantidad,tr("Kilometros cubicos por hora (km³/h)"),"Caudal");
-        Unidad(Resto,3600,Cantidad,tr("Metros cubicos por hora (m³/h)"),"Caudal");
-        Unidad1(Resto,3600,Cantidad,tr("Metros cubicos por hora (m³/h)"),"Caudal");
-        Unidad(Resto,3600000,Cantidad,tr("Decimetros cubicos por hora (dm³/h)"),"Caudal");
-        Unidad1(Resto,3600000,Cantidad,tr("Decimetros cubicos por hora (dm³/h)"),"Caudal");
-        Unidad(Resto,3600000000.00,Cantidad,tr("Centimetros cubicos por hora (cm³/h)"),"Caudal");
-        Unidad1(Resto,3600000000.00,Cantidad,tr("Centimetros cubicos por hora (cm³/h)"),"Caudal");
-        Unidad(Resto,3600000000000,Cantidad,tr("Milimetros cubicos por hora (mm³/h)"),"Caudal");
-        Unidad1(Resto,3600000000000,Cantidad,tr("Milimetros cubicos por hora (mm³/h)"),"Caudal");
-        Unidad(Resto,219685478.741035,Cantidad,tr("Pulgadas cubicas por hora (in³/h)"),"Caudal");
-        Unidad1(Resto,219685478.741035,Cantidad,tr("Pulgadas cubicas por hora (in³/h)"),"Caudal");
-        Unidad(Resto,127132.800197358,Cantidad,tr("Pies cubicos por hora (ft³/h)"),"Caudal");
-        Unidad1(Resto,127132.800197358,Cantidad,tr("Pies cubicos por hora (ft³/h)"),"Caudal");
-        Unidad(Resto,951019.388489329,Cantidad,tr("Galones por el hora (Liquido EE.UU.)"),"Caudal");
-        Unidad1(Resto,951019.388489329,Cantidad,tr("Galones por el hora (Liquido EE.UU.)"),"Caudal");
-        Unidad(Resto,791889.293876716,Cantidad,tr("Galones por hora (Imperial)"),"Caudal");
-        Unidad1(Resto,791889.293876716,Cantidad,tr("Galones por hora (Imperial)"),"Caudal");
-        Unidad(Resto,3600000,Cantidad,tr("Litros por hora (l/h)"),"Caudal");
-        Unidad1(Resto,3600000,Cantidad,tr("Litros por hora (l/h)"),"Caudal");
-        Unidad(Resto,0.000000863685930884134,Cantidad,tr("Millas cubicas por hora"),"Caudal");
-        Unidad1(Resto,0.000000863685930884134,Cantidad,tr("Millas cubicas por hora"),"Caudal");
-        Unidad(Resto,2.91856749764367,Cantidad,tr("Acre-pies por hora"),"Caudal");
-        Unidad1(Resto,2.91856749764367,Cantidad,tr("Acre-pies por hora"),"Caudal");
-        Unidad(Resto,102159.335730246,Cantidad,tr("Bushels por hora (EE.UU,)"),"Caudal");
-        Unidad1(Resto,102159.335730246,Cantidad,tr("Bushels por hora (EE.UU,)"),"Caudal");
-        Unidad(Resto,98986.1617345895,Cantidad,tr("Bushels por hora (Imperial)"),"Caudal");
-        Unidad1(Resto,98986.1617345895,Cantidad,tr("Bushels por hora (Imperial)"),"Caudal");
-        Unidad(Resto,0.0000864,Cantidad,tr("Kilometros cubicos por dia"),"Caudal");
-        Unidad1(Resto,0.0000864,Cantidad,tr("Kilometros cubicos por dia"),"Caudal");
-        Unidad(Resto,86400,Cantidad,tr("Metros cubicos por dia"),"Caudal");
-        Unidad1(Resto,86400,Cantidad,tr("Metros cubicos por dia"),"Caudal");
-        Unidad(Resto,86400000,Cantidad,tr("Decimetros cubicos por dia"),"Caudal");
-        Unidad1(Resto,86400000,Cantidad,tr("Decimetros cubicos por dia"),"Caudal");
-        Unidad(Resto,86400000000,Cantidad,tr("Centimetros cubicos por dia"),"Caudal");
-        Unidad1(Resto,86400000000,Cantidad,tr("Centimetros cubicos por dia"),"Caudal");
-        Unidad(Resto,86400000000000,Cantidad,tr("Milimetros cubicos por dia"),"Caudal");
-        Unidad1(Resto,86400000000000,Cantidad,tr("Milimetros cubicos por dia"),"Caudal");
-        Unidad(Resto,5272451489.78484,Cantidad,tr("Pulgadas cubicas por dia"),"Caudal");
-        Unidad1(Resto,5272451489.78484,Cantidad,tr("Pulgadas cubicas por dia"),"Caudal");
-        Unidad(Resto,3051187.2047366,Cantidad,tr("Pies cubicos por dia"),"Caudal");
-        Unidad1(Resto,3051187.2047366,Cantidad,tr("Pies cubicos por dia"),"Caudal");
-        Unidad(Resto,22824465.3237439,Cantidad,tr("Galones por el dia (Liquido EE.UU.)"),"Caudal");
-        Unidad1(Resto,22824465.3237439,Cantidad,tr("Galones por el dia (Liquido EE.UU.)"),"Caudal");
-        Unidad(Resto,19005343.0530412,Cantidad,tr("Galones por dia (Imperial)"),"Caudal");
-        Unidad1(Resto,19005343.0530412,Cantidad,tr("Galones por dia (Imperial)"),"Caudal");
-        Unidad(Resto,86400000,Cantidad,tr("Litros por dia"),"Caudal");
-        Unidad1(Resto,86400000,Cantidad,tr("Litros por dia"),"Caudal");
-        Unidad(Resto,0.0000207284623412192,Cantidad,tr("Millas cubicas por dia"),"Caudal");
-        Unidad1(Resto,0.0000207284623412192,Cantidad,tr("Millas cubicas por dia"),"Caudal");
-        Unidad(Resto,70.045619943448,Cantidad,tr("Acre-pies por dia"),"Caudal");
-        Unidad1(Resto,70.045619943448,Cantidad,tr("Acre-pies por dia"),"Caudal");
-        Unidad(Resto,2451824.05752591,Cantidad,tr("Bushels por dia (EE.UU,)"),"Caudal");
-        Unidad1(Resto,2451824.05752591,Cantidad,tr("Bushels por dia (EE.UU,)"),"Caudal");
-        Unidad(Resto,2375667.88163015,Cantidad,tr("Bushels por dia (Imperial)"),"Caudal");
-        Unidad1(Resto,2375667.88163015,Cantidad,tr("Bushels por dia (Imperial)"),"Caudal");
-        Unidad(Resto,0.031536,Cantidad,tr("Kilometros cubicos por ano"),"Caudal");
-        Unidad1(Resto,0.031536,Cantidad,tr("Kilometros cubicos por ano"),"Caudal");
-        Unidad(Resto,31536000,Cantidad,tr("Metros cubicos por ano"),"Caudal");
-        Unidad1(Resto,31536000,Cantidad,tr("Metros cubicos por ano"),"Caudal");
-        Unidad(Resto,31536000000,Cantidad,tr("Decimetros cubicos por ano"),"Caudal");
-        Unidad1(Resto,31536000000,Cantidad,tr("Decimetros cubicos por ano"),"Caudal");
-        Unidad(Resto,31536000000000,Cantidad,tr("Centimetros cubicos por ano"),"Caudal");
-        Unidad1(Resto,31536000000000,Cantidad,tr("Centimetros cubicos por ano"),"Caudal");
-        Unidad(Resto,31536000000000000,Cantidad,tr("Milimetros cubicos por ano"),"Caudal");
-        Unidad1(Resto,31536000000000000,Cantidad,tr("Milimetros cubicos por ano"),"Caudal");
-        Unidad(Resto,1924444793771.47,Cantidad,tr("Pulgadas cubicas por ano"),"Caudal");
-        Unidad1(Resto,1924444793771.47,Cantidad,tr("Pulgadas cubicas por ano"),"Caudal");
-        Unidad(Resto,1113683329.72886,Cantidad,tr("Pies cubicos por ano"),"Caudal");
-        Unidad1(Resto,1113683329.72886,Cantidad,tr("Pies cubicos por ano"),"Caudal");
-        Unidad(Resto,8330929843.16652,Cantidad,tr("Galones por el ano (Liquido EE.UU.)"),"Caudal");
-        Unidad1(Resto,8330929843.16652,Cantidad,tr("Galones por el ano (Liquido EE.UU.)"),"Caudal");
-        Unidad(Resto,6936950214.36003,Cantidad,tr("Galones por ano (Imperial)"),"Caudal");
-        Unidad1(Resto,6936950214.36003,Cantidad,tr("Galones por ano (Imperial)"),"Caudal");
-        Unidad(Resto,31536000000,Cantidad,tr("Litros por ano"),"Caudal");
-        Unidad1(Resto,31536000000,Cantidad,tr("Litros por ano"),"Caudal");
-        Unidad(Resto,0.00756588875454502,Cantidad,tr("Millas cubicas por ano"),"Caudal");
-        Unidad1(Resto,0.00756588875454502,Cantidad,tr("Millas cubicas por ano"),"Caudal");
-        Unidad(Resto,25566.6512793585,Cantidad,tr("Acre-pies por ano"),"Caudal");
-        Unidad1(Resto,25566.6512793585,Cantidad,tr("Acre-pies por ano"),"Caudal");
-        Unidad(Resto,894915780.996958,Cantidad,tr("Bushels por ano (EE.UU,)"),"Caudal");
-        Unidad1(Resto,894915780.996958,Cantidad,tr("Bushels por ano (EE.UU,)"),"Caudal");
-        Unidad(Resto,867118776.795004,Cantidad,tr("Bushels por ano (Imperial)"),"Caudal");
-        Unidad1(Resto,867118776.795004,Cantidad,tr("Bushels por ano (Imperial)"),"Caudal");
+        Unidad(Resto,0.000000001,Cantidad,tr("Kilometros cubicos por segundo (km³/s)"),"Caudal",Valor);
+        Unidad1(Resto,0.000000001,Cantidad,tr("Kilometros cubicos por segundo (km³/s)"),"Caudal",Valor);
+        Unidad(Resto,1,Cantidad,tr("Metros cubicos por segundo (m³/s)"),"Caudal",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Metros cubicos por segundo (m³/s)"),"Caudal",Valor);
+        Unidad(Resto,1000,Cantidad,tr("Decimetros cubicos por segundo (dm³/s)"),"Caudal",Valor);
+        Unidad1(Resto,1000,Cantidad,tr("Decimetros cubicos por segundo (dm³/s)"),"Caudal",Valor);
+        Unidad(Resto,1000000,Cantidad,tr("Centimetros cubicos por segundo (cm³/s)"),"Caudal",Valor);
+        Unidad1(Resto,1000000,Cantidad,tr("Centimetros cubicos por segundo (cm³/s)"),"Caudal",Valor);
+        Unidad(Resto,1000000000,Cantidad,tr("Milimetros cubicos por segundo (mm³/s)"),"Caudal",Valor);
+        Unidad1(Resto,1000000000,Cantidad,tr("Milimetros cubicos por segundo (mm³/s)"),"Caudal",Valor);
+        Unidad(Resto,61023.7440947319,Cantidad,tr("Pulgadas cubicas por segundo (in³/s)"),"Caudal",Valor);
+        Unidad1(Resto,61023.7440947319,Cantidad,tr("Pulgadas cubicas por segundo (in³/s)"),"Caudal",Valor);
+        Unidad(Resto,35.3146667214884,Cantidad,tr("Pies cubicos por segundo (ft³/s)"),"Caudal",Valor);
+        Unidad1(Resto,35.3146667214884,Cantidad,tr("Pies cubicos por segundo (ft³/s)"),"Caudal",Valor);
+        Unidad(Resto,264.172052358147,Cantidad,tr("Galones por el segundo (Liquido EE.UU.)"),"Caudal",Valor);
+        Unidad1(Resto,264.172052358147,Cantidad,tr("Galones por el segundo (Liquido EE.UU.)"),"Caudal",Valor);
+        Unidad(Resto,219.969248299088,Cantidad,tr("Galones por segundo (Imperial)"),"Caudal",Valor);
+        Unidad1(Resto,219.969248299088,Cantidad,tr("Galones por segundo (Imperial)"),"Caudal",Valor);
+        Unidad(Resto,1000,Cantidad,tr("Litros por segundo (l/s)"),"Caudal",Valor);
+        Unidad1(Resto,1000,Cantidad,tr("Litros por segundo (l/s)"),"Caudal",Valor);
+        Unidad(Resto,0.000000000239912758578926,Cantidad,tr("Millas cubicas por segundo"),"Caudal",Valor);
+        Unidad1(Resto,0.000000000239912758578926,Cantidad,tr("Millas cubicas por segundo"),"Caudal",Valor);
+        Unidad(Resto,0.000810713193789908,Cantidad,tr("Acre-pies por segundo"),"Caudal",Valor);
+        Unidad1(Resto,0.000810713193789908,Cantidad,tr("Acre-pies por segundo"),"Caudal",Valor);
+        Unidad(Resto,28.3775932584017,Cantidad,tr("Bushels por segundo (EE.UU,)"),"Caudal",Valor);
+        Unidad1(Resto,28.3775932584017,Cantidad,tr("Bushels por segundo (EE.UU,)"),"Caudal",Valor);
+        Unidad(Resto,27.496156037386,Cantidad,tr("Bushels por segundo (Imperial)"),"Caudal",Valor);
+        Unidad1(Resto,27.496156037386,Cantidad,tr("Bushels por segundo (Imperial)"),"Caudal",Valor);
+        Unidad(Resto,0.000000006,Cantidad,tr("Kilometros cubicos por minuto (km³/min)"),"Caudal",Valor);
+        Unidad1(Resto,0.000000006,Cantidad,tr("Kilometros cubicos por minuto (km³/min)"),"Caudal",Valor);
+        Unidad(Resto,60,Cantidad,tr("Metros cubicos por minuto (m³/min)"),"Caudal",Valor);
+        Unidad1(Resto,60,Cantidad,tr("Metros cubicos por minuto (m³/min)"),"Caudal",Valor);
+        Unidad(Resto,60000,Cantidad,tr("Decimetros cubicos por minuto (dm³/min)"),"Caudal",Valor);
+        Unidad1(Resto,60000,Cantidad,tr("Decimetros cubicos por minuto (dm³/min)"),"Caudal",Valor);
+        Unidad(Resto,60000000,Cantidad,tr("Centimetros cubicos por minuto (cm³/min)"),"Caudal",Valor);
+        Unidad1(Resto,60000000,Cantidad,tr("Centimetros cubicos por minuto (cm³/min)"),"Caudal",Valor);
+        Unidad(Resto,60000000000,Cantidad,tr("Milimetros cubicos por minuto (mm³/min)"),"Caudal",Valor);
+        Unidad1(Resto,60000000000,Cantidad,tr("Milimetros cubicos por minuto (mm³/min)"),"Caudal",Valor);
+        Unidad(Resto,3661424.64568392,Cantidad,tr("Pulgadas cubicas por minuto (in³/min)"),"Caudal",Valor);
+        Unidad1(Resto,3661424.64568392,Cantidad,tr("Pulgadas cubicas por minuto (in³/min)"),"Caudal",Valor);
+        Unidad(Resto,2118.8800032893,Cantidad,tr("Pies cubicos por minuto (ft³/min)"),"Caudal",Valor);
+        Unidad1(Resto,2118.8800032893,Cantidad,tr("Pies cubicos por minuto (ft³/min)"),"Caudal",Valor);
+        Unidad(Resto,15850.3231414888,Cantidad,tr("Galones por el minuto (Liquido EE.UU.)"),"Caudal",Valor);
+        Unidad1(Resto,15850.3231414888,Cantidad,tr("Galones por el minuto (Liquido EE.UU.)"),"Caudal",Valor);
+        Unidad(Resto,13198.1548979453,Cantidad,tr("Galones por minuto (Imperial)"),"Caudal",Valor);
+        Unidad1(Resto,13198.1548979453,Cantidad,tr("Galones por minuto (Imperial)"),"Caudal",Valor);
+        Unidad(Resto,60000,Cantidad,tr("Litros por minuto (l/min)"),"Caudal",Valor);
+        Unidad1(Resto,60000,Cantidad,tr("Litros por minuto (l/min)"),"Caudal",Valor);
+        Unidad(Resto,0.0000000143947655147356,Cantidad,tr("Millas cubicas por minuto"),"Caudal",Valor);
+        Unidad1(Resto,0.0000000143947655147356,Cantidad,tr("Millas cubicas por minuto"),"Caudal",Valor);
+        Unidad(Resto,0.0486427916273945,Cantidad,tr("Acre-pies por minuto"),"Caudal",Valor);
+        Unidad1(Resto,0.0486427916273945,Cantidad,tr("Acre-pies por minuto"),"Caudal",Valor);
+        Unidad(Resto,1702.6555955041,Cantidad,tr("Bushels por minuto (EE.UU,)"),"Caudal",Valor);
+        Unidad1(Resto,1702.6555955041,Cantidad,tr("Bushels por minuto (EE.UU,)"),"Caudal",Valor);
+        Unidad(Resto,1649.76936224316,Cantidad,tr("Bushels por minuto (Imperial)"),"Caudal",Valor);
+        Unidad1(Resto,1649.76936224316,Cantidad,tr("Bushels por minuto (Imperial)"),"Caudal",Valor);
+        Unidad(Resto,0.0000036,Cantidad,tr("Kilometros cubicos por hora (km³/h)"),"Caudal",Valor);
+        Unidad1(Resto,0.0000036,Cantidad,tr("Kilometros cubicos por hora (km³/h)"),"Caudal",Valor);
+        Unidad(Resto,3600,Cantidad,tr("Metros cubicos por hora (m³/h)"),"Caudal",Valor);
+        Unidad1(Resto,3600,Cantidad,tr("Metros cubicos por hora (m³/h)"),"Caudal",Valor);
+        Unidad(Resto,3600000,Cantidad,tr("Decimetros cubicos por hora (dm³/h)"),"Caudal",Valor);
+        Unidad1(Resto,3600000,Cantidad,tr("Decimetros cubicos por hora (dm³/h)"),"Caudal",Valor);
+        Unidad(Resto,3600000000.00,Cantidad,tr("Centimetros cubicos por hora (cm³/h)"),"Caudal",Valor);
+        Unidad1(Resto,3600000000.00,Cantidad,tr("Centimetros cubicos por hora (cm³/h)"),"Caudal",Valor);
+        Unidad(Resto,3600000000000,Cantidad,tr("Milimetros cubicos por hora (mm³/h)"),"Caudal",Valor);
+        Unidad1(Resto,3600000000000,Cantidad,tr("Milimetros cubicos por hora (mm³/h)"),"Caudal",Valor);
+        Unidad(Resto,219685478.741035,Cantidad,tr("Pulgadas cubicas por hora (in³/h)"),"Caudal",Valor);
+        Unidad1(Resto,219685478.741035,Cantidad,tr("Pulgadas cubicas por hora (in³/h)"),"Caudal",Valor);
+        Unidad(Resto,127132.800197358,Cantidad,tr("Pies cubicos por hora (ft³/h)"),"Caudal",Valor);
+        Unidad1(Resto,127132.800197358,Cantidad,tr("Pies cubicos por hora (ft³/h)"),"Caudal",Valor);
+        Unidad(Resto,951019.388489329,Cantidad,tr("Galones por el hora (Liquido EE.UU.)"),"Caudal",Valor);
+        Unidad1(Resto,951019.388489329,Cantidad,tr("Galones por el hora (Liquido EE.UU.)"),"Caudal",Valor);
+        Unidad(Resto,791889.293876716,Cantidad,tr("Galones por hora (Imperial)"),"Caudal",Valor);
+        Unidad1(Resto,791889.293876716,Cantidad,tr("Galones por hora (Imperial)"),"Caudal",Valor);
+        Unidad(Resto,3600000,Cantidad,tr("Litros por hora (l/h)"),"Caudal",Valor);
+        Unidad1(Resto,3600000,Cantidad,tr("Litros por hora (l/h)"),"Caudal",Valor);
+        Unidad(Resto,0.000000863685930884134,Cantidad,tr("Millas cubicas por hora"),"Caudal",Valor);
+        Unidad1(Resto,0.000000863685930884134,Cantidad,tr("Millas cubicas por hora"),"Caudal",Valor);
+        Unidad(Resto,2.91856749764367,Cantidad,tr("Acre-pies por hora"),"Caudal",Valor);
+        Unidad1(Resto,2.91856749764367,Cantidad,tr("Acre-pies por hora"),"Caudal",Valor);
+        Unidad(Resto,102159.335730246,Cantidad,tr("Bushels por hora (EE.UU,)"),"Caudal",Valor);
+        Unidad1(Resto,102159.335730246,Cantidad,tr("Bushels por hora (EE.UU,)"),"Caudal",Valor);
+        Unidad(Resto,98986.1617345895,Cantidad,tr("Bushels por hora (Imperial)"),"Caudal",Valor);
+        Unidad1(Resto,98986.1617345895,Cantidad,tr("Bushels por hora (Imperial)"),"Caudal",Valor);
+        Unidad(Resto,0.0000864,Cantidad,tr("Kilometros cubicos por dia"),"Caudal",Valor);
+        Unidad1(Resto,0.0000864,Cantidad,tr("Kilometros cubicos por dia"),"Caudal",Valor);
+        Unidad(Resto,86400,Cantidad,tr("Metros cubicos por dia"),"Caudal",Valor);
+        Unidad1(Resto,86400,Cantidad,tr("Metros cubicos por dia"),"Caudal",Valor);
+        Unidad(Resto,86400000,Cantidad,tr("Decimetros cubicos por dia"),"Caudal",Valor);
+        Unidad1(Resto,86400000,Cantidad,tr("Decimetros cubicos por dia"),"Caudal",Valor);
+        Unidad(Resto,86400000000,Cantidad,tr("Centimetros cubicos por dia"),"Caudal",Valor);
+        Unidad1(Resto,86400000000,Cantidad,tr("Centimetros cubicos por dia"),"Caudal",Valor);
+        Unidad(Resto,86400000000000,Cantidad,tr("Milimetros cubicos por dia"),"Caudal",Valor);
+        Unidad1(Resto,86400000000000,Cantidad,tr("Milimetros cubicos por dia"),"Caudal",Valor);
+        Unidad(Resto,5272451489.78484,Cantidad,tr("Pulgadas cubicas por dia"),"Caudal",Valor);
+        Unidad1(Resto,5272451489.78484,Cantidad,tr("Pulgadas cubicas por dia"),"Caudal",Valor);
+        Unidad(Resto,3051187.2047366,Cantidad,tr("Pies cubicos por dia"),"Caudal",Valor);
+        Unidad1(Resto,3051187.2047366,Cantidad,tr("Pies cubicos por dia"),"Caudal",Valor);
+        Unidad(Resto,22824465.3237439,Cantidad,tr("Galones por el dia (Liquido EE.UU.)"),"Caudal",Valor);
+        Unidad1(Resto,22824465.3237439,Cantidad,tr("Galones por el dia (Liquido EE.UU.)"),"Caudal",Valor);
+        Unidad(Resto,19005343.0530412,Cantidad,tr("Galones por dia (Imperial)"),"Caudal",Valor);
+        Unidad1(Resto,19005343.0530412,Cantidad,tr("Galones por dia (Imperial)"),"Caudal",Valor);
+        Unidad(Resto,86400000,Cantidad,tr("Litros por dia"),"Caudal",Valor);
+        Unidad1(Resto,86400000,Cantidad,tr("Litros por dia"),"Caudal",Valor);
+        Unidad(Resto,0.0000207284623412192,Cantidad,tr("Millas cubicas por dia"),"Caudal",Valor);
+        Unidad1(Resto,0.0000207284623412192,Cantidad,tr("Millas cubicas por dia"),"Caudal",Valor);
+        Unidad(Resto,70.045619943448,Cantidad,tr("Acre-pies por dia"),"Caudal",Valor);
+        Unidad1(Resto,70.045619943448,Cantidad,tr("Acre-pies por dia"),"Caudal",Valor);
+        Unidad(Resto,2451824.05752591,Cantidad,tr("Bushels por dia (EE.UU,)"),"Caudal",Valor);
+        Unidad1(Resto,2451824.05752591,Cantidad,tr("Bushels por dia (EE.UU,)"),"Caudal",Valor);
+        Unidad(Resto,2375667.88163015,Cantidad,tr("Bushels por dia (Imperial)"),"Caudal",Valor);
+        Unidad1(Resto,2375667.88163015,Cantidad,tr("Bushels por dia (Imperial)"),"Caudal",Valor);
+        Unidad(Resto,0.031536,Cantidad,tr("Kilometros cubicos por ano"),"Caudal",Valor);
+        Unidad1(Resto,0.031536,Cantidad,tr("Kilometros cubicos por ano"),"Caudal",Valor);
+        Unidad(Resto,31536000,Cantidad,tr("Metros cubicos por ano"),"Caudal",Valor);
+        Unidad1(Resto,31536000,Cantidad,tr("Metros cubicos por ano"),"Caudal",Valor);
+        Unidad(Resto,31536000000,Cantidad,tr("Decimetros cubicos por ano"),"Caudal",Valor);
+        Unidad1(Resto,31536000000,Cantidad,tr("Decimetros cubicos por ano"),"Caudal",Valor);
+        Unidad(Resto,31536000000000,Cantidad,tr("Centimetros cubicos por ano"),"Caudal",Valor);
+        Unidad1(Resto,31536000000000,Cantidad,tr("Centimetros cubicos por ano"),"Caudal",Valor);
+        Unidad(Resto,31536000000000000,Cantidad,tr("Milimetros cubicos por ano"),"Caudal",Valor);
+        Unidad1(Resto,31536000000000000,Cantidad,tr("Milimetros cubicos por ano"),"Caudal",Valor);
+        Unidad(Resto,1924444793771.47,Cantidad,tr("Pulgadas cubicas por ano"),"Caudal",Valor);
+        Unidad1(Resto,1924444793771.47,Cantidad,tr("Pulgadas cubicas por ano"),"Caudal",Valor);
+        Unidad(Resto,1113683329.72886,Cantidad,tr("Pies cubicos por ano"),"Caudal",Valor);
+        Unidad1(Resto,1113683329.72886,Cantidad,tr("Pies cubicos por ano"),"Caudal",Valor);
+        Unidad(Resto,8330929843.16652,Cantidad,tr("Galones por el ano (Liquido EE.UU.)"),"Caudal",Valor);
+        Unidad1(Resto,8330929843.16652,Cantidad,tr("Galones por el ano (Liquido EE.UU.)"),"Caudal",Valor);
+        Unidad(Resto,6936950214.36003,Cantidad,tr("Galones por ano (Imperial)"),"Caudal",Valor);
+        Unidad1(Resto,6936950214.36003,Cantidad,tr("Galones por ano (Imperial)"),"Caudal",Valor);
+        Unidad(Resto,31536000000,Cantidad,tr("Litros por ano"),"Caudal",Valor);
+        Unidad1(Resto,31536000000,Cantidad,tr("Litros por ano"),"Caudal",Valor);
+        Unidad(Resto,0.00756588875454502,Cantidad,tr("Millas cubicas por ano"),"Caudal",Valor);
+        Unidad1(Resto,0.00756588875454502,Cantidad,tr("Millas cubicas por ano"),"Caudal",Valor);
+        Unidad(Resto,25566.6512793585,Cantidad,tr("Acre-pies por ano"),"Caudal",Valor);
+        Unidad1(Resto,25566.6512793585,Cantidad,tr("Acre-pies por ano"),"Caudal",Valor);
+        Unidad(Resto,894915780.996958,Cantidad,tr("Bushels por ano (EE.UU,)"),"Caudal",Valor);
+        Unidad1(Resto,894915780.996958,Cantidad,tr("Bushels por ano (EE.UU,)"),"Caudal",Valor);
+        Unidad(Resto,867118776.795004,Cantidad,tr("Bushels por ano (Imperial)"),"Caudal",Valor);
+        Unidad1(Resto,867118776.795004,Cantidad,tr("Bushels por ano (Imperial)"),"Caudal",Valor);
         ui->label_14->setText(tr("Caudal volumetrico: Convertir a...")+ui->comboBox_44->currentText()+"");
         ui->label_15->setText(tr("Caudal volumetrico: Convertir de...")+ui->comboBox_44->currentText()+"");
     }
     if (Tipo == "Conductancia")
     {
         QString Value = ui->comboBox_54->currentText();
-        double Cantidad = ui->lineEdit_160->text().toFloat();
+        QString Valor = ui->lineEdit_160->text();
+        double Cantidad = ui->lineEdit_160->text().toDouble();
         double Resto = Referencia(Value,"Conductancia");
-        Unidad(Resto,1000000000,Cantidad,tr("Nanosiemens (nS)"),"Conductancia");
-        Unidad1(Resto,1000000000,Cantidad,tr("Nanosiemens (nS)"),"Conductancia");
-        Unidad(Resto,1000000,Cantidad,tr("Microsiemens (µS)"),"Conductancia");
-        Unidad1(Resto,1000000,Cantidad,tr("Microsiemens (µS)"),"Conductancia");
-        Unidad(Resto,1000,Cantidad,tr("Milisiemens (mS)"),"Conductancia");
-        Unidad1(Resto,1000,Cantidad,tr("Milisiemens (mS)"),"Conductancia");
-        Unidad(Resto,1,Cantidad,tr("Siemens (S)"),"Conductancia");
-        Unidad1(Resto,1,Cantidad,tr("Siemens (S)"),"Conductancia");
-        Unidad(Resto,0.001,Cantidad,tr("Kilosiemens (kS)"),"Conductancia");
-        Unidad1(Resto,0.001,Cantidad,tr("Kilosiemens (kS)"),"Conductancia");
-        Unidad(Resto,0.000001,Cantidad,tr("Megasiemens (MS)"),"Conductancia");
-        Unidad1(Resto,0.000001,Cantidad,tr("Megasiemens (MS)"),"Conductancia");
-        Unidad(Resto,0.000000001,Cantidad,tr("Gigasiemens (GS)"),"Conductancia");
-        Unidad1(Resto,0.000000001,Cantidad,tr("Gigasiemens (GS)"),"Conductancia");
-        Unidad(Resto,1,Cantidad,tr("Mho (℧)"),"Conductancia");
-        Unidad1(Resto,1,Cantidad,tr("Mho (℧)"),"Conductancia");
-        Unidad(Resto,1,Cantidad,tr("Amperios por voltios (A/V)"),"Conductancia");
-        Unidad1(Resto,1,Cantidad,tr("Amperios por voltios (A/V)"),"Conductancia");
+        Unidad(Resto,1000000000,Cantidad,tr("Nanosiemens (nS)"),"Conductancia",Valor);
+        Unidad1(Resto,1000000000,Cantidad,tr("Nanosiemens (nS)"),"Conductancia",Valor);
+        Unidad(Resto,1000000,Cantidad,tr("Microsiemens (µS)"),"Conductancia",Valor);
+        Unidad1(Resto,1000000,Cantidad,tr("Microsiemens (µS)"),"Conductancia",Valor);
+        Unidad(Resto,1000,Cantidad,tr("Milisiemens (mS)"),"Conductancia",Valor);
+        Unidad1(Resto,1000,Cantidad,tr("Milisiemens (mS)"),"Conductancia",Valor);
+        Unidad(Resto,1,Cantidad,tr("Siemens (S)"),"Conductancia",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Siemens (S)"),"Conductancia",Valor);
+        Unidad(Resto,0.001,Cantidad,tr("Kilosiemens (kS)"),"Conductancia",Valor);
+        Unidad1(Resto,0.001,Cantidad,tr("Kilosiemens (kS)"),"Conductancia",Valor);
+        Unidad(Resto,0.000001,Cantidad,tr("Megasiemens (MS)"),"Conductancia",Valor);
+        Unidad1(Resto,0.000001,Cantidad,tr("Megasiemens (MS)"),"Conductancia",Valor);
+        Unidad(Resto,0.000000001,Cantidad,tr("Gigasiemens (GS)"),"Conductancia",Valor);
+        Unidad1(Resto,0.000000001,Cantidad,tr("Gigasiemens (GS)"),"Conductancia",Valor);
+        Unidad(Resto,1,Cantidad,tr("Mho (℧)"),"Conductancia",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Mho (℧)"),"Conductancia",Valor);
+        Unidad(Resto,1,Cantidad,tr("Amperios por voltios (A/V)"),"Conductancia",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Amperios por voltios (A/V)"),"Conductancia",Valor);
         ui->label_14->setText(tr("Conductancia electrica: Convertir a...")+ui->comboBox_54->currentText()+"");
         ui->label_15->setText(tr("Conductancia electrica: Convertir de...")+ui->comboBox_54->currentText()+"");
+    }
+    if (Tipo == "Combustible")
+    {
+        QString Value = ui->comboBox_53->currentText();
+        QString Valor = ui->lineEdit_159->text();
+        double Cantidad = ui->lineEdit_159->text().toDouble();
+        double Resto = Referencia(Value,"Combustible");
+        Unidad(Resto,0.01,Cantidad,tr("Litros por kilometro (l/km)"),"Combustible",Valor);
+        Unidad1(Resto,0.01,Cantidad,tr("Litros por kilometro (l/km)"),"Combustible",Valor);
+        Unidad(Resto,0.1,Cantidad,tr("Litros por 10 kilometros (l/10 km)"),"Combustible",Valor);
+        Unidad1(Resto,0.1,Cantidad,tr("Litros por 10 kilometros (l/10 km)"),"Combustible",Valor);
+        Unidad(Resto,1,Cantidad,tr("Litros por 100 kilometros (l/100 km"),"Combustible",Valor);
+        Unidad1(Resto,1,Cantidad,tr("Litros por 100 kilometros (l/100 km"),"Combustible",Valor);
+        Unidad(Resto,100,Cantidad,tr("Kilometros por litro (km/l)"),"Combustible",Valor);
+        Unidad1(Resto,100,Cantidad,tr("Kilometros por litro (km/l)"),"Combustible",Valor);
+        Unidad(Resto,235.2145,Cantidad,tr("Millas por galon Americano (mpg)"),"Combustible",Valor);
+        Unidad1(Resto,235.2145,Cantidad,tr("Millas por galon Americano (mpg)"),"Combustible",Valor);
+        Unidad(Resto,0.4251438,Cantidad,tr("Galones por 100 millas"),"Combustible",Valor);
+        Unidad1(Resto,0.4251438,Cantidad,tr("Galones por 100 millas"),"Combustible",Valor);
+        Unidad(Resto,282.4815,Cantidad,tr("Millas por galon Britanico (mpg:1)"),"Combustible",Valor);
+        Unidad1(Resto,282.4815,Cantidad,tr("Millas por galon Britanico (mpg:1)"),"Combustible",Valor);
+        Unidad(Resto,62.1371192237334,Cantidad,tr("Millas por litro (mpl)"),"Combustible",Valor);
+        Unidad1(Resto,62.1371192237334,Cantidad,tr("Millas por litro (mpl)"),"Combustible",Valor);
+        Unidad(Resto,0.3540055,Cantidad,tr("Galones por 100 millas"),"Combustible",Valor);
+        Unidad1(Resto,0.3540055,Cantidad,tr("Galones por 100 millas"),"Combustible",Valor);
+        ui->label_14->setText(tr("Consumo de combustible: Convertir a...")+ui->comboBox_53->currentText()+"");
+        ui->label_15->setText(tr("Consumo de combustible: Convertir de...")+ui->comboBox_53->currentText()+"");
     }
 }
 
@@ -10818,11 +11167,37 @@ double ConversorUD::Referencia(QString Value,QString Tipo)
         if (Value == tr("Amperios por voltios (A/V)"))
             Valor = 1;
     }
+    if (Tipo == "Combustible")
+    {
+        if (Value == tr("Litros por kilometro (l/km)"))
+            Valor = 0.01;
+        if (Value == tr("Litros por 10 kilometros (l/10 km)"))
+            Valor = 0.1;
+        if (Value == tr("Litros por 100 kilometros (l/100 km)"))
+            Valor = 1;
+        if (Value == tr("Kilometros por litro (km/l)"))
+            Valor = 100;
+        if (Value == tr("Millas por galon Americano (mpg)"))
+            Valor = 235.2145;
+        if (Value == tr("Galones por 100 millas"))
+            Valor = 0.4251438;
+        if (Value == tr("Millas por galon Britanico (mpg:1)"))
+            Valor = 282.4815;
+        if (Value == tr("Millas por litro (mpl)"))
+            Valor = 62.1371192237334;
+        if (Value == tr("Galones por 100 millas"))
+            Valor = 0.3540055;
+    }
     return Valor;
 }
 
-void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString Nombre, QString Base)
+void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString Nombre, QString Base, QString Compara)
 {
+    QStringList decimal = Compara.split(".");
+    QString CantDecPos = decimal.value(1);
+    int CantDec = CantDecPos.count();
+    if (CantDec == 0)
+        CantDec = 2;
     if (Base == "Longitud")
     {
         if (ui->lineEdit->text() != "")
@@ -10832,8 +11207,8 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             {
                 double ValorF = Cantidad;
                 Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
+//                if (Zero.right(1) == "0")
+//                    Zero = Zero.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
                 {
                     if (Zero.right(1) == ",")
@@ -10853,7 +11228,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             else
             {
                 double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -10867,8 +11242,8 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
                         Valor = Valor.remove(".");
                 }
                 Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                if (Zero.right(1) == "0")
-                    Zero = Zero.remove(QRegExp("0+$"));
+//                if (Zero.right(1) == "0")
+//                    Zero = Zero.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
                 {
                     if (Zero.right(1) == ",")
@@ -10917,7 +11292,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             else
             {
                 double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -10981,7 +11356,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             else
             {
                 double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11045,7 +11420,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             else
             {
                 double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11110,7 +11485,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             else
             {
                 double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11174,7 +11549,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             else
             {
                 double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11238,7 +11613,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             else
             {
                 double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11302,7 +11677,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             else
             {
                 double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11366,7 +11741,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             else
             {
                 double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11430,7 +11805,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             else
             {
                 double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11494,7 +11869,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             else
             {
                 double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11558,7 +11933,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             else
             {
                 double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11598,7 +11973,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
         {
             QString Zero;
             if (ui->comboBox_54->currentText() == Nombre)
-            {
+            {                
                 double ValorF = Cantidad;
                 Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
                 if (Zero.right(1) == "0")
@@ -11622,7 +11997,7 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             else
             {
                 double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11656,11 +12031,80 @@ void ConversorUD::Unidad(double Value, double Value1, double Cantidad, QString N
             }
         }
     }
+    if (Base == "Combustible")
+    {
+        if (ui->lineEdit_159->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_53->currentText() == Nombre)
+            {
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Zero+" "+ui->comboBox_53->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+            else
+            {
+                double ValorF = (Value1/Value)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit->append(""+Valor+" "+ui->comboBox_53->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
+            }
+        }
+    }
 }
-void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString Nombre, QString Base)
+void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString Nombre, QString Base, QString Compara)
 {
+    QStringList decimal = Compara.split(".");
+    QString CantDecPos = decimal.value(1);
+    int CantDec = CantDecPos.count();
     if (Base == "Longitud")
     {
+        //ver porque falla esta parte
+
         if (ui->lineEdit->text() != "")
         {
             QString Zero;
@@ -11689,7 +12133,7 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             else
             {
                 double ValorF = (Value1/Value)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11753,7 +12197,7 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             else
             {
                 double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11817,7 +12261,7 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             else
             {
                 double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11881,7 +12325,7 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             else
             {
                 double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -11945,7 +12389,7 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             else
             {
                 double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -12009,7 +12453,7 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             else
             {
                 double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -12073,7 +12517,7 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             else
             {
                 double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -12137,7 +12581,7 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             else
             {
                 double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -12201,7 +12645,7 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             else
             {
                 double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -12265,7 +12709,7 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             else
             {
                 double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -12329,7 +12773,7 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             else
             {
                 double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -12393,7 +12837,7 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             else
             {
                 double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -12457,7 +12901,7 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             else
             {
                 double ValorF = (Value/Value1)*Cantidad;
-                QString Valor = QString("%L1").arg(Cantidad,Decimales,'f',Decimales);
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
                 if (Valor.right(1) == "0")
                     Valor = Valor.remove(QRegExp("0+$"));
                 if (Idioma == "Es")
@@ -12491,211 +12935,70 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
             }
         }
     }
-}
-
-void ConversorUD::on_pushButton_29_clicked()
-{
-    ui->lineEdit_150->setText("");
-    ui->lineEdit_150->setFocus();
-    ui->lineEdit_151->setText("");
-    ui->lineEdit_151->setToolTip("");
-    ui->label_14->setText("");
-    ui->label_15->setText("");
-    ui->textEdit->setText("");
-    ui->textEdit_2->setText("");
-}
-
-void ConversorUD::on_lineEdit_150_returnPressed()
-{
-    ui->lineEdit_150->setFocus();
-    ui->lineEdit_150->selectAll();
-}
-
-void ConversorUD::on_lineEdit_150_textChanged(const QString &arg1)
-{
-    if (arg1 != "")
+    if (Base == "Combustible")
     {
-        QString Valor = VerNum(arg1,1);
-        if (Valor == "No")
+        if (ui->lineEdit_159->text() != "")
+        {
+            QString Zero;
+            if (ui->comboBox_53->currentText() == Nombre)
             {
-            if (ui->lineEdit_150->text() == "")
-            {
-                ui->lineEdit_151->setText("");
-                ui->lineEdit_151->setToolTip("");
+                double ValorF = Cantidad;
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_53->currentText()+tr(" son ")+Zero+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
+                }
             }
             else
             {
-                QString Valor = ui->comboBox_44->currentText();
-                double Cantidad = arg1.toDouble();
-                double Resto = Referencia(Valor,"Caudal");
-                QString Valor1 = ui->comboBox_45->currentText();
-                double Resto1 = Referencia(Valor1,"Caudal");
-                if (Valor == Valor1)
+                double ValorF = (Value/Value1)*Cantidad;
+                QString Valor = QString("%L1").arg(Cantidad,0,'f',CantDec);
+                if (Valor.right(1) == "0")
+                    Valor = Valor.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
                 {
-                    double ValorF = Cantidad;
-                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                    if (Zero.right(1) == "0")
-                        Zero = Zero.remove(QRegExp("0+$"));
-                    if (Idioma == "Es")
-                    {
-                        if (Zero.right(1) == ",")
-                            Zero = Zero.remove(",");
-                    }
-                    else if (Idioma == "En")
-                    {
-                        if (Zero.right(1) == ".")
-                            Zero = Zero.remove(".");
-                    }
-                    ui->lineEdit_151->setText(Zero);
-                    ui->lineEdit_151->setToolTip(Zero);
+                    if (Valor.right(1) == ",")
+                        Valor = Valor.remove(",");
                 }
-                else
+                else if (Idioma == "En")
                 {
-                    double ValorF = (Resto1/Resto)*Cantidad;
-                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-                    if (Zero.right(1) == "0")
-                        Zero = Zero.remove(QRegExp("0+$"));
-                    if (Idioma == "Es")
-                    {
-                        if (Zero.right(1) == ",")
-                            Zero = Zero.remove(",");
-                    }
-                    else if (Idioma == "En")
-                    {
-                        if (Zero.right(1) == ".")
-                            Zero = Zero.remove(".");
-                    }
-                    ui->lineEdit_151->setText(Zero);
-                    ui->lineEdit_151->setToolTip(Zero);
+                    if (Valor.right(1) == ".")
+                        Valor = Valor.remove(".");
+                }
+                Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                if (Zero.right(1) == "0")
+                    Zero = Zero.remove(QRegExp("0+$"));
+                if (Idioma == "Es")
+                {
+                    if (Zero.right(1) == ",")
+                        Zero = Zero.remove(",");
+                }
+                else if (Idioma == "En")
+                {
+                    if (Zero.right(1) == ".")
+                        Zero = Zero.remove(".");
+                }
+                ui->textEdit_2->append(""+Zero+" "+ui->comboBox_53->currentText()+tr(" son ")+Valor+" "+Nombre+"");
+                if (Log == "S")
+                {
+                    system(QString::fromUtf8("echo '"+ui->textEdit_2->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
                 }
             }
-            Reprobar("Caudal");
-        }
-        else
-        {
-            QMessageBox m;
-            m.setWindowTitle(tr("Advertencia!!!"));
-            m.setText(tr("Has introducido un caracter no valido."));
-            m.exec();
-            ui->lineEdit_150->setFocus();
-            QString Resto = ui->lineEdit_150->text();
-            Resto.chop(1);
-            ui->lineEdit_150->setText(Resto);
-            return;
         }
     }
-}
-
-void ConversorUD::on_comboBox_44_activated(const QString &arg1)
-{
-    if (ui->lineEdit_150->text() == "")
-    {
-        ui->lineEdit_151->setText("");
-        ui->lineEdit_151->setToolTip("");
-    }
-    else
-    {
-        QString Valor = arg1;
-        double Cantidad = ui->lineEdit_150->text().toFloat();
-        double Resto = Referencia(Valor,"Caudal");
-        QString Valor1 = ui->comboBox_45->currentText();
-        double Resto1 = Referencia(Valor1,"Caudal");
-        if (Valor == Valor1)
-        {
-            double ValorF = Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_151->setText(Zero);
-            ui->lineEdit_151->setToolTip(Zero);
-        }
-        else
-        {
-            double ValorF = (Resto1/Resto)*Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_151->setText(Zero);
-            ui->lineEdit_151->setToolTip(Zero);
-        }
-    }
-    Reprobar("Caudal");
-}
-
-void ConversorUD::on_comboBox_45_activated(const QString &arg1)
-{
-    if (ui->lineEdit_150->text() == "")
-    {
-        ui->lineEdit_151->setText("");
-        ui->lineEdit_151->setToolTip("");
-    }
-    else
-    {
-        QString Valor = ui->comboBox_44->currentText();
-        double Cantidad = ui->lineEdit_150->text().toFloat();
-        double Resto = Referencia(Valor,"Caudal");
-        QString Valor1 = arg1;
-        double Resto1 = Referencia(Valor1,"Caudal");
-        if (Valor == Valor1)
-        {
-            double ValorF = Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_151->setText(Zero);
-            ui->lineEdit_151->setToolTip(Zero);
-        }
-        else
-        {
-            double ValorF = (Resto1/Resto)*Cantidad;
-            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
-            if (Zero.right(1) == "0")
-                Zero = Zero.remove(QRegExp("0+$"));
-            if (Idioma == "Es")
-            {
-                if (Zero.right(1) == ",")
-                    Zero = Zero.remove(",");
-            }
-            else if (Idioma == "En")
-            {
-                if (Zero.right(1) == ".")
-                    Zero = Zero.remove(".");
-            }
-            ui->lineEdit_151->setText(Zero);
-            ui->lineEdit_151->setToolTip(Zero);
-        }
-    }
-    Reprobar("Caudal");
 }
 
 QString ConversorUD::getDivisa()
@@ -12939,4 +13242,209 @@ void ConversorUD::on_comboBox_55_activated(const QString &arg1)
         }
     }
     Reprobar("Conductancia");
+}
+
+void ConversorUD::on_pushButton_33_clicked()
+{
+    ui->lineEdit_159->setText("");
+    ui->lineEdit_159->setFocus();
+    ui->lineEdit_158->setText("");
+    ui->lineEdit_158->setToolTip("");
+    ui->label_14->setText("");
+    ui->label_15->setText("");
+    ui->textEdit->setText("");
+    ui->textEdit_2->setText("");
+}
+
+void ConversorUD::on_lineEdit_159_returnPressed()
+{
+    ui->lineEdit_159->setFocus();
+    ui->lineEdit_159->selectAll();
+}
+
+void ConversorUD::on_lineEdit_159_textChanged(const QString &arg1)
+{
+    if (arg1 != "")
+    {
+        QString Valor = VerNum(arg1,1);
+        if (Valor == "No")
+            {
+            if (ui->lineEdit_159->text() == "")
+            {
+                ui->lineEdit_158->setText("");
+                ui->lineEdit_158->setToolTip("");
+            }
+            else
+            {
+                QString Valor = ui->comboBox_53->currentText();
+                double Cantidad = arg1.toDouble();
+                double Resto = Referencia(Valor,"Combustible");
+                QString Valor1 = ui->comboBox_56->currentText();
+                double Resto1 = Referencia(Valor1,"Combustible");
+                if (Valor == Valor1)
+                {
+                    double ValorF = Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_158->setText(Zero);
+                    ui->lineEdit_158->setToolTip(Zero);
+                }
+                else
+                {
+                    double ValorF = (Resto1/Resto)*Cantidad;
+                    QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+                    if (Zero.right(1) == "0")
+                        Zero = Zero.remove(QRegExp("0+$"));
+                    if (Idioma == "Es")
+                    {
+                        if (Zero.right(1) == ",")
+                            Zero = Zero.remove(",");
+                    }
+                    else if (Idioma == "En")
+                    {
+                        if (Zero.right(1) == ".")
+                            Zero = Zero.remove(".");
+                    }
+                    ui->lineEdit_158->setText(Zero);
+                    ui->lineEdit_158->setToolTip(Zero);
+                }
+            }
+            Reprobar("Combustible");
+        }
+        else
+        {
+            QMessageBox m;
+            m.setWindowTitle(tr("Advertencia!!!"));
+            m.setText(tr("Has introducido un caracter no valido."));
+            m.exec();
+            ui->lineEdit_159->setFocus();
+            QString Resto = ui->lineEdit_159->text();
+            Resto.chop(1);
+            ui->lineEdit_159->setText(Resto);
+            return;
+        }
+    }
+}
+
+void ConversorUD::on_comboBox_53_activated(const QString &arg1)
+{
+    if (ui->lineEdit_159->text() == "")
+    {
+        ui->lineEdit_158->setText("");
+        ui->lineEdit_158->setToolTip("");
+    }
+    else
+    {
+        QString Valor = arg1;
+        double Cantidad = ui->lineEdit_159->text().toFloat();
+        double Resto = Referencia(Valor,"Combustible");
+        QString Valor1 = ui->comboBox_56->currentText();
+        double Resto1 = Referencia(Valor1,"Combustible");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_158->setText(Zero);
+            ui->lineEdit_158->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_158->setText(Zero);
+            ui->lineEdit_158->setToolTip(Zero);
+        }
+    }
+    Reprobar("Combustible");
+}
+
+void ConversorUD::on_comboBox_56_activated(const QString &arg1)
+{
+    if (ui->lineEdit_159->text() == "")
+    {
+        ui->lineEdit_158->setText("");
+        ui->lineEdit_158->setToolTip("");
+    }
+    else
+    {
+        QString Valor = ui->comboBox_53->currentText();
+        double Cantidad = ui->lineEdit_159->text().toFloat();
+        double Resto = Referencia(Valor,"Combustible");
+        QString Valor1 = arg1;
+        double Resto1 = Referencia(Valor1,"Combustible");
+        if (Valor == Valor1)
+        {
+            double ValorF = Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_158->setText(Zero);
+            ui->lineEdit_158->setToolTip(Zero);
+        }
+        else
+        {
+            double ValorF = (Resto1/Resto)*Cantidad;
+            QString Zero = QString("%L1").arg(ValorF,0,'f',Decimales);
+            if (Zero.right(1) == "0")
+                Zero = Zero.remove(QRegExp("0+$"));
+            if (Idioma == "Es")
+            {
+                if (Zero.right(1) == ",")
+                    Zero = Zero.remove(",");
+            }
+            else if (Idioma == "En")
+            {
+                if (Zero.right(1) == ".")
+                    Zero = Zero.remove(".");
+            }
+            ui->lineEdit_158->setText(Zero);
+            ui->lineEdit_158->setToolTip(Zero);
+        }
+    }
+    Reprobar("Combustible");
 }

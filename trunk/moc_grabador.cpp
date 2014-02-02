@@ -22,7 +22,7 @@ static const uint qt_meta_data_Grabador[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      39,   14, // methods
+      43,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -71,6 +71,10 @@ static const uint qt_meta_data_Grabador[] = {
      978,  257,    9,    9, 0x08,
     1010,  257,    9,    9, 0x08,
     1042,    9,    9,    9, 0x08,
+    1049,    9,    9,    9, 0x08,
+    1076,    9,    9,    9, 0x08,
+    1086,    9,    9,    9, 0x08,
+    1096,    9,    9,    9, 0x08,
 
        0        // eod
 };
@@ -107,6 +111,8 @@ static const char qt_meta_stringdata_Grabador[] = {
     "on_spinBox_8_valueChanged(int)\0"
     "on_spinBox_10_valueChanged(int)\0"
     "on_spinBox_11_valueChanged(int)\0hora()\0"
+    "on_pushButton_13_clicked()\0CtrlRec()\0"
+    "CtrlFin()\0EjecutarTempo()\0"
 };
 
 void Grabador::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -154,6 +160,10 @@ void Grabador::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 36: _t->on_spinBox_10_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 37: _t->on_spinBox_11_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 38: _t->hora(); break;
+        case 39: _t->on_pushButton_13_clicked(); break;
+        case 40: _t->CtrlRec(); break;
+        case 41: _t->CtrlFin(); break;
+        case 42: _t->EjecutarTempo(); break;
         default: ;
         }
     }
@@ -191,9 +201,9 @@ int Grabador::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 39)
+        if (_id < 43)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 39;
+        _id -= 43;
     }
     return _id;
 }

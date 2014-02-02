@@ -91,6 +91,8 @@ public:
     QCheckBox *checkBox_34;
     QSpacerItem *verticalSpacer;
     QCheckBox *checkBox_83;
+    QCheckBox *checkBox_88;
+    QCheckBox *checkBox_89;
     QGridLayout *gridLayout_4;
     QPushButton *pushButton_2;
     QSpacerItem *horizontalSpacer;
@@ -152,6 +154,8 @@ public:
     QCheckBox *checkBox_80;
     QCheckBox *checkBox_50;
     QCheckBox *checkBox_84;
+    QCheckBox *checkBox_87;
+    QCheckBox *checkBox_90;
     QRadioButton *radioButton_5;
     QGroupBox *groupBox_7;
     QGridLayout *gridLayout_12;
@@ -491,6 +495,18 @@ public:
         checkBox_83->setChecked(true);
 
         gridLayout_6->addWidget(checkBox_83, 4, 0, 1, 1);
+
+        checkBox_88 = new QCheckBox(groupBox_3);
+        checkBox_88->setObjectName(QString::fromUtf8("checkBox_88"));
+        checkBox_88->setChecked(true);
+
+        gridLayout_6->addWidget(checkBox_88, 4, 1, 1, 1);
+
+        checkBox_89 = new QCheckBox(groupBox_3);
+        checkBox_89->setObjectName(QString::fromUtf8("checkBox_89"));
+        checkBox_89->setChecked(true);
+
+        gridLayout_6->addWidget(checkBox_89, 4, 2, 1, 1);
 
 
         gridLayout_8->addWidget(groupBox_3, 2, 0, 1, 3);
@@ -835,6 +851,18 @@ public:
 
         gridLayout_10->addWidget(checkBox_84, 4, 0, 1, 1);
 
+        checkBox_87 = new QCheckBox(groupBox_5);
+        checkBox_87->setObjectName(QString::fromUtf8("checkBox_87"));
+        checkBox_87->setChecked(true);
+
+        gridLayout_10->addWidget(checkBox_87, 4, 1, 1, 1);
+
+        checkBox_90 = new QCheckBox(groupBox_5);
+        checkBox_90->setObjectName(QString::fromUtf8("checkBox_90"));
+        checkBox_90->setChecked(true);
+
+        gridLayout_10->addWidget(checkBox_90, 4, 2, 1, 1);
+
 
         gridLayout_9->addWidget(groupBox_5, 3, 0, 1, 3);
 
@@ -1026,6 +1054,8 @@ public:
         checkBox_42->setText(QApplication::translate("Backup", "Lista de programas del menu", 0, QApplication::UnicodeUTF8));
         checkBox_34->setText(QApplication::translate("Backup", "Lista de peliculas", 0, QApplication::UnicodeUTF8));
         checkBox_83->setText(QApplication::translate("Backup", "Lista de generos para mp3/ogg", 0, QApplication::UnicodeUTF8));
+        checkBox_88->setText(QApplication::translate("Backup", "Lista de claves", 0, QApplication::UnicodeUTF8));
+        checkBox_89->setText(QApplication::translate("Backup", "Lista de codigos Ascii", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
         pushButton_2->setToolTip(QApplication::translate("Backup", "Creacion de copia con las opciones marcadas", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
@@ -1142,6 +1172,8 @@ public:
         checkBox_80->setText(QApplication::translate("Backup", "Lista de sincronizaciones", 0, QApplication::UnicodeUTF8));
         checkBox_50->setText(QApplication::translate("Backup", "Lista de peliculas", 0, QApplication::UnicodeUTF8));
         checkBox_84->setText(QApplication::translate("Backup", "Lista de generos para mp3/ogg", 0, QApplication::UnicodeUTF8));
+        checkBox_87->setText(QApplication::translate("Backup", "Lista de claves", 0, QApplication::UnicodeUTF8));
+        checkBox_90->setText(QApplication::translate("Backup", "Lista de codigos Ascii", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
         radioButton_5->setToolTip(QApplication::translate("Backup", "Seleccion de datos", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP

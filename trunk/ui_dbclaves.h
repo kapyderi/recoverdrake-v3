@@ -25,6 +25,7 @@
 #include <QtGui/QRadioButton>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QTableView>
+#include <QtGui/QTableWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -55,37 +56,39 @@ public:
     QRadioButton *radioButton_3;
     QRadioButton *radioButton_2;
     QRadioButton *radioButton_4;
+    QSpacerItem *horizontalSpacer_4;
+    QSpacerItem *horizontalSpacer_3;
+    QPushButton *pushButton_13;
+    QSpacerItem *horizontalSpacer_2;
+    QSpacerItem *horizontalSpacer_5;
     QTableView *tableView;
-    QGroupBox *groupBox_2;
-    QGridLayout *gridLayout_7;
-    QRadioButton *radioButton_6;
-    QRadioButton *radioButton_8;
-    QRadioButton *radioButton_7;
-    QRadioButton *radioButton_5;
-    QRadioButton *radioButton_9;
     QGroupBox *groupBox_3;
-    QGridLayout *gridLayout_6;
+    QGridLayout *gridLayout_9;
     QGridLayout *gridLayout_2;
-    QLabel *label;
-    QLineEdit *lineEdit;
-    QCheckBox *checkBox;
-    QGridLayout *gridLayout_3;
-    QComboBox *comboBox_2;
-    QLineEdit *lineEdit_2;
-    QLabel *label_2;
-    QLabel *label_3;
-    QLineEdit *lineEdit_4;
-    QLabel *label_5;
     QLabel *label_6;
     QLabel *label_4;
+    QLabel *label;
+    QLineEdit *lineEdit;
+    QLineEdit *lineEdit_2;
     QLineEdit *lineEdit_3;
+    QLabel *label_2;
+    QLabel *label_5;
+    QLineEdit *lineEdit_4;
     QLineEdit *lineEdit_5;
+    QGridLayout *gridLayout_6;
+    QComboBox *comboBox_2;
+    QLabel *label_7;
+    QLineEdit *lineEdit_6;
+    QLabel *label_3;
+    QCheckBox *checkBox;
+    QPushButton *pushButton_10;
+    QTableWidget *tableWidget;
 
     void setupUi(QDialog *dbclaves)
     {
         if (dbclaves->objectName().isEmpty())
             dbclaves->setObjectName(QString::fromUtf8("dbclaves"));
-        dbclaves->resize(956, 469);
+        dbclaves->resize(956, 698);
         QFont font;
         font.setPointSize(7);
         dbclaves->setFont(font);
@@ -102,6 +105,7 @@ public:
         QIcon icon1;
         icon1.addFile(QString::fromUtf8(":/Imagenes/izquierda.jpeg"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_7->setIcon(icon1);
+        pushButton_7->setIconSize(QSize(25, 25));
 
         gridLayout_5->addWidget(pushButton_7, 0, 0, 1, 1);
 
@@ -111,6 +115,7 @@ public:
         QIcon icon2;
         icon2.addFile(QString::fromUtf8(":/Imagenes/derecha.jpeg"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_8->setIcon(icon2);
+        pushButton_8->setIconSize(QSize(25, 25));
 
         gridLayout_5->addWidget(pushButton_8, 0, 1, 1, 1);
 
@@ -138,6 +143,7 @@ public:
         QIcon icon3;
         icon3.addFile(QString::fromUtf8(":/Imagenes/puerta.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_4->setIcon(icon3);
+        pushButton_4->setIconSize(QSize(25, 25));
 
         gridLayout_5->addWidget(pushButton_4, 0, 6, 1, 1);
 
@@ -164,6 +170,7 @@ public:
         QIcon icon4;
         icon4.addFile(QString::fromUtf8(":/Imagenes/pelis.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_6->setIcon(icon4);
+        pushButton_6->setIconSize(QSize(25, 25));
 
         gridLayout_4->addWidget(pushButton_6, 0, 0, 1, 1);
 
@@ -174,6 +181,7 @@ public:
         QIcon icon5;
         icon5.addFile(QString::fromUtf8(":/Imagenes/good.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton->setIcon(icon5);
+        pushButton->setIconSize(QSize(25, 25));
 
         gridLayout_4->addWidget(pushButton, 0, 1, 1, 1);
 
@@ -184,6 +192,7 @@ public:
         QIcon icon6;
         icon6.addFile(QString::fromUtf8(":/Imagenes/sustituir.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_2->setIcon(icon6);
+        pushButton_2->setIconSize(QSize(25, 25));
 
         gridLayout_4->addWidget(pushButton_2, 0, 2, 1, 1);
 
@@ -194,6 +203,7 @@ public:
         QIcon icon7;
         icon7.addFile(QString::fromUtf8(":/Imagenes/bad.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_3->setIcon(icon7);
+        pushButton_3->setIconSize(QSize(25, 25));
 
         gridLayout_4->addWidget(pushButton_3, 0, 3, 1, 1);
 
@@ -204,6 +214,7 @@ public:
         QIcon icon8;
         icon8.addFile(QString::fromUtf8(":/Imagenes/Error.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_11->setIcon(icon8);
+        pushButton_11->setIconSize(QSize(25, 25));
 
         gridLayout_4->addWidget(pushButton_11, 0, 4, 1, 1);
 
@@ -215,6 +226,7 @@ public:
         QIcon icon9;
         icon9.addFile(QString::fromUtf8(":/Imagenes/impresora.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_9->setIcon(icon9);
+        pushButton_9->setIconSize(QSize(25, 25));
 
         gridLayout_4->addWidget(pushButton_9, 0, 5, 1, 1);
 
@@ -225,6 +237,7 @@ public:
         QIcon icon10;
         icon10.addFile(QString::fromUtf8(":/Imagenes/guardar.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_12->setIcon(icon10);
+        pushButton_12->setIconSize(QSize(25, 25));
 
         gridLayout_4->addWidget(pushButton_12, 0, 6, 1, 1);
 
@@ -235,11 +248,12 @@ public:
         QIcon icon11;
         icon11.addFile(QString::fromUtf8(":/Imagenes/Correcto.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_5->setIcon(icon11);
+        pushButton_5->setIconSize(QSize(25, 25));
 
         gridLayout_4->addWidget(pushButton_5, 0, 7, 1, 1);
 
 
-        gridLayout_8->addLayout(gridLayout_4, 3, 0, 1, 2);
+        gridLayout_8->addLayout(gridLayout_4, 2, 0, 1, 2);
 
         groupBox = new QGroupBox(dbclaves);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
@@ -255,17 +269,42 @@ public:
         radioButton_3 = new QRadioButton(groupBox);
         radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
 
-        gridLayout->addWidget(radioButton_3, 0, 2, 1, 1);
+        gridLayout->addWidget(radioButton_3, 0, 4, 1, 1);
 
         radioButton_2 = new QRadioButton(groupBox);
         radioButton_2->setObjectName(QString::fromUtf8("radioButton_2"));
 
-        gridLayout->addWidget(radioButton_2, 0, 1, 1, 1);
+        gridLayout->addWidget(radioButton_2, 0, 2, 1, 1);
 
         radioButton_4 = new QRadioButton(groupBox);
         radioButton_4->setObjectName(QString::fromUtf8("radioButton_4"));
 
-        gridLayout->addWidget(radioButton_4, 0, 3, 1, 1);
+        gridLayout->addWidget(radioButton_4, 0, 6, 1, 1);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_4, 0, 3, 1, 1);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_3, 0, 7, 1, 1);
+
+        pushButton_13 = new QPushButton(groupBox);
+        pushButton_13->setObjectName(QString::fromUtf8("pushButton_13"));
+        QIcon icon12;
+        icon12.addFile(QString::fromUtf8(":/Imagenes/Fondo.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_13->setIcon(icon12);
+        pushButton_13->setIconSize(QSize(25, 25));
+
+        gridLayout->addWidget(pushButton_13, 0, 8, 1, 1);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_2, 0, 1, 1, 1);
+
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_5, 0, 5, 1, 1);
 
 
         gridLayout_8->addWidget(groupBox, 1, 0, 1, 2);
@@ -279,129 +318,52 @@ public:
         tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
         tableView->setSortingEnabled(true);
 
-        gridLayout_8->addWidget(tableView, 4, 0, 1, 2);
-
-        groupBox_2 = new QGroupBox(dbclaves);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setFont(font);
-        gridLayout_7 = new QGridLayout(groupBox_2);
-        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
-        gridLayout_7->setContentsMargins(0, 0, 0, 0);
-        radioButton_6 = new QRadioButton(groupBox_2);
-        radioButton_6->setObjectName(QString::fromUtf8("radioButton_6"));
-
-        gridLayout_7->addWidget(radioButton_6, 0, 2, 1, 1);
-
-        radioButton_8 = new QRadioButton(groupBox_2);
-        radioButton_8->setObjectName(QString::fromUtf8("radioButton_8"));
-
-        gridLayout_7->addWidget(radioButton_8, 0, 4, 1, 1);
-
-        radioButton_7 = new QRadioButton(groupBox_2);
-        radioButton_7->setObjectName(QString::fromUtf8("radioButton_7"));
-
-        gridLayout_7->addWidget(radioButton_7, 0, 3, 1, 1);
-
-        radioButton_5 = new QRadioButton(groupBox_2);
-        radioButton_5->setObjectName(QString::fromUtf8("radioButton_5"));
-
-        gridLayout_7->addWidget(radioButton_5, 0, 1, 1, 1);
-
-        radioButton_9 = new QRadioButton(groupBox_2);
-        radioButton_9->setObjectName(QString::fromUtf8("radioButton_9"));
-
-        gridLayout_7->addWidget(radioButton_9, 0, 0, 1, 1);
-
-
-        gridLayout_8->addWidget(groupBox_2, 2, 0, 1, 2);
+        gridLayout_8->addWidget(tableView, 3, 0, 1, 2);
 
         groupBox_3 = new QGroupBox(dbclaves);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        gridLayout_6 = new QGridLayout(groupBox_3);
-        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
-        gridLayout_6->setContentsMargins(0, 0, 0, 0);
+        gridLayout_9 = new QGridLayout(groupBox_3);
+        gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
+        gridLayout_9->setContentsMargins(0, 0, 0, 0);
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
-        label = new QLabel(groupBox_3);
-        label->setObjectName(QString::fromUtf8("label"));
+        label_6 = new QLabel(groupBox_3);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
         QFont font1;
-        font1.setPointSize(7);
+        font1.setPointSize(15);
         font1.setBold(true);
         font1.setWeight(75);
-        label->setFont(font1);
+        label_6->setFont(font1);
+
+        gridLayout_2->addWidget(label_6, 0, 11, 1, 1);
+
+        label_4 = new QLabel(groupBox_3);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setFont(font1);
+
+        gridLayout_2->addWidget(label_4, 0, 4, 1, 1);
+
+        label = new QLabel(groupBox_3);
+        label->setObjectName(QString::fromUtf8("label"));
+        QFont font2;
+        font2.setPointSize(7);
+        font2.setBold(true);
+        font2.setWeight(75);
+        label->setFont(font2);
 
         gridLayout_2->addWidget(label, 0, 0, 1, 1);
 
         lineEdit = new QLineEdit(groupBox_3);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setFont(font1);
+        lineEdit->setFont(font2);
 
         gridLayout_2->addWidget(lineEdit, 0, 1, 1, 1);
 
-        checkBox = new QCheckBox(groupBox_3);
-        checkBox->setObjectName(QString::fromUtf8("checkBox"));
-
-        gridLayout_2->addWidget(checkBox, 0, 2, 1, 1);
-
-
-        gridLayout_6->addLayout(gridLayout_2, 0, 0, 1, 1);
-
-        gridLayout_3 = new QGridLayout();
-        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        comboBox_2 = new QComboBox(groupBox_3);
-        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
-        comboBox_2->setFont(font1);
-
-        gridLayout_3->addWidget(comboBox_2, 0, 9, 1, 1);
-
         lineEdit_2 = new QLineEdit(groupBox_3);
         lineEdit_2->setObjectName(QString::fromUtf8("lineEdit_2"));
-        lineEdit_2->setFont(font1);
+        lineEdit_2->setFont(font2);
 
-        gridLayout_3->addWidget(lineEdit_2, 0, 1, 1, 1);
-
-        label_2 = new QLabel(groupBox_3);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setFont(font1);
-
-        gridLayout_3->addWidget(label_2, 0, 0, 1, 1);
-
-        label_3 = new QLabel(groupBox_3);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setFont(font1);
-
-        gridLayout_3->addWidget(label_3, 0, 8, 1, 1);
-
-        lineEdit_4 = new QLineEdit(groupBox_3);
-        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
-        lineEdit_4->setMinimumSize(QSize(35, 0));
-        lineEdit_4->setMaximumSize(QSize(35, 16777215));
-        lineEdit_4->setAlignment(Qt::AlignCenter);
-        lineEdit_4->setReadOnly(true);
-
-        gridLayout_3->addWidget(lineEdit_4, 0, 5, 1, 1);
-
-        label_5 = new QLabel(groupBox_3);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-        QFont font2;
-        font2.setPointSize(15);
-        font2.setBold(true);
-        font2.setWeight(75);
-        label_5->setFont(font2);
-
-        gridLayout_3->addWidget(label_5, 0, 4, 1, 1);
-
-        label_6 = new QLabel(groupBox_3);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setFont(font2);
-
-        gridLayout_3->addWidget(label_6, 0, 6, 1, 1);
-
-        label_4 = new QLabel(groupBox_3);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setFont(font2);
-
-        gridLayout_3->addWidget(label_4, 0, 2, 1, 1);
+        gridLayout_2->addWidget(lineEdit_2, 0, 3, 1, 1);
 
         lineEdit_3 = new QLineEdit(groupBox_3);
         lineEdit_3->setObjectName(QString::fromUtf8("lineEdit_3"));
@@ -410,7 +372,28 @@ public:
         lineEdit_3->setAlignment(Qt::AlignCenter);
         lineEdit_3->setReadOnly(true);
 
-        gridLayout_3->addWidget(lineEdit_3, 0, 3, 1, 1);
+        gridLayout_2->addWidget(lineEdit_3, 0, 5, 1, 1);
+
+        label_2 = new QLabel(groupBox_3);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setFont(font2);
+
+        gridLayout_2->addWidget(label_2, 0, 2, 1, 1);
+
+        label_5 = new QLabel(groupBox_3);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setFont(font1);
+
+        gridLayout_2->addWidget(label_5, 0, 6, 1, 1);
+
+        lineEdit_4 = new QLineEdit(groupBox_3);
+        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
+        lineEdit_4->setMinimumSize(QSize(35, 0));
+        lineEdit_4->setMaximumSize(QSize(35, 16777215));
+        lineEdit_4->setAlignment(Qt::AlignCenter);
+        lineEdit_4->setReadOnly(true);
+
+        gridLayout_2->addWidget(lineEdit_4, 0, 10, 1, 1);
 
         lineEdit_5 = new QLineEdit(groupBox_3);
         lineEdit_5->setObjectName(QString::fromUtf8("lineEdit_5"));
@@ -419,13 +402,79 @@ public:
         lineEdit_5->setAlignment(Qt::AlignCenter);
         lineEdit_5->setReadOnly(true);
 
-        gridLayout_3->addWidget(lineEdit_5, 0, 7, 1, 1);
+        gridLayout_2->addWidget(lineEdit_5, 0, 12, 1, 1);
 
 
-        gridLayout_6->addLayout(gridLayout_3, 1, 0, 1, 1);
+        gridLayout_9->addLayout(gridLayout_2, 0, 0, 1, 1);
+
+        gridLayout_6 = new QGridLayout();
+        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+        comboBox_2 = new QComboBox(groupBox_3);
+        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
+        comboBox_2->setFont(font2);
+
+        gridLayout_6->addWidget(comboBox_2, 0, 4, 1, 1);
+
+        label_7 = new QLabel(groupBox_3);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+        QFont font3;
+        font3.setBold(true);
+        font3.setWeight(75);
+        label_7->setFont(font3);
+
+        gridLayout_6->addWidget(label_7, 0, 0, 1, 1);
+
+        lineEdit_6 = new QLineEdit(groupBox_3);
+        lineEdit_6->setObjectName(QString::fromUtf8("lineEdit_6"));
+
+        gridLayout_6->addWidget(lineEdit_6, 0, 1, 1, 1);
+
+        label_3 = new QLabel(groupBox_3);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setFont(font2);
+
+        gridLayout_6->addWidget(label_3, 0, 3, 1, 1);
+
+        checkBox = new QCheckBox(groupBox_3);
+        checkBox->setObjectName(QString::fromUtf8("checkBox"));
+
+        gridLayout_6->addWidget(checkBox, 0, 7, 1, 1);
+
+        pushButton_10 = new QPushButton(groupBox_3);
+        pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
+        QIcon icon13;
+        icon13.addFile(QString::fromUtf8(":/Imagenes/firefox.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_10->setIcon(icon13);
+        pushButton_10->setIconSize(QSize(25, 25));
+
+        gridLayout_6->addWidget(pushButton_10, 0, 2, 1, 1);
+
+
+        gridLayout_9->addLayout(gridLayout_6, 1, 0, 1, 1);
 
 
         gridLayout_8->addWidget(groupBox_3, 0, 0, 1, 2);
+
+        tableWidget = new QTableWidget(dbclaves);
+        if (tableWidget->columnCount() < 6)
+            tableWidget->setColumnCount(6);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(4, __qtablewidgetitem4);
+        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(5, __qtablewidgetitem5);
+        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
+        tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableWidget->setAlternatingRowColors(true);
+
+        gridLayout_8->addWidget(tableWidget, 4, 0, 1, 2);
 
 
         retranslateUi(dbclaves);
@@ -469,15 +518,13 @@ public:
         radioButton_3->setText(QApplication::translate("dbclaves", "Encriptacion doble", 0, QApplication::UnicodeUTF8));
         radioButton_2->setText(QApplication::translate("dbclaves", "Encriptacion simple (Por defecto)", 0, QApplication::UnicodeUTF8));
         radioButton_4->setText(QApplication::translate("dbclaves", "Encriptacion triple", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("dbclaves", "Formato", 0, QApplication::UnicodeUTF8));
-        radioButton_6->setText(QApplication::translate("dbclaves", "Hexadecimal", 0, QApplication::UnicodeUTF8));
-        radioButton_8->setText(QApplication::translate("dbclaves", "Octal", 0, QApplication::UnicodeUTF8));
-        radioButton_7->setText(QApplication::translate("dbclaves", "Decimal", 0, QApplication::UnicodeUTF8));
-        radioButton_5->setText(QApplication::translate("dbclaves", "Binario", 0, QApplication::UnicodeUTF8));
-        radioButton_9->setText(QApplication::translate("dbclaves", "Sin formato", 0, QApplication::UnicodeUTF8));
+        pushButton_13->setText(QApplication::translate("dbclaves", "Encriptar", 0, QApplication::UnicodeUTF8));
         groupBox_3->setTitle(QApplication::translate("dbclaves", "Datos", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("dbclaves", "-", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("dbclaves", "-", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("dbclaves", "Usuario", 0, QApplication::UnicodeUTF8));
-        checkBox->setText(QApplication::translate("dbclaves", "Mostrar normal", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("dbclaves", "Clave", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("dbclaves", "-", 0, QApplication::UnicodeUTF8));
         comboBox_2->clear();
         comboBox_2->insertItems(0, QStringList()
          << QApplication::translate("dbclaves", "Web", 0, QApplication::UnicodeUTF8)
@@ -487,11 +534,22 @@ public:
          << QApplication::translate("dbclaves", "Caja fuerte", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("dbclaves", "Otros", 0, QApplication::UnicodeUTF8)
         );
-        label_2->setText(QApplication::translate("dbclaves", "Clave", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("dbclaves", "Pertenece a", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("dbclaves", "Tipo", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("dbclaves", "-", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("dbclaves", "-", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("dbclaves", "-", 0, QApplication::UnicodeUTF8));
+        checkBox->setText(QApplication::translate("dbclaves", "Mostrar normal", 0, QApplication::UnicodeUTF8));
+        pushButton_10->setText(QApplication::translate("dbclaves", "Abrir", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("dbclaves", "Usuario", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("dbclaves", "Clave", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("dbclaves", "Tipo", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QApplication::translate("dbclaves", "Ubicacion", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem4 = tableWidget->horizontalHeaderItem(4);
+        ___qtablewidgetitem4->setText(QApplication::translate("dbclaves", "Pertenece a...", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem5 = tableWidget->horizontalHeaderItem(5);
+        ___qtablewidgetitem5->setText(QApplication::translate("dbclaves", "Encriptada", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

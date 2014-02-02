@@ -37,8 +37,10 @@ public:
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
     QGridLayout *gridLayout_5;
-    QCheckBox *checkBox;
-    QCheckBox *checkBox_2;
+    QLabel *label_5;
+    QTableWidget *tableWidget_2;
+    QProgressBar *progressBar;
+    QSpacerItem *horizontalSpacer;
     QCheckBox *checkBox_3;
     QPushButton *pushButton_15;
     QGridLayout *gridLayout_8;
@@ -75,9 +77,9 @@ public:
     QPushButton *pushButton_4;
     QPushButton *pushButton_5;
     QPushButton *pushButton_6;
-    QTableWidget *tableWidget_2;
-    QProgressBar *progressBar;
-    QSpacerItem *horizontalSpacer;
+    QCheckBox *checkBox;
+    QCheckBox *checkBox_2;
+    QLineEdit *lineEdit_4;
 
     void setupUi(QDialog *sincrono)
     {
@@ -99,23 +101,62 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1181, 611));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1292, 594));
         gridLayout_5 = new QGridLayout(scrollAreaWidgetContents);
         gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
-        checkBox = new QCheckBox(scrollAreaWidgetContents);
-        checkBox->setObjectName(QString::fromUtf8("checkBox"));
+        label_5 = new QLabel(scrollAreaWidgetContents);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
 
-        gridLayout_5->addWidget(checkBox, 1, 2, 1, 1);
+        gridLayout_5->addWidget(label_5, 1, 1, 1, 1);
 
-        checkBox_2 = new QCheckBox(scrollAreaWidgetContents);
-        checkBox_2->setObjectName(QString::fromUtf8("checkBox_2"));
+        tableWidget_2 = new QTableWidget(scrollAreaWidgetContents);
+        if (tableWidget_2->columnCount() < 10)
+            tableWidget_2->setColumnCount(10);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(4, __qtablewidgetitem4);
+        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(5, __qtablewidgetitem5);
+        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(6, __qtablewidgetitem6);
+        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(7, __qtablewidgetitem7);
+        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(8, __qtablewidgetitem8);
+        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
+        tableWidget_2->setHorizontalHeaderItem(9, __qtablewidgetitem9);
+        tableWidget_2->setObjectName(QString::fromUtf8("tableWidget_2"));
+        tableWidget_2->setMinimumSize(QSize(0, 150));
+        tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableWidget_2->setAlternatingRowColors(true);
+        tableWidget_2->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tableWidget_2->setSortingEnabled(true);
+        tableWidget_2->horizontalHeader()->setDefaultSectionSize(150);
+        tableWidget_2->horizontalHeader()->setMinimumSectionSize(50);
 
-        gridLayout_5->addWidget(checkBox_2, 1, 3, 1, 1);
+        gridLayout_5->addWidget(tableWidget_2, 2, 0, 1, 9);
+
+        progressBar = new QProgressBar(scrollAreaWidgetContents);
+        progressBar->setObjectName(QString::fromUtf8("progressBar"));
+        progressBar->setValue(0);
+
+        gridLayout_5->addWidget(progressBar, 4, 0, 1, 9);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_5->addItem(horizontalSpacer, 1, 3, 1, 1);
 
         checkBox_3 = new QCheckBox(scrollAreaWidgetContents);
         checkBox_3->setObjectName(QString::fromUtf8("checkBox_3"));
 
-        gridLayout_5->addWidget(checkBox_3, 1, 4, 1, 1);
+        gridLayout_5->addWidget(checkBox_3, 1, 6, 1, 1);
 
         pushButton_15 = new QPushButton(scrollAreaWidgetContents);
         pushButton_15->setObjectName(QString::fromUtf8("pushButton_15"));
@@ -124,7 +165,7 @@ public:
         pushButton_15->setIcon(icon1);
         pushButton_15->setIconSize(QSize(25, 25));
 
-        gridLayout_5->addWidget(pushButton_15, 1, 6, 1, 1);
+        gridLayout_5->addWidget(pushButton_15, 1, 8, 1, 1);
 
         gridLayout_8 = new QGridLayout();
         gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
@@ -150,7 +191,7 @@ public:
         textEdit = new QTextEdit(scrollAreaWidgetContents);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
 
-        gridLayout_5->addWidget(textEdit, 6, 0, 1, 7);
+        gridLayout_5->addWidget(textEdit, 6, 0, 1, 9);
 
         pushButton_14 = new QPushButton(scrollAreaWidgetContents);
         pushButton_14->setObjectName(QString::fromUtf8("pushButton_14"));
@@ -159,7 +200,7 @@ public:
         pushButton_14->setIcon(icon2);
         pushButton_14->setIconSize(QSize(25, 25));
 
-        gridLayout_5->addWidget(pushButton_14, 1, 5, 1, 1);
+        gridLayout_5->addWidget(pushButton_14, 1, 7, 1, 1);
 
         label = new QLabel(scrollAreaWidgetContents);
         label->setObjectName(QString::fromUtf8("label"));
@@ -214,7 +255,7 @@ public:
         gridLayout_3->addWidget(label_4, 0, 4, 1, 1);
 
 
-        gridLayout_5->addLayout(gridLayout_3, 0, 0, 1, 7);
+        gridLayout_5->addLayout(gridLayout_3, 0, 0, 1, 9);
 
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
@@ -358,51 +399,26 @@ public:
         gridLayout_2->addWidget(groupBox, 0, 1, 1, 1);
 
 
-        gridLayout_5->addLayout(gridLayout_2, 3, 0, 1, 7);
+        gridLayout_5->addLayout(gridLayout_2, 3, 0, 1, 9);
 
-        tableWidget_2 = new QTableWidget(scrollAreaWidgetContents);
-        if (tableWidget_2->columnCount() < 10)
-            tableWidget_2->setColumnCount(10);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(0, __qtablewidgetitem);
-        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(2, __qtablewidgetitem2);
-        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(3, __qtablewidgetitem3);
-        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(4, __qtablewidgetitem4);
-        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(5, __qtablewidgetitem5);
-        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(6, __qtablewidgetitem6);
-        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(7, __qtablewidgetitem7);
-        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(8, __qtablewidgetitem8);
-        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
-        tableWidget_2->setHorizontalHeaderItem(9, __qtablewidgetitem9);
-        tableWidget_2->setObjectName(QString::fromUtf8("tableWidget_2"));
-        tableWidget_2->setMinimumSize(QSize(0, 150));
-        tableWidget_2->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        tableWidget_2->setAlternatingRowColors(true);
-        tableWidget_2->setSelectionBehavior(QAbstractItemView::SelectRows);
-        tableWidget_2->setSortingEnabled(true);
-        tableWidget_2->horizontalHeader()->setDefaultSectionSize(150);
-        tableWidget_2->horizontalHeader()->setMinimumSectionSize(50);
+        checkBox = new QCheckBox(scrollAreaWidgetContents);
+        checkBox->setObjectName(QString::fromUtf8("checkBox"));
 
-        gridLayout_5->addWidget(tableWidget_2, 2, 0, 1, 7);
+        gridLayout_5->addWidget(checkBox, 1, 4, 1, 1);
 
-        progressBar = new QProgressBar(scrollAreaWidgetContents);
-        progressBar->setObjectName(QString::fromUtf8("progressBar"));
-        progressBar->setValue(0);
+        checkBox_2 = new QCheckBox(scrollAreaWidgetContents);
+        checkBox_2->setObjectName(QString::fromUtf8("checkBox_2"));
 
-        gridLayout_5->addWidget(progressBar, 4, 0, 1, 7);
+        gridLayout_5->addWidget(checkBox_2, 1, 5, 1, 1);
 
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        lineEdit_4 = new QLineEdit(scrollAreaWidgetContents);
+        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
+        lineEdit_4->setMinimumSize(QSize(40, 0));
+        lineEdit_4->setMaximumSize(QSize(40, 16777215));
+        lineEdit_4->setAlignment(Qt::AlignCenter);
+        lineEdit_4->setReadOnly(true);
 
-        gridLayout_5->addItem(horizontalSpacer, 1, 1, 1, 1);
+        gridLayout_5->addWidget(lineEdit_4, 1, 2, 1, 1);
 
         scrollArea->setWidget(scrollAreaWidgetContents);
 
@@ -417,26 +433,45 @@ public:
     void retranslateUi(QDialog *sincrono)
     {
         sincrono->setWindowTitle(QApplication::translate("sincrono", "Sincrono v.0.1.0", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("sincrono", "Numero Sincronizacion", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget_2->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("sincrono", "Nombre del objetivo", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget_2->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("sincrono", "Ruta del objetivo", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget_2->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("sincrono", "Peso del objetivo", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidget_2->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QApplication::translate("sincrono", "Fecha del objetivo", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem4 = tableWidget_2->horizontalHeaderItem(4);
+        ___qtablewidgetitem4->setText(QApplication::translate("sincrono", "Tipo", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem5 = tableWidget_2->horizontalHeaderItem(5);
+        ___qtablewidgetitem5->setText(QApplication::translate("sincrono", "Estado", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem6 = tableWidget_2->horizontalHeaderItem(6);
+        ___qtablewidgetitem6->setText(QApplication::translate("sincrono", "Nombre del destino", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem7 = tableWidget_2->horizontalHeaderItem(7);
+        ___qtablewidgetitem7->setText(QApplication::translate("sincrono", "Ruta del destino", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem8 = tableWidget_2->horizontalHeaderItem(8);
+        ___qtablewidgetitem8->setText(QApplication::translate("sincrono", "Peso destino", 0, QApplication::UnicodeUTF8));
+        QTableWidgetItem *___qtablewidgetitem9 = tableWidget_2->horizontalHeaderItem(9);
+        ___qtablewidgetitem9->setText(QApplication::translate("sincrono", "Fecha destino", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        checkBox->setToolTip(QApplication::translate("sincrono", "Eliminar en la sincronizacion los archivos no localizados en el directorio fuente", 0, QApplication::UnicodeUTF8));
+        tableWidget_2->setToolTip(QApplication::translate("sincrono", "Muestra los objetivos localizados con sus propiedades", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_STATUSTIP
-        checkBox->setStatusTip(QApplication::translate("sincrono", "Eliminar en la sincronizacion los archivos no localizados en el directorio fuente", 0, QApplication::UnicodeUTF8));
+        tableWidget_2->setStatusTip(QApplication::translate("sincrono", "Muestra los objetivos localizados con sus propiedades", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_STATUSTIP
 #ifndef QT_NO_WHATSTHIS
-        checkBox->setWhatsThis(QApplication::translate("sincrono", "Eliminar en la sincronizacion los archivos no localizados en el directorio fuente", 0, QApplication::UnicodeUTF8));
+        tableWidget_2->setWhatsThis(QApplication::translate("sincrono", "Muestra los objetivos localizados con sus propiedades", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
-        checkBox->setText(QApplication::translate("sincrono", "Quitar eliminados en destino", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        checkBox_2->setToolTip(QApplication::translate("sincrono", "Guarda de forma oculta la ultima modificacion para poder recuperarla en caso necesario", 0, QApplication::UnicodeUTF8));
+        progressBar->setToolTip(QApplication::translate("sincrono", "Barra de progreso", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_STATUSTIP
-        checkBox_2->setStatusTip(QApplication::translate("sincrono", "Guarda de forma oculta la ultima modificacion para poder recuperarla en caso necesario", 0, QApplication::UnicodeUTF8));
+        progressBar->setStatusTip(QApplication::translate("sincrono", "Barra de progreso", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_STATUSTIP
 #ifndef QT_NO_WHATSTHIS
-        checkBox_2->setWhatsThis(QApplication::translate("sincrono", "Guarda de forma oculta la ultima modificacion para poder recuperarla en caso necesario", 0, QApplication::UnicodeUTF8));
+        progressBar->setWhatsThis(QApplication::translate("sincrono", "Barra de progreso", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
-        checkBox_2->setText(QApplication::translate("sincrono", "Guardar ultimo cambio", 0, QApplication::UnicodeUTF8));
         checkBox_3->setText(QApplication::translate("sincrono", "Analizar archivos ocultos", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
         pushButton_15->setToolTip(QApplication::translate("sincrono", "Recuperacion por fechas de ultimos cambios.", 0, QApplication::UnicodeUTF8));
@@ -641,44 +676,26 @@ public:
         pushButton_6->setWhatsThis(QApplication::translate("sincrono", "Parar los procesos en ejecucion", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
         pushButton_6->setText(QApplication::translate("sincrono", "Parar", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem = tableWidget_2->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("sincrono", "Nombre del objetivo", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem1 = tableWidget_2->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("sincrono", "Ruta del objetivo", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem2 = tableWidget_2->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("sincrono", "Peso del objetivo", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem3 = tableWidget_2->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("sincrono", "Fecha del objetivo", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem4 = tableWidget_2->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("sincrono", "Tipo", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem5 = tableWidget_2->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QApplication::translate("sincrono", "Estado", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem6 = tableWidget_2->horizontalHeaderItem(6);
-        ___qtablewidgetitem6->setText(QApplication::translate("sincrono", "Nombre del destino", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem7 = tableWidget_2->horizontalHeaderItem(7);
-        ___qtablewidgetitem7->setText(QApplication::translate("sincrono", "Ruta del destino", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem8 = tableWidget_2->horizontalHeaderItem(8);
-        ___qtablewidgetitem8->setText(QApplication::translate("sincrono", "Peso destino", 0, QApplication::UnicodeUTF8));
-        QTableWidgetItem *___qtablewidgetitem9 = tableWidget_2->horizontalHeaderItem(9);
-        ___qtablewidgetitem9->setText(QApplication::translate("sincrono", "Fecha destino", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        tableWidget_2->setToolTip(QApplication::translate("sincrono", "Muestra los objetivos localizados con sus propiedades", 0, QApplication::UnicodeUTF8));
+        checkBox->setToolTip(QApplication::translate("sincrono", "Eliminar en la sincronizacion los archivos no localizados en el directorio fuente", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_STATUSTIP
-        tableWidget_2->setStatusTip(QApplication::translate("sincrono", "Muestra los objetivos localizados con sus propiedades", 0, QApplication::UnicodeUTF8));
+        checkBox->setStatusTip(QApplication::translate("sincrono", "Eliminar en la sincronizacion los archivos no localizados en el directorio fuente", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_STATUSTIP
 #ifndef QT_NO_WHATSTHIS
-        tableWidget_2->setWhatsThis(QApplication::translate("sincrono", "Muestra los objetivos localizados con sus propiedades", 0, QApplication::UnicodeUTF8));
+        checkBox->setWhatsThis(QApplication::translate("sincrono", "Eliminar en la sincronizacion los archivos no localizados en el directorio fuente", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
+        checkBox->setText(QApplication::translate("sincrono", "Quitar eliminados en destino", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
-        progressBar->setToolTip(QApplication::translate("sincrono", "Barra de progreso", 0, QApplication::UnicodeUTF8));
+        checkBox_2->setToolTip(QApplication::translate("sincrono", "Guarda de forma oculta la ultima modificacion para poder recuperarla en caso necesario", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_STATUSTIP
-        progressBar->setStatusTip(QApplication::translate("sincrono", "Barra de progreso", 0, QApplication::UnicodeUTF8));
+        checkBox_2->setStatusTip(QApplication::translate("sincrono", "Guarda de forma oculta la ultima modificacion para poder recuperarla en caso necesario", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_STATUSTIP
 #ifndef QT_NO_WHATSTHIS
-        progressBar->setWhatsThis(QApplication::translate("sincrono", "Barra de progreso", 0, QApplication::UnicodeUTF8));
+        checkBox_2->setWhatsThis(QApplication::translate("sincrono", "Guarda de forma oculta la ultima modificacion para poder recuperarla en caso necesario", 0, QApplication::UnicodeUTF8));
 #endif // QT_NO_WHATSTHIS
+        checkBox_2->setText(QApplication::translate("sincrono", "Guardar ultimo cambio", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

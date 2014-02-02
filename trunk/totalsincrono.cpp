@@ -218,9 +218,9 @@ void TotalSincrono::inicio()
     cuenta = Cantidad.value(0).toInt();
     if (cuenta > 0)
     {
-        QString Referencia, Objetivo, Destino, Eliminar, Comprobar, Ocultos, Codigo;
+        QString Referencia, Objetivo, Destino, Eliminar, Comprobar, Ocultos, Codigo, Id;
         QSqlQuery Sincroniza(db);
-        Sincroniza.exec("SELECT Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo FROM Sincrono");
+        Sincroniza.exec("SELECT Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,Id FROM Sincrono");
         while(Sincroniza.next())
         {
             Referencia = Sincroniza.value(0).toString();
@@ -230,11 +230,12 @@ void TotalSincrono::inicio()
             Comprobar = Sincroniza.value(4).toString();
             Ocultos = Sincroniza.value(5).toString();
             Codigo = Sincroniza.value(6).toString();
+            Id = Sincroniza.value(7).toString();
             Sincro = new sincrono();
             connect(Sincro, SIGNAL(Terminado(int,QString)), this, SLOT(Refrescar(int,QString)));
             ui->tabWidget->addTab(Sincro,Referencia);
             ui->tabWidget->setCurrentIndex(ui->tabWidget->currentIndex()+1);
-            Sincro->Valor(Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,0,log);
+            Sincro->Valor(Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,0,log,Id);
         }
     }
     else if (cuenta == 0)
@@ -300,9 +301,9 @@ void TotalSincrono::on_pushButton_14_clicked()
     cuenta = Cantidad.value(0).toInt();
     if (cuenta > 0)
     {
-        QString Referencia, Objetivo, Destino, Eliminar, Comprobar, Ocultos, Codigo;
+        QString Referencia, Objetivo, Destino, Eliminar, Comprobar, Ocultos, Codigo, Id;
         QSqlQuery Sincroniza(db);
-        Sincroniza.exec("SELECT Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo FROM Sincrono");
+        Sincroniza.exec("SELECT Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,Id FROM Sincrono");
         while(Sincroniza.next())
         {
             Referencia = Sincroniza.value(0).toString();
@@ -312,11 +313,12 @@ void TotalSincrono::on_pushButton_14_clicked()
             Comprobar = Sincroniza.value(4).toString();
             Ocultos = Sincroniza.value(5).toString();
             Codigo = Sincroniza.value(6).toString();
+            Id = Sincroniza.value(7).toString();
             Sincro = new sincrono();
             connect(Sincro, SIGNAL(Terminado(int)), this, SLOT(Refrescar(int)));
             ui->tabWidget->addTab(Sincro,Referencia);
             ui->tabWidget->setCurrentIndex(ui->tabWidget->currentIndex()+1);
-            Sincro->Valor(Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,1,log);
+            Sincro->Valor(Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,1,log,Id);
             cantidad++;
         }
     }
@@ -341,9 +343,9 @@ void TotalSincrono::on_pushButton_12_clicked()
     cuenta = Cantidad.value(0).toInt();
     if (cuenta > 0)
     {
-        QString Referencia, Objetivo, Destino, Eliminar, Comprobar, Ocultos, Codigo;
+        QString Referencia, Objetivo, Destino, Eliminar, Comprobar, Ocultos, Codigo, Id;
         QSqlQuery Sincroniza(db);
-        Sincroniza.exec("SELECT Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo FROM Sincrono");
+        Sincroniza.exec("SELECT Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,Id FROM Sincrono");
         while(Sincroniza.next())
         {
             Referencia = Sincroniza.value(0).toString();
@@ -353,11 +355,12 @@ void TotalSincrono::on_pushButton_12_clicked()
             Comprobar = Sincroniza.value(4).toString();
             Ocultos = Sincroniza.value(5).toString();
             Codigo = Sincroniza.value(6).toString();
+            Id = Sincroniza.value(7).toString();
             Sincro = new sincrono();
             connect(Sincro, SIGNAL(Terminado(int)), this, SLOT(Refrescar(int)));
             ui->tabWidget->addTab(Sincro,Referencia);
             ui->tabWidget->setCurrentIndex(ui->tabWidget->currentIndex()+1);
-            Sincro->Valor(Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,2,log);            
+            Sincro->Valor(Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,2,log,Id);
         }
     }
     else if (cuenta == 0)
@@ -392,9 +395,9 @@ void TotalSincrono::on_tableView_doubleClicked(const QModelIndex &index)
         return;
         }
     }
-    QString Referencia, Objetivo, Destino, Eliminar, Comprobar, Ocultos, Codigo;
+    QString Referencia, Objetivo, Destino, Eliminar, Comprobar, Ocultos, Codigo, Id;
     QSqlQuery Sincroniza(db);
-    Sincroniza.exec("SELECT Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo FROM Sincrono WHERE Referencia='"+Refer+"'");
+    Sincroniza.exec("SELECT Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,Id FROM Sincrono WHERE Referencia='"+Refer+"'");
     Sincroniza.first();
     Referencia = Sincroniza.value(0).toString();
     Objetivo = Sincroniza.value(1).toString();
@@ -403,9 +406,10 @@ void TotalSincrono::on_tableView_doubleClicked(const QModelIndex &index)
     Comprobar = Sincroniza.value(4).toString();
     Ocultos = Sincroniza.value(5).toString();
     Codigo = Sincroniza.value(6).toString();
+    Id = Sincroniza.value(7).toString();
     Sincro = new sincrono();
     connect(Sincro, SIGNAL(Terminado(int)), this, SLOT(Refrescar(int)));
     ui->tabWidget->addTab(Sincro,Referencia);
     ui->tabWidget->setCurrentIndex(ui->tabWidget->currentIndex()+1);
-    Sincro->Valor(Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,0,log);
+    Sincro->Valor(Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,0,log,Id);
 }

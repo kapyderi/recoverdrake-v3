@@ -18,7 +18,7 @@ class sincrono : public QDialog {
 public:
     sincrono(QWidget *parent = 0);
     ~sincrono();
-    void Valor(QString Ref, QString Valor1, QString Valor2, QString Valor3, QString Valor4, QString Valor5, QString Valor6, int Value, QString Log);
+    void Valor(QString Ref, QString Valor1, QString Valor2, QString Valor3, QString Valor4, QString Valor5, QString Valor6, int Value, QString Log, QString Pos);
     QString Update;
 
 signals:
