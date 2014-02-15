@@ -137,7 +137,7 @@ bool Comparador::eventFilter(QObject* obj, QEvent *event)
             {
                 ayuda = new Ayuda(this);
                 ayuda->show();
-                ayuda->Valor("Comparador");
+                ayuda->Valor(tr("Comparador"));
                 return true;
             }
         }

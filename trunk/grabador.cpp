@@ -430,7 +430,7 @@ bool Grabador::eventFilter(QObject* obj, QEvent *event)
             {
                 ayuda = new Ayuda(this);
                 ayuda->show();
-                ayuda->Valor("Grabador");
+                ayuda->Valor(tr("Grabador"));
                 return true;
             }
         }

@@ -165,7 +165,7 @@ bool TotalSincrono::eventFilter(QObject* obj, QEvent *event)
             {
                 ayuda = new Ayuda(this);
                 ayuda->show();
-                ayuda->Valor("Sincrono");
+                ayuda->Valor(tr("Sincrono"));
                 return true;
             }
         }
@@ -315,7 +315,7 @@ void TotalSincrono::on_pushButton_14_clicked()
             Codigo = Sincroniza.value(6).toString();
             Id = Sincroniza.value(7).toString();
             Sincro = new sincrono();
-            connect(Sincro, SIGNAL(Terminado(int)), this, SLOT(Refrescar(int)));
+            connect(Sincro, SIGNAL(Terminado(int,QString)), this, SLOT(Refrescar(int,QString)));
             ui->tabWidget->addTab(Sincro,Referencia);
             ui->tabWidget->setCurrentIndex(ui->tabWidget->currentIndex()+1);
             Sincro->Valor(Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,1,log,Id);
@@ -357,7 +357,7 @@ void TotalSincrono::on_pushButton_12_clicked()
             Codigo = Sincroniza.value(6).toString();
             Id = Sincroniza.value(7).toString();
             Sincro = new sincrono();
-            connect(Sincro, SIGNAL(Terminado(int)), this, SLOT(Refrescar(int)));
+            connect(Sincro, SIGNAL(Terminado(int,QString)), this, SLOT(Refrescar(int,QString)));
             ui->tabWidget->addTab(Sincro,Referencia);
             ui->tabWidget->setCurrentIndex(ui->tabWidget->currentIndex()+1);
             Sincro->Valor(Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,2,log,Id);
@@ -408,7 +408,7 @@ void TotalSincrono::on_tableView_doubleClicked(const QModelIndex &index)
     Codigo = Sincroniza.value(6).toString();
     Id = Sincroniza.value(7).toString();
     Sincro = new sincrono();
-    connect(Sincro, SIGNAL(Terminado(int)), this, SLOT(Refrescar(int)));
+    connect(Sincro, SIGNAL(Terminado(int,QString)), this, SLOT(Refrescar(int,QString)));
     ui->tabWidget->addTab(Sincro,Referencia);
     ui->tabWidget->setCurrentIndex(ui->tabWidget->currentIndex()+1);
     Sincro->Valor(Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Codigo,0,log,Id);

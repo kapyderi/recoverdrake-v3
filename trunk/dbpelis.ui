@@ -48,8 +48,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>1123</width>
-        <height>739</height>
+        <width>1125</width>
+        <height>741</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_7">
@@ -430,6 +430,9 @@ font: bold</string>
             </property>
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Sin&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;imagen&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;disponible&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>

@@ -526,7 +526,7 @@ void Mrpm::on_pushButton_6_clicked()
                 item5=new QTableWidgetItem;
                 item = ui->tableWidget->item(i,0);
                 activo = item->text();
-                ui->textEdit->append(tr("Comprobando... ")+activo+tr("(Registro: ")+QString::number(i)+")");
+                ui->textEdit->append(tr("Comprobando... ")+activo+tr(" (Registro: ")+QString::number(i)+")");
                 Local = getPack(activo);
                 if (Local.contains("Name") == false)
                 {
@@ -1364,7 +1364,7 @@ void Mrpm::on_pushButton_9_clicked()
                 }
                 item=ui->tableWidget->item(i,0);
                 valor=item->text();
-                ui->textEdit->append(tr("Procesando... "+valor+"(Registro: "+QString::number(i)+")"));
+                ui->textEdit->append(tr("Procesando... "+valor+" (Registro: "+QString::number(i)+")"));
                 for(a=0;a<Datos.count();a++)
                 {
                     verlo=QString::fromUtf8(Datos.value(a));
@@ -1620,7 +1620,7 @@ bool Mrpm::eventFilter(QObject* obj, QEvent *event)
             {
                 ayuda = new Ayuda(this);
                 ayuda->show();
-                ayuda->Valor("Salvaguarda");
+                ayuda->Valor(tr("Salvaguarda"));
                 return true;
             }
         }

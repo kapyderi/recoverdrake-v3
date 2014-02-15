@@ -274,7 +274,7 @@ bool Televideo::eventFilter(QObject *obj, QEvent *event)
         {
             ayuda = new Ayuda(this);
             ayuda->show();
-            ayuda->Valor("TeleDrake");
+            ayuda->Valor(tr("TeleDrake"));
             return true;
         }
     }

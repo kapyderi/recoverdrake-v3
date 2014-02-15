@@ -245,10 +245,10 @@ static bool createConnection()
                        DB.close();
                        system("cp -v /root/Miscelanea.RecoverDrake.db.sqlite /root/Miscelanea.RecoverDrake.db.sqlite.backup");
                        DB.open();
-                       QProgressDialog progress("Encontrada nueva version "+Ver+", actualizando Base de datos de RecoverDrake... Espera por favor", "Cancelar", 0, 44);
+                       QProgressDialog progress("Encontrada nueva version "+Ver+", actualizando Base de datos de RecoverDrake... Espera por favor", "Cancelar", 0, 47);
                        progress.setWindowModality(Qt::WindowModal);
                        progress.show();
-                       for(int i=0;i<44;i++ )
+                       for(int i=0;i<47;i++ )
                        {
                            progress.setValue(i);
                            if (progress.wasCanceled())
@@ -1695,7 +1695,7 @@ static bool createConnection()
                                    wlistanegr.first();
                                    cuenta = wlistanegr.value(0).toInt();
                                    QSqlQuery wlistanegra(db);
-                                   wlistanegra.exec("SELECT Usuario,Password,Enc1,Enc2,Enc3,Tipo,Ubicacion,UserRD,Encriptado FROM Clave");
+                                   wlistanegra.exec("SELECT Usuario,Password,Enc1,Enc2,Enc3,Tipo,Dir,UserRD FROM Clave");
                                    QProgressDialog progressMenu("Actualizando Listado de claves... Espera por favor", "Cancelar", 0, cuenta);
                                    progressMenu.setWindowModality(Qt::WindowModal);
                                    progressMenu.show();
@@ -1719,24 +1719,22 @@ static bool createConnection()
                                         QString Tipo = wlistanegra.value(5).toString();
                                         QString Ubicacion = wlistanegra.value(6).toString();
                                         QString UserRD = wlistanegra.value(7).toString();
-                                        QString Encriptado = wlistanegra.value(8).toString();
                                         QSqlQuery RecDat(DB);
-                                        RecDat.exec("SELECT Usuario,Password,Enc1,Enc2,Enc3,Tipo,Ubicacion,UserRD,Encriptado FROM Clave WHERE Ubicacion='"+Ubicacion+"'");
+                                        RecDat.exec("SELECT Usuario,Password,Enc1,Enc2,Enc3,Tipo,Ubicacion,UserRD, FROM Clave WHERE Dir='"+Ubicacion+"'");
                                         RecDat.first();
                                         if (RecDat.isSelect())
                                         {
                                             QSqlQuery Wdark(DB);
-                                            Wdark.prepare("INSERT INTO Clave (Usuario,Password,Enc1,Enc2,Enc3,Tipo,Ubicacion,UserRD,Encriptado)"
-                                                          "VALUES (:Usuario,:Password,:Enc1,:Enc2,:Enc3,:Tipo,:Ubicacion,:UserRD,:Encriptado)");
+                                            Wdark.prepare("INSERT INTO Clave (Usuario,Password,Enc1,Enc2,Enc3,Tipo,Dir,UserRD)"
+                                                          "VALUES (:Usuario,:Password,:Enc1,:Enc2,:Enc3,:Tipo,:Dir,:UserRD)");
                                             Wdark.bindValue(":Usuario", DatUsuario);
                                             Wdark.bindValue(":Password", DatPassword);
                                             Wdark.bindValue(":Enc1", DatEnc1);
                                             Wdark.bindValue(":Enc2", DatEnc2);
                                             Wdark.bindValue(":Enc3", DatEnc3);
                                             Wdark.bindValue(":Tipo", Tipo);
-                                            Wdark.bindValue(":Ubicacion", Ubicacion);
+                                            Wdark.bindValue(":Dir", Ubicacion);
                                             Wdark.bindValue(":UserRD", UserRD);
-                                            Wdark.bindValue(":Encriptado", Encriptado);
                                             Wdark.exec();
                                         }
                                         cantidad++;
@@ -1804,8 +1802,83 @@ static bool createConnection()
                                    DB.commit();
                                }
                            }
+                           if (i==45)
+                           {
+                               QSqlQuery queryA(SM);
+                               queryA.exec("SELECT count() FROM sqlite_master WHERE type='table' AND name='Pais'");
+                               queryA.first();
+                               if (queryA.isValid())
+                               {
+                                   QString Tipo;
+                                   QSqlQuery query(db);
+                                   query.exec("SELECT Tipo FROM Pais WHERE id=1");
+                                   query.first();
+                                   if (query.isValid())
+                                   {
+                                       Tipo=query.value(0).toString();
+                                       QSqlQuery Miscelanea(DB);
+                                       Miscelanea.exec("UPDATE Pais SET Tipo='"+Tipo+"' WHERE id=1");
+                                   }
+                               }
+                           }
+                           if (i == 46)
+                           {
+                               QSqlQuery queryA(SM);
+                               queryA.exec("SELECT count() FROM sqlite_master WHERE type='table' AND name='Bic'");
+                               queryA.first();
+                               if (queryA.isValid())
+                               {
+                                   QSqlQuery wlistanegr(db);
+                                   wlistanegr.exec("SELECT COUNT(Codigo) as Cantidad FROM Bic");
+                                   int cuenta, comienzo;
+                                   wlistanegr.first();
+                                   cuenta = wlistanegr.value(0).toInt();
+                                   QSqlQuery wlistanegra(db);
+                                   wlistanegra.exec("SELECT Codigo,Nombre,Bic FROM Bic");
+                                   QProgressDialog progressMenu("Actualizando Listado de codigos BIC... Espera por favor", "Cancelar", 0, cuenta);
+                                   progressMenu.setWindowModality(Qt::WindowModal);
+                                   progressMenu.show();
+                                   QTest::qWait(20);
+                                   comienzo=0;
+                                   int cantidad=1;
+                                   while(wlistanegra.next())
+                                   {
+                                        if (cantidad == 1)
+                                        {
+                                            DB.transaction();
+                                        }
+                                        progressMenu.setValue(comienzo++);
+                                        if (progressMenu.wasCanceled())
+                                            break;
+                                        QString DatCodigo = wlistanegra.value(0).toString();
+                                        QString DatNombre = wlistanegra.value(1).toString();
+                                        QString DatBic = wlistanegra.value(2).toString();
+                                        QSqlQuery RecDat(DB);
+                                        RecDat.exec("SELECT Codigo,Nombre,Bic FROM Bic WHERE Codigo='"+DatCodigo+"'");
+                                        RecDat.first();
+                                        if (RecDat.isSelect())
+                                        {
+                                            QSqlQuery Wdark(DB);
+                                            Wdark.prepare("INSERT INTO Bic (Codigo,Nombre,Bic)"
+                                                          "VALUES (:Codigo,:Nombre,;Bic)");
+                                            Wdark.bindValue(":Codigo", DatCodigo);
+                                            Wdark.bindValue(":Nombre", DatNombre);
+                                            Wdark.bindValue(":Bic", DatBic);
+                                            Wdark.exec();
+                                        }
+                                        cantidad++;
+                                        if (cantidad == 50)
+                                        {
+                                            cantidad=1;
+                                            DB.commit();
+                                        }
+                                   }
+                                   progressMenu.setValue(cuenta);
+                                   DB.commit();
+                               }
+                           }
                        }
-                       progress.setValue(43);
+                       progress.setValue(47);
                        DB.close();
                        db.close();
                        SM.close();

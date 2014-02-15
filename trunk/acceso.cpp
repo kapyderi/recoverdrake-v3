@@ -1110,7 +1110,7 @@ bool acceso::eventFilter(QObject* obj, QEvent *event)
             {
                 ayuda = new Ayuda(this);
                 ayuda->show();
-                ayuda->Valor("Acceso");
+                ayuda->Valor(tr("Acceso"));
                 return true;
             }
         }

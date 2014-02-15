@@ -234,7 +234,7 @@ bool id3mp3::eventFilter(QObject* obj, QEvent *event)
             {
                 ayuda = new Ayuda(this);
                 ayuda->show();
-                ayuda->Valor("Etiquetador");
+                ayuda->Valor(tr("Etiquetador"));
                 return true;
             }
         }

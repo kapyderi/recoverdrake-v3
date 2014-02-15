@@ -269,6 +269,33 @@ recoverdrake::recoverdrake(QWidget *parent) :
         setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
         Stilo = "A";
     }
+    QString pais;
+    QSqlQuery Pais(dbs);
+    Pais.exec("SELECT Tipo FROM Pais WHERE id=1");
+    Pais.first();
+    if (Pais.isValid())
+        pais=Pais.value(0).toString();
+    if ( pais == "0")
+    {
+        QString Cantidad;
+        int respuesta = 0;
+        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Definir pais de origen")),
+                    QString::fromUtf8(tr("<center><b>Pais de origen</center><p>"
+                    "Debes decir si tu pais de origen es Espana, ya que hay utilidades que "
+                    "solo son validas para Espana y no para otros paises del mundo.<p>"
+                    "&iquest;Es espana tu pais de origen?")), QMessageBox::Ok, QMessageBox::No);
+        if (respuesta == QMessageBox::Ok)
+        {
+            Cantidad = "1";
+        }
+        else
+        {
+            Cantidad = "2";
+        }
+
+        QSqlQuery Miscelanea(dbs);
+        Miscelanea.exec("UPDATE Pais SET Tipo='"+Cantidad+"' WHERE id=1");
+    }
     acceso *acc=new acceso();
     if (Stilo == "A")
         acc->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
@@ -279,14 +306,6 @@ recoverdrake::recoverdrake(QWidget *parent) :
     {
         ui->menuAdministrador->menuAction()->setVisible(false);
     }
-
-
-
-    //QFuture<void> f1 = QtConcurrent::run(this, &recoverdrake::Modulos);
-
-
-
-
     Bloquear = 0;
     ui->checkBox->setEnabled(false);
     ui->checkBox_2->setEnabled(false);
@@ -899,6 +918,14 @@ recoverdrake::recoverdrake(QWidget *parent) :
     timer1->start(1000);
     Logs = "N";
     pagina = 0;
+
+
+
+    //Future<void> f1 = QtConcurrent::run(this, &recoverdrake::ActualizarTodo);
+
+
+
+
     Modulos();
     Arranque();
     this->installEventFilter(this);
@@ -946,7 +973,7 @@ bool recoverdrake::eventFilter(QObject* obj, QEvent *event)
             {
                 ayuda = new Ayuda(this);
                 ayuda->show();
-                ayuda->Valor("RecoverDrake");
+                ayuda->Valor(tr("RecoverDrake"));
                 return true;
             }
         }
@@ -2191,6 +2218,7 @@ void recoverdrake::ActualizarTodo()
     setUpdatesEnabled(false);
     QProgressDialog progress(tr("Actualizando configuraciones... Espera por favor"), tr("Cancelar"), 0, 61, this);
     progress.show();
+    QTest::qWait(20);
     for(int i=0;i<61;i++)
     {
         qApp->processEvents();
@@ -3966,7 +3994,7 @@ void recoverdrake::on_actionOpciones_triggered()
     opciones *opcion=new opciones(this);
     if (Stilo == "A")
         opcion->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-    opcion->show();
+    opcion->exec();
     this->ActualizarTodo();
 }
 
@@ -4786,7 +4814,7 @@ void recoverdrake::on_actionEliminar_paquetes_huerfanos_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -4844,7 +4872,7 @@ void recoverdrake::on_actionRecuperar_paquetes_huerfanos_Eliminados_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -4897,7 +4925,7 @@ void recoverdrake::on_actionSalvaguardar_rpm_s_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -4954,7 +4982,7 @@ void recoverdrake::on_actionRecuperar_rpm_s_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -5030,7 +5058,7 @@ void recoverdrake::on_actionSalvaguardar_copia_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -5038,7 +5066,7 @@ void recoverdrake::on_actionSalvaguardar_copia_triggered()
         if (gzip == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"gzip\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"gzip\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -5046,7 +5074,7 @@ void recoverdrake::on_actionSalvaguardar_copia_triggered()
             if (tar == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -5148,7 +5176,7 @@ void recoverdrake::on_actionRecuperar_copia_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -5386,7 +5414,7 @@ void recoverdrake::on_action_desde_CD_triggered()
     if (cdrdao == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrdao\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrdao\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -5467,7 +5495,7 @@ void recoverdrake::on_action_desde_directorio_triggered()
     if (cdrkit == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrkit\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrkit\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -5554,7 +5582,7 @@ void recoverdrake::on_actionMontar_imagen_ISO_triggered()
     if (ccd2iso == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ccd2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ccd2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -5562,7 +5590,7 @@ void recoverdrake::on_actionMontar_imagen_ISO_triggered()
         if (mdf2iso == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mdf2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mdf2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -5570,7 +5598,7 @@ void recoverdrake::on_actionMontar_imagen_ISO_triggered()
             if (cdi2iso == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdi2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdi2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -5579,7 +5607,7 @@ void recoverdrake::on_actionMontar_imagen_ISO_triggered()
                 if (nrg2iso == "0")
                 {
                     QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"nrg2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"nrg2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                     m.exec();
                 }
                 else
@@ -6180,7 +6208,7 @@ void recoverdrake::on_actionSalvaguardar_ficheros_de_recuperaci_n_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -6188,7 +6216,7 @@ void recoverdrake::on_actionSalvaguardar_ficheros_de_recuperaci_n_triggered()
         if (tar == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -6248,7 +6276,7 @@ void recoverdrake::on_actionRecuperar_ficheros_de_instalaci_n_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -6698,7 +6726,7 @@ void recoverdrake::on_actionRecuperar_Grub_de_arranque_triggered()
     if (kwrite == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"kwrite\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"kwrite\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7443,7 +7471,7 @@ void recoverdrake::on_actionInstalar_sopctas_qsopcast_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7543,7 +7571,7 @@ void recoverdrake::on_actionInstalar_drivers_triggered()
     if (ndiswrapper == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ndiswrapper\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ndiswrapper\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7614,7 +7642,7 @@ void recoverdrake::on_actionVer_modulo_instalado_triggered()
     if (ndiswrapper == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ndiswrapper\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ndiswrapper\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7660,7 +7688,7 @@ void recoverdrake::on_actionBorrar_drivers_triggered()
     if (ndiswrapper == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ndiswrapper\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ndiswrapper\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7741,7 +7769,7 @@ void recoverdrake::on_actionMadwifi_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7815,7 +7843,7 @@ void recoverdrake::on_actionRT2860_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7905,7 +7933,7 @@ void recoverdrake::on_actionRT2870_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7994,7 +8022,7 @@ void recoverdrake::on_actionRT3090_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8083,7 +8111,7 @@ void recoverdrake::on_action61_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8172,7 +8200,7 @@ void recoverdrake::on_actionRT73_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8261,7 +8289,7 @@ void recoverdrake::on_actionAtmel_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8355,7 +8383,7 @@ void recoverdrake::on_actionBcm43xx_fwcutter_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8424,7 +8452,7 @@ void recoverdrake::on_actionB43_fwcutter_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8494,7 +8522,7 @@ void recoverdrake::on_actionIpw2100_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8598,7 +8626,7 @@ void recoverdrake::on_actionConvertir_caracteres_especiales_a_UTF8_triggered()
         if (convmv == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"convmv\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"convmv\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -8707,7 +8735,7 @@ void recoverdrake::on_actionSustituir_espacios_en_blanco_triggered()
     if (convmv == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"convmv\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"convmv\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9199,7 +9227,7 @@ void recoverdrake::on_actionRecuperar_contrase_a_usuario_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9207,7 +9235,7 @@ void recoverdrake::on_actionRecuperar_contrase_a_usuario_triggered()
         if (sudo == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sudo\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sudo\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -9274,7 +9302,7 @@ void recoverdrake::on_actionKTTSD_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9282,7 +9310,7 @@ void recoverdrake::on_actionKTTSD_triggered()
         if (tar == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -9378,7 +9406,7 @@ void recoverdrake::on_actionVirtualBox_triggered()
     if (sudo == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sudo\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sudo\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9461,7 +9489,7 @@ void recoverdrake::on_actionExcluir_paquete_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9522,7 +9550,7 @@ void recoverdrake::on_actionRecuperar_paquete_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9622,7 +9650,7 @@ void recoverdrake::on_actionAplicar_permisos_masivos_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9630,7 +9658,7 @@ void recoverdrake::on_actionAplicar_permisos_masivos_triggered()
         if (ntfsconfig == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ntfsconfig\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ntfsconfig\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -9733,7 +9761,7 @@ void recoverdrake::on_actionRecuperar_ficheros_directorios_borrados_triggered()
     if (photorec == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"photorec\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"photorec\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9741,7 +9769,7 @@ void recoverdrake::on_actionRecuperar_ficheros_directorios_borrados_triggered()
         if (konsole == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"konsole\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"konsole\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -9792,7 +9820,7 @@ void recoverdrake::on_actionWifi_intermitente_WEB_WPA_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9840,7 +9868,7 @@ void recoverdrake::on_actionWifi_intermitente_abierta_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10074,7 +10102,7 @@ void recoverdrake::on_actionConvertir_deb_a_rpm_triggered()
     if (fakeroot == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"fakeroot\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"fakeroot\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10082,7 +10110,7 @@ void recoverdrake::on_actionConvertir_deb_a_rpm_triggered()
         if (alien == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"alien\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"alien\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -10209,7 +10237,7 @@ void recoverdrake::on_actionConvertir_cbr_a_pdf_triggered()
     if (unrar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"unrar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"unrar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10217,7 +10245,7 @@ void recoverdrake::on_actionConvertir_cbr_a_pdf_triggered()
         if (imagemagick == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -10310,7 +10338,7 @@ void recoverdrake::on_actionConvertir_cbz_a_pdf_triggered()
     if (unzip == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"unzip\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"unzip\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10318,7 +10346,7 @@ void recoverdrake::on_actionConvertir_cbz_a_pdf_triggered()
         if (imagemagick == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -10412,7 +10440,7 @@ void recoverdrake::on_actionCrear_gif_animados_triggered()
     if (imagemagick == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
     else
@@ -10492,7 +10520,7 @@ void recoverdrake::on_actionPartir_archivos_triggered()
     if (dalle == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dalle\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dalle\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10575,7 +10603,7 @@ void recoverdrake::on_actionUnir_archivos_triggered()
     if (dalle == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dalle\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dalle\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10654,7 +10682,7 @@ void recoverdrake::on_actionExtraer_audio_a_un_video_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10741,7 +10769,7 @@ void recoverdrake::on_actionIncluir_audio_a_un_video_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10824,7 +10852,7 @@ void recoverdrake::on_actionUnir_varios_video_en_uno_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10908,7 +10936,7 @@ void recoverdrake::on_actionMp3_wma_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10980,7 +11008,7 @@ void recoverdrake::on_actionMp3_wav_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11051,7 +11079,7 @@ void recoverdrake::on_actionMp3_ac3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11122,7 +11150,7 @@ void recoverdrake::on_actionWma_mp3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11193,7 +11221,7 @@ void recoverdrake::on_actionWma_wav_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11264,7 +11292,7 @@ void recoverdrake::on_actionWma_ac3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11335,7 +11363,7 @@ void recoverdrake::on_actionCda_mp3_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11343,7 +11371,7 @@ void recoverdrake::on_actionCda_mp3_triggered()
         if (cdparanoia == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
             else
@@ -11408,7 +11436,7 @@ void recoverdrake::on_actionCda_wma_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11416,7 +11444,7 @@ void recoverdrake::on_actionCda_wma_triggered()
         if (cdparanoia == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
             else
@@ -11481,7 +11509,7 @@ void recoverdrake::on_actionCda_wav_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11489,7 +11517,7 @@ void recoverdrake::on_actionCda_wav_triggered()
         if (cdparanoia == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
             else
@@ -11554,7 +11582,7 @@ void recoverdrake::on_actionCda_ac3_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11562,7 +11590,7 @@ void recoverdrake::on_actionCda_ac3_triggered()
         if (cdparanoia == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
             else
@@ -11626,7 +11654,7 @@ void recoverdrake::on_actionWav_wma_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11697,7 +11725,7 @@ void recoverdrake::on_actionWav_mp3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11770,7 +11798,7 @@ void recoverdrake::on_actionWav_ac3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11843,7 +11871,7 @@ void recoverdrake::on_actionAc3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11916,7 +11944,7 @@ void recoverdrake::on_actionAc3_mp3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11989,7 +12017,7 @@ void recoverdrake::on_actionAc3_wav_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12062,7 +12090,7 @@ void recoverdrake::on_actionAvi_HD_avi_Standar_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12136,7 +12164,7 @@ void recoverdrake::on_actionRecodificar_avi_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12211,7 +12239,7 @@ void recoverdrake::on_actionDesempaquetar_matroska_y_convertir_a_avi_triggered()
     if (mkvtoolnix == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mkvtoolnix\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mkvtoolnix\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12219,7 +12247,7 @@ void recoverdrake::on_actionDesempaquetar_matroska_y_convertir_a_avi_triggered()
         if (ffmpeg == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -12301,7 +12329,7 @@ void recoverdrake::on_actionAvi_mpg_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12374,7 +12402,7 @@ void recoverdrake::on_actionAvi_dvd_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12382,7 +12410,7 @@ void recoverdrake::on_actionAvi_dvd_triggered()
         if (dvdauthor == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -12463,7 +12491,7 @@ void recoverdrake::on_actionAVI_WMV_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12536,7 +12564,7 @@ void recoverdrake::on_actionAvi_flv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12609,7 +12637,7 @@ void recoverdrake::on_actionAvi_3gp_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12682,7 +12710,7 @@ void recoverdrake::on_actionAvi_mp4_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12755,7 +12783,7 @@ void recoverdrake::on_actionMpg_avi_2_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12828,7 +12856,7 @@ void recoverdrake::on_actionMpg_dvd_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12836,7 +12864,7 @@ void recoverdrake::on_actionMpg_dvd_triggered()
         if (dvdauthor == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -12917,7 +12945,7 @@ void recoverdrake::on_actionMPG_WMV_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12990,7 +13018,7 @@ void recoverdrake::on_actionMpg_flv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13063,7 +13091,7 @@ void recoverdrake::on_actionMpg_3gp_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13136,7 +13164,7 @@ void recoverdrake::on_actionMpg_mp4_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13209,7 +13237,7 @@ void recoverdrake::on_actionWmv_avi_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13282,7 +13310,7 @@ void recoverdrake::on_actionWmv_mpg_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13355,7 +13383,7 @@ void recoverdrake::on_actionWmv_dvd_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13363,7 +13391,7 @@ void recoverdrake::on_actionWmv_dvd_triggered()
         if (dvdauthor == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -13444,7 +13472,7 @@ void recoverdrake::on_actionWmv_flv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13517,7 +13545,7 @@ void recoverdrake::on_actionWmv_3gp_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13590,7 +13618,7 @@ void recoverdrake::on_actionWmv_mp4_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13663,7 +13691,7 @@ void recoverdrake::on_actionFlv_avi_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13736,7 +13764,7 @@ void recoverdrake::on_actionFlv_dvd_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13744,7 +13772,7 @@ void recoverdrake::on_actionFlv_dvd_triggered()
         if (dvdauthor == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -13825,7 +13853,7 @@ void recoverdrake::on_actionFlv_wmv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13893,7 +13921,7 @@ void recoverdrake::on_actionFlv_mpg_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13966,7 +13994,7 @@ void recoverdrake::on_actionFlv_3gp_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14039,7 +14067,7 @@ void recoverdrake::on_actionFlv_mp4_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14112,7 +14140,7 @@ void recoverdrake::on_actionMp4_avi_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14185,7 +14213,7 @@ void recoverdrake::on_actionMp4_mpg_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14258,7 +14286,7 @@ void recoverdrake::on_actionMp4_dvd_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14266,7 +14294,7 @@ void recoverdrake::on_actionMp4_dvd_triggered()
         if (dvdauthor == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -14347,7 +14375,7 @@ void recoverdrake::on_actionMp4_wmv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14420,7 +14448,7 @@ void recoverdrake::on_actionMp4_3gp_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14493,7 +14521,7 @@ void recoverdrake::on_actionMp4_flv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14566,7 +14594,7 @@ void recoverdrake::on_action3gp_mpg_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14639,7 +14667,7 @@ void recoverdrake::on_action3gp_avi_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14712,7 +14740,7 @@ void recoverdrake::on_action3gp_dvd_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14720,7 +14748,7 @@ void recoverdrake::on_action3gp_dvd_triggered()
         if (dvdauthor == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -14801,7 +14829,7 @@ void recoverdrake::on_action3gp_wmv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14874,7 +14902,7 @@ void recoverdrake::on_action3gp_flv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14947,7 +14975,7 @@ void recoverdrake::on_action3gp_mp4_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15020,7 +15048,7 @@ void recoverdrake::on_actionDvd_avi_2_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15028,7 +15056,7 @@ void recoverdrake::on_actionDvd_avi_2_triggered()
         if (lsdvdDat == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -15117,7 +15145,7 @@ void recoverdrake::on_actionDvd_mpg_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15125,7 +15153,7 @@ void recoverdrake::on_actionDvd_mpg_triggered()
         if (lsdvdDat == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -15133,7 +15161,7 @@ void recoverdrake::on_actionDvd_mpg_triggered()
             if (ffmpeg == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -15227,7 +15255,7 @@ void recoverdrake::on_actionDVD_WMV_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15235,7 +15263,7 @@ void recoverdrake::on_actionDVD_WMV_triggered()
         if (lsdvdDat == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -15243,7 +15271,7 @@ void recoverdrake::on_actionDVD_WMV_triggered()
             if (ffmpeg == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -15337,7 +15365,7 @@ void recoverdrake::on_actionDvd_flv_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15345,7 +15373,7 @@ void recoverdrake::on_actionDvd_flv_triggered()
         if (lsdvdDat == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -15353,7 +15381,7 @@ void recoverdrake::on_actionDvd_flv_triggered()
             if (ffmpeg == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -15447,7 +15475,7 @@ void recoverdrake::on_actionDvd_3gp_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15455,7 +15483,7 @@ void recoverdrake::on_actionDvd_3gp_triggered()
         if (lsdvdDat == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -15463,7 +15491,7 @@ void recoverdrake::on_actionDvd_3gp_triggered()
             if (ffmpeg == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -15557,7 +15585,7 @@ void recoverdrake::on_actionDvd_mp4_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15565,7 +15593,7 @@ void recoverdrake::on_actionDvd_mp4_triggered()
         if (lsdvdDat == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -15573,7 +15601,7 @@ void recoverdrake::on_actionDvd_mp4_triggered()
             if (ffmpeg == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -15929,7 +15957,7 @@ void recoverdrake::on_actionCopiar_iso_a_CD_DVD_triggered()
     if (cdrkit == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrkit\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrkit\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -16005,7 +16033,7 @@ void recoverdrake::on_actionCopiar_CD_DVD_triggered()
     if (cdrkit == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrkit\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrkit\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -17162,7 +17190,7 @@ void recoverdrake::on_actionActualizar_DB_Virus_triggered()
     if (clamav == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"clamav\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"clamav\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -17212,7 +17240,7 @@ void recoverdrake::on_actionScanear_Virus_2_triggered()
     if (clamav == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"clamav\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"clamav\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -17289,7 +17317,7 @@ void recoverdrake::on_actionBorrar_ficheros_de_Cuarentena_triggered()
     if (clamav == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"clamav\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"clamav\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -17297,7 +17325,7 @@ void recoverdrake::on_actionBorrar_ficheros_de_Cuarentena_triggered()
         if (dolphin == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dolphin\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dolphin\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -21042,7 +21070,7 @@ void recoverdrake::on_actionListar_logs_de_comandos_de_shell_triggered()
     if (kwrite == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21244,7 +21272,7 @@ void recoverdrake::on_actionImg_iso_triggered()
     if (ccd2iso == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ccd2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ccd2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21313,7 +21341,7 @@ void recoverdrake::on_actionCdi_iso_triggered()
     if (cdi2iso == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdi2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdi2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21380,7 +21408,7 @@ void recoverdrake::on_actionMdf_iso_triggered()
     if (mdf2iso == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mdf2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mdf2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21447,7 +21475,7 @@ void recoverdrake::on_actionNrg_iso_triggered()
     if (nrg2iso == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"nrg2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"nrg2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21713,7 +21741,7 @@ void recoverdrake::on_actionEtiquetado_de_mp3_triggered()
         QMessageBox m;
         if (Stilo == "A")
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"id3lib\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"id3lib\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21724,7 +21752,7 @@ void recoverdrake::on_actionEtiquetado_de_mp3_triggered()
             QMessageBox m;
             if (Stilo == "A")
                 m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"id3v2\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"id3v2\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -21814,7 +21842,7 @@ void recoverdrake::on_actionSupervisar_red_privada_triggered()
     if (nmap == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"nmap\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"nmap\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21822,7 +21850,7 @@ void recoverdrake::on_actionSupervisar_red_privada_triggered()
         if (iptables == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"iptables\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"iptables\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -22581,7 +22609,7 @@ void recoverdrake::on_actionListar_logs_de_sucesos_triggered()
     if (kwrite == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"kwrite\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"kwrite\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -23093,7 +23121,7 @@ void recoverdrake::on_actionCrear_iconos_triggered()
     if (imagemagick == "0")
     {
        QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-       m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+       m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
        m.exec();
     }
     else
@@ -24329,7 +24357,7 @@ void recoverdrake::on_actionGenerar_Ficheros_Multi_Idioma_triggered()
         QMessageBox m;
         if (Stilo == "A")
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \""+Valor+"\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \""+Valor+"\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -24379,7 +24407,7 @@ void recoverdrake::on_actionAcceder_a_la_traduccion_QT_Linguist_triggered()
         QMessageBox m;
         if (Stilo == "A")
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"qt4-linguist\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"qt4-linguist\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -25288,7 +25316,7 @@ void recoverdrake::on_pushButton_49_clicked()
         if (firefox == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"firefox\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"firefox\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
             ui->tabWidget->setCurrentPage(pagina);ui->tabWidget_8->setCurrentPage(0);return;
         }
@@ -25332,7 +25360,7 @@ void recoverdrake::on_actionCrear_USB_Live_Multiboot_Interactivo_triggered()
     if (fileroller == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"file-roller\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"file-roller\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -25340,7 +25368,7 @@ void recoverdrake::on_actionCrear_USB_Live_Multiboot_Interactivo_triggered()
         if (mtools == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mtools\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mtools\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -25579,7 +25607,7 @@ void recoverdrake::on_actionProbar_USB_Live_triggered()
     if (qemu == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"qemu\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"qemu\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -25688,7 +25716,7 @@ void recoverdrake::on_actionBuscador_triggered()
         if (gcstar == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"gcstar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"gcstar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -26194,7 +26222,7 @@ void recoverdrake::on_actionConfigurar_VNC_triggered()
     if (x11vnc == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"x11vnc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"x11vnc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -26202,7 +26230,7 @@ void recoverdrake::on_actionConfigurar_VNC_triggered()
         if (mutt == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"muttc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"muttc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -26210,7 +26238,7 @@ void recoverdrake::on_actionConfigurar_VNC_triggered()
             if (sendmail == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sendmail\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sendmail\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -26218,7 +26246,7 @@ void recoverdrake::on_actionConfigurar_VNC_triggered()
                 if (ssmtp == "0")
                 {
                     QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ssmtp\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ssmtp\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                     m.exec();
                 }
                 else
@@ -26367,7 +26395,7 @@ void recoverdrake::on_actionServidor_VNC_triggered()
     if (x11vnc == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"x11vnc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"x11vnc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -26375,7 +26403,7 @@ void recoverdrake::on_actionServidor_VNC_triggered()
         if (mutt == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"muttc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"muttc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -26383,7 +26411,7 @@ void recoverdrake::on_actionServidor_VNC_triggered()
             if (sendmail == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sendmail\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sendmail\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -26391,7 +26419,7 @@ void recoverdrake::on_actionServidor_VNC_triggered()
                 if (ssmtp == "0")
                 {
                     QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ssmtp\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ssmtp\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                     m.exec();
                 }
                 else
@@ -26607,7 +26635,7 @@ void recoverdrake::on_actionIniciar_sesion_remota_triggered()
     if (tigervnc == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tigervnc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tigervnc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -26646,7 +26674,7 @@ void recoverdrake::on_actionDescargar_torrent_triggered()
     if (transmission == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"transmission-cli\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"transmission-cli\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -27905,7 +27933,7 @@ void recoverdrake::on_actionCrea_tu_propio_kernel_personalizado_triggered()
     if (gcc == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"gcc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"gcc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -27913,7 +27941,7 @@ void recoverdrake::on_actionCrea_tu_propio_kernel_personalizado_triggered()
         if (makec== "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"make\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"make\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -27921,7 +27949,7 @@ void recoverdrake::on_actionCrea_tu_propio_kernel_personalizado_triggered()
             if (libncurses == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"libncurses-devel\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"libncurses-devel\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -27929,7 +27957,7 @@ void recoverdrake::on_actionCrea_tu_propio_kernel_personalizado_triggered()
                 if (libncursesw == "0")
                 {
                     QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"libncursesw-devel\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"libncursesw-devel\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                     m.exec();
                 }
                 else
@@ -28372,7 +28400,7 @@ void recoverdrake::on_actionGrabadora_de_sonidos_triggered()
         QMessageBox m;
         if (Stilo == "A")
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -28383,7 +28411,7 @@ void recoverdrake::on_actionGrabadora_de_sonidos_triggered()
             QMessageBox m;
             if (Stilo == "A")
                 m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"pulseaudio-utils\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"pulseaudio-utils\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -28655,7 +28683,7 @@ void recoverdrake::on_actionAmule_2_triggered()
                QString::fromUtf8(tr("<center><b>Solucionar error de inicio de amule</b></center><p>"
                   "Es posible que inicies amule y no inicie, debido a un problema con un fichero "
                   "corrupto de configuracion.<p>"
-                  "Con esta utilidad se eliminar el problema y podras volver a utilizarlo como antes.<p>"
+                  "Con esta utilidad se elimina el problema y podras volver a utilizarlo como antes.<p>"
                   "<B>NOTA: Debes esperar a que termine completamente el proceso seleccionado, "
                   "el cual te sera notificado cuando finalice en la consola de procesos.</B><p>"
                   "&iquest;Solucionar error inicio de amule?")), QMessageBox::Ok, QMessageBox::No);
@@ -28826,7 +28854,7 @@ void recoverdrake::on_actionClaves_triggered()
             if (Stilo == "A")
                 Claves->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
             Claves->showMaximized();
-            Claves->Valor("");
+            Claves->Valor("",Usu);
             Claves->exec();
         }
         else if (Window == 1)
@@ -28845,7 +28873,7 @@ void recoverdrake::on_actionClaves_triggered()
                 if (Stilo == "A")
                     Claves->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
                 Claves->showMaximized();
-                Claves->Valor("Quitar");
+                Claves->Valor("Quitar",Usu);
                 Claves->exec();
             }
             else

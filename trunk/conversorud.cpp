@@ -98,6 +98,23 @@ ConversorUD::ConversorUD(QWidget *parent) :
     {
         Idioma = "En";
     }
+    QString pais;
+    QSqlQuery Pais(db);
+    Pais.exec("SELECT Tipo FROM Pais WHERE id=1");
+    Pais.first();
+    if (Pais.isValid())
+        pais=Pais.value(0).toString();
+    qDebug() << pais;
+    if (pais == "1")
+    {
+        ui->groupBox_6->setVisible(true);
+        ui->groupBox_7->setVisible(true);
+    }
+    else if (pais == "2")
+    {
+        ui->groupBox_6->setVisible(false);
+        ui->groupBox_7->setVisible(false);
+    }
     ui->comboBox_11->setCurrentIndex(ui->comboBox_11->findText(tr("Ano")));
     ui->comboBox_12->setCurrentIndex(ui->comboBox_12->findText(tr("Ano")));
     ui->comboBox->setCurrentIndex(ui->comboBox->findText(tr("Metro (m)")));
@@ -189,6 +206,7 @@ ConversorUD::ConversorUD(QWidget *parent) :
     ui->groupBox_12->setVisible(false);
     ui->comboBox_25->setCurrentText(tr("Distancia o Longitud"));
     ui->lineEdit_55->setText("28");
+    ui->label_135->setText("");
     ui->lineEdit->installEventFilter(this);
     ui->lineEdit_14->installEventFilter(this);
     ui->lineEdit_19->installEventFilter(this);
@@ -266,7 +284,7 @@ bool ConversorUD::eventFilter(QObject* obj, QEvent *event)
             {
                 ayuda = new Ayuda(this);
                 ayuda->show();
-                ayuda->Valor("Conversor");
+                ayuda->Valor(tr("Conversor"));
                 return true;
             }
         }
@@ -3037,6 +3055,9 @@ void ConversorUD::on_pushButton_6_clicked()
     ui->lineEdit_16->setText("");
     ui->lineEdit_17->setText("");
     ui->lineEdit_18->setText("");
+    ui->label_135->setText("");
+    ui->lineEdit_125->setText("");
+    ui->lineEdit_124->setText("");
     ui->lineEdit_15->setFocus();
 }
 
@@ -4190,8 +4211,23 @@ void ConversorUD::Comprobar2()
         ui->textEdit_2->setVisible(false);
         ui->groupBox_8->setVisible(true);
         ui->groupBox_9->setVisible(true);
-        ui->groupBox_7->setVisible(true);
-        ui->groupBox_6->setVisible(true);
+        QString pais;
+        QSqlQuery Pais(db);
+        Pais.exec("SELECT Tipo FROM Pais WHERE id=1");
+        Pais.first();
+        if (Pais.isValid())
+            pais=Pais.value(0).toString();
+        qDebug() << pais;
+        if (pais == "1")
+        {
+            ui->groupBox_6->setVisible(true);
+            ui->groupBox_7->setVisible(true);
+        }
+        else if (pais == "2")
+        {
+            ui->groupBox_6->setVisible(false);
+            ui->groupBox_7->setVisible(false);
+        }
         ui->groupBox_10->setVisible(true);
         ui->comboBox_25->setVisible(false);
         ui->groupBox_20->setVisible(false);
@@ -4407,10 +4443,10 @@ void ConversorUD::on_lineEdit_17_returnPressed()
             ValorDigito1 = 0;
         ui->lineEdit_16->setText(""+QString::number(ValorDigito)+""+QString::number(ValorDigito1)+"");
         QString ValorIban = ui->lineEdit_15->text()+ui->lineEdit_18->text()+ui->lineEdit_16->text()+ui->lineEdit_17->text()+"142800";                
-        QString Parte1 = ValorIban.mid(1,9);
-        QString Parte2 = ValorIban.mid(10,7);
-        QString Parte3 = ValorIban.mid(17,7);
-        QString Parte4 = ValorIban.mid(24,3);
+        QString Parte1 = ValorIban.mid(0,9);
+        QString Parte2 = ValorIban.mid(9,7);
+        QString Parte3 = ValorIban.mid(16,7);
+        QString Parte4 = ValorIban.mid(23,4);
         double Resto1Iban = Parte1.toDouble()/97;
         QString Resto1 = QString::number(Resto1Iban,'f',10);
         QStringList Resto1Calc = Resto1.split(".");
@@ -4446,6 +4482,17 @@ void ConversorUD::on_lineEdit_17_returnPressed()
             ValorES = QString::number(Total);
         QString Resultado = "ES"+ValorES;
         ui->lineEdit_124->setText(Resultado);
+        QString Nombre, Bic;
+        QSqlQuery query(db);
+        query.exec("SELECT Nombre,Bic FROM Bic WHERE Codigo='"+ui->lineEdit_15->text()+"'");
+        query.first();
+        if (query.isValid())
+        {
+            Nombre=query.value(0).toString();
+            Bic=query.value(1).toString();
+        }
+        ui->lineEdit_125->setText(Bic);
+        ui->label_135->setText(Nombre);
     }
 }
 
@@ -5401,7 +5448,6 @@ void ConversorUD::on_lineEdit_12_textChanged(const QString &arg1)
                 int numero;
                 ascii=Valor.at(0).toAscii();
                 numero=ascii.toAscii() ;
-                qDebug() << numero;
                 if ( (numero >= 48 && numero <=57) || (numero >= 65 && numero <=70))
                 {
                     int Calculo;
@@ -8978,6 +9024,9 @@ void ConversorUD::on_pushButton_2_clicked()
     ui->checkBox_48->setChecked(false);
     ui->toolBox->setCurrentIndex(0);
     ui->tabWidget_2->setCurrentPage(0);
+    ui->lineEdit_125->setText("");
+    ui->lineEdit_124->setText("");
+    ui->label_135->setText("");
     ui->lineEdit_37->setText("");
     ui->lineEdit_36->setText("");
     ui->lineEdit_36->setToolTip("");
@@ -13001,43 +13050,6 @@ void ConversorUD::Unidad1(double Value, double Value1, double Cantidad, QString 
     }
 }
 
-QString ConversorUD::getDivisa()
-{
-    QProcess *procesoFree;
-    QStringList argumentosFree;
-    QByteArray ip;
-    procesoFree=new QProcess(this);
-    argumentosFree << "http://www.convertworld.com/es/moneda/";
-    procesoFree->start("curl", argumentosFree);
-    if (! procesoFree->waitForStarted())
-        return QString("");
-    procesoFree->waitForFinished();
-    ip = procesoFree->readAllStandardOutput();
-    delete procesoFree;
-    QString res = QString(ip);
-    res.chop(0);
-    return res;
-}
-
-void ConversorUD::Divisa()
-{
-    QString Comprobar;
-    QStringList Resto;
-    QString Valor = getDivisa();
-    QStringList Depurar = Valor.split("\n");
-    for (int a=0;a<Depurar.count();a++)
-    {
-        Comprobar = Depurar.value(a);
-        if (Comprobar.contains("<option value="))
-        {
-            Resto << Comprobar;
-        }
-    }
-    qDebug() << Resto;
-
-    // falta esta parte para las monedas
-}
-
 void ConversorUD::on_pushButton_34_clicked()
 {
     ui->lineEdit_160->setText("");
@@ -13048,7 +13060,6 @@ void ConversorUD::on_pushButton_34_clicked()
     ui->label_15->setText("");
     ui->textEdit->setText("");
     ui->textEdit_2->setText("");
-
 }
 
 void ConversorUD::on_lineEdit_160_returnPressed()
@@ -13447,4 +13458,41 @@ void ConversorUD::on_comboBox_56_activated(const QString &arg1)
         }
     }
     Reprobar("Combustible");
+}
+
+QString ConversorUD::getDivisa()
+{
+    QProcess *procesoFree;
+    QStringList argumentosFree;
+    QByteArray ip;
+    procesoFree=new QProcess(this);
+    argumentosFree << "http://www.convertworld.com/es/moneda/";
+    procesoFree->start("curl", argumentosFree);
+    if (! procesoFree->waitForStarted())
+        return QString("");
+    procesoFree->waitForFinished();
+    ip = procesoFree->readAllStandardOutput();
+    delete procesoFree;
+    QString res = QString(ip);
+    res.chop(0);
+    return res;
+}
+
+void ConversorUD::Divisa()
+{
+    QString Comprobar;
+    QStringList Resto;
+    QString Valor = getDivisa();
+    QStringList Depurar = Valor.split("\n");
+    for (int a=0;a<Depurar.count();a++)
+    {
+        Comprobar = Depurar.value(a);
+        if (Comprobar.contains("<option value="))
+        {
+            Resto << Comprobar;
+        }
+    }
+    qDebug() << Resto;
+
+    // falta esta parte para las monedas
 }

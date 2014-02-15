@@ -48,8 +48,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>1292</width>
-        <height>594</height>
+        <width>1255</width>
+        <height>599</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_5">
@@ -814,6 +814,10 @@
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
