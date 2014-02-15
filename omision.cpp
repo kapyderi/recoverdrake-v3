@@ -158,7 +158,7 @@ bool Omision::eventFilter(QObject* obj, QEvent *event)
             {
                 ayuda = new Ayuda(this);
                 ayuda->show();
-                ayuda->Valor("Sincrono::Omitir palabras sincronizadas");
+                ayuda->Valor(tr("Sincrono::Omitir palabras sincronizadas"));
                 return true;
             }
         }

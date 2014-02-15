@@ -19,7 +19,7 @@ class dbclaves : public QDialog
 public:
     explicit dbclaves(QWidget *parent = 0);
     ~dbclaves();
-    void Valor(QString valor);
+    void Valor(QString valor, QString Usuario);
 
 signals:
     void Cerrar();
@@ -37,8 +37,19 @@ private slots:
     void on_lineEdit_textChanged(const QString &arg1);
     int randInt(int low, int high);
     void ramdomize();
-
+    void cambiaFila(QModelIndex actual);
     void on_lineEdit_2_textChanged(const QString &arg1);
+    void on_lineEdit_6_textChanged(const QString &arg1);
+    void Encriptar();
+    void Desencriptar();
+    void on_pushButton_clicked();
+    void on_pushButton_7_clicked();
+    void on_pushButton_8_clicked();
+    void on_pushButton_2_clicked();
+    void on_pushButton_3_clicked();
+    void on_pushButton_11_clicked();
+
+    void on_pushButton_10_clicked();
 
 private:
     Ui::dbclaves *ui;
@@ -63,6 +74,8 @@ private:
     QString cantidad51;
     int CierreTotal;
     QString Stilo;
+    int Bloqueo;
+    QString IDUser;
 
 };
 

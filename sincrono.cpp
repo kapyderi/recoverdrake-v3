@@ -116,12 +116,29 @@ void sincrono::changeEvent(QEvent *e)
 }
 
 void sincrono::Valor(QString Ref, QString Valor1, QString Valor2, QString Valor3, QString Valor4, QString Valor5, QString Valor6, int Value, QString Log, QString Pos)
-{      
+{
+    QColor color;
     Referencia = Ref;
     ui->lineEdit_3->setText(Referencia);
     ui->lineEdit->setText(Valor1);
     ui->lineEdit_2->setText(Valor2);
     ui->lineEdit_4->setText(Pos);
+    drakeSistema drake;
+    QString Explora = "find \"%1\"/.Sincrono";
+    Explora = Explora.arg(ui->lineEdit_2->text());
+    QString valor = drake.getStart(Explora);
+    QStringList Value1 = valor.split("\n");
+    if (Value1.count() <= 2)
+    {
+        ui->pushButton_15->setBackgroundColor(colorAnt);
+        ui->pushButton_15->setEnabled(false);
+    }
+    else
+    {
+        color = QColor(Qt::yellow);
+        ui->pushButton_15->setBackgroundColor(color);
+        ui->pushButton_15->setEnabled(true);
+    }
     if (Valor3 == "Si")
     {
         ui->checkBox->setChecked(true);
@@ -180,8 +197,7 @@ void sincrono::Valor(QString Ref, QString Valor1, QString Valor2, QString Valor3
     int Cantidad;
     QString Traspaso;
     QStringList Separar;
-    QString Resto;
-    QColor color;
+    QString Resto;    
     Traspaso = Omitir;
     Separar = Traspaso.split(";");
     Cantidad = Separar.count();
@@ -198,23 +214,7 @@ void sincrono::Valor(QString Ref, QString Valor1, QString Valor2, QString Valor3
         ui->pushButton_14->setBackgroundColor(colorAnt);
         ui->pushButton_14->setText(tr("Filtrar palabras"));
         ui->pushButton_14->setToolTip(Omitir);
-    }
-    drakeSistema drake;
-    QString Explora = "find \"%1\"/.Sincrono";
-    Explora = Explora.arg(ui->lineEdit_2->text());
-    QString valor = drake.getStart(Explora);
-    QStringList Value1 = valor.split("\n");
-    if (Value1.count() <= 2)
-    {
-        ui->pushButton_15->setBackgroundColor(colorAnt);
-        ui->pushButton_15->setEnabled(false);
-    }
-    else
-    {
-        color = QColor(Qt::yellow);
-        ui->pushButton_15->setBackgroundColor(color);
-        ui->pushButton_15->setEnabled(true);
-    }    
+    }   
     if (Log == "S")
         log = "S";
     else
@@ -1564,11 +1564,8 @@ void sincrono::on_pushButton_10_clicked()
 {
     QString Referencia,Objetivo,Destino,Eliminar,Comprobar,Ocultos,Final;
     QSqlQuery Compara(db);
-    Compara.exec("SELECT Referencia FROM Sincrono WHERE Id='"+ui->lineEdit_4->text()+"'"); // AND Destino='"+ui->lineEdit_2->text()+"'");
+    Compara.exec("SELECT Referencia FROM Sincrono WHERE Id='"+ui->lineEdit_4->text()+"'");
     Compara.first();
-// COMPROBAR ESTO
-
-
     Referencia = Compara.value(0).toString();
     if (Referencia == "")
     {
@@ -1615,7 +1612,7 @@ void sincrono::on_pushButton_5_clicked()
             QMessageBox m;
             if (Stilo == "A")
                 m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr("No hay nada que sincronizar, todo esta correcto."));
+            m.setText(tr("No hay nada que sincronizar en ")+ui->lineEdit_3->text()+tr(", todo esta correcto."));
             m.exec();
             return;
         }
@@ -1709,7 +1706,7 @@ void sincrono::on_pushButton_5_clicked()
                 QMessageBox m;
                 if (Stilo == "A")
                     m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr("No hay nada que sincronizar, todo esta correcto."));
+                m.setText(tr("No hay nada que sincronizar en ")+ui->lineEdit_3->text()+tr(", todo esta correcto."));
                 m.exec();
                 return;
             }
@@ -2406,7 +2403,7 @@ bool sincrono::eventFilter(QObject* obj, QEvent *event)
             {
                 ayuda = new Ayuda(this);
                 ayuda->show();
-                ayuda->Valor("Sincrono");
+                ayuda->Valor(tr("Sincrono"));
                 return true;
             }
         }
@@ -2644,39 +2641,48 @@ void sincrono::Verificar()
 {
     if (Value == 0)
     {
-        QColor color;
-        drakeSistema drake;
-        QString md1 = "find \"%1\" -name .Sincrono";
-        md1 = md1.arg(ui->lineEdit_2->text());
-        QString Valor1 = drake.getStart(md1);
-        if (Valor1 == "")
+        if (ui->lineEdit_2->text() != "")
         {
-            ui->pushButton_15->setBackgroundColor(colorAnt);
-            ui->pushButton_15->setEnabled(false);
+            QColor color;
+            drakeSistema drake;
+            QString md1 = "find \"%1\" -name .Sincrono";
+            md1 = md1.arg(ui->lineEdit_2->text());
+            QString Valor1 = drake.getStart(md1);
+            if (Valor1 == "")
+            {
+                ui->pushButton_15->setBackgroundColor(colorAnt);
+                ui->pushButton_15->setEnabled(false);
+            }
+            else
+            {
+                color = QColor(Qt::yellow);
+                ui->pushButton_15->setBackgroundColor(color);
+                ui->pushButton_15->setEnabled(true);
+            }
         }
-        else
+        if (ui->lineEdit->text() != "")
         {
-            color = QColor(Qt::yellow);
-            ui->pushButton_15->setBackgroundColor(color);
-            ui->pushButton_15->setEnabled(true);
+                QString Valor10 = "ls -l -d \"%1\"";
+                Valor10 = Valor10.arg(ui->lineEdit->text());
+                QString PermisosO = getPropietario(Valor10);
+                QStringList RestoO = PermisosO.split(" ");
+                QString PermiO = RestoO.value(2);
+                if (PermiO != "")
+                    ui->label_2->setText(tr("Propietario: ")+PermiO+"");
+                else
+                    ui->label_2->setText("");
         }
-        QString Valor10 = "ls -l -d \"%1\"";
-        Valor10 = Valor10.arg(ui->lineEdit->text());
-        QString Valor20 = "ls -l -d \"%1\"";
-        Valor20 = Valor20.arg(ui->lineEdit_2->text());
-        QString PermisosO = getPropietario(Valor10);
-        QString PermisosD = getPropietario(Valor20);
-        QStringList RestoO = PermisosO.split(" ");
-        QStringList RestoD = PermisosD.split(" ");
-        QString PermiO = RestoO.value(2);
-        QString PermiD = RestoD.value(2);
-        if (PermiO != "")
-            ui->label_2->setText(tr("Propietario: ")+PermiO+"");
-        else
-            ui->label_2->setText("");
-        if (PermiD != "")
-            ui->label_4->setText(tr("Propietario: ")+PermiD+"");
-        else
-            ui->label_4->setText("");
+        if (ui->lineEdit_2->text() != "")
+        {
+            QString Valor20 = "ls -l -d \"%1\"";
+            Valor20 = Valor20.arg(ui->lineEdit_2->text());
+            QString PermisosD = getPropietario(Valor20);
+            QStringList RestoD = PermisosD.split(" ");
+            QString PermiD = RestoD.value(2);
+            if (PermiD != "")
+                ui->label_4->setText(tr("Propietario: ")+PermiD+"");
+            else
+                ui->label_4->setText("");
+        }
     }
 }

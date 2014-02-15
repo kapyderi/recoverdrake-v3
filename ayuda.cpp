@@ -56,77 +56,84 @@ void Ayuda::Valor(QString valor)
 {
     ui->tabWidget->clear();
     ui->listWidget_2->setCurrentRow(0);
-    if (valor == "Sincrono")
+    if (valor == tr("Sincrono"))
     {
         ui->tabWidget->insertTab(0,ui->tab_1,valor);
         ui->tabWidget->setCurrentPage(0);
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(valor);
     }
-    if (valor == "Sincrono::Copias sincronizadas")
+    if (valor == tr("Sincrono::Copias sincronizadas"))
     {
         ui->tabWidget->insertTab(0,ui->tab_2,valor);
         ui->tabWidget->setCurrentPage(0);
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(valor);
     }
-    if (valor == "Sincrono::Omitir palabras sincronizadas")
+    if (valor == tr("Sincrono::Omitir palabras sincronizadas"))
     {
         ui->tabWidget->insertTab(0,ui->tab_31,valor);
         ui->tabWidget->setCurrentPage(0);
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(valor);
     }
-    if (valor == "Salvaguarda")
+    if (valor == tr("Salvaguarda"))
     {
         ui->tabWidget->insertTab(0,ui->tab_41,valor);
         ui->tabWidget->setCurrentPage(0);
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(valor);
     }
-    if (valor == "Comparador")
+    if (valor == tr("Comparador"))
     {
         ui->tabWidget->insertTab(0,ui->tab_5,valor);
         ui->tabWidget->setCurrentPage(0);
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(valor);
     }
-    if (valor == "TeleDrake")
+    if (valor == tr("TeleDrake"))
     {
         ui->tabWidget->insertTab(0,ui->tab_6,valor);
         ui->tabWidget->setCurrentPage(0);
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(valor);
     }
-    if (valor == "VideoDrake")
+    if (valor == tr("VideoDrake"))
     {
         ui->tabWidget->insertTab(0,ui->tab_7,valor);
         ui->tabWidget->setCurrentPage(0);
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(valor);
     }
-    if (valor == "Acceso")
+    if (valor == tr("Acceso"))
     {
         ui->tabWidget->insertTab(0,ui->tab_8,valor);
         ui->tabWidget->setCurrentPage(0);
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(valor);
     }
-    if (valor == "Etiquetador")
+    if (valor == tr("Etiquetador"))
     {
         ui->tabWidget->insertTab(0,ui->tab,valor);
         ui->tabWidget->setCurrentPage(0);
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(valor);
     }
-    if (valor == "Backup")
+    if (valor == tr("Backup"))
     {
         ui->tabWidget->insertTab(0,ui->tab_9,valor);
         ui->tabWidget->setCurrentPage(0);
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(valor);
     }
-    if (valor == "RecoverDrake")
+    if (valor == tr("Grabador"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_12,valor);
+        ui->tabWidget->setCurrentPage(0);
+        ui->listWidget->setCurrentRow(0);
+        ui->lineEdit->setText(valor);
+    }
+    if (valor == tr("RecoverDrake"))
     {
         ui->tabWidget_2->setCurrentPage(1);
         ui->listWidget_2->setCurrentRow(0);
@@ -145,59 +152,69 @@ void Ayuda::Valor(QString valor)
 void Ayuda::on_listWidget_currentTextChanged(const QString &currentText)
 {
     ui->tabWidget->removeTab(Pestana);
-    if (currentText == "Sincrono")
+    if (currentText == tr("Sincrono"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_1,"Sincrono");
+        ui->tabWidget->insertTab(0,ui->tab_1,tr("Sincrono"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Sincrono::Copias sincronizadas")
+    if (currentText == tr("Sincrono::Copias sincronizadas"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_2,"Sincrono::Copias sincronizadas");
+        ui->tabWidget->insertTab(0,ui->tab_2,tr("Sincrono::Copias sincronizadas"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Sincrono::Omitir palabras sincronizadas")
+    if (currentText == tr("Sincrono::Omitir palabras sincronizadas"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_31,"Sincrono::Omitir palabras sincronizadas");
+        ui->tabWidget->insertTab(0,ui->tab_31,tr("Sincrono::Omitir palabras sincronizadas"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Salvaguarda")
+    if (currentText == tr("Salvaguarda"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_41,"Salvaguarda");
+        ui->tabWidget->insertTab(0,ui->tab_41,tr("Salvaguarda"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Comparador")
+    if (currentText == tr("Comparador"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_5,"Comparador");
+        ui->tabWidget->insertTab(0,ui->tab_5,tr("Comparador"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "TeleDrake")
+    if (currentText == tr("TeleDrake"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_6,"TeleDrake");
+        ui->tabWidget->insertTab(0,ui->tab_6,tr("TeleDrake"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "VideoDrake")
+    if (currentText == tr("VideoDrake"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_7,"VideoDrake");
+        ui->tabWidget->insertTab(0,ui->tab_7,tr("VideoDrake"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Acceso")
+    if (currentText == tr("Acceso"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_8,"Acceso");
+        ui->tabWidget->insertTab(0,ui->tab_8,tr("Acceso"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Etiquetador")
+    if (currentText == tr("Etiquetador"))
     {
-        ui->tabWidget->insertTab(0,ui->tab,"Etiquetador");
+        ui->tabWidget->insertTab(0,ui->tab,tr("Etiquetador"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Backup")
+    if (currentText == tr("Backup"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_9,"Backup");
+        ui->tabWidget->insertTab(0,ui->tab_9,tr("Backup"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Menu principal::Activar control errores de sesion")
+    if (currentText == tr("Menu principal::Activar control errores de sesion"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_10,"Menu principal::Activar control errores de sesion");
+        ui->tabWidget->insertTab(0,ui->tab_10,tr("Menu principal::Activar control errores de sesion"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Solucion a problemas::Amule"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_11,tr("Solucion a problemas::Amule"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Grabador"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_12,tr("Grabador"));
         ui->tabWidget->setCurrentPage(0);
     }
 }
@@ -213,59 +230,69 @@ void Ayuda::on_lineEdit_textChanged(const QString &arg1)
 void Ayuda::on_listWidget_2_currentTextChanged(const QString &currentText)
 {
     ui->tabWidget->removeTab(Pestana);
-    if (currentText == "Sincrono")
+    if (currentText == tr("Sincrono"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_1,"Sincrono");
+        ui->tabWidget->insertTab(0,ui->tab_1,tr("Sincrono"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Sincrono::Copias sincronizadas")
+    if (currentText == tr("Sincrono::Copias sincronizadas"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_2,"Sincrono::Copias sincronizadas");
+        ui->tabWidget->insertTab(0,ui->tab_2,tr("Sincrono::Copias sincronizadas"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Sincrono::Omitir palabras sincronizadas")
+    if (currentText == tr("Sincrono::Omitir palabras sincronizadas"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_31,"Sincrono::Omitir palabras sincronizadas");
+        ui->tabWidget->insertTab(0,ui->tab_31,tr("Sincrono::Omitir palabras sincronizadas"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Salvaguarda")
+    if (currentText == tr("Salvaguarda"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_41,"Salvaguarda");
+        ui->tabWidget->insertTab(0,ui->tab_41,tr("Salvaguarda"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Comparador")
+    if (currentText == tr("Comparador"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_5,"Comparador");
+        ui->tabWidget->insertTab(0,ui->tab_5,tr("Comparador"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "TeleDrake")
+    if (currentText == tr("TeleDrake"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_6,"TeleDrake");
+        ui->tabWidget->insertTab(0,ui->tab_6,tr("TeleDrake"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "VideoDrake")
+    if (currentText == tr("VideoDrake"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_7,"VideoDrake");
+        ui->tabWidget->insertTab(0,ui->tab_7,tr("VideoDrake"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Acceso")
+    if (currentText == tr("Acceso"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_8,"Acceso");
+        ui->tabWidget->insertTab(0,ui->tab_8,tr("Acceso"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Etiquetador")
+    if (currentText == tr("Etiquetador"))
     {
-        ui->tabWidget->insertTab(0,ui->tab,"Etiquetador");
+        ui->tabWidget->insertTab(0,ui->tab,tr("Etiquetador"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Backup")
+    if (currentText == tr("Backup"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_9,"Backup");
+        ui->tabWidget->insertTab(0,ui->tab_9,tr("Backup"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (currentText == "Menu principal::Activar control errores de sesion")
+    if (currentText == tr("Menu principal::Activar control errores de sesion"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_10,"Menu principal::Activar control errores de sesion");
+        ui->tabWidget->insertTab(0,ui->tab_10,tr("Menu principal::Activar control errores de sesion"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Solucion a problemas::Amule"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_11,tr("Solucion a problemas::Amule"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Grabador"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_12,tr("Grabador"));
         ui->tabWidget->setCurrentPage(0);
     }
 }
@@ -282,59 +309,69 @@ void Ayuda::Comprobar()
         Valor = ui->listWidget_2->currentItem()->text();
     }
     ui->tabWidget->removeTab(Pestana);
-    if (Valor == "Sincrono")
+    if (Valor == tr("Sincrono"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_1,"Sincrono");
+        ui->tabWidget->insertTab(0,ui->tab_1,tr("Sincrono"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (Valor == "Sincrono::Copias sincronizadas")
+    if (Valor == tr("Sincrono::Copias sincronizadas"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_2,"Sincrono::Copias sincronizadas");
+        ui->tabWidget->insertTab(0,ui->tab_2,tr("Sincrono::Copias sincronizadas"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (Valor == "Sincrono::Omitir palabras sincronizadas")
+    if (Valor == tr("Sincrono::Omitir palabras sincronizadas"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_31,"Sincrono::Omitir palabras sincronizadas");
+        ui->tabWidget->insertTab(0,ui->tab_31,tr("Sincrono::Omitir palabras sincronizadas"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (Valor == "Salvaguarda")
+    if (Valor == tr("Salvaguarda"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_41,"Salvaguarda");
+        ui->tabWidget->insertTab(0,ui->tab_41,tr("Salvaguarda"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (Valor == "Comparador")
+    if (Valor == tr("Comparador"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_5,"Comparador");
+        ui->tabWidget->insertTab(0,ui->tab_5,tr("Comparador"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (Valor == "TeleDrake")
+    if (Valor == tr("TeleDrake"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_6,"TeleDrake");
+        ui->tabWidget->insertTab(0,ui->tab_6,tr("TeleDrake"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (Valor == "VideoDrake")
+    if (Valor == tr("VideoDrake"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_7,"VideoDrake");
+        ui->tabWidget->insertTab(0,ui->tab_7,tr("VideoDrake"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (Valor == "Acceso")
+    if (Valor == tr("Acceso"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_8,"Acceso");
+        ui->tabWidget->insertTab(0,ui->tab_8,tr("Acceso"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (Valor == "Etiquetador")
+    if (Valor == tr("Etiquetador"))
     {
-        ui->tabWidget->insertTab(0,ui->tab,"Etiquetador");
+        ui->tabWidget->insertTab(0,ui->tab,tr("Etiquetador"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (Valor == "Backup")
+    if (Valor == tr("Backup"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_9,"Backup");
+        ui->tabWidget->insertTab(0,ui->tab_9,tr("Backup"));
         ui->tabWidget->setCurrentPage(0);
     }
-    if (Valor == "Menu principal::Activar control errores de sesion")
+    if (Valor == tr("Menu principal::Activar control errores de sesion"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_10,"Menu principal::Activar control errores de sesion");
+        ui->tabWidget->insertTab(0,ui->tab_10,tr("Menu principal::Activar control errores de sesion"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (Valor == tr("Solucion a problemas::Amule"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_11,tr("Solucion a problemas::Amule"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (Valor == tr("Grabador"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_12,tr("Grabador"));
         ui->tabWidget->setCurrentPage(0);
     }
 }

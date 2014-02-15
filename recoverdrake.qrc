@@ -398,5 +398,15 @@
         <file>Imagenes/F1Backup2.png</file>
         <file>Imagenes/F1Backup3.png</file>
         <file>Imagenes/F1Backup4.png</file>
+        <file>Imagenes/menuproblemas.png</file>
+        <file>Imagenes/F1Grabador1.png</file>
+        <file>Imagenes/F1Grabador2.png</file>
+        <file>Imagenes/F1Grabador3.png</file>
+        <file>Imagenes/F1Grabador4.png</file>
+        <file>Imagenes/F1Grabador5.png</file>
+        <file>Imagenes/F1Grabador6.png</file>
+        <file>Imagenes/F1Grabador7.png</file>
+        <file>Imagenes/F1Grabador.png</file>
+        <file>Imagenes/F1Grabador8.png</file>
     </qresource>
 </RCC>

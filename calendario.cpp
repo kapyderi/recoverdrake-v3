@@ -637,7 +637,7 @@ bool Calendario::eventFilter(QObject* obj, QEvent *event)
             {
                 ayuda = new Ayuda(this);
                 ayuda->show();
-                ayuda->Valor("Sincrono::Copias sincronizadas");
+                ayuda->Valor(tr("Sincrono::Copias sincronizadas"));
                 return true;
             }
         }

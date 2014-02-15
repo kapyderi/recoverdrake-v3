@@ -150,7 +150,7 @@ bool Reproductor::eventFilter(QObject *obj, QEvent *event)
         {
             ayuda = new Ayuda(this);
             ayuda->show();
-            ayuda->Valor("VideoDrake");
+            ayuda->Valor(tr("VideoDrake"));
             return true;
         }
     }

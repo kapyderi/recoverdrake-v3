@@ -178,7 +178,7 @@ public:
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1123, 739));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 1125, 741));
         gridLayout_7 = new QGridLayout(scrollAreaWidgetContents);
         gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
         groupBox = new QGroupBox(scrollAreaWidgetContents);
@@ -400,6 +400,7 @@ public:
         label_11->setObjectName(QString::fromUtf8("label_11"));
         label_11->setMinimumSize(QSize(81, 81));
         label_11->setMaximumSize(QSize(81, 81));
+        label_11->setAlignment(Qt::AlignCenter);
 
         gridLayout_11->addWidget(label_11, 0, 0, 1, 1);
 

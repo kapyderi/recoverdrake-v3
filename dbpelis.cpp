@@ -911,7 +911,9 @@ void dbpelis::on_pushButton_clicked()
     titulo = ui->lineEdit->text();
     if (titulo == "")
     {
-        QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
         m.setText(tr("No se puede insertar si no se ha introducido como minimo el campo titulo de pelicula."));
         m.exec();
         return;
@@ -3220,7 +3222,7 @@ void dbpelis::on_pushButton_11_clicked()
                                QString::fromUtf8(tr("<center><b>Borrado de base de datos de peliculas<b></center><p>"
                                "Se borrara toda la lista de peliculas, por lo que no se podra recuperar.</B><p>"
                                "Como es algo muy peligroso, ya que puedes perder datos muy importantes, tendras que introducir la clave "
-                               "para realizar este paso.<p>"
+                               "de usuario para realizar este paso.<p>"
                                "&iquest;Estas seguro de borrar la base de datos de peliculas?")), QMessageBox::Ok, QMessageBox::No);
         if (respuesta == QMessageBox::Ok)
         {

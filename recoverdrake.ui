@@ -84,9 +84,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-225</y>
-         <width>1018</width>
-         <height>838</height>
+         <y>0</y>
+         <width>1023</width>
+         <height>845</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_82">
@@ -1719,8 +1719,8 @@ p, li { white-space: pre-wrap; }
                      </widget>
                     </item>
                     <item row="2" column="0" colspan="4">
-                     <widget class="QWebView" name="webView" native="true">
-                      <property name="url" stdset="0">
+                     <widget class="QWebView" name="webView">
+                      <property name="url">
                        <url>
                         <string>about:blank</string>
                        </url>
@@ -9380,7 +9380,7 @@ color: rgb(0, 0, 255);</string>
                <enum>QTabWidget::Triangular</enum>
               </property>
               <property name="currentIndex">
-               <number>4</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="tab_13">
                <attribute name="icon">
@@ -21120,7 +21120,7 @@ font: Bold;</string>
      <x>0</x>
      <y>0</y>
      <width>1039</width>
-     <height>21</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -21255,8 +21255,8 @@ font: Bold;</string>
       <rect>
        <x>698</x>
        <y>331</y>
-       <width>379</width>
-       <height>125</height>
+       <width>377</width>
+       <height>107</height>
       </rect>
      </property>
      <property name="font">
@@ -21284,8 +21284,8 @@ font: Bold;</string>
       <rect>
        <x>718</x>
        <y>542</y>
-       <width>306</width>
-       <height>144</height>
+       <width>304</width>
+       <height>126</height>
       </rect>
      </property>
      <property name="font">
@@ -21313,8 +21313,8 @@ font: Bold;</string>
       <rect>
        <x>718</x>
        <y>462</y>
-       <width>323</width>
-       <height>98</height>
+       <width>321</width>
+       <height>84</height>
       </rect>
      </property>
      <property name="font">
@@ -21343,8 +21343,8 @@ font: Bold;</string>
       <rect>
        <x>667</x>
        <y>512</y>
-       <width>373</width>
-       <height>386</height>
+       <width>371</width>
+       <height>342</height>
       </rect>
      </property>
      <property name="font">
@@ -21411,8 +21411,8 @@ font: Bold;</string>
       <rect>
        <x>718</x>
        <y>482</y>
-       <width>281</width>
-       <height>98</height>
+       <width>279</width>
+       <height>84</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -21536,6 +21536,7 @@ font: Bold;</string>
     <addaction name="actionSincronizador_de_datos"/>
     <addaction name="actionCambiar_usuario_a_un_archivo"/>
     <addaction name="actionCrea_tu_propio_kernel_personalizado"/>
+    <addaction name="actionEncriptar_textos"/>
     <addaction name="actionBorrar_archivos_especificos_recursivamente"/>
     <addaction name="actionCambiar_resolucion_a_pantalla"/>
     <addaction name="actionCambiar_juego_de_caracteres"/>
@@ -21858,10 +21859,10 @@ font: Bold;</string>
    <widget class="QMenu" name="menuOtros">
     <property name="geometry">
      <rect>
-      <x>542</x>
-      <y>95</y>
-      <width>312</width>
-      <height>855</height>
+      <x>526</x>
+      <y>93</y>
+      <width>310</width>
+      <height>791</height>
      </rect>
     </property>
     <property name="cursor">
@@ -28813,9 +28814,22 @@ default connected 1280x1024+0+0 0mm x 0mm
     <string>Vlc</string>
    </property>
   </action>
+  <action name="actionEncriptar_textos">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Encriptar textos</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKitWidgets/QWebView</header>
+  </customwidget>
   <customwidget>
    <class>Phonon::SeekSlider</class>
    <extends>QWidget</extends>
@@ -28825,11 +28839,6 @@ default connected 1280x1024+0+0 0mm x 0mm
    <class>Phonon::VolumeSlider</class>
    <extends>QWidget</extends>
    <header location="global">phonon/volumeslider.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QWebView</class>
-   <extends>QWidget</extends>
-   <header>QtWebKit/QWebView</header>
   </customwidget>
  </customwidgets>
  <resources>
