@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>580</width>
-    <height>661</height>
+    <height>668</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -37,6 +37,9 @@
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="4">
     <widget class="QPushButton" name="pushButton">
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>Salir</string>
      </property>
@@ -54,6 +57,9 @@
    </item>
    <item row="1" column="0">
     <widget class="QPushButton" name="pushButton_2">
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>Guardar</string>
      </property>
@@ -84,6 +90,9 @@
    </item>
    <item row="1" column="2">
     <widget class="QPushButton" name="pushButton_3">
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="text">
       <string>Restaurar  valores predefinidos</string>
      </property>
@@ -651,7 +660,148 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="8" column="0">
+       <item row="8" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox_21">
+         <property name="title">
+          <string>Pais*** </string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_33">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QRadioButton" name="radioButton_52">
+            <property name="text">
+             <string>Espana</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QRadioButton" name="radioButton_53">
+            <property name="text">
+             <string>Otro pais</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="9" column="0" colspan="2">
+        <widget class="QLabel" name="label_188">
+         <property name="palette">
+          <palette>
+           <active>
+            <colorrole role="WindowText">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>0</red>
+               <green>0</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Text">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>0</red>
+               <green>0</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="ButtonText">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>0</red>
+               <green>0</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </active>
+           <inactive>
+            <colorrole role="WindowText">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>0</red>
+               <green>0</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Text">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>0</red>
+               <green>0</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="ButtonText">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>0</red>
+               <green>0</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </inactive>
+           <disabled>
+            <colorrole role="WindowText">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>0</red>
+               <green>0</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Text">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>0</red>
+               <green>0</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="ButtonText">
+             <brush brushstyle="SolidPattern">
+              <color alpha="255">
+               <red>0</red>
+               <green>0</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </disabled>
+          </palette>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>6</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 255);</string>
+         </property>
+         <property name="text">
+          <string>*** Necesario para algunas opciones exclusivas de Espana.</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0" colspan="2">
         <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -2347,6 +2497,483 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans'; font-size:6pt; font-weight:600; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Sans Serif'; color:#0000ff;&quot;&gt;* Solo funciona con utilidades que sean interactivas y automaticas a la vez.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_12">
+      <attribute name="icon">
+       <iconset resource="recoverdrake.qrc">
+        <normaloff>:/Imagenes/mail.png</normaloff>:/Imagenes/mail.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Correo</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_39">
+       <item row="0" column="0" colspan="8">
+        <widget class="QGroupBox" name="groupBox_22">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <family>Sans Serif</family>
+           <pointsize>7</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="title">
+          <string>Datos de e-mail para envio de ip</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_34">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QRadioButton" name="radioButton_54">
+            <property name="text">
+             <string>Cuenta gmail</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <layout class="QGridLayout" name="gridLayout_36">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_191">
+              <property name="text">
+               <string>Direccion de e-mail</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="lineEdit_8">
+              <property name="whatsThis">
+               <string>Si activas esta opcion tendras que abrir los puertos de tu router desde 5900 al 5910 minimo</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_192">
+              <property name="text">
+               <string>@gmail.com</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <layout class="QGridLayout" name="gridLayout_37">
+            <item row="0" column="5">
+             <widget class="QCheckBox" name="checkBox_6">
+              <property name="text">
+               <string>Requiere autenticacion</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QCheckBox" name="checkBox_5">
+              <property name="text">
+               <string>SSL</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_193">
+              <property name="text">
+               <string>Servidor smtp</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="lineEdit_9">
+              <property name="text">
+               <string>smtp.gmail.com</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_195">
+              <property name="text">
+               <string>Puerto</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QSpinBox" name="spinBox">
+              <property name="maximum">
+               <number>99999</number>
+              </property>
+              <property name="value">
+               <number>465</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="4" column="0" colspan="2">
+           <layout class="QGridLayout" name="gridLayout_38">
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_194">
+              <property name="text">
+               <string>Clave</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLineEdit" name="lineEdit_10">
+              <property name="echoMode">
+               <enum>QLineEdit::Password</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QCheckBox" name="checkBox_7">
+              <property name="font">
+               <font>
+                <pointsize>7</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Visualizar clave</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_190">
+              <property name="text">
+               <string>Usuario</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="lineEdit_12"/>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1">
+           <widget class="QRadioButton" name="radioButton_55">
+            <property name="text">
+             <string>Otras cuentas (puede no funcionar)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0" colspan="2">
+           <layout class="QGridLayout" name="gridLayout_35">
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="lineEdit_11"/>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_189">
+              <property name="text">
+               <string>DIreccion de envio</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QPushButton" name="pushButton_17">
+              <property name="text">
+               <string>Enviar correo de prueba</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/mail.png</normaloff>:/Imagenes/mail.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QPushButton" name="pushButton_16">
+         <property name="text">
+          <string>Eliminar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" colspan="8">
+        <widget class="QTableView" name="tableView_2">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="pushButton_14">
+         <property name="font">
+          <font>
+           <pointsize>7</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Insertar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/good.png</normaloff>:/Imagenes/good.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="5">
+        <spacer name="horizontalSpacer_14">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="2">
+        <widget class="QPushButton" name="pushButton_15">
+         <property name="text">
+          <string>Modificar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <spacer name="horizontalSpacer_12">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="3">
+        <spacer name="horizontalSpacer_13">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="6" colspan="2">
+        <widget class="QPushButton" name="pushButton_18">
+         <property name="text">
+          <string>Nuevo</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/borrar.png</normaloff>:/Imagenes/borrar.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_8">
+      <attribute name="icon">
+       <iconset resource="recoverdrake.qrc">
+        <normaloff>:/Imagenes/embudo.png</normaloff>:/Imagenes/embudo.png</iconset>
+      </attribute>
+      <attribute name="title">
+       <string>Palabras clave</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_28">
+       <item row="2" column="1">
+        <widget class="QPushButton" name="pushButton_6">
+         <property name="text">
+          <string>Modificar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_118">
+         <property name="text">
+          <string>Palabra clave*</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QPushButton" name="pushButton_5">
+         <property name="text">
+          <string>Eliminar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="5">
+        <widget class="QLabel" name="label_117">
+         <property name="font">
+          <font>
+           <pointsize>7</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:7pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;*Introducir cualquier palabra clave que se quiera evitar en la opcion de mantenimiento&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt; de rpms capturados, en el menu de utilidades/Salvaguardar/Recuperar rpms.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="4">
+        <widget class="QLineEdit" name="lineEdit_7"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="text">
+          <string>Insertar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/good.png</normaloff>:/Imagenes/good.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QPushButton" name="pushButton_7">
+         <property name="text">
+          <string>Filtrar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/embudo.png</normaloff>:/Imagenes/embudo.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="5">
+        <widget class="QTableView" name="tableView">
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QPushButton" name="pushButton_8">
+         <property name="text">
+          <string>Nuevo</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/borrar.png</normaloff>:/Imagenes/borrar.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -4247,111 +4874,6 @@ font: bold;</string>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_8">
-      <attribute name="icon">
-       <iconset resource="recoverdrake.qrc">
-        <normaloff>:/Imagenes/embudo.png</normaloff>:/Imagenes/embudo.png</iconset>
-      </attribute>
-      <attribute name="title">
-       <string>Palabras clave</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_28">
-       <item row="2" column="1">
-        <widget class="QPushButton" name="pushButton_6">
-         <property name="text">
-          <string>Modificar</string>
-         </property>
-         <property name="icon">
-          <iconset resource="recoverdrake.qrc">
-           <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_118">
-         <property name="text">
-          <string>Palabra clave*</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="4">
-        <widget class="QPushButton" name="pushButton_5">
-         <property name="text">
-          <string>Eliminar</string>
-         </property>
-         <property name="icon">
-          <iconset resource="recoverdrake.qrc">
-           <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0" colspan="5">
-        <widget class="QLabel" name="label_117">
-         <property name="font">
-          <font>
-           <pointsize>7</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:7pt; font-weight:600; font-style:normal;&quot;&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;*Introducir cualquier palabra clave que se quiera evitar en la opcion de mantenimiento&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt; de rpms capturados, en el menu de utilidades/Salvaguardar/Recuperar rpms.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1" colspan="4">
-        <widget class="QLineEdit" name="lineEdit_7"/>
-       </item>
-       <item row="2" column="0">
-        <widget class="QPushButton" name="pushButton_4">
-         <property name="text">
-          <string>Insertar</string>
-         </property>
-         <property name="icon">
-          <iconset resource="recoverdrake.qrc">
-           <normaloff>:/Imagenes/good.png</normaloff>:/Imagenes/good.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QPushButton" name="pushButton_7">
-         <property name="text">
-          <string>Filtrar</string>
-         </property>
-         <property name="icon">
-          <iconset resource="recoverdrake.qrc">
-           <normaloff>:/Imagenes/embudo.png</normaloff>:/Imagenes/embudo.png</iconset>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" colspan="5">
-        <widget class="QTableView" name="tableView">
-         <property name="alternatingRowColors">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <widget class="QPushButton" name="pushButton_8">
-         <property name="text">
-          <string>Limpiar</string>
-         </property>
-         <property name="icon">
-          <iconset resource="recoverdrake.qrc">
-           <normaloff>:/Imagenes/borrar.png</normaloff>:/Imagenes/borrar.png</iconset>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="icon">
        <iconset resource="recoverdrake.qrc">
@@ -4382,9 +4904,9 @@ p, li { white-space: pre-wrap; }
       <widget class="QLabel" name="label_17">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>-20</x>
          <y>-5</y>
-         <width>121</width>
+         <width>151</width>
          <height>31</height>
         </rect>
        </property>
@@ -5322,9 +5844,9 @@ p, li { white-space: pre-wrap; }
       <widget class="QLabel" name="label_56">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>-1</x>
          <y>-5</y>
-         <width>120</width>
+         <width>131</width>
          <height>31</height>
         </rect>
        </property>
@@ -6287,9 +6809,9 @@ p, li { white-space: pre-wrap; }
       <widget class="QLabel" name="label_98">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>-21</x>
          <y>0</y>
-         <width>120</width>
+         <width>151</width>
          <height>21</height>
         </rect>
        </property>
@@ -6830,11 +7352,349 @@ p, li { white-space: pre-wrap; }
         <string/>
        </property>
       </widget>
+      <widget class="QLabel" name="label_196">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>330</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>libqrencode-devel</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_197">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>330</y>
+         <width>361</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_198">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>350</y>
+         <width>361</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_199">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>350</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>bzip2</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_200">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>370</y>
+         <width>361</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_201">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>370</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>zip</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_202">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>390</y>
+         <width>361</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_203">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>390</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>zoo</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_204">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>410</y>
+         <width>361</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_205">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>410</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>arj</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_206">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>430</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>7z</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_207">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>430</y>
+         <width>361</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_208">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>450</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>rar</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_209">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>450</y>
+         <width>361</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </widget>
     </widget>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineEdit_8</tabstop>
+  <tabstop>lineEdit_9</tabstop>
+  <tabstop>spinBox</tabstop>
+  <tabstop>lineEdit_12</tabstop>
+  <tabstop>lineEdit_10</tabstop>
+  <tabstop>lineEdit_7</tabstop>
+  <tabstop>radioButton_13</tabstop>
+  <tabstop>radioButton_12</tabstop>
+  <tabstop>radioButton_14</tabstop>
+  <tabstop>radioButton_15</tabstop>
+  <tabstop>lineEdit_5</tabstop>
+  <tabstop>lineEdit_6</tabstop>
+  <tabstop>lineEdit_4</tabstop>
+  <tabstop>checkBox_3</tabstop>
+  <tabstop>radioButton_42</tabstop>
+  <tabstop>radioButton_41</tabstop>
+  <tabstop>checkBox</tabstop>
+  <tabstop>radioButton_52</tabstop>
+  <tabstop>radioButton_53</tabstop>
+  <tabstop>verticalSlider_2</tabstop>
+  <tabstop>verticalSlider_9</tabstop>
+  <tabstop>verticalSlider_10</tabstop>
+  <tabstop>verticalSlider_3</tabstop>
+  <tabstop>verticalSlider_5</tabstop>
+  <tabstop>verticalSlider_7</tabstop>
+  <tabstop>verticalSlider_8</tabstop>
+  <tabstop>verticalSlider_6</tabstop>
+  <tabstop>verticalSlider_4</tabstop>
+  <tabstop>verticalSlider</tabstop>
+  <tabstop>checkBox_4</tabstop>
+  <tabstop>textEdit_3</tabstop>
+  <tabstop>checkBox_2</tabstop>
+  <tabstop>comboBox_2</tabstop>
+  <tabstop>fontComboBox</tabstop>
+  <tabstop>comboBox</tabstop>
+  <tabstop>comboBox_3</tabstop>
+  <tabstop>pushButton_10</tabstop>
+  <tabstop>pushButton_9</tabstop>
+  <tabstop>radioButton_43</tabstop>
+  <tabstop>radioButton_44</tabstop>
+  <tabstop>radioButton_45</tabstop>
+  <tabstop>radioButton_48</tabstop>
+  <tabstop>radioButton_50</tabstop>
+  <tabstop>radioButton_16</tabstop>
+  <tabstop>radioButton_17</tabstop>
+  <tabstop>radioButton_46</tabstop>
+  <tabstop>radioButton_47</tabstop>
+  <tabstop>radioButton_49</tabstop>
+  <tabstop>radioButton_51</tabstop>
+  <tabstop>radioButton_18</tabstop>
+  <tabstop>radioButton_19</tabstop>
+  <tabstop>radioButton_4</tabstop>
+  <tabstop>radioButton_5</tabstop>
+  <tabstop>radioButton_6</tabstop>
+  <tabstop>radioButton_7</tabstop>
+  <tabstop>radioButton_8</tabstop>
+  <tabstop>radioButton_9</tabstop>
+  <tabstop>radioButton</tabstop>
+  <tabstop>radioButton_2</tabstop>
+  <tabstop>radioButton_3</tabstop>
+  <tabstop>radioButton_22</tabstop>
+  <tabstop>radioButton_32</tabstop>
+  <tabstop>radioButton_33</tabstop>
+  <tabstop>radioButton_34</tabstop>
+  <tabstop>radioButton_35</tabstop>
+  <tabstop>radioButton_20</tabstop>
+  <tabstop>radioButton_21</tabstop>
+  <tabstop>radioButton_23</tabstop>
+  <tabstop>radioButton_24</tabstop>
+  <tabstop>radioButton_25</tabstop>
+  <tabstop>radioButton_26</tabstop>
+  <tabstop>radioButton_30</tabstop>
+  <tabstop>radioButton_31</tabstop>
+  <tabstop>radioButton_27</tabstop>
+  <tabstop>radioButton_28</tabstop>
+  <tabstop>radioButton_29</tabstop>
+  <tabstop>radioButton_36</tabstop>
+  <tabstop>radioButton_37</tabstop>
+  <tabstop>radioButton_38</tabstop>
+  <tabstop>radioButton_39</tabstop>
+  <tabstop>radioButton_40</tabstop>
+  <tabstop>lineEdit_3</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>pushButton_6</tabstop>
+  <tabstop>pushButton_5</tabstop>
+  <tabstop>radioButton_11</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>pushButton_7</tabstop>
+  <tabstop>tableView</tabstop>
+  <tabstop>pushButton_8</tabstop>
+  <tabstop>pushButton_11</tabstop>
+  <tabstop>pushButton_12</tabstop>
+  <tabstop>pushButton_13</tabstop>
+  <tabstop>pushButton_14</tabstop>
+  <tabstop>checkBox_7</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>radioButton_10</tabstop>
+  <tabstop>tableView_2</tabstop>
+  <tabstop>radioButton_54</tabstop>
+  <tabstop>radioButton_55</tabstop>
+  <tabstop>checkBox_5</tabstop>
+  <tabstop>checkBox_6</tabstop>
+  <tabstop>pushButton_15</tabstop>
+  <tabstop>pushButton_16</tabstop>
+  <tabstop>pushButton_17</tabstop>
+  <tabstop>lineEdit_11</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>pushButton_18</tabstop>
+ </tabstops>
  <resources>
   <include location="recoverdrake.qrc"/>
  </resources>

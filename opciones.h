@@ -15,6 +15,7 @@ public:
     opciones(QWidget *parent = 0);
     ~opciones();
     void iniciar();
+    void Valor(QString Opcion);
 
 protected:
     void changeEvent(QEvent *e);
@@ -44,7 +45,10 @@ private:
     QSqlTableModel *Model20;
     QSqlTableModel *Model21;
     QSqlTableModel *Model22;
+    QSqlTableModel *Model23;
+    QSqlTableModel *Model24;
     int id;
+    int fila0;
     int fila;
     int fila1;
     int fila2;
@@ -148,6 +152,7 @@ private:
     QString user;
     QString Stilo;
     QString getRpm(QString Valor);
+    QString arqt;
 
 private slots:
     void changeStyle(QString stilo);
@@ -160,6 +165,7 @@ private slots:
     void on_pushButton_clicked();
     void on_pushButton_3_clicked();
     void cambiaFila(QModelIndex actual);
+    void cambiaFila1(QModelIndex actual);
     void on_pushButton_4_clicked();
     void on_pushButton_6_clicked();
     void on_pushButton_7_clicked();
@@ -173,6 +179,13 @@ private slots:
     void on_pushButton_12_clicked();
     void on_pushButton_13_clicked();
     void Comprobar();
+    void on_pushButton_14_clicked();
+    void Smtp();
+    void password();
+    void on_pushButton_16_clicked();
+    void on_pushButton_18_clicked();
+    void on_pushButton_15_clicked();
+    void on_pushButton_17_clicked();
 };
 
 #endif // OPCIONES_H

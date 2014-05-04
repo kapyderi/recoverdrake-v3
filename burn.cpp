@@ -140,13 +140,15 @@ burn::burn(QWidget *parent) :
     CierreTotal = 0;
     Opcion = 0;
     tamanio = 0.000;
-    QFileDialog *fdlg = new QFileDialog(this, "Buscador", false);    
+    QFileDialog *fdlg = new QFileDialog(this, "Buscador");
     fdlg->setAcceptDrops(true);
     connect(fdlg, SIGNAL(finished(int)), fdlg, SLOT(open()));
     connect(fdlg, SIGNAL(fileSelected(QString)), this, SLOT(Cargar(QString)));
     connect(fdlg, SIGNAL(currentChanged(QString)), this, SLOT(Value(QString)));
-    ui->mdiArea->addSubWindow(fdlg);
+    ui->gridLayout_28->addWidget(fdlg);
     fdlg->setWindowState(Qt::WindowMaximized);
+    fdlg->setLabelText(QFileDialog::Reject, NULL);
+    fdlg->setViewMode(QFileDialog::Detail);
     ui->tableWidget->setAcceptDrops(true);
     ui->tableWidget->setDropIndicatorShown(true);
     ui->textEdit->setAcceptDrops(false);
@@ -259,7 +261,7 @@ void burn::Contar()
             ui->label_29->setShown(false);
             ui->label_30->setShown(false);
             ui->label_31->setShown(false);
-            int Value, Value1, Capacidad, Total;
+            int Value, Capacidad, Total;
             QStringList DatoInfo, DatoInfo1;
             Dato = getInfo();
             Dato2 = getDir();
@@ -461,7 +463,7 @@ void burn::Contar()
             ui->label_19->setText(Sesion);
             ui->label_32->setText(Rw);
             ui->label_21->setText(QString::number(Libre)+" Mb");
-            if (Value = 0)
+            if (Value == 0)
             {
                 ui->label_9->setText(QString::number(Total)+ " Mb");
             }
@@ -643,9 +645,7 @@ void burn::on_pushButton_clicked()
                 break;
             }
             else
-            {
                 Valor= 1;
-            }
         }
         if (Valor != 0)
         {
@@ -833,19 +833,22 @@ void burn::on_pushButton_2_clicked()
     int a,cantidad;
     QString cadena;
     cantidad=ui->tableWidget->rowCount();
-    for(a=0;a<cantidad;a++)
+    if (cantidad == 0)
+        Valor = 1;
+    else
     {
-        QTableWidgetItem *itemC;
-        itemC=ui->tableWidget->item(a,1);
-        cadena= itemC->text();
-        if (cadena == ruta)
+        for(a=0;a<cantidad;a++)
         {
-            Valor = 0;
-            break;
-        }
-        else
-        {
-            Valor = 1;
+            QTableWidgetItem *itemC;
+            itemC=ui->tableWidget->item(a,1);
+            cadena= itemC->text();
+            if (cadena == ruta)
+            {
+                Valor = 0;
+                break;
+            }
+            else
+                Valor = 1;
         }
     }
     if (Valor != 0)
@@ -1081,7 +1084,6 @@ QString burn::getSize(QString Dir)
     procesoCut=new QProcess(this);
     argumentosDu << "-s" << "--block-size=K" << ""+Dir+"";
     argumentosCut << "-d" << "K" << "-f1";
-
     procesoDu->setStandardOutputProcess(procesoCut);
     procesoDu->start("du",argumentosDu);
     procesoCut->start("cut",argumentosCut);
@@ -1212,7 +1214,6 @@ void burn::on_pushButton_4_clicked()
                         connect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
                         connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
                         int valor= comandos.count(); mib->Valor(valor,0); mib->iniciarProceso();
-
              }
         }
     }
@@ -1590,19 +1591,22 @@ void burn::dropEvent(QDropEvent *event)
     int a,cantidad;
     QString cadena;
     cantidad=ui->tableWidget->rowCount();
-    for(a=0;a<cantidad;a++)
+    if (cantidad == 0)
+        Valor = 1;
+    else
     {
-        QTableWidgetItem *itemC;
-        itemC=ui->tableWidget->item(a,1);
-        cadena= itemC->text();
-        if (cadena == rutaAbs+"/")
+        for(a=0;a<cantidad;a++)
         {
-            Valor = 0;
-            break;
-        }
-        else
-        {
-            Valor = 1;
+            QTableWidgetItem *itemC;
+            itemC=ui->tableWidget->item(a,1);
+            cadena= itemC->text();
+            if (cadena == rutaAbs+"/")
+            {
+                Valor = 0;
+                break;
+            }
+            else
+                Valor = 1;
         }
     }
     if (Valor != 0)
@@ -1772,9 +1776,7 @@ void burn::Cargar(QString Valor)
                 break;
             }
             else
-            {
                 Valor = 1;
-            }
         }
         if (Valor != 0)
         {
@@ -1943,9 +1945,7 @@ void burn::Info()
         ui->textEdit_2->setText(Dato);
     }
     else
-    {
         this->Info();
-    }
 }
 
 void burn::Refresco()
@@ -1962,7 +1962,7 @@ void burn::Refresco()
     ui->label_29->setShown(false);
     ui->label_30->setShown(false);
     ui->label_31->setShown(false);
-    int Value, Value1, Capacidad, Total;
+    int Value, Capacidad, Total;
     QStringList DatoInfo, DatoInfo1;
     Dato = getInfo();
     Dato2 = getDir();
@@ -2164,17 +2164,10 @@ void burn::Refresco()
     ui->label_19->setText(Sesion);
     ui->label_32->setText(Rw);
     ui->label_21->setText(QString::number(Libre)+" Mb");
-    if (Value1 = 0)
-    {
-        ui->label_9->setText(QString::number(Total)+ " Mb");
-    }
+    if (Final == "Si")
+        ui->label_9->setText(QString::number(Capacidad)+ " Mb");
     else
-    {
-        if (Final == "Si")
-            ui->label_9->setText(QString::number(Capacidad)+ " Mb");
-        else
-            ui->label_9->setText(QString::number(Capacidad+Libre)+ " Mb");
-    }
+        ui->label_9->setText(QString::number(Capacidad+Libre)+ " Mb");
     if (Multi == "Si")
     {
         ui->checkBox_2->setHidden(false);
@@ -2271,15 +2264,13 @@ QString burn::getDir()
     procesoRPM=new QProcess(this);
     if (Distro=="Mageia")
     {
-        if (dist == "3")
+        if (dist.toInt() >= 3)
             argumentosRPM << "-1" << "/run/media/"+user+"/Disc";
         else
             argumentosRPM << "-1" << "/media/cdrom";
     }
     else
-    {
         argumentosRPM << "-1" << "/media/cdrom";
-    }
     procesoRPM->start("dir",argumentosRPM);
     if (! procesoRPM->waitForStarted())
         return QString("");
@@ -2740,9 +2731,7 @@ void burn::on_pushButton_14_clicked()
                                         else
                                         {
                                             if (ui->comboBox_2->currentText().toInt() > 1 && Copia < ui->comboBox_2->currentText().toInt())
-                                            {
-                                                //No tiene que hacer nada
-                                            }
+                                            {}
                                             else
                                             {
                                                 QString c1 = QString::fromUtf8(tr("echo Creando imagen de datos..."));
@@ -2978,6 +2967,7 @@ void burn::on_pushButton_18_clicked()
 
 void burn::on_tabWidget_currentChanged(int index)
 {
+    Q_UNUSED(index);
     if (ui->tabWidget->currentIndex() == 0)
     {
         ui->groupBox_11->hide();
@@ -3067,4 +3057,4 @@ void burn::on_pushButton_20_clicked()
     Grabando = "DVDVideoCopy";
 }
 
-//esta a medio
+//falta por terminar

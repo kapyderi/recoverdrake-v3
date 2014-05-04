@@ -13,6 +13,7 @@ namespace Ui {
 
 class Busca : public QDialog {
     Q_OBJECT
+
 public:
     Busca(QWidget *parent = 0);
     ~Busca();

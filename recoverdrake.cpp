@@ -46,6 +46,13 @@
 #include <QFuture>
 #include "conversorud.h"
 
+
+
+//ver lo de instalado cuando esta en un sistema con codificacion espanol y recoverdrake en ingles que falla. (pasa en constain(tr("instalado")
+//http://asotto.blogspot.com.es/2012/01/borrando-archivos-de-un-directorio-con.html
+
+
+
 recoverdrake::recoverdrake(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::recoverdrake)
@@ -60,6 +67,8 @@ recoverdrake::recoverdrake(QWidget *parent) :
     ui->radioButton_4->setChecked(true);
     ui->radioButton_5->setChecked(true);
     ui->checkBox_7->setChecked(true);
+    ui->tabWidget->removeTab(26);
+    ui->tabWidget->removeTab(25);
     ui->tabWidget->removeTab(24);
     ui->tabWidget->removeTab(23);
     ui->tabWidget->removeTab(22);
@@ -83,7 +92,7 @@ recoverdrake::recoverdrake(QWidget *parent) :
     ui->tabWidget->removeTab(4);
     ui->tabWidget->removeTab(3);
     ui->tabWidget->removeTab(2);
-    ui->tabWidget->setCurrentPage(0);    
+    ui->tabWidget->setCurrentIndex(0);
     ui->tabWidget_8->setCurrentPage(0);
     Pestanas=1;
     Pagina1=0;
@@ -109,6 +118,8 @@ recoverdrake::recoverdrake(QWidget *parent) :
     Pagina21=0;
     Pagina22=0;
     Pagina23=0;
+    Pagina24=0;
+    Pagina25=0;
     CerrarP=0;
     Puntero = 0;
     Puntero1 = 0;
@@ -119,6 +130,7 @@ recoverdrake::recoverdrake(QWidget *parent) :
     notas *Version=new notas();
     QString Versio=Version->Ultimo;
     this->setWindowTitle("RecoverDrake - "+Versio+"");
+    ui->label_113->setText(Versio);
     QString Estilo;
     QSqlQuery queryEstilo(dbs);
     queryEstilo.exec("SELECT Style FROM Estilo WHERE id=2");
@@ -134,8 +146,6 @@ recoverdrake::recoverdrake(QWidget *parent) :
     ui->pushButton_4->setEnabled(true);
     ui->pushButton_5->setEnabled(false);
     ui->pushButton_6->setEnabled(false);
-    ui->pushButton_7->setEnabled(false);
-    ui->pushButton_8->setEnabled(false);
     ui->lcdNumber_2->display("00:00:00");
     mediaObject = new Phonon::MediaObject(this);
     audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
@@ -292,7 +302,6 @@ recoverdrake::recoverdrake(QWidget *parent) :
         {
             Cantidad = "2";
         }
-
         QSqlQuery Miscelanea(dbs);
         Miscelanea.exec("UPDATE Pais SET Tipo='"+Cantidad+"' WHERE id=1");
     }
@@ -339,6 +348,65 @@ recoverdrake::recoverdrake(QWidget *parent) :
     {
         TipoRed = "WIF";
     }
+    drakeSistema drake;
+    QString X = drake.getResolution();
+    QStringList LasX = X.split(" ");
+    QString X2 = LasX.value(3);
+    QStringList Parcial2 = X2.split("x");
+    Dato1 = Parcial2.value(0).toInt();
+    Dato2 = Parcial2.value(1).toInt();
+    if (Dato1 >= 1280 && Dato2 >= 1024)
+    {
+        if (Dato1 == 1280 && Dato2 == 1024)
+        {
+            RX = 0;
+        }
+        else
+            RX = 1;
+        QString Formato;
+        QSqlQuery queryFormato(dbs);
+        queryFormato.exec("SELECT Aspecto FROM Formato WHERE id=2");
+        queryFormato.first();
+        Formato=queryFormato.value(0).toString();
+        if (Formato == "0")
+        {
+            Aspecto = 0;
+        }
+        else if (Formato == "1")
+        {
+            Aspecto = 1;
+        }
+        if (Aspecto == 1)
+        {
+            ui->tabWidget_8->insertTab(2,ui->tab_11,"Sistema");
+            ui->tabWidget_8->setTabIcon(0,QIcon(":/Imagenes/ejecutar.png"));            
+            if (RX == 0)
+            {
+                ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(false);
+                ui->groupBox_4->show();
+            }
+            else
+            {
+                ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(true);
+                ui->groupBox_4->hide();
+            }
+        }
+        else if (Aspecto == 0)
+        {
+            int Pos = ui->tabWidget_8->indexOf(ui->tab_11);
+            ui->tabWidget_8->removeTab(Pos);            
+            if (RX == 1)
+            {
+                ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(true);
+                ui->groupBox_4->hide();
+            }
+            else
+            {
+                ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(false);
+                ui->groupBox_4->show();
+            }
+        }
+    }
     QSettings seting("myorg","Aplica");
     QVariant opcion;
     QVariant opcion1;
@@ -379,7 +447,8 @@ recoverdrake::recoverdrake(QWidget *parent) :
     ui->actionDesactivar_pantalla_inicio->setChecked(opcion6.toBool());
     ui->actionActivar_Comprobaci_n_de_wifi->setChecked(opcion7.toBool());
     ui->actionSupervisar_visualizacion_previa_en_dolphin->setChecked(opcion8.toBool());
-    ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setChecked(opcion9.toBool());
+    if (RX == 1)
+        ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setChecked(opcion9.toBool());
     ui->actionLiberar_memoria_de_Cache->setChecked(opcion10.toBool());
     ui->actionDesactivar_Barra_de_menu_superios->setChecked(opcion11.toBool());
     ui->actionDesactivar_Barra_de_menu_inferior->setChecked(opcion12.toBool());
@@ -585,48 +654,7 @@ recoverdrake::recoverdrake(QWidget *parent) :
     else if (Chat == 0)
     {        
         ui->pushButton_49->setText(tr("Mostrar Canal IRC::#blogdrake"));
-    }
-    drakeSistema drake;
-    QString X = drake.getResolution();
-    QStringList LasX = X.split(" ");
-    QString X2 = LasX.value(3);
-    QStringList Parcial2 = X2.split("x");
-    Dato1 = Parcial2.value(0).toInt();
-    Dato2 = Parcial2.value(1).toInt();
-    if (Dato1 >= 1280 && Dato2 >= 1024)
-    {
-        QString Formato;
-        QSqlQuery queryFormato(dbs);
-        queryFormato.exec("SELECT Aspecto FROM Formato WHERE id=2");
-        queryFormato.first();
-        Formato=queryFormato.value(0).toString();
-        if (Formato == "0")
-        {
-            Aspecto = 0;
-        }
-        else if (Formato == "1")
-        {
-            Aspecto = 1;
-        }
-        if (Aspecto == 1)
-        {
-            ui->tabWidget_8->insertTab(2,ui->tab_11,"Sistema");
-            ui->tabWidget_8->setTabIcon(0,QIcon(":/Imagenes/ejecutar.png"));
-            ui->pushButton_9->hide();
-            ui->groupBox_4->hide();
-            ui->label_113->hide();
-            ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(false);
-        }
-        else if (Aspecto == 0)
-        {
-            int Pos = ui->tabWidget_8->indexOf(ui->tab_11);
-            ui->tabWidget_8->removeTab(Pos);
-            ui->pushButton_9->show();
-            ui->groupBox_4->show();
-            ui->label_113->show();
-            ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(true);
-        }
-    }
+    }    
     ui->label_9->setText(Nivel);
     QSqlQuery query2(dbs);
     query2.exec("SELECT COUNT(Usuario) AS Cantidad FROM Control");
@@ -911,21 +939,108 @@ recoverdrake::recoverdrake(QWidget *parent) :
     ui->tableView->resizeRowsToContents();
     ui->tableView->resizeColumnsToContents();
     ui->tableView_3->resizeRowsToContents();
-    ui->tableView_3->resizeColumnsToContents();
-    on_pushButton_5_clicked();
+    ui->tableView_3->resizeColumnsToContents();    
     timer1 = new QTimer(this);
     connect(timer1, SIGNAL(timeout()), this, SLOT(hora()));
     timer1->start(1000);
     Logs = "N";
     pagina = 0;
-
-
-
-    //Future<void> f1 = QtConcurrent::run(this, &recoverdrake::ActualizarTodo);
-
-
-
-
+    if (ui->tableView->model()->rowCount() != 0)
+    {
+        int Posicion = ui->tableView->model()->rowCount();
+        mediaObject->clear();
+        sources.clear();
+        QString activo1;
+        int index = sources.size();
+        QSqlQuery Variable(dbs);
+        Variable.exec("SELECT Ruta FROM Musica");
+        while(Variable.next())
+        {
+            activo1 = Variable.value(0).toString();
+            Phonon::MediaSource source(activo1);
+            sources.append(source);
+            mediaObject->setCurrentSource(sources.at(index));
+        }
+        QSqlQuery Cancion(dbs);
+        Cancion.exec("SELECT Posicion FROM Cancion WHERE id=1");
+        Cancion.first();
+        int cantidad=Cancion.value(0).toInt();
+        if (cantidad <= 0 || cantidad > Posicion)
+        {
+            mediaObject->setCurrentSource(sources[0]);
+            ui->tableView->selectRow(0);
+        }
+        else
+        {
+            mediaObject->setCurrentSource(sources[cantidad-1]);
+            ui->tableView->selectRow(cantidad-1);
+        }
+        Parando = 0;
+        on_pushButton_5_clicked();
+        Parando = 1;
+        ui->tableView->resizeRowsToContents();
+        ui->tableView->resizeColumnsToContents();
+    }
+    future = new QFuture<void>;
+    watcher = new QFutureWatcher<void>;
+    zenity="0";
+    kwrite="0";
+    ndiswrapper= "0";
+    ntfsconfig="0";
+    cdparanoia="0";
+    gzip="0";
+    tar= "0";
+    cdrdao= "0";
+    cdrkit= "0";
+    convmv= "0";
+    photorec= "0";
+    konsole="0";
+    sudo= "0";
+    alien= "0";
+    fakeroot="0";
+    unrar= "0";
+    imagemagick="0";
+    unzip= "0";
+    dalle="0";
+    ffmpeg= "0";
+    mencoder= "0";
+    mkvtoolnix= "0";
+    dvdauthor= "0";
+    lsdvdDat= "0";
+    clamav= "0";
+    dolphin= "0";
+    ccd2iso= "0";
+    mdf2iso= "0";
+    cdi2iso= "0";
+    nrg2iso= "0";
+    libnotify="0";
+    id3lib = "0";
+    nmap = "0";
+    iptables = "0";
+    vlc = "0";
+    fileroller = "0";
+    mtools = "0";
+    qemu = "0";
+    gcstar = "0";
+    x11vnc = "0";
+    mutt = "0";
+    sendmail = "0";
+    ssmtp = "0";
+    tigervnc="0";
+    transmission="0";
+    firefox="0";
+    gcc="0";
+    makec="0";
+    libncurses="0";
+    libncursesw="0";
+    pulseaudio= "0";
+    libqrencode="0";
+    bzip2="0";
+    zip="0";
+    zoo="0";
+    arj="0";
+    a7z="0";
+    rar="0";
     Modulos();
     Arranque();
     this->installEventFilter(this);
@@ -945,8 +1060,6 @@ recoverdrake::~recoverdrake()
         delete otros;
     if (clave != 0)
         delete clave;
-    if (SetOpcion != 0)
-        delete SetOpcion;
 }
 
 void recoverdrake::changeEvent(QEvent *e)
@@ -960,7 +1073,6 @@ void recoverdrake::changeEvent(QEvent *e)
         break;
     }
 }
-
 
 bool recoverdrake::eventFilter(QObject* obj, QEvent *event)
 {
@@ -986,16 +1098,16 @@ void recoverdrake::Modulos()
 {
     drakeSistema drake;
     setUpdatesEnabled(false);
-    QProgressDialog progress(tr("Cargando modulos y configuraciones... Espera por favor"), tr("Cancelar"), 0, 83, this);
+    QProgressDialog progress(tr("Cargando modulos y configuraciones... Espera por favor"), tr("Cancelar"), 0, 90, this);
     progress.show();
-    for(i=0;i<83;i++)
+    for(i=0;i<90;i++)
     {
         qApp->processEvents();
         progress.setValue(i);
         if (progress.wasCanceled())
             break;
         if (i==0)
-        {
+        {            
             QString X = drake.getResolution();
             QStringList LasX = X.split(" ");
             QString X2 = LasX.value(3);
@@ -1004,79 +1116,150 @@ void recoverdrake::Modulos()
             Dato2 = Parcial2.value(1).toInt();
         }
         if (i==1)
+        {
+            progress.setLabelText(tr("Recibiendo Arquitectura... Espera por favor"));
             arqt = drake.getArquitectura();
+        }
         if (i==2)
+        {
+            progress.setLabelText(tr("Recibiendo Usuario... Espera por favor"));
             user = drake.getUser();
+        }
         if (i==3)
+        {
+            progress.setLabelText(tr("Recibiendo Tipo de Nucleo... Espera por favor"));
             Tip = drake.getTipKernel();
+        }
         if (i==4)
+        {
+            progress.setLabelText(tr("Recibiendo Version del Nucleo... Espera por favor"));
             Ver = drake.getVerKernel();
+        }
         if (i==5)
+        {
+            progress.setLabelText(tr("Recibiendo Revision del Nucleo... Espera por favor"));
             Rev = drake.getRevKernel();
+        }
         if (i==6)
-            Dir = drake.getDirActual();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Vir = drake.getVirtual();
+        {
+            progress.setLabelText(tr("Recibiendo Directorio actual... Espera por favor"));
+            Dir = drake.getDirActual();
+            Vir = drake.getVirtual();
+        }
         if (i==7)
+        {
+            progress.setLabelText(tr("Recibiendo Distro y version... Espera por favor"));
             Linux = drake.getLinux();
+        }
         if (i==8)
+        {
+            progress.setLabelText(tr("Recibiendo Hardware PCI... Espera por favor"));
             Pci = drake.getPci();
+        }
         if (i==9)
+        {
+            progress.setLabelText(tr("Recibiendo Modulos instalados en el nucleo... Espera por favor"));
             Mod = drake.getModulo();
+        }
         if (i==10)
+        {
+            progress.setLabelText(tr("Recibiendo Espacio ocupado de home... Espera por favor"));
             du = drake.getEspacio();
+        }
         if (i==11)
+        {
+            progress.setLabelText(tr("Recibiendo Repositorios... Espera por favor"));
             repo = drake.getRepositorio();
+        }
         if (i==12)
+        {
+            progress.setLabelText(tr("Recibiendo Modulos de redes... Espera por favor"));
             red = drake.getRedes();
+        }
         if (i==13)
+        {
+            progress.setLabelText(tr("Recibiendo Listado de rpm ordenados... Espera por favor"));
             rpm = drake.getRpms();
+        }
         if (i==14)
+        {
+            progress.setLabelText(tr("Recibiendo Nombre de la Distro... Espera por favor"));
             Distro = drake.getDistrop();
+        }
         if (i==15)
+        {
+            progress.setLabelText(tr("Recibiendo Memoria libre... Espera por favor"));
             free = drake.getFree();
+        }
+        {
         if (i==16)
+        {
+            progress.setLabelText(tr("Recibiendo Espacio libre total... Espera por favor"));
             Total = drake.getDisco();
+        }
         if (i==17)
         {
+            progress.setLabelText(tr("Recibiendo Espacio libre de la raiz... Espera por favor"));
             Raiz = drake.getDiscR();
             Raiz=Raiz.right(6).left(3).remove("%");
         }
         if (i==18)
         {
+            progress.setLabelText(tr("Recibiendo Espacio libre de home... Espera por favor"));
             Home = drake.getDiscH();
             Home=Home.right(10).left(3).remove("%");
         }
         if (i==19)
+            progress.setLabelText(tr("Recibiendo IP... Espera por favor"));
             ip = drake.getIP();
+        }
         if (i==20)
+        {
+            progress.setLabelText(tr("Recibiendo Release... Espera por favor"));
             release = drake.getRelease();
+        }
         if (i==21)
         {
+            progress.setLabelText(tr("Recibiendo IP del router... Espera por favor"));
             ipRoute = drake.getIPRouter();
-            ipRoute = ipRoute.right(5).remove(" ");
+            QStringList Route = ipRoute.split(" ");
+            ipRoute = Route.value(Route.count()-1);
         }
         if (i==22)
+        {
+            progress.setLabelText(tr("Recibiendo Uso de CPU... Espera por favor"));
             infoPro = drake.getInfoPro();
+        }
         if (i==23)
         {
+            progress.setLabelText(tr("Recibiendo Resoluciones disponibles de pantalla... Espera por favor"));
             Resolution = drake.getResolucion();
             Resolution = Resolution.replace("minimum","Min.").replace("current","Actual").replace("maximum","Max.").remove("Screen 0:");
         }
         if (i==24)
+        {
+            progress.setLabelText(tr("Recibiendo Hostname... Espera por favor"));
             infoHost = drake.getHostname();
+        }
         if (i==25)
+        {
+            progress.setLabelText(tr("Recibiendo Informacion de la BIOS... Espera por favor"));
             Bios = drake.getBios();
+        }
         if (i==26)
         {
+            progress.setLabelText(tr("Recibiendo ESSID... Espera por favor"));
             ipEssid = drake.getEssid(ipRoute);
             QStringList Essid;
             ipEssid = ipEssid.remove("ESSID:");
             ipEssid = ipEssid.remove("                    ");
             Essid = ipEssid.split("\n");
             ipEssid = Essid.value(0);
-            ipEssid = ipEssid.remove("\"");
+            ipEssid = ipEssid.remove("\"");            
         }
         if (i==27)
         {
+            progress.setLabelText(tr("Recibiendo Ethernet... Espera por favor"));
             Eth=drake.getEthernet();
             Eth=Eth.remove("          ");
             Eth=Eth.remove("RX bytes:");
@@ -1086,574 +1269,397 @@ void recoverdrake::Modulos()
         }
         if (i==28)
         {
+            progress.setLabelText(tr("Recibiendo dependencias necesarias... Espera por favor"));
             Localizar = getPack();
+            if (Localizar == "")
+            {
+                progress.setLabelText(tr("Reconstruyendo corrupcion en DB de paquetes... Espera por favor"));
+                int respuesta = 0;
+                respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Base de paquetes trabada")),
+                            QString::fromUtf8(tr("<center><b>Problemas con la base de paquetes</center><p>"
+                            "La base de datos de paquetes no arroja ningun movimiento y eso es debido a "
+                            "que se encuentra trabada y tiene que se liberada para poder disponer de las dependencias necesarias.<p>"
+                            "&iquest;Quieres realizar la limpieza de la base de paquetes?")), QMessageBox::Ok, QMessageBox::No);
+                if (respuesta == QMessageBox::Ok)
+                {
+                    system("rm -vrf /var/lib/rpm/__db.0*");
+                    system("rpm --rebuilddb");
+                    Localizar = getPack();
+                }
+                progress.setLabelText(tr("Recibiendo dependencias necesarias... Espera por favor"));
+            }
         }
         if (i==29)
         {
             zenity= "zenity";
             if (Localizar.contains(zenity) == false)
-            {
                     zenity="0";
-            }
             else
-            {
                     zenity="1";
-            }
         }
         if (i==30)
         {
             kwrite= "kwrite";
             if (Localizar.contains(kwrite) == false)
-            {
                     kwrite="0";
-            }
             else
-            {
                     kwrite="1";
-            }
         }
         if (i==31)
         {
             ndiswrapper= "ndiswrapper";
             if (Localizar.contains(ndiswrapper) == false)
-            {
                     ndiswrapper= "0";
-            }
             else
-            {
                     ndiswrapper= "1";
-            }
         }
         if (i==32)
         {
             ntfsconfig= "ntfs-config";
             if (Localizar.contains(ntfsconfig) == false)
-            {
                     ntfsconfig="0";
-            }
             else
-            {
                     ntfsconfig="1";
-            }
         }
         if (i==33)
         {
             cdparanoia= "cdparanoia";
             if (Localizar.contains(cdparanoia) == false)
-            {
                     cdparanoia="0";
-            }
             else
-            {
                     cdparanoia="1";
-            }
         }
         if (i==34)
         {
             gzip= "gzip";
             if (Localizar.contains(gzip) == false)
-            {
                     gzip="0";
-            }
             else
-            {
                     gzip="1";
-            }
         }
         if (i==35)
         {
             tar= "tar";
             if (Localizar.contains(tar) == false)
-            {
                     tar= "0";
-            }
             else
-            {
                     tar= "1";
-            }
         }
         if (i==36)
         {
             cdrdao= "cdrdao";
             if (Localizar.contains(cdrdao) == false)
-            {
                     cdrdao= "0";
-            }
             else
-            {
                     cdrdao= "1";
-            }
         }
         if (i==37)
         {
             cdrkit= "cdrkit";
             if (Localizar.contains(cdrkit) == false)
-            {
                     cdrkit= "0";
-            }
             else
-            {
                     cdrkit= "1";
-            }
         }
         if (i==38)
         {
             convmv= "convmv";
             if (Localizar.contains(convmv) == false)
-            {
                     convmv= "0";
-            }
             else
-            {
                     convmv= "1";
-
-            }
         }
         if (i==39)
         {
             photorec= "photorec";
             if (Localizar.contains(photorec) == false)
-            {
                     photorec= "0";
-            }
             else
-            {
                     photorec= "1";
-            }
         }
         if (i==40)
         {
             konsole= "konsole";
             if (Localizar.contains(konsole) == false)
-            {
                     konsole="0";
-            }
             else
-            {
                     konsole="1";
-            }
         }
         if (i==41)
         {
             sudo= "sudo";
             if (Localizar.contains(sudo) == false)
-            {
                     sudo= "0";
-            }
             else
-            {
                     sudo= "1";
-            }
         }
         if (i==41)
         {
             alien= "alien";
             if (Localizar.contains(alien) == false)
-            {
                     alien= "0";
-            }
             else
-            {
                     alien= "1";
-            }
         }
         if (i==42)
         {
             fakeroot= "fakeroot";
             if (Localizar.contains(fakeroot) == false)
-            {
                     fakeroot="0";
-            }
             else
-            {
                     fakeroot="1";
-            }
         }
         if (i==43)
         {
             unrar = "unrar";
             if (Localizar.contains(unrar) == false)
-            {
                     unrar= "0";
-            }
             else
-            {
                     unrar= "1";
-            }
         }
         if (i==44)
         {
             imagemagick= "imagemagick";
             if (Localizar.contains(imagemagick) == false)
-            {
                     imagemagick="0";
-            }
             else
-            {
                     imagemagick="1";
-            }
         }
         if (i==45)
         {
             unzip = "unzip";
             if (Localizar.contains(unzip) == false)
-            {
                     unzip= "0";
-            }
             else
-            {
                     unzip= "1";
-            }
         }
         if (i==46)
         {
             dalle= "dalle";
             if (Localizar.contains(dalle) == false)
-            {
                     dalle="0";
-            }
             else
-            {
                     dalle="1";
-            }
         }
         if (i==47)
         {
             ffmpeg= "ffmpeg";
             if (Localizar.contains(ffmpeg) == false)
-            {
                     ffmpeg= "0";
-            }
             else
-            {
                     ffmpeg= "1";
-            }
         }
         if (i==48)
         {
             mencoder= "mencoder";
             if (Localizar.contains(mencoder) == false)
-            {
                     mencoder= "0";
-            }
             else
-            {
                     mencoder= "1";
-            }
         }
         if (i==49)
         {
             mkvtoolnix= "mkvtoolnix";
             if (Localizar.contains(mkvtoolnix) == false)
-            {
                     mkvtoolnix= "0";
-            }
             else
-            {
                     mkvtoolnix= "1";
-            }
         }
         if (i==50)
         {
             dvdauthor= "dvdauthor";
             if (Localizar.contains(dvdauthor) == false)
-            {
                     dvdauthor= "0";
-            }
             else
-            {
                     dvdauthor= "1";
-            }
         }
         if (i==51)
         {
             lsdvdDat= "lsdvd";
             if (Localizar.contains(lsdvdDat) == false)
-            {
                     lsdvdDat= "0";
-            }
             else
-            {
                     lsdvdDat= "1";
-            }
         }
         if (i==52)
         {
             clamav= "clamav";
             if (Localizar.contains(clamav) == false)
-            {
                     clamav= "0";
-            }
             else
-            {
                     clamav= "1";
-            }
         }
         if (i==53)
         {
             dolphin= "dolphin";
             if (Localizar.contains(dolphin) == false)
-            {
                     dolphin= "0";
-            }
             else
-            {
                     dolphin= "1";
-            }
         }
         if (i==54)
         {
             ccd2iso= "ccd2iso";
             if (Localizar.contains(ccd2iso) == false)
-            {
                     ccd2iso= "0";
-            }
             else
-            {
                     ccd2iso= "1";
-            }
         }
         if (i==55)
         {
             mdf2iso= "mdf2iso";
             if (Localizar.contains(mdf2iso) == false)
-            {
                     mdf2iso= "0";
-            }
             else
-            {
                     mdf2iso= "1";
-            }
         }
         if (i==56)
         {
             cdi2iso= "cdi2iso";
             if (Localizar.contains(cdi2iso) == false)
-            {
                     cdi2iso= "0";
-            }
             else
-            {
                     cdi2iso= "1";
-            }
         }
         if (i==57)
         {
             nrg2iso= "nrg2iso";
             if (Localizar.contains(nrg2iso) == false)
-            {
                     nrg2iso= "0";
-            }
             else
-            {
                     nrg2iso= "1";
-            }
         }
         if (i==58)
         {
             libnotify= "libnotify";
             if (Localizar.contains(libnotify) == false)
-            {
                     libnotify="0";
-            }
             else
-            {
                     libnotify="1";
-            }
         }
         if (i==59)
         {
             id3lib= "id3lib";
             if (Localizar.contains(id3lib) == false)
-            {
                     id3lib = "0";
-            }
             else
-            {
                     id3lib = "1";
-            }
         }
         if (i==60)
         {
             nmap= "nmap";
             if (Localizar.contains(nmap) == false)
-            {
                     nmap = "0";
-            }
             else
-            {
                     nmap = "1";
-            }
         }
         if (i==61)
         {
             iptables= "iptables";
             if (Localizar.contains(iptables) == false)
-            {
                     iptables = "0";
-            }
             else
-            {
                     iptables = "1";
-            }if (i==35)
-            {
-                tar= "tar";
-                if (Localizar.contains(tar) == false)
-                {
-                        tar= "0";
-                }
-                else
-                {
-                        tar= "1";
-                }
-            }
         }
         if (i==62)
         {
             vlc= "vlc";
             if (Localizar.contains(vlc) == false)
-            {
                     vlc = "0";
-            }
             else
-            {
                     vlc = "1";
-            }
         }
         if (i==63)
         {
             fileroller= "file-roller";
             if (Localizar.contains(fileroller) == false)
-            {
                     fileroller = "0";
-            }
             else
-            {
                     fileroller = "1";
-            }
         }
         if (i==64)
         {
             mtools= "mtools";
             if (Localizar.contains(mtools) == false)
-            {
                     mtools = "0";
-            }
             else
-            {
                     mtools = "1";
-            }
         }
         if (i==65)
         {
             qemu= "qemu";
             if (Localizar.contains(qemu) == false)
-            {
                     qemu = "0";
-            }
             else
-            {
                     qemu = "1";
-            }
         }
         if (i==66)
         {
             gcstar= "gcstar";
             if (Localizar.contains(gcstar) == false)
-            {
                      gcstar = "0";
-            }
             else
-            {
                      gcstar = "1";
-            }
         }
         if (i==67)
         {
             x11vnc= "x11vnc";
             if (Localizar.contains(x11vnc) == false)
-            {
                      x11vnc = "0";
-            }
             else
-            {
                      x11vnc = "1";
-            }
         }
         if (i==68)
         {
             mutt= "mutt";
             if (Localizar.contains(mutt) == false)
-            {
                      mutt = "0";
-            }
             else
-            {
                      mutt = "1";
-            }
         }
         if (i==69)
         {
             sendmail= "sendmail";
             if (Localizar.contains(sendmail) == false)
-            {
                      sendmail = "0";
-            }
             else
-            {
                      sendmail = "1";
-            }
         }
         if (i==70)
         {
             ssmtp= "ssmtp";
             if (Localizar.contains(ssmtp) == false)
-            {
                      ssmtp = "0";
-            }
             else
-            {
                      ssmtp = "1";
-            }
         }
         if (i==71)
         {
             tigervnc= "tigervnc";
             if (Localizar.contains(tigervnc) == false)
-            {
                      tigervnc="0";
-            }
             else
-            {
                      tigervnc="1";
-            }
         }
         if (i==72)
         {
             transmission = "transmission-cli";
             if (Localizar.contains(transmission) == false)
-            {
                      transmission="0";
-            }
             else
-            {
                      transmission="1";
-            }
         }
         if (i==73)
         {
             firefox= "firefox";
             if (Localizar.contains(firefox) == false)
-            {
                     firefox="0";
-            }
             else
-            {
                     firefox="1";
-            }
         }
         if (i==74)
         {
+            progress.setLabelText(tr("Actualizando Datos de redes... Espera por favor"));
             if (EthF > 0)
             {
                 QSqlQuery query8(dbs);
@@ -1671,13 +1677,13 @@ void recoverdrake::Modulos()
         }
         if (i==75)
         {
+            progress.setLabelText(tr("Configurando Estilo visual... Espera por favor"));            
             if (Dato1 != 1280 || Dato2 != 1024)
             {
                 if (Dato1 <= 1279 || Dato2 <= 1023)
                 {
-                    ui->pushButton_9->hide();
+                    RX = 1;
                     ui->groupBox_4->hide();
-                    ui->label_113->hide();
                     ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(false);
                     ui->textEdit_13->setText(QString::fromUtf8(rpm));
                     ui->textEdit_14->setText(QString::fromUtf8(Pci));
@@ -1714,9 +1720,12 @@ void recoverdrake::Modulos()
                     ui->label_21->setText(QString::fromUtf8(release));
                     ui->textEdit_12->setText(QString::fromUtf8(Bios));
                 }
+                else
+                    RX = 1;
             }
             else
             {
+                RX = 0;
                 ui->textEdit_9->setText(QString::fromUtf8(rpm));
                 ui->textEdit_6->setText(QString::fromUtf8(du));
                 ui->lineEdit->setText(QString::fromUtf8(user));
@@ -1734,7 +1743,6 @@ void recoverdrake::Modulos()
                 ui->textEdit_8->setText(QString::fromUtf8(red));
                 ui->label_21->setText(QString::fromUtf8(release));
                 ui->textEdit_12->setText(QString::fromUtf8(Bios));
-                ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(false);
                 ui->textEdit_13->setText(QString::fromUtf8(rpm));
                 ui->textEdit_14->setText(QString::fromUtf8(Pci));
                 ui->textEdit_15->setText(QString::fromUtf8(du));
@@ -1752,6 +1760,8 @@ void recoverdrake::Modulos()
                 ui->lineEdit_19->setText(QString::fromUtf8(Resolution));
                 ui->textEdit_21->setText(QString::fromUtf8(Linux));
                 ui->label_86->setText(QString::fromUtf8(release));
+                ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(false);
+                ui->groupBox_4->show();
             }
             ui->textBrowser_2->setText(QString::fromUtf8(free));
             ui->textBrowser_3->setText(QString::fromUtf8(Total));
@@ -1766,88 +1776,123 @@ void recoverdrake::Modulos()
                     this->ui->label_22->setText(""+ipRoute+" / "+Essid+"");
             }
             else if (ipRoute == "")
-            {
                 this->ui->label_22->setText(tr("Utilizando Ethernet"));
-            }
             if (ip == "")
-            {
                 this->ui->label_19->setText(tr("Sin Acceso a Red"));
-            }
             else if (ip != "")
-            {
                 this->ui->label_19->setText(QString::fromUtf8(ip));
-            }
         }
         if (i==76)
         {
             gcc= "gcc";
             if (Localizar.contains(gcc) == false)
-            {
                     gcc="0";
-            }
             else
-            {
                     gcc="1";
-            }
         }
         if (i==77)
         {
             makec= "make";
             if (Localizar.contains(makec) == false)
-            {
                     makec="0";
-            }
             else
-            {
                     makec="1";
-            }
         }
         if (i==78)
         {
-            libncurses= "libncurses-devel";
-            if (Localizar.contains(libncurses) == false)
-            {
-                    libncurses="0";
-            }
+            if (arqt =="x86_64")
+                libncurses= "lib64ncurses-devel";
             else
-            {
+                libncurses= "libncurses-devel";
+            if (Localizar.contains(libncurses) == false)
+                    libncurses="0";
+            else
                     libncurses="1";
-            }
         }
         if (i==79)
         {
-            libncursesw= "libncursesw-devel";
-            if (Localizar.contains(libncursesw) == false)
-            {
-                    libncursesw="0";
-            }
+            if (arqt =="x86_64")
+                libncursesw= "lib64ncursesw-devel";
             else
-            {
+                libncursesw= "libncursesw-devel";
+            if (Localizar.contains(libncursesw) == false)
+                    libncursesw="0";
+            else
                     libncursesw="1";
-            }
         }
         if (i==80)
-        {
             dist = drake.getDistribucion();
-        }
         if (i==81)
-        {
             MAC = drake.getMAC(ipRoute);
-        }
         if (i==82)
         {
             pulseaudio= "pulseaudio-utils";
             if (Localizar.contains(pulseaudio) == false)
-            {
                     pulseaudio= "0";
-            }
             else
-            {
                     pulseaudio= "1";
-            }
+        }
+        if (i==83)
+        {
+            if (arqt =="x86_64")
+                libqrencode= "lib64qrencode-devel";
+            else
+                libqrencode= "libqrencode-devel";
+            if (Localizar.contains(libqrencode) == false)
+                    libqrencode="0";
+            else
+                    libqrencode="1";
+        }
+        if (i==84)
+        {
+            bzip2= "bzip2";
+            if (Localizar.contains(bzip2) == false)
+                    bzip2="0";
+            else
+                    bzip2="1";
+        }
+        if (i==85)
+        {
+            zip= "zip";
+            if (Localizar.contains(zip) == false)
+                    zip="0";
+            else
+                    zip="1";
+        }
+        if (i==86)
+        {
+            zoo= "zoo";
+            if (Localizar.contains(zoo) == false)
+                    zoo="0";
+            else
+                    zoo="1";
+        }
+        if (i==87)
+        {
+            arj= "arj";
+            if (Localizar.contains(arj) == false)
+                    arj="0";
+            else
+                    arj="1";
+        }
+        if (i==88)
+        {
+            a7z= "p7zip";
+            if (Localizar.contains(a7z) == false)
+                    a7z="0";
+            else
+                    a7z="1";
+        }
+        if (i==89)
+        {
+            rar= "rar";
+            if (Localizar.contains(rar) == false)
+                    rar="0";
+            else
+                    rar="1";
         }
     }
-    progress.setValue(83);
+    progress.setValue(90);
     setUpdatesEnabled(true);
 }
 
@@ -2216,10 +2261,9 @@ void recoverdrake::Actualizar()
 void recoverdrake::ActualizarTodo()
 { 
     setUpdatesEnabled(false);
-    QProgressDialog progress(tr("Actualizando configuraciones... Espera por favor"), tr("Cancelar"), 0, 61, this);
+    QProgressDialog progress(tr("Actualizando configuraciones... Espera por favor"), tr("Cancelar"), 0, 68, this);
     progress.show();
-    QTest::qWait(20);
-    for(int i=0;i<61;i++)
+    for(int i=0;i<68;i++)
     {
         qApp->processEvents();
         progress.setValue(i);
@@ -2289,554 +2333,369 @@ void recoverdrake::ActualizarTodo()
         {
             zenity= "zenity";
             if (Localizar.contains(zenity) == false)
-            {
                     zenity="0";
-            }
             else
-            {
                     zenity="1";
-            }
         }
         if (i==4)
         {
             kwrite= "kwrite";
             if (Localizar.contains(kwrite) == false)
-            {
                     kwrite="0";
-            }
             else
-            {
                     kwrite="1";
-            }
         }
         if (i==5)
         {
             ndiswrapper= "ndiswrapper";
             if (Localizar.contains(ndiswrapper) == false)
-            {
                     ndiswrapper= "0";
-            }
             else
-            {
                     ndiswrapper= "1";
-            }
         }
         if (i==6)
         {
             ntfsconfig= "ntfs-config";
             if (Localizar.contains(ntfsconfig) == false)
-            {
                     ntfsconfig="0";
-            }
             else
-            {
                     ntfsconfig="1";
-            }
         }
         if (i==7)
         {
             cdparanoia= "cdparanoia";
             if (Localizar.contains(cdparanoia) == false)
-            {
                     cdparanoia="0";
-            }
             else
-            {
                     cdparanoia="1";
-            }
         }
         if (i==8)
         {
             gzip= "gzip";
             if (Localizar.contains(gzip) == false)
-            {
                     gzip="0";
-            }
             else
-            {
                     gzip="1";
-            }
         }
         if (i==9)
         {
             tar= "tar";
             if (Localizar.contains(tar) == false)
-            {
                     tar= "0";
-            }
             else
-            {
                     tar= "1";
-            }
         }
         if (i==10)
         {
             cdrdao= "cdrdao";
             if (Localizar.contains(cdrdao) == false)
-            {
                     cdrdao= "0";
-            }
             else
-            {
                     cdrdao= "1";
-            }
         }
         if (i==11)
         {
             cdrkit= "cdrkit";
             if (Localizar.contains(cdrkit) == false)
-            {
                     cdrkit= "0";
-            }
             else
-            {
                     cdrkit= "1";
-            }
         }
         if (i==12)
         {
             convmv= "convmv";
             if (Localizar.contains(convmv) == false)
-            {
                     convmv= "0";
-            }
             else
-            {
                     convmv= "1";
-
-            }
         }
         if (i==13)
         {
             photorec= "photorec";
             if (Localizar.contains(photorec) == false)
-            {
                     photorec= "0";
-            }
             else
-            {
                     photorec= "1";
-            }
         }
         if (i==14)
         {
             konsole= "konsole";
             if (Localizar.contains(konsole) == false)
-            {
                     konsole="0";
-            }
             else
-            {
                     konsole="1";
-            }
         }
         if (i==15)
         {
             sudo= "sudo";
             if (Localizar.contains(sudo) == false)
-            {
                     sudo= "0";
-            }
             else
-            {
                     sudo= "1";
-            }
         }
         if (i==16)
         {
             alien= "alien";
             if (Localizar.contains(alien) == false)
-            {
                     alien= "0";
-            }
             else
-            {
                     alien= "1";
-            }
         }
         if (i==17)
         {
             fakeroot= "fakeroot";
             if (Localizar.contains(fakeroot) == false)
-            {
                     fakeroot="0";
-            }
             else
-            {
                     fakeroot="1";
-            }
         }
         if (i==18)
         {
             unrar = "unrar";
             if (Localizar.contains(unrar) == false)
-            {
                     unrar= "0";
-            }
             else
-            {
                     unrar= "1";
-            }
         }
         if (i==19)
         {
             imagemagick= "imagemagick";
             if (Localizar.contains(imagemagick) == false)
-            {
                     imagemagick="0";
-            }
             else
-            {
                     imagemagick="1";
-            }
         }
         if (i==20)
         {
             unzip = "unzip";
             if (Localizar.contains(unzip) == false)
-            {
                     unzip= "0";
-            }
             else
-            {
                     unzip= "1";
-            }
         }
         if (i==21)
         {
             dalle= "dalle";
             if (Localizar.contains(dalle) == false)
-            {
                     dalle="0";
-            }
             else
-            {
                     dalle="1";
-            }
         }
         if (i==22)
         {
             ffmpeg= "ffmpeg";
             if (Localizar.contains(ffmpeg) == false)
-            {
                     ffmpeg= "0";
-            }
             else
-            {
                     ffmpeg= "1";
-            }
         }
         if (i==23)
         {
             mencoder= "mencoder";
             if (Localizar.contains(mencoder) == false)
-            {
                     mencoder= "0";
-            }
             else
-            {
                     mencoder= "1";
-            }
         }
         if (i==24)
         {
             mkvtoolnix= "mkvtoolnix";
             if (Localizar.contains(mkvtoolnix) == false)
-            {
                     mkvtoolnix= "0";
-            }
             else
-            {
                     mkvtoolnix= "1";
-            }
         }
         if (i==25)
         {
             dvdauthor= "dvdauthor";
             if (Localizar.contains(dvdauthor) == false)
-            {
                     dvdauthor= "0";
-            }
             else
-            {
                     dvdauthor= "1";
-            }
         }
         if (i==26)
         {
             lsdvdDat= "lsdvd";
             if (Localizar.contains(lsdvdDat) == false)
-            {
                     lsdvdDat= "0";
-            }
             else
-            {
                     lsdvdDat= "1";
-            }
         }
         if (i==27)
         {
             clamav= "clamav";
             if (Localizar.contains(clamav) == false)
-            {
                     clamav= "0";
-            }
             else
-            {
                     clamav= "1";
-            }
         }
         if (i==28)
         {
             dolphin= "dolphin";
             if (Localizar.contains(dolphin) == false)
-            {
                     dolphin= "0";
-            }
             else
-            {
                     dolphin= "1";
-            }
         }
         if (i==29)
         {
             ccd2iso= "ccd2iso";
             if (Localizar.contains(ccd2iso) == false)
-            {
                     ccd2iso= "0";
-            }
             else
-            {
                     ccd2iso= "1";
-            }
         }
         if (i==30)
         {
             mdf2iso= "mdf2iso";
             if (Localizar.contains(mdf2iso) == false)
-            {
                     mdf2iso= "0";
-            }
             else
-            {
                     mdf2iso= "1";
-            }
         }
         if (i==31)
         {
             cdi2iso= "cdi2iso";
             if (Localizar.contains(cdi2iso) == false)
-            {
                     cdi2iso= "0";
-            }
             else
-            {
                     cdi2iso= "1";
-            }
         }
         if (i==32)
         {
             nrg2iso= "nrg2iso";
             if (Localizar.contains(nrg2iso) == false)
-            {
                     nrg2iso= "0";
-            }
             else
-            {
                     nrg2iso= "1";
-            }
         }
         if (i==33)
         {
             libnotify= "libnotify";
             if (Localizar.contains(libnotify) == false)
-            {
                     libnotify="0";
-            }
             else
-            {
                     libnotify="1";
-            }
         }
         if (i==34)
         {
             id3lib= "id3lib";
             if (Localizar.contains(id3lib) == false)
-            {
                     id3lib = "0";
-            }
             else
-            {
                     id3lib = "1";
-            }
         }
         if (i==35)
         {
             nmap= "nmap";
             if (Localizar.contains(nmap) == false)
-            {
                     nmap = "0";
-            }
             else
-            {
                     nmap = "1";
-            }
         }
         if (i==36)
         {
             iptables= "iptables";
             if (Localizar.contains(iptables) == false)
-            {
                     iptables = "0";
-            }
             else
-            {
                     iptables = "1";
-            }
         }
         if (i==37)
         {
             vlc= "vlc";
             if (Localizar.contains(vlc) == false)
-            {
                     vlc = "0";
-            }
             else
-            {
                     vlc = "1";
-            }
         }
         if (i==38)
         {
             fileroller= "file-roller";
             if (Localizar.contains(fileroller) == false)
-            {
                     fileroller = "0";
-            }
             else
-            {
                     fileroller = "1";
-            }
         }
         if (i==39)
         {
             mtools= "mtools";
             if (Localizar.contains(mtools) == false)
-            {
                     mtools = "0";
-            }
             else
-            {
                     mtools = "1";
-            }
         }
         if (i==40)
         {
             qemu= "qemu";
             if (Localizar.contains(qemu) == false)
-            {
                     qemu = "0";
-            }
             else
-            {
                     qemu = "1";
-            }
         }
         if (i==41)
         {
             gcstar= "gcstar";
             if (Localizar.contains(gcstar) == false)
-            {
                      gcstar = "0";
-            }
             else
-            {
                      gcstar = "1";
-            }
         }
         if (i==42)
         {
             x11vnc= "x11vnc";
             if (Localizar.contains(x11vnc) == false)
-            {
                      x11vnc = "0";
-            }
             else
-            {
                      x11vnc = "1";
-            }
         }
         if (i==43)
         {
             mutt= "mutt";
             if (Localizar.contains(mutt) == false)
-            {
                      mutt = "0";
-            }
             else
-            {
                      mutt = "1";
-            }
         }
         if (i==44)
         {
             sendmail= "sendmail";
             if (Localizar.contains(sendmail) == false)
-            {
                      sendmail = "0";
-            }
             else
-            {
                      sendmail = "1";
-            }
         }
         if (i==45)
         {
             ssmtp= "ssmtp";
             if (Localizar.contains(ssmtp) == false)
-            {
                      ssmtp = "0";
-            }
             else
-            {
                      ssmtp = "1";
-            }
         }
         if (i==46)
         {
             tigervnc= "tigervnc";
             if (Localizar.contains(tigervnc) == false)
-            {
                      tigervnc="0";
-            }
             else
-            {
                      tigervnc="1";
-            }
         }
         if (i==47)
         {
             transmission = "transmission-cli";
             if (Localizar.contains(transmission) == false)
-            {
                      transmission="0";
-            }
             else
-            {
                      transmission="1";
-            }
         }
         if (i==48)
         {
             firefox= "firefox";
             if (Localizar.contains(firefox) == false)
-            {
                     firefox="0";
-            }
             else
-            {
                     firefox="1";
-            }
         }
         if (i==49)
         {
@@ -2937,13 +2796,9 @@ void recoverdrake::ActualizarTodo()
             consola.first();
             QString konsola=consola.value(0).toString();
             if (konsola == "0")
-            {
                 ui->textEdit->setStyleSheet("background-color: rgb(0, 0, 0); color: rgb(255, 255, 255); font-size: 9pt; font-family: Sans Serif");
-            }
             else if (konsola == "2")
-            {
                 ui->textEdit->setStyleSheet(QString::fromUtf8("background-color: rgb(0, 0, 0); border-image: url(:/Imagenes/fondoKonsole.png); color: rgb(255, 255, 255); font: 9pt \"Sans Serif\";"));
-            }
         }
         if (i==51)
         {
@@ -2953,13 +2808,9 @@ void recoverdrake::ActualizarTodo()
             queryAplicacion.first();
             Aplicacion=queryAplicacion.value(0).toString();
             if (Aplicacion == "0")
-            {
                 Window = 0;
-            }
             else if (Aplicacion == "1")
-            {
                 Window = 1;
-            }
         }
         if (i==52)
         {
@@ -2969,22 +2820,14 @@ void recoverdrake::ActualizarTodo()
             queryChat.first();
             chat=queryChat.value(0).toString();
             if (chat == "0")
-            {
                 Chat = 0;
-            }
             else if (chat == "1")
-            {
                 Chat = 1;
-            }
             ui->pushButton_50->hide();
             if (Chat == 1)
-            {                
                 ui->pushButton_49->setText(tr("Ir a Canal IRC::#blogdrake"));
-            }
             else if (Chat == 0)
-            {                
                 ui->pushButton_49->setText(tr("Mostrar Canal IRC::#blogdrake"));
-            }
         }
         if (i==53)
         {
@@ -2997,36 +2840,48 @@ void recoverdrake::ActualizarTodo()
             Dato2 = Parcial2.value(1).toInt();
             if (Dato1 >= 1280 || Dato2 >= 1024)
             {
+                if (Dato1 == 1280 && Dato2 == 1024)
+                    RX = 0;
+                else
+                    RX = 1;
                 QString Formato;
                 QSqlQuery queryFormato(dbs);
                 queryFormato.exec("SELECT Aspecto FROM Formato WHERE id=2");
                 queryFormato.first();
                 Formato=queryFormato.value(0).toString();
                 if (Formato == "0")
-                {
                     Aspecto = 0;
-                }
                 else if (Formato == "1")
-                {
                     Aspecto = 1;
-                }
                 if (Aspecto == 1)
                 {
                     ui->tabWidget_8->insertTab(2,ui->tab_11,"Sistema");
                     ui->tabWidget_8->setTabIcon(0,QIcon(":/Imagenes/ejecutar.png"));
-                    ui->pushButton_9->hide();
-                    ui->groupBox_4->hide();
-                    ui->label_113->hide();
-                    ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(false);
+                    if (RX == 0)
+                    {
+                        ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(false);
+                        ui->groupBox_4->show();
+                    }
+                    else
+                    {
+                        ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(true);
+                        ui->groupBox_4->hide();
+                    }
                 }
                 else if (Aspecto == 0)
                 {
                     int Pos = ui->tabWidget_8->indexOf(ui->tab_11);
                     ui->tabWidget_8->removeTab(Pos);
-                    ui->pushButton_9->show();
-                    ui->groupBox_4->show();
-                    ui->label_113->show();
-                    ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(true);
+                    if (RX == 1)
+                    {
+                        ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(true);
+                        ui->groupBox_4->hide();
+                    }
+                    else
+                    {
+                        ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(false);
+                        ui->groupBox_4->show();
+                    }
                 }
             }
         }
@@ -3034,49 +2889,39 @@ void recoverdrake::ActualizarTodo()
         {
             gcc= "gcc";
             if (Localizar.contains(gcc) == false)
-            {
                     gcc="0";
-            }
             else
-            {
                     gcc="1";
-            }
         }
         if (i==55)
         {
             makec= "make";
             if (Localizar.contains(makec) == false)
-            {
                     makec="0";
-            }
             else
-            {
                     makec="1";
-            }
-        }
+        }        
         if (i==56)
         {
-            libncurses= "libncurses-devel";
-            if (Localizar.contains(libncurses) == false)
-            {
-                    libncurses="0";
-            }
+            if (arqt =="x86_64")
+                libncurses= "lib64ncurses-devel";
             else
-            {
+                libncurses= "libncurses-devel";
+            if (Localizar.contains(libncurses) == false)
+                    libncurses="0";
+            else
                     libncurses="1";
-            }
         }
         if (i==57)
         {
-            libncursesw= "libncursesw-devel";
-            if (Localizar.contains(libncursesw) == false)
-            {
-                    libncursesw="0";
-            }
+            if (arqt =="x86_64")
+                libncursesw= "lib64ncursesw-devel";
             else
-            {
+                libncursesw= "libncursesw-devel";
+            if (Localizar.contains(libncursesw) == false)
+                    libncursesw="0";
+            else
                     libncursesw="1";
-            }
         }
         if (i==58)
         {
@@ -3138,16 +2983,71 @@ void recoverdrake::ActualizarTodo()
         {
             pulseaudio= "pulseaudio-utils";
             if (Localizar.contains(pulseaudio) == false)
-            {
                     pulseaudio="0";
-            }
             else
-            {
                     pulseaudio="1";
-            }
+        }
+        if (i==61)
+        {
+            if (arqt =="x86_64")
+                libqrencode= "lib64qrencode-devel";
+            else
+                libqrencode= "libqrencode-devel";
+            if (Localizar.contains(libqrencode) == false)
+                    libqrencode="0";
+            else
+                    libqrencode="1";
+        }
+        if (i==62)
+        {
+            bzip2= "bzip2";
+            if (Localizar.contains(bzip2) == false)
+                    bzip2="0";
+            else
+                    bzip2="1";
+        }
+        if (i==63)
+        {
+            zip= "zip";
+            if (Localizar.contains(zip) == false)
+                    zip="0";
+            else
+                    zip="1";
+        }
+        if (i==64)
+        {
+            zoo= "zoo";
+            if (Localizar.contains(zoo) == false)
+                    zoo="0";
+            else
+                    zoo="1";
+        }
+        if (i==65)
+        {
+            arj= "arj";
+            if (Localizar.contains(arj) == false)
+                    arj="0";
+            else
+                    arj="1";
+        }
+        if (i==66)
+        {
+            a7z= "p7zip";
+            if (Localizar.contains(a7z) == false)
+                    a7z="0";
+            else
+                    a7z="1";
+        }
+        if (i==67)
+        {
+            rar= "rar";
+            if (Localizar.contains(rar) == false)
+                    rar="0";
+            else
+                    rar="1";
         }
     }
-    progress.setValue(61);
+    progress.setValue(68);
     setUpdatesEnabled(true);
 }
 
@@ -3162,7 +3062,10 @@ void recoverdrake::Arranque()
        ui->label_65->setText(tr("<FONT COLOR=\"BLUE\">Version registrada nº ")+Registro+".");
    else
        ui->label_65->setText(tr("<FONT COLOR=\"RED\">Version no registrada."));
-   ui->groupBox_4->hide();
+   if (RX == 0)
+       ui->groupBox_4->show();
+   else
+       ui->groupBox_4->hide();
    ui->pushButton_2->hide();
    ui->progressBar->hide();
    ui->label_13->hide();
@@ -3195,7 +3098,8 @@ void recoverdrake::Arranque()
    opcion3=ui->actionMinimizar_al_Salir->isChecked();
    opcion6=ui->actionDesactivar_pantalla_inicio->isChecked();
    opcion8=ui->actionSupervisar_visualizacion_previa_en_dolphin->isChecked();
-   opcion9=ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->isChecked();
+   if (RX == 1)
+       opcion9=ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->isChecked();
    opcion10=ui->actionLiberar_memoria_de_Cache->isChecked();
    opcion11=ui->actionDesactivar_Barra_de_menu_superios->isChecked();
    opcion12=ui->actionDesactivar_Barra_de_menu_inferior->isChecked();
@@ -3369,11 +3273,14 @@ void recoverdrake::Arranque()
    {
        if (Aspecto == 0)
        {
-           ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setIcon(QIcon(":/Imagenes/good.png"));
-           QString hora = QTime::currentTime().toString("hh:mm:ss");
-           ui->textEdit_4->append(""+hora+"-- Mostrar \"Caracteristicas especificas de tu sistemas GNU/Linux\".");
-           ui->groupBox_4->show();
-           ui->pushButton_9->setText(tr("Ocultar \"Caracteristicas especificas de tu sistema GNU/Linux\""));
+           if (RX == 1)
+           {
+               ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setIcon(QIcon(":/Imagenes/good.png"));
+               QString hora = QTime::currentTime().toString("hh:mm:ss");
+               ui->textEdit_4->append(""+hora+"-- Mostrar \"Caracteristicas especificas de tu sistemas GNU/Linux\".");
+               ui->groupBox_4->show();
+               ui->pushButton_9->setText(tr("Ocultar \"Caracteristicas especificas de tu sistema GNU/Linux\""));
+           }
        }
    }
    if (opcion10 == true)
@@ -3406,19 +3313,10 @@ void recoverdrake::Arranque()
    }
    if (opcion1==true)
    {
-
-
-
-
-       //ver las lib cuando son en 64
-
-
-
-
        ui->actionComprabar_depndencias_RecoverDrake->setIcon(QIcon(":/Imagenes/good.png"));
        QString hora = QTime::currentTime().toString("hh:mm:ss");
        ui->textEdit_4->append(""+hora+"-- Comprobacion de dependencias activada.");
-       QString cmd=QString::fromUtf8(tr("echo Comprobando dependencias necesarias..."));
+       QString cmdx=QString::fromUtf8(tr("echo Comprobando dependencias necesarias..."));
        QString comando="urpmi -a --auto --force zenity";
        QString comando1="urpmi -a --auto --force sudo";
        QString comando2="urpmi -a --auto --force bash";
@@ -3440,7 +3338,11 @@ void recoverdrake::Arranque()
        QString comando18="urpmi -a --auto --force mkvtoolnix";
        QString comando19="urpmi -a --auto --force clamav";
        QString comando20="urpmi -a --auto --force dolphin";
-       QString comando21="urpmi -a --auto --force libqtgui4";
+       QString comando21;
+       if (arqt =="x86_64")
+           comando21="urpmi -a --auto --force lib64qtgui4";
+       else
+           comando21="urpmi -a --auto --force libqtgui4";
        QString comando22="urpmi -a --auto --force unrar";
        QString comando23="urpmi -a --auto --force mencoder";
        QString comando24="urpmi -a --auto --force gnome-utils ";
@@ -3448,7 +3350,13 @@ void recoverdrake::Arranque()
        QString comando26="urpmi -a --auto --force win32-codecs";
        QString comando27="urpmi -a --auto --force xanim-codecs";
        QString comando28="urpmi -a --auto --force libquicktime";
-       QString comando29="urpmi -a --auto --force libquicktime";
+       QString comando29;
+       int Eliminar = 0;
+       if (arqt =="x86_64")
+       {
+           comando29="urpmi -a --auto --force lib64quicktime0";
+           Eliminar = 1;
+       }
        QString comando30="urpmi -a --auto --force libquicktime-x264";
        QString comando31="urpmi -a --auto --force libquicktime-lame";
        QString comando32="urpmi -a --auto --force libquicktime-faad";
@@ -3509,36 +3417,138 @@ void recoverdrake::Arranque()
        QString comando87="urpmi -a --auto --force dvdbackup";
        QString comando88="urpmi -a --auto --force gcc";
        QString comando89="urpmi -a --auto --force make";
-       QString comando90="urpmi -a --auto --force libncurses-devel";
-       QString comando91="urpmi -a --auto --force libncursesw-devel";
+       QString comando90,comando91;
+       if (arqt =="x86_64")
+       {
+           comando90="urpmi -a --auto --force lib64ncurses-devel";
+           comando91="urpmi -a --auto --force lib64ncursesw-devel";
+       }
+       else
+       {
+           comando90="urpmi -a --auto --force libncurses-devel";
+           comando91="urpmi -a --auto --force libncursesw-devel";
+       }
        QString comando92="urpmi -a --auto --force id3v2";
        QString comando93="urpmi -a --auto --force pulseaudio-utils";
-       if (nrg2iso == "0")
-       {
-           QString cm = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
-           QString cmd = "wget http://gregory.kokanosky.free.fr/v4/linux/nrg2iso-0.2-SuSE9_br.i586.rpm";
-           QString cmd1 = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
-           QString cmd2 ="urpmi nrg2iso-0.2-SuSE9_br.i586.rpm";
-           QString cmd3 = tr("echo Limpiando temporales...");
-           QString cmd4 = "rm -vf nrg2iso-0.2-SuSE9_br.i586.rpm";
-           comandos << cm << cmd << cmd1 << cmd2 << cmd3 << cmd4;
-       }
-       comandos << cmd << comando << comando1 << comando2 << comando3 << comando4 << comando5 << comando6 << comando7 << comando8 << comando9 << comando10;
+       QString comando94;
+       if (arqt =="x86_64")
+           comando94="urpmi -a --auto --force lib64qrencode-devel";
+       else
+           comando94="urpmi -a --auto --force libqrencode-devel";
+       QString comando95 = "urpmi -a --auto --force bzip2";
+       QString comando96 = "urpmi -a --auto --force zip";
+       QString comando98 = "urpmi -a --auto --force arj";
+       QString comando99 = "urpmi -a --auto --force p7zip";
+       comandos << cmdx << comando << comando1 << comando2 << comando3 << comando4 << comando5 << comando6 << comando7 << comando8 << comando9 << comando10;
        comandos << comando11 << comando12 << comando13 << comando14 << comando15 << comando16 << comando17 << comando18 << comando19 << comando20;
-       comandos << comando21 << comando22 << comando23 << comando24 << comando25 << comando26 << comando27 << comando28 << comando29 << comando30;
+       if (Eliminar == 1)
+            comandos << comando21 << comando22 << comando23 << comando24 << comando25 << comando26 << comando27 << comando28 << comando29 << comando30;
+       else if (Eliminar == 0)
+            comandos << comando21 << comando22 << comando23 << comando24 << comando25 << comando26 << comando27 << comando28 << comando30;
        comandos << comando31 << comando32 << comando33 << comando34 << comando35 << comando36 << comando37 << comando38 << comando39 << comando40;
        comandos << comando41 << comando42 << comando43 << comando44 << comando45 << comando46 << comando47 << comando48 << comando49 << comando50;
        comandos << comando51 << comando52 << comando53 << comando54 << comando55 << comando56 << comando57 << comando58 << comando59 << comando60;
        comandos << comando61 << comando62 << comando63 << comando64 << comando65 << comando66 << comando67 << comando68 << comando69 << comando70 << comando71 << comando72;
        comandos << comando73 << comando74 << comando75 << comando76 << comando77 << comando78 << comando79 << comando80 << comando81 << comando82 << comando83 << comando84;
-       comandos << comando85 << comando86 << comando87 << comando88 << comando89 << comando90 << comando91 << comando92 << comando93;
+       comandos << comando85 << comando86 << comando87 << comando88 << comando89 << comando90 << comando91 << comando92 << comando93 << comando94;
+       comandos << comando95 << comando96 << comando98 << comando99;
+       QString cm, cmd, cmd1, cmd2, cmd3, cmd4;
+       if (nrg2iso == "0")
+       {
+           cm = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
+           cmd = "wget http://gregory.kokanosky.free.fr/v4/linux/nrg2iso-0.2-SuSE9_br.i586.rpm";
+           cmd1 = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
+           cmd2 ="urpmi --auto --force nrg2iso-0.2-SuSE9_br.i586.rpm";
+           cmd3 = tr("echo Limpiando temporales...");
+           cmd4 = "rm -vf nrg2iso-0.2-SuSE9_br.i586.rpm";
+           comandos << cm << cmd << cmd1 << cmd2 << cmd3 << cmd4;
+       }
+       QString cmr, cmdr, cmd1r, cmd2r, cmd3r, cmd4r, x64, x86;
+       if (rar == "0")
+       {
+           cmr = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
+           if (arqt =="x86_64")
+           {
+                cmdr = "wget ftp://download.asso-linux-online.fr/download/packages-mlo/Mageia/4/x86_64/nonfree/rar-5.0.0-2.nonfree.mga4.x86_64.rpm";
+                x64 = "rar-5.0.0-2.nonfree.mga4.x86_64.rpm";
+           }
+           else
+           {
+               cmdr = "wget ftp://download.asso-linux-online.fr/download/packages-mlo/Mageia/4/i586/nonfree/rar-5.0.0-2.nonfree.mga4.i586.rpm";
+               x86 = "rar-5.0.0-2.nonfree.mga4.i586.rpm";
+           }
+           cmd1r = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
+           if (arqt =="x86_64")
+           {
+                cmd2r ="urpmi --auto --force %1";
+                cmd2r=cmd2r.arg(x64);
+           }
+           else
+           {
+               cmd2r ="urpmi --auto --force %1";
+               cmd2r=cmd2r.arg(x86);
+           }
+           cmd3r = tr("echo Limpiando temporales...");
+           if (arqt =="x86_64")
+           {
+                cmd4r = "rm -vf %1";
+                cmd4r=cmd4r.arg(x64);
+           }
+           else
+           {
+               cmd4r = "rm -vf %1";
+               cmd4r=cmd4r.arg(x86);
+           }
+           comandos << cmr << cmdr << cmd1r << cmd2r << cmd3r << cmd4r;
+       }
+       QString cmrZ, cmdrZ, cmd1rZ, cmd2rZ, cmd3rZ, cmd4rZ;
+       if (zoo == "0")
+       {
+           cmrZ = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
+           if (arqt =="x86_64")
+           {
+                cmdrZ = "wget http://mirror.rosalab.ru/rosa/rosa2012.1/repository/x86_64/restricted/release/zoo-2.10-6-plf2012.1.x86_64.rpm";
+                x64 = "zoo-2.10-6-plf2012.1.x86_64.rpm";
+           }
+           else
+           {
+               cmdrZ = "wget http://mirror.rosalab.ru/rosa/rosa2012.1/repository/i586/restricted/release/zoo-2.10-6-plf2012.1.i586.rpm";
+               x86 = "zoo-2.10-6-plf2012.1.i586.rpm";
+           }
+           cmd1rZ = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
+           if (arqt =="x86_64")
+           {
+                cmd2rZ ="urpmi --auto --force %1";
+                cmd2rZ=cmd2rZ.arg(x64);
+           }
+           else
+           {
+               cmd2rZ ="urpmi --auto --force %1";
+               cmd2rZ=cmd2rZ.arg(x86);
+           }
+           cmd3rZ = tr("echo Limpiando temporales...");
+           if (arqt =="x86_64")
+           {
+                cmd4rZ = "rm -vf %1";
+                cmd4rZ=cmd4rZ.arg(x64);
+           }
+           else
+           {
+               cmd4rZ = "rm -vf %1";
+               cmd4rZ=cmd4rZ.arg(x86);
+           }
+           comandos << cmrZ << cmdrZ << cmd1rZ << cmd2rZ << cmd3rZ << cmd4rZ;
+       }
        if (mib != 0)
            delete mib;
        mib = new DrakeProcesos(comandos, this);
        connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
        connect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
        connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
-       int valor= comandos.count(); mib->Valor(valor,0); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
+       int valor= comandos.count();
+       mib->Valor(valor,0);
+       mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+       mib->iniciarProceso();
    }
    else if (opcion1 != true)
    {
@@ -3547,21 +3557,17 @@ void recoverdrake::Arranque()
            QString hora = QTime::currentTime().toString("hh:mm:ss");
            ui->textEdit_4->append(""+hora+"-- <b><FONT COLOR=\"RED\">ATENCION: LA COMPROBACION DE DEPENDENCIAS NO ESTA ACTIVADA, PUEDE NO FUNCIONAR CORRECTAMENTE.");
            int respuesta = 0;
-
            respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Comprobar dependencias de uso")),
                       QString::fromUtf8(tr("<center><b>Comprobar dependencias para RecoverDrake</b></center><p>"
-
                          "<b>IMPORTANTE:</b> He observado que tienes la comprobacion de dependencias "
                          "deshabilitada...no es un buen consejo, ya que para realizar todos los "
                          "procesos de RecoverDrake, son necesarios paquetes externos que deberian "
                          "estar totalmente configurados y funcionando al 100%.<p>"
-
                          "&iquest;Comprobar dependencias para el buen uso de RecoverDrake?")), QMessageBox::Ok, QMessageBox::No);
-
            if (respuesta == QMessageBox::Ok)
            {
                Refrescar();
-               QString cmd=QString::fromUtf8(tr("echo Buscando dependencias necesarias e instalando..."));
+               QString cmdx=QString::fromUtf8(tr("echo Buscando dependencias necesarias e instalando..."));
                QString comando="urpmi -a --auto --force zenity";
                QString comando1="urpmi -a --auto --force sudo";
                QString comando2="urpmi -a --auto --force bash";
@@ -3583,7 +3589,11 @@ void recoverdrake::Arranque()
                QString comando18="urpmi -a --auto --force mkvtoolnix";
                QString comando19="urpmi -a --auto --force clamav";
                QString comando20="urpmi -a --auto --force dolphin";
-               QString comando21="urpmi -a --auto --force libqtgui4";
+               QString comando21;
+               if (arqt =="x86_64")
+                   comando21="urpmi -a --auto --force lib64qtgui4";
+               else
+                   comando21="urpmi -a --auto --force libqtgui4";
                QString comando22="urpmi -a --auto --force unrar";
                QString comando23="urpmi -a --auto --force mencoder";
                QString comando24="urpmi -a --auto --force gnome-utils ";
@@ -3591,7 +3601,13 @@ void recoverdrake::Arranque()
                QString comando26="urpmi -a --auto --force win32-codecs";
                QString comando27="urpmi -a --auto --force xanim-codecs";
                QString comando28="urpmi -a --auto --force libquicktime";
-               QString comando29="urpmi -a --auto --force libquicktime";
+               QString comando29;
+               int Eliminar = 0;
+               if (arqt =="x86_64")
+               {
+                   comando29="urpmi -a --auto --force lib64quicktime0";
+                   Eliminar = 1;
+               }
                QString comando30="urpmi -a --auto --force libquicktime-x264";
                QString comando31="urpmi -a --auto --force libquicktime-lame";
                QString comando32="urpmi -a --auto --force libquicktime-faad";
@@ -3652,36 +3668,138 @@ void recoverdrake::Arranque()
                QString comando87="urpmi -a --auto --force dvdbackup";
                QString comando88="urpmi -a --auto --force gcc";
                QString comando89="urpmi -a --auto --force make";
-               QString comando90="urpmi -a --auto --force libncurses-devel";
-               QString comando91="urpmi -a --auto --force libncursesw-devel";
+               QString comando90,comando91;
+               if (arqt =="x86_64")
+               {
+                   comando90="urpmi -a --auto --force lib64ncurses-devel";
+                   comando91="urpmi -a --auto --force lib64ncursesw-devel";
+               }
+               else
+               {
+                   comando90="urpmi -a --auto --force libncurses-devel";
+                   comando91="urpmi -a --auto --force libncursesw-devel";
+               }
                QString comando92="urpmi -a --auto --force id3v2";
                QString comando93="urpmi -a --auto --force pulseaudio-utils";
-               if (nrg2iso == "0")
-               {
-                   QString cm = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
-                   QString cmd = "wget http://gregory.kokanosky.free.fr/v4/linux/nrg2iso-0.2-SuSE9_br.i586.rpm";
-                   QString cmd1 = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
-                   QString cmd2 ="urpmi nrg2iso-0.2-SuSE9_br.i586.rpm";
-                   QString cmd3 = tr("echo Limpiando temporales...");
-                   QString cmd4 = "rm -vf nrg2iso-0.2-SuSE9_br.i586.rpm";
-                   comandos << cm << cmd << cmd1 << cmd2 << cmd3 << cmd4;
-               }
-               comandos << cmd << comando << comando1 << comando2 << comando3 << comando4 << comando5 << comando6 << comando7 << comando8 << comando9 << comando10;
+               QString comando94;
+               if (arqt =="x86_64")
+                   comando94="urpmi -a --auto --force lib64qrencode-devel";
+               else
+                   comando94="urpmi -a --auto --force libqrencode-devel";
+               QString comando95 = "urpmi -a --auto --force bzip2";
+               QString comando96 = "urpmi -a --auto --force zip";
+               QString comando98 = "urpmi -a --auto --force arj";
+               QString comando99 = "urpmi -a --auto --force p7zip";
+               comandos << cmdx << comando << comando1 << comando2 << comando3 << comando4 << comando5 << comando6 << comando7 << comando8 << comando9 << comando10;
                comandos << comando11 << comando12 << comando13 << comando14 << comando15 << comando16 << comando17 << comando18 << comando19 << comando20;
-               comandos << comando21 << comando22 << comando23 << comando24 << comando25 << comando26 << comando27 << comando28 << comando29 << comando30;
+               if (Eliminar == 1)
+                    comandos << comando21 << comando22 << comando23 << comando24 << comando25 << comando26 << comando27 << comando28 << comando29 << comando30;
+               else if (Eliminar == 0)
+                    comandos << comando21 << comando22 << comando23 << comando24 << comando25 << comando26 << comando27 << comando28 << comando30;
                comandos << comando31 << comando32 << comando33 << comando34 << comando35 << comando36 << comando37 << comando38 << comando39 << comando40;
                comandos << comando41 << comando42 << comando43 << comando44 << comando45 << comando46 << comando47 << comando48 << comando49 << comando50;
                comandos << comando51 << comando52 << comando53 << comando54 << comando55 << comando56 << comando57 << comando58 << comando59 << comando60;
                comandos << comando61 << comando62 << comando63 << comando64 << comando65 << comando66 << comando67 << comando68 << comando69 << comando70 << comando71 << comando72;
                comandos << comando73 << comando74 << comando75 << comando76 << comando77 << comando78 << comando79 << comando80 << comando81 << comando82 << comando83 << comando84;
-               comandos << comando85 << comando86 << comando87 << comando88 << comando89 << comando90 << comando91 << comando92 << comando93;
+               comandos << comando85 << comando86 << comando87 << comando88 << comando89 << comando90 << comando91 << comando92 << comando93 << comando94;
+               comandos << comando95 << comando96 << comando98 << comando99;
+               QString cm, cmd, cmd1, cmd2, cmd3, cmd4;
+               if (nrg2iso == "0")
+               {
+                   cm = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
+                   cmd = "wget http://gregory.kokanosky.free.fr/v4/linux/nrg2iso-0.2-SuSE9_br.i586.rpm";
+                   cmd1 = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
+                   cmd2 ="urpmi --auto --force nrg2iso-0.2-SuSE9_br.i586.rpm";
+                   cmd3 = tr("echo Limpiando temporales...");
+                   cmd4 = "rm -vf nrg2iso-0.2-SuSE9_br.i586.rpm";
+                   comandos << cm << cmd << cmd1 << cmd2 << cmd3 << cmd4;
+               }
+               QString cmr, cmdr, cmd1r, cmd2r, cmd3r, cmd4r, x64, x86;
+               if (rar == "0")
+               {
+                   cmr = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
+                   if (arqt =="x86_64")
+                   {
+                        cmdr = "wget ftp://download.asso-linux-online.fr/download/packages-mlo/Mageia/4/x86_64/nonfree/rar-5.0.0-2.nonfree.mga4.x86_64.rpm";
+                        x64 = "rar-5.0.0-2.nonfree.mga4.x86_64.rpm";
+                   }
+                   else
+                   {
+                       cmdr = "wget ftp://download.asso-linux-online.fr/download/packages-mlo/Mageia/4/i586/nonfree/rar-5.0.0-2.nonfree.mga4.i586.rpm";
+                       x86 = "rar-5.0.0-2.nonfree.mga4.i586.rpm";
+                   }
+                   cmd1r = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
+                   if (arqt =="x86_64")
+                   {
+                        cmd2r ="urpmi --auto --force %1";
+                        cmd2r=cmd2r.arg(x64);
+                   }
+                   else
+                   {
+                       cmd2r ="urpmi --auto --force %1";
+                       cmd2r=cmd2r.arg(x86);
+                   }
+                   cmd3r = tr("echo Limpiando temporales...");
+                   if (arqt =="x86_64")
+                   {
+                        cmd4r = "rm -vf %1";
+                        cmd4r=cmd4r.arg(x64);
+                   }
+                   else
+                   {
+                       cmd4r = "rm -vf %1";
+                       cmd4r=cmd4r.arg(x86);
+                   }
+                   comandos << cmr << cmdr << cmd1r << cmd2r << cmd3r << cmd4r;
+               }
+               QString cmrZ, cmdrZ, cmd1rZ, cmd2rZ, cmd3rZ, cmd4rZ;
+               if (zoo == "0")
+               {
+                   cmrZ = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
+                   if (arqt =="x86_64")
+                   {
+                        cmdrZ = "wget http://mirror.rosalab.ru/rosa/rosa2012.1/repository/x86_64/restricted/release/zoo-2.10-6-plf2012.1.x86_64.rpm";
+                        x64 = "zoo-2.10-6-plf2012.1.x86_64.rpm";
+                   }
+                   else
+                   {
+                       cmdrZ = "wget http://mirror.rosalab.ru/rosa/rosa2012.1/repository/i586/restricted/release/zoo-2.10-6-plf2012.1.i586.rpm";
+                       x86 = "zoo-2.10-6-plf2012.1.i586.rpm";
+                   }
+                   cmd1rZ = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
+                   if (arqt =="x86_64")
+                   {
+                        cmd2rZ ="urpmi --auto --force %1";
+                        cmd2rZ=cmd2rZ.arg(x64);
+                   }
+                   else
+                   {
+                       cmd2rZ ="urpmi --auto --force %1";
+                       cmd2rZ=cmd2rZ.arg(x86);
+                   }
+                   cmd3rZ = tr("echo Limpiando temporales...");
+                   if (arqt =="x86_64")
+                   {
+                        cmd4rZ = "rm -vf %1";
+                        cmd4rZ=cmd4rZ.arg(x64);
+                   }
+                   else
+                   {
+                       cmd4rZ = "rm -vf %1";
+                       cmd4rZ=cmd4rZ.arg(x86);
+                   }
+                   comandos << cmrZ << cmdrZ << cmd1rZ << cmd2rZ << cmd3rZ << cmd4rZ;
+               }
                if (mib != 0)
                    delete mib;
                mib = new DrakeProcesos(comandos, this);
                connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
                connect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
                connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
-               int valor= comandos.count(); mib->Valor(valor,0); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
+               int valor= comandos.count();
+               mib->Valor(valor,0);
+               mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+               mib->iniciarProceso();
            }
            else
            {
@@ -3714,19 +3832,15 @@ void recoverdrake::on_actionComprobar_dependencias_triggered()
        Refrescar();
        QStringList comandos;
        int respuesta = 0;
-
        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Comprobar dependencias de uso")),
                   QString::fromUtf8(tr("<center><b>Comprobar dependencias para RecoverDrake</b></center><p>"
-
                      "<b>IMPORTANTE:</b> Se procede a comprobar la integridad de funcionamiento "
                      "de RecoverDrake, realizando la busqueda de paquetes externos necesarios y "
                      "que deberian estar totalmente configurados y funcionando al 100%.<p>"
-
                      "&iquest;Comprobar dependencias para el buen uso de RecoverDrake?")), QMessageBox::Ok, QMessageBox::No);
-
        if (respuesta == QMessageBox::Ok)
        {
-           QString cmd=QString::fromUtf8(tr("echo Buscando dependencias necesarias e instalando..."));
+           QString cmdx=QString::fromUtf8(tr("echo Buscando dependencias necesarias e instalando..."));
            QString comando="urpmi -a --auto --force zenity";
            QString comando1="urpmi -a --auto --force sudo";
            QString comando2="urpmi -a --auto --force bash";
@@ -3748,7 +3862,11 @@ void recoverdrake::on_actionComprobar_dependencias_triggered()
            QString comando18="urpmi -a --auto --force mkvtoolnix";
            QString comando19="urpmi -a --auto --force clamav";
            QString comando20="urpmi -a --auto --force dolphin";
-           QString comando21="urpmi -a --auto --force libqtgui4";
+           QString comando21;
+           if (arqt =="x86_64")
+               comando21="urpmi -a --auto --force lib64qtgui4";
+           else
+               comando21="urpmi -a --auto --force libqtgui4";
            QString comando22="urpmi -a --auto --force unrar";
            QString comando23="urpmi -a --auto --force mencoder";
            QString comando24="urpmi -a --auto --force gnome-utils ";
@@ -3756,7 +3874,13 @@ void recoverdrake::on_actionComprobar_dependencias_triggered()
            QString comando26="urpmi -a --auto --force win32-codecs";
            QString comando27="urpmi -a --auto --force xanim-codecs";
            QString comando28="urpmi -a --auto --force libquicktime";
-           QString comando29="urpmi -a --auto --force libquicktime";
+           QString comando29;
+           int Eliminar = 0;
+           if (arqt =="x86_64")
+           {
+               comando29="urpmi -a --auto --force lib64quicktime0";
+               Eliminar = 1;
+           }
            QString comando30="urpmi -a --auto --force libquicktime-x264";
            QString comando31="urpmi -a --auto --force libquicktime-lame";
            QString comando32="urpmi -a --auto --force libquicktime-faad";
@@ -3817,29 +3941,128 @@ void recoverdrake::on_actionComprobar_dependencias_triggered()
            QString comando87="urpmi -a --auto --force dvdbackup";
            QString comando88="urpmi -a --auto --force gcc";
            QString comando89="urpmi -a --auto --force make";
-           QString comando90="urpmi -a --auto --force libncurses-devel";
-           QString comando91="urpmi -a --auto --force libncursesw-devel";
+           QString comando90,comando91;
+           if (arqt =="x86_64")
+           {
+               comando90="urpmi -a --auto --force lib64ncurses-devel";
+               comando91="urpmi -a --auto --force lib64ncursesw-devel";
+           }
+           else
+           {
+               comando90="urpmi -a --auto --force libncurses-devel";
+               comando91="urpmi -a --auto --force libncursesw-devel";
+           }
            QString comando92="urpmi -a --auto --force id3v2";
            QString comando93="urpmi -a --auto --force pulseaudio-utils";
-           if (nrg2iso == "0")
-           {
-               QString cm = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
-               QString cmd = "wget http://gregory.kokanosky.free.fr/v4/linux/nrg2iso-0.2-SuSE9_br.i586.rpm";
-               QString cmd1 = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
-               QString cmd2 ="urpmi nrg2iso-0.2-SuSE9_br.i586.rpm";
-               QString cmd3 = tr("echo Limpiando temporales...");
-               QString cmd4 = "rm -vf nrg2iso-0.2-SuSE9_br.i586.rpm";
-               comandos << cm << cmd << cmd1 << cmd2 << cmd3 << cmd4;
-           }
-           comandos << cmd << comando << comando1 << comando2 << comando3 << comando4 << comando5 << comando6 << comando7 << comando8 << comando9 << comando10;
+           QString comando94;
+           if (arqt =="x86_64")
+               comando94="urpmi -a --auto --force lib64qrencode-devel";
+           else
+               comando94="urpmi -a --auto --force libqrencode-devel";
+           QString comando95 = "urpmi -a --auto --force bzip2";
+           QString comando96 = "urpmi -a --auto --force zip";
+           QString comando98 = "urpmi -a --auto --force arj";
+           QString comando99 = "urpmi -a --auto --force p7zip";
+           comandos << cmdx << comando << comando1 << comando2 << comando3 << comando4 << comando5 << comando6 << comando7 << comando8 << comando9 << comando10;
            comandos << comando11 << comando12 << comando13 << comando14 << comando15 << comando16 << comando17 << comando18 << comando19 << comando20;
-           comandos << comando21 << comando22 << comando23 << comando24 << comando25 << comando26 << comando27 << comando28 << comando29 << comando30;
+           if (Eliminar == 1)
+                comandos << comando21 << comando22 << comando23 << comando24 << comando25 << comando26 << comando27 << comando28 << comando29 << comando30;
+           else if (Eliminar == 0)
+                comandos << comando21 << comando22 << comando23 << comando24 << comando25 << comando26 << comando27 << comando28 << comando30;
            comandos << comando31 << comando32 << comando33 << comando34 << comando35 << comando36 << comando37 << comando38 << comando39 << comando40;
            comandos << comando41 << comando42 << comando43 << comando44 << comando45 << comando46 << comando47 << comando48 << comando49 << comando50;
            comandos << comando51 << comando52 << comando53 << comando54 << comando55 << comando56 << comando57 << comando58 << comando59 << comando60;
            comandos << comando61 << comando62 << comando63 << comando64 << comando65 << comando66 << comando67 << comando68 << comando69 << comando70 << comando71 << comando72;
            comandos << comando73 << comando74 << comando75 << comando76 << comando77 << comando78 << comando79 << comando80 << comando81 << comando82 << comando83 << comando84;
-           comandos << comando85 << comando86 << comando87 << comando88 << comando89 << comando90 << comando91 << comando92 << comando93;
+           comandos << comando85 << comando86 << comando87 << comando88 << comando89 << comando90 << comando91 << comando92 << comando93 << comando94;
+           comandos << comando95 << comando96 << comando98 << comando99;
+           QString cm, cmd, cmd1, cmd2, cmd3, cmd4;
+           if (nrg2iso == "0")
+           {
+               cm = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
+               cmd = "wget http://gregory.kokanosky.free.fr/v4/linux/nrg2iso-0.2-SuSE9_br.i586.rpm";
+               cmd1 = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
+               cmd2 ="urpmi --auto --force nrg2iso-0.2-SuSE9_br.i586.rpm";
+               cmd3 = tr("echo Limpiando temporales...");
+               cmd4 = "rm -vf nrg2iso-0.2-SuSE9_br.i586.rpm";
+               comandos << cm << cmd << cmd1 << cmd2 << cmd3 << cmd4;
+           }
+           QString cmr, cmdr, cmd1r, cmd2r, cmd3r, cmd4r, x64, x86;
+           if (rar == "0")
+           {
+               cmr = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
+               if (arqt =="x86_64")
+               {
+                    cmdr = "wget ftp://download.asso-linux-online.fr/download/packages-mlo/Mageia/4/x86_64/nonfree/rar-5.0.0-2.nonfree.mga4.x86_64.rpm";
+                    x64 = "rar-5.0.0-2.nonfree.mga4.x86_64.rpm";
+               }
+               else
+               {
+                   cmdr = "wget ftp://download.asso-linux-online.fr/download/packages-mlo/Mageia/4/i586/nonfree/rar-5.0.0-2.nonfree.mga4.i586.rpm";
+                   x86 = "rar-5.0.0-2.nonfree.mga4.i586.rpm";
+               }
+               cmd1r = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
+               if (arqt =="x86_64")
+               {
+                    cmd2r ="urpmi --auto --force %1";
+                    cmd2r=cmd2r.arg(x64);
+               }
+               else
+               {
+                   cmd2r ="urpmi --auto --force %1";
+                   cmd2r=cmd2r.arg(x86);
+               }
+               cmd3r = tr("echo Limpiando temporales...");
+               if (arqt =="x86_64")
+               {
+                    cmd4r = "rm -vf %1";
+                    cmd4r=cmd4r.arg(x64);
+               }
+               else
+               {
+                   cmd4r = "rm -vf %1";
+                   cmd4r=cmd4r.arg(x86);
+               }
+               comandos << cmr << cmdr << cmd1r << cmd2r << cmd3r << cmd4r;
+           }
+           QString cmrZ, cmdrZ, cmd1rZ, cmd2rZ, cmd3rZ, cmd4rZ;
+           if (zoo == "0")
+           {
+               cmrZ = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
+               if (arqt =="x86_64")
+               {
+                    cmdrZ = "wget http://mirror.rosalab.ru/rosa/rosa2012.1/repository/x86_64/restricted/release/zoo-2.10-6-plf2012.1.x86_64.rpm";
+                    x64 = "zoo-2.10-6-plf2012.1.x86_64.rpm";
+               }
+               else
+               {
+                   cmdrZ = "wget http://mirror.rosalab.ru/rosa/rosa2012.1/repository/i586/restricted/release/zoo-2.10-6-plf2012.1.i586.rpm";
+                   x86 = "zoo-2.10-6-plf2012.1.i586.rpm";
+               }
+               cmd1rZ = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
+               if (arqt =="x86_64")
+               {
+                    cmd2rZ ="urpmi --auto --force %1";
+                    cmd2rZ=cmd2rZ.arg(x64);
+               }
+               else
+               {
+                   cmd2rZ ="urpmi --auto --force %1";
+                   cmd2rZ=cmd2rZ.arg(x86);
+               }
+               cmd3rZ = tr("echo Limpiando temporales...");
+               if (arqt =="x86_64")
+               {
+                    cmd4rZ = "rm -vf %1";
+                    cmd4rZ=cmd4rZ.arg(x64);
+               }
+               else
+               {
+                   cmd4rZ = "rm -vf %1";
+                   cmd4rZ=cmd4rZ.arg(x86);
+               }
+               comandos << cmrZ << cmdrZ << cmd1rZ << cmd2rZ << cmd3rZ << cmd4rZ;
+           }
            if (mib != 0)
                delete mib;
            mib = new DrakeProcesos(comandos, this);
@@ -3906,6 +4129,7 @@ void recoverdrake::on_actionMostrar_Caracteristicas_especificas_de_tu_sistema_GN
         ui->groupBox_4->show();
         ui->pushButton_9->setText(tr("Ocultar \"Caracteristicas especificas de tu sistema GNU/Linux\""));        
         this->showMaximized();
+        RX = 1;
     }
     else
     {
@@ -3916,6 +4140,7 @@ void recoverdrake::on_actionMostrar_Caracteristicas_especificas_de_tu_sistema_GN
         ui->groupBox_4->hide();
         ui->pushButton_9->setText(tr("Mostrar \"Caracteristicas especificas de tu sistema GNU/Linux\""));
         this->showMaximized();
+        RX = 0;
     }
     m.exec();
     ui->progressBar->hide();
@@ -4016,22 +4241,18 @@ void recoverdrake::on_actionComprabar_depndencias_RecoverDrake_triggered(bool c)
        int respuesta = 0;
        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Comprobar dependencias de uso")),
                   QString::fromUtf8(tr("<center><b>Comprobar dependecias para RecoverDrake</b></center><p>"
-
                      "<b>IMPORTANTE:</b> Esta opcion se utiliza para saber y actualizar "
                      "todas las dependencias necesarias para un buen uso de RecoverDrake, "
                      "ya que necesita de varios paquetes externos que deben estar "
                      "debidamente configurados e instalados para tener al 100% nuestra "
                      "utilidad.<p>"
-
                      "<B>NOTA: Debes esperar a que termine completamente el proceso seleccionado, "
                      "el cual te sera notificado cuando finalice en la consola de procesos.</B><p>"
-
                      "&iquest;Comprobar dependencias para el buen uso de RecoverDrake?")), QMessageBox::Ok, QMessageBox::No);
-
        if (respuesta == QMessageBox::Ok)
        {
            m.setText(tr("Se ha activado la comprobacion de dependencias de RecoverDrake. Se procedera a realizar la comprobacion."));
-           QString cmd=QString::fromUtf8(tr("echo Buscando dependencias necesarias e instalando..."));
+           QString cmdx=QString::fromUtf8(tr("echo Buscando dependencias necesarias e instalando..."));
            QString comando="urpmi -a --auto --force zenity";
            QString comando1="urpmi -a --auto --force sudo";
            QString comando2="urpmi -a --auto --force bash";
@@ -4053,7 +4274,11 @@ void recoverdrake::on_actionComprabar_depndencias_RecoverDrake_triggered(bool c)
            QString comando18="urpmi -a --auto --force mkvtoolnix";
            QString comando19="urpmi -a --auto --force clamav";
            QString comando20="urpmi -a --auto --force dolphin";
-           QString comando21="urpmi -a --auto --force libqtgui4";
+           QString comando21;
+           if (arqt =="x86_64")
+               comando21="urpmi -a --auto --force lib64qtgui4";
+           else
+               comando21="urpmi -a --auto --force libqtgui4";
            QString comando22="urpmi -a --auto --force unrar";
            QString comando23="urpmi -a --auto --force mencoder";
            QString comando24="urpmi -a --auto --force gnome-utils ";
@@ -4061,7 +4286,13 @@ void recoverdrake::on_actionComprabar_depndencias_RecoverDrake_triggered(bool c)
            QString comando26="urpmi -a --auto --force win32-codecs";
            QString comando27="urpmi -a --auto --force xanim-codecs";
            QString comando28="urpmi -a --auto --force libquicktime";
-           QString comando29="urpmi -a --auto --force libquicktime";
+           QString comando29;
+           int Eliminar = 0;
+           if (arqt =="x86_64")
+           {
+               comando29="urpmi -a --auto --force lib64quicktime0";
+               Eliminar = 1;
+           }
            QString comando30="urpmi -a --auto --force libquicktime-x264";
            QString comando31="urpmi -a --auto --force libquicktime-lame";
            QString comando32="urpmi -a --auto --force libquicktime-faad";
@@ -4122,36 +4353,138 @@ void recoverdrake::on_actionComprabar_depndencias_RecoverDrake_triggered(bool c)
            QString comando87="urpmi -a --auto --force dvdbackup";
            QString comando88="urpmi -a --auto --force gcc";
            QString comando89="urpmi -a --auto --force make";
-           QString comando90="urpmi -a --auto --force libncurses-devel";
-           QString comando91="urpmi -a --auto --force libncursesw-devel";
+           QString comando90,comando91;
+           if (arqt =="x86_64")
+           {
+               comando90="urpmi -a --auto --force lib64ncurses-devel";
+               comando91="urpmi -a --auto --force lib64ncursesw-devel";
+           }
+           else
+           {
+               comando90="urpmi -a --auto --force libncurses-devel";
+               comando91="urpmi -a --auto --force libncursesw-devel";
+           }
            QString comando92="urpmi -a --auto --force id3v2";
            QString comando93="urpmi -a --auto --force pulseaudio-utils";
-           if (nrg2iso == "0")
-           {
-               QString cm = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
-               QString cmd = "wget http://gregory.kokanosky.free.fr/v4/linux/nrg2iso-0.2-SuSE9_br.i586.rpm";
-               QString cmd1 = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
-               QString cmd2 ="urpmi nrg2iso-0.2-SuSE9_br.i586.rpm";
-               QString cmd3 = tr("echo Limpiando temporales...");
-               QString cmd4 = "rm -vf nrg2iso-0.2-SuSE9_br.i586.rpm";
-               comandos << cm << cmd << cmd1 << cmd2 << cmd3 << cmd4;
-           }
-           comandos << cmd << comando << comando1 << comando2 << comando3 << comando4 << comando5 << comando6 << comando7 << comando8 << comando9 << comando10;
+           QString comando94;
+           if (arqt =="x86_64")
+               comando94="urpmi -a --auto --force lib64qrencode-devel";
+           else
+               comando94="urpmi -a --auto --force libqrencode-devel";
+           QString comando95 = "urpmi -a --auto --force bzip2";
+           QString comando96 = "urpmi -a --auto --force zip";
+           QString comando98 = "urpmi -a --auto --force arj";
+           QString comando99 = "urpmi -a --auto --force p7zip";
+           comandos << cmdx << comando << comando1 << comando2 << comando3 << comando4 << comando5 << comando6 << comando7 << comando8 << comando9 << comando10;
            comandos << comando11 << comando12 << comando13 << comando14 << comando15 << comando16 << comando17 << comando18 << comando19 << comando20;
-           comandos << comando21 << comando22 << comando23 << comando24 << comando25 << comando26 << comando27 << comando28 << comando29 << comando30;
+           if (Eliminar == 1)
+                comandos << comando21 << comando22 << comando23 << comando24 << comando25 << comando26 << comando27 << comando28 << comando29 << comando30;
+           else if (Eliminar == 0)
+                comandos << comando21 << comando22 << comando23 << comando24 << comando25 << comando26 << comando27 << comando28 << comando30;
            comandos << comando31 << comando32 << comando33 << comando34 << comando35 << comando36 << comando37 << comando38 << comando39 << comando40;
            comandos << comando41 << comando42 << comando43 << comando44 << comando45 << comando46 << comando47 << comando48 << comando49 << comando50;
            comandos << comando51 << comando52 << comando53 << comando54 << comando55 << comando56 << comando57 << comando58 << comando59 << comando60;
            comandos << comando61 << comando62 << comando63 << comando64 << comando65 << comando66 << comando67 << comando68 << comando69 << comando70 << comando71 << comando72;
            comandos << comando73 << comando74 << comando75 << comando76 << comando77 << comando78 << comando79 << comando80 << comando81 << comando82 << comando83 << comando84;
-           comandos << comando85 << comando86 << comando87 << comando88 << comando89 << comando90 << comando91 << comando92 << comando93;
+           comandos << comando85 << comando86 << comando87 << comando88 << comando89 << comando90 << comando91 << comando92 << comando93 << comando94;
+           comandos << comando95 << comando96 << comando98 << comando99;
+           QString cm, cmd, cmd1, cmd2, cmd3, cmd4;
+           if (nrg2iso == "0")
+           {
+               cm = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
+               cmd = "wget http://gregory.kokanosky.free.fr/v4/linux/nrg2iso-0.2-SuSE9_br.i586.rpm";
+               cmd1 = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
+               cmd2 ="urpmi --auto --force nrg2iso-0.2-SuSE9_br.i586.rpm";
+               cmd3 = tr("echo Limpiando temporales...");
+               cmd4 = "rm -vf nrg2iso-0.2-SuSE9_br.i586.rpm";
+               comandos << cm << cmd << cmd1 << cmd2 << cmd3 << cmd4;
+           }
+           QString cmr, cmdr, cmd1r, cmd2r, cmd3r, cmd4r, x64, x86;
+           if (rar == "0")
+           {
+               cmr = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
+               if (arqt =="x86_64")
+               {
+                    cmdr = "wget ftp://download.asso-linux-online.fr/download/packages-mlo/Mageia/4/x86_64/nonfree/rar-5.0.0-2.nonfree.mga4.x86_64.rpm";
+                    x64 = "rar-5.0.0-2.nonfree.mga4.x86_64.rpm";
+               }
+               else
+               {
+                   cmdr = "wget ftp://download.asso-linux-online.fr/download/packages-mlo/Mageia/4/i586/nonfree/rar-5.0.0-2.nonfree.mga4.i586.rpm";
+                   x86 = "rar-5.0.0-2.nonfree.mga4.i586.rpm";
+               }
+               cmd1r = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
+               if (arqt =="x86_64")
+               {
+                    cmd2r ="urpmi --auto --force %1";
+                    cmd2r=cmd2r.arg(x64);
+               }
+               else
+               {
+                   cmd2r ="urpmi --auto --force %1";
+                   cmd2r=cmd2r.arg(x86);
+               }
+               cmd3r = tr("echo Limpiando temporales...");
+               if (arqt =="x86_64")
+               {
+                    cmd4r = "rm -vf %1";
+                    cmd4r=cmd4r.arg(x64);
+               }
+               else
+               {
+                   cmd4r = "rm -vf %1";
+                   cmd4r=cmd4r.arg(x86);
+               }
+               comandos << cmr << cmdr << cmd1r << cmd2r << cmd3r << cmd4r;
+           }
+           QString cmrZ, cmdrZ, cmd1rZ, cmd2rZ, cmd3rZ, cmd4rZ;
+           if (zoo == "0")
+           {
+               cmrZ = QString::fromUtf8(tr("echo Descargando paquete solicitado..."));
+               if (arqt =="x86_64")
+               {
+                    cmdrZ = "wget http://mirror.rosalab.ru/rosa/rosa2012.1/repository/x86_64/restricted/release/zoo-2.10-6-plf2012.1.x86_64.rpm";
+                    x64 = "zoo-2.10-6-plf2012.1.x86_64.rpm";
+               }
+               else
+               {
+                   cmdrZ = "wget http://mirror.rosalab.ru/rosa/rosa2012.1/repository/i586/restricted/release/zoo-2.10-6-plf2012.1.i586.rpm";
+                   x86 = "zoo-2.10-6-plf2012.1.i586.rpm";
+               }
+               cmd1rZ = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
+               if (arqt =="x86_64")
+               {
+                    cmd2rZ ="urpmi --auto --force %1";
+                    cmd2rZ=cmd2rZ.arg(x64);
+               }
+               else
+               {
+                   cmd2rZ ="urpmi --auto --force %1";
+                   cmd2rZ=cmd2rZ.arg(x86);
+               }
+               cmd3rZ = tr("echo Limpiando temporales...");
+               if (arqt =="x86_64")
+               {
+                    cmd4rZ = "rm -vf %1";
+                    cmd4rZ=cmd4rZ.arg(x64);
+               }
+               else
+               {
+                   cmd4rZ = "rm -vf %1";
+                   cmd4rZ=cmd4rZ.arg(x86);
+               }
+               comandos << cmrZ << cmdrZ << cmd1rZ << cmd2rZ << cmd3rZ << cmd4rZ;
+           }
            if (mib != 0)
                delete mib;
            mib = new DrakeProcesos(comandos, this);
            connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
            connect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
            connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
-           int valor= comandos.count(); mib->Valor(valor,0); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
+           int valor= comandos.count();
+           mib->Valor(valor,0);
+           mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+           mib->iniciarProceso();
        }
        ui->actionComprabar_depndencias_RecoverDrake->setChecked(false);
        opcion1=ui->actionComprabar_depndencias_RecoverDrake->isChecked();
@@ -4666,7 +4999,7 @@ void recoverdrake::on_actionA_adir_todos_triggered()
         respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Instalar todos los repositorios")),
                QString::fromUtf8(tr("<center><b>Instalar todos los repositorios</b></center><p>"
 
-                  "Este apartado realiza la instalacion masiva de todos "
+                  "Este apartado Si no se soluciona, realiza la instalacion masiva de todos "
                   "los repositorios incluidos por defectos, como pueden "
                   "ser OFICIALES, PLF, MIB, BDK y MUD.<P> "
 
@@ -4814,7 +5147,7 @@ void recoverdrake::on_actionEliminar_paquetes_huerfanos_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -4872,7 +5205,7 @@ void recoverdrake::on_actionRecuperar_paquetes_huerfanos_Eliminados_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -4925,7 +5258,7 @@ void recoverdrake::on_actionSalvaguardar_rpm_s_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -4982,7 +5315,7 @@ void recoverdrake::on_actionRecuperar_rpm_s_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -5058,7 +5391,7 @@ void recoverdrake::on_actionSalvaguardar_copia_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -5066,7 +5399,7 @@ void recoverdrake::on_actionSalvaguardar_copia_triggered()
         if (gzip == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"gzip\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"gzip\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -5074,7 +5407,7 @@ void recoverdrake::on_actionSalvaguardar_copia_triggered()
             if (tar == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -5176,7 +5509,7 @@ void recoverdrake::on_actionRecuperar_copia_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -5414,7 +5747,7 @@ void recoverdrake::on_action_desde_CD_triggered()
     if (cdrdao == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrdao\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrdao\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -5495,7 +5828,7 @@ void recoverdrake::on_action_desde_directorio_triggered()
     if (cdrkit == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrkit\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrkit\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -5582,7 +5915,7 @@ void recoverdrake::on_actionMontar_imagen_ISO_triggered()
     if (ccd2iso == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ccd2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ccd2iso\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -5590,7 +5923,7 @@ void recoverdrake::on_actionMontar_imagen_ISO_triggered()
         if (mdf2iso == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mdf2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mdf2iso\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -5598,7 +5931,7 @@ void recoverdrake::on_actionMontar_imagen_ISO_triggered()
             if (cdi2iso == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdi2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdi2iso\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -5607,7 +5940,7 @@ void recoverdrake::on_actionMontar_imagen_ISO_triggered()
                 if (nrg2iso == "0")
                 {
                     QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"nrg2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"nrg2iso\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                     m.exec();
                 }
                 else
@@ -6208,7 +6541,7 @@ void recoverdrake::on_actionSalvaguardar_ficheros_de_recuperaci_n_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -6216,7 +6549,7 @@ void recoverdrake::on_actionSalvaguardar_ficheros_de_recuperaci_n_triggered()
         if (tar == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -6276,7 +6609,7 @@ void recoverdrake::on_actionRecuperar_ficheros_de_instalaci_n_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -6726,7 +7059,7 @@ void recoverdrake::on_actionRecuperar_Grub_de_arranque_triggered()
     if (kwrite == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"kwrite\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"kwrite\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7471,7 +7804,7 @@ void recoverdrake::on_actionInstalar_sopctas_qsopcast_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7509,9 +7842,7 @@ void recoverdrake::on_actionInstalar_sopctas_qsopcast_triggered()
         {
                         respuesta1 = QMessageBox::question(this, QString::fromUtf8(tr("Licencia de uso")),
                                                QString::fromUtf8(tr("<center><b>Licencia (Idioma original)<b></center><p>"
-
                                                "<FONT COLOR=\"BLUE\">Terms of Service<p>"
-
                                                "<FONT COLOR=\"BLUE\">Nowadays, all the services on SopCast (sopcast.com) are totally free and only for test purpose. "
                                                "<FONT COLOR=\"BLUE\">Our client (P2P TV Player) and channel list can be copied and distributed freely for anyone. "
                                                "<FONT COLOR=\"BLUE\">Any portion of these may not be sold, resold, or otherwise exploited for any commercial purpose "
@@ -7571,7 +7902,7 @@ void recoverdrake::on_actionInstalar_drivers_triggered()
     if (ndiswrapper == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ndiswrapper\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ndiswrapper\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7642,7 +7973,7 @@ void recoverdrake::on_actionVer_modulo_instalado_triggered()
     if (ndiswrapper == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ndiswrapper\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ndiswrapper\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7688,7 +8019,7 @@ void recoverdrake::on_actionBorrar_drivers_triggered()
     if (ndiswrapper == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ndiswrapper\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ndiswrapper\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7769,7 +8100,7 @@ void recoverdrake::on_actionMadwifi_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7843,7 +8174,7 @@ void recoverdrake::on_actionRT2860_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -7933,7 +8264,7 @@ void recoverdrake::on_actionRT2870_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8022,7 +8353,7 @@ void recoverdrake::on_actionRT3090_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8111,7 +8442,7 @@ void recoverdrake::on_action61_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8200,7 +8531,7 @@ void recoverdrake::on_actionRT73_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8289,7 +8620,7 @@ void recoverdrake::on_actionAtmel_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8383,7 +8714,7 @@ void recoverdrake::on_actionBcm43xx_fwcutter_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8452,7 +8783,7 @@ void recoverdrake::on_actionB43_fwcutter_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8522,7 +8853,7 @@ void recoverdrake::on_actionIpw2100_2_triggered()
     if (tar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -8626,7 +8957,7 @@ void recoverdrake::on_actionConvertir_caracteres_especiales_a_UTF8_triggered()
         if (convmv == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"convmv\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"convmv\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -8735,7 +9066,7 @@ void recoverdrake::on_actionSustituir_espacios_en_blanco_triggered()
     if (convmv == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"convmv\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"convmv\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9227,7 +9558,7 @@ void recoverdrake::on_actionRecuperar_contrase_a_usuario_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9235,7 +9566,7 @@ void recoverdrake::on_actionRecuperar_contrase_a_usuario_triggered()
         if (sudo == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sudo\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sudo\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -9302,7 +9633,7 @@ void recoverdrake::on_actionKTTSD_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9310,7 +9641,7 @@ void recoverdrake::on_actionKTTSD_triggered()
         if (tar == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -9406,7 +9737,7 @@ void recoverdrake::on_actionVirtualBox_triggered()
     if (sudo == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sudo\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sudo\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9489,7 +9820,7 @@ void recoverdrake::on_actionExcluir_paquete_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9550,7 +9881,7 @@ void recoverdrake::on_actionRecuperar_paquete_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9650,7 +9981,7 @@ void recoverdrake::on_actionAplicar_permisos_masivos_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9658,7 +9989,7 @@ void recoverdrake::on_actionAplicar_permisos_masivos_triggered()
         if (ntfsconfig == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ntfsconfig\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ntfsconfig\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -9761,7 +10092,7 @@ void recoverdrake::on_actionRecuperar_ficheros_directorios_borrados_triggered()
     if (photorec == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"photorec\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"photorec\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9769,7 +10100,7 @@ void recoverdrake::on_actionRecuperar_ficheros_directorios_borrados_triggered()
         if (konsole == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"konsole\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"konsole\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -9820,7 +10151,7 @@ void recoverdrake::on_actionWifi_intermitente_WEB_WPA_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -9868,7 +10199,7 @@ void recoverdrake::on_actionWifi_intermitente_abierta_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10102,7 +10433,7 @@ void recoverdrake::on_actionConvertir_deb_a_rpm_triggered()
     if (fakeroot == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"fakeroot\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"fakeroot\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10110,7 +10441,7 @@ void recoverdrake::on_actionConvertir_deb_a_rpm_triggered()
         if (alien == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"alien\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"alien\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -10194,26 +10525,20 @@ void recoverdrake::on_actionReconstruir_DB_de_los_rpm_s_triggered()
     {
         respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Reconstruir DB de los rpms")),
                            QString::fromUtf8(tr("<center><b>Reconstruir DB de los rpms<b></center><p>"
-
                            "Con esta opcion reconstruimos toda la base de datos de "
                            "rpmś instalados en el sistema. Muy util cuando hay problemas "
                            "de localizacion de paquetes aun teniendolos instalados.<p>"
-
                            "Este proceso, puede tardar un tiempo, se paciente, "
                            "la espera lo merece.<p>"
-
                            "<B>NOTA: Debes esperar a que termine completamente el "
                            "proceso seleccionado, el cual te sera notificado "
                            "cuando finalice en la consola de procesos.</B><p>"
-
                            "&iquest;Reconstruir DB?")), QMessageBox::Ok, QMessageBox::No);
     }
     else
-    {
         respuesta=QMessageBox::Ok;
-    }
-    if (respuesta == QMessageBox::Ok){
-
+    if (respuesta == QMessageBox::Ok)
+    {
             QString cm = QString::fromUtf8(tr("echo Reconstruyendo DB de rpms, puede demorarse un tiempo..."));
             QString cmd = "rpm --rebuilddb";
             QString cmd1 = QString::fromUtf8(tr("echo Reconstruccion de la DB de rpms completada"));
@@ -10225,8 +10550,17 @@ void recoverdrake::on_actionReconstruir_DB_de_los_rpm_s_triggered()
             connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
             connect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
             connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
-            int valor= comandos.count(); mib->Valor(valor,0); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();}
-            else{ui->tabWidget->setCurrentPage(pagina);ui->tabWidget_8->setCurrentPage(0);return;}
+            int valor= comandos.count();
+            mib->Valor(valor,0);
+            mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+            mib->iniciarProceso();
+    }
+    else
+    {
+        ui->tabWidget->setCurrentPage(pagina);
+        ui->tabWidget_8->setCurrentPage(0);
+        return;
+    }
 }
 
 void recoverdrake::on_actionConvertir_cbr_a_pdf_triggered()
@@ -10237,7 +10571,7 @@ void recoverdrake::on_actionConvertir_cbr_a_pdf_triggered()
     if (unrar == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"unrar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"unrar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10245,7 +10579,7 @@ void recoverdrake::on_actionConvertir_cbr_a_pdf_triggered()
         if (imagemagick == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -10338,7 +10672,7 @@ void recoverdrake::on_actionConvertir_cbz_a_pdf_triggered()
     if (unzip == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"unzip\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"unzip\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10346,7 +10680,7 @@ void recoverdrake::on_actionConvertir_cbz_a_pdf_triggered()
         if (imagemagick == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -10440,7 +10774,7 @@ void recoverdrake::on_actionCrear_gif_animados_triggered()
     if (imagemagick == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
     else
@@ -10520,7 +10854,7 @@ void recoverdrake::on_actionPartir_archivos_triggered()
     if (dalle == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dalle\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dalle\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10603,7 +10937,7 @@ void recoverdrake::on_actionUnir_archivos_triggered()
     if (dalle == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dalle\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dalle\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10682,7 +11016,7 @@ void recoverdrake::on_actionExtraer_audio_a_un_video_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10769,7 +11103,7 @@ void recoverdrake::on_actionIncluir_audio_a_un_video_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10852,7 +11186,7 @@ void recoverdrake::on_actionUnir_varios_video_en_uno_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -10936,7 +11270,7 @@ void recoverdrake::on_actionMp3_wma_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11008,7 +11342,7 @@ void recoverdrake::on_actionMp3_wav_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11079,7 +11413,7 @@ void recoverdrake::on_actionMp3_ac3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11150,7 +11484,7 @@ void recoverdrake::on_actionWma_mp3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11221,7 +11555,7 @@ void recoverdrake::on_actionWma_wav_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11292,7 +11626,7 @@ void recoverdrake::on_actionWma_ac3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11363,7 +11697,7 @@ void recoverdrake::on_actionCda_mp3_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11371,7 +11705,7 @@ void recoverdrake::on_actionCda_mp3_triggered()
         if (cdparanoia == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
             else
@@ -11436,7 +11770,7 @@ void recoverdrake::on_actionCda_wma_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11444,7 +11778,7 @@ void recoverdrake::on_actionCda_wma_triggered()
         if (cdparanoia == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
             else
@@ -11509,7 +11843,7 @@ void recoverdrake::on_actionCda_wav_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11517,7 +11851,7 @@ void recoverdrake::on_actionCda_wav_triggered()
         if (cdparanoia == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
             else
@@ -11582,7 +11916,7 @@ void recoverdrake::on_actionCda_ac3_triggered()
     if (zenity == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11590,7 +11924,7 @@ void recoverdrake::on_actionCda_ac3_triggered()
         if (cdparanoia == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
             else
@@ -11654,7 +11988,7 @@ void recoverdrake::on_actionWav_wma_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11725,7 +12059,7 @@ void recoverdrake::on_actionWav_mp3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11798,7 +12132,7 @@ void recoverdrake::on_actionWav_ac3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11871,7 +12205,7 @@ void recoverdrake::on_actionAc3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -11944,7 +12278,7 @@ void recoverdrake::on_actionAc3_mp3_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12017,7 +12351,7 @@ void recoverdrake::on_actionAc3_wav_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12090,7 +12424,7 @@ void recoverdrake::on_actionAvi_HD_avi_Standar_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12164,7 +12498,7 @@ void recoverdrake::on_actionRecodificar_avi_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12239,7 +12573,7 @@ void recoverdrake::on_actionDesempaquetar_matroska_y_convertir_a_avi_triggered()
     if (mkvtoolnix == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mkvtoolnix\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mkvtoolnix\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12247,7 +12581,7 @@ void recoverdrake::on_actionDesempaquetar_matroska_y_convertir_a_avi_triggered()
         if (ffmpeg == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -12329,7 +12663,7 @@ void recoverdrake::on_actionAvi_mpg_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12402,7 +12736,7 @@ void recoverdrake::on_actionAvi_dvd_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12410,7 +12744,7 @@ void recoverdrake::on_actionAvi_dvd_triggered()
         if (dvdauthor == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -12491,7 +12825,7 @@ void recoverdrake::on_actionAVI_WMV_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12564,7 +12898,7 @@ void recoverdrake::on_actionAvi_flv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12637,7 +12971,7 @@ void recoverdrake::on_actionAvi_3gp_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12710,7 +13044,7 @@ void recoverdrake::on_actionAvi_mp4_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12783,7 +13117,7 @@ void recoverdrake::on_actionMpg_avi_2_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12856,7 +13190,7 @@ void recoverdrake::on_actionMpg_dvd_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -12864,7 +13198,7 @@ void recoverdrake::on_actionMpg_dvd_triggered()
         if (dvdauthor == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -12945,7 +13279,7 @@ void recoverdrake::on_actionMPG_WMV_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13018,7 +13352,7 @@ void recoverdrake::on_actionMpg_flv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13091,7 +13425,7 @@ void recoverdrake::on_actionMpg_3gp_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13164,7 +13498,7 @@ void recoverdrake::on_actionMpg_mp4_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13237,7 +13571,7 @@ void recoverdrake::on_actionWmv_avi_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13310,7 +13644,7 @@ void recoverdrake::on_actionWmv_mpg_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13383,7 +13717,7 @@ void recoverdrake::on_actionWmv_dvd_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13391,7 +13725,7 @@ void recoverdrake::on_actionWmv_dvd_triggered()
         if (dvdauthor == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -13472,7 +13806,7 @@ void recoverdrake::on_actionWmv_flv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13545,7 +13879,7 @@ void recoverdrake::on_actionWmv_3gp_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13618,7 +13952,7 @@ void recoverdrake::on_actionWmv_mp4_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13691,7 +14025,7 @@ void recoverdrake::on_actionFlv_avi_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13764,7 +14098,7 @@ void recoverdrake::on_actionFlv_dvd_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13772,7 +14106,7 @@ void recoverdrake::on_actionFlv_dvd_triggered()
         if (dvdauthor == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -13853,7 +14187,7 @@ void recoverdrake::on_actionFlv_wmv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13921,7 +14255,7 @@ void recoverdrake::on_actionFlv_mpg_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -13994,7 +14328,7 @@ void recoverdrake::on_actionFlv_3gp_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14067,7 +14401,7 @@ void recoverdrake::on_actionFlv_mp4_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14140,7 +14474,7 @@ void recoverdrake::on_actionMp4_avi_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14213,7 +14547,7 @@ void recoverdrake::on_actionMp4_mpg_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14286,7 +14620,7 @@ void recoverdrake::on_actionMp4_dvd_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14294,7 +14628,7 @@ void recoverdrake::on_actionMp4_dvd_triggered()
         if (dvdauthor == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -14375,7 +14709,7 @@ void recoverdrake::on_actionMp4_wmv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14448,7 +14782,7 @@ void recoverdrake::on_actionMp4_3gp_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14521,7 +14855,7 @@ void recoverdrake::on_actionMp4_flv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14594,7 +14928,7 @@ void recoverdrake::on_action3gp_mpg_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14667,7 +15001,7 @@ void recoverdrake::on_action3gp_avi_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14740,7 +15074,7 @@ void recoverdrake::on_action3gp_dvd_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14748,7 +15082,7 @@ void recoverdrake::on_action3gp_dvd_triggered()
         if (dvdauthor == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dvdauthor\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -14829,7 +15163,7 @@ void recoverdrake::on_action3gp_wmv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14902,7 +15236,7 @@ void recoverdrake::on_action3gp_flv_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -14975,7 +15309,7 @@ void recoverdrake::on_action3gp_mp4_triggered()
     if (ffmpeg == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15048,7 +15382,7 @@ void recoverdrake::on_actionDvd_avi_2_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15056,7 +15390,7 @@ void recoverdrake::on_actionDvd_avi_2_triggered()
         if (lsdvdDat == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -15145,7 +15479,7 @@ void recoverdrake::on_actionDvd_mpg_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15153,7 +15487,7 @@ void recoverdrake::on_actionDvd_mpg_triggered()
         if (lsdvdDat == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -15161,7 +15495,7 @@ void recoverdrake::on_actionDvd_mpg_triggered()
             if (ffmpeg == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -15255,7 +15589,7 @@ void recoverdrake::on_actionDVD_WMV_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15263,7 +15597,7 @@ void recoverdrake::on_actionDVD_WMV_triggered()
         if (lsdvdDat == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -15271,7 +15605,7 @@ void recoverdrake::on_actionDVD_WMV_triggered()
             if (ffmpeg == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -15365,7 +15699,7 @@ void recoverdrake::on_actionDvd_flv_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15373,7 +15707,7 @@ void recoverdrake::on_actionDvd_flv_triggered()
         if (lsdvdDat == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -15381,7 +15715,7 @@ void recoverdrake::on_actionDvd_flv_triggered()
             if (ffmpeg == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -15475,7 +15809,7 @@ void recoverdrake::on_actionDvd_3gp_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15483,7 +15817,7 @@ void recoverdrake::on_actionDvd_3gp_triggered()
         if (lsdvdDat == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -15491,7 +15825,7 @@ void recoverdrake::on_actionDvd_3gp_triggered()
             if (ffmpeg == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -15585,7 +15919,7 @@ void recoverdrake::on_actionDvd_mp4_triggered()
     if (mencoder == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mencoder\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -15593,7 +15927,7 @@ void recoverdrake::on_actionDvd_mp4_triggered()
         if (lsdvdDat == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lsdvd\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -15601,7 +15935,7 @@ void recoverdrake::on_actionDvd_mp4_triggered()
             if (ffmpeg == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -15957,7 +16291,7 @@ void recoverdrake::on_actionCopiar_iso_a_CD_DVD_triggered()
     if (cdrkit == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrkit\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrkit\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -16033,7 +16367,7 @@ void recoverdrake::on_actionCopiar_CD_DVD_triggered()
     if (cdrkit == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrkit\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdrkit\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -16423,7 +16757,7 @@ void recoverdrake::on_actionAyuda_de_RecoverDrake_triggered()
         if(!existing)
         {
             Conectar();
-            ui->tabWidget->insertTab(Pestanas,ui->tab_50,"Ayuda");
+            ui->tabWidget->insertTab(Pestanas,ui->tab_50,tr("Ayuda"));
             ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/help.png"));
             ui->tabWidget->setCurrentPage(Pestanas);
             Pagina8 = Pestanas;
@@ -16511,7 +16845,7 @@ void recoverdrake::mibFin()
     if (UpDate == 1)
     {
         UpDate = 0;
-        this->ActualizarTodo();
+        this->Actualizar();
     }
 }
 
@@ -16886,7 +17220,9 @@ void recoverdrake::chekar13(bool n)
 void recoverdrake::on_actionSupervisar_visualizacion_previa_en_dolphin_triggered(bool h)
 {
     Refrescar();
-    QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+    QMessageBox m;
+    if (Stilo == "A")
+        m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
     bool opcion8;
     opcion8=ui->actionSupervisar_visualizacion_previa_en_dolphin->isChecked();
     QSettings seting("myorg","Aplica");
@@ -17190,7 +17526,7 @@ void recoverdrake::on_actionActualizar_DB_Virus_triggered()
     if (clamav == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"clamav\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"clamav\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -17240,7 +17576,7 @@ void recoverdrake::on_actionScanear_Virus_2_triggered()
     if (clamav == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"clamav\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"clamav\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -17317,7 +17653,7 @@ void recoverdrake::on_actionBorrar_ficheros_de_Cuarentena_triggered()
     if (clamav == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"clamav\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"clamav\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -17325,7 +17661,7 @@ void recoverdrake::on_actionBorrar_ficheros_de_Cuarentena_triggered()
         if (dolphin == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dolphin\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"dolphin\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -17398,7 +17734,7 @@ void recoverdrake::on_actionListar_logs_de_accesos_triggered()
         if(!existing)
         {
             Conectar();
-            ui->tabWidget->insertTab(Pestanas,ui->tab_51,"Logs de accesos");
+            ui->tabWidget->insertTab(Pestanas,ui->tab_51,tr("Logs de accesos"));
             ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/ojo2.png"));
             ui->tabWidget->setCurrentPage(Pestanas);
             Pagina9 = Pestanas;
@@ -19370,19 +19706,19 @@ void recoverdrake::on_actionUnrar_triggered()
     int respuesta = 0;
     if (Mensaka!="Activo")
     {
-        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Imprescindibles (Compresores): Pack Unrar/Zip/Arj/7Zip")),
-                       QString::fromUtf8(tr("<center><b>Instalar Pack Unrar/Zip/Arj/7Zip</center><p>"
+        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Imprescindibles (Compresores): Pack unrar/zip/arj/p7zip")),
+                       QString::fromUtf8(tr("<center><b>Instalar Pack unrar/zip/arj/p7zip</center><p>"
 
                        "Con esta opcion vamos a instalar paquetes considerados imprescindibles "
                        "para un completo uso de tu sistema operativo.<p>"
 
-                       "En este caso: Pack Unrar/Zip/Arj/7Zip.<p>"
+                       "En este caso: Pack unrar/zip/arj/p7zip.<p>"
 
                        "<B>NOTA: Debes esperar a que termine completamente el "
                        "proceso seleccionado, el cual te sera notificado "
                        "cuando finalice en la consola de procesos.</B><p>"
 
-                       "&iquest;Instalar Pack Unrar/Zip/Arj/7Zip?")), QMessageBox::Ok, QMessageBox::No);
+                       "&iquest;Instalar Pack unrar/zip/arj/p7zip?")), QMessageBox::Ok, QMessageBox::No);
     }
     else
     {
@@ -19391,7 +19727,7 @@ void recoverdrake::on_actionUnrar_triggered()
     if (respuesta == QMessageBox::Ok){
 
         QString cm = QString::fromUtf8(tr("echo Instalando paquetes solicitados..."));
-        QString cmd = "urpmi --fuzzy -a --wget --auto gzip bzip2 tar zip unzip unrar lha p7zip arj unarj zoo unace cabextract";
+        QString cmd = "urpmi --fuzzy -a --wget --auto gzip bzip2 tar zip unzip unrar zoo p7zip arj unarj zoo unace cabextract";
         QStringList comandos;
         comandos<< cm << cmd;
 
@@ -19559,7 +19895,7 @@ void recoverdrake::on_actionTodos_7_triggered()
     if (respuesta == QMessageBox::Ok){
 
         QString cm = QString::fromUtf8(tr("echo Instalando paquetes solicitados..."));
-        QString cmd = "urpmi --fuzzy -a --wget --auto ark gzip bzip2 tar zip unzip unrar lha p7zip arj unarj zoo unace cabextract file-roller xarchiver dalle";
+        QString cmd = "urpmi --fuzzy -a --wget --auto ark gzip bzip2 tar zip unzip unrar zoo p7zip arj unarj zoo unace cabextract file-roller xarchiver dalle";
         QStringList comandos;
         comandos<< cm << cmd;
 
@@ -19685,7 +20021,11 @@ void recoverdrake::on_actionQt_triggered()
     if (respuesta == QMessageBox::Ok){
 
         QString cm = QString::fromUtf8(tr("echo Instalando paquete solicitado..."));
-        QString cmd = "urpmi --fuzzy -a --wget --auto --force libqt4-devel qt-creator qt4-designer qt4-linguist gcc";
+        QString cmd;
+        if (arqt == "x86_64")
+            cmd = "urpmi --fuzzy -a --wget --auto --force lib64qt4-devel qt-creator qt4-designer qt4-linguist gcc";
+        else
+            cmd = "urpmi --fuzzy -a --wget --auto --force libqt4-devel qt-creator qt4-designer qt4-linguist gcc";
         QStringList comandos;
         comandos<< cm << cmd;
 
@@ -19895,9 +20235,19 @@ void recoverdrake::on_actionTodos_8_triggered()
     if (respuesta == QMessageBox::Ok){
 
         QString cm = QString::fromUtf8(tr("echo Instalando paquetes solicitados..."));
-        QString cmd = "urpmi --fuzzy --wget -a --auto task-c-devel task-c++-devel libqt4-devel qt-creator qt4-designer qt4-linguist"
+        QString cmd;
+        if (arqt == "x86_64")
+        {
+            cmd = "urpmi --fuzzy --wget -a --auto task-c-devel task-c++-devel lib64qt4-devel qt-creator qt4-designer qt4-linguist"
+                                  "rpmlint rpm-build spec-helper libtool easyrpmbuilder gcc-gfortran gambas2-ide gambas2-gb-gui "
+                                  "java-1.6.0-sun eclipse netbeans";
+        }
+        else
+        {
+            cmd = "urpmi --fuzzy --wget -a --auto task-c-devel task-c++-devel libqt4-devel qt-creator qt4-designer qt4-linguist"
                       "rpmlint rpm-build spec-helper libtool easyrpmbuilder gcc-gfortran gambas2-ide gambas2-gb-gui "
                       "java-1.6.0-sun eclipse netbeans";
+        }
         QStringList comandos;
         comandos<< cm << cmd;
 
@@ -21070,7 +21420,7 @@ void recoverdrake::on_actionListar_logs_de_comandos_de_shell_triggered()
     if (kwrite == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zenity\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21098,48 +21448,96 @@ void recoverdrake::on_actionListar_logs_de_comandos_de_shell_triggered()
         {
             system("kwrite /home/"+user+"/.bash_history");
         }
-        else{ui->tabWidget->setCurrentPage(pagina);ui->tabWidget_8->setCurrentPage(0);return;}
+        else{
+            ui->tabWidget->setCurrentPage(pagina);
+            ui->tabWidget_8->setCurrentPage(0);
+            return;
+        }
     }
     ui->progressBar->hide();
     ui->pushButton_2->hide();
-    ui->label_13->hide();ui->tabWidget->setCurrentPage(pagina);ui->tabWidget_8->setCurrentPage(0);
+    ui->label_13->hide();
+    ui->tabWidget->setCurrentPage(pagina);
+    ui->tabWidget_8->setCurrentPage(0);
 }
 
 void recoverdrake::on_pushButton_clicked()
 {
     ui->progressBar->setValue(0);
     drakeSistema drake;
-    dist = drake.getDistribucion();
-    arqt = drake.getArquitectura();
-    user = drake.getUser();
-    Tip = drake.getTipKernel();
-    Ver = drake.getVerKernel();
-    Rev = drake.getRevKernel();
-    Dir = drake.getDirActual();
-    Vir = drake.getVirtual();
-    Linux = drake.getLinux();
-    Pci = drake.getPci();
-    Mod = drake.getModulo();
-    du = drake.getEspacio();
-    repo = drake.getRepositorio();
-    red = drake.getRedes();
-    rpm = drake.getRpms();
-    Distro = drake.getDistrop();
-    free = drake.getFree();
-    Total = drake.getDisco();
-    Raiz = drake.getDiscR();
-    Home = drake.getDiscH();
-    ip = drake.getIP();
-    Bios = drake.getBios();
-    release = drake.getRelease();
-    ipRoute = drake.getIPRouter();
-    ipRoute = ipRoute.right(5).remove(" ");
-    MAC = drake.getMAC(ipRoute);
-    infoPro = drake.getInfoPro();
-    Home=Home.right(10).left(3).remove("%");
-    Raiz=Raiz.right(6).left(3).remove("%");
-    Resolution = drake.getResolucion();
-    Resolution = Resolution.replace("minimum","Min.").replace("current","Actual").replace("maximum","Max.").remove("Screen 0:");
+    setUpdatesEnabled(false);
+    QProgressDialog progress(tr("Refrescando datos... Espera por favor"), tr("Cancelar"), 0, 26, this);
+    progress.show();
+    for(i=0;i<26;i++)
+    {
+        qApp->processEvents();
+        progress.setValue(i);
+        if (progress.wasCanceled())
+            break;
+        if (i==0)
+            dist = drake.getDistribucion();
+        if (i==1)
+            arqt = drake.getArquitectura();
+        if (i==2)
+            user = drake.getUser();
+        if (i==3)
+            Tip = drake.getTipKernel();
+        if (i==4)
+            Ver = drake.getVerKernel();
+        if (i==5)
+            Rev = drake.getRevKernel();
+        if (i==6)
+            Dir = drake.getDirActual();
+        if (i==7)
+            Vir = drake.getVirtual();
+        if (i==8)
+            Linux = drake.getLinux();
+        if (i==9)
+            Pci = drake.getPci();
+        if (i==10)
+            Mod = drake.getModulo();
+        if (i==11)
+            du = drake.getEspacio();
+        if (i==12)
+            repo = drake.getRepositorio();
+        if (i==13)
+            red = drake.getRedes();
+        if (i==14)
+            rpm = drake.getRpms();
+        if (i==15)
+            Distro = drake.getDistrop();
+        if (i==16)
+            free = drake.getFree();
+        if (i==17)
+            Total = drake.getDisco();
+        if (i==18)
+            Raiz = drake.getDiscR();
+        if (i==19)
+            Home = drake.getDiscH();
+        if (i==20)
+            ip = drake.getIP();
+        if (i==21)
+            Bios = drake.getBios();
+        if (i==22)
+            release = drake.getRelease();
+        if (i==23)
+        {
+            ipRoute = drake.getIPRouter();
+            ipRoute = ipRoute.right(5).remove(" ");
+            MAC = drake.getMAC(ipRoute);
+        }
+        if (i==24)
+        {
+            infoPro = drake.getInfoPro();
+            Home=Home.right(10).left(3).remove("%");
+            Raiz=Raiz.right(6).left(3).remove("%");
+        }
+        if (i==25)
+        {
+            Resolution = drake.getResolucion();
+            Resolution = Resolution.replace("minimum","Min.").replace("current","Actual").replace("maximum","Max.").remove("Screen 0:");
+        }
+    }
     this->ui->textEdit_9->setText(QString::fromUtf8(rpm));
     this->ui->textEdit_6->setText(QString::fromUtf8(du));
     this->ui->lineEdit->setText(QString::fromUtf8(user));
@@ -21170,18 +21568,19 @@ void recoverdrake::on_pushButton_clicked()
             this->ui->label_22->setText(""+ipRoute+" / "+Essid+"");
     }
     else if (ipRoute == "")
-    {
         this->ui->label_22->setText(tr("Utilizando Ethernet"));
-    }
     if (ip == "")
-    {
         this->ui->label_19->setText(tr("Sin Acceso a Red"));
-    }
     else if (ip != "")
-    {
         this->ui->label_19->setText(QString::fromUtf8(ip));
+    else
+    {
+        ui->tabWidget->setCurrentPage(pagina);
+        ui->tabWidget_8->setCurrentPage(0);
+        return;
     }
-    else{ui->tabWidget->setCurrentPage(pagina);ui->tabWidget_8->setCurrentPage(0);return;}
+    progress.setValue(26);
+    setUpdatesEnabled(true);
 }
 
 QString recoverdrake::getPack()
@@ -21196,7 +21595,6 @@ QString recoverdrake::getPack()
         return QString("");
     procesoRPM->waitForFinished();
     Paquete = QString(procesoRPM->readAllStandardOutput());
-    procesoRPM->waitForFinished();
     delete procesoRPM;
     QString res =  QString(Paquete);
     res.chop(1);
@@ -21215,7 +21613,6 @@ QString recoverdrake::getRpm(QString Valor)
         return QString("");
     procesoRPM->waitForFinished();
     Paquete = QString(procesoRPM->readAllStandardOutput());
-    procesoRPM->waitForFinished();
     delete procesoRPM;
     QString res =  QString(Paquete);
     res.chop(1);
@@ -21272,7 +21669,7 @@ void recoverdrake::on_actionImg_iso_triggered()
     if (ccd2iso == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ccd2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ccd2iso\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21341,7 +21738,7 @@ void recoverdrake::on_actionCdi_iso_triggered()
     if (cdi2iso == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdi2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"cdi2iso\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21408,7 +21805,7 @@ void recoverdrake::on_actionMdf_iso_triggered()
     if (mdf2iso == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mdf2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mdf2iso\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21475,7 +21872,7 @@ void recoverdrake::on_actionNrg_iso_triggered()
     if (nrg2iso == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"nrg2iso\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"nrg2iso\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21741,7 +22138,7 @@ void recoverdrake::on_actionEtiquetado_de_mp3_triggered()
         QMessageBox m;
         if (Stilo == "A")
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"id3lib\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"id3lib\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21752,7 +22149,7 @@ void recoverdrake::on_actionEtiquetado_de_mp3_triggered()
             QMessageBox m;
             if (Stilo == "A")
                 m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"id3v2\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"id3v2\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -21793,7 +22190,7 @@ void recoverdrake::on_actionEtiquetado_de_mp3_triggered()
                     {
                         Conectar();
                         mp3=new id3mp3(this);
-                        ui->tabWidget->insertTab(Pestanas,ui->tab_66,"Etiquetador");
+                        ui->tabWidget->insertTab(Pestanas,ui->tab_66,tr("Etiquetador"));
                         ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/etiqueta.png"));
                         ui->tabWidget->setCurrentPage(Pestanas);
                         Pagina20 = Pestanas;
@@ -21842,7 +22239,7 @@ void recoverdrake::on_actionSupervisar_red_privada_triggered()
     if (nmap == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"nmap\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"nmap\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -21850,7 +22247,7 @@ void recoverdrake::on_actionSupervisar_red_privada_triggered()
         if (iptables == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"iptables\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"iptables\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -22609,7 +23006,7 @@ void recoverdrake::on_actionListar_logs_de_sucesos_triggered()
     if (kwrite == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"kwrite\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"kwrite\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -22739,9 +23136,19 @@ void recoverdrake::on_actionQT_Linguist_no_encuentra_los_programas_triggered()
      if (respuesta == QMessageBox::Ok)
      {
         QString cm =QString::fromUtf8(tr("echo Corrigiendo fallos de enlaces a QT-Linguist..."));
-        QString cm1= "ln -s /usr/lib/qt4/bin/lconvert /usr/bin/";
-        QString cm2= "ln -s /usr/lib/qt4/bin/lrelease /usr/bin/";
-        QString cm3= "ln -s /usr/lib/qt4/bin/lupdate /usr/bin/";
+        QString cm1,cm2,cm3;
+        if (arqt == "x86_64")
+        {
+            cm1= "ln -s /usr/lib64/qt4/bin/lconvert /usr/bin/";
+            cm2= "ln -s /usr/lib64/qt4/bin/lrelease /usr/bin/";
+            cm3= "ln -s /usr/lib64/qt4/bin/lupdate /usr/bin/";
+        }
+        else
+        {
+            cm1= "ln -s /usr/lib/qt4/bin/lconvert /usr/bin/";
+            cm2= "ln -s /usr/lib/qt4/bin/lrelease /usr/bin/";
+            cm3= "ln -s /usr/lib/qt4/bin/lupdate /usr/bin/";
+        }
         QString cm4 =QString::fromUtf8(tr("echo Fallos de enlaces corregidos"));
         comandos<< cm << cm1 << cm2 << cm3 << cm4;
 
@@ -22792,7 +23199,7 @@ void recoverdrake::on_actionMantenimiento_de_rpm_s_triggered()
             {
                 Conectar();
                 rpmSet = new Mrpm;
-                ui->tabWidget->insertTab(Pestanas,ui->tab_62,"Generar/Recuperar rpms");
+                ui->tabWidget->insertTab(Pestanas,ui->tab_62,tr("Generar/Recuperar rpms"));
                 ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/System.png"));
                 ui->tabWidget->setCurrentPage(Pestanas);
                 Pagina16 = Pestanas;
@@ -22857,7 +23264,7 @@ void recoverdrake::on_actionActualizar_sistema_interactivo_triggered()
             {
                 Conectar();
                 Actualiza = new Update;
-                ui->tabWidget->insertTab(Pestanas,ui->tab_52,"Actualizar Sistema");
+                ui->tabWidget->insertTab(Pestanas,ui->tab_52,tr("Actualizar Sistema"));
                 ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/luparpm.png"));
                 ui->tabWidget->setCurrentPage(Pestanas);
                 Pagina11 = Pestanas;
@@ -22917,7 +23324,7 @@ void recoverdrake::on_actionEliminiar_Recuperar_paquetes_huerfanos_interactivo_t
             {
                 Conectar();
                 huerfanos = new orphans;
-                ui->tabWidget->insertTab(Pestanas,ui->tab_61,"Huerfanos");
+                ui->tabWidget->insertTab(Pestanas,ui->tab_61,tr("Huerfanos"));
                 ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/huerfano.png"));
                 ui->tabWidget->setCurrentPage(Pestanas);
                 Pagina15 = Pestanas;
@@ -22975,7 +23382,7 @@ void recoverdrake::on_actionMantenimiento_de_rpm_s_instalados_Interactivo_trigge
             {
                 Conectar();
                 Irpm = new rpminst;
-                ui->tabWidget->insertTab(Pestanas,ui->tab_59,"Mantenimiento");
+                ui->tabWidget->insertTab(Pestanas,ui->tab_59,tr("Mantenimiento"));
                 ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/rpm.png"));
                 ui->tabWidget->setCurrentPage(Pestanas);
                 Pagina13 = Pestanas;
@@ -23034,7 +23441,7 @@ void recoverdrake::on_actionTratamiento_de_Nucleos_Kernel_Interactivo_triggered(
             {
                 Conectar();
                 Irpm = new rpminst;
-                ui->tabWidget->insertTab(Pestanas,ui->tab_60,"Kernels");
+                ui->tabWidget->insertTab(Pestanas,ui->tab_60,tr("Kernels"));
                 ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/drakhard-mdk.png"));
                 ui->tabWidget->setCurrentPage(Pestanas);
                 Pagina14 = Pestanas;
@@ -23091,7 +23498,7 @@ void recoverdrake::on_actionMantenimiento_de_repositorios_Interactivo_triggered(
             {
                 Conectar();
                 urpminst = new urpmi;
-                ui->tabWidget->insertTab(Pestanas,ui->tab_58,"Repositorios");
+                ui->tabWidget->insertTab(Pestanas,ui->tab_58,tr("Repositorios"));
                 ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/repo.png"));
                 ui->tabWidget->setCurrentPage(Pestanas);
                 Pagina12 = Pestanas;
@@ -23121,7 +23528,7 @@ void recoverdrake::on_actionCrear_iconos_triggered()
     if (imagemagick == "0")
     {
        QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-       m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+       m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"imagemagick\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
        m.exec();
     }
     else
@@ -23228,7 +23635,7 @@ void recoverdrake::on_actionConversor_de_formatos_de_video_Interactivo_triggered
                     {
                         Conectar();
                         convert = new Conversor;
-                        ui->tabWidget->insertTab(Pestanas,ui->tab_34,"Conversor de Video");
+                        ui->tabWidget->insertTab(Pestanas,ui->tab_34,tr("Conversor de Video"));
                         ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/multimedia.png"));
                         ui->tabWidget->setCurrentPage(Pestanas);
                         Pagina5 = Pestanas;
@@ -23297,38 +23704,42 @@ void recoverdrake::on_actionEliminar_corrupcion_en_DB_triggered()
     int respuesta = 0;
     QStringList comandos;
     if (Mensaka!="Activo")
-        {
-            respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Eliminar corrupcion en DB rpm")),
-                           QString::fromUtf8(tr("<center><b>Eliminar corrupcion en DB rpm</center><p>"
-
-                           "Puede que al intentar actualizar el equipo no te deje por un problema de corrupcion "
-                           "de la base de datos de los rpms instalados y que no deja ni siquiera reconstruirla, por lo que "
-                           "es necesario aplicar esta funcion para poder repararla.<p>"
-
-                           "&iquest;Eliminar corrupcion en DB rpm?")), QMessageBox::Ok, QMessageBox::No);
-        }
+    {
+        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Eliminar corrupcion en DB rpm")),
+                       QString::fromUtf8(tr("<center><b>Eliminar corrupcion en DB rpm</center><p>"
+                       "Puede que al intentar actualizar el equipo no te deje por un problema de corrupcion "
+                       "de la base de datos de los rpms instalados y que no deja ni siquiera reconstruirla, por lo que "
+                       "es necesario aplicar esta funcion para poder repararla.<p>"
+                       "&iquest;Eliminar corrupcion en DB rpm?")), QMessageBox::Ok, QMessageBox::No);
+    }
     else
-        {
             respuesta=QMessageBox::Ok;
-        }
     if (respuesta == QMessageBox::Ok)
-        {
-           system("rm -vrf /var/lib/rpm/__db.0*");
-           QString cm1=QString::fromUtf8(tr("echo Eliminando problema de corrupcion..."));
-           QString cm3=QString::fromUtf8(tr("echo Problema eliminado."));
-           QString cm4=QString::fromUtf8(tr("echo Reconstruyendo DB, puede demorarse un tiempo..."));
-           QString cm5= "rpm --rebuilddb";
-           QString cm6=QString::fromUtf8(tr("echo Reconstruccion de DB realizada."));
-           comandos << cm1 << cm3 << cm4 << cm5 << cm6;
-           if (mib != 0)
-           delete mib;
-           mib = new DrakeProcesos(comandos, this);
-           connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
-           connect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
-           connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
-           int valor= comandos.count(); mib->Valor(valor,0); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
-        }
-        else{ui->tabWidget->setCurrentPage(pagina);ui->tabWidget_8->setCurrentPage(0);return;}
+    {
+       system("rm -vrf /var/lib/rpm/__db.0*");
+       QString cm1=QString::fromUtf8(tr("echo Eliminando problema de corrupcion..."));
+       QString cm3=QString::fromUtf8(tr("echo Problema eliminado."));
+       QString cm4=QString::fromUtf8(tr("echo Reconstruyendo DB, puede demorarse un tiempo..."));
+       QString cm5= "rpm --rebuilddb";
+       QString cm6=QString::fromUtf8(tr("echo Reconstruccion de DB realizada."));
+       comandos << cm1 << cm3 << cm4 << cm5 << cm6;
+       if (mib != 0)
+       delete mib;
+       mib = new DrakeProcesos(comandos, this);
+       connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
+       connect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
+       connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
+       int valor= comandos.count();
+       mib->Valor(valor,0);
+       mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+       mib->iniciarProceso();
+    }
+    else
+    {
+        ui->tabWidget->setCurrentPage(pagina);
+        ui->tabWidget_8->setCurrentPage(0);
+        return;
+    }
 }
 
 void recoverdrake::on_actionInsertar_subtitulos_a_video_triggered()
@@ -23359,7 +23770,9 @@ void recoverdrake::on_actionInsertar_subtitulos_a_video_triggered()
     ui->progressBar->hide();
     ui->pushButton_2->hide();
     ui->label_13->hide();
-    ui->tabWidget->setCurrentPage(pagina);ui->tabWidget_8->setCurrentPage(0);return;
+    ui->tabWidget->setCurrentPage(pagina);
+    ui->tabWidget_8->setCurrentPage(0);
+    return;
 }
 
 void recoverdrake::cambiaFila(QModelIndex actual)
@@ -23375,7 +23788,7 @@ void recoverdrake::cambiaFila(QModelIndex actual)
         Titulo=index.data().toString();
         index=ui->tableView->model()->index(ActualRow,2);
         Tags=index.data().toString();
-        this->filaAudio=ActualRow;
+        filaAudio=ActualRow+1;
         ui->tableView->scrollTo(index);
         ui->tableView->resizeRowsToContents();
         ui->tableView->resizeColumnsToContents();
@@ -23448,7 +23861,7 @@ void recoverdrake::cambiaFila(QModelIndex actual)
         QString PTrack = Track.value(0);
         QString TTrack = Track.value(1);
         ui->lineEdit_29->setText(QString::fromUtf8(PTrack));
-        ui->lineEdit_27->setText(QString::fromUtf8(TTrack));
+        ui->lineEdit_27->setText(QString::fromUtf8(TTrack));        
     }
 }
 
@@ -23519,22 +23932,9 @@ void recoverdrake::on_pushButton_4_clicked()
     if (ui->tableView->model()->rowCount() != 0)
     {
         int Posicion = ui->tableView->model()->rowCount();
-        mediaObject->clear();
-        sources.clear();
-        QString activo1;       
-        int index = sources.size();        
-        QSqlQuery Variable(dbs);
-        Variable.exec("SELECT Ruta FROM Musica");
-        while(Variable.next())
-        {
-            activo1 = Variable.value(0).toString();
-            Phonon::MediaSource source(activo1);
-            sources.append(source);
-            mediaObject->setCurrentSource(sources.at(index));
-        }
         QSqlQuery Cancion(dbs);
         Cancion.exec("SELECT Posicion FROM Cancion WHERE id=1");
-        Cancion.first();        
+        Cancion.first();
         int cantidad=Cancion.value(0).toInt();
         if (cantidad < 0 || cantidad > Posicion)
         {
@@ -23543,14 +23943,14 @@ void recoverdrake::on_pushButton_4_clicked()
         }
         else
         {
-            mediaObject->setCurrentSource(sources[cantidad]);
-            ui->tableView->selectRow(cantidad);
+            mediaObject->setCurrentSource(sources[cantidad-1]);
         }
         play();
     }
     else
     {
-        QMessageBox m; if (Stilo == "A")
+        QMessageBox m;
+        if (Stilo == "A")
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
         m.setText(tr("No hay nada en la lista. Inserta algun fichero de musica."));
         m.exec();
@@ -23574,9 +23974,7 @@ void recoverdrake::play()
     ui->pushButton_7->setEnabled(true);
     ui->pushButton_8->setEnabled(true);   
     ui->seekSlider->setMediaObject(mediaObject);
-    //ui->seekSlider->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
     ui->volumeSlider->setAudioOutput(audioOutput);
-    //ui->volumeSlider->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
     timeSound->start(1000);
     this->oyendo();
 }
@@ -23587,7 +23985,7 @@ int recoverdrake::randInt(int low, int high)
     }
 
 void recoverdrake::siguiente()
-{
+{    
     int index;
     if (Ramdom == 1)
     {
@@ -23606,22 +24004,19 @@ void recoverdrake::siguiente()
         ui->tableView->selectRow(index);
         ui->lcdNumber_2->display("00:00:00");
         play();
-    }
+    }    
 }
 
 void recoverdrake::oyendo()
 {
     if (ActualRow >= 0)
     {
-        QSqlQuery Cancion(dbs);
-        Cancion.exec("SELECT Posicion FROM Cancion WHERE id=1");
-        Cancion.first();
         QSqlRecord record= Model2->record(0);
         record.setValue(0,1);
-        record.setValue(1,ActualRow);
+        record.setValue(1,filaAudio);
         Model2->setRecord(0,record);
         Model2->submitAll();
-        trayIcon->showMessage("Escuchando...",QString::fromUtf8(""+Titulo+""),QSystemTrayIcon::Information, 4000);
+        trayIcon->showMessage(tr("Escuchando..."),QString::fromUtf8(""+Titulo+""),QSystemTrayIcon::Information, 4000);
     }
 }
 
@@ -23662,6 +24057,7 @@ void recoverdrake::on_pushButton_6_clicked()
         ui->pushButton_6->setEnabled(true);
         ui->pushButton_7->setEnabled(true);
         ui->pushButton_8->setEnabled(true);
+        trayIcon->showMessage(tr("Continuando... "),QString::fromUtf8(""+Titulo+""),QSystemTrayIcon::Information, 4000);
     }
     else
     {
@@ -23672,6 +24068,7 @@ void recoverdrake::on_pushButton_6_clicked()
         ui->pushButton_6->setEnabled(true);
         ui->pushButton_7->setEnabled(false);
         ui->pushButton_8->setEnabled(false);
+        trayIcon->showMessage(tr("Pausando... "),QString::fromUtf8(""+Titulo+""),QSystemTrayIcon::Information, 4000);
     }
 }
 
@@ -23683,39 +24080,16 @@ void recoverdrake::on_pushButton_5_clicked()
     ui->pushButton_6->setEnabled(false);
     timeSound->stop();
     ui->lcdNumber_2->display("00:00:00");
-    if (ui->tableView->model()->rowCount() != 0)
+    if (ui->tableView->model()->rowCount() > 0)
     {
-        int Posicion = ui->tableView->model()->rowCount();
-        QSqlQuery Cancion(dbs);
-        Cancion.exec("SELECT Posicion FROM Cancion WHERE id=1");
-        Cancion.first();
-        int cantidad=Cancion.value(0).toInt();
-        if (cantidad < 0 || cantidad > Posicion)
-        {
-            QSqlQuery Cancion(dbs);
-            Cancion.exec("SELECT Posicion FROM Cancion WHERE id=1");
-            Cancion.first();
-            QSqlRecord record= Model2->record(0);
-            record.setValue(0,1);
-            record.setValue(1,0);
-            Model2->setRecord(0,record);
-            Model2->submitAll();
-            ui->label_31->setText(tr("Ultima cancion escuchada... ")+QString::number(1)+"");
-        }
-        else
-        {
-
-            QString Actual = QString::number(cantidad+1);
-            QSqlQuery Cancion(dbs);
-            Cancion.exec("SELECT Posicion FROM Cancion WHERE id=1");
-            Cancion.first();
-            QSqlRecord record= Model2->record(0);
-            record.setValue(0,1);
-            record.setValue(1,Actual.toInt()-1);
-            Model2->setRecord(0,record);
-            Model2->submitAll();
-            ui->label_31->setText(tr("Ultima cancion escuchada... ")+Actual+"");
-        }
+        QSqlRecord record= Model2->record(0);
+        record.setValue(0,1);
+        record.setValue(1,filaAudio);
+        Model2->setRecord(0,record);
+        Model2->submitAll();
+        ui->label_31->setText(tr("Ultima cancion escuchada... ")+QString::number(filaAudio)+"");
+        if (Parando == 1)
+            trayIcon->showMessage(tr("Parado: "),QString::fromUtf8(""+Titulo+""),QSystemTrayIcon::Information, 4000);
     }
     else
     {
@@ -23731,23 +24105,26 @@ void recoverdrake::tableClicked()
     mediaObject->clearQueue();
     if (ActualRow >= sources.size())
     {
-        ui->tabWidget->setCurrentPage(pagina);ui->tabWidget_8->setCurrentPage(0);
+        ui->tabWidget->setCurrentPage(pagina);
+        ui->tabWidget_8->setCurrentPage(0);
         return;
     }
     mediaObject->setCurrentSource(sources[ActualRow]);
     if (wasPlaying)
     {
-        ui->tableView->selectRow(ActualRow);        
+        ui->tableView->selectRow(ActualRow);
         play();
     }
     else
     {
+        Parando = 0;
         on_pushButton_5_clicked();
+        Parando = 1;
     }
 }
 
 void recoverdrake::sourceChanged(const Phonon::MediaSource &source)
-{    
+{
     ui->tableView->selectRow(sources.indexOf(source));
     ui->lcdNumber_2->display("00:00:00");
     QString Actual;
@@ -23756,7 +24133,8 @@ void recoverdrake::sourceChanged(const Phonon::MediaSource &source)
 }
 
 void recoverdrake::on_pushButton_7_clicked()
-{   
+{
+    bool wasPlaying = mediaObject->state() == Phonon::PlayingState;
     int row;
     if (Ramdom == 1)
     {
@@ -23774,12 +24152,16 @@ void recoverdrake::on_pushButton_7_clicked()
         mediaObject->setCurrentSource(sources[row]);
         ui->tableView->selectRow(row);
         ui->lcdNumber_2->display("00:00:00");        
+    }
+    if (wasPlaying)
+    {
         play();
     }
 }
 
 void recoverdrake::on_pushButton_8_clicked()
 {
+    bool wasPlaying = mediaObject->state() == Phonon::PlayingState;
     int row;
     if (Ramdom == 1)
     {
@@ -23799,8 +24181,11 @@ void recoverdrake::on_pushButton_8_clicked()
             mediaObject->setCurrentSource(sources[row]);
             ui->tableView->selectRow(row);
             ui->lcdNumber_2->display("00:00:00");            
-            play();
         }
+    }
+    if (wasPlaying)
+    {
+        play();
     }
 }
 
@@ -23825,7 +24210,6 @@ void recoverdrake::keyPressEvent( QKeyEvent* e )
 
 void recoverdrake::on_pushButton_16_clicked()
 {
-
     if (Ramdom == 1)
     {
         Ramdom = 0;
@@ -23843,9 +24227,7 @@ void recoverdrake::on_pushButton_17_clicked()
     int respuesta = 0;
     respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Borrado de lista de reproduccion")),
                            QString::fromUtf8(tr("<center><b>Borrado de lista de reproduccion<b></center><p>"
-
                            "Se borrara toda la lista de favoritos.</B><p>"
-
                            "&iquest;Estas seguro de borrar la lista?")), QMessageBox::Ok, QMessageBox::No);
     if (respuesta == QMessageBox::Ok)
     {
@@ -23874,7 +24256,7 @@ void recoverdrake::cambiaFilaRadio(QModelIndex actual)
     index=ui->tableView_3->model()->index(ActualRowRadio,2);
     index=ui->tableView_3->model()->index(ActualRowRadio,3);
     Emisora = index.data().toString();
-    this->filaAudioRadio=ActualRowRadio;
+    filaAudioRadio=ActualRowRadio+1;
     ui->tableView_3->resizeRowsToContents();
     ui->tableView_3->resizeColumnsToContents();
 }
@@ -23886,15 +24268,17 @@ void recoverdrake::tableClickedRadio()
     mediaObject->clear();
     ui->tableView->selectRow(ActualRowRadio);
     mediaObject->setCurrentSource(Emisora);
-    QSqlQuery Cancion(dbs);
-    Cancion.exec("SELECT Posicion FROM PosRadio WHERE id=1");
-    Cancion.first();
-    QSqlRecord record= Model2->record(0);
-    record.setValue(0,1);
-    record.setValue(1,ActualRowRadio);
-    Model2->setRecord(0,record);
-    Model2->submitAll();
-    playRadio();
+    this->Threading();
+}
+
+void recoverdrake::Threading()
+{
+    *future = QtConcurrent::run(this, &recoverdrake::playRadio);
+    watcher->setFuture(*future);
+    if ( future->isFinished())
+    {}
+    else
+      future->cancel();
 }
 
 void recoverdrake::on_pushButton_27_clicked()
@@ -23964,33 +24348,42 @@ void recoverdrake::on_pushButton_27_clicked()
 
 void recoverdrake::on_pushButton_20_clicked()
 {
-    int Borrado, x, Total, Parcial;
-    Parcial=0;
-    Borrado = ui->tableView_3->model()->rowCount();
-    Total=Borrado;
-    setUpdatesEnabled(false);
-    QProgressDialog progress("Borrando lista... Espera por favor", "Cancelar", 0, Total, this);    
-    progress.show();
-    for(x=0;x<Borrado;x++)
-    {        
-        Parcial = Parcial+1;
-        progress.setValue(Parcial);
-        if (progress.wasCanceled())
-            break;
-        ui->tableView_3->model()->removeRow(x);
-        x=x-1;
-        Borrado=Borrado-1;
+    int respuesta = 0;
+    respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Borrado de lista de emisoras")),
+                QString::fromUtf8(tr("<center><b>Borrar lista de emisoras</center><p>"
+                "Vas a proceder al borrado completo de la lista de emisoras de radio, tanto "
+                "las predefinidas, como las posteriores.<p>"
+                "&iquest;Borrar lista?")), QMessageBox::Ok, QMessageBox::No);
+    if (respuesta == QMessageBox::Ok)
+    {
+        int Borrado, x, Total, Parcial;
+        Parcial=0;
+        Borrado = ui->tableView_3->model()->rowCount();
+        Total=Borrado;
+        setUpdatesEnabled(false);
+        QProgressDialog progress("Borrando lista... Espera por favor", "Cancelar", 0, Total, this);
+        progress.show();
+        for(x=0;x<Borrado;x++)
+        {
+            Parcial = Parcial+1;
+            progress.setValue(Parcial);
+            if (progress.wasCanceled())
+                break;
+            ui->tableView_3->model()->removeRow(x);
+            x=x-1;
+            Borrado=Borrado-1;
+        }
+        progress.setValue(Total);
+        setUpdatesEnabled(true);
+        QSqlQuery Cancion(dbs);
+        Cancion.exec("SELECT Posicion FROM PosRadio WHERE id=1");
+        Cancion.first();
+        QSqlRecord record= Model4->record(0);
+        record.setValue(0,1);
+        record.setValue(1,0);
+        Model4->setRecord(0,record);
+        Model4->submitAll();
     }
-    progress.setValue(Total);
-    setUpdatesEnabled(true);
-    QSqlQuery Cancion(dbs);
-    Cancion.exec("SELECT Posicion FROM PosRadio WHERE id=1");
-    Cancion.first();
-    QSqlRecord record= Model4->record(0);
-    record.setValue(0,1);
-    record.setValue(1,0);
-    Model4->setRecord(0,record);
-    Model4->submitAll();
 }
 
 void recoverdrake::on_pushButton_24_clicked()
@@ -24002,9 +24395,9 @@ void recoverdrake::on_pushButton_24_clicked()
         Cancion.exec("SELECT Posicion FROM PosRadio WHERE id=1");
         Cancion.first();
         int cantidad=Cancion.value(0).toInt();
-        ui->tableView_3->selectRow(cantidad);
+        ui->tableView_3->selectRow(cantidad-1);
         mediaObject->setCurrentSource(Emisora);
-        this->playRadio();
+        this->Threading();
     }
     else
     {
@@ -24023,13 +24416,10 @@ void recoverdrake::on_pushButton_24_clicked()
 }
 
 void recoverdrake::playRadio()
-{
-    QSqlQuery Cancion(dbs);
-    Cancion.exec("SELECT Posicion FROM PosRadio WHERE id=1");
-    Cancion.first();
+{    
     QSqlRecord record= Model4->record(0);
     record.setValue(0,1);
-    record.setValue(1,ActualRowRadio);
+    record.setValue(1,filaAudioRadio);
     Model4->setRecord(0,record);
     Model4->submitAll();
     mediaObject->play();
@@ -24094,7 +24484,7 @@ void recoverdrake::on_pushButton_25_clicked()
        record.setValue(1,row);
        Model4->setRecord(0,record);
        Model4->submitAll();
-       playRadio();
+       this->Threading();
     }
 }
 
@@ -24117,7 +24507,7 @@ void recoverdrake::on_pushButton_22_clicked()
        record.setValue(1,row);
        Model4->setRecord(0,record);
        Model4->submitAll();
-       playRadio();
+       this->Threading();
     }
 }
 
@@ -24268,7 +24658,7 @@ void recoverdrake::on_actionConversor_de_formatos_de_Audio_Interactivo_triggered
                 {
                     Conectar();
                     convAudio = new ConvAudio;
-                    ui->tabWidget->insertTab(Pestanas,ui->tab_33,"Conversor de Audio");
+                    ui->tabWidget->insertTab(Pestanas,ui->tab_33,tr("Conversor de Audio"));
                     ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/audio.png"));
                     ui->tabWidget->setCurrentPage(Pestanas);
                     Pagina4 = Pestanas;
@@ -24357,7 +24747,7 @@ void recoverdrake::on_actionGenerar_Ficheros_Multi_Idioma_triggered()
         QMessageBox m;
         if (Stilo == "A")
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \""+Valor+"\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \""+Valor+"\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -24407,7 +24797,7 @@ void recoverdrake::on_actionAcceder_a_la_traduccion_QT_Linguist_triggered()
         QMessageBox m;
         if (Stilo == "A")
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"qt4-linguist\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"qt4-linguist\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -24447,11 +24837,13 @@ void recoverdrake::on_pushButton_9_clicked()
     {
         ui->groupBox_4->show();
         ui->pushButton_9->setText(tr("Ocultar \"Caracteristicas especificas de tu sistema GNU/Linux\""));
+        RX = 1;
     }
     else
     {
         ui->groupBox_4->hide();
         ui->pushButton_9->setText(tr("Mostrar \"Caracteristicas especificas de tu sistema GNU/Linux\""));
+        RX = 0;
     }
 }
 
@@ -24498,8 +24890,8 @@ void recoverdrake::on_pushButton_11_clicked()
         ui->tableView->setColumnHidden(2, true);
         ui->pushButton_11->setText(tr("Mostrar ruta"));
     }
-    ui->tableView->resizeRowsToContents();
     ui->tableView->resizeColumnsToContents();
+    ui->tableView->resizeRowsToContents();    
 }
 
 void recoverdrake::on_pushButton_12_clicked()
@@ -25316,7 +25708,7 @@ void recoverdrake::on_pushButton_49_clicked()
         if (firefox == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"firefox\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"firefox\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
             ui->tabWidget->setCurrentPage(pagina);ui->tabWidget_8->setCurrentPage(0);return;
         }
@@ -25360,7 +25752,7 @@ void recoverdrake::on_actionCrear_USB_Live_Multiboot_Interactivo_triggered()
     if (fileroller == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"file-roller\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"file-roller\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -25368,7 +25760,7 @@ void recoverdrake::on_actionCrear_USB_Live_Multiboot_Interactivo_triggered()
         if (mtools == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mtools\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"mtools\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -25607,7 +25999,7 @@ void recoverdrake::on_actionProbar_USB_Live_triggered()
     if (qemu == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"qemu\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"qemu\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -25687,7 +26079,7 @@ void recoverdrake::on_actionEjercicios_practicos_triggered()
                  {
                      Conectar();
                      test = new examen;
-                     ui->tabWidget->insertTab(Pestanas,ui->tab_40,"Ejercicios practicos");
+                     ui->tabWidget->insertTab(Pestanas,ui->tab_40,tr("Ejercicios practicos"));
                      ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/libro.png"));
                      ui->tabWidget->setCurrentPage(Pestanas);
                      Pagina7 = Pestanas;
@@ -25716,7 +26108,7 @@ void recoverdrake::on_actionBuscador_triggered()
         if (gcstar == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"gcstar\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"gcstar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -25758,8 +26150,8 @@ void recoverdrake::on_actionBuscador_triggered()
                      {
                          Conectar();
                          buscar = new Busca;
-                         ui->tabWidget->insertTab(Pestanas,ui->tab_32,"Buscador");
-                         ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/lupaO.png"));
+                         ui->tabWidget->insertTab(Pestanas,ui->tab_32,tr("Buscador"));
+                         ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/Buscar.png"));
                          ui->tabWidget->setCurrentPage(Pestanas);
                          Pagina3 = Pestanas;
                          ui->mdiArea_3->addSubWindow(buscar);
@@ -26082,18 +26474,29 @@ void recoverdrake::on_actionPhonon_no_es_reconocido_por_programas_basados_en_QT_
     if (respuesta == QMessageBox::Ok)
     {
         QString cm =QString::fromUtf8(tr("echo Corrigiendo fallos de enlaces a phonon..."));
-        QString cm1= "ln -sf /usr/lib/kde4/plugins/phonon_backend /usr/lib/qt4/plugins/phonon_backend";
+        QString cm1;
+        if (arqt == "x86_64")
+            cm1= "ln -sf /usr/lib64/kde4/plugins/phonon_backend /usr/lib64/qt4/plugins/phonon_backend";
+        else
+            cm1= "ln -sf /usr/lib/kde4/plugins/phonon_backend /usr/lib/qt4/plugins/phonon_backend";
         comandos<< cm << cm1;
-
         if (mib != 0)
             delete mib;
         mib = new DrakeProcesos(comandos, this);
         connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
         connect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
         connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
-        int valor= comandos.count(); mib->Valor(valor,0); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
+        int valor= comandos.count();
+        mib->Valor(valor,0);
+        mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+        mib->iniciarProceso();
     }
-    else{ui->tabWidget->setCurrentPage(pagina);ui->tabWidget_8->setCurrentPage(0);return;}
+    else
+    {
+        ui->tabWidget->setCurrentPage(pagina);
+        ui->tabWidget_8->setCurrentPage(0);
+        return;
+    }
 }
 
 void recoverdrake::on_actionPeliculas_triggered()
@@ -26122,7 +26525,7 @@ void recoverdrake::on_actionPeliculas_triggered()
                 if (Stilo == "A")
                     pelis->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: 7pt; font-style: "+DatoTalla+"; font-family: Sans Serif; font-weight: bold");
                 pelis->showMaximized();
-                pelis->Valor("");
+                pelis->Valor("",Usu);
                 pelis->exec();
             }
             else if (Window == 1)
@@ -26132,7 +26535,7 @@ void recoverdrake::on_actionPeliculas_triggered()
                 {
                     Conectar();
                     pelis = new dbpelis;
-                    ui->tabWidget->insertTab(Pestanas,ui->tab_38,"DB Pelis");
+                    ui->tabWidget->insertTab(Pestanas,ui->tab_38,tr("DB Pelis"));
                     ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/pelis.png"));
                     ui->tabWidget->setCurrentPage(Pestanas);
                     Pagina6 = Pestanas;
@@ -26141,7 +26544,7 @@ void recoverdrake::on_actionPeliculas_triggered()
                     if (Stilo == "A")
                         pelis->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
                     pelis->showMaximized();
-                    pelis->Valor("Quitar");
+                    pelis->Valor("Quitar",Usu);
                     pelis->exec();
                 }
                 else
@@ -26192,7 +26595,7 @@ void recoverdrake::on_actionCompilar_desde_las_fuentes_triggered()
             {
                 Conectar();
                 make = new makefile;
-                ui->tabWidget->insertTab(Pestanas,ui->tab_64,"Compilar desde las fuentes");
+                ui->tabWidget->insertTab(Pestanas,ui->tab_64,tr("Compilar desde las fuentes"));
                 ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/compilar.png"));
                 ui->tabWidget->setCurrentPage(Pestanas);
                 Pagina18 = Pestanas;
@@ -26222,7 +26625,7 @@ void recoverdrake::on_actionConfigurar_VNC_triggered()
     if (x11vnc == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"x11vnc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"x11vnc\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -26230,7 +26633,7 @@ void recoverdrake::on_actionConfigurar_VNC_triggered()
         if (mutt == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"muttc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"muttc\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -26238,7 +26641,7 @@ void recoverdrake::on_actionConfigurar_VNC_triggered()
             if (sendmail == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sendmail\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sendmail\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -26246,7 +26649,7 @@ void recoverdrake::on_actionConfigurar_VNC_triggered()
                 if (ssmtp == "0")
                 {
                     QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ssmtp\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ssmtp\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                     m.exec();
                 }
                 else
@@ -26395,7 +26798,7 @@ void recoverdrake::on_actionServidor_VNC_triggered()
     if (x11vnc == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"x11vnc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"x11vnc\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -26403,7 +26806,7 @@ void recoverdrake::on_actionServidor_VNC_triggered()
         if (mutt == "0")
         {
             QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"muttc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"muttc\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -26411,7 +26814,7 @@ void recoverdrake::on_actionServidor_VNC_triggered()
             if (sendmail == "0")
             {
                 QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sendmail\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"sendmail\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
@@ -26419,7 +26822,7 @@ void recoverdrake::on_actionServidor_VNC_triggered()
                 if (ssmtp == "0")
                 {
                     QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ssmtp\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ssmtp\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                     m.exec();
                 }
                 else
@@ -26635,7 +27038,7 @@ void recoverdrake::on_actionIniciar_sesion_remota_triggered()
     if (tigervnc == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tigervnc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tigervnc\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -26674,7 +27077,7 @@ void recoverdrake::on_actionDescargar_torrent_triggered()
     if (transmission == "0")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"transmission-cli\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"transmission-cli\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -27148,7 +27551,7 @@ void recoverdrake::on_actionCrear_copia_de_seguridad_triggered()
                 {
                     Conectar();
                     backup = new Backup;
-                    ui->tabWidget->insertTab(Pestanas,ui->tab_2,"Backup");
+                    ui->tabWidget->insertTab(Pestanas,ui->tab_2,tr("Backup"));
                     ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/guardar.png"));
                     ui->tabWidget->setCurrentPage(Pestanas);
                     Pagina1 = Pestanas;
@@ -27176,6 +27579,7 @@ QMdiSubWindow *recoverdrake::buscarBackup()
     {
         if(Backup *a= qobject_cast<Backup *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -27188,6 +27592,7 @@ QMdiSubWindow *recoverdrake::buscarBurn()
     {
         if(burn *b= qobject_cast<burn *>(window->widget()))
         {
+            Q_UNUSED(b);
             return window;            
         }
     }
@@ -27200,6 +27605,7 @@ QMdiSubWindow *recoverdrake::buscarBusca()
     {
         if(Busca *c= qobject_cast<Busca *>(window->widget()))
         {
+            Q_UNUSED(c);
             return window;
         }
     }
@@ -27212,6 +27618,7 @@ QMdiSubWindow *recoverdrake::buscarConvAudio()
     {
         if(ConvAudio *d= qobject_cast<ConvAudio *>(window->widget()))
         {
+            Q_UNUSED(d);
             return window;
         }
     }
@@ -27224,6 +27631,7 @@ QMdiSubWindow *recoverdrake::buscarConvVideo()
     {
         if(Conversor *e= qobject_cast<Conversor *>(window->widget()))
         {
+            Q_UNUSED(e);
             return window;
         }
     }
@@ -27236,6 +27644,7 @@ QMdiSubWindow *recoverdrake::buscarPelis()
     {
         if(dbpelis *e= qobject_cast<dbpelis *>(window->widget()))
         {
+            Q_UNUSED(e);
             return window;
         }
     }
@@ -27248,6 +27657,7 @@ QMdiSubWindow *recoverdrake::buscarExec()
     {
         if(examen *f= qobject_cast<examen *>(window->widget()))
         {
+            Q_UNUSED(f);
             return window;
         }
     }
@@ -27260,6 +27670,7 @@ QMdiSubWindow *recoverdrake::buscarHelp()
     {
         if(help *g= qobject_cast<help *>(window->widget()))
         {
+            Q_UNUSED(g);
             return window;
         }
     }
@@ -27272,6 +27683,7 @@ QMdiSubWindow *recoverdrake::buscarLogs()
     {
         if(Visualizar *h= qobject_cast<Visualizar *>(window->widget()))
         {
+            Q_UNUSED(h);
             return window;
         }
     }
@@ -27296,6 +27708,7 @@ void recoverdrake::Desconectar()
 
 void recoverdrake::on_tabWidget_currentChanged(int index)
 {
+    Q_UNUSED(index)
     if (ui->tabWidget->currentIndex() == 0)
     {
         if (Puntero == 1)
@@ -27381,7 +27794,7 @@ void recoverdrake::on_actionGrabador_de_CD_DVD_Interactivo_triggered()
                 {                    
                     Conectar();
                     quemar = new burn;
-                    ui->tabWidget->insertTab(Pestanas,ui->tab_31,"Grabador");
+                    ui->tabWidget->insertTab(Pestanas,ui->tab_31,tr("Grabador"));
                     ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/cd_burning_section.png"));
                     ui->tabWidget->setCurrentPage(Pestanas);
                     Pagina2 = Pestanas;
@@ -27633,59 +28046,60 @@ void recoverdrake::on_pushButton_115_clicked()
 
 void recoverdrake::on_actionSincronizador_de_datos_triggered()
 {
-        QString hora = QTime::currentTime().toString("hh:mm:ss");
-        ui->textEdit_4->append(""+hora+"-- Accion: Sincronizar datos.");
-        int respuesta = 0;
-        if (Mensaka!="Activo")
+    QString hora = QTime::currentTime().toString("hh:mm:ss");
+    ui->textEdit_4->append(""+hora+"-- Accion: Sincronizar datos.");
+    int respuesta = 0;
+    if (Mensaka!="Activo")
+    {
+        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Sincronizar datos")),
+                           QString::fromUtf8(tr("<center><b>Sincronizar datos</center></b><p>"
+                           "Con esta opcion podemos sincronizar datos y que solo se modifiquen en el destino "
+                           "los datos que hayan sido modificados.<p>"
+                           "&iquest;Sincronizar datos?")), QMessageBox::Ok, QMessageBox::No);
+    }
+    else
+    {
+        respuesta=QMessageBox::Ok;
+    }
+    if (respuesta == QMessageBox::Ok)
+    {
+        if (Window == 0)
         {
-            respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Sincronizar datos")),
-                               QString::fromUtf8(tr("<center><b>Sincronizar datos</center></b><p>"
-                               "Con esta opcion podemos sincronizar datos y que solo se modifiquen en el destino "
-                               "los datos que hayan sido modificados.<p>"
-                               "&iquest;Sincronizar datos?")), QMessageBox::Ok, QMessageBox::No);
+
+            TotalSincrono *Sync = new TotalSincrono(this);
+            if (Stilo == "A")
+                Sync->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+            Sync->Valor("",Logs);
+            Sync->showMaximized();
+            Sync->exec();
         }
-        else
+        else if (Window == 1)
         {
-            respuesta=QMessageBox::Ok;
-        }
-        if (respuesta == QMessageBox::Ok)
-        {
-            if (Window == 0)
+            QMdiSubWindow *existing = buscarSincrono();
+            if(!existing)
             {
+                Conectar();
                 Sync = new TotalSincrono;
+                ui->tabWidget->insertTab(Pestanas,ui->tab_53,tr("Sincronizador"));
+                ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/sustituir.png"));
+                ui->tabWidget->setCurrentPage(Pestanas);
+                Pagina10 = Pestanas;
+                ui->mdiArea_10->addSubWindow(Sync);
+                connect(Sync, SIGNAL(Cerrar()), this, SLOT(CerrarSync()));
                 if (Stilo == "A")
                     Sync->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                Sync->Valor("",Logs);
                 Sync->showMaximized();
+                Sync->Valor("Quitar",Logs);
                 Sync->exec();
             }
-            else if (Window == 1)
+            else
             {
-                QMdiSubWindow *existing = buscarSincrono();
-                if(!existing)
-                {
-                    Conectar();
-                    Sync = new TotalSincrono;
-                    ui->tabWidget->insertTab(Pestanas,ui->tab_53,"Sincronizador");
-                    ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/sustituir.png"));
-                    ui->tabWidget->setCurrentPage(Pestanas);
-                    Pagina10 = Pestanas;
-                    ui->mdiArea_10->addSubWindow(Sync);
-                    connect(Sync, SIGNAL(Cerrar()), this, SLOT(CerrarSync()));
-                    if (Stilo == "A")
-                        Sync->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    Sync->showMaximized();
-                    Sync->Valor("Quitar",Logs);
-                    Sync->exec();
-                }
-                else
-                {
-                    ui->tabWidget->setCurrentPage(Pagina10);
-                    ui->mdiArea_10->setActiveSubWindow(existing);
-                }
-                Sync->setWindowState(Qt::WindowMaximized);
+                ui->tabWidget->setCurrentPage(Pagina10);
+                ui->mdiArea_10->setActiveSubWindow(existing);
             }
+            Sync->setWindowState(Qt::WindowMaximized);
         }
+    }
 }
 
 QMdiSubWindow *recoverdrake::buscarSincrono()
@@ -27694,6 +28108,7 @@ QMdiSubWindow *recoverdrake::buscarSincrono()
     {
         if(TotalSincrono *a= qobject_cast<TotalSincrono *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -27706,6 +28121,7 @@ QMdiSubWindow *recoverdrake::buscarActualiza()
     {
         if(Update *a= qobject_cast<Update *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -27718,6 +28134,7 @@ QMdiSubWindow *recoverdrake::buscarUrpmi()
     {
         if(urpmi *a= qobject_cast<urpmi *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -27730,6 +28147,7 @@ QMdiSubWindow *recoverdrake::buscarRpminst()
     {
         if(rpminst *a= qobject_cast<rpminst *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -27742,6 +28160,7 @@ QMdiSubWindow *recoverdrake::buscarKernel()
     {
         if(rpminst *a= qobject_cast<rpminst *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -27754,6 +28173,7 @@ QMdiSubWindow *recoverdrake::buscarHuerfanos()
     {
         if(orphans *a= qobject_cast<orphans *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -27766,6 +28186,7 @@ QMdiSubWindow *recoverdrake::buscarRpm()
     {
         if(Mrpm *a= qobject_cast<Mrpm *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -27932,32 +28353,46 @@ void recoverdrake::on_actionCrea_tu_propio_kernel_personalizado_triggered()
 {
     if (gcc == "0")
     {
-        QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"gcc\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"gcc\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
     {
         if (makec== "0")
         {
-            QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"make\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            QMessageBox m;
+            if (Stilo == "A")
+                m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"make\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
         {
             if (libncurses == "0")
             {
-                QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"libncurses-devel\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                QMessageBox m;
+                if (Stilo == "A")
+                    m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                if (arqt == "x86_64")
+                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lib64ncurses-devel\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                else
+                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"libncurses-devel\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                 m.exec();
             }
             else
             {
                 if (libncursesw == "0")
                 {
-                    QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"libncursesw-devel\" necesaria.<p>Realize la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                    QMessageBox m;
+                    if (Stilo == "A")
+                        m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                    if (arqt == "x86_64")
+                        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"lib64ncursesw-devel\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+                    else
+                        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"libncursesw-devel\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
                     m.exec();
                 }
                 else
@@ -27994,7 +28429,7 @@ void recoverdrake::on_actionCrea_tu_propio_kernel_personalizado_triggered()
                             {
                                 Conectar();
                                 Nucleo = new Kernel;
-                                ui->tabWidget->insertTab(Pestanas,ui->tab_63,"Crear/compilar Kernel");
+                                ui->tabWidget->insertTab(Pestanas,ui->tab_63,tr("Crear/compilar Kernel"));
                                 ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/nucleo.png"));
                                 ui->tabWidget->setCurrentPage(Pestanas);
                                 Pagina17 = Pestanas;
@@ -28026,6 +28461,7 @@ QMdiSubWindow *recoverdrake::buscarNucleo()
     {
         if(Kernel *a= qobject_cast<Kernel *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -28038,6 +28474,7 @@ QMdiSubWindow *recoverdrake::buscarMakefile()
     {
         if(makefile *a= qobject_cast<makefile *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -28296,7 +28733,7 @@ void recoverdrake::on_actionComparador_triggered()
             {
                 Conectar();
                 Compara = new Comparador;
-                ui->tabWidget->insertTab(Pestanas,ui->tab_65,"Comparador");
+                ui->tabWidget->insertTab(Pestanas,ui->tab_65,tr("Comparador"));
                 ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/Comparador.png"));
                 ui->tabWidget->setCurrentPage(Pestanas);
                 Pagina19 = Pestanas;
@@ -28324,6 +28761,7 @@ QMdiSubWindow *recoverdrake::buscarCompara()
     {
         if(Comparador *a= qobject_cast<Comparador *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -28357,6 +28795,7 @@ QMdiSubWindow *recoverdrake::buscarid3mp3()
     {
         if(id3mp3 *a= qobject_cast<id3mp3 *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -28400,7 +28839,7 @@ void recoverdrake::on_actionGrabadora_de_sonidos_triggered()
         QMessageBox m;
         if (Stilo == "A")
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"ffmpeg\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
         m.exec();
     }
     else
@@ -28411,7 +28850,7 @@ void recoverdrake::on_actionGrabadora_de_sonidos_triggered()
             QMessageBox m;
             if (Stilo == "A")
                 m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"pulseaudio-utils\" necesaria.<p>Realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"pulseaudio-utils\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
             m.exec();
         }
         else
@@ -28490,6 +28929,7 @@ QMdiSubWindow *recoverdrake::buscarGrabador()
     {
         if(Grabador *a= qobject_cast<Grabador *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -28644,7 +29084,7 @@ void recoverdrake::on_actionConvertidor_de_medidas_triggered()
             {
                 Conectar();
                 ConvUD = new ConversorUD;
-                ui->tabWidget->insertTab(Pestanas,ui->tab_68,"Conversor");
+                ui->tabWidget->insertTab(Pestanas,ui->tab_68,tr("Conversor"));
                 ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/medir.png"));
                 ui->tabWidget->setCurrentPage(Pestanas);
                 Pagina22 = Pestanas;
@@ -28725,6 +29165,7 @@ QMdiSubWindow *recoverdrake::buscarConversor()
     {
         if(ConversorUD *a= qobject_cast<ConversorUD *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -28864,7 +29305,7 @@ void recoverdrake::on_actionClaves_triggered()
             {
                 Conectar();
                 Claves = new dbclaves;
-                ui->tabWidget->insertTab(Pestanas,ui->tab_69,"DB Claves");
+                ui->tabWidget->insertTab(Pestanas,ui->tab_69,tr("DB Claves"));
                 ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/security-mdk.png"));
                 ui->tabWidget->setCurrentPage(Pestanas);
                 Pagina23 = Pestanas;
@@ -28892,6 +29333,7 @@ QMdiSubWindow *recoverdrake::buscarClaves()
     {
         if(dbclaves *a= qobject_cast<dbclaves *>(window->widget()))
         {
+            Q_UNUSED(a);
             return window;
         }
     }
@@ -28909,4 +29351,349 @@ void recoverdrake::CerrarClaves()
     }
 }
 
-//ver lo de instalado cuando esta en un sistema con codificacion espanol y recoverdrake en ingles que falla. (pasa en constain(tr("instalado")
+void recoverdrake::on_actionConfiguracion_manual_triggered()
+{
+    QString hora = QTime::currentTime().toString("hh:mm:ss");
+    ui->textEdit_4->append(""+hora+tr("-- Accion: Formatos de impresion manual."));
+    int respuesta = 0;
+    if (Mensaka!="Activo")
+    {
+        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Formatos de impresion manual")),
+                       QString::fromUtf8(tr("<center><b>Formatos manuales</center><p>"
+                       "Aqui puedes visualizar los modelos predefinidos de impresion y tambien "
+                       "puedes definir nuevos o modificar los existentes introduciendo las coordenas y datos necesarios de forma manual.<p>"
+                       "&iquest;Configurar formatos de impresion?")), QMessageBox::Ok, QMessageBox::No);
+    }
+    else
+    {
+        respuesta=QMessageBox::Ok;
+    }
+    if (respuesta == QMessageBox::Ok)
+    {
+        Report *Reporte=new Report(this);
+        if (Stilo == "A")
+            Reporte->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        Reporte->exec();
+    }
+}
+
+void recoverdrake::on_actionConfiguracion_visual_triggered()
+{
+    QString hora = QTime::currentTime().toString("hh:mm:ss");
+    ui->textEdit_4->append(""+hora+tr("-- Accion: Formatos de impresion visual."));
+    int respuesta = 0;
+    if (Mensaka!="Activo")
+    {
+        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Formatos de impresion visual")),
+                       QString::fromUtf8(tr("<center><b>Formatos visuales</center><p>"
+                       "Aqui puedes visualizar los modelos predefinidos de impresion y tambien "
+                       "puedes definir nuevos o modificar los existentes de forma visual.<p>"
+                       "&iquest;Configurar formatos de impresion?")), QMessageBox::Ok, QMessageBox::No);
+    }
+    else
+    {
+        respuesta=QMessageBox::Ok;
+    }
+    if (respuesta == QMessageBox::Ok)
+    {
+        ReportVisual *VReport=new ReportVisual(this);
+        if (Stilo == "A")
+            VReport->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        VReport->showMaximized();
+    }
+}
+
+void recoverdrake::on_actionGenerador_QR_triggered()
+{
+    QString hora = QTime::currentTime().toString("hh:mm:ss");
+    ui->textEdit_4->append(""+hora+tr("-- Accion: Generador de QR."));
+    if (libqrencode == "0")
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"libqrencode\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.exec();
+    }
+    else
+    {
+        int respuesta = 0;
+        if (Mensaka!="Activo")
+        {
+            respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Generador de QR")),
+                           QString::fromUtf8(tr("<center><b>QR</center><p>"
+                           "Genera tus propios QR en 2D con esta aplicacion.<p>"
+                           "&iquest;Generar QR?")), QMessageBox::Ok, QMessageBox::No);
+        }
+        else
+        {
+            respuesta=QMessageBox::Ok;
+        }
+        if (respuesta == QMessageBox::Ok)
+        {
+            if (Window == 0)
+            {
+                qrcode *QR=new qrcode(this);
+                if (Stilo == "A")
+                    QR->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                QR->showMaximized();
+                QR->Valor("");
+                QR->exec();
+            }
+            else if (Window == 1)
+            {
+                QMdiSubWindow *existing = buscarQR();
+                if(!existing)
+                {
+                    Conectar();
+                    QR = new qrcode;
+                    ui->tabWidget->insertTab(Pestanas,ui->tab_70,tr("Generador QR"));
+                    ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/URI_www_kapyderi_blogspog.png"));
+                    ui->tabWidget->setCurrentPage(Pestanas);
+                    Pagina24 = Pestanas;
+                    ui->mdiArea_24->addSubWindow(QR);
+                    connect(QR, SIGNAL(Cerrar()), this, SLOT(CerrarQR()));
+                    if (Stilo == "A")
+                        QR->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                    QR->showMaximized();
+                    QR->Valor("Quitar");
+                    QR->exec();
+                }
+                else
+                {
+                    ui->tabWidget->setCurrentPage(Pagina24);
+                    ui->mdiArea_24->setActiveSubWindow(existing);
+                }
+                QR->setWindowState(Qt::WindowMaximized);
+            }
+        }
+    }
+}
+
+QMdiSubWindow *recoverdrake::buscarQR()
+{
+    foreach (QMdiSubWindow *window, ui->mdiArea_24->subWindowList())
+    {
+        if(qrcode *a= qobject_cast<qrcode *>(window->widget()))
+        {
+            Q_UNUSED(a);
+            return window;
+        }
+    }
+    return 0;
+}
+
+void recoverdrake::CerrarQR()
+{
+    if (Pagina24 != 0)
+    {
+        ui->mdiArea_24->removeSubWindow(QR);
+        ui->tabWidget->removeTab(ui->tabWidget->currentIndex());
+        Pagina24=0;
+        Desconectar();
+    }
+}
+
+void recoverdrake::on_pushButton_66_clicked()
+{
+    this->on_actionGenerador_QR_triggered();
+}
+
+void recoverdrake::on_actionComprimir_descomprimir_triggered()
+{
+    QString hora = QTime::currentTime().toString("hh:mm:ss");
+    ui->textEdit_4->append(""+hora+tr("-- Accion: Compresor/descompresor de archivos."));
+//    if (tar == "0")
+//    {
+//        QMessageBox m;
+//        if (Stilo == "A")
+//            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+//        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"tar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+//        m.exec();
+//    }
+//    else
+//    {
+//        if (gzip == "0")
+//        {
+//            QMessageBox m;
+//            if (Stilo == "A")
+//                m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+//            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"gzip\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+//            m.exec();
+//        }
+//        else
+//        {
+//            if (bzip2 == "0")
+//            {
+//                QMessageBox m;
+//                if (Stilo == "A")
+//                    m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+//                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"bzip2\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+//                m.exec();
+//            }
+//            else
+//            {
+//                if (zip == "0")
+//                {
+//                    QMessageBox m;
+//                    if (Stilo == "A")
+//                        m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+//                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zip\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+//                    m.exec();
+//                }
+//                else
+//                {
+//                    if (unzip == "0")
+//                    {
+//                        QMessageBox m;
+//                        if (Stilo == "A")
+//                            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+//                        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"unzip\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+//                        m.exec();
+//                    }
+//                    else
+//                    {
+//                        if (zoo == "0")
+//                        {
+//                            QMessageBox m;
+//                            if (Stilo == "A")
+//                                m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+//                            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"zoo\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+//                            m.exec();
+//                        }
+//                        else
+//                        {
+//                            if (arj == "0")
+//                            {
+//                                QMessageBox m;
+//                                if (Stilo == "A")
+//                                    m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+//                                m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"arj\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+//                                m.exec();
+//                            }
+//                            else
+//                            {
+//                                if (unrar == "0")
+//                                {
+//                                    QMessageBox m;
+//                                    if (Stilo == "A")
+//                                        m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+//                                    m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"unrar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+//                                    m.exec();
+//                                }
+//                                else
+//                                {
+//                                    if (a7z == "0")
+//                                    {
+//                                        QMessageBox m;
+//                                        if (Stilo == "A")
+//                                            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+//                                        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"p7zip\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+//                                        m.exec();
+//                                    }
+//                                    else
+//                                    {
+//                                        if (rar == "0")
+//                                        {
+//                                            QMessageBox m;
+//                                            if (Stilo == "A")
+//                                                m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+//                                            m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"rar\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+//                                            m.exec();
+//                                        }
+//                                        else
+//                                        {
+                                            int respuesta = 0;
+                                            if (Mensaka!="Activo")
+                                            {
+                                                respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Compresor")),
+                                                               QString::fromUtf8(tr("<center><b>Compresor/descompresor</center><p>"
+                                                               "Genera tus propios archivos comprimidos en varios formatos estandar.<p>"
+                                                               "&iquest;Generar Compresion/descompresion?")), QMessageBox::Ok, QMessageBox::No);
+                                            }
+                                            else
+                                            {
+                                                respuesta=QMessageBox::Ok;
+                                            }
+                                            if (respuesta == QMessageBox::Ok)
+                                            {
+                                                if (Window == 0)
+                                                {
+                                                    compresor *Kompresor=new compresor(this);
+                                                    if (Stilo == "A")
+                                                        Kompresor->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                                                    Kompresor->showMaximized();
+                                                    Kompresor->Valor("",Logs);
+                                                    Kompresor->exec();
+                                                }
+                                                else if (Window == 1)
+                                                {
+                                                    QMdiSubWindow *existing = buscarCompresor();
+                                                    if(!existing)
+                                                    {
+                                                        Conectar();
+                                                        Kompresor = new compresor;
+                                                        ui->tabWidget->insertTab(Pestanas,ui->tab_71,tr("Kompresor"));
+                                                        ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/comprimir.png"));
+                                                        ui->tabWidget->setCurrentPage(Pestanas);
+                                                        Pagina25 = Pestanas;
+                                                        ui->mdiArea_25->addSubWindow(Kompresor);
+                                                        connect(Kompresor, SIGNAL(Cerrar()), this, SLOT(CerrarCompresor()));
+                                                        if (Stilo == "A")
+                                                            Kompresor->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                                                        Kompresor->showMaximized();
+                                                        Kompresor->Valor("Quitar",Logs);
+                                                        Kompresor->exec();
+                                                    }
+                                                    else
+                                                    {
+                                                        ui->tabWidget->setCurrentPage(Pagina25);
+                                                        ui->mdiArea_25->setActiveSubWindow(existing);
+                                                    }
+                                                    Kompresor->setWindowState(Qt::WindowMaximized);
+                                                }
+                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+}
+
+QMdiSubWindow *recoverdrake::buscarCompresor()
+{
+    foreach (QMdiSubWindow *window, ui->mdiArea_25->subWindowList())
+    {
+        if(compresor *a= qobject_cast<compresor *>(window->widget()))
+        {
+            Q_UNUSED(a);
+            return window;
+        }
+    }
+    return 0;
+}
+
+void recoverdrake::CerrarCompresor()
+{
+    if (Pagina25 != 0)
+    {
+        ui->mdiArea_25->removeSubWindow(Kompresor);
+        ui->tabWidget->removeTab(ui->tabWidget->currentIndex());
+        Pagina25=0;
+        Desconectar();
+    }
+}
+void recoverdrake::on_pushButton_116_clicked()
+{
+    this->on_actionComprimir_descomprimir_triggered();
+}
+
+void recoverdrake::on_actionRefrescar_dependencias_triggered()
+{
+    this->ActualizarTodo();
+}

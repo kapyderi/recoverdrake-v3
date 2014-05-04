@@ -89,7 +89,7 @@
       <string>Creacion o recuparacion de copia de la DB</string>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -102,242 +102,6 @@
           <string>Realizar backup de...</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_8">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item row="2" column="0" colspan="3">
-           <widget class="QGroupBox" name="groupBox_3">
-            <property name="toolTip">
-             <string>Opcion de datos personales</string>
-            </property>
-            <property name="statusTip">
-             <string>Opcion de datos personales</string>
-            </property>
-            <property name="whatsThis">
-             <string>Opcion de datos personales</string>
-            </property>
-            <property name="title">
-             <string>Datos</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_6">
-             <item row="2" column="2">
-              <widget class="QCheckBox" name="checkBox_36">
-               <property name="text">
-                <string>Lista de ip para VNC</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="2">
-              <widget class="QCheckBox" name="checkBox_89">
-               <property name="text">
-                <string>Lista de codigos Ascii</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="checkBox_88">
-               <property name="text">
-                <string>Lista de claves</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QCheckBox" name="checkBox_30">
-               <property name="text">
-                <string>Lista de Control de accesos</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="checkBox_27">
-               <property name="text">
-                <string>Lista de canales de television</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="2">
-              <widget class="QCheckBox" name="checkBox_79">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="text">
-                <string>Lista de sincronizaciones</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QCheckBox" name="checkBox_6">
-               <property name="text">
-                <string>Lista blanca wifi</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBox_7">
-               <property name="text">
-                <string>Lista de palabras clave</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="checkBox_34">
-               <property name="text">
-                <string>Lista de peliculas</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="checkBox_83">
-               <property name="text">
-                <string>Lista de generos para mp3/ogg</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="checkBox_42">
-               <property name="text">
-                <string>Lista de programas del menu</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBox_26">
-               <property name="text">
-                <string>Lista de canales de radio</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="checkBox_24">
-               <property name="text">
-                <string>Lista de musica</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="checkBox_29">
-               <property name="text">
-                <string>Lista de usuarios</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="checkBox_5">
-               <property name="text">
-                <string>Lista negra wifi</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="checkBox_93">
-               <property name="text">
-                <string>Lista de codigos BIC</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="4" column="0" colspan="3">
-           <layout class="QGridLayout" name="gridLayout_4">
-            <item row="1" column="1">
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>479</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="1" column="0">
-             <widget class="QPushButton" name="pushButton_2">
-              <property name="toolTip">
-               <string>Creacion de copia con las opciones marcadas</string>
-              </property>
-              <property name="statusTip">
-               <string>Creacion de copia con las opciones marcadas</string>
-              </property>
-              <property name="whatsThis">
-               <string>Creacion de copia con las opciones marcadas</string>
-              </property>
-              <property name="text">
-               <string>Crear copia</string>
-              </property>
-              <property name="icon">
-               <iconset resource="recoverdrake.qrc">
-                <normaloff>:/Imagenes/guardar.png</normaloff>:/Imagenes/guardar.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>25</width>
-                <height>25</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
           <item row="0" column="0">
            <widget class="QRadioButton" name="radioButton">
             <property name="toolTip">
@@ -367,6 +131,25 @@
             </property>
             <property name="text">
              <string>Datos</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QRadioButton" name="radioButton_3">
+            <property name="toolTip">
+             <string>Seleccion de todo</string>
+            </property>
+            <property name="statusTip">
+             <string>Seleccion de todo</string>
+            </property>
+            <property name="whatsThis">
+             <string>Seleccion de todo</string>
+            </property>
+            <property name="text">
+             <string>Todo</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -695,27 +478,336 @@
                </property>
               </widget>
              </item>
+             <item row="12" column="1">
+              <widget class="QCheckBox" name="checkBox_103">
+               <property name="text">
+                <string>Chequeos</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
-          <item row="0" column="2">
-           <widget class="QRadioButton" name="radioButton_3">
+          <item row="2" column="0" colspan="3">
+           <widget class="QGroupBox" name="groupBox_3">
             <property name="toolTip">
-             <string>Seleccion de todo</string>
+             <string>Opcion de datos personales</string>
             </property>
             <property name="statusTip">
-             <string>Seleccion de todo</string>
+             <string>Opcion de datos personales</string>
             </property>
             <property name="whatsThis">
-             <string>Seleccion de todo</string>
+             <string>Opcion de datos personales</string>
             </property>
-            <property name="text">
-             <string>Todo</string>
+            <property name="title">
+             <string>Datos</string>
             </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="2" column="2">
+              <widget class="QCheckBox" name="checkBox_36">
+               <property name="text">
+                <string>Lista de ip para VNC</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QCheckBox" name="checkBox_89">
+               <property name="text">
+                <string>Lista de codigos Ascii</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="checkBox_88">
+               <property name="text">
+                <string>Lista de claves</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QCheckBox" name="checkBox_30">
+               <property name="text">
+                <string>Lista de Control de accesos</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QCheckBox" name="checkBox_6">
+               <property name="text">
+                <string>Lista blanca wifi</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="checkBox_27">
+               <property name="text">
+                <string>Lista de canales de television</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QCheckBox" name="checkBox_79">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="text">
+                <string>Lista de sincronizaciones</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBox_7">
+               <property name="text">
+                <string>Lista de palabras clave</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="checkBox_34">
+               <property name="text">
+                <string>Lista de peliculas</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBox_26">
+               <property name="text">
+                <string>Lista de canales de radio</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBox_83">
+               <property name="text">
+                <string>Lista de generos para mp3/ogg</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="checkBox_29">
+               <property name="text">
+                <string>Lista de usuarios</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="checkBox_42">
+               <property name="text">
+                <string>Lista de programas del menu</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBox_24">
+               <property name="text">
+                <string>Lista de musica</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="checkBox_93">
+               <property name="text">
+                <string>Lista de codigos BIC</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="checkBox_5">
+               <property name="text">
+                <string>Lista negra wifi</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="checkBox_99">
+               <property name="text">
+                <string>Lista de modelos</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBox_101">
+               <property name="text">
+                <string>Lista de campos</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="2">
+              <widget class="QCheckBox" name="checkBox_100">
+               <property name="text">
+                <string>Lista de lineas de modelos</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="checkBox_102">
+               <property name="text">
+                <string>Lista de documentos</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="2">
+              <widget class="QCheckBox" name="checkBox_105">
+               <property name="text">
+                <string>Lista de reportes</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="checkBox_107">
+               <property name="text">
+                <string>Lista de emails</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
+          </item>
+          <item row="4" column="0" colspan="3">
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="1" column="1">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>479</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="pushButton_2">
+              <property name="toolTip">
+               <string>Creacion de copia con las opciones marcadas</string>
+              </property>
+              <property name="statusTip">
+               <string>Creacion de copia con las opciones marcadas</string>
+              </property>
+              <property name="whatsThis">
+               <string>Creacion de copia con las opciones marcadas</string>
+              </property>
+              <property name="text">
+               <string>Crear copia</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/guardar.png</normaloff>:/Imagenes/guardar.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QPushButton" name="pushButton_6">
+              <property name="text">
+               <string>Desmarcar todo</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/menos.png</normaloff>:/Imagenes/menos.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="pushButton_7">
+              <property name="text">
+               <string>Marcar todo</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/mas.png</normaloff>:/Imagenes/mas.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item row="3" column="0" colspan="3">
            <spacer name="verticalSpacer">
@@ -1184,6 +1276,16 @@
                </property>
               </widget>
              </item>
+             <item row="10" column="1">
+              <widget class="QCheckBox" name="checkBox_104">
+               <property name="text">
+                <string>Chequeos</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -1351,16 +1453,6 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="2">
-              <widget class="QCheckBox" name="checkBox_90">
-               <property name="text">
-                <string>Lista de codigos Ascii</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QCheckBox" name="checkBox_9">
                <property name="text">
@@ -1375,6 +1467,76 @@
               <widget class="QCheckBox" name="checkBox_94">
                <property name="text">
                 <string>Lista de codigos BIC</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="checkBox_95">
+               <property name="text">
+                <string>Lista de modelos</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="2">
+              <widget class="QCheckBox" name="checkBox_96">
+               <property name="text">
+                <string>Lista de lineas de modelos</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBox_97">
+               <property name="text">
+                <string>Lista de campos</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="checkBox_98">
+               <property name="text">
+                <string>Lista de documentos</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="2">
+              <widget class="QCheckBox" name="checkBox_106">
+               <property name="text">
+                <string>Lista de reportes</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QCheckBox" name="checkBox_90">
+               <property name="text">
+                <string>Lista de codigos Ascii</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="checkBox_108">
+               <property name="text">
+                <string>Lista de emails</string>
                </property>
                <property name="checked">
                 <bool>true</bool>

@@ -602,7 +602,6 @@ void Busca::on_pushButton_7_clicked()
     for(int i=0;i<list.count();i++)
     {
         QString Value0 = list.value(i);
-        qDebug() << Value0;
         QTableWidgetItem *item1, *item2;
         item1=new QTableWidgetItem;
         item2=new QTableWidgetItem;

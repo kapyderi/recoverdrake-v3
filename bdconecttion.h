@@ -245,10 +245,10 @@ static bool createConnection()
                        DB.close();
                        system("cp -v /root/Miscelanea.RecoverDrake.db.sqlite /root/Miscelanea.RecoverDrake.db.sqlite.backup");
                        DB.open();
-                       QProgressDialog progress("Encontrada nueva version "+Ver+", actualizando Base de datos de RecoverDrake... Espera por favor", "Cancelar", 0, 47);
+                       QProgressDialog progress("Encontrada nueva version "+Ver+", actualizando Base de datos de RecoverDrake... Espera por favor", "Cancelar", 0, 54);
                        progress.setWindowModality(Qt::WindowModal);
                        progress.show();
-                       for(int i=0;i<47;i++ )
+                       for(int i=0;i<54;i++ )
                        {
                            progress.setValue(i);
                            if (progress.wasCanceled())
@@ -1645,11 +1645,15 @@ static bool createConnection()
                                         RecDat.first();
                                         if (RecDat.isSelect())
                                         {
-                                            QSqlQuery Wdark(DB);
-                                            Wdark.prepare("INSERT INTO id3Genre (Genero)"
-                                                          "VALUES (:Genero)");
-                                            Wdark.bindValue(":Genero", DatObjetivo);
-                                            Wdark.exec();
+                                            QString ValIp = RecDat.value(0).toString();
+                                            if (DatObjetivo != ValIp)
+                                            {
+                                                QSqlQuery Wdark(DB);
+                                                Wdark.prepare("INSERT INTO id3Genre (Genero)"
+                                                              "VALUES (:Genero)");
+                                                Wdark.bindValue(":Genero", DatObjetivo);
+                                                Wdark.exec();
+                                            }
                                         }
                                         cantidad++;
                                         if (cantidad == 50)
@@ -1720,22 +1724,26 @@ static bool createConnection()
                                         QString Ubicacion = wlistanegra.value(6).toString();
                                         QString UserRD = wlistanegra.value(7).toString();
                                         QSqlQuery RecDat(DB);
-                                        RecDat.exec("SELECT Usuario,Password,Enc1,Enc2,Enc3,Tipo,Ubicacion,UserRD, FROM Clave WHERE Dir='"+Ubicacion+"'");
+                                        RecDat.exec("SELECT Usuario,Password,Enc1,Enc2,Enc3,Tipo,Dir,UserRD FROM Clave WHERE Dir='"+Ubicacion+"'");
                                         RecDat.first();
                                         if (RecDat.isSelect())
                                         {
-                                            QSqlQuery Wdark(DB);
-                                            Wdark.prepare("INSERT INTO Clave (Usuario,Password,Enc1,Enc2,Enc3,Tipo,Dir,UserRD)"
-                                                          "VALUES (:Usuario,:Password,:Enc1,:Enc2,:Enc3,:Tipo,:Dir,:UserRD)");
-                                            Wdark.bindValue(":Usuario", DatUsuario);
-                                            Wdark.bindValue(":Password", DatPassword);
-                                            Wdark.bindValue(":Enc1", DatEnc1);
-                                            Wdark.bindValue(":Enc2", DatEnc2);
-                                            Wdark.bindValue(":Enc3", DatEnc3);
-                                            Wdark.bindValue(":Tipo", Tipo);
-                                            Wdark.bindValue(":Dir", Ubicacion);
-                                            Wdark.bindValue(":UserRD", UserRD);
-                                            Wdark.exec();
+                                            QString ValIp = RecDat.value(6).toString();
+                                            if (Ubicacion != ValIp)
+                                            {
+                                                QSqlQuery Wdark(DB);
+                                                Wdark.prepare("INSERT INTO Clave (Usuario,Password,Enc1,Enc2,Enc3,Tipo,Dir,UserRD)"
+                                                              "VALUES (:Usuario,:Password,:Enc1,:Enc2,:Enc3,:Tipo,:Dir,:UserRD)");
+                                                Wdark.bindValue(":Usuario", DatUsuario);
+                                                Wdark.bindValue(":Password", DatPassword);
+                                                Wdark.bindValue(":Enc1", DatEnc1);
+                                                Wdark.bindValue(":Enc2", DatEnc2);
+                                                Wdark.bindValue(":Enc3", DatEnc3);
+                                                Wdark.bindValue(":Tipo", Tipo);
+                                                Wdark.bindValue(":Dir", Ubicacion);
+                                                Wdark.bindValue(":UserRD", UserRD);
+                                                Wdark.exec();
+                                            }
                                         }
                                         cantidad++;
                                         if (cantidad == 50)
@@ -1877,8 +1885,460 @@ static bool createConnection()
                                    DB.commit();
                                }
                            }
+                           if (i == 47)
+                           {
+                               QSqlQuery queryA(SM);
+                               queryA.exec("SELECT count() FROM sqlite_master WHERE type='table' AND name='ReportModelo'");
+                               queryA.first();
+                               if (queryA.isValid())
+                               {
+                                   QSqlQuery wlistanegr(db);
+                                   wlistanegr.exec("SELECT COUNT(Id) as Cantidad FROM ReportModelo");
+                                   int cuenta, comienzo;
+                                   wlistanegr.first();
+                                   cuenta = wlistanegr.value(0).toInt();
+                                   QSqlQuery wlistanegra(db);
+                                   wlistanegra.exec("SELECT Codigo,Descripcion,Alto,Ancho,MgSuperior,MgIzquierdo,Orientacion,PorDefecto,Marca,Documento FROM ReportModelo");
+                                   QProgressDialog progressMenu("Actualizando Modelos... Espera por favor", "Cancelar", 0, cuenta);
+                                   progressMenu.setWindowModality(Qt::WindowModal);
+                                   progressMenu.show();
+                                   QTest::qWait(20);
+                                   comienzo=0;
+                                   int cantidad=1;
+                                   while(wlistanegra.next())
+                                   {
+                                        if (cantidad == 1)
+                                        {
+                                            DB.transaction();
+                                        }
+                                        progressMenu.setValue(comienzo++);
+                                        if (progressMenu.wasCanceled())
+                                            break;
+                                        QString DatCodigo = wlistanegra.value(0).toString();
+                                        QString DatNombre = wlistanegra.value(1).toString();
+                                        QString DatAlto = wlistanegra.value(2).toString();
+                                        QString DatAncho = wlistanegra.value(3).toString();
+                                        QString DatSuperior = wlistanegra.value(4).toString();
+                                        QString DatIzquierdo = wlistanegra.value(5).toString();
+                                        QString DatOrientacion = wlistanegra.value(6).toString();
+                                        QString DatDefecto = wlistanegra.value(7).toString();
+                                        QString DatMarca = wlistanegra.value(8).toString();
+                                        QString DatDoc = wlistanegra.value(9).toString();
+                                        QSqlQuery RecDat(DB);
+                                        RecDat.exec("SELECT Codigo,Descripcion,Alto,Ancho,MgSuperior,MgIzquierdo,Orientacion,PorDefecto,Marca,Documento FROM ReportModelo WHERE Codigo='"+DatCodigo+"'");
+                                        RecDat.first();                                        
+                                        if (RecDat.isSelect())
+                                        {
+                                            QString ValIp = RecDat.value(0).toString();
+                                            if (DatCodigo != ValIp)
+                                            {
+                                                QSqlQuery Wdark(DB);
+                                                Wdark.prepare("INSERT INTO ReportModelo (Codigo,Descripcion,Alto,Ancho,MgSuperior,MgIzquierdo,Orientacion,PorDefecto,Marca,Documento)"
+                                                              "VALUES (:Codigo,:Descripcion,:Alto,:Ancho,:MgSuperior,:MgIzquierdo,:Orientacion,:PorDefecto,:Marca,:Documento)");
+                                                Wdark.bindValue(":Codigo", DatCodigo);
+                                                Wdark.bindValue(":Descripcion", DatNombre);
+                                                Wdark.bindValue(":Alto", DatAlto);
+                                                Wdark.bindValue(":Ancho", DatAncho);
+                                                Wdark.bindValue(":MgSuperior", DatSuperior);
+                                                Wdark.bindValue(":MgIzquierdo", DatIzquierdo);
+                                                Wdark.bindValue(":Orientacion", DatOrientacion);
+                                                Wdark.bindValue(":PorDefecto", DatDefecto);
+                                                Wdark.bindValue(":Marca", DatMarca);
+                                                Wdark.bindValue(":Documento", DatDoc);
+                                                Wdark.exec();
+                                            }
+                                            else
+                                            {
+                                                QSqlQuery Wwhite(DB);
+                                                Wwhite.exec("UPDATE ReportModelo SET Codigo='"+DatCodigo+"',Descripcion='"+DatNombre+"',Alto='"+DatAlto+"',Ancho='"+DatAncho+"',MgSuperior='"+DatSuperior+"',MgIzquierdo='"+DatIzquierdo+"',Orientacion='"+DatOrientacion+"',PorDefecto='"+DatDefecto+"',Marca='"+DatMarca+"',Documento='"+DatDoc+"' WHERE Codigo='"+DatCodigo+"'");
+                                            }
+                                        }
+                                        cantidad++;
+                                        if (cantidad == 50)
+                                        {
+                                            cantidad=1;
+                                            DB.commit();
+                                        }
+                                   }
+                                   progressMenu.setValue(cuenta);
+                                   DB.commit();
+                               }
+                           }
+                           if (i == 48)
+                           {
+                               QSqlQuery queryA(SM);
+                               queryA.exec("SELECT count() FROM sqlite_master WHERE type='table' AND name='ReportLineas'");
+                               queryA.first();
+                               if (queryA.isValid())
+                               {
+                                   QSqlQuery wlistanegr(db);
+                                   wlistanegr.exec("SELECT COUNT(Id) as Cantidad FROM ReportLineas");
+                                   int cuenta, comienzo;
+                                   wlistanegr.first();
+                                   cuenta = wlistanegr.value(0).toInt();
+                                   QSqlQuery wlistanegra(db);
+                                   wlistanegra.exec("SELECT Codigo,Campo,Descripcion,Linea,Columna,Ajuste,Interlineado,Fuente,Color,Marca FROM ReportLineas");
+                                   QProgressDialog progressMenu("Actualizando Lineas de modelos... Espera por favor", "Cancelar", 0, cuenta);
+                                   progressMenu.setWindowModality(Qt::WindowModal);
+                                   progressMenu.show();
+                                   QTest::qWait(20);
+                                   comienzo=0;
+                                   int cantidad=1;
+                                   while(wlistanegra.next())
+                                   {
+                                        if (cantidad == 1)
+                                        {
+                                            DB.transaction();
+                                        }
+                                        progressMenu.setValue(comienzo++);
+                                        if (progressMenu.wasCanceled())
+                                            break;
+                                        QString DatCodigo = wlistanegra.value(0).toString();
+                                        QString DatCampo = wlistanegra.value(1).toString();
+                                        QString DatNombre = wlistanegra.value(2).toString();
+                                        QString DatLinea = wlistanegra.value(3).toString();
+                                        QString DatColumna = wlistanegra.value(4).toString();
+                                        QString DatAjuste = wlistanegra.value(5).toString();
+                                        QString DatInter = wlistanegra.value(6).toString();
+                                        QString DatFuente = wlistanegra.value(7).toString();
+                                        QString DatColor = wlistanegra.value(8).toString();
+                                        QString DatMarca = wlistanegra.value(9).toString();
+                                        QSqlQuery RecDat(DB);
+                                        RecDat.exec("SELECT Codigo,Campo,Descripcion,Linea,Columna,Ajuste,Interlineado,Fuente,Color,Marca FROM ReportLineas WHERE Codigo='"+DatCodigo+"'");
+                                        RecDat.first();                                        
+                                        if (RecDat.isSelect())
+                                        {
+                                            QString ValIp = RecDat.value(0).toString();
+                                            if (DatCodigo != ValIp)
+                                            {
+                                                QSqlQuery Wdark(DB);
+                                                Wdark.prepare("INSERT INTO ReportLineas (Codigo,Campo,Descripcion,Linea,Columna,Ajuste,Interlineado,Fuente,Color,Marca)"
+                                                              "VALUES (:Codigo,:Campo,:Descripcion,:Linea,:Columna,:Ajuste,:Interlineado,:Fuente,:Color,:Marca)");
+                                                Wdark.bindValue(":Codigo", DatCodigo);
+                                                Wdark.bindValue(":Campo", DatCampo);
+                                                Wdark.bindValue(":Descripcion", DatNombre);
+                                                Wdark.bindValue(":Linea", DatLinea);
+                                                Wdark.bindValue(":Columna", DatColumna);
+                                                Wdark.bindValue(":Ajuste", DatAjuste);
+                                                Wdark.bindValue(":Interlineado", DatInter);
+                                                Wdark.bindValue(":Fuente", DatFuente);
+                                                Wdark.bindValue(":Color", DatColor);
+                                                Wdark.bindValue(":Marca", DatMarca);
+                                                Wdark.exec();
+                                            }
+                                            else
+                                            {
+                                                QSqlQuery Wwhite(DB);
+                                                Wwhite.exec("UPDATE ReportLineas SET Codigo='"+DatCodigo+"',Campo='"+DatCampo+"',Descripcion='"+DatNombre+"',Linea='"+DatLinea+"',Columna='"+DatColumna+"',Ajuste='"+DatAjuste+"',Interlineado='"+DatInter+"',Fuente='"+DatFuente+"',Color='"+DatColor+"',Marca='"+DatMarca+"' WHERE Codigo='"+DatCodigo+"'");
+                                            }
+                                        }
+                                        cantidad++;
+                                        if (cantidad == 50)
+                                        {
+                                            cantidad=1;
+                                            DB.commit();
+                                        }
+                                   }
+                                   progressMenu.setValue(cuenta);
+                                   DB.commit();
+                               }
+                           }
+                           if (i == 49)
+                           {
+                               QSqlQuery queryA(SM);
+                               queryA.exec("SELECT count() FROM sqlite_master WHERE type='table' AND name='ReportCampos'");
+                               queryA.first();
+                               if (queryA.isValid())
+                               {
+                                   QSqlQuery wlistanegr(db);
+                                   wlistanegr.exec("SELECT COUNT(Id) as Cantidad FROM ReportCampos");
+                                   int cuenta, comienzo;
+                                   wlistanegr.first();
+                                   cuenta = wlistanegr.value(0).toInt();
+                                   QSqlQuery wlistanegra(db);
+                                   wlistanegra.exec("SELECT Codigo,Descripcion,TipoDocumento,Marca FROM ReportCampos");
+                                   QProgressDialog progressMenu("Actualizando Campos de modelos... Espera por favor", "Cancelar", 0, cuenta);
+                                   progressMenu.setWindowModality(Qt::WindowModal);
+                                   progressMenu.show();
+                                   QTest::qWait(20);
+                                   comienzo=0;
+                                   int cantidad=1;
+                                   while(wlistanegra.next())
+                                   {
+                                        if (cantidad == 1)
+                                        {
+                                            DB.transaction();
+                                        }
+                                        progressMenu.setValue(comienzo++);
+                                        if (progressMenu.wasCanceled())
+                                            break;
+                                        QString DatCodigo = wlistanegra.value(0).toString();
+                                        QString DatNombre = wlistanegra.value(1).toString();
+                                        QString DatTipo = wlistanegra.value(2).toString();
+                                        QString DatMarca = wlistanegra.value(3).toString();
+                                        QSqlQuery RecDat(DB);
+                                        RecDat.exec("SELECT Codigo,Descripcion,TipoDocumento,Marca FROM ReportCampos WHERE Codigo='"+DatCodigo+"'");
+                                        RecDat.first();
+                                        if (RecDat.isSelect())
+                                        {
+                                            QString ValIp = RecDat.value(0).toString();
+                                            if (DatCodigo != ValIp)
+                                            {
+                                                QSqlQuery Wdark(DB);
+                                                Wdark.prepare("INSERT INTO ReportCampos (Codigo,Descripcion,TipoDocumento,Marca)"
+                                                              "VALUES (:Codigo,:Descripcion,:TipoDocumento,:Marca)");
+                                                Wdark.bindValue(":Codigo", DatCodigo);
+                                                Wdark.bindValue(":Descripcion", DatNombre);
+                                                Wdark.bindValue(":TipoDocumento", DatTipo);
+                                                Wdark.bindValue(":Marca", DatMarca);
+                                                Wdark.exec();
+                                            }
+                                            else
+                                            {
+                                                QSqlQuery Wwhite(DB);
+                                                Wwhite.exec("UPDATE ReportCampos SET Codigo='"+DatCodigo+"',Descripcion='"+DatNombre+"',TipoDocumento='"+DatTipo+"',Marca='"+DatMarca+"' WHERE Codigo='"+DatCodigo+"'");
+                                            }
+                                        }
+                                        cantidad++;
+                                        if (cantidad == 50)
+                                        {
+                                            cantidad=1;
+                                            DB.commit();
+                                        }
+                                   }
+                                   progressMenu.setValue(cuenta);
+                                   DB.commit();
+                               }
+                           }
+                           if (i == 50)
+                           {
+                               QSqlQuery queryA(SM);
+                               queryA.exec("SELECT count() FROM sqlite_master WHERE type='table' AND name='ReportDocumento'");
+                               queryA.first();
+                               if (queryA.isValid())
+                               {
+                                   QSqlQuery wlistanegr(db);
+                                   wlistanegr.exec("SELECT COUNT(Id) as Cantidad FROM ReportDocumento");
+                                   int cuenta, comienzo;
+                                   wlistanegr.first();
+                                   cuenta = wlistanegr.value(0).toInt();
+                                   QSqlQuery wlistanegra(db);
+                                   wlistanegra.exec("SELECT Codigo,Descripcion,Marca FROM ReportDocumento");
+                                   QProgressDialog progressMenu("Actualizando Documentos... Espera por favor", "Cancelar", 0, cuenta);
+                                   progressMenu.setWindowModality(Qt::WindowModal);
+                                   progressMenu.show();
+                                   QTest::qWait(20);
+                                   comienzo=0;
+                                   int cantidad=1;
+                                   while(wlistanegra.next())
+                                   {
+                                        if (cantidad == 1)
+                                        {
+                                            DB.transaction();
+                                        }
+                                        progressMenu.setValue(comienzo++);
+                                        if (progressMenu.wasCanceled())
+                                            break;
+                                        QString DatCodigo = wlistanegra.value(0).toString();
+                                        QString DatNombre = wlistanegra.value(1).toString();
+                                        QString DatMarca = wlistanegra.value(2).toString();
+                                        QSqlQuery RecDat(DB);
+                                        RecDat.exec("SELECT Codigo,Descripcion,Marca FROM ReportDocumento WHERE Codigo='"+DatCodigo+"'");
+                                        RecDat.first();
+                                        if (RecDat.isSelect())
+                                        {
+                                            QString ValIp = RecDat.value(0).toString();
+                                            if (DatCodigo != ValIp)
+                                            {
+                                                QSqlQuery Wdark(DB);
+                                                Wdark.prepare("INSERT INTO ReportDocumento (Codigo,Descripcion,Marca)"
+                                                              "VALUES (:Codigo,:Descripcion,:Marca)");
+                                                Wdark.bindValue(":Codigo", DatCodigo);
+                                                Wdark.bindValue(":Descripcion", DatNombre);
+                                                Wdark.bindValue(":Marca", DatMarca);
+                                                Wdark.exec();
+                                            }
+                                            else
+                                            {
+                                                QSqlQuery Wwhite(DB);
+                                                Wwhite.exec("UPDATE ReportDocumento SET Codigo='"+DatCodigo+"',Descripcion='"+DatNombre+"',Marca='"+DatMarca+"' WHERE Codigo='"+DatCodigo+"'");
+                                            }
+                                        }
+                                        cantidad++;
+                                        if (cantidad == 50)
+                                        {
+                                            cantidad=1;
+                                            DB.commit();
+                                        }
+                                   }
+                                   progressMenu.setValue(cuenta);
+                                   DB.commit();
+                               }
+                           }
+                           if (i==51)
+                           {
+                               QSqlQuery queryA(SM);
+                               queryA.exec("SELECT count() FROM sqlite_master WHERE type='table' AND name='Chequeos'");
+                               queryA.first();
+                               if (queryA.isValid())
+                               {
+                                   QString cantidad41, cantidad42;
+                                   QSqlQuery query39(db);
+                                   query39.exec("SELECT CheckVerContorno,CheckLimitarVista FROM Chequeos WHERE id=2");
+                                   query39.first();
+                                   if (query39.isValid())
+                                   {
+                                        cantidad41=query39.value(0).toString();
+                                        cantidad42=query39.value(1).toString();
+                                        QSqlQuery red(DB);
+                                        red.exec("UPDATE Chequeos SET CheckVerContorno='"+cantidad41+"',CheckLimitarVista='"+cantidad42+"' WHERE id=2");
+                                   }
+                               }
+                           }
+                           if (i == 52)
+                           {
+                               QSqlQuery queryA(SM);
+                               queryA.exec("SELECT count() FROM sqlite_master WHERE type='table' AND name='Report'");
+                               queryA.first();
+                               if (queryA.isValid())
+                               {
+                                   QSqlQuery wlistanegr(db);
+                                   wlistanegr.exec("SELECT COUNT(report_id) as Cantidad FROM Report");
+                                   int cuenta, comienzo;
+                                   wlistanegr.first();
+                                   cuenta = wlistanegr.value(0).toInt();
+                                   QSqlQuery wlistanegra(db);
+                                   wlistanegra.exec("SELECT report_name,report_descrip,report_source,report_grade,report_table FROM Report");
+                                   QProgressDialog progressMenu("Actualizando Reportes... Espera por favor", "Cancelar", 0, cuenta);
+                                   progressMenu.setWindowModality(Qt::WindowModal);
+                                   progressMenu.show();
+                                   QTest::qWait(20);
+                                   comienzo=0;
+                                   int cantidad=1;
+                                   while(wlistanegra.next())
+                                   {
+                                        if (cantidad == 1)
+                                        {
+                                            DB.transaction();
+                                        }
+                                        progressMenu.setValue(comienzo++);
+                                        if (progressMenu.wasCanceled())
+                                            break;
+                                        QString DatName = wlistanegra.value(0).toString();
+                                        QString DatDescrip = wlistanegra.value(1).toString();
+                                        QString DatSource = wlistanegra.value(2).toString();
+                                        int DatGrade = wlistanegra.value(3).toInt();
+                                        QString DatTabla = wlistanegra.value(4).toString();
+                                        QSqlQuery RecDat(DB);
+                                        RecDat.exec("SELECT report_name,report_descrip,report_source,report_grade,report_table FROM Report WHERE report_name='"+DatName+"'");
+                                        RecDat.first();
+                                        if (RecDat.isSelect())
+                                        {
+                                            QString ValIp = RecDat.value(1).toString();
+                                            if (DatName != ValIp)
+                                            {
+                                                QSqlQuery Wdark(DB);
+                                                Wdark.prepare("INSERT INTO Report (report_name,report_descrip,report_source,report_grade,report_table)"
+                                                              "VALUES (:report_name,:report_descrip,:report_source,:report_grade,:report_table)");
+                                                Wdark.bindValue(":report_name", DatName);
+                                                Wdark.bindValue(":report_descrip", DatDescrip);
+                                                Wdark.bindValue(":report_source", DatSource);
+                                                Wdark.bindValue(":report_grade", DatGrade);
+                                                Wdark.bindValue(":report_table", DatTabla);
+                                                Wdark.exec();
+                                            }
+                                            else
+                                            {
+                                                QSqlQuery Wwhite(DB);
+                                                Wwhite.exec("UPDATE Report SET report_name='"+DatName+"',report_descrip='"+DatDescrip+"',report_source='"+DatSource+"',report_grade="+DatGrade+",report_table='"+DatTabla+"' WHERE report_name='"+DatName+"'");
+                                            }
+                                        }
+                                        cantidad++;
+                                        if (cantidad == 50)
+                                        {
+                                            cantidad=1;
+                                            DB.commit();
+                                        }
+                                   }
+                                   progressMenu.setValue(cuenta);
+                                   DB.commit();
+                               }
+                           }
+                           if (i == 53)
+                           {
+                               QSqlQuery queryA(SM);
+                               queryA.exec("SELECT count() FROM sqlite_master WHERE type='table' AND name='Smtp'");
+                               queryA.first();
+                               if (queryA.isValid())
+                               {
+                                   QSqlQuery wlistanegr(db);
+                                   wlistanegr.exec("SELECT COUNT(id) as Cantidad FROM Smtp");
+                                   int cuenta, comienzo;
+                                   wlistanegr.first();
+                                   cuenta = wlistanegr.value(0).toInt();
+                                   QSqlQuery wlistanegra(db);
+                                   wlistanegra.exec("SELECT Correo,smptserver,Clave,Autenticacion,SSL,User,Port FROM Smtp");
+                                   QProgressDialog progressMenu("Actualizando emails... Espera por favor", "Cancelar", 0, cuenta);
+                                   progressMenu.setWindowModality(Qt::WindowModal);
+                                   progressMenu.show();
+                                   QTest::qWait(20);
+                                   comienzo=0;
+                                   int cantidad=1;
+                                   while(wlistanegra.next())
+                                   {
+                                        if (cantidad == 1)
+                                        {
+                                            DB.transaction();
+                                        }
+                                        progressMenu.setValue(comienzo++);
+                                        if (progressMenu.wasCanceled())
+                                            break;
+                                        QString DatName = wlistanegra.value(0).toString();
+                                        QString DatDescrip = wlistanegra.value(1).toString();
+                                        QString DatSource = wlistanegra.value(2).toString();
+                                        QString DatGrade = wlistanegra.value(3).toString();
+                                        QString DatTabla = wlistanegra.value(4).toString();
+                                        QString DatUser = wlistanegra.value(5).toString();
+                                        QString DatPort = wlistanegra.value(6).toString();
+                                        QSqlQuery RecDat(DB);
+                                        RecDat.exec("SELECT Correo,smptserver,Clave,Autenticacion,SSL,User,Port FROM Smtp WHERE Correo='"+DatName+"'");
+                                        RecDat.first();
+                                        if (RecDat.isSelect())
+                                        {
+                                            QString ValIp = RecDat.value(1).toString();
+                                            if (DatName != ValIp)
+                                            {
+                                                QSqlQuery Wdark(DB);
+                                                Wdark.prepare("INSERT INTO Smtp (Correo,smptserver,Clave,Autenticacion,SSL,User,Port)"
+                                                              "VALUES (:Correo,:smptserver,:Clave,:Autenticacion,:SSL,:User,:Port)");
+                                                Wdark.bindValue(":Correo", DatName);
+                                                Wdark.bindValue(":smptserver", DatDescrip);
+                                                Wdark.bindValue(":Clave", DatSource);
+                                                Wdark.bindValue(":Autenticacion", DatGrade);
+                                                Wdark.bindValue(":SSL", DatTabla);
+                                                Wdark.bindValue(":User", DatUser);
+                                                Wdark.bindValue(":Port", DatPort);
+                                                Wdark.exec();
+                                            }
+                                            else
+                                            {
+                                                QSqlQuery Wwhite(DB);
+                                                Wwhite.exec("UPDATE Smtp SET Correo='"+DatName+"',smptserver='"+DatDescrip+"',Clave='"+DatSource+"',Autenticacion="+DatGrade+",SSL='"+DatTabla+"',User='"+DatUser+"',Port='"+DatPort+"' WHERE Correo='"+DatName+"'");
+                                            }
+                                        }
+                                        cantidad++;
+                                        if (cantidad == 50)
+                                        {
+                                            cantidad=1;
+                                            DB.commit();
+                                        }
+                                   }
+                                   progressMenu.setValue(cuenta);
+                                   DB.commit();
+                               }
+                           }
                        }
-                       progress.setValue(47);
+                       progress.setValue(54);
                        DB.close();
                        db.close();
                        SM.close();

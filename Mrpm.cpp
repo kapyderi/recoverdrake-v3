@@ -135,9 +135,7 @@ void Mrpm::Comprobar()
 void Mrpm::Valor(QString valor, QString Logs)
 {
     if (valor == "Quitar")
-    {
         CierreTotal = 1;
-    }
     if (Logs == "S")
         Log = "S";
     else
@@ -149,17 +147,13 @@ void Mrpm::on_pushButton_2_clicked()
     if (CierreTotal == 1)
     {
         if (Log == "S")
-        {
             system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-        }
         emit Cerrar();
     }
     else
     {
         if (Log == "S")
-        {
             system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-        }
         close();
     }
 }

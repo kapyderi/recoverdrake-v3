@@ -49,7 +49,8 @@ void DrakeProcesos::Valor(int valor, int valor1)
 
 void DrakeProcesos::iniciarProceso()
 {
-    if (comandos.count() == 0){
+    if (comandos.count() == 0)
+    {
         emit finProceso();
         return;
     }
@@ -71,6 +72,11 @@ void DrakeProcesos::iniciarProceso()
         comand = this->comandos.at(0);
         ValorComand = QString::number(DatoTotal-comandos.count());
     }
+    if (DatoRef == 3)
+    {
+        comand = this->comandos.at(0);
+        ValorComand = comand;
+    }
     this->crearConectarProceso();
     proceso->start(comando);
     comandos.removeAt(0);
@@ -88,7 +94,8 @@ void DrakeProcesos::crearConectarProceso()
 
 void DrakeProcesos::destruirProceso()
 {
-    if (proceso != 0){
+    if (proceso != 0)
+    {
         disconnect(proceso, SIGNAL(error(QProcess::ProcessError)), this, SLOT(error(QProcess::ProcessError)));
         disconnect(proceso, SIGNAL(finished ( int, QProcess::ExitStatus)), this, SLOT(finalizado(int,QProcess::ExitStatus)));
         disconnect(proceso, SIGNAL(readyReadStandardError ()), this, SLOT(leerError()));
@@ -168,19 +175,42 @@ void DrakeProcesos::finalizado (int exitCode, QProcess::ExitStatus exitStatus )
                 }
             }
         }
+        else
+        {
+            if (exitStatus == QProcess::CrashExit)
+            {
+                system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'ERROR: El proceso termino inesperadamente.\'\"");
+                emit publicarDatos(tr("El proceso termino inesperadamente."));
+            }
+            else if (exitCode != 0)
+            {
+                system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'PROBLEMA: El proceso no se ha realizado satisfactoriamente.\'\"");
+                emit publicarDatos(tr("El proceso no se ha realizado satisfactoriamente."));
+            }
+            else
+            {
+                system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'OK: Proceso realizado correctamente.\'\"");
+                emit publicarDatos(tr("Proceso realizado correctamente."));
+            }
+        }
     }
     this->iniciarProceso();
 }
 
 void DrakeProcesos::error(QProcess::ProcessError errores)
 {
+    Q_UNUSED(errores);
     system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'ERROR: El proceso ha generado un error.\'\"");
-    QMessageBox m;
-    if (Stilo == "A")
-        m.setStyleSheet("background-color: "+Fcantidad51+"; color: "+Fcantidad50+"; font-size: "+Fcantidad49+"pt; font-style: "+FDatoTalla+"; font-family: "+Fcantidad47+"; font-weight: "+FDatoNegro+"");
-    m.setText(tr(QString::fromUtf8("<b>El proceso ha generado un error.<p>Se actualizarán procesos internos.<p>Se paciente...")));
-    m.exec();
-    this->iniciarProceso();
+    if (DatoRef != 3)
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+Fcantidad51+"; color: "+Fcantidad50+"; font-size: "+Fcantidad49+"pt; font-style: "+FDatoTalla+"; font-family: "+Fcantidad47+"; font-weight: "+FDatoNegro+"");
+        m.setText(tr(QString::fromUtf8("<b>El proceso ha generado un error.<p>Se actualizarán procesos internos.<p>Se paciente...")));
+        m.exec();
+    }
+    emit finProceso();
+    return;
 }
 
 void DrakeProcesos::leerError()

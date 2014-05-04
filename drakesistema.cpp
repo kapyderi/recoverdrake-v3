@@ -17,26 +17,18 @@ QString drakeSistema::getVirtual()
     QStringList argumentosFind;
     QStringList argumentosCut;
     QByteArray TipVirtual;
-
     procesoFind=new QProcess(this);
     procesoCut=new QProcess(this);
-
     argumentosFind << "/etc/init.d/vboxdrv";
     argumentosCut << "-d" << "/" << "-f4";
-
     procesoFind->setStandardOutputProcess(procesoCut);
-
     procesoFind->start("find",argumentosFind);
     procesoCut->start("cut",argumentosCut);
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesoFind->waitForFinished();
     procesoCut->waitForFinished();
-
     TipVirtual = QString(procesoCut->readAllStandardOutput());
-
     delete procesoFind;
     delete procesoCut;
     QString res =  QString(TipVirtual);    
@@ -48,18 +40,12 @@ QString drakeSistema::getDirActual()
 {
     QProcess *procesoDir;
     QByteArray DirActual;
-
     procesoDir=new QProcess(this);
-
     procesoDir->start("pwd");
-
     if (! procesoDir->waitForStarted())
         return QString("");
-
     procesoDir->waitForFinished();
-
     DirActual = QString(procesoDir->readAllStandardOutput());
-
     delete procesoDir;
     QString res =  QString(DirActual);
     res.chop(1);
@@ -70,18 +56,12 @@ QString drakeSistema::getRedes()
 {
     QProcess *procesoDir;
     QByteArray red;
-
     procesoDir=new QProcess(this);
-
     procesoDir->start("ifconfig");
-
     if (! procesoDir->waitForStarted())
         return QString("");
-
     procesoDir->waitForFinished();
-
     red = QString(procesoDir->readAllStandardOutput());
-
     delete procesoDir;
     QString res =  QString(red);
     res.chop(1);
@@ -93,22 +73,15 @@ QString drakeSistema::getRpms()
     QProcess *procesoDir;
     QStringList argumentosFind;
     QByteArray rpm;
-
     procesoDir=new QProcess(this);
-
     argumentosFind << "-qa" << "--last";
-
     procesoDir->start("rpm",argumentosFind);
-
     if (! procesoDir->waitForStarted())
     {
         return QString("");
     }
-
     procesoDir->waitForFinished();
-
     rpm = QString(procesoDir->readAllStandardOutput());
-
     delete procesoDir;
     QString res =  QString(rpm);
     res.chop(1);
@@ -154,26 +127,18 @@ QString drakeSistema::getTipKernel()
     QStringList argumentosUname;
     QStringList argumentosCut;
     QByteArray TipKernel;
-
     procesoUname=new QProcess(this);
     procesoCut=new QProcess(this);
-
     argumentosUname << "-r";
     argumentosCut << "-d" << "-" << "-f2";
-
     procesoUname->setStandardOutputProcess(procesoCut);
-
     procesoUname->start("uname",argumentosUname);
     procesoCut->start("cut",argumentosCut);
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesoUname->waitForFinished();
     procesoCut->waitForFinished();
-
     TipKernel = QString(procesoCut->readAllStandardOutput());
-
     delete procesoUname;
     delete procesoCut;
     QString res =  QString(TipKernel);
@@ -187,26 +152,18 @@ QString drakeSistema::getVerKernel()
     QStringList argumentosUname;
     QStringList argumentosCut;
     QByteArray VerKernel;
-
     procesoUname=new QProcess(this);
     procesoCut=new QProcess(this);
-
     argumentosUname << "-r";
     argumentosCut << "-d" << "-" << "-f1";
-
     procesoUname->setStandardOutputProcess(procesoCut);
-
     procesoUname->start("uname",argumentosUname);
     procesoCut->start("cut",argumentosCut);
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesoUname->waitForFinished();
     procesoCut->waitForFinished();
-
     VerKernel = QString(procesoCut->readAllStandardOutput());
-
     delete procesoUname;
     delete procesoCut;
     QString res = QString(VerKernel);
@@ -245,26 +202,18 @@ QString drakeSistema::getRevKernel()
     QStringList argumentosUname;
     QStringList argumentosCut;
     QByteArray RevKernel;
-
     procesoUname=new QProcess(this);
     procesoCut=new QProcess(this);
-
     argumentosUname << "-r";
     argumentosCut << "-d" << "-" << "-f3";
-
     procesoUname->setStandardOutputProcess(procesoCut);
-
     procesoUname->start("uname",argumentosUname);
     procesoCut->start("cut",argumentosCut);
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesoUname->waitForFinished();
     procesoCut->waitForFinished();
-
     RevKernel = QString(procesoCut->readAllStandardOutput());
-
     delete procesoUname;
     delete procesoCut;
     QString res =  QString(RevKernel);
@@ -278,30 +227,22 @@ QString drakeSistema::getUser()
     QStringList argumentosawk;
     QStringList argumentosCut;
     QByteArray usuario;
-
     procesoawk=new QProcess(this);
     procesowho=new QProcess(this);
     procesoCut=new QProcess(this);
-
     argumentosawk << "NR<(NF-NR) {print $1}";
     argumentosCut << "-d" << " " << "-f1";
-
     procesowho->setStandardOutputProcess(procesoawk);
     procesoawk->setStandardOutputProcess(procesoCut);
-
     procesowho->start("who");
     procesoawk->start("awk",argumentosawk);
     procesoCut->start("cut",argumentosCut);
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesowho->waitForFinished();
     procesoawk->waitForFinished();
     procesoCut->waitForFinished();
-
     usuario = QString(procesoCut->readAllStandardOutput());
-
     delete procesowho;
     delete procesoawk;
     delete procesoCut;
@@ -315,9 +256,7 @@ QString drakeSistema::getArquitectura()
     QProcess *procesoCut;
     QStringList argumentosCut;
     QByteArray arquitectura;
-
     procesoCut=new QProcess(this);
-
     drakeSistema drake;
     Distro = drake.getDistrop();
     if (Distro=="Mandriva")
@@ -329,14 +268,10 @@ QString drakeSistema::getArquitectura()
         argumentosCut << "-c" << "cut -d ' ' -f6 /etc/release";
     }
     procesoCut->start("/bin/sh", argumentosCut);
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesoCut->waitForFinished();
-
     arquitectura = procesoCut->readAllStandardOutput();
-
     delete procesoCut;
     QString res =  QString(arquitectura);
     res.chop(1);
@@ -348,20 +283,13 @@ QString drakeSistema::getLinux()
     QProcess *procesoCut;
     QStringList argumentosCut;
     QByteArray Linux;
-
     procesoCut=new QProcess(this);
-
     argumentosCut << "/etc/issue";
-
     procesoCut->start("cat", argumentosCut);
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesoCut->waitForFinished();
-
     Linux = procesoCut->readAllStandardOutput();
-
     delete procesoCut;
     QString res =  QString(Linux);
     res.chop(5);
@@ -374,20 +302,13 @@ QString drakeSistema::getDistrop()
     QStringList argumentosCut;
     QByteArray Distros;
     QString Distro;
-
     procesoCut=new QProcess(this);
-
     argumentosCut << "/etc/issue";
-
     procesoCut->start("cat", argumentosCut);
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesoCut->waitForFinished();
-
     Distros = procesoCut->readAllStandardOutput();
-
     delete procesoCut;
     Distro = QString(Distros);
     Distro=Distro.split(" ").value(0);
@@ -401,20 +322,13 @@ QString drakeSistema::getRepositorio()
     QProcess *procesoCut;
     QStringList argumentosCut;
     QByteArray repo;
-
     procesoCut=new QProcess(this);
-
     argumentosCut << "--list-media";
-
     procesoCut->start("urpmq", argumentosCut);
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesoCut->waitForFinished();
-
     repo = procesoCut->readAllStandardOutput();
-
     delete procesoCut;
     QString res =  QString(repo);
     res.chop(1);
@@ -425,18 +339,12 @@ QString drakeSistema::getPci()
 {
     QProcess *procesoCut;
     QByteArray Pci;
-
     procesoCut=new QProcess(this);
-
     procesoCut->start("lspci");
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesoCut->waitForFinished();
-
     Pci = procesoCut->readAllStandardOutput();
-
     delete procesoCut;
     QString res =  QString(Pci);
     res.chop(1);
@@ -448,20 +356,13 @@ QString drakeSistema::getEspacio()
     QProcess *procesoCut;
     QStringList argumentosCut;
     QByteArray du;
-
     procesoCut=new QProcess(this);
-
     argumentosCut << "/home";
-
     procesoCut->start("du", argumentosCut);
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesoCut->waitForFinished();
-
     du = procesoCut->readAllStandardOutput();
-
     delete procesoCut;
     QString res =  QString(du);
     res.chop(1);
@@ -472,18 +373,12 @@ QString drakeSistema::getModulo()
 {
     QProcess *procesoCut;
     QByteArray Mod;
-
     procesoCut=new QProcess(this);
-
     procesoCut->start("lsmod");
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesoCut->waitForFinished();
-
     Mod = procesoCut->readAllStandardOutput();
-
     delete procesoCut;
     QString res =  QString(Mod);
     res.chop(1);
@@ -576,20 +471,13 @@ QString drakeSistema::getFree()
     QStringList argumentosFree;
     QByteArray Frees;
     QString Free;
-
     procesoFree=new QProcess(this);
-
     argumentosFree << "-o";
-
     procesoFree->start("free", argumentosFree);
-
     if (! procesoFree->waitForStarted())
         return QString("");
-
     procesoFree->waitForFinished();
-
     Frees = procesoFree->readAllStandardOutput();
-
     delete procesoFree;
     Free = QString(Frees);
     QString res =  QString("        "+Free+"");
@@ -602,20 +490,13 @@ QString drakeSistema::getDisco()
     QProcess *procesoFree;
     QStringList argumentosFree;
     QByteArray Total;
-
     procesoFree=new QProcess(this);
-
     argumentosFree << "-h";
-
     procesoFree->start("df", argumentosFree);
-
     if (! procesoFree->waitForStarted())
         return QString("");
-
     procesoFree->waitForFinished();
-
     Total = procesoFree->readAllStandardOutput();
-
     delete procesoFree;
     QString res = QString(Total);
     res.chop(0);
@@ -627,20 +508,13 @@ QString drakeSistema::getDiscR()
     QProcess *procesoFree;
     QStringList argumentosFree;
     QByteArray Raiz;
-
     procesoFree=new QProcess(this);
-
     argumentosFree << "-H" << "/";
-
     procesoFree->start("df", argumentosFree);
-
     if (! procesoFree->waitForStarted())
         return QString("");
-
     procesoFree->waitForFinished();
-
     Raiz = procesoFree->readAllStandardOutput();
-
     delete procesoFree;
     QString res = QString(Raiz);
     res.chop(0);
@@ -702,20 +576,13 @@ QString drakeSistema::getIP()
     QProcess *procesoFree;
     QStringList argumentosFree;
     QByteArray ip;
-
     procesoFree=new QProcess(this);
-
     argumentosFree << "http://cualesmiip.e-mision.net:999/";
-
     procesoFree->start("curl", argumentosFree);
-
     if (! procesoFree->waitForStarted())
         return QString("");
-
     procesoFree->waitForFinished();
-
     ip = procesoFree->readAllStandardOutput();
-
     delete procesoFree;
     QString res = QString(ip);
     res.chop(0);
@@ -960,19 +827,15 @@ QString drakeSistema::getRelease()
     QProcess *procesoCut, *procesoCut2, *procesoCut3, *procesoCut4;
     QStringList argumentosCut, argumentosCut2, argumentosCut3, argumentosCut4;
     QByteArray release;
-
     procesoCut=new QProcess(this);
     procesoCut2=new QProcess(this);
     procesoCut3=new QProcess(this);
     procesoCut4=new QProcess(this);
-
     procesoCut->setStandardOutputProcess(procesoCut2);
     procesoCut2->setStandardOutputProcess(procesoCut3);
     procesoCut3->setStandardOutputProcess(procesoCut4);
-
     drakeSistema drake;
     Distro = drake.getDistrop();
-
     argumentosCut << "-qa";
     if (Distro=="Mandriva")
     {
@@ -984,22 +847,17 @@ QString drakeSistema::getRelease()
     }
     argumentosCut3 << "-v" << "common";
     argumentosCut4 << "-f3" << "-d" << "-";
-
     procesoCut->start("rpm", argumentosCut);
     procesoCut2->start("grep", argumentosCut2);
     procesoCut3->start("grep", argumentosCut3);
     procesoCut4->start("cut", argumentosCut4);
-
     if (! procesoCut4->waitForStarted())
         return QString("");
-
     procesoCut->waitForFinished();
     procesoCut2->waitForFinished();
     procesoCut3->waitForFinished();
     procesoCut4->waitForFinished();
-
     release = procesoCut4->readAllStandardOutput();
-
     delete procesoCut;
     delete procesoCut2;
     delete procesoCut3;
@@ -1015,26 +873,18 @@ QString drakeSistema::getIPRouter()
     QStringList argumentosRoute;
     QStringList argumentosGrep;
     QByteArray IpRouter;
-
     procesoCat=new QProcess(this);
     procesoGrep=new QProcess(this);
-
     argumentosRoute << "-n";
     argumentosGrep << "UG";
-
     procesoCat->setStandardOutputProcess(procesoGrep);
-
     procesoCat->start("route", argumentosRoute);
     procesoGrep->start("grep", argumentosGrep);
-
     if (! procesoGrep->waitForStarted())
         return QString("");
-
     procesoCat->waitForFinished();
     procesoGrep->waitForFinished();
-
     IpRouter = procesoGrep->readAllStandardOutput();
-
     delete procesoCat;
     delete procesoGrep;
     QString res = QString(IpRouter);
@@ -1048,26 +898,18 @@ QString drakeSistema::getInternet()
     QStringList argumentosRoute;
     QStringList argumentosGrep;
     QByteArray IpRouter;
-
     procesoCat=new QProcess(this);
     procesoGrep=new QProcess(this);
-
     argumentosRoute << "-n";
     argumentosGrep << "UG";
-
     procesoCat->setStandardOutputProcess(procesoGrep);
-
     procesoCat->start("route", argumentosRoute);
     procesoGrep->start("grep", argumentosGrep);
-
     if (! procesoGrep->waitForStarted())
         return QString("");
-
     procesoCat->waitForFinished();
     procesoGrep->waitForFinished();
-
     IpRouter = procesoGrep->readAllStandardOutput();
-
     delete procesoCat;
     delete procesoGrep;
     QString res = QString(IpRouter);
@@ -1080,20 +922,13 @@ QString drakeSistema::getInfoPro()
     QProcess *procesoCat;
     QStringList argumentosCat;
     QByteArray Cat;
-
     procesoCat=new QProcess(this);
-
     argumentosCat << "/proc/cpuinfo";
-
     procesoCat->start("cat", argumentosCat);
-
     if (! procesoCat->waitForStarted())
         return QString("");
-
     procesoCat->waitForFinished();
-
     Cat = procesoCat->readAllStandardOutput();
-
     delete procesoCat;
     QString res = QString(Cat);
     res.chop(1);
@@ -1106,26 +941,18 @@ QString drakeSistema::getMac(QString Valor)
     QStringList argumentosRoute;
     QStringList argumentosGrep;
     QByteArray IpRouter;
-
     procesoCat=new QProcess(this);
     procesoGrep=new QProcess(this);
-
     argumentosRoute << "-n" << "-e" << ""+Valor+"";
     argumentosGrep << ""+Valor+"";
-
     procesoCat->setStandardOutputProcess(procesoGrep);
-
     procesoCat->start("arp", argumentosRoute);
     procesoGrep->start("grep", argumentosGrep);
-
     if (! procesoGrep->waitForStarted())
         return QString("");
-
     procesoCat->waitForFinished();
     procesoGrep->waitForFinished();
-
     IpRouter = procesoGrep->readAllStandardOutput();
-
     delete procesoCat;
     delete procesoGrep;
     QString res = QString(IpRouter);
@@ -1345,25 +1172,17 @@ QString drakeSistema::getResolution()
     QProcess *procesoCat, *procesoGrep;
     QStringList argumentosGrep;
     QByteArray Label;
-
     procesoCat=new QProcess(this);
     procesoGrep=new QProcess(this);
-
     argumentosGrep << "*";
-
     procesoCat->setStandardOutputProcess(procesoGrep);
-
     procesoCat->start("xrandr");
     procesoGrep->start("grep", argumentosGrep);
-
     if (! procesoGrep->waitForStarted())
         return QString("");
-
     procesoCat->waitForFinished();
     procesoGrep->waitForFinished();
-
     Label = procesoGrep->readAllStandardOutput();
-
     delete procesoCat;
     delete procesoGrep;
     QString res = QString(Label);
@@ -1376,26 +1195,18 @@ QString drakeSistema::getResolucion()
     QProcess *procesoCat, *procesoGrep;
     QStringList argumentosCat, argumentosGrep;
     QByteArray Label;
-
     procesoCat=new QProcess(this);
     procesoGrep=new QProcess(this);
-
     argumentosCat << "-q";
     argumentosGrep << "Screen";
-
     procesoCat->setStandardOutputProcess(procesoGrep);
-
     procesoCat->start("xrandr", argumentosCat);
     procesoGrep->start("grep", argumentosGrep);
-
     if (! procesoGrep->waitForStarted())
         return QString("");
-
     procesoCat->waitForFinished();
     procesoGrep->waitForFinished();
-
     Label = procesoGrep->readAllStandardOutput();
-
     delete procesoCat;
     delete procesoGrep;
     QString res = QString(Label);
@@ -1407,18 +1218,12 @@ QString drakeSistema::getHostname()
 {
     QProcess *procesoCat;
     QByteArray Label;
-
     procesoCat=new QProcess(this);
-
     procesoCat->start("hostname");
-
     if (! procesoCat->waitForStarted())
         return QString("");
-
     procesoCat->waitForFinished();
-
     Label = procesoCat->readAllStandardOutput();
-
     delete procesoCat;
     QString res = QString(Label);
     res.chop(1);
@@ -1429,18 +1234,12 @@ QString drakeSistema::getBios()
 {
     QProcess *procesoXset;
     QByteArray TipCaps;
-
     procesoXset=new QProcess(this);
-
     procesoXset->start("dmidecode");
-
     if (! procesoXset->waitForStarted())
         return QString("");
-
     procesoXset->waitForFinished();
-
     TipCaps = QString(procesoXset->readAllStandardOutput());
-
     delete procesoXset;
     QString res = QString(TipCaps);
     res.chop(1);
@@ -1453,26 +1252,18 @@ QString drakeSistema::getEssid(QString ip)
     QStringList argumentosRoute;
     QStringList argumentosGrep;
     QByteArray IpRouter;
-
     procesoCat=new QProcess(this);
     procesoGrep=new QProcess(this);
-
     argumentosRoute << ip << "scan";
     argumentosGrep << "ESSID";
-
     procesoCat->setStandardOutputProcess(procesoGrep);
-
     procesoCat->start("iwlist", argumentosRoute);
     procesoGrep->start("grep", argumentosGrep);
-
     if (! procesoGrep->waitForStarted())
         return QString("");
-
     procesoCat->waitForFinished();
     procesoGrep->waitForFinished();
-
     IpRouter = procesoGrep->readAllStandardOutput();
-
     delete procesoCat;
     delete procesoGrep;
     QString res = QString(IpRouter);
@@ -1486,26 +1277,18 @@ QString drakeSistema::getEthernet()
     QStringList argumentosFind;
     QStringList argumentosCut;
     QByteArray TipVirtual;
-
     procesoFind=new QProcess(this);
     procesoCut=new QProcess(this);
-
     argumentosFind << "eth0";
     argumentosCut << "RX bytes";
-
     procesoFind->setStandardOutputProcess(procesoCut);
-
     procesoFind->start("ifconfig",argumentosFind);
     procesoCut->start("grep",argumentosCut);
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesoFind->waitForFinished();
     procesoCut->waitForFinished();
-
     TipVirtual = QString(procesoCut->readAllStandardOutput());
-
     delete procesoFind;
     delete procesoCut;
     QString res =  QString(TipVirtual);

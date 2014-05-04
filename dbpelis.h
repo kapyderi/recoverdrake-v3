@@ -17,7 +17,7 @@ class dbpelis : public QDialog {
 public:
     dbpelis(QWidget *parent = 0);
     ~dbpelis();
-    void Valor(QString valor);
+    void Valor(QString valor, QString Usuario);
 
 signals:
     void Cerrar();
@@ -50,6 +50,11 @@ private:
     QString cantidad51;
     int CierreTotal;
     QString Stilo;
+    QString IDUser;
+//    QFont font;
+//    QColor color, color1;
+//    QPen pen;
+//    QPen pen1;
 
 private slots:
     void on_pushButton_12_clicked();

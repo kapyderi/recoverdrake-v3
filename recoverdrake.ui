@@ -32,7 +32,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="recoverdrake.qrc">
-    <normaloff>:/Imagenes/kapyderi.jpg</normaloff>:/Imagenes/kapyderi.jpg</iconset>
+    <normaloff>:/Imagenes/logo.png</normaloff>:/Imagenes/logo.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>
@@ -84,9 +84,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
+         <y>-208</y>
          <width>1023</width>
-         <height>845</height>
+         <height>822</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_82">
@@ -146,7 +146,7 @@
                <enum>QTabWidget::Triangular</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>1</number>
               </property>
               <property name="movable">
                <bool>true</bool>
@@ -656,7 +656,7 @@ p, li { white-space: pre-wrap; }
                        </property>
                        <property name="icon">
                         <iconset resource="recoverdrake.qrc">
-                         <normaloff>:/Imagenes/prisma.png</normaloff>:/Imagenes/prisma.png</iconset>
+                         <normaloff>:/Imagenes/Buscar.png</normaloff>:/Imagenes/Buscar.png</iconset>
                        </property>
                        <property name="iconSize">
                         <size>
@@ -1620,6 +1620,94 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;DB&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;de&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Claves&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="11" column="3">
+                      <widget class="QPushButton" name="pushButton_66">
+                       <property name="minimumSize">
+                        <size>
+                         <width>75</width>
+                         <height>75</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>75</width>
+                         <height>75</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="recoverdrake.qrc">
+                         <normaloff>:/Imagenes/URI_www_kapyderi_blogspog.png</normaloff>:/Imagenes/URI_www_kapyderi_blogspog.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>60</width>
+                         <height>60</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="12" column="3">
+                      <widget class="QLabel" name="label_178">
+                       <property name="text">
+                        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:7pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Generador&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;de&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;QR&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="11" column="5">
+                      <widget class="QPushButton" name="pushButton_116">
+                       <property name="minimumSize">
+                        <size>
+                         <width>75</width>
+                         <height>75</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>75</width>
+                         <height>75</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="recoverdrake.qrc">
+                         <normaloff>:/Imagenes/comprimir.png</normaloff>:/Imagenes/comprimir.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>60</width>
+                         <height>60</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="12" column="5">
+                      <widget class="QLabel" name="label_180">
+                       <property name="text">
+                        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:7pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Compresor&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -3750,11 +3838,11 @@ font: Bold;</string>
                     </item>
                     <item row="3" column="0" colspan="2">
                      <widget class="QTextEdit" name="textEdit_4">
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>58</height>
-                       </size>
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
                       </property>
                      </widget>
                     </item>
@@ -9355,23 +9443,11 @@ p, li { white-space: pre-wrap; }
            <attribute name="title">
             <string>Utilidades</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_61">
-            <item row="1" column="2">
-             <widget class="QPushButton" name="pushButton_9">
-              <property name="styleSheet">
-               <string notr="true">font: 7pt &quot;Sans Serif&quot;;
-font: bold;
-color: rgb(0, 0, 255);</string>
-              </property>
-              <property name="text">
-               <string>Mostrar &quot;Caracteristicas especificas de tu sistema GNU/Linux&quot;</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0" colspan="3">
+           <layout class="QGridLayout" name="gridLayout_104">
+            <item row="0" column="0" colspan="2">
              <widget class="QTabWidget" name="tabWidget_2">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -9380,7 +9456,7 @@ color: rgb(0, 0, 255);</string>
                <enum>QTabWidget::Triangular</enum>
               </property>
               <property name="currentIndex">
-               <number>0</number>
+               <number>4</number>
               </property>
               <widget class="QWidget" name="tab_13">
                <attribute name="icon">
@@ -10006,6 +10082,9 @@ font: bold;</string>
                   <property name="alternatingRowColors">
                    <bool>true</bool>
                   </property>
+                  <property name="selectionMode">
+                   <enum>QAbstractItemView::SingleSelection</enum>
+                  </property>
                   <property name="selectionBehavior">
                    <enum>QAbstractItemView::SelectRows</enum>
                   </property>
@@ -10014,7 +10093,7 @@ font: bold;</string>
                 <item row="1" column="0">
                  <widget class="QPushButton" name="pushButton_27">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
@@ -10031,7 +10110,7 @@ font: bold;</string>
                 <item row="1" column="1">
                  <widget class="QPushButton" name="pushButton_28">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
@@ -10048,16 +10127,10 @@ font: bold;</string>
                 <item row="1" column="2" colspan="2">
                  <widget class="QPushButton" name="pushButton_20">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>126</width>
-                    <height>26</height>
-                   </size>
                   </property>
                   <property name="text">
                    <string>Vaciar lista</string>
@@ -10066,12 +10139,18 @@ font: bold;</string>
                    <iconset resource="recoverdrake.qrc">
                     <normaloff>:/Imagenes/papelera.png</normaloff>:/Imagenes/papelera.png</iconset>
                   </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
                  </widget>
                 </item>
                 <item row="1" column="5" colspan="2">
                  <widget class="QPushButton" name="pushButton_25">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
@@ -18638,22 +18717,56 @@ font: bold;</string>
               </widget>
              </widget>
             </item>
-            <item row="1" column="0" colspan="2">
-             <widget class="QLabel" name="label_113">
-              <property name="text">
-               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+            <item row="1" column="0">
+             <layout class="QGridLayout" name="gridLayout_61">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_179">
+                <property name="text">
+                 <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:7pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;Recover&lt;/span&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; color:#ff0000;&quot;&gt;Drake&lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; font-style:italic; color:#ff0000;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-size:14pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;v. 2.70.62 T.E.U.&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; font-style:italic; color:#ff0000;&quot;&gt;Proyecto Derix&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;Recover&lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ff0000;&quot;&gt;Drake&lt;/span&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#0000ff;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#0000ff;&quot;&gt;-- &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;Proyecto Derix &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignHCenter|Qt::AlignTop</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_113">
+                <property name="styleSheet">
+                 <string notr="true">font: 10pt &quot;Sans Serif&quot;;
+color: rgb(0, 0, 255);
+font: bold italic;</string>
+                </property>
+                <property name="text">
+                 <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:7pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;vacio&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignHCenter|Qt::AlignTop</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="pushButton_9">
+              <property name="styleSheet">
+               <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold;
+color: rgb(0, 0, 255);</string>
               </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
+              <property name="text">
+               <string>Mostrar &quot;Caracteristicas especificas de tu sistema GNU/Linux&quot;</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="0" colspan="3">
+            <item row="2" column="0" colspan="2">
              <widget class="QGroupBox" name="groupBox_4">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -21106,6 +21219,34 @@ font: Bold;</string>
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="tab_70">
+           <attribute name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/URI_www_kapyderi_blogspog.png</normaloff>:/Imagenes/URI_www_kapyderi_blogspog.png</iconset>
+           </attribute>
+           <attribute name="title">
+            <string>Generador QR</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_103">
+            <item row="0" column="0">
+             <widget class="QMdiArea" name="mdiArea_24"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_71">
+           <attribute name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/comprimir.png</normaloff>:/Imagenes/comprimir.png</iconset>
+           </attribute>
+           <attribute name="title">
+            <string>Kompresor</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_105">
+            <item row="0" column="0">
+             <widget class="QMdiArea" name="mdiArea_25"/>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -21174,6 +21315,17 @@ font: Bold;</string>
     <property name="separatorsCollapsible">
      <bool>true</bool>
     </property>
+    <widget class="QMenu" name="menuFormatos_de_impresion">
+     <property name="title">
+      <string>Formatos de impresion</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/impresora.png</normaloff>:/Imagenes/impresora.png</iconset>
+     </property>
+     <addaction name="actionConfiguracion_manual"/>
+     <addaction name="actionConfiguracion_visual"/>
+    </widget>
     <addaction name="actionActivar_Desactivar_inicio_con_Linux"/>
     <addaction name="actionComprabar_depndencias_RecoverDrake"/>
     <addaction name="actionSugerencias_y_avisos"/>
@@ -21194,7 +21346,10 @@ font: Bold;</string>
     <addaction name="separator"/>
     <addaction name="actionUsuarios"/>
     <addaction name="actionComprobar_dependencias"/>
+    <addaction name="actionRefrescar_dependencias"/>
     <addaction name="actionAjustes_de_ecualizacion"/>
+    <addaction name="actionElegir_tarjeta_de_sonido"/>
+    <addaction name="menuFormatos_de_impresion"/>
     <addaction name="actionOpciones"/>
     <addaction name="separator"/>
     <addaction name="actionReiniciar"/>
@@ -21859,10 +22014,10 @@ font: Bold;</string>
    <widget class="QMenu" name="menuOtros">
     <property name="geometry">
      <rect>
-      <x>526</x>
-      <y>93</y>
+      <x>613</x>
+      <y>99</y>
       <width>310</width>
-      <height>791</height>
+      <height>854</height>
      </rect>
     </property>
     <property name="cursor">
@@ -22382,10 +22537,13 @@ font: Bold;</string>
     <addaction name="actionCrear_gif_animados"/>
     <addaction name="menuLanzador_de_menu_de_Linux"/>
     <addaction name="actionDescargar_torrent"/>
+    <addaction name="actionGenerador_QR"/>
     <addaction name="actionConvertidor_de_medidas"/>
     <addaction name="actionCalculadora"/>
+    <addaction name="actionComprimir_descomprimir"/>
     <addaction name="actionEmuladores"/>
     <addaction name="actionCambiar_imagen_de_inicio_de_sistema"/>
+    <addaction name="actionDescargar_web_completas"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="separator"/>
@@ -23086,6 +23244,8 @@ font: Bold;</string>
     <bool>false</bool>
    </attribute>
    <addaction name="actionSalir"/>
+   <addaction name="separator"/>
+   <addaction name="actionRefrescar_dependencias"/>
    <addaction name="actionComprobar_dependencias"/>
    <addaction name="separator"/>
    <addaction name="actionDuplicar_disco"/>
@@ -23103,6 +23263,7 @@ font: Bold;</string>
    <addaction name="actionCda_mp3"/>
    <addaction name="separator"/>
    <addaction name="actionConsola_como_root"/>
+   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar">
    <property name="font">
@@ -23137,6 +23298,12 @@ font: Bold;</string>
    <property name="whatsThis">
     <string>Barra de tareas interactivas.</string>
    </property>
+   <property name="iconSize">
+    <size>
+     <width>35</width>
+     <height>30</height>
+    </size>
+   </property>
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonTextUnderIcon</enum>
    </property>
@@ -23147,6 +23314,7 @@ font: Bold;</string>
     <bool>false</bool>
    </attribute>
    <addaction name="actionOpciones"/>
+   <addaction name="actionConfiguracion_visual"/>
    <addaction name="actionMantenimiento_de_rpm_s"/>
    <addaction name="actionCrear_USB_Live_Multiboot_Interactivo"/>
    <addaction name="actionMantenimiento_de_repositorios_Interactivo"/>
@@ -28713,7 +28881,11 @@ default connected 1280x1024+0+0 0mm x 0mm
   </action>
   <action name="actionComparador">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/Comparador.png</normaloff>:/Imagenes/Comparador.png</iconset>
    </property>
    <property name="text">
     <string>Comparador</string>
@@ -28820,6 +28992,111 @@ default connected 1280x1024+0+0 0mm x 0mm
    </property>
    <property name="text">
     <string>Encriptar textos</string>
+   </property>
+  </action>
+  <action name="actionDescargar_web_completas">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Descargar web completas</string>
+   </property>
+   <property name="statusTip">
+    <string>http://www.linuxtotal.com.mx/?cont=info_admon_017 -- http://vidalinux.blogspot.com.es/2007/09/como-descargar-una-web-completa-en.html</string>
+   </property>
+  </action>
+  <action name="actionConfiguracion_manual">
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/icono.png</normaloff>:/Imagenes/icono.png</iconset>
+   </property>
+   <property name="text">
+    <string>Configuracion manual</string>
+   </property>
+  </action>
+  <action name="actionConfiguracion_visual">
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/modelo.png</normaloff>:/Imagenes/modelo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Configuracion visual</string>
+   </property>
+  </action>
+  <action name="actionGenerador_QR">
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/URI_www_kapyderi_blogspog.png</normaloff>:/Imagenes/URI_www_kapyderi_blogspog.png</iconset>
+   </property>
+   <property name="text">
+    <string>Generador QR</string>
+   </property>
+  </action>
+  <action name="actionElegir_tarjeta_de_sonido">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/drakhard-mdk.png</normaloff>:/Imagenes/drakhard-mdk.png</iconset>
+   </property>
+   <property name="text">
+    <string>Elegir tarjeta principal de sonido</string>
+   </property>
+   <property name="whatsThis">
+    <string>Alternative method
+
+First you will have to find out the card and device id that you want to set as the default by running aplay -l:
+
+$ aplay -l
+
+**** List of PLAYBACK Hardware Devices ****
+card 0: Intel [HDA Intel], device 0: CONEXANT Analog [CONEXANT Analog]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 0: Intel [HDA Intel], device 1: Conexant Digital [Conexant Digital]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 1: JamLab [JamLab], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 2: Audio [Altec Lansing XT1 - USB Audio], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+
+For example, the last entry in this list has the card ID 2 and the device ID 0. To set this card as the default, you can either use the system-wide file /etc/asound.conf or the user-specific file ~/.asoundrc. You may have to create the file if it does not exist. Then insert the following options with the corresponding card.
+
+pcm.!default {
+	type hw
+	card 2
+}
+
+ctl.!default {
+	type hw           
+	card 2
+}
+</string>
+   </property>
+  </action>
+  <action name="actionComprimir_descomprimir">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/comprimir.png</normaloff>:/Imagenes/comprimir.png</iconset>
+   </property>
+   <property name="text">
+    <string>Comprimir/descomprimir</string>
+   </property>
+  </action>
+  <action name="actionRefrescar_dependencias">
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/Refrescar.png</normaloff>:/Imagenes/Refrescar.png</iconset>
+   </property>
+   <property name="text">
+    <string>Refrescar dependencias</string>
    </property>
   </action>
  </widget>

@@ -34,44 +34,44 @@ dbpelis::dbpelis(QWidget *parent) :
     Model= new QSqlTableModel(0,db);
     Model->setTable("pelis");
     Model->select();
-    Model->setHeaderData(1,Qt::Horizontal,"Titulo");
-    Model->setHeaderData(2,Qt::Horizontal,"Titulo Original");
-    Model->setHeaderData(3,Qt::Horizontal,"Calificacion por edades");
-    Model->setHeaderData(4,Qt::Horizontal,"Genero: Drama");
-    Model->setHeaderData(5,Qt::Horizontal,"Genero: Comedia");
-    Model->setHeaderData(6,Qt::Horizontal,"Genero: Accion");
-    Model->setHeaderData(7,Qt::Horizontal,"Genero: Aventura");
-    Model->setHeaderData(8,Qt::Horizontal,"Genero: Ciencia Ficcion");
-    Model->setHeaderData(9,Qt::Horizontal,"Genero: Romantico");
-    Model->setHeaderData(10,Qt::Horizontal,"Genero: Musical");
-    Model->setHeaderData(11,Qt::Horizontal,"Genero: Catastrofes");
-    Model->setHeaderData(12,Qt::Horizontal,"Genero: Suspense");
-    Model->setHeaderData(13,Qt::Horizontal,"Genero: Fantasia");
-    Model->setHeaderData(14,Qt::Horizontal,"Genero: Erotico");
-    Model->setHeaderData(15,Qt::Horizontal,"Genero: Porno");
-    Model->setHeaderData(16,Qt::Horizontal,"Genero: Historico");
-    Model->setHeaderData(17,Qt::Horizontal,"Genero: Policiaco");
-    Model->setHeaderData(18,Qt::Horizontal,"Genero: Terror");
-    Model->setHeaderData(19,Qt::Horizontal,"Genero: Western");
-    Model->setHeaderData(20,Qt::Horizontal,"Genero: Belico");
-    Model->setHeaderData(21,Qt::Horizontal,"Genero: Deportes");
-    Model->setHeaderData(22,Qt::Horizontal,"Genero: Animacion/dibujos");
-    Model->setHeaderData(23,Qt::Horizontal,"Genero: Documental");
-    Model->setHeaderData(24,Qt::Horizontal,"Genero: Gore/Zombies");
-    Model->setHeaderData(25,Qt::Horizontal,"Caratula");
-    Model->setHeaderData(26,Qt::Horizontal,"Actor principal");
-    Model->setHeaderData(27,Qt::Horizontal,"Actor secundario");
-    Model->setHeaderData(28,Qt::Horizontal,"Calificacion");
-    Model->setHeaderData(29,Qt::Horizontal,"Sinopsis");
-    Model->setHeaderData(30,Qt::Horizontal,"Nº Soporte");
-    Model->setHeaderData(31,Qt::Horizontal,"Nº Posicion");
-    Model->setHeaderData(32,Qt::Horizontal,"Visionada");
-    Model->setHeaderData(33,Qt::Horizontal,"Duracion");
-    Model->setHeaderData(34,Qt::Horizontal,"Color/BW");
-    Model->setHeaderData(35,Qt::Horizontal,"Idioma");
-    Model->setHeaderData(36,Qt::Horizontal,"Formato Video");
-    Model->setHeaderData(37,Qt::Horizontal,"Director");
-    Model->setHeaderData(38,Qt::Horizontal,"Ano");
+    Model->setHeaderData(1,Qt::Horizontal,tr("Titulo"));
+    Model->setHeaderData(2,Qt::Horizontal,tr("Titulo Original"));
+    Model->setHeaderData(3,Qt::Horizontal,tr("Calificacion por edades"));
+    Model->setHeaderData(4,Qt::Horizontal,tr("Genero: Drama"));
+    Model->setHeaderData(5,Qt::Horizontal,tr("Genero: Comedia"));
+    Model->setHeaderData(6,Qt::Horizontal,tr("Genero: Accion"));
+    Model->setHeaderData(7,Qt::Horizontal,tr("Genero: Aventura"));
+    Model->setHeaderData(8,Qt::Horizontal,tr("Genero: Ciencia Ficcion"));
+    Model->setHeaderData(9,Qt::Horizontal,tr("Genero: Romantico"));
+    Model->setHeaderData(10,Qt::Horizontal,tr("Genero: Musical"));
+    Model->setHeaderData(11,Qt::Horizontal,tr("Genero: Catastrofes"));
+    Model->setHeaderData(12,Qt::Horizontal,tr("Genero: Suspense"));
+    Model->setHeaderData(13,Qt::Horizontal,tr("Genero: Fantasia"));
+    Model->setHeaderData(14,Qt::Horizontal,tr("Genero: Erotico"));
+    Model->setHeaderData(15,Qt::Horizontal,tr("Genero: Porno"));
+    Model->setHeaderData(16,Qt::Horizontal,tr("Genero: Historico"));
+    Model->setHeaderData(17,Qt::Horizontal,tr("Genero: Policiaco"));
+    Model->setHeaderData(18,Qt::Horizontal,tr("Genero: Terror"));
+    Model->setHeaderData(19,Qt::Horizontal,tr("Genero: Western"));
+    Model->setHeaderData(20,Qt::Horizontal,tr("Genero: Belico"));
+    Model->setHeaderData(21,Qt::Horizontal,tr("Genero: Deportes"));
+    Model->setHeaderData(22,Qt::Horizontal,tr("Genero: Animacion/dibujos"));
+    Model->setHeaderData(23,Qt::Horizontal,tr("Genero: Documental"));
+    Model->setHeaderData(24,Qt::Horizontal,tr("Genero: Gore/Zombies"));
+    Model->setHeaderData(25,Qt::Horizontal,tr("Caratula"));
+    Model->setHeaderData(26,Qt::Horizontal,tr("Actor principal"));
+    Model->setHeaderData(27,Qt::Horizontal,tr("Actor secundario"));
+    Model->setHeaderData(28,Qt::Horizontal,tr("Calificacion"));
+    Model->setHeaderData(29,Qt::Horizontal,tr("Sinopsis"));
+    Model->setHeaderData(30,Qt::Horizontal,tr("Nº Soporte"));
+    Model->setHeaderData(31,Qt::Horizontal,tr("Nº Posicion"));
+    Model->setHeaderData(32,Qt::Horizontal,tr("Visionada"));
+    Model->setHeaderData(33,Qt::Horizontal,tr("Duracion"));
+    Model->setHeaderData(34,Qt::Horizontal,tr("Color/BW"));
+    Model->setHeaderData(35,Qt::Horizontal,tr("Idioma"));
+    Model->setHeaderData(36,Qt::Horizontal,tr("Formato Video"));
+    Model->setHeaderData(37,Qt::Horizontal,tr("Director"));
+    Model->setHeaderData(38,Qt::Horizontal,tr("Ano"));
     ui->tableView->setModel(Model);
     ui->comboBox_2->setCurrentItem(1);
     inicio();
@@ -153,8 +153,9 @@ dbpelis::~dbpelis()
         delete import;
 }
 
-void dbpelis::Valor(QString valor)
+void dbpelis::Valor(QString valor, QString Usuario)
 {
+    IDUser = Usuario;
     if (valor == "Quitar")
     {        
         CierreTotal = 1;
@@ -477,11 +478,11 @@ void dbpelis::inicio()
     index=ui->tableView->model()->index(i,31);
     ui->lineEdit_6->setText(tr(index.data().toString()));
     index=ui->tableView->model()->index(i,32);
-    if (index.data().toInt() == 0)
+    if (index.data().toInt() == 1)
     {
         ui->radioButton_17->setChecked(true);
     }
-    else if (index.data().toInt() == 1)
+    else if (index.data().toInt() == 0)
     {
         ui->radioButton_18->setChecked(true);
     }
@@ -831,11 +832,11 @@ void dbpelis::cambiaFila(QModelIndex actual)
         index=ui->tableView->model()->index(i,31);
         ui->lineEdit_6->setText(tr(index.data().toString()));
         index=ui->tableView->model()->index(i,32);
-        if (index.data().toInt() == 0)
+        if (index.data().toInt() == 1)
         {
             ui->radioButton_17->setChecked(true);
         }
-        else if (index.data().toInt() == 1)
+        else if (index.data().toInt() == 0)
         {
             ui->radioButton_18->setChecked(true);
         }
@@ -1167,11 +1168,11 @@ void dbpelis::on_pushButton_clicked()
     posicion = ui->lineEdit_6->text();
     if (ui->radioButton_17->isChecked() == true)
     {
-        visionada="0";
+        visionada="1";
     }
     else if (ui->radioButton_18->isChecked() == true)
     {
-        visionada="1";
+        visionada="0";
     }
     duracion = ui->timeEdit->time().toString("HH:mm:ss");
     if (ui->radioButton_19->isChecked() == true)
@@ -1333,7 +1334,7 @@ void dbpelis::on_pushButton_6_clicked()
 
 void dbpelis::on_comboBox_currentIndexChanged(QString busca)
 {
-    if (busca == "Sin filtro (todas las peliculas)")
+    if (busca == tr("Sin filtro (todas las peliculas)"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -1354,7 +1355,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Titulo")
+    if (busca == tr("Titulo"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -1375,7 +1376,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Titulo original")
+    if (busca == tr("Titulo original"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -1396,7 +1397,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Calificacion: Todos los publicos")
+    if (busca == tr("Calificacion: Todos los publicos"))
     {
        Model->setFilter("edad like '0'");
        ui->tableView->setModel(Model);
@@ -1410,7 +1411,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Calificacion: N.R. a menores de 7")
+    if (busca == tr("Calificacion: N.R. a menores de 7"))
     {
        Model->setFilter("edad like '1'");
        ui->tableView->setModel(Model);
@@ -1424,7 +1425,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Calificacion: N.R. a menores de 12")
+    if (busca == tr("Calificacion: N.R. a menores de 12"))
     {
        Model->setFilter("edad like '2'");
        ui->tableView->setModel(Model);
@@ -1438,7 +1439,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Calificacion: N.R. a menores de 16")
+    if (busca == tr("Calificacion: N.R. a menores de 16"))
     {
        Model->setFilter("edad like '3'");
        ui->tableView->setModel(Model);
@@ -1452,7 +1453,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Calificacion: N.R. a menores de 18")
+    if (busca == tr("Calificacion: N.R. a menores de 18"))
     {
        Model->setFilter("edad like '4'");
        ui->tableView->setModel(Model);
@@ -1466,7 +1467,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Calificacion: Adultos")
+    if (busca == tr("Calificacion: Adultos"))
     {
        Model->setFilter("edad like '5'");
        ui->tableView->setModel(Model);
@@ -1480,7 +1481,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Calificacion: Sin clasificar")
+    if (busca == tr("Calificacion: Sin clasificar"))
     {
        Model->setFilter("edad like '6'");
        ui->tableView->setModel(Model);
@@ -1494,7 +1495,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Drama")
+    if (busca == tr("Genero: Drama"))
     {
        Model->setFilter("drama like '1'");
        ui->tableView->setModel(Model);
@@ -1508,7 +1509,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Comedia")
+    if (busca == tr("Genero: Comedia"))
     {
        Model->setFilter("comedia like '1'");
        ui->tableView->setModel(Model);
@@ -1522,7 +1523,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Accion")
+    if (busca == tr("Genero: Accion"))
     {
        Model->setFilter("accion like '1'");
        ui->tableView->setModel(Model);
@@ -1536,7 +1537,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Aventura")
+    if (busca == tr("Genero: Aventura"))
     {
        Model->setFilter("aventura like '1'");
        ui->tableView->setModel(Model);
@@ -1550,7 +1551,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Ciencia-Ficcion")
+    if (busca == tr("Genero: Ciencia-Ficcion"))
     {
        Model->setFilter("scifi like '1'");
        ui->tableView->setModel(Model);
@@ -1564,7 +1565,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Romantica")
+    if (busca == tr("Genero: Romantica"))
     {
        Model->setFilter("romantica like '1'");
        ui->tableView->setModel(Model);
@@ -1578,7 +1579,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Musical")
+    if (busca == tr("Genero: Musical"))
     {
        Model->setFilter("musical like '1'");
        ui->tableView->setModel(Model);
@@ -1592,7 +1593,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Catastrofes")
+    if (busca == tr("Genero: Catastrofes"))
     {
        Model->setFilter("catastrofes like '1'");
        ui->tableView->setModel(Model);
@@ -1606,7 +1607,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Suspense")
+    if (busca == tr("Genero: Suspense"))
     {
        Model->setFilter("suspense like '1'");
        ui->tableView->setModel(Model);
@@ -1620,7 +1621,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Fantasia")
+    if (busca == tr("Genero: Fantasia"))
     {
        Model->setFilter("fantasia like '1'");
        ui->tableView->setModel(Model);
@@ -1634,7 +1635,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Erotico")
+    if (busca == tr("Genero: Erotico"))
     {
        Model->setFilter("erotico like '1'");
        ui->tableView->setModel(Model);
@@ -1648,7 +1649,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Porno")
+    if (busca == tr("Genero: Porno"))
     {
        Model->setFilter("porno like '1'");
        ui->tableView->setModel(Model);
@@ -1662,7 +1663,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Historico")
+    if (busca == tr("Genero: Historico"))
     {
        Model->setFilter("historico like '1'");
        ui->tableView->setModel(Model);
@@ -1676,7 +1677,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Policiaco")
+    if (busca == tr("Genero: Policiaco"))
     {
        Model->setFilter("policiaco like '1'");
        ui->tableView->setModel(Model);
@@ -1690,7 +1691,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Terror")
+    if (busca == tr("Genero: Terror"))
     {
        Model->setFilter("terror like '1'");
        ui->tableView->setModel(Model);
@@ -1704,7 +1705,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Western")
+    if (busca == tr("Genero: Western"))
     {
        Model->setFilter("western like '1'");
        ui->tableView->setModel(Model);
@@ -1718,7 +1719,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Belico")
+    if (busca == tr("Genero: Belico"))
     {
        Model->setFilter("belico like '1'");
        ui->tableView->setModel(Model);
@@ -1732,7 +1733,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Deportes")
+    if (busca == tr("Genero: Deportes"))
     {
        Model->setFilter("deportes like '1'");
        ui->tableView->setModel(Model);
@@ -1746,7 +1747,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Animacion/Dibujos")
+    if (busca == tr("Genero: Animacion/Dibujos"))
     {
        Model->setFilter("animacion like '1'");
        ui->tableView->setModel(Model);
@@ -1760,7 +1761,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Documental")
+    if (busca == tr("Genero: Documental"))
     {
        Model->setFilter("documental like '1'");
        ui->tableView->setModel(Model);
@@ -1774,7 +1775,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Gore/Zombies")
+    if (busca == tr("Genero: Gore/Zombies"))
     {
        Model->setFilter("gore_zombies like '1'");
        ui->tableView->setModel(Model);
@@ -1788,7 +1789,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Actor principal")
+    if (busca == tr("Actor principal"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -1809,7 +1810,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Actor secundario")
+    if (busca == tr("Actor secundario"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -1830,7 +1831,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Valoracion: 0")
+    if (busca == tr("Valoracion: 0"))
     {
        Model->setFilter("calificacion like '0'");
        ui->tableView->setModel(Model);
@@ -1844,7 +1845,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 1")
+    if (busca ==tr("Valoracion: 1"))
     {
        Model->setFilter("calificacion like '1'");
        ui->tableView->setModel(Model);
@@ -1858,7 +1859,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 2")
+    if (busca == tr("Valoracion: 2"))
     {
        Model->setFilter("calificacion like '2'");
        ui->tableView->setModel(Model);
@@ -1872,7 +1873,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 3")
+    if (busca == tr("Valoracion: 3"))
     {
        Model->setFilter("calificacion like '3'");
        ui->tableView->setModel(Model);
@@ -1886,7 +1887,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 4")
+    if (busca == tr("Valoracion: 4"))
     {
        Model->setFilter("calificacion like '4'");
        ui->tableView->setModel(Model);
@@ -1900,7 +1901,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 5")
+    if (busca == tr("Valoracion: 5"))
     {
        Model->setFilter("calificacion like '5'");
        ui->tableView->setModel(Model);
@@ -1914,7 +1915,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 6")
+    if (busca == tr("Valoracion: 6"))
     {
        Model->setFilter("calificacion like '6'");
        ui->tableView->setModel(Model);
@@ -1928,7 +1929,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 7")
+    if (busca == tr("Valoracion: 7"))
     {
        Model->setFilter("calificacion like '7'");
        ui->tableView->setModel(Model);
@@ -1942,7 +1943,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 8")
+    if (busca == tr("Valoracion: 8"))
     {
        Model->setFilter("calificacion like '8'");
        ui->tableView->setModel(Model);
@@ -1956,7 +1957,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 9")
+    if (busca == tr("Valoracion: 9"))
     {
        Model->setFilter("calificacion like '9'");
        ui->tableView->setModel(Model);
@@ -1970,7 +1971,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 10 (Obra Maestra)")
+    if (busca == tr("Valoracion: 10 (Obra Maestra)"))
     {
        Model->setFilter("calificacion like '10'");
        ui->tableView->setModel(Model);
@@ -1984,7 +1985,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Soporte")
+    if (busca ==tr("Soporte"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -2005,7 +2006,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Posicion")
+    if (busca == tr("Posicion"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -2026,7 +2027,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Visionada: Si")
+    if (busca == tr("Visionada: Si"))
     {
        Model->setFilter("visionada like '0'");
        ui->tableView->setModel(Model);
@@ -2040,7 +2041,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Visionada: No")
+    if (busca == tr("Visionada: No"))
     {
        Model->setFilter("visionada like '1'");
        ui->tableView->setModel(Model);
@@ -2054,7 +2055,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Color")
+    if (busca == tr("Color"))
     {
        Model->setFilter("color like '0'");
        ui->tableView->setModel(Model);
@@ -2068,7 +2069,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "B/W")
+    if (busca == tr("B/W"))
     {
        Model->setFilter("color like '1'");
        ui->tableView->setModel(Model);
@@ -2082,7 +2083,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Version Original")
+    if (busca == tr("Version Original"))
     {
        Model->setFilter("vose like '0'");
        ui->tableView->setModel(Model);
@@ -2096,7 +2097,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Subtitulada")
+    if (busca == tr("Subtitulada"))
     {
        Model->setFilter("vose like '1'");
        ui->tableView->setModel(Model);
@@ -2110,7 +2111,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Doblada")
+    if (busca == tr("Doblada"))
     {
        Model->setFilter("vose like '2'");
        ui->tableView->setModel(Model);
@@ -2124,7 +2125,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: DVD")
+    if (busca == tr("Formato: DVD"))
     {
        Model->setFilter("formato like 'DVD'");
        ui->tableView->setModel(Model);
@@ -2138,7 +2139,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: avi")
+    if (busca == tr("Formato: avi"))
     {
        Model->setFilter("formato like 'avi'");
        ui->tableView->setModel(Model);
@@ -2152,7 +2153,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: VCD")
+    if (busca == tr("Formato: VCD"))
     {
        Model->setFilter("formato like 'VCD'");
        ui->tableView->setModel(Model);
@@ -2166,7 +2167,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: VHS")
+    if (busca == tr("Formato: VHS"))
     {
        Model->setFilter("formato like 'VHS'");
        ui->tableView->setModel(Model);
@@ -2180,7 +2181,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: mkv")
+    if (busca == tr("Formato: mkv"))
     {
        Model->setFilter("formato like 'mkv'");
        ui->tableView->setModel(Model);
@@ -2194,7 +2195,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: LD")
+    if (busca == tr("Formato: LD"))
     {
        Model->setFilter("formato like 'LD'");
        ui->tableView->setModel(Model);
@@ -2208,7 +2209,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: B-Ray")
+    if (busca == tr("Formato: B-Ray"))
     {
        Model->setFilter("formato like 'B-Ray'");
        ui->tableView->setModel(Model);
@@ -2222,7 +2223,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Director")
+    if (busca == tr("Director"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -2243,7 +2244,7 @@ void dbpelis::on_comboBox_currentIndexChanged(QString busca)
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Fecha")
+    if (busca == tr("Fecha"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -2270,7 +2271,7 @@ void dbpelis::orden()
 {
     QString busca;
     busca = ui->comboBox->currentText();
-    if (busca == "Sin filtro (todas las peliculas)")
+    if (busca == tr("Sin filtro (todas las peliculas)"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -2291,7 +2292,7 @@ void dbpelis::orden()
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Titulo")
+    if (busca == tr("Titulo"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -2312,7 +2313,7 @@ void dbpelis::orden()
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Titulo original")
+    if (busca == tr("Titulo original"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -2333,7 +2334,7 @@ void dbpelis::orden()
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Calificacion: Todos los publicos")
+    if (busca == tr("Calificacion: Todos los publicos"))
     {
        Model->setFilter("edad like '0'");
        ui->tableView->setModel(Model);
@@ -2347,7 +2348,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Calificacion: N.R. a menores de 7")
+    if (busca == tr("Calificacion: N.R. a menores de 7"))
     {
        Model->setFilter("edad like '1'");
        ui->tableView->setModel(Model);
@@ -2361,7 +2362,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Calificacion: N.R. a menores de 12")
+    if (busca == tr("Calificacion: N.R. a menores de 12"))
     {
        Model->setFilter("edad like '2'");
        ui->tableView->setModel(Model);
@@ -2375,7 +2376,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Calificacion: N.R. a menores de 16")
+    if (busca == tr("Calificacion: N.R. a menores de 16"))
     {
        Model->setFilter("edad like '3'");
        ui->tableView->setModel(Model);
@@ -2389,7 +2390,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Calificacion: N.R. a menores de 18")
+    if (busca == tr("Calificacion: N.R. a menores de 18"))
     {
        Model->setFilter("edad like '4'");
        ui->tableView->setModel(Model);
@@ -2403,7 +2404,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Calificacion: Adultos")
+    if (busca == tr("Calificacion: Adultos"))
     {
        Model->setFilter("edad like '5'");
        ui->tableView->setModel(Model);
@@ -2417,7 +2418,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Calificacion: Sin clasificar")
+    if (busca == tr("Calificacion: Sin clasificar"))
     {
        Model->setFilter("edad like '6'");
        ui->tableView->setModel(Model);
@@ -2431,7 +2432,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Drama")
+    if (busca == tr("Genero: Drama"))
     {
        Model->setFilter("drama like '1'");
        ui->tableView->setModel(Model);
@@ -2445,7 +2446,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Comedia")
+    if (busca == tr("Genero: Comedia"))
     {
        Model->setFilter("comedia like '1'");
        ui->tableView->setModel(Model);
@@ -2459,7 +2460,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Accion")
+    if (busca == tr("Genero: Accion"))
     {
        Model->setFilter("accion like '1'");
        ui->tableView->setModel(Model);
@@ -2473,7 +2474,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Aventura")
+    if (busca == tr("Genero: Aventura"))
     {
        Model->setFilter("aventura like '1'");
        ui->tableView->setModel(Model);
@@ -2487,7 +2488,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Ciencia-Ficcion")
+    if (busca == tr("Genero: Ciencia-Ficcion"))
     {
        Model->setFilter("scifi like '1'");
        ui->tableView->setModel(Model);
@@ -2501,7 +2502,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Romantica")
+    if (busca == tr("Genero: Romantica"))
     {
        Model->setFilter("romantica like '1'");
        ui->tableView->setModel(Model);
@@ -2515,7 +2516,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Musical")
+    if (busca == tr("Genero: Musical"))
     {
        Model->setFilter("musical like '1'");
        ui->tableView->setModel(Model);
@@ -2529,7 +2530,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Catastrofes")
+    if (busca == tr("Genero: Catastrofes"))
     {
        Model->setFilter("catastrofes like '1'");
        ui->tableView->setModel(Model);
@@ -2543,7 +2544,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Suspense")
+    if (busca == tr("Genero: Suspense"))
     {
        Model->setFilter("suspense like '1'");
        ui->tableView->setModel(Model);
@@ -2557,7 +2558,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Fantasia")
+    if (busca == tr("Genero: Fantasia"))
     {
        Model->setFilter("fantasia like '1'");
        ui->tableView->setModel(Model);
@@ -2571,7 +2572,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Erotico")
+    if (busca == tr("Genero: Erotico"))
     {
        Model->setFilter("erotico like '1'");
        ui->tableView->setModel(Model);
@@ -2585,7 +2586,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Porno")
+    if (busca == tr("Genero: Porno"))
     {
        Model->setFilter("porno like '1'");
        ui->tableView->setModel(Model);
@@ -2599,7 +2600,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Historico")
+    if (busca == tr("Genero: Historico"))
     {
        Model->setFilter("historico like '1'");
        ui->tableView->setModel(Model);
@@ -2613,7 +2614,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Policiaco")
+    if (busca == tr("Genero: Policiaco"))
     {
        Model->setFilter("policiaco like '1'");
        ui->tableView->setModel(Model);
@@ -2627,7 +2628,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Terror")
+    if (busca == tr("Genero: Terror"))
     {
        Model->setFilter("terror like '1'");
        ui->tableView->setModel(Model);
@@ -2641,7 +2642,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Western")
+    if (busca == tr("Genero: Western"))
     {
        Model->setFilter("western like '1'");
        ui->tableView->setModel(Model);
@@ -2655,7 +2656,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Belico")
+    if (busca == tr("Genero: Belico"))
     {
        Model->setFilter("belico like '1'");
        ui->tableView->setModel(Model);
@@ -2669,7 +2670,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Deportes")
+    if (busca == tr("Genero: Deportes"))
     {
        Model->setFilter("deportes like '1'");
        ui->tableView->setModel(Model);
@@ -2683,7 +2684,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Animacion/Dibujos")
+    if (busca == tr("Genero: Animacion/Dibujos"))
     {
        Model->setFilter("animacion like '1'");
        ui->tableView->setModel(Model);
@@ -2697,7 +2698,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Documental")
+    if (busca == tr("Genero: Documental"))
     {
        Model->setFilter("documental like '1'");
        ui->tableView->setModel(Model);
@@ -2711,7 +2712,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Genero: Gore/Zombies")
+    if (busca == tr("Genero: Gore/Zombies"))
     {
        Model->setFilter("gore_zombies like '1'");
        ui->tableView->setModel(Model);
@@ -2725,7 +2726,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Actor principal")
+    if (busca == tr("Actor principal"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -2746,7 +2747,7 @@ void dbpelis::orden()
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Actor secundario")
+    if (busca == tr("Actor secundario"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -2767,7 +2768,7 @@ void dbpelis::orden()
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Valoracion: 0")
+    if (busca == tr("Valoracion: 0"))
     {
        Model->setFilter("calificacion like '0'");
        ui->tableView->setModel(Model);
@@ -2781,7 +2782,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 1")
+    if (busca == tr("Valoracion: 1"))
     {
        Model->setFilter("calificacion like '1'");
        ui->tableView->setModel(Model);
@@ -2795,7 +2796,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 2")
+    if (busca == tr("Valoracion: 2"))
     {
        Model->setFilter("calificacion like '2'");
        ui->tableView->setModel(Model);
@@ -2809,7 +2810,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 3")
+    if (busca == tr("Valoracion: 3"))
     {
        Model->setFilter("calificacion like '3'");
        ui->tableView->setModel(Model);
@@ -2823,7 +2824,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 4")
+    if (busca == tr("Valoracion: 4"))
     {
        Model->setFilter("calificacion like '4'");
        ui->tableView->setModel(Model);
@@ -2837,7 +2838,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 5")
+    if (busca == tr("Valoracion: 5"))
     {
        Model->setFilter("calificacion like '5'");
        ui->tableView->setModel(Model);
@@ -2851,7 +2852,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 6")
+    if (busca == tr("Valoracion: 6"))
     {
        Model->setFilter("calificacion like '6'");
        ui->tableView->setModel(Model);
@@ -2865,7 +2866,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 7")
+    if (busca == tr("Valoracion: 7"))
     {
        Model->setFilter("calificacion like '7'");
        ui->tableView->setModel(Model);
@@ -2879,7 +2880,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 8")
+    if (busca == tr("Valoracion: 8"))
     {
        Model->setFilter("calificacion like '8'");
        ui->tableView->setModel(Model);
@@ -2893,7 +2894,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 9")
+    if (busca == tr("Valoracion: 9"))
     {
        Model->setFilter("calificacion like '9'");
        ui->tableView->setModel(Model);
@@ -2907,7 +2908,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Valoracion: 10 (Obra Maestra)")
+    if (busca == tr("Valoracion: 10 (Obra Maestra)"))
     {
        Model->setFilter("calificacion like '10'");
        ui->tableView->setModel(Model);
@@ -2921,7 +2922,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Soporte")
+    if (busca == tr("Soporte"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -2942,7 +2943,7 @@ void dbpelis::orden()
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Posicion")
+    if (busca == tr("Posicion"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -2963,7 +2964,7 @@ void dbpelis::orden()
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Visionada: Si")
+    if (busca == tr("Visionada: Si"))
     {
        Model->setFilter("visionada like '0'");
        ui->tableView->setModel(Model);
@@ -2977,7 +2978,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Visionada: No")
+    if (busca == tr("Visionada: No"))
     {
        Model->setFilter("visionada like '1'");
        ui->tableView->setModel(Model);
@@ -2991,7 +2992,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Color")
+    if (busca == tr("Color"))
     {
        Model->setFilter("color like '0'");
        ui->tableView->setModel(Model);
@@ -3005,7 +3006,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "B/W")
+    if (busca ==tr( "B/W"))
     {
        Model->setFilter("color like '1'");
        ui->tableView->setModel(Model);
@@ -3019,7 +3020,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Version Original")
+    if (busca == tr("Version Original"))
     {
        Model->setFilter("vose like '0'");
        ui->tableView->setModel(Model);
@@ -3033,7 +3034,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Subtitulada")
+    if (busca == tr("Subtitulada"))
     {
        Model->setFilter("vose like '1'");
        ui->tableView->setModel(Model);
@@ -3047,7 +3048,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Doblada")
+    if (busca == tr("Doblada"))
     {
        Model->setFilter("vose like '2'");
        ui->tableView->setModel(Model);
@@ -3061,7 +3062,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: DVD")
+    if (busca == tr("Formato: DVD"))
     {
        Model->setFilter("formato like 'DVD'");
        ui->tableView->setModel(Model);
@@ -3075,7 +3076,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: avi")
+    if (busca == tr("Formato: avi"))
     {
        Model->setFilter("formato like 'avi'");
        ui->tableView->setModel(Model);
@@ -3089,7 +3090,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: VCD")
+    if (busca == tr("Formato: VCD"))
     {
        Model->setFilter("formato like 'VCD'");
        ui->tableView->setModel(Model);
@@ -3103,7 +3104,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: VHS")
+    if (busca == tr("Formato: VHS"))
     {
        Model->setFilter("formato like 'VHS'");
        ui->tableView->setModel(Model);
@@ -3117,7 +3118,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: mkv")
+    if (busca == tr("Formato: mkv"))
     {
        Model->setFilter("formato like 'mkv'");
        ui->tableView->setModel(Model);
@@ -3131,7 +3132,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: LD")
+    if (busca == tr("Formato: LD"))
     {
        Model->setFilter("formato like 'LD'");
        ui->tableView->setModel(Model);
@@ -3145,7 +3146,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Formato: B-Ray")
+    if (busca == tr("Formato: B-Ray"))
     {
        Model->setFilter("formato like 'B-Ray'");
        ui->tableView->setModel(Model);
@@ -3159,7 +3160,7 @@ void dbpelis::orden()
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
        }
     }
-    if (busca == "Director")
+    if (busca == tr("Director"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -3180,7 +3181,7 @@ void dbpelis::orden()
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
         }
     }
-    if (busca == "Fecha")
+    if (busca == tr("Fecha"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
@@ -3289,7 +3290,7 @@ void dbpelis::on_pushButton_5_clicked()
         import=new importar(this);
         if (Stilo == "A")
             import->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        import->Valor(datos);
+        import->Valor(datos,0,IDUser);
         import->exec();
         QString Recibido=import->Resultado;
         if (Recibido == "Negativo")
@@ -3341,7 +3342,7 @@ void dbpelis::on_pushButton_9_clicked()
         color1=Orden->TColor1;
         if (NomOrden == "")
         {
-            NomOrden="Titulo";
+            NomOrden=tr("Titulo");
             font = QFont("Helvetica",6,50);
             color = QColor(Qt::black);
             color1= QColor(Qt::black);
@@ -3349,18 +3350,20 @@ void dbpelis::on_pushButton_9_clicked()
     }
     else if (respuesta == QMessageBox::No)
     {
-        NomOrden="Titulo";
+        NomOrden=tr("Titulo");
         font = QFont("Helvetica",6,50);
         color = QColor(Qt::black);
         color1= QColor(Qt::black);
     }
-    QFontMetrics medidas(font);
+    int size = font.pointSize()+((font.pointSize()*80)/6);
+    QFont Talla(font);
+    Talla.setPointSize(size);
+    QFontMetrics medidas(Talla);
     QPrintDialog *dialog = new QPrintDialog(&usu, this);
     dialog->setWindowTitle(tr("Imprimir listado de peliculas por orden de "+NomOrden+""));
     dialog->addEnabledOption(QAbstractPrintDialog::PrintSelection);
     if (dialog->exec() == QDialog::Accepted)
     {
-        // imprimir(&usu, NomOrden, font, color, color1);
         txt.begin(&usu);
         txt.setFont(font);
         pen.setColor(color);
@@ -3375,316 +3378,316 @@ void dbpelis::on_pushButton_9_clicked()
         bool sombrear = false;
         QSqlQuery pelis(db);
         LocPos=0;
-        if (NomOrden == "Sin filtro (todas las peliculas)")
+        if (NomOrden == tr("Sin filtro (todas las peliculas)"))
         {
-            NomOrdenFin= "titulo";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin= tr("titulo");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Titulo")
+        else if (NomOrden == tr("Titulo"))
         {
-            NomOrdenFin="titulo";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("titulo");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Titulo original")
+        else if (NomOrden == tr("Titulo original"))
         {
-            NomOrdenFin="titulo_original";
+            NomOrdenFin=tr("titulo_original");
             LocPos=1;
-            pelis.exec("SELECT titulo_original,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" !='' ORDER BY "+NomOrdenFin+" ASC ");
+            pelis.exec("SELECT titulo_original,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' !='' ORDER BY '"+NomOrdenFin+"' ASC ");
         }
-        else if (NomOrden == "Calificacion: Todos los publicos")
+        else if (NomOrden == tr("Calificacion: Todos los publicos"))
         {
-            NomOrdenFin="edad";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '0' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("edad");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '0' ORDER BY Soporte ASC");
         }
-        else if (NomOrden == "Calificacion: N.R. a menores de 7")
+        else if (NomOrden == tr("Calificacion: N.R. a menores de 7"))
         {
-            NomOrdenFin="edad";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '1' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("edad");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '1' ORDER BY Soporte ASC");
         }
-        else if (NomOrden == "Calificacion: N.R. a menores de 12")
+        else if (NomOrden == tr("Calificacion: N.R. a menores de 12"))
         {
-            NomOrdenFin="edad";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '2' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("edad");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '2' ORDER BY Soporte ASC");
         }
-        else if (NomOrden == "Calificacion: N.R. a menores de 16")
+        else if (NomOrden == tr("Calificacion: N.R. a menores de 16"))
         {
-            NomOrdenFin="edad";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '3' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("edad");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '3' ORDER BY Soporte ASC");
         }
-        else if (NomOrden == "Calificacion: N.R. a menores de 18")
+        else if (NomOrden == tr("Calificacion: N.R. a menores de 18"))
         {
-            NomOrdenFin="edad";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '4' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("edad");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '4' ORDER BY Soporte ASC");
         }
-        else if (NomOrden == "Calificacion: Adultos")
+        else if (NomOrden == tr("Calificacion: Adultos"))
         {
-            NomOrdenFin="edad";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '5' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("edad");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '5' ORDER BY Soporte ASC");
         }
-        else if (NomOrden == "Calificacion: Sin clasificar")
+        else if (NomOrden == tr("Calificacion: Sin clasificar"))
         {
-            NomOrdenFin="edad";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '6' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("edad");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '6' ORDER BY Soporte ASC");
         }
-        else if (NomOrden == "Genero: Drama")
+        else if (NomOrden == tr("Genero: Drama"))
         {
-            NomOrdenFin="drama";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("drama");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Comedia")
+        else if (NomOrden == tr("Genero: Comedia"))
         {
-            NomOrdenFin="comedia";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("comedia");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Accion")
+        else if (NomOrden == tr("Genero: Accion"))
         {
-            NomOrdenFin="accion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("accion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Aventura")
+        else if (NomOrden == tr("Genero: Aventura"))
         {
-            NomOrdenFin="aventura";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("aventura");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Ciencia-Ficcion")
+        else if (NomOrden == tr("Genero: Ciencia-Ficcion"))
         {
-            NomOrdenFin="scifi";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("scifi");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Romantica")
+        else if (NomOrden == tr("Genero: Romantica"))
         {
-            NomOrdenFin="romantica";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("romantica");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Musical")
+        else if (NomOrden == tr("Genero: Musical"))
         {
-            NomOrdenFin="musical";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("musical");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Catastrofes")
+        else if (NomOrden == tr("Genero: Catastrofes"))
         {
-            NomOrdenFin="catastrofes";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("catastrofes");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Suspense")
+        else if (NomOrden == tr("Genero: Suspense"))
         {
-            NomOrdenFin="suspense";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("suspense");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Fantasia")
+        else if (NomOrden == tr("Genero: Fantasia"))
         {
-            NomOrdenFin="fantasia";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("fantasia");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Erotico")
+        else if (NomOrden == tr("Genero: Erotico"))
         {
-            NomOrdenFin="erotico";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("erotico");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Porno")
+        else if (NomOrden == tr("Genero: Porno"))
         {
-            NomOrdenFin="porno";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("porno");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Historico")
+        else if (NomOrden == tr("Genero: Historico"))
         {
-            NomOrdenFin="historico";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("historico");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Policiaco")
+        else if (NomOrden == tr("Genero: Policiaco"))
         {
-            NomOrdenFin="policiaco";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("policiaco");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Terror")
+        else if (NomOrden == tr("Genero: Terror"))
         {
-            NomOrdenFin="terror";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("terror");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Western")
+        else if (NomOrden == tr("Genero: Western"))
         {
-            NomOrdenFin="western";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("western");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Belico")
+        else if (NomOrden == tr("Genero: Belico"))
         {
-            NomOrdenFin="belico";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("belico");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Deportes")
+        else if (NomOrden == tr("Genero: Deportes"))
         {
-            NomOrdenFin="deportes";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("deportes");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Animacion/Dibujos")
+        else if (NomOrden == tr("Genero: Animacion/Dibujos"))
         {
-            NomOrdenFin="animacion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("animacion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Documental")
+        else if (NomOrden == tr("Genero: Documental"))
         {
-            NomOrdenFin="documental";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("documental");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Genero: Gore/Zombies")
+        else if (NomOrden == tr("Genero: Gore/Zombies"))
         {
-            NomOrdenFin="gore";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '0' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("gore");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '0' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if (NomOrden == "Actor principal")
+        else if (NomOrden == tr("Actor principal"))
         {
-            NomOrdenFin="actor";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("actor");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if(NomOrden == "Actor secundario")
+        else if(NomOrden == tr("Actor secundario"))
         {
-            NomOrdenFin="secundario";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("secundario");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if(NomOrden == "Valoracion: 0")
+        else if(NomOrden == tr("Valoracion: 0"))
         {
-            NomOrdenFin="calificacion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '0' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("calificacion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '0' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Valoracion: 1")
+        else if(NomOrden == tr("Valoracion: 1"))
         {
-            NomOrdenFin="calificacion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '1' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("calificacion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '1' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Valoracion: 2")
+        else if(NomOrden == tr("Valoracion: 2"))
         {
-            NomOrdenFin="calificacion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '2' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("calificacion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '2' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Valoracion: 3")
+        else if(NomOrden == tr("Valoracion: 3"))
         {
-            NomOrdenFin="calificacion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '3' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("calificacion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '3' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Valoracion: 4")
+        else if(NomOrden == tr("Valoracion: 4"))
         {
-            NomOrdenFin="calificacion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '4' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("calificacion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '4' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Valoracion: 5")
+        else if(NomOrden == tr("Valoracion: 5"))
         {
-            NomOrdenFin="calificacion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '5' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("calificacion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '5' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Valoracion: 6")
+        else if(NomOrden == tr("Valoracion: 6"))
         {
-            NomOrdenFin="calificacion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '6' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("calificacion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '6' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Valoracion: 7")
+        else if(NomOrden == tr("Valoracion: 7"))
         {
-            NomOrdenFin="calificacion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '7' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("calificacion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '7' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Valoracion: 8")
+        else if(NomOrden == tr("Valoracion: 8"))
         {
-            NomOrdenFin="calificacion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '8' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("calificacion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '8' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Valoracion: 9")
+        else if(NomOrden == tr("Valoracion: 9"))
         {
-            NomOrdenFin="calificacion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '9' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("calificacion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '9' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Valoracion: 10 (Obra Maestra)")
+        else if(NomOrden == tr("Valoracion: 10 (Obra Maestra)"))
         {
-            NomOrdenFin="calificacion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '10' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("calificacion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '10' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Soporte")
+        else if(NomOrden == tr("Soporte"))
         {
-            NomOrdenFin="soporte";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("soporte");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if(NomOrden == "Posicion")
+        else if(NomOrden == tr("Posicion"))
         {
-            NomOrdenFin="posicion";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '' ORDER BY Soporte ASC and "+NomOrdenFin+" ASC ");
+            NomOrdenFin=tr("posicion");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '' ORDER BY Soporte ASC and '"+NomOrdenFin+"' ASC ");
         }
-        else if(NomOrden == "Visionada: Si")
+        else if(NomOrden == tr("Visionada: Si"))
         {
-            NomOrdenFin="visionada";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '0' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("visionada");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '0' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Visionada: No")
+        else if(NomOrden == tr("Visionada: No"))
         {
-            NomOrdenFin="visionada";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '1' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("visionada");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '1' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Color")
+        else if(NomOrden == tr("Color"))
         {
-            NomOrdenFin="color";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '0' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("color");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '0' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "B/W")
+        else if(NomOrden == tr("B/W"))
         {
-            NomOrdenFin="color";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '1' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("color");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '1' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Version Original")
+        else if(NomOrden == tr("Version Original"))
         {
-            NomOrdenFin="vose";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '0' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("vose");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '0' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Subtitulada")
+        else if(NomOrden == tr("Subtitulada"))
         {
-            NomOrdenFin="vose";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '1' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("vose");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '1' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Doblada")
+        else if(NomOrden == tr("Doblada"))
         {
-            NomOrdenFin="vose";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = '2' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("vose");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = '2' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Formato: DVD")
+        else if(NomOrden == tr("Formato: DVD"))
         {
-            NomOrdenFin="formato";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = 'DVD' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("formato");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = 'DVD' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Formato: avi")
+        else if(NomOrden == tr("Formato: avi"))
         {
-            NomOrdenFin="formato";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = 'avi' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("formato");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = 'avi' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Formato: VCD")
+        else if(NomOrden == tr("Formato: VCD"))
         {
-            NomOrdenFin="formato";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = 'VCD' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("formato");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = 'VCD' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Formato: VHS")
+        else if(NomOrden == tr("Formato: VHS"))
         {
-            NomOrdenFin="formato";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = 'VHS' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("formato");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = 'VHS' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Formato: mkv")
+        else if(NomOrden == tr("Formato: mkv"))
         {
-            NomOrdenFin="formato";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = 'mkv' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("formato");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = 'mkv' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Formato: LD")
+        else if(NomOrden == tr("Formato: LD"))
         {
-            NomOrdenFin="formato";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = 'LD' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("formato");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = 'LD' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Formato: B-Ray")
+        else if(NomOrden == tr("Formato: B-Ray"))
         {
-            NomOrdenFin="formato";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" = 'B-Ray' ORDER BY Soporte ASC");
+            NomOrdenFin=tr("formato");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' = 'B-Ray' ORDER BY Soporte ASC");
         }
-        else if(NomOrden == "Director")
+        else if(NomOrden == tr("Director"))
         {
-            NomOrdenFin="director";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("director");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '' ORDER BY '"+NomOrdenFin+"' ASC");
         }
-        else if(NomOrden == "Fecha")
+        else if(NomOrden == tr("Fecha"))
         {
-            NomOrdenFin="fecha";
-            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE "+NomOrdenFin+" != '' ORDER BY "+NomOrdenFin+" ASC");
+            NomOrdenFin=tr("fecha");
+            pelis.exec("SELECT Titulo,Soporte,Posicion,visionada FROM Pelis WHERE '"+NomOrdenFin+"' != '' ORDER BY '"+NomOrdenFin+"' ASC");
         }
         while(pelis.next())
         {
@@ -3710,10 +3713,10 @@ void dbpelis::on_pushButton_9_clicked()
                 if (LocPos==1)
                     txt.drawText(columnas[0], Qt::AlignHCenter, NomOrdenFin);
                 else
-                    txt.drawText(columnas[0], Qt::AlignHCenter, "Titulo");
-                txt.drawText(columnas[1], Qt::AlignHCenter, "Soporte");
-                txt.drawText(columnas[2], Qt::AlignHCenter, "Posicion");
-                txt.drawText(columnas[3], Qt::AlignHCenter, "Visionada");
+                    txt.drawText(columnas[0], Qt::AlignHCenter, tr("Titulo"));
+                txt.drawText(columnas[1], Qt::AlignHCenter, tr("Soporte"));
+                txt.drawText(columnas[2], Qt::AlignHCenter, tr("Posicion"));
+                txt.drawText(columnas[3], Qt::AlignHCenter, tr("Visionada"));
                 txt.drawLine(columnas[0].x(), columnas[0].bottom(), columnas[3].x() + columnas[3].width(), columnas[3].bottom());
                 columnas[0].translate(0, medidas.lineSpacing());
                 columnas[1].translate(0, medidas.lineSpacing());
@@ -3736,7 +3739,7 @@ void dbpelis::on_pushButton_9_clicked()
             }
             else
             {
-                 if(sombrear)
+                 if (sombrear)
                  {
                      txt.fillRect(columnas[0], Qt::lightGray);
                      txt.fillRect(columnas[1], Qt::lightGray);
@@ -4021,11 +4024,11 @@ void dbpelis::on_pushButton_2_clicked()
     posicion = ui->lineEdit_6->text();
     if (ui->radioButton_17->isChecked() == true)
     {
-        visionada="0";
+        visionada="1";
     }
     else if (ui->radioButton_18->isChecked() == true)
     {
-        visionada="1";
+        visionada="0";
     }
     duracion = ui->timeEdit->time().toString("HH:mm:ss");
     if (ui->radioButton_19->isChecked() == true)
@@ -4105,6 +4108,8 @@ void dbpelis::on_pushButton_12_clicked()
     Separa->Valor("Titulo;Director;Tiempo;Posicion;etc.");
     Separa->exec();
     QString SaltoDat=Separa->SaltoDato;
+    if (SaltoDat == "Cancelar")
+        return;
     if (SaltoDat == "Tab")
         SaltoDat = "\t";
     QString path=tr("/home/%1/Documentos/");
@@ -4117,7 +4122,7 @@ void dbpelis::on_pushButton_12_clicked()
     QFile file(""+fileName+".csv");
     file.open(QIODevice::WriteOnly | QIODevice::Truncate);
     QTextStream in(&file);
-    in << "Titulo" << SaltoDat << "Titulo Original" << SaltoDat << "Edad" << SaltoDat << "Drama" << SaltoDat <<  "Comedia" << SaltoDat << "Accion" << SaltoDat << "Aventura" << SaltoDat << "Scifi" << SaltoDat << "Romantica" << SaltoDat << "Musical" << SaltoDat << "Catastrofes" << SaltoDat << "Suspense" << SaltoDat << "Fantasia" << SaltoDat << "Erotico" << SaltoDat << "Porno" << SaltoDat << "Historico" << SaltoDat << "Policiaco" << SaltoDat << "Terror" << SaltoDat << "Western" << SaltoDat << "Belico" << SaltoDat << "Deportes" << SaltoDat << "Animacion" << SaltoDat << "Documental" << SaltoDat << "Gore_zombies" << SaltoDat << "Caratula" << SaltoDat << "Actor" << SaltoDat << "Secundario" << SaltoDat << "Calificacion" << SaltoDat << "Sinopsis" << SaltoDat << "Soporte" << SaltoDat << "Posicion" << SaltoDat << "Visionada" << SaltoDat << "Duracion" << SaltoDat << "Color" << SaltoDat << "Vose" << SaltoDat << "Formato" << SaltoDat << "Director" << SaltoDat << "Fecha" << "\n";
+    in << tr("Titulo") << SaltoDat << tr("Titulo Original") << SaltoDat << tr("Edad") << SaltoDat << tr("Drama") << SaltoDat << tr("Comedia") << SaltoDat << tr("Accion") << SaltoDat << tr("Aventura") << SaltoDat << tr("Scifi") << SaltoDat << tr("Romantica") << SaltoDat << tr("Musical") << SaltoDat << tr("Catastrofes") << SaltoDat << tr("Suspense") << SaltoDat << tr("Fantasia") << SaltoDat << tr("Erotico") << SaltoDat << tr("Porno") << SaltoDat << tr("Historico") << SaltoDat << tr("Policiaco") << SaltoDat << tr("Terror") << SaltoDat << tr("Western") << SaltoDat << tr("Belico") << SaltoDat << tr("Deportes") << SaltoDat << tr("Animacion") << SaltoDat << tr("Documental") << SaltoDat << tr("Gore_zombies") << SaltoDat << tr("Caratula") << SaltoDat << tr("Actor") << SaltoDat << tr("Secundario") << SaltoDat << tr("Calificacion") << SaltoDat << tr("Sinopsis") << SaltoDat << tr("Soporte") << SaltoDat << tr("Posicion") << SaltoDat << tr("Visionada") << SaltoDat << tr("Duracion") << SaltoDat << tr("Color") << SaltoDat << tr("Vose") << SaltoDat << tr("Formato") << SaltoDat << tr("Director") << SaltoDat << tr("Fecha") << "\n";
     QSqlQuery Acces(db);
     Acces.exec("SELECT COUNT(id) as Cantidad FROM pelis");
     int cuenta, comienzo;
@@ -4126,7 +4131,7 @@ void dbpelis::on_pushButton_12_clicked()
     QSqlQuery Acceso(db);
     Acceso.exec("SELECT titulo,titulo_original,edad,drama,comedia,accion,aventura,scifi,romantica,musical,catastrofes,suspense,fantasia,erotico,porno,historico,policiaco,terror,western,belico,deportes,animacion,documental,gore_zombies,caratula,actor,secundario,calificacion,sinopsis,soporte,posicion,visionada,duracion,color,vose,formato,fecha FROM pelis");
     setUpdatesEnabled(false);
-    QProgressDialog progressPelis("Creando archivo... Espera por favor", "Cancelar", 0, cuenta);
+    QProgressDialog progressPelis(tr("Creando archivo... Espera por favor"), "Cancelar", 0, cuenta);
     progressPelis.show();
     comienzo=0;
     while(Acceso.next())

@@ -14,7 +14,9 @@ QT += network \
     multimedia \
     qt3support \
     testlib \
-    dbus
+    dbus \
+    printsupport
+
 TARGET = RecoverDrake
 TEMPLATE = app
 SOURCES += main.cpp \
@@ -75,7 +77,56 @@ SOURCES += main.cpp \
     grabador.cpp \
     conversorud.cpp \
     calculadora.cpp \
-    dbclaves.cpp
+    dbclaves.cpp \
+    report.cpp \
+    Report/container.cpp \
+    Report/customlabel.cpp \
+    Report/detailsection.cpp \
+    Report/editdetailsecdlg.cpp \
+    Report/editdinamycitemdlg.cpp \
+    Report/editfielddlg.cpp \
+    Report/editimagedlg.cpp \
+    Report/editlinedlg.cpp \
+    Report/editrectdlg.cpp \
+    Report/edittextdlg.cpp \
+    Report/pageheadersection.cpp \
+    Report/paper.cpp \
+    Report/reportfield.cpp \
+    Report/reportimage.cpp \
+    Report/reportline.cpp \
+    Report/reportrenderer.cpp \
+    Report/reportview.cpp \
+    Report/roundedrect.cpp \
+    Report/section.cpp \
+    Report/sectioneditordlg.cpp \
+    reportvisual.cpp \
+    Report/editparamdlg.cpp \
+    Report/reportacumulator.cpp \
+    Report/reportparama.cpp \
+    Report/editacum.cpp \
+    Report/editpaperdlg.cpp \
+    Report/codebar.cpp \
+    Report/editcodebardlg.cpp \
+    Report/editrelationalfield.cpp \
+    Report/relationalfield.cpp \
+    Report/savetobdfrm.cpp \
+    Report/sqlcalls.cpp \
+    Auxiliares/timedmessagebox.cpp \
+    Smpt/emailaddress.cpp \
+    Smpt/mimeattachment.cpp \
+    Smpt/mimecontentformatter.cpp \
+    Smpt/mimefile.cpp \
+    Smpt/mimehtml.cpp \
+    Smpt/mimeinlinefile.cpp \
+    Smpt/mimemessage.cpp \
+    Smpt/mimemultipart.cpp \
+    Smpt/mimepart.cpp \
+    Smpt/mimetext.cpp \
+    Smpt/quotedprintable.cpp \
+    Smpt/smtpclient.cpp \
+    QR/qrwidget.cpp \
+    qrcode.cpp \
+    compresor.cpp
 HEADERS += recoverdrake.h \
     drakesistema.h \
     drakeprocesos.h \
@@ -134,7 +185,57 @@ HEADERS += recoverdrake.h \
     grabador.h \
     conversorud.h \
     calculadora.h \
-    dbclaves.h
+    dbclaves.h \
+    report.h \
+    Report/container.h \
+    Report/customlabel.h \
+    Report/detailsection.h \
+    Report/editdetailsecdlg.h \
+    Report/editdinamycitemdlg.h \
+    Report/editfielddlg.h \
+    Report/editimagedlg.h \
+    Report/editlinedlg.h \
+    Report/editrectdlg.h \
+    Report/edittextdlg.h \
+    Report/pageheadersection.h \
+    Report/paper.h \
+    Report/reportfield.h \
+    Report/reportimage.h \
+    Report/reportline.h \
+    Report/reportrenderer.h \
+    Report/reportview.h \
+    Report/roundedrect.h \
+    Report/section.h \
+    Report/sectioneditordlg.h \
+    reportvisual.h \
+    Report/editparamdlg.h \
+    Report/reportacumulator.h \
+    Report/reportparama.h \
+    Report/editacum.h \
+    Report/editpaperdlg.h \
+    Report/codebar.h \
+    Report/editcodebardlg.h \
+    Report/editrelationalfield.h \
+    Report/relationalfield.h \
+    Report/savetobdfrm.h \
+    Report/sqlcalls.h \
+    Auxiliares/timedmessagebox.h \
+    Smpt/emailaddress.h \
+    Smpt/mimeattachment.h \
+    Smpt/mimecontentformatter.h \
+    Smpt/mimefile.h \
+    Smpt/mimehtml.h \
+    Smpt/mimeinlinefile.h \
+    Smpt/mimemessage.h \
+    Smpt/mimemultipart.h \
+    Smpt/mimepart.h \
+    Smpt/mimetext.h \
+    Smpt/quotedprintable.h \
+    Smpt/smtpclient.h \
+    Smpt/SmtpMime \
+    QR/qrwidget.h \
+    qrcode.h \
+    compresor.h
 FORMS += recoverdrake.ui \
     acceso.ui \
     claves.ui \
@@ -189,15 +290,32 @@ FORMS += recoverdrake.ui \
     grabador.ui \
     conversorud.ui \
     calculadora.ui \
-    dbclaves.ui
+    dbclaves.ui \
+    report.ui \
+    Report/editdetailsecdlg.ui \
+    Report/editfielddlg.ui \
+    Report/editimagedlg.ui \
+    Report/editlinedlg.ui \
+    Report/editrectdlg.ui \
+    Report/edittextdlg.ui \
+    Report/sectioneditordlg.ui \
+    reportvisual.ui \
+    Report/editparamdlg.ui \
+    Report/editacum.ui \
+    Report/editpaperdlg.ui \
+    Report/editcodebardlg.ui \
+    Report/editrelationalfield.ui \
+    Report/savetobdfrm.ui \
+    qrcode.ui \
+    compresor.ui
 RESOURCES += recoverdrake.qrc
 OTHER_FILES += 
 TRANSLATIONS += RecoverDrake_en.ts \
     RecoverDrake_es.ts
+LIBS += -lqrencode
 CODECFORTR = UTF-8
 CODECFORSRC = UTF-8
 
 # PARA VERSION 5 O SUPERIOR COMENTAR LAS LINEAS SIGUIENTES:
 #greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-#QT += printsupport
 #contains(QT, core): QT += concurrent

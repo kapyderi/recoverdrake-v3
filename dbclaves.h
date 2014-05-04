@@ -7,6 +7,10 @@
 #include "desbloquear.h"
 #include "importar.h"
 #include "ordenar.h"
+#include <QPen>
+#include "ayuda.h"
+
+class QPrinter;
 
 namespace Ui {
 class dbclaves;
@@ -48,8 +52,19 @@ private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_3_clicked();
     void on_pushButton_11_clicked();
-
     void on_pushButton_10_clicked();
+    void on_pushButton_12_clicked();
+    void on_pushButton_5_clicked();
+    void orden();
+    void on_comboBox_currentIndexChanged(QString busca);
+    void print(QPrinter*);
+    void on_pushButton_9_clicked();
+    void Cambiar();
+    void on_lineEdit_11_textChanged(const QString &arg1);
+    void on_lineEdit_12_textChanged(const QString &arg1);
+    void on_lineEdit_13_textChanged(const QString &arg1);
+    void on_lineEdit_14_textChanged(const QString &arg1);
+    void on_lineEdit_15_textChanged(const QString &arg1);
 
 private:
     Ui::dbclaves *ui;
@@ -64,6 +79,7 @@ private:
     Desbloquear *pass;
     ordenar *Orden;
     importar *import;
+    Ayuda *ayuda;
     QString cantidadDefecto;
     QString cantidad47;
     QString cantidad48;
@@ -76,6 +92,12 @@ private:
     QString Stilo;
     int Bloqueo;
     QString IDUser;
+    QFont font;
+    QColor color, color1;
+    QPen pen;
+    QPen pen1;
+    QString NomOrden;
+    QString DesencriptarUser(QString Userid, QString Enc1, QString Enc2, QString Enc3, int Tipo);
 
 };
 

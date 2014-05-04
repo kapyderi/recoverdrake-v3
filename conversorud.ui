@@ -2219,7 +2219,7 @@ background-color: rgb(255, 251, 239);</string>
         </sizepolicy>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="tab_3">
         <attribute name="title">
@@ -5576,8 +5576,8 @@ background-color: rgb(255, 251, 239);</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>436</width>
-              <height>185</height>
+              <width>577</width>
+              <height>242</height>
              </rect>
             </property>
             <attribute name="label">

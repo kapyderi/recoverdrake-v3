@@ -81,7 +81,7 @@
         <item row="0" column="2">
          <widget class="QPushButton" name="pushButton_11">
           <property name="text">
-           <string>Limpiar</string>
+           <string>Nuevo</string>
           </property>
           <property name="icon">
            <iconset resource="recoverdrake.qrc">
@@ -261,7 +261,7 @@
         <item row="0" column="2">
          <widget class="QPushButton" name="pushButton_12">
           <property name="text">
-           <string>Limpiar</string>
+           <string>Nuevo</string>
           </property>
           <property name="icon">
            <iconset resource="recoverdrake.qrc">

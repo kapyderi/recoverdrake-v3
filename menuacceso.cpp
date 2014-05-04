@@ -17,13 +17,13 @@ MenuAcceso::MenuAcceso(QWidget *parent) :
     Model= new QSqlTableModel(0,db);
     Model->setTable("Menu");
     Model->select();
-    Model->setHeaderData(1,Qt::Horizontal,"Nombre");
-    Model->setHeaderData(2,Qt::Horizontal,"Nombre en Espanol");
-    Model->setHeaderData(3,Qt::Horizontal,"Comentario en Espanol");
-    Model->setHeaderData(4,Qt::Horizontal,"Comentario");
-    Model->setHeaderData(5,Qt::Horizontal,"Categoria");
-    Model->setHeaderData(6,Qt::Horizontal,"Icono");
-    Model->setHeaderData(7,Qt::Horizontal,"Ejecutable");
+    Model->setHeaderData(1,Qt::Horizontal,tr("Nombre"));
+    Model->setHeaderData(2,Qt::Horizontal,tr("Nombre en Espanol"));
+    Model->setHeaderData(3,Qt::Horizontal,tr("Comentario en Espanol"));
+    Model->setHeaderData(4,Qt::Horizontal,tr("Comentario"));
+    Model->setHeaderData(5,Qt::Horizontal,tr("Categoria"));
+    Model->setHeaderData(6,Qt::Horizontal,tr("Icono"));
+    Model->setHeaderData(7,Qt::Horizontal,tr("Ejecutable"));
     ui->tableView->setModel(Model);
     ui->tableView->setColumnHidden(0, true);
     connect(ui->tableView->selectionModel(),SIGNAL(currentChanged(QModelIndex,

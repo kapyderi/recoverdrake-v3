@@ -22,6 +22,7 @@
 #include <QTest>
 #include <QDesktopWidget>
 #include <QTranslator>
+#include "Auxiliares/timedmessagebox.h"
 
 extern QTranslator *qTranslator;
 
@@ -29,7 +30,7 @@ acceso::acceso(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::acceso)
 {
-    ui->setupUi(this);    
+    ui->setupUi(this);
     ui->checkBox->hide();
     connect(ui->checkBox,SIGNAL(clicked()),this,SLOT(Comprobar()));
     db=QSqlDatabase::database("PRINCIPAL");
@@ -139,6 +140,8 @@ acceso::acceso(QWidget *parent) :
         Limitacion = 1;
     notas *acc=new notas();
     Ver=acc->Ultimo;
+    QString Version = tr("Construido con Qt ")+QString::fromStdString(QT_VERSION_STR);
+    ui->label_20->setText(Version);
     qsrand(QTime::currentTime().msec());
     if (Limitacion == 0)
     {
@@ -580,7 +583,7 @@ void acceso::on_pushButton_clicked()
                 bool ok;
                 QString Clave;
                 Clave = QInputDialog::getText(this, QString::fromUtf8(tr("Clave de Administrador")),
-                QString::fromUtf8(tr("Introduce la clave de administrador.<P> ")),
+                QString::fromUtf8(tr("Introduce la clave de administrador...")),
                 QLineEdit::Password,
                 "",&ok);
                 if (Clave.isEmpty())
@@ -1149,7 +1152,7 @@ void acceso::on_lineEdit_2_textChanged(QString Value)
 {
     if (Valor == 0)
     {
-        if (Value != "")
+        if (Value != "" && Value.count() == 1)
         {
             QChar ascii;
             int numero;
@@ -1157,10 +1160,9 @@ void acceso::on_lineEdit_2_textChanged(QString Value)
             numero=ascii.toAscii() ;
             if (numero >= 65 && numero <=90)
             {
-                QMessageBox m;
-                m.setWindowTitle(tr("Advertencia!!!"));
-                m.setText(tr("El bloque de mayusculas esta activado."));
-                m.exec();
+                TimedMessageBox *t = new TimedMessageBox(ui->lineEdit_2,tr("El bloque de mayusculas esta activado."),TimedMessageBox::Infomation,0);
+                Q_UNUSED(t);
+                ui->lineEdit_2->setFocus();
                 Valor = 1;
             }
             this->tecla();
