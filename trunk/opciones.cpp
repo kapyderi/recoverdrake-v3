@@ -15,6 +15,7 @@
 #include <QStyleFactory>
 #include <QPalette>
 #include <QStylePlugin>
+#include <Smpt/SmtpMime>
 
 extern QTranslator *qTranslator;
 
@@ -25,6 +26,7 @@ opciones::opciones(QWidget *parent) :
     ui->setupUi(this);
     drakeSistema drake;
     user = drake.getUser();
+    arqt = drake.getArquitectura();
     db=QSqlDatabase::database("PRINCIPAL");
     Stilo = "B";
     Model= new QSqlTableModel(0,db);
@@ -66,9 +68,10 @@ opciones::opciones(QWidget *parent) :
     Model12= new QSqlTableModel(0,db);
     Model12->setTable("Palabra");
     Model12->select();
-    Model12->setHeaderData(1,Qt::Horizontal,"Palabra a evitar");
+    Model12->setHeaderData(1,Qt::Horizontal,tr("Palabra a evitar"));
     ui->tableView->setModel(Model12);
     ui->tableView->setColumnHidden(0, true);
+    ui->tableView->resizeColumnsToContents();
     ui->tabWidget->setCurrentPage(0);
     connect(ui->tableView->selectionModel(),SIGNAL(currentChanged(QModelIndex,QModelIndex)),this,SLOT(cambiaFila(QModelIndex)));
     Model13= new QSqlTableModel(0,db);
@@ -101,6 +104,20 @@ opciones::opciones(QWidget *parent) :
     Model22= new QSqlTableModel(0,db);
     Model22->setTable("Ecualizador");
     Model22->select();
+    Model23= new QSqlTableModel(0,db);
+    Model23->setTable("Pais");
+    Model23->select();
+    Model24= new QSqlTableModel(0,db);
+    Model24->setTable("Smtp");
+    Model24->select();
+    Model24->setHeaderData(2,Qt::Horizontal,tr("Servidor SMTP"));
+    Model24->setHeaderData(6,Qt::Horizontal,tr("Usuario"));
+    Model24->setHeaderData(7,Qt::Horizontal,tr("Puerto"));
+    ui->tableView_2->setModel(Model24);
+    ui->tableView_2->setColumnHidden(0, true);
+    ui->tableView_2->setColumnHidden(3, true);
+    ui->tableView_2->resizeColumnsToContents();
+    connect(ui->tableView_2->selectionModel(),SIGNAL(currentChanged(QModelIndex,QModelIndex)),this,SLOT(cambiaFila1(QModelIndex)));
     Save = 0;
     Retro = 1;
     connect(ui->radioButton_15,SIGNAL(clicked()),this,SLOT(Wlan()));
@@ -110,6 +127,11 @@ opciones::opciones(QWidget *parent) :
     connect(ui->comboBox_3, SIGNAL(activated(QString)),this, SLOT(changeStyle(QString)));
     connect(ui->checkBox_4, SIGNAL(clicked()), this, SLOT(Comprobar()));
     ui->comboBox_3->addItems(QStyleFactory::keys());
+    ui->radioButton_54->setChecked(true);
+    connect(ui->radioButton_54,SIGNAL(clicked()),this,SLOT(Smtp()));
+    connect(ui->radioButton_55,SIGNAL(clicked()),this,SLOT(Smtp()));
+    this->Smtp();
+    connect(ui->checkBox_7,SIGNAL(clicked()),this,SLOT(password()));
     this->iniciar();
 }
 
@@ -139,6 +161,8 @@ opciones::~opciones()
     delete Model20;
     delete Model21;
     delete Model22;
+    delete Model23;
+    delete Model24;
 }
 
 void opciones::changeEvent(QEvent *e)
@@ -153,6 +177,12 @@ void opciones::changeEvent(QEvent *e)
     }
 }
 
+void opciones::Valor(QString Opcion)
+{
+    if (Opcion == "mail")
+        ui->tabWidget->setCurrentIndex(4);
+}
+
 void opciones::Comprobar()
 {
     if (ui->checkBox_4->isChecked())
@@ -164,9 +194,10 @@ void opciones::Comprobar()
 void opciones::iniciar()
 {
     setUpdatesEnabled(false);
-    QProgressDialog progress(tr("Recopilando datos de preferencias personales... Espera por favor"), tr("Cancelar"), 0, 90, this);
+    QProgressDialog progress(tr("Recopilando datos de preferencias personales... Espera por favor"), tr("Cancelar"), 0, 98, this);
     progress.show();
-    for(int i=0;i<90;i++)
+    QTest::qWait(20);
+    for(int i=0;i<98;i++)
     {
         qApp->processEvents();
         progress.setValue(i);
@@ -1862,30 +1893,50 @@ void opciones::iniciar()
         }
         if (i==85)
         {
-            Localizar = getRpm("libncurses-devel");
+            QString Valor;
+            if (arqt =="x86_64")
+            {
+                Valor= "lib64ncurses-devel";
+                Localizar = getRpm(Valor);
+            }
+            else
+            {
+                Valor= "libncurses-devel";
+                Localizar = getRpm(Valor);
+            }
+            ui->label_350->setText(Valor);
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
             {
                 ui->label_349->setText(QString::fromUtf8("..."));
             }
             else
             {
-                QString Valor= "libncurses-devel";
                 QString Value = getPack1(Valor);
-                ui->label_349->setText(QString::fromUtf8(Value));
+                ui->label_349->setText(QString::fromUtf8(Value));                
             }
         }
         if (i==86)
         {
-            Localizar = getRpm("libncursesw-devel");
+            QString Valor;
+            if (arqt =="x86_64")
+            {
+                Valor= "lib64ncursesw-devel";
+                Localizar = getRpm(Valor);
+            }
+            else
+            {
+                Valor= "libncursesw-devel";
+                Localizar = getRpm(Valor);
+            }
+            ui->label_351->setText(Valor);
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
             {
                 ui->label_352->setText(QString::fromUtf8("..."));
             }
             else
             {
-                QString Valor= "libncursesw-devel";
                 QString Value = getPack1(Valor);
-                ui->label_352->setText(QString::fromUtf8(Value));
+                ui->label_352->setText(QString::fromUtf8(Value));                
             }
         }
         if (i==87)
@@ -1967,8 +2018,135 @@ void opciones::iniciar()
                 ui->label_187->setText(QString::fromUtf8(Value));
             }
         }
+        if (i==90)
+        {
+            QString pais;
+            QSqlQuery Pais(db);
+            Pais.exec("SELECT Tipo FROM Pais WHERE id=1");
+            Pais.first();
+            if (Pais.isValid())
+                pais=Pais.value(0).toString();
+            if ( pais == "1")
+            {
+                ui->radioButton_52->setChecked(true);
+                ui->radioButton_53->setChecked(false);
+            }
+            else if (pais == "2")
+            {
+                ui->radioButton_52->setChecked(false);
+                ui->radioButton_53->setChecked(true);
+            }
+        }
+        if (i==91)
+        {
+            QString Valor;
+            if (arqt =="x86_64")
+            {
+                Valor= "lib64qrencode-devel";
+                Localizar = getRpm(Valor);
+            }
+            else
+            {
+                Valor= "libqrencode-devel";
+                Localizar = getRpm(Valor);
+            }
+            ui->label_196->setText(Valor);
+            if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
+            {
+                ui->label_197->setText(QString::fromUtf8("..."));
+            }
+            else
+            {
+                QString Value = getPack1(Valor);
+                ui->label_197->setText(QString::fromUtf8(Value));
+            }
+        }
+        if (i==92)
+        {
+            Localizar = getRpm("bzip2");
+            if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
+            {
+                ui->label_198->setText(QString::fromUtf8("..."));
+            }
+            else
+            {
+                QString Valor= "bzip2";
+                QString Value = getPack1(Valor);
+                ui->label_198->setText(QString::fromUtf8(Value));
+            }
+        }
+        if (i==93)
+        {
+            Localizar = getRpm("zip");
+            if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
+            {
+                ui->label_200->setText(QString::fromUtf8("..."));
+            }
+            else
+            {
+                QString Valor= "zip";
+                QString Value = getPack1(Valor);
+                ui->label_200->setText(QString::fromUtf8(Value));
+            }
+        }
+        if (i==94)
+        {
+            Localizar = getRpm("zoo");
+            if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
+            {
+                ui->label_202->setText(QString::fromUtf8("..."));
+            }
+            else
+            {
+                QString Valor= "zoo";
+                QString Value = getPack1(Valor);
+                ui->label_202->setText(QString::fromUtf8(Value));
+            }
+        }
+        if (i==95)
+        {
+            Localizar = getRpm("arj");
+            if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
+            {
+                ui->label_204->setText(QString::fromUtf8("..."));
+            }
+            else
+            {
+                QString Valor= "arj";
+                QString Value = getPack1(Valor);
+                ui->label_204->setText(QString::fromUtf8(Value));
+            }
+        }
+        if (i==96)
+        {
+            Localizar = getRpm("p7zip");
+            if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
+            {
+                ui->label_207->setText(QString::fromUtf8("..."));
+            }
+            else
+            {
+                QString Valor= "7z";
+                QString Value = getPack1(Valor);
+                ui->label_207->setText(QString::fromUtf8(Value));
+            }
+        }
+        if (i==96)
+        {
+            Localizar = getRpm("rar");
+            if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
+            {
+                ui->label_209->setText(QString::fromUtf8("..."));
+            }
+            else
+            {
+                QString Valor= "rar";
+                QString Value = getPack1(Valor);
+                ui->label_209->setText(QString::fromUtf8(Value));
+            }
+        }
     }
-    progress.setValue(89);
+    progress.setValue(98);
     setUpdatesEnabled(true);
 }
 
@@ -2935,7 +3113,42 @@ void opciones::on_pushButton_2_clicked()
     }
     else
     {
-        QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No se han podido realizar los cambios. Compruebe la accesibilidad de la base de datos."));
+        m.exec();
+        return;
+    }
+    QString pais;
+    QSqlQuery Pais(db);
+    Pais.exec("SELECT id FROM Pais WHERE id=1");
+    Pais.first();
+    if (Pais.isValid())
+        pais=Pais.value(0).toString();
+    int filapais=0;
+    QString ValorP11;
+    if (pais == "1")
+    {
+        if(ui->radioButton_52->isChecked())
+        {
+            ValorP11 = "1";
+        }
+        else if(ui->radioButton_53->isChecked())
+        {
+            ValorP11 = "2";
+        }
+        QSqlRecord record= Model23->record(filapais);
+        record.setValue(0,pais.toInt());
+        record.setValue(1,ValorP11);
+        Model23->setRecord(filapais,record);
+        Model23->submitAll();
+    }
+    else
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
         m.setText(tr("No se han podido realizar los cambios. Compruebe la accesibilidad de la base de datos."));
         m.exec();
         return;
@@ -3146,14 +3359,10 @@ void opciones::on_pushButton_3_clicked()
     int respuesta = 0;
     respuesta = QMessageBox::question(this, tr("Restaurar valores por defecto"),
                tr("<center><b>Restaurar valores por defecto</b></center><p>"
-
                   "<b>IMPORTANTE:</b> Estas a punto de eliminar las configuraciones "
                   "personalizadas que hayas introducido manualmente.<p>"
-
                   "Procede con cuidado!!!<p>"
-
                   "&iquest;Restaurar valores por defecto?"), QMessageBox::Ok, QMessageBox::No);
-
     if (respuesta == QMessageBox::Ok)
     {
         Retro = 1;
@@ -4602,6 +4811,21 @@ void opciones::on_pushButton_3_clicked()
             Model16->setRecord(this->fila9,record);
             Model16->submitAll();
         }
+        QString cantidadP;
+        ui->radioButton_42->setChecked(false);
+        ui->radioButton_41->setChecked(false);
+        QSqlQuery queryP(db);
+        queryP.exec("SELECT id FROM Pais WHERE id=1");
+        queryP.first();
+        if (queryP.isValid())
+            cantidadP=queryP.value(0).toString();
+        int filaP9=1;
+        QSqlRecord recordP= Model23->record(filaP9);
+        record.setValue(1,"0");
+        Model23->setRecord(filaP9,recordP);
+        Model23->submitAll();
+        ui->radioButton_52->setChecked(false);
+        ui->radioButton_53->setChecked(false);
         QString Menu, dato;
         QSqlQuery menu(db);
         menu.exec("SELECT Tipo_Menu FROM Menus WHERE id=1");
@@ -4803,7 +5027,7 @@ void opciones::on_pushButton_4_clicked()
     if (User == cantidad)
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr("No se pueden duplicar palabras clave. Cambie los datos de palabra clave para poder insertarla."));
+        m.setText(tr("No se pueden duplicar palabras clave. Cambia los datos de palabra clave para poder insertarla."));
         m.exec();
         return;
     }
@@ -4848,7 +5072,6 @@ void opciones::on_pushButton_5_clicked()
 void opciones::on_pushButton_8_clicked()
 {
     this->ui->lineEdit_7->setText(tr(""));
-    return;
 }
 
 void opciones::on_fontComboBox_currentFontChanged(QFont f)
@@ -4984,4 +5207,298 @@ QString opciones::getRpm(QString Valor)
     QString res =  QString(Paquete);
     res.chop(1);
     return res;
+}
+
+void opciones::cambiaFila1(QModelIndex actual)
+{
+        int i;
+        i=actual.row();
+        QModelIndex index;
+        index=ui->tableView_2->model()->index(i,0);
+        this->id= index.data().toInt();
+        index=ui->tableView_2->model()->index(i,1);
+        ui->lineEdit_8->setText(tr(index.data().toString()));
+        if (ui->lineEdit_8->text().contains("@gmail.com"))
+        {
+            ui->radioButton_54->setChecked(true);
+            ui->lineEdit_8->setText(ui->lineEdit_8->text().remove("@gmail.com"));
+        }
+        else
+        {
+            ui->radioButton_55->setChecked(true);
+        }
+        this->Smtp();
+        index=ui->tableView_2->model()->index(i,2);
+        ui->lineEdit_9->setText(tr(index.data().toString()));
+        index=ui->tableView_2->model()->index(i,3);
+        ui->lineEdit_10->setText(tr(index.data().toString()));
+        index=ui->tableView_2->model()->index(i,4);
+        QString Valor= index.data().toString();
+        if (Valor == "Si")
+            ui->checkBox_6->setChecked(true);
+        else
+            ui->checkBox_6->setChecked(false);
+        index=ui->tableView_2->model()->index(i,5);
+        QString Valor1= index.data().toString();
+        if (Valor1 == "Si")
+            ui->checkBox_5->setChecked(true);
+        else
+            ui->checkBox_5->setChecked(false);
+        index=ui->tableView_2->model()->index(i,6);
+        ui->lineEdit_12->setText(tr(index.data().toString()));
+        index=ui->tableView_2->model()->index(i,7);
+        int Valor2= index.data().toInt();
+        ui->spinBox->setValue(Valor2);
+        this->fila0=i;
+}
+
+void opciones::Smtp()
+{
+    if (ui->radioButton_54->isChecked())
+    {
+        ui->label_192->setVisible(true);
+        if (ui->lineEdit_8->text().contains("@gmail.com"))
+        {
+            ui->lineEdit_8->setText(ui->lineEdit_8->text().remove("@gmail.com"));
+        }
+        if (ui->lineEdit_8->text() == "")
+            ui->lineEdit_9->setText("smtp.gmail.com");
+    }
+    else if (ui->radioButton_55->isChecked())
+    {
+        ui->label_192->setVisible(false);
+        if (ui->lineEdit_8->text() == "")
+            ui->lineEdit_9->setText("");
+    }
+
+}
+
+void opciones::password()
+{
+    if (ui->checkBox_7->isChecked() == true)
+    {
+        ui->lineEdit_10->setEchoMode(QLineEdit::Normal);
+    }
+    else if (ui->checkBox_7->isChecked() == false)
+    {
+        ui->lineEdit_10->setEchoMode(QLineEdit::Password);
+    }
+}
+
+void opciones::on_pushButton_14_clicked()
+{
+    QString Correo, Server, Clave, Autentic, SSL, User, Port, Dato;
+    Correo=ui->lineEdit_8->text();
+    if (ui->radioButton_54->isChecked())
+    {
+        if (!ui->lineEdit_8->text().contains("@gmail.com"))
+        {
+            ui->lineEdit_8->setText(ui->lineEdit_8->text()+"@gmail.com");
+            Correo=ui->lineEdit_8->text();
+        }
+    }
+    Server=ui->lineEdit_9->text();
+    Clave=ui->lineEdit_10->text();
+    if (ui->checkBox_6->isChecked())
+        Autentic="Si";
+    else
+        Autentic="No";
+    if (ui->checkBox_5->isChecked())
+        SSL="Si";
+    else
+        SSL="No";
+    User=ui->lineEdit_12->text();
+    Port=ui->spinBox->text();
+    QSqlQuery query(db);
+    query.exec("SELECT Correo FROM Smtp WHERE Correo='"+Correo+"'");
+    query.first();
+    if (query.isValid())
+        Dato=query.value(0).toString();
+    if (Correo == Dato && Correo !="")
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No se puede duplicar el correo electronico por razones obvias."));
+        m.exec();
+        return;
+    }
+    if (Correo == "" || Server == "" || Clave == "" || Autentic == "" || SSL == "" || User == "" || Port == "")
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No pueden haber datos vacios.<p>Todos los datos son necesarios para una perfecta configuracion."));
+        m.exec();
+        return;
+    }
+    QSqlQuery Wdark(db);
+    Wdark.prepare("INSERT INTO Smtp (Correo,smptserver,Clave,Autenticacion,SSL,User,Port)"
+                  "VALUES (:Correo,:smptserver,:Clave,:Autenticacion,:SSL,:User,:Port)");
+    Wdark.bindValue(":Correo", Correo);
+    Wdark.bindValue(":smptserver", Server);
+    Wdark.bindValue(":Clave", Clave);
+    Wdark.bindValue(":Autenticacion", Autentic);
+    Wdark.bindValue(":SSL", SSL);
+    Wdark.bindValue(":User", User);
+    Wdark.bindValue(":Port", Port);
+    Wdark.exec();
+    Model24->select();
+    ui->tableView_2->setModel(Model24);
+    ui->tableView_2->resizeColumnsToContents();
+}
+
+void opciones::on_pushButton_16_clicked()
+{
+    QString Correo;
+    Correo= ui->lineEdit_8->text();
+    QSqlQuery query1(db);
+    query1.exec("SELECT Correo FROM Smtp WHERE Correo='"+Correo+"'");
+    query1.first();
+    ui->tableView_2->model()->removeRow(fila0);
+    ui->tableView_2->resizeColumnsToContents();
+}
+
+void opciones::on_pushButton_18_clicked()
+{
+    ui->lineEdit_8->setText("");
+    ui->lineEdit_9->setText("smtp.gmail.com");
+    ui->lineEdit_10->setText("");
+    ui->checkBox_6->setChecked(true);
+    ui->checkBox_5->setChecked(true);
+    ui->lineEdit_12->setText("");
+    ui->spinBox->setValue(465);
+    ui->radioButton_54->setChecked(true);
+    this->Smtp();
+    ui->checkBox_7->setChecked(false);
+}
+
+void opciones::on_pushButton_15_clicked()
+{
+    QString Correo, Server, Clave, Autentic, SSL, User, Port, Dato;
+    Correo=ui->lineEdit_8->text();
+    if (ui->radioButton_54->isChecked())
+    {
+        if (!ui->lineEdit_8->text().contains("@gmail.com"))
+        {
+            ui->lineEdit_8->setText(ui->lineEdit_8->text()+"@gmail.com");
+            Correo=ui->lineEdit_8->text();
+        }
+    }
+    Server=ui->lineEdit_9->text();
+    Clave=ui->lineEdit_10->text();
+    if (ui->checkBox_6->isChecked())
+        Autentic="Si";
+    else
+        Autentic="No";
+    if (ui->checkBox_5->isChecked())
+        SSL="Si";
+    else
+        SSL="No";
+    User=ui->lineEdit_12->text();
+    Port=ui->spinBox->text();
+    QSqlQuery query(db);
+    query.exec("SELECT Correo FROM Smtp WHERE Correo='"+Correo+"'");
+    query.first();
+    if (query.isValid())
+        Dato=query.value(0).toString();
+    if (Correo != Dato)
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No hay ningun correo creado con ese nombre."));
+        m.exec();
+        return;
+    }
+    if (Correo == "" || Server == "" || Clave == "" || Autentic == "" || SSL == "" || User == "" || Port == "")
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No pueden haber datos vacios.<p>Todos los datos son necesarios para una perfecta configuracion."));
+        m.exec();
+        return;
+    }
+    QSqlRecord record= Model24->record(this->fila0);
+    record.setValue(1,Correo);
+    record.setValue(2,Server);
+    record.setValue(3,Clave);
+    record.setValue(4,Autentic);
+    record.setValue(5,SSL);
+    record.setValue(6,User);
+    record.setValue(7,Port);
+    Model24->setRecord(this->fila0,record);
+    Model24->submitAll();
+    ui->tableView_2->selectRow(0);
+    ui->tableView_2->resizeColumnsToContents();
+}
+
+void opciones::on_pushButton_17_clicked()
+{
+    QMessageBox okMessage (this);
+    QString Correo, Server, Clave, User, Port, Envio;
+    bool SSL;
+    bool Autentic;
+    Correo=ui->lineEdit_8->text();
+    if (ui->radioButton_54->isChecked())
+    {
+        if (!ui->lineEdit_8->text().contains("@gmail.com"))
+        {
+            ui->lineEdit_8->setText(ui->lineEdit_8->text()+"@gmail.com");
+            Correo=ui->lineEdit_8->text();
+        }
+    }
+    Server=ui->lineEdit_9->text();
+    Clave=ui->lineEdit_10->text();
+    Autentic = ui->checkBox_6->isChecked();
+    SSL = ui->checkBox_5->isChecked();
+    User=ui->lineEdit_12->text();
+    Port=ui->spinBox->text();
+    Envio=ui->lineEdit_11->text();
+    if (Envio == "" || !Envio.contains("@"))
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("Introduce una direccion de correo donde enviar la prueba."));
+        m.exec();
+    }
+    SmtpClient smtp(Server, Port.toInt(), SSL ? SmtpClient::SslConnection : SmtpClient::TcpConnection);
+    smtp.setUser(User);
+    smtp.setPassword(Clave);
+    MimeMessage message;
+    message.setSender(new EmailAddress(Correo, User));
+    message.addRecipient(new EmailAddress(Envio, Envio));
+    message.setSubject(tr("Mensaje de prueba"));
+    MimeText text;
+    text.setText(tr("Hola!\n Esto es un mensaje de prueba."));
+    message.addPart(&text);
+    if (!smtp.connectToHost())
+    {
+        okMessage.setText(tr("La conexion ha fallado"));
+        okMessage.exec();
+        return;
+    }
+    if (Autentic)
+        if (!smtp.login(User, Clave))
+        {
+            okMessage.setText(tr("La autentificacion ha fallado"));
+            okMessage.exec();
+            return;
+        }
+
+    if (!smtp.sendMail(message))
+    {
+        okMessage.setText
+                (tr("El envio del mail ha fallado"));
+        okMessage.exec();
+        return;
+    }
+    else
+    {
+        okMessage.setText(tr("El email ha sido enviado con exito."));
+        okMessage.exec();
+    }
+    smtp.quit();
 }

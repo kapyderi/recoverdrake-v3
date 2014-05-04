@@ -408,5 +408,62 @@
         <file>Imagenes/F1Grabador7.png</file>
         <file>Imagenes/F1Grabador.png</file>
         <file>Imagenes/F1Grabador8.png</file>
+        <file>Imagenes/F1Qt.png</file>
+        <file>Imagenes/informe.png</file>
+        <file>Imagenes/duplicar.png</file>
+        <file>Imagenes/volver.png</file>
+        <file>Imagenes/target.png</file>
+        <file>Imagenes/Buscar.png</file>
+        <file>Imagenes/modelo.png</file>
+        <file>Imagenes/cross.png</file>
+        <file>Imagenes/font.png</file>
+        <file>Imagenes/printer.png</file>
+        <file>Imagenes/report_disk.png</file>
+        <file>Imagenes/shape_align_bottom.png</file>
+        <file>Imagenes/shape_align_center.png</file>
+        <file>Imagenes/shape_align_left.png</file>
+        <file>Imagenes/shape_align_middle.png</file>
+        <file>Imagenes/shape_align_right.png</file>
+        <file>Imagenes/shape_move_back.png</file>
+        <file>Imagenes/shape_move_backwards.png</file>
+        <file>Imagenes/shape_move_forwards.png</file>
+        <file>Imagenes/shape_move_front.png</file>
+        <file>Imagenes/shape_square.png</file>
+        <file>Imagenes/style.png</file>
+        <file>Imagenes/text_align_center.png</file>
+        <file>Imagenes/text_align_left.png</file>
+        <file>Imagenes/text_align_right.png</file>
+        <file>Imagenes/text_align_up.png</file>
+        <file>Imagenes/text_bold.png</file>
+        <file>Imagenes/text_italic.png</file>
+        <file>Imagenes/text_underline.png</file>
+        <file>Imagenes/shape_align_top.png</file>
+        <file>Imagenes/pintura.png</file>
+        <file>Imagenes/rectredondeado.png</file>
+        <file>Imagenes/codebar.png</file>
+        <file>Imagenes/candadoC.png</file>
+        <file>Imagenes/muro.png</file>
+        <file>Imagenes/rejilla.png</file>
+        <file>Imagenes/barcode.png</file>
+        <file>Imagenes/document-save.png</file>
+        <file>Imagenes/line.png</file>
+        <file>Imagenes/open.png</file>
+        <file>Imagenes/picture.png</file>
+        <file>Imagenes/print-preview.png</file>
+        <file>Imagenes/save_db.png</file>
+        <file>Imagenes/upload_db.png</file>
+        <file>Imagenes/field_rel.png</file>
+        <file>Imagenes/field.png</file>
+        <file>Imagenes/parametro.png</file>
+        <file>Imagenes/mail.png</file>
+        <file>Imagenes/clip.png</file>
+        <file>Imagenes/F1QRDrake.png</file>
+        <file>Imagenes/comprimir.png</file>
+        <file>Imagenes/Refrescar.png</file>
+        <file>Imagenes/descomprimirDOWN.png</file>
+        <file>Imagenes/comprimirUP.png</file>
+    </qresource>
+    <qresource prefix="/codeBar">
+        <file>Imagenes/codebar/FRE3OF9X.TTF</file>
     </qresource>
 </RCC>

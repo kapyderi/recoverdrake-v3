@@ -16,10 +16,12 @@ class importar : public QDialog
 public:
     explicit importar(QWidget *parent = 0);
     ~importar();
-    void Valor(QStringList datos);
+    void Valor(QStringList datos, int Tipo, QString Usuario);
     QString Resultado;
     QStringList Recepcion;
+    QStringList Emision;
     QString Receptor;
+    QString Prueba;
     QString ReceptorComp;
     QStringList RDatos;
     QString titulo,titulo1,edad,drama,comedia,accion,aventura,scifi,romantica,musical,catastrofes,suspense,fantasia,erotico,porno,historico;
@@ -48,6 +50,9 @@ private:
     QString cantidad50;
     QString cantidad51;
     QString Stilo;
+    int Base;
+    QString User;
+    int Cambio;
 
 };
 

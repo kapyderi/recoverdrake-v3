@@ -104,9 +104,11 @@ void DrakeProcesos1::finalizado (int exitCode, QProcess::ExitStatus exitStatus )
 
 void DrakeProcesos1::error(QProcess::ProcessError errores)
 {
+    Q_UNUSED(errores);
     system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'ERROR: El proceso ha generado un error.\'\"");
     emit publicarDatos(tr("El proceso ha generado un error."));
-    this->iniciarProceso();
+    emit finProceso();
+    return;
 }
 
 void DrakeProcesos1::leerError()

@@ -28,6 +28,7 @@ private slots:
 
 private:
     Ui::ordenar *ui;
+    QString Tipo;
 };
 
 #endif // ORDENAR_H

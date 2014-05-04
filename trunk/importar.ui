@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>701</width>
+    <width>809</width>
     <height>371</height>
    </rect>
   </property>
@@ -62,198 +62,7 @@
     <widget class="QLineEdit" name="lineEdit"/>
    </item>
    <item row="1" column="1" colspan="2">
-    <widget class="QComboBox" name="comboBox_2">
-     <item>
-      <property name="text">
-       <string>titulo</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>titulo_original</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>edad</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>drama</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>comedia</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>accion</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>aventura</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>scifi</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>romantica</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>musical</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>catastrofes</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>suspense</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>fantasia</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>erotico</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>porno</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>historico</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>policiaco</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>terror</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>western</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>belico</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>deportes</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>animacion</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>documental</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>gore_zombies</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>caratula</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>actor</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>secundario</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>calificacion</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>sinopsis</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>soporte</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>posicion</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>visionada</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>duracion</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>color</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>vose</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>formato</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>director</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Fecha</string>
-      </property>
-     </item>
-    </widget>
+    <widget class="QComboBox" name="comboBox_2"/>
    </item>
    <item row="5" column="1" colspan="2">
     <widget class="QLineEdit" name="lineEdit_2"/>
@@ -358,6 +167,11 @@ font: bold;</string>
      <column>
       <property name="text">
        <string>Campo a importar</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Dato de Ejemplo</string>
       </property>
      </column>
      <column>

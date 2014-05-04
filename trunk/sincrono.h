@@ -66,6 +66,8 @@ private:
     QTimer *Contad;
     int Value;
     int Counter;
+    int ContadorC;
+    int Marca;
 
 private slots:
     void on_pushButton_5_clicked();

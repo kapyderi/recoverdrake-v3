@@ -274,9 +274,7 @@ void Comparador::on_pushButton_2_clicked()
             path=path.arg(user);
         }
         else
-        {
             path=ui->lineEdit->text();
-        }
         QString fileNameDirectori = QFileDialog::getExistingDirectory(this,tr("Directorio fuente?"),path,QFileDialog::ShowDirsOnly);
         if (fileNameDirectori.isEmpty())
            return;
@@ -292,9 +290,7 @@ void Comparador::on_pushButton_2_clicked()
             path=path.arg(user);
         }
         else
-        {
             path=ui->lineEdit->text();
-        }
         QString fileNameOrigen = QFileDialog::getOpenFileName(this,QString::fromUtf8(tr("Todos los archivos")),
                             path);
         if (fileNameOrigen.isEmpty())
@@ -1694,15 +1690,15 @@ void Comparador::on_tableWidget_itemSelectionChanged()
         if (Tipo == 0)
         {
             contador = ui->tableWidget->item(ui->tableWidget->currentRow(), 0)->text();
-            if ((*it)->text(5) == contador)
-            (*it)->setSelected(true);
+            if ((*it)->text(0) == contador)
+                (*it)->setSelected(true);
             ++it;
         }
         if (Tipo == 1)
         {
             contador = ui->tableWidget->item(ui->tableWidget->currentRow(), 0)->text();
             if ((*it)->text(1) == contador || (*it)->text(4) == contador)
-            (*it)->setSelected(true);
+                (*it)->setSelected(true);
             ++it;
         }
         if (Tipo == 2)
@@ -1715,9 +1711,9 @@ void Comparador::on_tableWidget_itemSelectionChanged()
             a = Valor1.toInt();
             for (int c=a;c<Resto;c++)
             {
-                contador = QString::number(c); //contador = QString::number(Resto);
+                contador = QString::number(c);
                 if ((*it)->text(0) == contador)
-                (*it)->setSelected(true);
+                    (*it)->setSelected(true);
             }
             ++it;
         }
@@ -1745,7 +1741,7 @@ void Comparador::on_pushButton_12_clicked()
     while (*it)
     {
         if ((*it)->text(5) == "#D")
-        (*it)->setSelected(true);
+            (*it)->setSelected(true);
         ++it;
     }
     QModelIndex index;
@@ -1771,7 +1767,7 @@ void Comparador::on_pushButton_10_clicked()
     while (*it)
     {
         if ((*it)->text(5) == "#VI")
-        (*it)->setSelected(true);
+            (*it)->setSelected(true);
         ++it;
     }
     QModelIndex index;
@@ -1797,7 +1793,7 @@ void Comparador::on_pushButton_11_clicked()
     while (*it)
     {
         if ((*it)->text(5) == "#VD")
-        (*it)->setSelected(true);
+            (*it)->setSelected(true);
         ++it;
     }
     QModelIndex index;
@@ -1823,11 +1819,11 @@ void Comparador::on_pushButton_14_clicked()
     while (*it)
     {
         if ((*it)->text(5) == "#VD")
-        (*it)->setSelected(true);
+            (*it)->setSelected(true);
         if ((*it)->text(5) == "#VI")
-        (*it)->setSelected(true);
+            (*it)->setSelected(true);
         if ((*it)->text(5) == "#D")
-        (*it)->setSelected(true);
+            (*it)->setSelected(true);
         ++it;
     }
     int Valor, a, b, c;

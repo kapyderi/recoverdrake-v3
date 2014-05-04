@@ -22,7 +22,6 @@
 
 
 
-
 Ayuda::Ayuda(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Ayuda)
@@ -78,7 +77,7 @@ void Ayuda::Valor(QString valor)
         ui->lineEdit->setText(valor);
     }
     if (valor == tr("Salvaguarda"))
-    {
+    {        
         ui->tabWidget->insertTab(0,ui->tab_41,valor);
         ui->tabWidget->setCurrentPage(0);
         ui->listWidget->setCurrentRow(0);
@@ -139,6 +138,13 @@ void Ayuda::Valor(QString valor)
         ui->listWidget_2->setCurrentRow(0);
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(ui->listWidget->currentItem()->text());
+    }
+    if (valor == tr("QRDrake"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_14,valor);
+        ui->tabWidget->setCurrentPage(0);
+        ui->listWidget->setCurrentRow(0);
+        ui->lineEdit->setText(valor);
     }
     if (ui->lineEdit->text() == "")
     {
@@ -215,6 +221,16 @@ void Ayuda::on_listWidget_currentTextChanged(const QString &currentText)
     if (currentText == tr("Grabador"))
     {
         ui->tabWidget->insertTab(0,ui->tab_12,tr("Grabador"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Solucion a problemas::Phonon"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_13,tr("Solucion a problemas::Phonon"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("QRDrake"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_14,tr("QRDrake"));
         ui->tabWidget->setCurrentPage(0);
     }
 }
@@ -295,6 +311,16 @@ void Ayuda::on_listWidget_2_currentTextChanged(const QString &currentText)
         ui->tabWidget->insertTab(0,ui->tab_12,tr("Grabador"));
         ui->tabWidget->setCurrentPage(0);
     }
+    if (currentText == tr("Solucion a problemas::Phonon"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_13,tr("Solucion a problemas::Phonon"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("QRDrake"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_14,tr("QRDrake"));
+        ui->tabWidget->setCurrentPage(0);
+    }
 }
 
 void Ayuda::Comprobar()
@@ -372,6 +398,16 @@ void Ayuda::Comprobar()
     if (Valor == tr("Grabador"))
     {
         ui->tabWidget->insertTab(0,ui->tab_12,tr("Grabador"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (Valor == tr("Solucion a problemas::Phonon"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_13,tr("Solucion a problemas::Phonon"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (Valor == tr("QRDrake"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_14,tr("QRDrake"));
         ui->tabWidget->setCurrentPage(0);
     }
 }

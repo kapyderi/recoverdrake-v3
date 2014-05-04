@@ -26,7 +26,19 @@ void ordenar::Dato(QString valor)
         ui->label_4->setEnabled(false);
         ui->comboBox_2->setEnabled(false);
         ui->comboBox_3->setEnabled(false);
+        ui->comboBox_4->setEnabled(false);
     }
+    if (valor == "claves")
+    {
+        ui->label_2->setEnabled(true);
+        ui->comboBox->setEnabled(false);
+        ui->label_3->setEnabled(false);
+        ui->label_4->setEnabled(false);
+        ui->comboBox_2->setEnabled(false);
+        ui->comboBox_3->setEnabled(false);
+        ui->comboBox_4->setEnabled(true);
+    }
+    Tipo = valor;
 }
 
 void ordenar::on_pushButton_3_clicked()
@@ -51,7 +63,10 @@ void ordenar::on_pushButton_clicked()
 
 void ordenar::on_pushButton_2_clicked()
 {
-    NOrden=ui->comboBox->currentText();
+    if (Tipo == "pelis")
+        NOrden=ui->comboBox->currentText();
+    if (Tipo == "claves")
+        NOrden=ui->comboBox_4->currentText();
     close();
 }
 

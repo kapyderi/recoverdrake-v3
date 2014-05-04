@@ -83,7 +83,7 @@ sincrono::sincrono(QWidget *parent) :
     ui->pushButton_2->setEnabled(false);
     ui->pushButton_13->setEnabled(false);
     ui->checkBox_2->setChecked(true);
-    connect(ui->checkBox,SIGNAL(clicked()),this,SLOT(Comprobar()));    
+    connect(ui->checkBox,SIGNAL(clicked()),this,SLOT(Comprobar()));
     Sincronizador = 0;
     NoSincro = 0;
     Value = 0;
@@ -91,6 +91,8 @@ sincrono::sincrono(QWidget *parent) :
     this->installEventFilter(this);
     Comprueba = "No";
     Counter = 0;
+    ContadorC = 0;
+    Marca = 0;
     Contad = new QTimer(this);
     connect(Contad, SIGNAL(timeout()), this, SLOT(Montaje()));
     Contad->start(5000);
@@ -120,6 +122,10 @@ void sincrono::Valor(QString Ref, QString Valor1, QString Valor2, QString Valor3
     QColor color;
     Referencia = Ref;
     ui->lineEdit_3->setText(Referencia);
+    if (Valor1.right(1) == "/")
+        Valor1.remove(Valor1.count()-1,1);
+    if (Valor2.right(1) == "/")
+        Valor2.remove(Valor2.count()-1,1);
     ui->lineEdit->setText(Valor1);
     ui->lineEdit_2->setText(Valor2);
     ui->lineEdit_4->setText(Pos);
@@ -169,6 +175,7 @@ void sincrono::Valor(QString Ref, QString Valor1, QString Valor2, QString Valor3
     }
     else if (Value == 2)
     {
+        Marca = 1;
         this->on_pushButton_4_clicked();
         this->on_pushButton_5_clicked();
     }
@@ -299,11 +306,11 @@ void sincrono::on_pushButton_3_clicked()
                         QString::fromUtf8(tr("<center><b>PRECAUCION</center><p>"
                                    "El directorio destino no esta vacio por lo que si aceptas esta opcion tienes que tener "
                                    "en cuenta que si marcas la opcion de \"Quitar eliminados en destino\" puedes borrar cosas "
-                                   "muy importantes ya que los archivos que no esten en origen seran borrado, ademas de los "
+                                   "muy importantes ya que los archivos que no esten en origen seran borrados, ademas de los "
                                    "directorios dentro de el, con la consiguiente perdida de datos.<p>"
                                    "Siempre debes utilizar un directorio nuevo o como minimo con el mismo nombre del origen para "
                                    "que no haya problemas como el comentado.<p>"
-                                   "<B>NOTA: Procede con mucha precaucion o no aceptes la opcion si no "
+                                   "<B>NOTA: Procede con mucha precaucion o no aceptes la opcion \"si\" no "
                                    "sabes lo que estas haciendo.</B><p>"
                                    "&iquest;Utilizar el directorio destino seleccionado?")), QMessageBox::Ok, QMessageBox::No);
             if (respuesta == QMessageBox::No)
@@ -449,6 +456,7 @@ void sincrono::on_pushButton_4_clicked()
     Valor20 = Valor20.arg(ui->lineEdit_2->text());
     drakeSistema drake;
     QString valor = drake.getStart(Valor20);
+    QStringList Comparar = valor.split("\n");
     if (valor == "")
     {
         if (ui->lineEdit_2->text().contains("/media"))
@@ -496,7 +504,12 @@ void sincrono::on_pushButton_4_clicked()
                             }
                             Depurar = ""+Definitivo+""+Valorado+"";
                             ui->lineEdit_2->setText(Depurar);
-                            Contador = 1;
+                            Contador = 1;                          
+                            if (Comparar.value(0) != ui->lineEdit_2->text())
+                            {
+                                ui->textEdit->append(tr("<FONT COLOR=\"RED\">...En analisis: La ruta introducida en destino no existe. Comprueba la accesibilidad de la misma."));
+                                return;
+                            }
                             break;
                         }
                         else if (Mount == "No")
@@ -509,7 +522,7 @@ void sincrono::on_pushButton_4_clicked()
                             return;
                         }
                     }
-                }
+                }                
             }
             if (Contador == 0)
             {
@@ -523,17 +536,19 @@ void sincrono::on_pushButton_4_clicked()
         }
         else
         {
-            if (ui->lineEdit_2->text() == "")
-            {
-                QMessageBox m;
-                if (Stilo == "A")
-                    m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr("No has introducido la ruta correcta de destino."));
-                m.exec();
-                return;
-            }
+            QMessageBox m;
+            if (Stilo == "A")
+                m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+            m.setText(tr("No has introducido la ruta correcta de destino o no es accesible."));
+            m.exec();
+            return;
         }
-    }    
+    }
+    if (Comparar.value(0) != ui->lineEdit_2->text())
+    {
+        ui->textEdit->append(tr("<FONT COLOR=\"RED\">...En analisis: La ruta introducida en destino no existe. Comprueba la accesibilidad de la misma."));
+        return;
+    }
     QString Valor21 = "find \"%1\"";
     Valor21 = Valor21.arg(ui->lineEdit->text());
     QString valor1 = drake.getStart(Valor21);
@@ -1336,7 +1351,7 @@ void sincrono::on_pushButton_4_clicked()
     ui->pushButton_11->setEnabled(true);
     ui->pushButton_12->setEnabled(true);
     ui->pushButton_7->setText(tr("Todos (")+QString::number(Contador)+")");
-    ui->textEdit->append(tr("Archivos totales: ")+QString::number(Contador)+"");
+    ui->textEdit->append(tr("Archivos totales: ")+QString::number(Contador)+"");    
     itemsa = ui->tableWidget_2->findItems(tr("Sin cambios") , Qt::MatchExactly);
     ui->pushButton_8->setText(tr("Iguales (")+QString::number(itemsa.count())+")");
     if (itemsa.count() == 0)
@@ -1376,6 +1391,19 @@ void sincrono::on_pushButton_4_clicked()
         Counter = 1;
     else
         Counter = 0;
+    if (Contador == 0)
+    {
+        ContadorC = 1;
+        ui->pushButton_7->setEnabled(false);
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No hay nada que sincronizar en ")+ui->lineEdit_3->text()+tr(", todo esta correcto."));
+        m.exec();
+        return;
+    }
+    else
+        ContadorC = 0;
 }
 
 void sincrono::on_pushButton_6_clicked()
@@ -1401,6 +1429,10 @@ void sincrono::on_pushButton_6_clicked()
     ui->pushButton_6->setEnabled(false);
     ui->pushButton_14->setEnabled(true);
     ui->pushButton_15->setEnabled(true);
+    if (Marca == 1)
+        Marca = 0;
+    Counter = 0;
+    ContadorC = 0;
     Value = 0;
 }
 
@@ -1601,6 +1633,28 @@ void sincrono::on_pushButton_10_clicked()
 
 void sincrono::on_pushButton_5_clicked()
 {
+    if (Evento == 1)
+    {
+        Marca = 0;
+        Counter = 0;
+        ContadorC= 0;
+        Evento=0;
+        return;
+    }
+    if (Marca == 1)
+    {
+        if (Counter == 1)
+        {
+            if (ContadorC == 1)
+            {
+                Evento = 0;
+                Marca = 0;
+                Counter = 0;
+                ContadorC= 0;
+                return;
+            }
+        }
+    }
     this->on_pushButton_7_clicked();
     QString Root = ui->lineEdit_2->text();
     int Contador = ui->tableWidget_2->rowCount();
@@ -1609,12 +1663,30 @@ void sincrono::on_pushButton_5_clicked()
     {
         if (Contador > 0)
         {
-            QMessageBox m;
-            if (Stilo == "A")
-                m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr("No hay nada que sincronizar en ")+ui->lineEdit_3->text()+tr(", todo esta correcto."));
-            m.exec();
-            return;
+            int respuesta = 0;
+            respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Nueva Sincronizacion")),
+                                   QString::fromUtf8(tr("<center><b>Sincronizacion<b></center><p>"
+                                   "No hay nada que sincronizar en ")+ui->lineEdit_3->text()+tr(", todo esta correcto.<p>"
+                                   "Si quieres volver a analizar y sincronizar, lo puedes hacer tambien.<p>"
+                                   "&iquest;Volver a analizar y sincronizar?")), QMessageBox::Ok, QMessageBox::No);
+            if (respuesta == QMessageBox::Ok)
+            {
+                Marca = 0;
+                Counter = 0;
+                ContadorC= 0;
+                Evento = 0;
+                int Borrado, x;
+                Borrado = ui->tableWidget_2->rowCount();
+                for(x=0;x<Borrado;x++)
+                {
+                     ui->tableWidget_2->removeRow(x);
+                     x=x-1;
+                     Borrado=Borrado-1;
+                }
+                Marca = 1;
+                this->on_pushButton_5_clicked();
+                return;
+            }
         }
     }
     int Cantidad;
@@ -1625,6 +1697,7 @@ void sincrono::on_pushButton_5_clicked()
         Valor20 = Valor20.arg(ui->lineEdit_2->text());
         drakeSistema drake;
         QString valor = drake.getStart(Valor20);
+        QStringList Comparar = valor.split("\n");
         if (valor == "")
         {
             Contador = 0;
@@ -1669,7 +1742,15 @@ void sincrono::on_pushButton_5_clicked()
                             }
                             Depurar = ""+Definitivo+""+Valorado+"";
                             ui->lineEdit_2->setText(Depurar);
-                            Contador = 1;
+                            Contador = 1;                            
+                            if (Comparar.value(0) != ui->lineEdit_2->text())
+                            {
+                                ui->textEdit->append(tr("<FONT COLOR=\"RED\">...En sincronizacion: La ruta introducida en destino no existe. Comprueba la accesibilidad de la misma."));
+                                Marca = 0;
+                                Counter = 0;
+                                ContadorC= 0;
+                                return;
+                            }
                             break;
                         }
                         else if (Mount == "No")
@@ -1679,6 +1760,9 @@ void sincrono::on_pushButton_5_clicked()
                                 m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
                             m.setText(tr("No esta montada la unidad destino, por lo que debes montarla antes de utilizar la sincronizacion."));
                             m.exec();
+                            Marca = 0;
+                            Counter = 0;
+                            ContadorC= 0;
                             return;
                         }
                     }
@@ -1696,19 +1780,26 @@ void sincrono::on_pushButton_5_clicked()
                 m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
             m.setText(tr("No has introducido la ruta correcta de destino o no es accesible."));
             m.exec();
+            Evento = 0;
+            Marca = 0;
+            Counter = 0;
+            ContadorC= 0;
             return;
         }
         else
         {
+            Marca = 1;
             this->on_pushButton_4_clicked();
             if (Counter == 1)
             {
-                QMessageBox m;
-                if (Stilo == "A")
-                    m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                m.setText(tr("No hay nada que sincronizar en ")+ui->lineEdit_3->text()+tr(", todo esta correcto."));
-                m.exec();
-                return;
+                if (ContadorC == 1)
+                {
+                    Evento = 0;
+                    Marca = 0;
+                    Counter = 0;
+                    ContadorC= 0;
+                    return;
+                }
             }
             else
             {
@@ -1718,9 +1809,27 @@ void sincrono::on_pushButton_5_clicked()
                 }
                 if (Sincronizador == 1)
                     this->on_pushButton_5_clicked();
+                Evento = 0;
+                Marca = 0;
+                Counter = 0;
+                ContadorC= 0;
                 return;
             }
         }
+    }
+    QString Valor20 = "find \"%1\"";
+    Valor20 = Valor20.arg(ui->lineEdit_2->text());
+    drakeSistema drake;
+    QString value = drake.getStart(Valor20);
+    QStringList Comparar = value.split("\n");
+    if (Comparar.value(0) != ui->lineEdit_2->text())
+    {
+        ui->textEdit->append(tr("<FONT COLOR=\"RED\">...En sincronizacion: La ruta introducida en destino no existe. Comprueba la accesibilidad de la misma."));
+        Marca = 0;
+        Counter = 0;
+        ContadorC= 0;
+        Evento = 0;
+        return;
     }
     ui->textEdit->append("");
     ui->textEdit->append(tr("Iniciando sincronizacion de objetivos"));
@@ -1735,6 +1844,10 @@ void sincrono::on_pushButton_5_clicked()
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
         m.setText(tr("No has definido una ruta fuente para poder marcar objetivos."));
         m.exec();
+        Marca = 0;
+        Counter = 0;
+        ContadorC= 0;
+        Evento = 0;
         return;
     }
     if (ui->lineEdit_2->text() == "")
@@ -1744,7 +1857,23 @@ void sincrono::on_pushButton_5_clicked()
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
         m.setText(tr("No has definido una ruta destino para poder comparar objetivos."));
         m.exec();
+        Marca = 0;
+        Counter = 0;
+        ContadorC= 0;
+        Evento = 0;
         return;
+    }
+    else
+    {
+        if (Comparar.value(0) != ui->lineEdit_2->text())
+        {
+            ui->textEdit->append(tr("<FONT COLOR=\"RED\">...En sincronizacion: La ruta introducida en destino no existe. Comprueba la accesibilidad de la misma."));
+            Marca = 0;
+            Counter = 0;
+            ContadorC= 0;
+            Evento = 0;
+            return;
+        }
     }
     ui->pushButton_4->setEnabled(false);
     ui->pushButton_5->setEnabled(false);
@@ -1845,6 +1974,9 @@ void sincrono::on_pushButton_5_clicked()
             ui->textEdit->append(tr("Trabajo cancelado"));
             Evento = 0;
             Value = 0;
+            Marca = 0;
+            Counter = 0;
+            ContadorC= 0;
             return;
         }
         item2 = ui->tableWidget_2->item(x,1);
@@ -2040,6 +2172,10 @@ void sincrono::on_pushButton_5_clicked()
     Totalizar = comandos.count();
     ui->progressBar->setRange(0,Totalizar);
     Counter = 0;
+    Marca = 0;
+    ContadorC = 0;
+    Evento = 0;
+    Value = 0;
 }
 
 void sincrono::mibEscribir(QString valor)
@@ -2141,26 +2277,26 @@ void sincrono::mibFin()
         ui->pushButton_12->setEnabled(true);
         ui->pushButton_7->setText(tr("Todos (")+QString::number(Contador)+")");
         ui->textEdit->append(tr("Archivos totales: "+QString::number(Contador)+""));
-        QList<QTableWidgetItem *> itemsa = ui->tableWidget_2->findItems(tr("Sin cambios") , Qt::MatchExactly);
+        itemsa = ui->tableWidget_2->findItems(tr("Sin cambios") , Qt::MatchExactly);
         ui->pushButton_8->setText(tr("Iguales (")+QString::number(itemsa.count())+")");
         if (itemsa.count() == 0)
             ui->pushButton_8->setEnabled(false);
         ui->textEdit->append(tr("Archivos iguales: ")+QString::number(itemsa.count())+"");
-        QList<QTableWidgetItem *> itemsb = ui->tableWidget_2->findItems(tr("Modificado") , Qt::MatchExactly);
-        ui->pushButton_9->setText(tr("Cambios (")+QString::number(itemsb.count())+")");
-        if (itemsb.count() == 0)
+        items1 = ui->tableWidget_2->findItems(tr("Modificado") , Qt::MatchExactly);
+        ui->pushButton_9->setText(tr("Cambios (")+QString::number(items1.count())+")");
+        if (items1.count() == 0)
             ui->pushButton_9->setEnabled(false);
-        ui->textEdit->append(tr("Archivos modificados: ")+QString::number(itemsb.count())+"");
-        QList<QTableWidgetItem *> itemsc = ui->tableWidget_2->findItems(tr("Nuevo") , Qt::MatchExactly);
-        ui->pushButton_2->setText(tr("Nuevos (")+QString::number(itemsc.count())+")");
-        if (itemsc.count() == 0)
+        ui->textEdit->append(tr("Archivos modificados: ")+QString::number(items1.count())+"");
+        items = ui->tableWidget_2->findItems(tr("Nuevo") , Qt::MatchExactly);
+        ui->pushButton_2->setText(tr("Nuevos (")+QString::number(items.count())+")");
+        if (items.count() == 0)
             ui->pushButton_2->setEnabled(false);
-        ui->textEdit->append(tr("Archivos nuevos: ")+QString::number(itemsc.count())+"");
-        QList<QTableWidgetItem *> itemsd = ui->tableWidget_2->findItems(tr("Eliminado") , Qt::MatchExactly);
-        ui->pushButton_13->setText(tr("Eliminados (")+QString::number(itemsd.count())+")");
-        if (itemsd.count() == 0)
+        ui->textEdit->append(tr("Archivos nuevos: ")+QString::number(items.count())+"");
+        items2 = ui->tableWidget_2->findItems(tr("Eliminado") , Qt::MatchExactly);
+        ui->pushButton_13->setText(tr("Eliminados (")+QString::number(items2.count())+")");
+        if (items2.count() == 0)
             ui->pushButton_13->setEnabled(false);
-        ui->textEdit->append(tr("Archivos eliminados: ")+QString::number(itemsd.count())+"");
+        ui->textEdit->append(tr("Archivos eliminados: ")+QString::number(items2.count())+"");
         ui->textEdit->append("");
         QColor color;
         drakeSistema drake;
@@ -2360,6 +2496,12 @@ void sincrono::on_lineEdit_2_textChanged(const QString &arg1)
 {
     if (arg1 != "")
     {
+        QString Valor = arg1;
+        if (Valor.right(1) == "/")
+        {
+            Valor.remove(Valor.count()-1,1);
+            ui->lineEdit_2->setText(Valor);
+        }
         QString Valor2 = "ls -l -d \"%1\"";
         Valor2 = Valor2.arg(ui->lineEdit_2->text());
         QString PermisosD = getPropietario(Valor2);
@@ -2378,6 +2520,12 @@ void sincrono::on_lineEdit_textChanged(const QString &arg1)
 {
     if (arg1 != "")
     {
+        QString Valor = arg1;
+        if (Valor.right(1) == "/")
+        {
+            Valor.remove(Valor.count()-1,1);
+            ui->lineEdit->setText(Valor);
+        }
         QString Valor1 = "ls -l -d \"%1\"";
         Valor1 = Valor1.arg(ui->lineEdit->text());
         QString PermisosO = getPropietario(Valor1);
@@ -2489,6 +2637,7 @@ void sincrono::Montaje()
     Valor20 = Valor20.arg(ui->lineEdit_2->text());
     drakeSistema drake;
     QString valor = drake.getStart(Valor20);
+    QStringList Comparar = valor.split("\n");
     if (valor == "")
     {
         if (ui->lineEdit_2->text().contains("/media"))
@@ -2536,12 +2685,18 @@ void sincrono::Montaje()
                             }
                             Depurar = ""+Definitivo+""+Valorado+"";
                             ui->lineEdit_2->setText(Depurar);
-                            Contador = 1;
+                            Contador = 1;                            
+                            if (Comparar.value(0) != ui->lineEdit_2->text())
+                            {
+                                ui->label_4->setPixmap(QPixmap(QString::fromUtf8(":/Imagenes/bad.png")));
+                                return;
+                            }
                             break;
                         }
                         else if (Mount == "No")
                         {
                             ui->label_4->setPixmap(QPixmap(QString::fromUtf8(":/Imagenes/bad.png")));
+                            return;
                         }
                     }
                 }
@@ -2549,16 +2704,29 @@ void sincrono::Montaje()
             if (Contador == 0)
             {
                 ui->label_4->setPixmap(QPixmap(QString::fromUtf8(":/Imagenes/bad.png")));
+                return;
             }
         }
         else
         {
-            ui->label_4->setPixmap(QPixmap(QString::fromUtf8("")));
+            if (Comparar.value(0) != ui->lineEdit_2->text())
+            {
+                ui->label_4->setPixmap(QPixmap(QString::fromUtf8(":/Imagenes/bad.png")));
+                return;
+            }
+            else
+                ui->label_4->setPixmap(QPixmap(QString::fromUtf8("")));
         }
     }
     else
     {
-        ui->label_4->setPixmap(QPixmap(QString::fromUtf8("")));
+        if (Comparar.value(0) != ui->lineEdit_2->text())
+        {
+            ui->label_4->setPixmap(QPixmap(QString::fromUtf8(":/Imagenes/bad.png")));
+            return;
+        }
+        else
+            ui->label_4->setPixmap(QPixmap(QString::fromUtf8("")));
     }
     QString Valor21 = "find \"%1\"";
     Valor21 = Valor21.arg(ui->lineEdit->text());
@@ -2616,6 +2784,7 @@ void sincrono::Montaje()
                         else if (Mount == "No")
                         {
                             ui->label_2->setPixmap(QPixmap(QString::fromUtf8(":/Imagenes/bad.png")));
+                            return;
                         }
                     }
                 }
@@ -2623,6 +2792,7 @@ void sincrono::Montaje()
             if (Contador == 0)
             {
                 ui->label_2->setPixmap(QPixmap(QString::fromUtf8(":/Imagenes/bad.png")));
+                return;
             }
         }
         else

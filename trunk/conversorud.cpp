@@ -5923,6 +5923,7 @@ void ConversorUD::on_calendarWidget_clicked(const QDate &date)
         Final = FechaF.toString("MM-dd-yyyy");
     }
     ui->lineEdit_57->setText(Final);
+    ui->calendarWidget_2->setSelectedDate(FechaF);
     this->Semanas();
 }
 
@@ -5969,6 +5970,7 @@ void ConversorUD::on_lineEdit_55_returnPressed()
                     Final = FechaF.toString("MM-dd-yyyy");
                 }
                 ui->lineEdit_57->setText(Final);
+                ui->calendarWidget_2->setSelectedDate(FechaF);
             }
         }
     }

@@ -13,6 +13,7 @@
 #include "opciones.h"
 #include <QSqlDatabase>
 #include <QStyleFactory>
+#include <QFontDatabase>
 
 QTranslator *qTranslator;
 QSqlDatabase db;
@@ -124,6 +125,7 @@ int main(int argc, char *argv[])
             cantidad51=query51.value(0).toString();
         w.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
     }
+    QFontDatabase::addApplicationFont(":/codeBar/Imagenes/codebar/FRE3OF9X.TTF");
     w.setStyle(QStyleFactory::create(Estilo));
     QApplication::setStyle(QStyleFactory::create(Estilo));
     w.showMaximized();

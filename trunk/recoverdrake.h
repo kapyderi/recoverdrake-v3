@@ -62,6 +62,13 @@
 #include "conversorud.h"
 #include "calculadora.h"
 #include "dbclaves.h"
+#include "report.h"
+#include "reportvisual.h"
+#include "qrcode.h"
+#include <QtConcurrentRun>
+#include <QFuture>
+#include <QFutureWatcher>
+#include "compresor.h"
 
 namespace Ui {
     class recoverdrake;
@@ -84,7 +91,11 @@ private:
     bool saveFile(const QString &fileName);
     void loadFile(const QString &fileName);
     void escribir();
+    QFuture<void> *future;
+    QFutureWatcher<void> *watcher;    
     Ayuda *ayuda;
+    Report *Reporte;
+    compresor *Kompresor;
     QSqlDatabase dbs;
     QSqlTableModel *Model;
     QSqlTableModel *Model1;
@@ -114,6 +125,8 @@ private:
     QMdiSubWindow *buscarGrabador();
     QMdiSubWindow *buscarConversor();
     QMdiSubWindow *buscarClaves();
+    QMdiSubWindow *buscarQR();
+    QMdiSubWindow *buscarCompresor();
     QStringList listaArchivos;
     Phonon::Effect *effect;
     Phonon::MediaObject *mediaObject;
@@ -264,6 +277,8 @@ private:
     int Pagina21;
     int Pagina22;
     int Pagina23;
+    int Pagina24;
+    int Pagina25;
     int Dato1;
     int Dato2;
     int CerrarP;
@@ -286,7 +301,6 @@ private:
     id3mp3 *mp3;
     wifi *wifired;
     opciones *opcion;
-    opciones *SetOpcion;
     Mrpm *rpmSet;
     Update *Actualiza;
     orphans *huerfanos;
@@ -322,6 +336,8 @@ private:
     ConversorUD *ConvUD;
     Calculadora *Calcula;
     dbclaves *Claves;
+    ReportVisual *VReport;
+    qrcode *QR;
     int filaAudio;
     int filaAudioRadio;
     int i;
@@ -404,6 +420,13 @@ private:
     QString cantidad51;
     QString Eth;
     QString pulseaudio;
+    QString libqrencode;
+    QString bzip2;
+    QString zip;
+    QString zoo;
+    QString arj;
+    QString a7z;
+    QString rar;
     int EthF;
     int LocDia;
     int LocMes;
@@ -413,6 +436,8 @@ private:
     int LocSegundo;
     QString fileNameTorrent;
     QString fileNameDirTorrent;
+    int Parando;
+    int RX;
 
 private slots:
     void actionConsola_como_root();
@@ -454,6 +479,8 @@ private slots:
     void Cerrarid3mp3();
     void CerrarGrabador();
     void CerrarConversor();
+    void CerrarQR();
+    void CerrarCompresor();
     void on_pushButton_52_clicked();
     void on_pushButton_54_clicked();
     void on_pushButton_51_clicked();
@@ -970,6 +997,15 @@ private slots:
     void on_actionVlc_3_triggered();
     void on_actionClaves_triggered();
     void on_pushButton_65_clicked();
+    void on_actionConfiguracion_manual_triggered();
+    void on_actionConfiguracion_visual_triggered();
+    void on_pushButton_66_clicked();
+    void on_actionGenerador_QR_triggered();
+    void Threading();
+    void on_actionComprimir_descomprimir_triggered();
+    void on_pushButton_116_clicked();
+
+    void on_actionRefrescar_dependencias_triggered();
 
 public:
     Ui::recoverdrake *uil;
