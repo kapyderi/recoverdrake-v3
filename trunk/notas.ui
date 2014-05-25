@@ -987,7 +987,7 @@ font: bold Italic;
 color: rgb(0, 0, 255);</string>
      </property>
      <property name="text">
-      <string>Version 3.160.103 T.E.U. La Version final</string>
+      <string>Version 3.162.103 T.E.U. La Version final</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

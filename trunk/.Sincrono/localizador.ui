@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Localizador</class>
+ <widget class="QDialog" name="Localizador">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>624</width>
+    <height>468</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Ventana de anadido</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/mas.png</normaloff>:/Imagenes/mas.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" rowspan="12" colspan="2">
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <column>
+      <property name="text">
+       <string>Archivo</string>
+      </property>
+      <property name="icon">
+       <iconset resource="recoverdrake.qrc">
+        <normaloff>:/Imagenes/64px-Dolphin-icon.svg.png</normaloff>:/Imagenes/64px-Dolphin-icon.svg.png</iconset>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Ruta</string>
+      </property>
+      <property name="icon">
+       <iconset resource="recoverdrake.qrc">
+        <normaloff>:/Imagenes/VLC.png</normaloff>:/Imagenes/VLC.png</iconset>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Tamano</string>
+      </property>
+      <property name="icon">
+       <iconset resource="recoverdrake.qrc">
+        <normaloff>:/Imagenes/kttsd.png</normaloff>:/Imagenes/kttsd.png</iconset>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QPushButton" name="pbAgregar">
+     <property name="maximumSize">
+      <size>
+       <width>210</width>
+       <height>26</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Agregar Ficheros</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/fileopen.png</normaloff>:/Imagenes/fileopen.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="maximumSize">
+      <size>
+       <width>210</width>
+       <height>26</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Agregar Directorios</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/carpeta.png</normaloff>:/Imagenes/carpeta.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="QLabel" name="label">
+     <property name="maximumSize">
+      <size>
+       <width>210</width>
+       <height>36</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 20pt &quot;Sans Serif&quot;;
+font: bold;</string>
+     </property>
+     <property name="text">
+      <string>Tamano total:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="2">
+    <widget class="QLabel" name="label_4">
+     <property name="maximumSize">
+      <size>
+       <width>210</width>
+       <height>36</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 20pt &quot;Sans Serif&quot;;
+font: bold;</string>
+     </property>
+     <property name="text">
+      <string>Mb</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2">
+    <widget class="QLabel" name="lblTamanio">
+     <property name="maximumSize">
+      <size>
+       <width>210</width>
+       <height>36</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>20</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 20pt &quot;Sans Serif&quot;;
+font: bold;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QPushButton" name="pbEliminar">
+     <property name="maximumSize">
+      <size>
+       <width>210</width>
+       <height>26</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Eliminar Datos</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="2">
+    <widget class="QPushButton" name="pushButton">
+     <property name="maximumSize">
+      <size>
+       <width>210</width>
+       <height>26</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Hecho!!!</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/good.png</normaloff>:/Imagenes/good.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="2">
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="maximumSize">
+      <size>
+       <width>210</width>
+       <height>26</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Salir sin cambios</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

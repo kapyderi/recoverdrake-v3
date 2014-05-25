@@ -62,13 +62,13 @@
 #include "conversorud.h"
 #include "calculadora.h"
 #include "dbclaves.h"
-#include "report.h"
 #include "reportvisual.h"
 #include "qrcode.h"
 #include <QtConcurrentRun>
 #include <QFuture>
 #include <QFutureWatcher>
 #include "compresor.h"
+#include "textencrip.h"
 
 namespace Ui {
     class recoverdrake;
@@ -94,8 +94,8 @@ private:
     QFuture<void> *future;
     QFutureWatcher<void> *watcher;    
     Ayuda *ayuda;
-    Report *Reporte;
     compresor *Kompresor;
+    textencrip *Encriptar;
     QSqlDatabase dbs;
     QSqlTableModel *Model;
     QSqlTableModel *Model1;
@@ -127,6 +127,7 @@ private:
     QMdiSubWindow *buscarClaves();
     QMdiSubWindow *buscarQR();
     QMdiSubWindow *buscarCompresor();
+    QMdiSubWindow *buscarEncriptar();
     QStringList listaArchivos;
     Phonon::Effect *effect;
     Phonon::MediaObject *mediaObject;
@@ -279,6 +280,7 @@ private:
     int Pagina23;
     int Pagina24;
     int Pagina25;
+    int Pagina26;
     int Dato1;
     int Dato2;
     int CerrarP;
@@ -481,6 +483,7 @@ private slots:
     void CerrarConversor();
     void CerrarQR();
     void CerrarCompresor();
+    void CerrarEncriptar();
     void on_pushButton_52_clicked();
     void on_pushButton_54_clicked();
     void on_pushButton_51_clicked();
@@ -997,15 +1000,15 @@ private slots:
     void on_actionVlc_3_triggered();
     void on_actionClaves_triggered();
     void on_pushButton_65_clicked();
-    void on_actionConfiguracion_manual_triggered();
     void on_actionConfiguracion_visual_triggered();
     void on_pushButton_66_clicked();
     void on_actionGenerador_QR_triggered();
     void Threading();
     void on_actionComprimir_descomprimir_triggered();
     void on_pushButton_116_clicked();
-
     void on_actionRefrescar_dependencias_triggered();
+    void on_pushButton_118_clicked();
+    void on_actionEncriptar_textos_triggered();
 
 public:
     Ui::recoverdrake *uil;

@@ -876,6 +876,7 @@ void Mrpm::mibFin()
         ui->progressBar->setValue(0);
         ui->progressBar->hide();
         Opcion = 0;
+        TotalProceso=0;
     }
 }
 
@@ -1607,7 +1608,7 @@ bool Mrpm::eventFilter(QObject* obj, QEvent *event)
 {
     if (obj == this)
     {
-        if (event->type() == QEvent::KeyPress)
+        if (event->type() == QEvent::KeyRelease)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
             if (keyEvent->key() == Qt::Key_F1)

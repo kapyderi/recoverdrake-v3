@@ -1,0 +1,1697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dbpelis</class>
+ <widget class="QDialog" name="dbpelis">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1127</width>
+    <height>743</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Catologo de peliculas</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/pelis.png</normaloff>:/Imagenes/pelis.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_9">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1125</width>
+        <height>741</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_7">
+       <item row="0" column="0" colspan="8">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="styleSheet">
+          <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+         </property>
+         <property name="title">
+          <string>Pelicula</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="5" column="2">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Titulo</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="4">
+           <widget class="QLineEdit" name="lineEdit"/>
+          </item>
+          <item row="6" column="4">
+           <widget class="QLineEdit" name="lineEdit_2"/>
+          </item>
+          <item row="6" column="2">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Titulo Original</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="5">
+           <widget class="QLabel" name="label_16">
+            <property name="text">
+             <string>Fecha</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="5">
+           <widget class="QLineEdit" name="lineEdit_10">
+            <property name="maximumSize">
+             <size>
+              <width>70</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1" rowspan="2">
+           <widget class="QLabel" name="label_17">
+            <property name="text">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:7pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/Imagenes/pelis.png&quot; width=&quot;90&quot; height=&quot;65&quot; /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="6" rowspan="2">
+           <widget class="QGroupBox" name="groupBox_9">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+            </property>
+            <property name="title">
+             <string>Visionada</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_8">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="radioButton_17">
+               <property name="text">
+                <string>Si</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QRadioButton" name="radioButton_18">
+               <property name="text">
+                <string>No</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="8" column="0" colspan="7">
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+            </property>
+            <property name="title">
+             <string>Clasificacion por edades</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="1">
+              <widget class="QRadioButton" name="radioButton_2">
+               <property name="text">
+                <string>N.R. menores 7</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="radioButton">
+               <property name="text">
+                <string>Todos los publicos</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QRadioButton" name="radioButton_3">
+               <property name="text">
+                <string>N.R. menores 12</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QRadioButton" name="radioButton_5">
+               <property name="text">
+                <string>N.R. menores 18</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="7">
+              <widget class="QRadioButton" name="radioButton_25">
+               <property name="text">
+                <string>Sin Clasificar</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QRadioButton" name="radioButton_4">
+               <property name="text">
+                <string>N.R. menores 16</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="5">
+              <widget class="QRadioButton" name="radioButton_21">
+               <property name="text">
+                <string>Adultos (Porno)</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="9" column="5">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>Duracion</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="6">
+           <widget class="QTimeEdit" name="timeEdit">
+            <property name="displayFormat">
+             <string>HH:mm:ss</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="1" colspan="4">
+           <widget class="QGroupBox" name="groupBox_7">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+            </property>
+            <property name="title">
+             <string>Valoracion</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_5">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="6">
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>Regular:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="12">
+              <widget class="QRadioButton" name="radioButton_14">
+               <property name="text">
+                <string>9</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="13">
+              <widget class="QRadioButton" name="radioButton_16">
+               <property name="text">
+                <string>10</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>Mala:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QRadioButton" name="radioButton_6">
+               <property name="text">
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QRadioButton" name="radioButton_7">
+               <property name="text">
+                <string>1</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QRadioButton" name="radioButton_8">
+               <property name="text">
+                <string>2</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="4">
+              <widget class="QRadioButton" name="radioButton_9">
+               <property name="text">
+                <string>3</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="5">
+              <widget class="QRadioButton" name="radioButton_10">
+               <property name="text">
+                <string>4</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="7">
+              <widget class="QRadioButton" name="radioButton_11">
+               <property name="text">
+                <string>5</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="8">
+              <widget class="QRadioButton" name="radioButton_12">
+               <property name="text">
+                <string>6</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="9">
+              <widget class="QRadioButton" name="radioButton_13">
+               <property name="text">
+                <string>7</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="10">
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Buena:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="11">
+              <widget class="QRadioButton" name="radioButton_15">
+               <property name="text">
+                <string>8</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="8">
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="styleSheet">
+          <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+         </property>
+         <property name="title">
+          <string>Caratula/Cartel</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_11">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="pushButton_10">
+            <property name="text">
+             <string>Insertar imagen</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_11">
+            <property name="minimumSize">
+             <size>
+              <width>81</width>
+              <height>81</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>81</width>
+              <height>81</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Insertar cartel de tu pelicula favorita pulsando el boto insertar</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Sin&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;imagen&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;disponible&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QComboBox" name="comboBox_2">
+            <item>
+             <property name="text">
+              <string>DVD</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>avi</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>VCD</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>VHS</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>mkv</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>LD</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B-Ray</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>Formato</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="7">
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="styleSheet">
+          <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+         </property>
+         <property name="title">
+          <string>Clasificacion por generos</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="checkBox">
+            <property name="toolTip">
+             <string>películas que se centran principalmente en el desarrollo de un conflicto entre los protagonistas, o del protagonista con su entorno o consigo mismo.</string>
+            </property>
+            <property name="statusTip">
+             <string>películas que se centran principalmente en el desarrollo de un conflicto entre los protagonistas, o del protagonista con su entorno o consigo mismo.</string>
+            </property>
+            <property name="whatsThis">
+             <string>películas que se centran principalmente en el desarrollo de un conflicto entre los protagonistas, o del protagonista con su entorno o consigo mismo.</string>
+            </property>
+            <property name="text">
+             <string>Drama</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="checkBox_2">
+            <property name="toolTip">
+             <string>películas realizadas con la intención de provocar humor, entretenimiento o/y risa en el espectador.</string>
+            </property>
+            <property name="statusTip">
+             <string>películas realizadas con la intención de provocar humor, entretenimiento o/y risa en el espectador.</string>
+            </property>
+            <property name="whatsThis">
+             <string>películas realizadas con la intención de provocar humor, entretenimiento o/y risa en el espectador.</string>
+            </property>
+            <property name="text">
+             <string>Comedia</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="checkBox_3">
+            <property name="toolTip">
+             <string>peliculas cuyo argumento implica una interacción moral entre el «bien» y el «mal» llevada a su fin por la violencia o la fuerza física.</string>
+            </property>
+            <property name="statusTip">
+             <string>peliculas cuyo argumento implica una interacción moral entre el «bien» y el «mal» llevada a su fin por la violencia o la fuerza física.</string>
+            </property>
+            <property name="whatsThis">
+             <string>peliculas cuyo argumento implica una interacción moral entre el «bien» y el «mal» llevada a su fin por la violencia o la fuerza física.</string>
+            </property>
+            <property name="text">
+             <string>Accion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QCheckBox" name="checkBox_4">
+            <property name="toolTip">
+             <string>peliculas que contienen situaciones de peligro y riesgo.</string>
+            </property>
+            <property name="statusTip">
+             <string>peliculas que contienen situaciones de peligro y riesgo.</string>
+            </property>
+            <property name="whatsThis">
+             <string>peliculas que contienen situaciones de peligro y riesgo.</string>
+            </property>
+            <property name="text">
+             <string>Aventura</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QCheckBox" name="checkBox_6">
+            <property name="toolTip">
+             <string>peliculas que presentan la progresión de lo desconocido a lo conocido por el descubrimiento de una serie de enigmas.</string>
+            </property>
+            <property name="statusTip">
+             <string>peliculas que presentan la progresión de lo desconocido a lo conocido por el descubrimiento de una serie de enigmas.</string>
+            </property>
+            <property name="whatsThis">
+             <string>peliculas que presentan la progresión de lo desconocido a lo conocido por el descubrimiento de una serie de enigmas.</string>
+            </property>
+            <property name="text">
+             <string>Ciencia Ficcion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QCheckBox" name="checkBox_7">
+            <property name="toolTip">
+             <string>peliculas que hacen hincapié en los elementos amorosos y románticos.</string>
+            </property>
+            <property name="statusTip">
+             <string>peliculas que hacen hincapié en los elementos amorosos y románticos.</string>
+            </property>
+            <property name="whatsThis">
+             <string>peliculas que hacen hincapié en los elementos amorosos y románticos.</string>
+            </property>
+            <property name="text">
+             <string>Romantica</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="6">
+           <widget class="QCheckBox" name="checkBox_8">
+            <property name="toolTip">
+             <string>peliculas que contienen interrupciones en su desarrollo, para dar un breve receso por medio de un fragmento musical cantado o acompanados de una coreografía.</string>
+            </property>
+            <property name="statusTip">
+             <string>peliculas que contienen interrupciones en su desarrollo, para dar un breve receso por medio de un fragmento musical cantado o acompanados de una coreografía.</string>
+            </property>
+            <property name="whatsThis">
+             <string>peliculas que contienen interrupciones en su desarrollo, para dar un breve receso por medio de un fragmento musical cantado o acompanados de una coreografía.</string>
+            </property>
+            <property name="text">
+             <string>Musical</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBox_9">
+            <property name="toolTip">
+             <string>pelculas en el que el tema principal es una gran catástrofe  (por ejemplo grandes incendios, terremotos, naufragios o una hipotética colisión de un asteroide contra la Tierra).</string>
+            </property>
+            <property name="statusTip">
+             <string>pelculas en el que el tema principal es una gran catástrofe  (por ejemplo grandes incendios, terremotos, naufragios o una hipotética colisión de un asteroide contra la Tierra).</string>
+            </property>
+            <property name="whatsThis">
+             <string>pelculas en el que el tema principal es una gran catástrofe  (por ejemplo grandes incendios, terremotos, naufragios o una hipotética colisión de un asteroide contra la Tierra).</string>
+            </property>
+            <property name="text">
+             <string>Catastrofes</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="checkBox_10">
+            <property name="toolTip">
+             <string>pelculas realizadas con la intención de provocar tensión en el espectador. También suele utilizarse la palabra thriller para designar películas de este tipo, aunque hay sutiles diferencias.</string>
+            </property>
+            <property name="statusTip">
+             <string>pelculas realizadas con la intención de provocar tensión en el espectador. También suele utilizarse la palabra thriller para designar películas de este tipo, aunque hay sutiles diferencias.</string>
+            </property>
+            <property name="whatsThis">
+             <string>pelculas realizadas con la intención de provocar tensión en el espectador. También suele utilizarse la palabra thriller para designar películas de este tipo, aunque hay sutiles diferencias.</string>
+            </property>
+            <property name="text">
+             <string>Suspense</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QCheckBox" name="checkBox_11">
+            <property name="toolTip">
+             <string>peliculas que contienen hechos, mundos, criaturas o cosas fantasiosas.</string>
+            </property>
+            <property name="statusTip">
+             <string>peliculas que contienen hechos, mundos, criaturas o cosas fantasiosas.</string>
+            </property>
+            <property name="whatsThis">
+             <string>peliculas que contienen hechos, mundos, criaturas o cosas fantasiosas.</string>
+            </property>
+            <property name="text">
+             <string>Fantasia</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QCheckBox" name="checkBox_12">
+            <property name="toolTip">
+             <string>peliculas que contiene escenas sexuales implicitas.</string>
+            </property>
+            <property name="statusTip">
+             <string>peliculas que contiene escenas sexuales implicitas.</string>
+            </property>
+            <property name="whatsThis">
+             <string>peliculas que contiene escenas sexuales implicitas.</string>
+            </property>
+            <property name="text">
+             <string>Erotico</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QCheckBox" name="checkBox_13">
+            <property name="toolTip">
+             <string>peliculas que contiene escenas sexuales explicitas.</string>
+            </property>
+            <property name="statusTip">
+             <string>peliculas que contiene escenas sexuales explicitas.</string>
+            </property>
+            <property name="whatsThis">
+             <string>peliculas que contiene escenas sexuales explicitas.</string>
+            </property>
+            <property name="text">
+             <string>Pornografico</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="QCheckBox" name="checkBox_14">
+            <property name="toolTip">
+             <string>la acción de estas películas ocurre en el pasado, a menudo con intención de recreación histórica.</string>
+            </property>
+            <property name="statusTip">
+             <string>la acción de estas películas ocurre en el pasado, a menudo con intención de recreación histórica.</string>
+            </property>
+            <property name="whatsThis">
+             <string>la acción de estas películas ocurre en el pasado, a menudo con intención de recreación histórica.</string>
+            </property>
+            <property name="text">
+             <string>Historico</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="6">
+           <widget class="QCheckBox" name="checkBox_15">
+            <property name="toolTip">
+             <string>la derrota del «Mal» en el reino de la actividad criminal.</string>
+            </property>
+            <property name="statusTip">
+             <string>la derrota del «Mal» en el reino de la actividad criminal.</string>
+            </property>
+            <property name="whatsThis">
+             <string>la derrota del «Mal» en el reino de la actividad criminal.</string>
+            </property>
+            <property name="text">
+             <string>Policiaco</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="checkBox_5">
+            <property name="toolTip">
+             <string>peliculas realizadas con la intención de provocar tensión, miedo y/o el sobresalto en la audiencia.</string>
+            </property>
+            <property name="statusTip">
+             <string>peliculas realizadas con la intención de provocar tensión, miedo y/o el sobresalto en la audiencia.</string>
+            </property>
+            <property name="whatsThis">
+             <string>peliculas realizadas con la intención de provocar tensión, miedo y/o el sobresalto en la audiencia.</string>
+            </property>
+            <property name="text">
+             <string>Terror</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="checkBox_16">
+            <property name="toolTip">
+             <string>del período colonial a la era moderna de los Estados Unidos de América, a menudo mitificándolos.</string>
+            </property>
+            <property name="statusTip">
+             <string>del período colonial a la era moderna de los Estados Unidos de América, a menudo mitificándolos.</string>
+            </property>
+            <property name="whatsThis">
+             <string>del período colonial a la era moderna de los Estados Unidos de América, a menudo mitificándolos.</string>
+            </property>
+            <property name="text">
+             <string>Western</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QCheckBox" name="checkBox_17">
+            <property name="toolTip">
+             <string>campos de batalla y posiciones que pertenecen a un tiempo de guerra.</string>
+            </property>
+            <property name="statusTip">
+             <string>campos de batalla y posiciones que pertenecen a un tiempo de guerra.</string>
+            </property>
+            <property name="whatsThis">
+             <string>campos de batalla y posiciones que pertenecen a un tiempo de guerra.</string>
+            </property>
+            <property name="text">
+             <string>Belico</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QCheckBox" name="checkBox_18">
+            <property name="toolTip">
+             <string>entornos o acontecimientos relacionados con un deporte.</string>
+            </property>
+            <property name="statusTip">
+             <string>entornos o acontecimientos relacionados con un deporte.</string>
+            </property>
+            <property name="whatsThis">
+             <string>entornos o acontecimientos relacionados con un deporte.</string>
+            </property>
+            <property name="text">
+             <string>Deportes</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <widget class="QCheckBox" name="checkBox_19">
+            <property name="toolTip">
+             <string>peliculas realizadas intergramente en imagenes realizadas por ordenador.</string>
+            </property>
+            <property name="statusTip">
+             <string>peliculas realizadas intergramente en imagenes realizadas por ordenador.</string>
+            </property>
+            <property name="whatsThis">
+             <string>peliculas realizadas intergramente en imagenes realizadas por ordenador.</string>
+            </property>
+            <property name="text">
+             <string>Dibujos</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QCheckBox" name="checkBox_20">
+            <property name="toolTip">
+             <string>Trata de documentar un hecho real con el maximo de detalles.</string>
+            </property>
+            <property name="statusTip">
+             <string>Trata de documentar un hecho real con el maximo de detalles.</string>
+            </property>
+            <property name="whatsThis">
+             <string>Trata de documentar un hecho real con el maximo de detalles.</string>
+            </property>
+            <property name="text">
+             <string>Documental</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="6">
+           <widget class="QCheckBox" name="checkBox_21">
+            <property name="toolTip">
+             <string>peliculas consideras de mucha violencia explicita y al mismo tiempo es un subgenero de terror.</string>
+            </property>
+            <property name="statusTip">
+             <string>peliculas consideras de mucha violencia explicita y al mismo tiempo es un subgenero de terror.</string>
+            </property>
+            <property name="whatsThis">
+             <string>peliculas consideras de mucha violencia explicita y al mismo tiempo es un subgenero de terror.</string>
+            </property>
+            <property name="text">
+             <string>Gore/Zombies</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="7">
+        <widget class="QGroupBox" name="groupBox_8">
+         <property name="styleSheet">
+          <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+         </property>
+         <property name="title">
+          <string>Localizador</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_14">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEdit_5">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEdit_6"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="text">
+             <string>Cod. DB</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Posicion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEdit_7"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Num. Soporte</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2" rowspan="3">
+           <widget class="QGroupBox" name="groupBox_10">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+            </property>
+            <property name="title">
+             <string>Imagen</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_10">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="2" column="0">
+              <widget class="QRadioButton" name="radioButton_20">
+               <property name="text">
+                <string>B/W</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QRadioButton" name="radioButton_19">
+               <property name="text">
+                <string>Color</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="8">
+        <widget class="QGroupBox" name="groupBox_11">
+         <property name="styleSheet">
+          <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+         </property>
+         <property name="title">
+          <string>Idioma</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_12">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QRadioButton" name="radioButton_22">
+            <property name="text">
+             <string>Si</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QRadioButton" name="radioButton_24">
+            <property name="minimumSize">
+             <size>
+              <width>61</width>
+              <height>16</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>V.O.S.E.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QRadioButton" name="radioButton_23">
+            <property name="text">
+             <string>Doblaje</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="6">
+        <widget class="QGroupBox" name="groupBox_5">
+         <property name="styleSheet">
+          <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+         </property>
+         <property name="title">
+          <string>Datos tecnicos</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Principal</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEdit_4">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>21</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Secundario</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLineEdit" name="lineEdit_3">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_14">
+            <property name="text">
+             <string>Director</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="3">
+           <widget class="QLineEdit" name="lineEdit_9">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>21</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="6" colspan="3">
+        <widget class="QGroupBox" name="groupBox_6">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>120</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+         </property>
+         <property name="title">
+          <string>Sinopsis</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QTextEdit" name="textEdit_2"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="9">
+        <widget class="QTableView" name="tableView">
+         <property name="styleSheet">
+          <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="pushButton_7">
+         <property name="maximumSize">
+          <size>
+           <width>31</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/izquierda.jpeg</normaloff>:/Imagenes/izquierda.jpeg</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLabel" name="label_15">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QPushButton" name="pushButton_8">
+         <property name="maximumSize">
+          <size>
+           <width>31</width>
+           <height>23</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/derecha.jpeg</normaloff>:/Imagenes/derecha.jpeg</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="3">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>311</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="4" column="4">
+        <widget class="QComboBox" name="comboBox">
+         <property name="styleSheet">
+          <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>Sin filtro (todas las peliculas)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Titulo</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Titulo original</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Calificacion: Todos los publicos</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Calificacion: N.R. a menores de 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Calificacion: N.R. a menores de 12</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Calificacion: N.R. a menores de 16</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Calificacion: N.R. a menores de 18</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Calificacion: Adultos</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Calificacion: Sin clasificar</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Drama</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Comedia</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Accion</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Aventura</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Ciencia-Ficcion</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Romantica</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Musical</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Catastrofes</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Suspense</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Fantasia</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Erotico</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Porno</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Historico</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Policiaco</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Terror</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Western</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Belico</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Deportes</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Animacion/Dibujos</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Documental</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Genero: Gore/Zombies</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Actor principal</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Actor secundario</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Valoracion: 0</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Valoracion: 1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Valoracion: 2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Valoracion: 3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Valoracion: 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Valoracion: 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Valoracion: 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Valoracion: 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Valoracion: 8</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Valoracion: 9</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Valoracion: 10 (Obra Maestra)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Soporte</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Posicion</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Visionada: Si</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Visionada: No</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Color</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>B/W</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Version Original</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Subtitulada</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Doblada</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Formato: DVD</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Formato: avi</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Formato: VCD</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Formato: VHS</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Formato: mkv</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Formato: LD</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Formato: B-Ray</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Director</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Fecha</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="4" column="5">
+        <widget class="QCheckBox" name="checkBox_22">
+         <property name="styleSheet">
+          <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+         </property>
+         <property name="text">
+          <string>Ordenar</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="6" colspan="2">
+        <widget class="QLineEdit" name="lineEdit_8"/>
+       </item>
+       <item row="4" column="8">
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="styleSheet">
+          <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+         </property>
+         <property name="text">
+          <string>Salir</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" colspan="9">
+        <widget class="QGroupBox" name="groupBox_13">
+         <property name="title">
+          <string/>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_13">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="3">
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+            </property>
+            <property name="text">
+             <string>Modificar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="6">
+           <widget class="QPushButton" name="pushButton_11">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+            </property>
+            <property name="text">
+             <string>Eliminar toda la DB</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/Error.png</normaloff>:/Imagenes/Error.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="9">
+           <widget class="QPushButton" name="pushButton_9">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+            </property>
+            <property name="text">
+             <string>Imprimir</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/impresora.png</normaloff>:/Imagenes/impresora.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="11">
+           <widget class="QPushButton" name="pushButton_5">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+            </property>
+            <property name="text">
+             <string>Importar DB (.csv)</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/Correcto.png</normaloff>:/Imagenes/Correcto.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QPushButton" name="pushButton_3">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+            </property>
+            <property name="text">
+             <string>Eliminar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="pushButton_6">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+            </property>
+            <property name="text">
+             <string>Crear nueva pelicula</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/pelis.png</normaloff>:/Imagenes/pelis.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="pushButton">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+            </property>
+            <property name="text">
+             <string>Insertar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/good.png</normaloff>:/Imagenes/good.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="10">
+           <widget class="QPushButton" name="pushButton_12">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+font: bold</string>
+            </property>
+            <property name="text">
+             <string>Exportar DB (.csv)</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/guardar.png</normaloff>:/Imagenes/guardar.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

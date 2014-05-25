@@ -8,10 +8,6 @@
 #include <QMessageBox>
 #include <QMimeData>
 
-
-//falta por ver la linea 306 de kernel.cpp para descomprimir en otro directorio.
-
-
 compresor::compresor(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::compresor)
@@ -133,10 +129,12 @@ compresor::compresor(QWidget *parent) :
     this->Empaquet();
     Evento = 0;
     ui->progressBar->hide();
+    ui->pushButton_11->hide();
     NoMessage = 0;
     TipoClick = 1;
     this->Comprobar2();
     this->Comprobar5();
+    TotalProceso=0;
 }
 
 compresor::~compresor()
@@ -195,27 +193,14 @@ bool compresor::eventFilter(QObject* obj, QEvent *event)
                     return true;
             }
         }
-        if (event->type() == QEvent::KeyPress)
+        if (event->type() == QEvent::KeyRelease)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
             if (keyEvent->key() == Qt::Key_F1)
             {
                 ayuda = new Ayuda(this);
                 ayuda->show();
-                ayuda->Valor(tr("Kompresor"));
-                return true;
-            }
-        }
-        return false;
-    }
-    if (obj == ui->tableWidget)
-    {
-        if (event->type() == QEvent::KeyPress)
-        {
-            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
-            if (keyEvent->key() == Qt::Key_Delete)
-            {
-                on_pushButton_2_clicked();
+                ayuda->Valor(tr("Compresor"));
                 return true;
             }
         }
@@ -284,8 +269,9 @@ void compresor::Comprobar()
         ui->tableWidget_2->hide();
         ui->label_4->hide();
         ui->checkBox_8->hide();
+        ui->pushButton_2->setText(tr("Eliminar seleccionado"));
     }
-    else if (ui->radioButton_2->isChecked())
+    if (ui->radioButton_2->isChecked())
     {
         if (TipoCom == 0)
         {
@@ -306,7 +292,16 @@ void compresor::Comprobar()
         ui->groupBox_3->setEnabled(false);
         ui->tableWidget->hide();
         ui->tableWidget_2->show();
-        ui->label_4->show();
+        if (ui->checkBox_8->isChecked())
+        {
+            ui->label_4->hide();
+            ui->pushButton_2->setText(tr("Eliminar seleccionado"));
+        }
+        else
+        {
+            ui->label_4->show();
+            ui->pushButton_2->setText(tr("Eliminar seleccionados"));
+        }
         ui->checkBox_8->show();
     }
 }
@@ -647,6 +642,7 @@ void compresor::Listado(QString Valor)
     if (LPaquet == ".tar")
     {
         ui->pushButton_8->show();
+        ui->checkBox_9->hide();
         ui->tableWidget_2->hideColumn(3);
         Value = "su - %2 -c \"tar -t --list -f '%1'\"";
         Value = Value.arg(Valor).arg(user);
@@ -687,6 +683,7 @@ void compresor::Listado(QString Valor)
     if (LPaquet == ".gz")
     {
         ui->pushButton_8->hide();
+        ui->checkBox_9->hide();
         QString ValorT, ValorC;
         Value = "su - %2 -c \"gzip -l '%1'\"";
         Value = Value.arg(Valor).arg(user);
@@ -745,6 +742,7 @@ void compresor::Listado(QString Valor)
     if (LPaquet == ".bz2")
     {
         ui->pushButton_8->hide();
+        ui->checkBox_9->hide();
         ui->tableWidget_2->hideColumn(1);
         ui->tableWidget_2->hideColumn(2);
         ui->tableWidget_2->hideColumn(3);
@@ -760,6 +758,7 @@ void compresor::Listado(QString Valor)
     if (LPaquet == ".tar.gz")
     {
         ui->pushButton_8->show();
+        ui->checkBox_9->hide();
         ui->tableWidget_2->hideColumn(2);
         ui->tableWidget_2->hideColumn(3);
         Value = "su - %2 -c \"tar -tz --list -f '%1'\"";
@@ -798,6 +797,7 @@ void compresor::Listado(QString Valor)
     if (LPaquet == ".tar.bz2")
     {
         ui->pushButton_8->show();
+        ui->checkBox_9->hide();
         ui->tableWidget_2->hideColumn(2);
         ui->tableWidget_2->hideColumn(3);
         Value = "su - %2 -c \"tar -tj --list -f '%1'\"";
@@ -836,6 +836,7 @@ void compresor::Listado(QString Valor)
     if (LPaquet == ".zip")
     {
         ui->pushButton_8->show();
+        ui->checkBox_9->show();;
         QString ValorT, ValorC;
         Value = "su - %2 -c \"unzip -v '%1'\"";
         Value = Value.arg(Valor).arg(user);
@@ -900,6 +901,7 @@ void compresor::Listado(QString Valor)
     if (LPaquet == ".zoo")
     {
         ui->pushButton_8->show();
+        ui->checkBox_9->show();;
         QString ValorT, ValorC;
         Value = "su - %2 -c \"zoo -L '%1'\"";
         Value = Value.arg(Valor).arg(user);
@@ -964,6 +966,7 @@ void compresor::Listado(QString Valor)
     if (LPaquet == ".arj")
     {
         ui->pushButton_8->show();
+        ui->checkBox_9->show();;
         int Posicion;
         QString ValorT, ValorC;
         Value = "su - %2 -c \"arj v '%1'\"";
@@ -994,7 +997,6 @@ void compresor::Listado(QString Valor)
                 FFinal.replace(QRegExp("\\s+"), " ");
                 FFinal.trimmed();
                 QStringList Nombre = FFinal.split(" ");
-                qDebug() << Nombre;
                 item2=new QTableWidgetItem;
                 item3=new QTableWidgetItem;
                 item4=new QTableWidgetItem;
@@ -1053,6 +1055,7 @@ void compresor::Listado(QString Valor)
     if (LPaquet == ".7z")
     {
         ui->pushButton_8->show();
+        ui->checkBox_9->show();;
         int Igual = 0;
         QString ValorT, ValorC;
         Value = "su - %2 -c \"7z l '%1'\"";
@@ -1140,6 +1143,7 @@ void compresor::Listado(QString Valor)
     if (LPaquet == ".rar")
     {
         ui->pushButton_8->show();
+        ui->checkBox_9->show();;
         QString ValorT, ValorC;
         Value = "su - %2 -c \"rar v '%1'\"";
         Value = Value.arg(Valor).arg(user);
@@ -1161,7 +1165,6 @@ void compresor::Listado(QString Valor)
             QString Juntar;
             for (int a=2;a<Final.count();a++)
             {
-                qDebug() << Final.value(a);
                 if (a == 2)
                 {
                     ValorC = Final.value(a);
@@ -1243,20 +1246,33 @@ void compresor::on_pushButton_2_clicked()
     }
     if (ui->radioButton_2->isChecked())
     {
-        j=ui->tableWidget_2->currentRow();
-        if (j == -1)
+        QModelIndexList select = ui->tableWidget_2->selectionModel()->selectedRows();
+        QItemSelectionModel *selection = ui->tableWidget_2->selectionModel();
+        if (!selection->hasSelection())
         {
             QMessageBox m;
             if (Stilo == "A")
                 m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-            m.setText(tr("No has seleccionado ningun registro, por lo que no puedes realizar lo que has solicitado."));
+            m.setText(tr("No has seleccionado ningun archivo.<p>Debes seleccionar uno como minimo."));
             m.exec();
             return;
         }
-        else
-            ui->tableWidget_2->removeRow(j);
-        ui->tableWidget_2->resizeColumnsToContents();
-        ui->tableWidget_2->resizeRowsToContents();
+        int Cantidad, ActualRow;
+        Cantidad=0;
+        foreach (QModelIndex actual, select)
+        {
+            if (Cantidad == 0)
+            {
+                ActualRow=actual.row();
+                Cantidad = 1;
+            }
+            else
+            {
+                ActualRow=actual.row();
+                ActualRow = ActualRow-1;
+            }
+            ui->tableWidget_2->removeRow(ActualRow);
+        }
     }
     ui->label_4->setText(tr("Fichero: "));
 }
@@ -1536,6 +1552,7 @@ void compresor::Empaquet()
 
 void compresor::on_pushButton_4_clicked()
 {
+    ui->pushButton_4->setEnabled(false);
     int cantidad;
     cantidad=ui->tableWidget->rowCount();
     if (cantidad != 0)
@@ -1574,6 +1591,7 @@ void compresor::on_pushButton_4_clicked()
                         m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
                     m.setText(tr("Debes introducir una ruta para poder comprimir/empaquetar."));
                     m.exec();
+                    ui->pushButton_4->setEnabled(true);
                     return;
                 }
             }
@@ -1627,6 +1645,7 @@ void compresor::on_pushButton_4_clicked()
                         m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
                     m.setText(tr("Debes introducir una ruta para poder comprimir/empaquetar."));
                     m.exec();
+                    ui->pushButton_4->setEnabled(true);
                     return;
                 }
             }
@@ -1635,8 +1654,9 @@ void compresor::on_pushButton_4_clicked()
         if (ui->checkBox->isChecked())
         {
             ui->progressBar->show();
+            ui->pushButton_11->show();
             QTableWidgetItem *item1;
-            QString activo1;            
+            QString activo1;
             int itemCount = ui->tableWidget->rowCount();
             if (itemCount == 0)
             {
@@ -1645,6 +1665,7 @@ void compresor::on_pushButton_4_clicked()
                     m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
                 m.setText(tr("No hay ningun registro, por lo que no puedes procesar la solicitud."));
                 m.exec();
+                ui->pushButton_4->setEnabled(true);
                 return;
             }
             else
@@ -1660,6 +1681,8 @@ void compresor::on_pushButton_4_clicked()
                         ui->textEdit->append(tr("Trabajo cancelado"));
                         ui->progressBar->setValue(0);
                         ui->progressBar->hide();
+                        ui->pushButton_11->hide();
+                        ui->pushButton_4->setEnabled(true);
                         return;
                     }
                     item1 = ui->tableWidget->item(i,1);
@@ -1780,6 +1803,7 @@ void compresor::on_pushButton_4_clicked()
                     m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
                 m.setText(tr("No hay ningun registro, por lo que no puedes procesar la solicitud."));
                 m.exec();
+                ui->pushButton_4->setEnabled(true);
                 return;
             }
             else
@@ -1887,6 +1911,7 @@ void compresor::on_pushButton_4_clicked()
         if (mib != 0)
             delete mib;
         ui->progressBar->show();
+        ui->pushButton_11->show();
         mib = new DrakeProcesos(comandos, this);
         connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
         connect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
@@ -1906,6 +1931,7 @@ void compresor::on_pushButton_4_clicked()
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
         m.setText(tr("No hay registros para comprimir/empaquetar."));
         m.exec();
+        ui->pushButton_4->setEnabled(true);
         return;
     }
 }
@@ -1945,10 +1971,13 @@ void compresor::Comprobar2()
                 if (FullDirectori != "")
                 {
                     nombreParcial=FullDirectori;
-                    nombreParcial = nombreParcial.remove(Paquet);
-                    QStringList Parcial = nombreParcial.split("/");
-                    Encadena = Parcial.value(Parcial.count()-1);
-                    nombreParcial.remove(Encadena);
+                    if (nombreParcial.contains(Paquet))
+                    {
+                        nombreParcial = nombreParcial.remove(Paquet);
+                        QStringList Parcial = nombreParcial.split("/");
+                        Encadena = Parcial.value(Parcial.count()-1);
+                        nombreParcial.remove(Encadena);
+                    }
                     ui->lineEdit->setText(nombreParcial);
                 }
                 else
@@ -1956,10 +1985,13 @@ void compresor::Comprobar2()
                     QString nombreParcial, Encadena;
                     FullRute = ui->lineEdit->text();
                     nombreParcial=ui->lineEdit->text();
-                    nombreParcial = nombreParcial.remove(Paquet);
-                    QStringList Parcial = nombreParcial.split("/");
-                    Encadena = Parcial.value(Parcial.count()-1);
-                    nombreParcial.remove(Encadena);
+                    if (nombreParcial.contains(Paquet))
+                    {
+                        nombreParcial = nombreParcial.remove(Paquet);
+                        QStringList Parcial = nombreParcial.split("/");
+                        Encadena = Parcial.value(Parcial.count()-1);
+                        nombreParcial.remove(Encadena);
+                    }
                     ui->lineEdit->setText(nombreParcial);
                 }
                 if (ui->lineEdit->text().endsWith("/") == true)
@@ -2017,7 +2049,7 @@ void compresor::Comprobar2()
                         QMessageBox m;
                         if (Stilo == "A")
                             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                        m.setText(tr("No hay ninguna nombre de destino para comprimir/empaquetar se coge por defecto el que hay en la primera ruta."));
+                        m.setText(tr("No hay ningun nombre de destino para comprimir/empaquetar se coge por defecto el que hay en la primera ruta."));
                         m.exec();
                         QTableWidgetItem *itemA;
                         itemA=ui->tableWidget->item(0,1);
@@ -2181,17 +2213,32 @@ void compresor::ProcesarValor(QString ValorComand)
 {
     int iFilas, a;
     QString valor;
-    iFilas=ui->tableWidget->rowCount();
-    QTableWidgetItem *item;
-    for(a=0;a<iFilas;a++)
+    if (ui->radioButton->isChecked())
     {
-        item=ui->tableWidget->item(a,0);
-        valor=item->text();
-        if(ValorComand.contains(valor))
-            ui->tableWidget->selectRow(a);
-     }
-     TotalProceso = TotalProceso+1;
-     ui->progressBar->setValue(TotalProceso);
+        iFilas=ui->tableWidget->rowCount();
+        QTableWidgetItem *item;
+        for(a=0;a<iFilas;a++)
+        {
+            item=ui->tableWidget->item(a,0);
+            valor=item->text();
+            if(ValorComand.contains(valor))
+                ui->tableWidget->selectRow(a);
+         }
+    }
+    else
+    {
+        iFilas=ui->tableWidget_2->rowCount();
+        QTableWidgetItem *item;
+        for(a=0;a<iFilas;a++)
+        {
+            item=ui->tableWidget_2->item(a,0);
+            valor=item->text();
+            if(ValorComand.contains(valor))
+                ui->tableWidget_2->selectRow(a);
+         }
+    }
+    TotalProceso = TotalProceso+1;
+    ui->progressBar->setValue(TotalProceso);
 }
 
 void compresor::mibprogreso(QString Dat)
@@ -2209,7 +2256,29 @@ void compresor::mibFin()
     {
         ui->progressBar->setValue(0);
         ui->progressBar->hide();
+        ui->pushButton_11->hide();
+        TotalProceso=0;
     }
+}
+
+void compresor::on_pushButton_11_clicked()
+{
+    Evento = 1;
+    if (mib != 0)
+    {
+        mib->killProceso();
+        disconnect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
+        disconnect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
+        disconnect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
+        disconnect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
+    }
+    ui->progressBar->setValue(0);
+    ui->progressBar->hide();
+    ui->pushButton_11->hide();
+    if (ui->radioButton->isChecked())
+        ui->pushButton_4->setEnabled(true);
+    else if (ui->radioButton_2->isChecked())
+        ui->pushButton_7->setEnabled(true);
 }
 
 void compresor::on_checkBox_clicked()
@@ -2267,9 +2336,19 @@ void compresor::Comprobar5()
         ui->tableWidget_2->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Ruta origen")));
         ui->tableWidget_2->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Ruta destino")));
         ui->tableWidget_2->hideColumn(3);
-        ui->pushButton_9->show();
-        ui->pushButton_10->show();
-        ui->pushButton_11->show();
+        if (ui->checkBox_7->isChecked())
+        {
+            ui->pushButton_9->hide();
+            ui->pushButton_10->hide();
+        }
+        else
+        {
+            ui->pushButton_9->show();
+            ui->pushButton_10->show();
+        }
+        ui->pushButton_7->setText(tr("Descomprimir"));
+        if (ui->checkBox_2->isChecked())
+            ui->pushButton_2->setText(tr("Eliminar seleccionado"));
     }
     else
     {
@@ -2277,14 +2356,19 @@ void compresor::Comprobar5()
         disconnect(fdlg1, SIGNAL(filesSelected(QStringList)), this, SLOT(ValorRuta1(QStringList)));
         fdlg1->setLabelText(QFileDialog::Accept, tr("Seleccionar"));
         ui->pushButton_8->show();
-        ui->label_4->show();
+        if (ui->radioButton_2->isChecked())
+            ui->label_4->show();
+        else
+            ui->label_4->hide();
         fdlg1->setFileMode(QFileDialog::ExistingFile);
         ui->tableWidget_2->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Peso")));
         ui->tableWidget_2->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Nivel compresion")));
         ui->tableWidget_2->showColumn(3);
         ui->pushButton_9->hide();
         ui->pushButton_10->hide();
-        ui->pushButton_11->hide();
+        ui->pushButton_7->setText(tr("Descomprimir todo"));
+        if (ui->checkBox_2->isChecked())
+            ui->pushButton_2->setText(tr("Eliminar seleccionados"));
     }
 }
 
@@ -2292,15 +2376,23 @@ void compresor::Comprobar6()
 {
     if (ui->checkBox_7->isChecked())
     {
-        ui->pushButton_9->hide();
-        ui->pushButton_10->hide();
-        ui->pushButton_11->hide();
+        if (!ui->checkBox_8->isChecked())
+        {
+            ui->pushButton_9->hide();
+            ui->pushButton_10->hide();
+            if (ui->radioButton->isChecked())
+                ui->tableWidget_2->hideColumn(2);
+        }
     }
     else
     {
-        ui->pushButton_9->show();
-        ui->pushButton_10->show();
-        ui->pushButton_11->show();
+        if (ui->checkBox_8->isChecked())
+        {
+            ui->pushButton_9->show();
+            ui->pushButton_10->show();
+            if (ui->radioButton->isChecked())
+                ui->tableWidget_2->showColumn(2);
+        }
     }
 }
 
@@ -2336,12 +2428,13 @@ void compresor::ValorRuta1(QStringList valor)
             QFile file(rutaAbs);
             item1->setText(tr(QFileInfo(file).fileName()));
             item2->setText(tr(rutaAbs));
-            if (ui->checkBox_8->isChecked())
+            if (ui->checkBox_7->isChecked())
             {
                 QString Nombre, Ruta;
                 Nombre = item1->text();
                 Ruta = rutaAbs;
                 Ruta.remove(Nombre);
+                Ruta.chop(1);
                 item3->setText(Ruta);
             }
             else
@@ -2367,9 +2460,1032 @@ void compresor::on_pushButton_6_clicked()
     ui->lineEdit_2->setText(fileNameDirectori);
 }
 
-void compresor::on_pushButton_7_clicked()
+void compresor::on_pushButton_9_clicked()
 {
-    //falta esta parte.
+    if (ui->lineEdit_2->text() == "")
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No has introducido una ruta valida o esta vacia."));
+        m.exec();
+        return;
+    }
+    int iFilas;
+    iFilas=ui->tableWidget_2->currentRow();
+    if (iFilas == -1)
+    {
+        QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No has seleccionado ningun registro, por lo que no puedes procesar la solicitud."));
+        m.exec();
+        return;
+    }
+    else
+    {
+        QTableWidgetItem *item;
+        item=new QTableWidgetItem;
+        item->setText(ui->lineEdit_2->text());
+        ui->tableWidget_2->setItem(iFilas,2,item);
+        ui->tableWidget_2->resizeRowsToContents();
+        ui->tableWidget_2->resizeColumnsToContents();
+    }
 }
 
-// http://www.qt-coding.com/2013/11/28/tip-of-the-day-select-multiple-rows-in-qtableview-programatically/
+void compresor::on_pushButton_10_clicked()
+{
+    int iFilas;
+    iFilas=ui->tableWidget_2->currentRow();
+    if (iFilas == -1)
+    {
+        QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No has seleccionado ningun registro, por lo que no puedes procesar la solicitud."));
+        m.exec();
+        return;
+    }
+    else
+    {
+        int respuesta = 0;
+        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Advertencia!!!")),
+                    QString::fromUtf8(tr("<center><b>Forma de eliminar la ruta<b></center><p>"
+                    "Puedes dejar la ruta en blanco o poner por defecto la misma que tiene "
+                    "el archivo comprimido.<p>"
+                    "&iquest;Dejar la ruta en blanco?")), QMessageBox::Ok, QMessageBox::No);
+        if (respuesta == QMessageBox::Ok)
+        {
+            QTableWidgetItem *item;
+            item=new QTableWidgetItem;
+            item->setText("");
+            ui->tableWidget_2->setItem(iFilas,2,item);
+            ui->tableWidget_2->resizeRowsToContents();
+            ui->tableWidget_2->resizeColumnsToContents();
+        }
+        else
+        {
+            QString RutaI, RutaF;
+            QTableWidgetItem *item, *item1, *item2;
+            item=new QTableWidgetItem;
+            item1=new QTableWidgetItem;
+            item2=new QTableWidgetItem;
+            item=ui->tableWidget_2->item(iFilas,0);
+            item1=ui->tableWidget_2->item(iFilas,1);
+            RutaI = item->text();
+            RutaF = item1->text();
+            RutaF.remove(RutaI);
+            RutaF.chop(1);
+            item2->setText(RutaF);
+            ui->tableWidget_2->setItem(iFilas,2,item2);
+            ui->tableWidget_2->resizeRowsToContents();
+            ui->tableWidget_2->resizeColumnsToContents();
+        }
+    }
+}
+
+void compresor::on_pushButton_7_clicked()
+{
+    QStringList comandos;
+    int j,i;
+    j=ui->tableWidget_2->rowCount();
+    if (j == 0)
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No hay registros para procesar."));
+        m.exec();
+        return;
+    }
+    if (ui->checkBox_8->isChecked())
+    {
+        if (ui->checkBox_7->isChecked())
+        {
+            ui->progressBar->show();
+            ui->pushButton_11->show();
+            QString value, value1, value2;
+            ui->progressBar->setRange(0,j);
+            Evento = 0;
+            QTableWidgetItem *item, *item1;
+            for(i=0;i<j;i++)
+            {
+                qApp->processEvents();
+                if (Evento == 1)
+                {
+                    ui->textEdit->append(tr("Trabajo cancelado"));
+                    ui->pushButton_7->setEnabled(true);
+                    return;
+                }
+                item=new QTableWidgetItem;
+                item1=new QTableWidgetItem;
+                item=ui->tableWidget_2->item(i,0);
+                item1=ui->tableWidget_2->item(i,1);
+                value=item->text();
+                value1=item1->text();
+                value2 = value1;
+                value2.remove(value);
+                if (value.endsWith(".tar"))
+                    LPaquet = ".tar";
+                if (value.endsWith(".gz"))
+                    LPaquet = ".gz";
+                if (value.endsWith(".bz2"))
+                    LPaquet = ".bz2";
+                if (value.endsWith(".tar.gz"))
+                    LPaquet = ".tar.gz";
+                if (value.endsWith(".tar.bz2"))
+                    LPaquet = ".tar.bz2";
+                if (value.endsWith(".zip"))
+                    LPaquet = ".zip";
+                if (value.endsWith(".zoo"))
+                    LPaquet = ".zoo";
+                if (value.endsWith(".arj"))
+                    LPaquet = ".arj";
+                if (value.endsWith(".7z"))
+                    LPaquet = ".7z";
+                if (value.endsWith(".rar"))
+                    LPaquet = ".rar";
+                QString cmd1;
+                QString cmd = QString::fromUtf8(tr("echo Realizando descompresion/desempaquetado de "+value1+"..."));
+                comandos<< cmd;
+                if (LPaquet == ".tar")
+                {
+                    cmd1= "su - %3 -c \"tar -xvf '%1' -C '%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+                if (LPaquet == ".gz")
+                {
+                    cmd1= "su - %2 -c \"gzip -dvf '%1'\"";
+                    cmd1=cmd1.arg(value1).arg(user);
+                }
+                if (LPaquet == ".bz2")
+                {
+                    cmd1= "su - %2 -c \"bzip2 -vfd '%1'\"";
+                    cmd1=cmd1.arg(value1).arg(user);
+                }
+                if (LPaquet == ".tar.gz")
+                {
+                    cmd1= "su - %3 -c \"tar -vxzf '%1' -C '%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+                if (LPaquet == ".tar.bz2")
+                {
+                    cmd1= "su - %3 -c \"tar -vxjf '%1' -C '%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+                if (LPaquet == ".zip")
+                {
+                    if (ui->checkBox_9->isChecked())
+                    {
+                        cmd1= "su - %3 -c \"unzip -oj '%1' -d '%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                    else
+                    {
+                        cmd1= "su - %3 -c \"unzip -o '%1' -d '%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                }
+                if (LPaquet == ".zoo")
+                {
+                    if (ui->checkBox_9->isChecked())
+                    {
+                        cmd1= "su - %2 -c \"zoo xO:/ '%1'\"";
+                        cmd1=cmd1.arg(value1).arg(user);
+                    }
+                    else
+                    {
+                        cmd1= "su - %2 -c \"zoo xO./ '%1'\"";
+                        cmd1=cmd1.arg(value1).arg(user);
+                    }
+                }
+                if (LPaquet == ".arj")
+                {
+                    if (ui->checkBox_9->isChecked())
+                    {
+                        cmd1= "su - %3 -c \"arj e -y '%1' '%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                    else
+                    {
+                        cmd1= "su - %3 -c \"arj x -y '%1' '%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                }
+                if (LPaquet == ".7z")
+                {
+                    if (ui->checkBox_9->isChecked())
+                    {
+                        cmd1= "su - %3 -c \"7z e -y '%1' -o'%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                    else
+                    {
+                        cmd1= "su - %3 -c \"7z x -y '%1' -o'%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                }
+                if (LPaquet == ".rar")
+                {
+                    if (ui->checkBox_9->isChecked())
+                    {
+                        cmd1= "su - %3 -c \"rar e -y '%1' '%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                    else
+                    {
+                        cmd1= "su - %3 -c \"rar x -y '%1' '%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                }
+                comandos<< cmd1;
+            }
+        }
+        else if (!ui->checkBox_7->isChecked())
+        {
+            QTableWidgetItem *item, *item1, *item2;
+            for(int a=0;a<j;a++)
+            {
+                item2=new QTableWidgetItem;
+                item2=ui->tableWidget_2->item(a,2);
+                QString Comprobacion = item2->text();
+                if (Comprobacion == "")
+                {
+                    QMessageBox m;
+                    if (Stilo == "A")
+                        m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                    m.setText(tr("Existen archivos sin ruta de destino.<p>Comprueba lo que falta antes de continuar."));
+                    m.exec();
+                    return;
+                }
+            }
+            ui->progressBar->show();
+            ui->pushButton_11->show();
+            QString value, value1, value2;
+            ui->progressBar->setRange(0,j);
+            Evento = 0;
+            for(i=0;i<j;i++)
+            {
+                qApp->processEvents();
+                if (Evento == 1)
+                {
+                    ui->textEdit->append(tr("Trabajo cancelado"));
+                    ui->pushButton_7->setEnabled(true);
+                    return;
+                }
+                item=new QTableWidgetItem;
+                item1=new QTableWidgetItem;
+                item2=new QTableWidgetItem;
+                item=ui->tableWidget_2->item(i,0);
+                item1=ui->tableWidget_2->item(i,1);
+                item2=ui->tableWidget_2->item(i,2);
+                value=item->text();
+                value1=item1->text();
+                value2=item2->text();
+                if (value.endsWith(".tar"))
+                    LPaquet = ".tar";
+                if (value.endsWith(".gz"))
+                    LPaquet = ".gz";
+                if (value.endsWith(".bz2"))
+                    LPaquet = ".bz2";
+                if (value.endsWith(".tar.gz"))
+                    LPaquet = ".tar.gz";
+                if (value.endsWith(".tar.bz2"))
+                    LPaquet = ".tar.bz2";
+                if (value.endsWith(".zip"))
+                    LPaquet = ".zip";
+                if (value.endsWith(".zoo"))
+                    LPaquet = ".zoo";
+                if (value.endsWith(".arj"))
+                    LPaquet = ".arj";
+                if (value.endsWith(".7z"))
+                    LPaquet = ".7z";
+                if (value.endsWith(".rar"))
+                    LPaquet = ".rar";
+                QString cmd1;
+                QString cmd = QString::fromUtf8(tr("echo Realizando descompresion/desempaquetado de "+value1+"..."));
+                comandos<< cmd;
+                if (LPaquet == ".tar")
+                {
+                    cmd1= "su - %3 -c \"tar -xvf '%1' -C '%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+                if (LPaquet == ".gz")
+                {
+                    cmd1= "su - %2 -c \"gzip -dvf '%1'\"";
+                    cmd1=cmd1.arg(value1).arg(user);
+                }
+                if (LPaquet == ".bz2")
+                {
+                    cmd1= "su - %2 -c \"bzip2 -vfd '%1'\"";
+                    cmd1=cmd1.arg(value1).arg(user);
+                }
+                if (LPaquet == ".tar.gz")
+                {
+                    cmd1= "su - %3 -c \"tar -vxzf '%1' -C '%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+                if (LPaquet == ".tar.bz2")
+                {
+                    cmd1= "su - %3 -c \"tar -vxjf '%1' -C '%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+                if (LPaquet == ".zip")
+                {
+                    if (ui->checkBox_9->isChecked())
+                    {
+                        cmd1= "su - %3 -c \"unzip -oj '%1' -d '%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                    else
+                    {
+                        cmd1= "su - %3 -c \"unzip -o '%1' -d '%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                }
+                if (LPaquet == ".zoo")
+                {
+                    if (ui->checkBox_9->isChecked())
+                    {
+                        cmd1= "su - %2 -c \"zoo xO:/ '%1'\"";
+                        cmd1=cmd1.arg(value1).arg(user);
+                    }
+                    else
+                    {
+                        cmd1= "su - %2 -c \"zoo xO./ '%1'\"";
+                        cmd1=cmd1.arg(value1).arg(user);
+                    }
+                }
+                if (LPaquet == ".arj")
+                {
+                    if (ui->checkBox_9->isChecked())
+                    {
+                        cmd1= "su - %3 -c \"arj e -y '%1' '%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                    else
+                    {
+                        cmd1= "su - %3 -c \"arj x -y '%1' '%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                }
+                if (LPaquet == ".7z")
+                {
+                    if (ui->checkBox_9->isChecked())
+                    {
+                        cmd1= "su - %3 -c \"7z e -y '%1' -o'%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                    else
+                    {
+                        cmd1= "su - %3 -c \"7z x -y '%1' -o'%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                }
+                if (LPaquet == ".rar")
+                {
+                    if (ui->checkBox_9->isChecked())
+                    {
+                        cmd1= "su - %3 -c \"rar e -y '%1' '%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                    else
+                    {
+                        cmd1= "su - %3 -c \"rar x -y '%1' '%2'\"";
+                        cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                    }
+                }
+                comandos<< cmd1;
+            }
+        }
+    }
+    else
+    {
+        if (ui->checkBox_7->isChecked())
+        {
+            QString value1 = ui->label_4->text();
+            value1.remove(tr("Fichero: "));
+            QString Value = ui->label_4->text();
+            Value.remove(tr("Fichero: "));
+            QString value2 = Value;
+            QStringList Valor = Value.split("/");
+            QString Resto = Valor.value(Valor.count()-1);
+            value2.remove(Resto);
+            if (value1.endsWith(".tar"))
+                LPaquet = ".tar";
+            if (value1.endsWith(".gz"))
+                LPaquet = ".gz";
+            if (value1.endsWith(".bz2"))
+                LPaquet = ".bz2";
+            if (value1.endsWith(".tar.gz"))
+                LPaquet = ".tar.gz";
+            if (value1.endsWith(".tar.bz2"))
+                LPaquet = ".tar.bz2";
+            if (value1.endsWith(".zip"))
+                LPaquet = ".zip";
+            if (value1.endsWith(".zoo"))
+                LPaquet = ".zoo";
+            if (value1.endsWith(".arj"))
+                LPaquet = ".arj";
+            if (value1.endsWith(".7z"))
+                LPaquet = ".7z";
+            if (value1.endsWith(".rar"))
+                LPaquet = ".rar";
+            QString cmd1;
+            QString cmd = QString::fromUtf8(tr("echo Realizando descompresion/desempaquetado de "+value1+"..."));
+            comandos<< cmd;
+            if (LPaquet == ".tar")
+            {
+                cmd1= "su - %3 -c \"tar -xvf '%1' -C '%2'\"";
+                cmd1=cmd1.arg(value1).arg(value2).arg(user);
+            }
+            if (LPaquet == ".gz")
+            {
+                cmd1= "su - %2 -c \"gzip -dvf '%1'\"";
+                cmd1=cmd1.arg(value1).arg(user);
+            }
+            if (LPaquet == ".bz2")
+            {
+                cmd1= "su - %2 -c \"bzip2 -vfd '%1'\"";
+                cmd1=cmd1.arg(value1).arg(user);
+            }
+            if (LPaquet == ".tar.gz")
+            {
+                cmd1= "su - %3 -c \"tar -vxzf '%1' -C '%2'\"";
+                cmd1=cmd1.arg(value1).arg(value2).arg(user);
+            }
+            if (LPaquet == ".tar.bz2")
+            {
+                cmd1= "su - %3 -c \"tar -vxjf '%1' -C '%2'\"";
+                cmd1=cmd1.arg(value1).arg(value2).arg(user);
+            }
+            if (LPaquet == ".zip")
+            {
+                if (ui->checkBox_9->isChecked())
+                {
+                    cmd1= "su - %3 -c \"unzip -oj '%1' -d '%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+                else
+                {
+                    cmd1= "su - %3 -c \"unzip -o '%1' -d '%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+            }
+            if (LPaquet == ".zoo")
+            {
+                if (ui->checkBox_9->isChecked())
+                {
+                    cmd1= "su - %2 -c \"zoo xO:/ '%1'\"";
+                    cmd1=cmd1.arg(value1).arg(user);
+                }
+                else
+                {
+                    cmd1= "su - %2 -c \"zoo xO./ '%1'\"";
+                    cmd1=cmd1.arg(value1).arg(user);
+                }
+            }
+            if (LPaquet == ".arj")
+            {
+                if (ui->checkBox_9->isChecked())
+                {
+                    cmd1= "su - %3 -c \"arj e -y '%1' '%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+                else
+                {
+                    cmd1= "su - %3 -c \"arj x -y '%1' '%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+            }
+            if (LPaquet == ".7z")
+            {
+                if (ui->checkBox_9->isChecked())
+                {
+                    cmd1= "su - %3 -c \"7z e -y '%1' -o'%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+                else
+                {
+                    cmd1= "su - %3 -c \"7z x -y '%1' -o'%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+            }
+            if (LPaquet == ".rar")
+            {
+                if (ui->checkBox_9->isChecked())
+                {
+                    cmd1= "su - %3 -c \"rar e -y '%1' '%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+                else
+                {
+                    cmd1= "su - %3 -c \"rar x -y '%1' '%2'\"";
+                    cmd1=cmd1.arg(value1).arg(value2).arg(user);
+                }
+            }
+            comandos<< cmd1;
+        }
+        else
+        {
+            QString Value = ui->label_4->text();
+            QString value2 = ui->lineEdit_2->text();
+            if (value2 == "")
+            {
+                QMessageBox m;
+                if (Stilo == "A")
+                    m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                m.setText(tr("No hay ruta de destino definida."));
+                m.exec();
+                return;
+            }
+            Value.remove(tr("Fichero: "));
+            QString cmd1;
+            QString cmd = QString::fromUtf8(tr("echo Realizando descompresion/desempaquetado de "+Value+"..."));
+            comandos<< cmd;
+            if (Value.endsWith(".tar"))
+                LPaquet = ".tar";
+            if (Value.endsWith(".gz"))
+                LPaquet = ".gz";
+            if (Value.endsWith(".bz2"))
+                LPaquet = ".bz2";
+            if (Value.endsWith(".tar.gz"))
+                LPaquet = ".tar.gz";
+            if (Value.endsWith(".tar.bz2"))
+                LPaquet = ".tar.bz2";
+            if (Value.endsWith(".zip"))
+                LPaquet = ".zip";
+            if (Value.endsWith(".zoo"))
+                LPaquet = ".zoo";
+            if (Value.endsWith(".arj"))
+                LPaquet = ".arj";
+            if (Value.endsWith(".7z"))
+                LPaquet = ".7z";
+            if (Value.endsWith(".rar"))
+                LPaquet = ".rar";
+            if (LPaquet == ".tar")
+            {
+                cmd1= "su - %3 -c \"tar -xvf '%1' -C '%2'\"";
+                cmd1=cmd1.arg(Value).arg(value2).arg(user);
+            }
+            if (LPaquet == ".gz")
+            {
+                cmd1= "su - %2 -c \"gzip -dvf '%1'\"";
+                cmd1=cmd1.arg(Value).arg(user);
+            }
+            if (LPaquet == ".bz2")
+            {
+                cmd1= "su - %2 -c \"bzip2 -vfd '%1'\"";
+                cmd1=cmd1.arg(Value).arg(user);
+            }
+            if (LPaquet == ".tar.gz")
+            {
+                cmd1= "su - %3 -c \"tar -vxzf '%1' -C '%2'\"";
+                cmd1=cmd1.arg(Value).arg(value2).arg(user);
+            }
+            if (LPaquet == ".tar.bz2")
+            {
+                cmd1= "su - %3 -c \"tar -vxjf '%1' -C '%2'\"";
+                cmd1=cmd1.arg(Value).arg(value2).arg(user);
+            }
+            if (LPaquet == ".zip")
+            {
+                if (ui->checkBox_9->isChecked())
+                {
+                    cmd1= "su - %3 -c \"unzip -oj '%1' -d '%2'\"";
+                    cmd1=cmd1.arg(Value).arg(value2).arg(user);
+                }
+                else
+                {
+                    cmd1= "su - %3 -c \"unzip -o '%1' -d '%2'\"";
+                    cmd1=cmd1.arg(Value).arg(value2).arg(user);
+                }
+            }
+            if (LPaquet == ".zoo")
+            {
+                if (ui->checkBox_9->isChecked())
+                {
+                    cmd1= "su - %2 -c \"zoo xO:/ '%1'\"";
+                    cmd1=cmd1.arg(Value).arg(user);
+                }
+                else
+                {
+                    cmd1= "su - %2 -c \"zoo xO./ '%1'\"";
+                    cmd1=cmd1.arg(Value).arg(user);
+                }
+            }
+            if (LPaquet == ".arj")
+            {
+                if (ui->checkBox_9->isChecked())
+                {
+                    cmd1= "su - %3 -c \"arj e -y '%1' '%2'\"";
+                    cmd1=cmd1.arg(Value).arg(value2).arg(user);
+                }
+                else
+                {
+                    cmd1= "su - %3 -c \"arj x -y '%1' '%2'\"";
+                    cmd1=cmd1.arg(Value).arg(value2).arg(user);
+                }
+            }
+            if (LPaquet == ".7z")
+            {
+                if (ui->checkBox_9->isChecked())
+                {
+                    cmd1= "su - %3 -c \"7z e -y '%1' -o'%2'\"";
+                    cmd1=cmd1.arg(Value).arg(value2).arg(user);
+                }
+                else
+                {
+                    cmd1= "su - %3 -c \"7z x -y '%1' -o'%2'\"";
+                    cmd1=cmd1.arg(Value).arg(value2).arg(user);
+                }
+            }
+            if (LPaquet == ".rar")
+            {
+                if (ui->checkBox_9->isChecked())
+                {
+                    cmd1= "su - %3 -c \"rar e -y '%1' '%2'\"";
+                    cmd1=cmd1.arg(Value).arg(value2).arg(user);
+                }
+                else
+                {
+                    cmd1= "su - %3 -c \"rar x -y '%1' '%2'\"";
+                    cmd1=cmd1.arg(Value).arg(value2).arg(user);
+                }
+            }
+            comandos<< cmd1;
+        }
+    }
+    if (mib != 0)
+        delete mib;
+    ui->progressBar->show();
+    ui->pushButton_11->show();
+    mib = new DrakeProcesos(comandos, this);
+    connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
+    connect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
+    connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
+    connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
+    int valor= comandos.count();
+    mib->Valor(valor,3);
+    mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+    mib->iniciarProceso();
+    Totalizar = comandos.count();
+    ui->progressBar->setRange(0,Totalizar);
+}
+
+void compresor::on_pushButton_12_clicked()
+{
+    QStringList comandos;
+    int j,i;
+    j=ui->tableWidget_2->rowCount();
+    if (j == 0)
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No hay registros para procesar."));
+        m.exec();
+        return;
+    }
+    if (ui->checkBox_8->isChecked())
+    {
+        ui->progressBar->show();
+        ui->pushButton_11->show();
+        QString value, value1, value2;
+        ui->progressBar->setRange(0,j);
+        Evento = 0;
+        QTableWidgetItem *item, *item1;
+        for(i=0;i<j;i++)
+        {
+            qApp->processEvents();
+            if (Evento == 1)
+            {
+                ui->textEdit->append(tr("Trabajo cancelado"));
+                ui->pushButton_7->setEnabled(true);
+                return;
+            }
+            item=new QTableWidgetItem;
+            item1=new QTableWidgetItem;
+            item=ui->tableWidget_2->item(i,0);
+            item1=ui->tableWidget_2->item(i,1);
+            value=item->text();
+            value1=item1->text();
+            value2 = value1;
+            value2.remove(value);
+            if (value.endsWith(".tar"))
+                LPaquet = ".tar";
+            if (value.endsWith(".gz"))
+                LPaquet = ".gz";
+            if (value.endsWith(".bz2"))
+                LPaquet = ".bz2";
+            if (value.endsWith(".tar.gz"))
+                LPaquet = ".tar.gz";
+            if (value.endsWith(".tar.bz2"))
+                LPaquet = ".tar.bz2";
+            if (value.endsWith(".zip"))
+                LPaquet = ".zip";
+            if (value.endsWith(".zoo"))
+                LPaquet = ".zoo";
+            if (value.endsWith(".arj"))
+                LPaquet = ".arj";
+            if (value.endsWith(".7z"))
+                LPaquet = ".7z";
+            if (value.endsWith(".rar"))
+                LPaquet = ".rar";
+            QString cmd1;
+            QString cmd = QString::fromUtf8(tr("echo Realizando comprobacion de "+value1+"..."));
+            comandos<< cmd;
+            if (LPaquet == ".tar")
+            {
+                cmd1= "su - %2 -c \"tar -tf '%1'\"";
+                cmd1=cmd1.arg(value1).arg(user);
+            }
+            if (LPaquet == ".gz")
+            {
+                cmd1= "su - %2 -c \"gzip -tv '%1'\"";
+                cmd1=cmd1.arg(value1).arg(user);
+            }
+            if (LPaquet == ".bz2")
+            {
+                cmd1= "su - %2 -c \"bzip2 -tvv '%1'\"";
+                cmd1=cmd1.arg(value1).arg(user);
+            }
+            if (LPaquet == ".tar.gz")
+            {
+                cmd1= "su - %2 -c \"tar -tf '%1'\"";
+                cmd1=cmd1.arg(value1).arg(user);
+            }
+            if (LPaquet == ".tar.bz2")
+            {
+                cmd1= "su - %2 -c \"bzip2 -tvv '%1'\"";
+                cmd1=cmd1.arg(value1).arg(user);
+            }
+            if (LPaquet == ".zip")
+            {
+                cmd1= "su - %2 -c \"unzip -t '%1'\"";
+                cmd1=cmd1.arg(value1).arg(user);
+            }
+            if (LPaquet == ".zoo")
+            {
+                cmd1= "su - %2 -c \"zoo -test '%1'\"";
+                cmd1=cmd1.arg(value1).arg(user);
+            }
+            if (LPaquet == ".arj")
+            {
+                cmd1= "su - %2 -c \"arj t '%1' \"";
+                cmd1=cmd1.arg(value1).arg(user);
+            }
+            if (LPaquet == ".7z")
+            {
+                cmd1= "su - %2 -c \"7z t '%1'\"";
+                cmd1=cmd1.arg(value1).arg(user);
+            }
+            if (LPaquet == ".rar")
+            {
+                cmd1= "su - %2 -c \"rar t '%1'\"";
+                cmd1=cmd1.arg(value1).arg(user);
+            }
+            comandos<< cmd1;
+        }
+    }
+    else
+    {
+        QString Value = ui->label_4->text();
+        Value.remove(tr("Fichero: "));
+        QString cmd1;
+        QString cmd = QString::fromUtf8(tr("echo Realizando comprobacion de "+Value+"..."));
+        comandos<< cmd;
+        if (Value.endsWith(".tar"))
+            LPaquet = ".tar";
+        if (Value.endsWith(".gz"))
+            LPaquet = ".gz";
+        if (Value.endsWith(".bz2"))
+            LPaquet = ".bz2";
+        if (Value.endsWith(".tar.gz"))
+            LPaquet = ".tar.gz";
+        if (Value.endsWith(".tar.bz2"))
+            LPaquet = ".tar.bz2";
+        if (Value.endsWith(".zip"))
+            LPaquet = ".zip";
+        if (Value.endsWith(".zoo"))
+            LPaquet = ".zoo";
+        if (Value.endsWith(".arj"))
+            LPaquet = ".arj";
+        if (Value.endsWith(".7z"))
+            LPaquet = ".7z";
+        if (Value.endsWith(".rar"))
+            LPaquet = ".rar";
+        if (LPaquet == ".tar")
+        {
+            cmd1= "su - %2 -c \"tar -tf '%1'\"";
+            cmd1=cmd1.arg(Value).arg(user);
+        }
+        if (LPaquet == ".gz")
+        {
+            cmd1= "su - %2 -c \"gzip -tv '%1'\"";
+            cmd1=cmd1.arg(Value).arg(user);
+        }
+        if (LPaquet == ".bz2")
+        {
+            cmd1= "su - %2 -c \"bzip2 -tvv '%1'\"";
+            cmd1=cmd1.arg(Value).arg(user);
+        }
+        if (LPaquet == ".tar.gz")
+        {
+            cmd1= "su - %2 -c \"tar -tf '%1'\"";
+            cmd1=cmd1.arg(Value).arg(user);
+        }
+        if (LPaquet == ".tar.bz2")
+        {
+            cmd1= "su - %2 -c \"bzip2 -tvv '%1'\"";
+            cmd1=cmd1.arg(Value).arg(user);
+        }
+        if (LPaquet == ".zip")
+        {
+            cmd1= "su - %2 -c \"unzip -t '%1'\"";
+            cmd1=cmd1.arg(Value).arg(user);
+        }
+        if (LPaquet == ".zoo")
+        {
+            cmd1= "su - %2 -c \"zoo -test '%1'\"";
+            cmd1=cmd1.arg(Value).arg(user);
+        }
+        if (LPaquet == ".arj")
+        {
+            cmd1= "su - %2 -c \"arj t '%1' \"";
+            cmd1=cmd1.arg(Value).arg(user);
+        }
+        if (LPaquet == ".7z")
+        {
+            cmd1= "su - %2 -c \"7z t '%1'\"";
+            cmd1=cmd1.arg(Value).arg(user);
+        }
+        if (LPaquet == ".rar")
+        {
+            cmd1= "su - %2 -c \"rar t '%1'\"";
+            cmd1=cmd1.arg(Value).arg(user);
+        }
+        comandos<< cmd1;
+    }
+    if (mib != 0)
+        delete mib;
+    ui->progressBar->show();
+    ui->pushButton_11->show();
+    mib = new DrakeProcesos(comandos, this);
+    connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
+    connect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
+    connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
+    connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
+    int valor= comandos.count();
+    mib->Valor(valor,3);
+    mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+    mib->iniciarProceso();
+    Totalizar = comandos.count();
+    ui->progressBar->setRange(0,Totalizar);
+}
+
+void compresor::on_pushButton_8_clicked()
+{   
+    QStringList comandos;
+    QString value1, cmd1;
+    QModelIndexList select = ui->tableWidget_2->selectionModel()->selectedRows(0);
+    QItemSelectionModel *selection = ui->tableWidget_2->selectionModel();
+    if (!selection->hasSelection())
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No has seleccionado ningun archivo.<p>Debes seleccionar uno como minimo."));
+        m.exec();
+        return;
+    }
+    foreach (QModelIndex actual, select)
+    {
+        int ActualRow=actual.row();
+        QModelIndex index;
+        index = selection->model()->index(ActualRow,0);
+        QString Valor = index.data().toString();
+        Valor = Valor.simplified();
+        value1.append("'"+Valor+"' ");
+    }
+    value1 = value1.simplified();
+    QString Value, value2;
+    if (ui->checkBox_7->isChecked())
+    {
+        Value = ui->label_4->text();
+        Value.remove(tr("Fichero: "));
+        value2 = Value;
+        QStringList Valor = Value.split("/");
+        QString Resto = Valor.value(Valor.count()-1);
+        value2.remove(Resto);
+    }
+    else
+    {
+        Value = ui->label_4->text();
+        value2 = ui->lineEdit_2->text();
+        if (value2 == "")
+        {
+            QMessageBox m;
+            if (Stilo == "A")
+                m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+            m.setText(tr("No hay ruta de destino definida."));
+            m.exec();
+            return;
+        }
+        Value.remove(tr("Fichero: "));
+    }
+    QString cmd = QString::fromUtf8(tr("echo Realizando descompresion/desempaquetado de "+Value+"..."));
+    comandos<< cmd;
+    if (LPaquet == ".tar")
+    {
+        cmd1= "su - %3 -c \"tar -xvf '%1' %4 -C '%2'\"";
+        cmd1=cmd1.arg(Value).arg(value2).arg(user).arg(value1);
+    }
+    if (LPaquet == ".tar.gz")
+    {
+        cmd1= "su - %3 -c \"tar -vxzf '%1' %4 -C '%2'\"";
+        cmd1=cmd1.arg(Value).arg(value2).arg(user).arg(value1);
+    }
+    if (LPaquet == ".tar.bz2")
+    {
+        cmd1= "su - %3 -c \"tar -vxjf '%1' %4 -C '%2'\"";
+        cmd1=cmd1.arg(Value).arg(value2).arg(user).arg(value1);
+    }
+    if (LPaquet == ".zip")
+    {
+        if (ui->checkBox_9->isChecked())
+        {
+            cmd1= "su - %3 -c \"unzip -oj '%1' %4 -d '%2'\"";
+            cmd1=cmd1.arg(Value).arg(value2).arg(user).arg(value1);
+        }
+        else
+        {
+            cmd1= "su - %3 -c \"unzip -o '%1' %4 -d '%2'\"";
+            cmd1=cmd1.arg(Value).arg(value2).arg(user).arg(value1);
+        }
+    }
+    if (LPaquet == ".zoo")
+    {
+        if (ui->checkBox_9->isChecked())
+        {
+            cmd1= "su - %2 -c \"zoo xO:/ '%1' %3\"";
+            cmd1=cmd1.arg(Value).arg(user).arg(value1);
+        }
+        else
+        {
+            cmd1= "su - %2 -c \"zoo xO./ '%1' %3\"";
+            cmd1=cmd1.arg(Value).arg(user).arg(value1);
+        }
+    }
+    if (LPaquet == ".arj")
+    {
+        if (ui->checkBox_9->isChecked())
+        {
+            cmd1= "su - %3 -c \"arj e -y '%1' '%2' %4\"";
+            cmd1=cmd1.arg(Value).arg(value2).arg(user).arg(value1);
+        }
+        else
+        {
+            cmd1= "su - %3 -c \"arj x -y '%1' '%2' %4\"";
+            cmd1=cmd1.arg(Value).arg(value2).arg(user).arg(value1);
+        }
+    }
+    if (LPaquet == ".7z")
+    {
+        if (ui->checkBox_9->isChecked())
+        {
+            cmd1= "su - %3 -c \"7z e -y '%1' %4 -o'%2'\"";
+            cmd1=cmd1.arg(Value).arg(value2).arg(user).arg(value1);
+        }
+        else
+        {
+            cmd1= "su - %3 -c \"7z x -y '%1' %4 -o'%2'\"";
+            cmd1=cmd1.arg(Value).arg(value2).arg(user).arg(value1);
+        }
+    }
+    if (LPaquet == ".rar")
+    {
+        if (ui->checkBox_9->isChecked())
+        {
+            cmd1= "su - %3 -c \"rar e -y '%1' %4 '%2'\"";
+            cmd1=cmd1.arg(Value).arg(value2).arg(user).arg(value1);
+        }
+        else
+        {
+            cmd1= "su - %3 -c \"rar x -y '%1' %4 '%2'\"";
+            cmd1=cmd1.arg(Value).arg(value2).arg(user).arg(value1);
+        }
+    }
+    comandos << cmd1;
+    if (mib != 0)
+        delete mib;
+    ui->progressBar->show();
+    ui->pushButton_11->show();
+    mib = new DrakeProcesos(comandos, this);
+    connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
+    connect(mib, SIGNAL(progreso(QString)), this, SLOT(mibprogreso(QString)));
+    connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
+    connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
+    int valor= comandos.count();
+    mib->Valor(valor,3);
+    mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+    mib->iniciarProceso();
+    Totalizar = comandos.count();
+    ui->progressBar->setRange(0,Totalizar);
+}

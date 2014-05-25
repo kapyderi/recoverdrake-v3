@@ -462,6 +462,23 @@
         <file>Imagenes/Refrescar.png</file>
         <file>Imagenes/descomprimirDOWN.png</file>
         <file>Imagenes/comprimirUP.png</file>
+        <file>Imagenes/F1Compresor.png</file>
+        <file>Imagenes/F1Compresor1.png</file>
+        <file>Imagenes/F1Compresor2.png</file>
+        <file>Imagenes/F1Compresor3.png</file>
+        <file>Imagenes/F1Compresor4.png</file>
+        <file>Imagenes/F1Compresor5.png</file>
+        <file>Imagenes/F1Compresor6.png</file>
+        <file>Imagenes/F1Compresor7.png</file>
+        <file>Imagenes/F1DBClaves.png</file>
+        <file>Imagenes/F1DBClaves1.png</file>
+        <file>Imagenes/F1DBClaves2.png</file>
+        <file>Imagenes/F1DBClaves3.png</file>
+        <file>Imagenes/F1DBClaves4.png</file>
+        <file>Imagenes/F1DBClaves5.png</file>
+        <file>Imagenes/F1DBClaves6.png</file>
+        <file>Imagenes/F1DBClaves7.png</file>
+        <file>Imagenes/Encriptar.png</file>
     </qresource>
     <qresource prefix="/codeBar">
         <file>Imagenes/codebar/FRE3OF9X.TTF</file>

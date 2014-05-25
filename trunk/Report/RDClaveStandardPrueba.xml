@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<RDReports>
+    <Paper acum="cam_204385449">
+        <Size w="29.69" h="20.93"/>
+        <StandartSize type="4"/>
+        <Orientation type="H"/>
+        <Margin left="0.50" bottom="0.50" top="0.50" rigth="0.50"/>
+        <Section size="114" id="0" name="Cabecera de report">
+            <Element w="40.0000" Alineacion="L" x="497.0000" y="90.0000" h="15.0000" italicFont="0" fontFamily="Arial" fontSize="10" fontWeigth="75" underlined="0" Orientacion="H" id="Label" name="txt_104102463" Text="Enc1" color="0,0,255,255"/>
+            <Element w="466.0000" Color2="0,0,0,0" x="619.0000" y="1.0000" h="70.0000" endPointPoint="" endPointName="Self" PenWidth="1" id="RoundRect" name="rect_37626042" GradientUsed="0" GradientDirection="V" RadiousX="20" PenColor="0,0,0,255" RadiousY="20" Color1="0,0,0,0"/>
+            <Element w="59.0000" x="1.0000" y="1.0000" h="50.0000" Path="/usr/share/RecoverDrake/logo.png" Dinamic="0" id="Image" fromBD="0" name="img_568317126"/>
+            <Element w="291.0000" Alineacion="C" x="718.0000" y="4.0000" h="61.0000" italicFont="0" fontFamily="Arial" fontSize="20" fontWeigth="75" underlined="0" Orientacion="H" id="Label" name="Titulo de report" Text="LISTADO DE CLAVES ENCRIPTADAS" color="0,0,255,255"/>
+            <Element w="46.0000" Alineacion="L" x="235.0000" y="92.0000" h="15.0000" italicFont="0" fontFamily="Arial" fontSize="10" fontWeigth="75" underlined="0" Orientacion="H" id="Label" name="Campo Clave" Text="Clave" color="0,0,255,255"/>
+            <Element w="58.0000" Alineacion="L" x="1.0000" y="94.0000" h="15.0000" italicFont="0" fontFamily="Arial" fontSize="10" fontWeigth="75" underlined="0" Orientacion="H" id="Label" name="Campo Usuario" Text="Usuario" color="0,0,255,255"/>
+            <Element w="1081.0000" x="2.0000" penStyle="1" y="100.0000" h="18.0000" endPointPoint="" penColor="0,0,0,255" endPointName="Self" Orientacion="H" id="Line" name="Linea cabecera" penWidth="1"/>
+            <Element w="40.0000" Alineacion="L" x="558.0000" y="90.0000" h="15.0000" italicFont="0" fontFamily="Arial" fontSize="10" fontWeigth="75" underlined="0" Orientacion="H" id="Label" name="txt_643940126" Text="Enc2" color="0,0,255,255"/>
+            <Element w="40.0000" Alineacion="L" x="618.0000" y="90.0000" h="15.0000" italicFont="0" fontFamily="Arial" fontSize="10" fontWeigth="75" underlined="0" Orientacion="H" id="Label" name="txt_699543928" Text="Enc3" color="0,0,255,255"/>
+            <Element w="38.0000" Alineacion="L" x="678.0000" y="90.0000" h="15.0000" italicFont="0" fontFamily="Arial" fontSize="10" fontWeigth="75" underlined="0" Orientacion="H" id="Label" name="txt_544280636" Text="Tipo" color="0,0,255,255"/>
+            <Element w="58.0000" Alineacion="L" x="803.0000" y="91.0000" h="15.0000" italicFont="0" fontFamily="Arial" fontSize="10" fontWeigth="75" underlined="0" Orientacion="H" id="Label" name="txt_96945245" Text="Usuario" color="0,0,255,255"/>
+        </Section>
+        <Section OnFistPage="0" size="16" id="1" name="Cabecera de pagina"/>
+        <Section color1="0,0,0,255" alternative="0" color2="0,0,0,255" size="115" haveSqlInterno="0" SqlInterno="General.Sugerencias" colored="0" SqlGlobal="General.Clave" acum="" id="2" name="PRUEBA" ClausulaInterna="Sugerencia=Id">
+            <Body size="115">
+                <Element w="1081.0000" x="0.0000" penStyle="1" y="59.0000" h="20.0000" endPointPoint="" penColor="0,0,0,255" endPointName="Self" Orientacion="H" id="Line" name="Linea cuerpo" penWidth="1"/>
+                <Element w="143.0000" x="0.0000" vertical="0" y="16.0000" h="39.0000" codeSize="15" barSize="25" Sql="General.Clave.Enc1" Code="*123456789*" id="CodeBar" visibleCode="1" name="cod_1295877056"/>
+                <Element fontWeigth="50" Sql="General.Clave.Password=General.Clave.Password->UserRD" id="RelationalField" fontFamily="Arial" Orientacion="H" w="478.0000" x="171.0000" y="23.0000" name="rel_2024278521" Alineacion="L" color="0,0,0,255" formato="0" italicFont="0" underlined="0" fontSize="10" h="20.0000" Text="" Expandable="0"/>
+                <Element fontWeigth="50" Sql="General.Clave.Password" id="Field" fontFamily="Arial" Orientacion="H" w="257.0000" x="220.0000" y="0.0000" name="Campo Password" Alineacion="L" color="0,0,0,255" formato="0" italicFont="0" underlined="0" fontSize="7" h="16.0000" Text="" Expandable="0"/>
+                <Element fontWeigth="50" Sql="General.Clave.UserRD" id="Field" fontFamily="Arial" Orientacion="H" w="282.0000" x="793.0000" y="-2.0000" name="cam_112512695" Alineacion="L" color="0,0,0,255" formato="0" italicFont="0" underlined="0" fontSize="7" h="15.0000" Text="" Expandable="0"/>
+                <Element fontWeigth="50" Sql="General.Clave.Tipo" id="Field" fontFamily="Arial" Orientacion="H" w="109.0000" x="669.0000" y="-2.0000" name="cam_581013699" Alineacion="L" color="0,0,0,255" formato="0" italicFont="0" underlined="0" fontSize="7" h="15.0000" Text="" Expandable="0"/>
+                <Element fontWeigth="50" Sql="General.Clave.Enc1" id="Field" fontFamily="Arial" Orientacion="H" w="40.0000" x="486.0000" y="-1.0000" name="cam_204385449" Alineacion="L" color="0,0,0,255" formato="0" italicFont="0" underlined="0" fontSize="7" h="16.0000" Text="" Expandable="0"/>
+                <Element fontWeigth="50" Sql="General.Clave.Usuario" id="Field" fontFamily="Arial" Orientacion="H" w="220.0000" x="0.0000" y="-1.0000" name="Campo Clave" Alineacion="L" color="0,0,0,255" formato="0" italicFont="0" underlined="0" fontSize="7" h="18.0000" Text="" Expandable="0"/>
+                <Element fontWeigth="50" Sql="General.Clave.Enc2" id="Field" fontFamily="Arial" Orientacion="H" w="39.0000" x="547.0000" y="-1.0000" name="cam_1110070661" Alineacion="L" color="0,0,0,255" formato="0" italicFont="0" underlined="0" fontSize="7" h="20.0000" Text="" Expandable="0"/>
+                <Element fontWeigth="50" Sql="General.Clave.Enc3" id="Field" fontFamily="Arial" Orientacion="H" w="39.0000" x="607.0000" y="-1.0000" name="cam_1844596609" Alineacion="L" color="0,0,0,255" formato="0" italicFont="0" underlined="0" fontSize="7" h="20.0000" Text="" Expandable="0"/>
+            </Body>
+        </Section>
+        <Section OnFistPage="0" size="17" id="3" name="Pie de pagina"/>
+        <Section size="20" id="4" name="Pie de report">
+            <Element w="150.0000" Alineacion="L" x="610.1024" y="-1.0000" h="20.0000" target="cam_204385449" italicFont="0" fontFamily="Arial" fontSize="10" fontWeigth="50" underlined="0" Orientacion="H" id="Acumulador" name="acum_1979690961" Text="" formato="0" color="0,0,0,255"/>
+            <Element w="120.0000" Alineacion="L" x="965.0000" y="2.0000" h="18.0000" italicFont="0" Arg=":fecha" fontFamily="Arial" fontSize="9" fontWeigth="75" underlined="0" Orientacion="H" id="Param" name="para_1372342614" Text=":fecha" color="0,0,0,255"/>
+            <Element w="150.0000" Alineacion="L" x="8.0000" y="-1.0000" h="20.0000" italicFont="0" Arg=":hora" fontFamily="Arial" fontSize="10" fontWeigth="50" underlined="0" Orientacion="H" id="Param" name="para_1426092089" Text=":hora" color="0,0,0,255"/>
+        </Section>
+    </Paper>
+</RDReports>

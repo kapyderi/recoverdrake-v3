@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TotalSincrono</class>
+ <widget class="QDialog" name="TotalSincrono">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>687</width>
+    <height>507</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Sincrono v.0.1.0</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/Sincronizar.png</normaloff>:/Imagenes/Sincronizar.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>9</number>
+   </property>
+   <property name="topMargin">
+    <number>9</number>
+   </property>
+   <property name="rightMargin">
+    <number>9</number>
+   </property>
+   <property name="bottomMargin">
+    <number>9</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>-1</number>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>147</height>
+       </size>
+      </property>
+      <property name="title">
+       <string>Objetivos guardados</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="0" column="1">
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <widget class="QPushButton" name="pushButton_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Inserta una nueva pestana vacia a sincronizadores</string>
+           </property>
+           <property name="statusTip">
+            <string>Inserta una nueva pestana vacia a sincronizadores</string>
+           </property>
+           <property name="whatsThis">
+            <string>Inserta una nueva pestana vacia a sincronizadores</string>
+           </property>
+           <property name="text">
+            <string>Insertar Sincronizacion</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/mas.png</normaloff>:/Imagenes/mas.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QPushButton" name="pushButton_5">
+           <property name="toolTip">
+            <string>Elimina la pestana activa en sincronizadores</string>
+           </property>
+           <property name="statusTip">
+            <string>Elimina la pestana activa en sincronizadores</string>
+           </property>
+           <property name="whatsThis">
+            <string>Elimina la pestana activa en sincronizadores</string>
+           </property>
+           <property name="text">
+            <string>Eliminar Sincronizacion</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/menos.png</normaloff>:/Imagenes/menos.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="2">
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="1" column="0" colspan="2">
+          <widget class="QPushButton" name="pushButton_12">
+           <property name="toolTip">
+            <string>Analiza y sincroniza automaticamente los objetivos guardados en la base de datos</string>
+           </property>
+           <property name="statusTip">
+            <string>Analiza y sincroniza automaticamente los objetivos guardados en la base de datos</string>
+           </property>
+           <property name="whatsThis">
+            <string>Analiza y sincroniza automaticamente los objetivos guardados en la base de datos</string>
+           </property>
+           <property name="text">
+            <string>Sincronizar Objetivos</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/BACKUP.png</normaloff>:/Imagenes/BACKUP.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" colspan="2">
+          <widget class="QPushButton" name="pushButton_14">
+           <property name="toolTip">
+            <string>Analiza todos los objetivos guardados en la base de datos</string>
+           </property>
+           <property name="statusTip">
+            <string>Analiza todos los objetivos guardados en la base de datos</string>
+           </property>
+           <property name="whatsThis">
+            <string>Analiza todos los objetivos guardados en la base de datos</string>
+           </property>
+           <property name="text">
+            <string>Analizar Objetivos</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/disco-duro.png</normaloff>:/Imagenes/disco-duro.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QPushButton" name="pushButton_10">
+           <property name="toolTip">
+            <string>Nos vamos...</string>
+           </property>
+           <property name="statusTip">
+            <string>Nos vamos...</string>
+           </property>
+           <property name="whatsThis">
+            <string>Nos vamos...</string>
+           </property>
+           <property name="text">
+            <string>Salir</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="0">
+        <widget class="QTableView" name="tableView">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Lista de objetivos guardados.</string>
+         </property>
+         <property name="statusTip">
+          <string>Lista de objetivos guardados.</string>
+         </property>
+         <property name="whatsThis">
+          <string>Lista de objetivos guardados.</string>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

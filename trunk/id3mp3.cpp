@@ -227,7 +227,7 @@ bool id3mp3::eventFilter(QObject* obj, QEvent *event)
 {
     if (obj == this)
     {
-        if (event->type() == QEvent::KeyPress)
+        if (event->type() == QEvent::KeyRelease)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
             if (keyEvent->key() == Qt::Key_F1)
@@ -1177,6 +1177,7 @@ void id3mp3::mibFin()
         ui->progressBar->hide();
         Evento = 0;
         ControlNum = 0;
+        TotalProceso=0;
     }
     if (Ordenar == 2)
         ui->textEdit->append(tr("Realizada primera fase"));
