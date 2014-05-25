@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Kernel</class>
+ <widget class="QDialog" name="Kernel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>887</width>
+    <height>710</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Kernel personalizado</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/nucleo.png</normaloff>:/Imagenes/nucleo.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="1" column="1" colspan="7">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Preparar nucleo</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="2">
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="toolTip">
+         <string>Direccion del archivo comprimido del nucleo</string>
+        </property>
+        <property name="statusTip">
+         <string>Direccion del archivo comprimido del nucleo</string>
+        </property>
+        <property name="whatsThis">
+         <string>Direccion del archivo comprimido del nucleo</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="radioButton_2">
+          <property name="toolTip">
+           <string>Opcion de busqueda en el ordenador</string>
+          </property>
+          <property name="statusTip">
+           <string>Opcion de busqueda en el ordenador</string>
+          </property>
+          <property name="whatsThis">
+           <string>Opcion de busqueda en el ordenador</string>
+          </property>
+          <property name="text">
+           <string>Ordenador</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QRadioButton" name="radioButton">
+          <property name="toolTip">
+           <string>Opcion de busqueda en internet</string>
+          </property>
+          <property name="statusTip">
+           <string>Opcion de busqueda en internet</string>
+          </property>
+          <property name="whatsThis">
+           <string>Opcion de busqueda en internet</string>
+          </property>
+          <property name="text">
+           <string>Internet</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="toolTip">
+         <string>Direccion donde estan todos los nucleos oficiales</string>
+        </property>
+        <property name="statusTip">
+         <string>Direccion donde estan todos los nucleos oficiales</string>
+        </property>
+        <property name="whatsThis">
+         <string>Direccion donde estan todos los nucleos oficiales</string>
+        </property>
+        <property name="text">
+         <string>http://www.kernel.org/</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="pushButton">
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Buscar en el ordenador.</string>
+        </property>
+        <property name="statusTip">
+         <string>Buscar en el ordenador.</string>
+        </property>
+        <property name="whatsThis">
+         <string>Buscar en el ordenador.</string>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="toolTip">
+         <string>Preparacion del nucleo para su posterior compilacion</string>
+        </property>
+        <property name="statusTip">
+         <string>Preparacion del nucleo para su posterior compilacion</string>
+        </property>
+        <property name="whatsThis">
+         <string>Preparacion del nucleo para su posterior compilacion</string>
+        </property>
+        <property name="text">
+         <string>Preparar Kernel</string>
+        </property>
+        <property name="icon">
+         <iconset resource="recoverdrake.qrc">
+          <normaloff>:/Imagenes/configure.png</normaloff>:/Imagenes/configure.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="3">
+       <widget class="QLabel" name="label">
+        <property name="styleSheet">
+         <string notr="true">font: 8pt &quot;DejaVu Sans&quot;;
+color: rgb(255, 0, 0);
+font: bold;</string>
+        </property>
+        <property name="text">
+         <string>* Pegar la ruta completa de la direccion de Internet.</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="5" column="1" rowspan="2" colspan="7">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Consola de procesos</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <property name="leftMargin">
+       <number>2</number>
+      </property>
+      <property name="topMargin">
+       <number>2</number>
+      </property>
+      <property name="rightMargin">
+       <number>2</number>
+      </property>
+      <property name="bottomMargin">
+       <number>2</number>
+      </property>
+      <item row="1" column="0">
+       <widget class="QTextEdit" name="textEdit">
+        <property name="toolTip">
+         <string>Consola de procesos con toda la informacion extendida</string>
+        </property>
+        <property name="statusTip">
+         <string>Consola de procesos con toda la informacion extendida</string>
+        </property>
+        <property name="whatsThis">
+         <string>Consola de procesos con toda la informacion extendida</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QProgressBar" name="progressBar">
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="8" column="7">
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="toolTip">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="statusTip">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="whatsThis">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="text">
+      <string>Salir</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="7">
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string>Tratamiento del nucleo</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="1">
+       <widget class="QRadioButton" name="radioButton_4">
+        <property name="toolTip">
+         <string>Se comienza desde la compilacion</string>
+        </property>
+        <property name="statusTip">
+         <string>Se comienza desde la compilacion</string>
+        </property>
+        <property name="whatsThis">
+         <string>Se comienza desde la compilacion</string>
+        </property>
+        <property name="text">
+         <string>Localizacion de Nucleo ya preparado</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="radioButton_3">
+        <property name="toolTip">
+         <string>Activa la opcion de Preparar nucleo para localizar un nucleo en bruto y realiza los pasos para compilar</string>
+        </property>
+        <property name="statusTip">
+         <string>Activa la opcion de Preparar nucleo para localizar un nucleo en bruto y realiza los pasos para compilar</string>
+        </property>
+        <property name="whatsThis">
+         <string>Activa la opcion de Preparar nucleo para localizar un nucleo en bruto y realiza los pasos para compilar</string>
+        </property>
+        <property name="text">
+         <string>Preparacion de Nucleo</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="1" colspan="7">
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="toolTip">
+      <string>Tipo de configuracion del nucleo</string>
+     </property>
+     <property name="statusTip">
+      <string>Tipo de configuracion del nucleo</string>
+     </property>
+     <property name="whatsThis">
+      <string>Tipo de configuracion del nucleo</string>
+     </property>
+     <property name="title">
+      <string>Configurar nucleo </string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_6">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="1">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="radioButton_5">
+        <property name="toolTip">
+         <string>Comenzar desde cero la configuracion del nucleo</string>
+        </property>
+        <property name="statusTip">
+         <string>Comenzar desde cero la configuracion del nucleo</string>
+        </property>
+        <property name="whatsThis">
+         <string>Comenzar desde cero la configuracion del nucleo</string>
+        </property>
+        <property name="text">
+         <string>Configurar Nucleo nuevo</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="6">
+       <widget class="QPushButton" name="pushButton_7">
+        <property name="toolTip">
+         <string>Se accede al tipo de configuracion elegido</string>
+        </property>
+        <property name="statusTip">
+         <string>Se accede al tipo de configuracion elegido</string>
+        </property>
+        <property name="whatsThis">
+         <string>Se accede al tipo de configuracion elegido</string>
+        </property>
+        <property name="text">
+         <string>Configurar Kernel</string>
+        </property>
+        <property name="icon">
+         <iconset resource="recoverdrake.qrc">
+          <normaloff>:/Imagenes/configure.png</normaloff>:/Imagenes/configure.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="7">
+       <widget class="QGroupBox" name="groupBox_6">
+        <property name="toolTip">
+         <string>Ayuda a las opciones del menuconfig</string>
+        </property>
+        <property name="statusTip">
+         <string>Ayuda a las opciones del menuconfig</string>
+        </property>
+        <property name="whatsThis">
+         <string>Ayuda a las opciones del menuconfig</string>
+        </property>
+        <property name="title">
+         <string>Teclas de ayuda para menuconfig</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_8">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#0000ff;&quot;&gt;shif+?&lt;/span&gt; = Nos muestra informacion&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#0000ff;&quot;&gt;n &lt;/span&gt;= Deshabilitar opcion dentro del Kernel (No se compila)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#0000ff;&quot;&gt;/ &lt;/span&gt;= Nos permite buscar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#0000ff;&quot;&gt;m&lt;/span&gt; = Marcar opcion como modulo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#0000ff;&quot;&gt;y&lt;/span&gt; = incluye la opcion dentro del kernel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QRadioButton" name="radioButton_7">
+        <property name="toolTip">
+         <string>Automatiza la configuracion de un nucleo con el hardware encontrado. No recomendado</string>
+        </property>
+        <property name="statusTip">
+         <string>Automatiza la configuracion de un nucleo con el hardware encontrado. No recomendado</string>
+        </property>
+        <property name="whatsThis">
+         <string>Automatiza la configuracion de un nucleo con el hardware encontrado. No recomendado</string>
+        </property>
+        <property name="text">
+         <string>Configurar Nucleo automaticamente</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="7">
+       <widget class="QGroupBox" name="groupBox_7">
+        <property name="title">
+         <string>Como configurar el nucleo</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_9">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="1" column="0">
+          <widget class="QRadioButton" name="radioButton_8">
+           <property name="toolTip">
+            <string>Acceso estandar a la configuracion</string>
+           </property>
+           <property name="statusTip">
+            <string>Acceso estandar a la configuracion</string>
+           </property>
+           <property name="whatsThis">
+            <string>Acceso estandar a la configuracion</string>
+           </property>
+           <property name="text">
+            <string>Utilizar menuconfig (Por defecto)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QRadioButton" name="radioButton_10">
+           <property name="toolTip">
+            <string>Acceso mediante gui GTK a la configuracion</string>
+           </property>
+           <property name="statusTip">
+            <string>Acceso mediante gui GTK a la configuracion</string>
+           </property>
+           <property name="whatsThis">
+            <string>Acceso mediante gui GTK a la configuracion</string>
+           </property>
+           <property name="text">
+            <string>Utilizar gconfig (X Gtk)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QRadioButton" name="radioButton_9">
+           <property name="toolTip">
+            <string>Acceso mediante gui QT a la configuracion</string>
+           </property>
+           <property name="statusTip">
+            <string>Acceso mediante gui QT a la configuracion</string>
+           </property>
+           <property name="whatsThis">
+            <string>Acceso mediante gui QT a la configuracion</string>
+           </property>
+           <property name="text">
+            <string>Utilizar xconfig (X Qt)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QRadioButton" name="radioButton_11">
+           <property name="toolTip">
+            <string>Acceso por consola a la configuracion</string>
+           </property>
+           <property name="statusTip">
+            <string>Acceso por consola a la configuracion</string>
+           </property>
+           <property name="whatsThis">
+            <string>Acceso por consola a la configuracion</string>
+           </property>
+           <property name="text">
+            <string>Utilizar config (consola)</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QRadioButton" name="radioButton_6">
+        <property name="toolTip">
+         <string>Recibir una configuracion anterior de tu ordenador</string>
+        </property>
+        <property name="statusTip">
+         <string>Recibir una configuracion anterior de tu ordenador</string>
+        </property>
+        <property name="whatsThis">
+         <string>Recibir una configuracion anterior de tu ordenador</string>
+        </property>
+        <property name="text">
+         <string>Configurar Nucleo anterior</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="1" colspan="7">
+    <widget class="QGroupBox" name="groupBox_5">
+     <property name="title">
+      <string>Localizar nucleo ya preparado</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_7">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Localiza una carpeta de nucleo para compilar</string>
+        </property>
+        <property name="statusTip">
+         <string>Localiza una carpeta de nucleo para compilar</string>
+        </property>
+        <property name="whatsThis">
+         <string>Localiza una carpeta de nucleo para compilar</string>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_2">
+        <property name="toolTip">
+         <string>Direccion de la carpeta con el nucleo en bruto</string>
+        </property>
+        <property name="statusTip">
+         <string>Direccion de la carpeta con el nucleo en bruto</string>
+        </property>
+        <property name="whatsThis">
+         <string>Direccion de la carpeta con el nucleo en bruto</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="pushButton_6">
+        <property name="toolTip">
+         <string>Solo crea el enlace para la compilacion</string>
+        </property>
+        <property name="statusTip">
+         <string>Solo crea el enlace para la compilacion</string>
+        </property>
+        <property name="whatsThis">
+         <string>Solo crea el enlace para la compilacion</string>
+        </property>
+        <property name="text">
+         <string>Crear enlace </string>
+        </property>
+        <property name="icon">
+         <iconset resource="recoverdrake.qrc">
+          <normaloff>:/Imagenes/configure.png</normaloff>:/Imagenes/configure.png</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QPushButton" name="pushButton_9">
+     <property name="toolTip">
+      <string>Mostrar/ocultar consola de procesos</string>
+     </property>
+     <property name="statusTip">
+      <string>Mostrar/ocultar consola de procesos</string>
+     </property>
+     <property name="whatsThis">
+      <string>Mostrar/ocultar consola de procesos</string>
+     </property>
+     <property name="text">
+      <string>Mostrar consola</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/console-mdk.png</normaloff>:/Imagenes/console-mdk.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="5">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="4" column="1" colspan="7">
+    <widget class="QGroupBox" name="groupBox_8">
+     <property name="title">
+      <string>Compilacion</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_11">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <layout class="QGridLayout" name="gridLayout_10">
+        <item row="0" column="2">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Ruta</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QLineEdit" name="lineEdit_3">
+          <property name="toolTip">
+           <string>Ruta que recibes de la localizacion del modulo en cuestion</string>
+          </property>
+          <property name="statusTip">
+           <string>Ruta que recibes de la localizacion del modulo en cuestion</string>
+          </property>
+          <property name="whatsThis">
+           <string>Ruta que recibes de la localizacion del modulo en cuestion</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="6">
+         <widget class="QPushButton" name="pushButton_8">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>A compilar el nucleo. Se paciente</string>
+          </property>
+          <property name="statusTip">
+           <string>A compilar el nucleo. Se paciente</string>
+          </property>
+          <property name="whatsThis">
+           <string>A compilar el nucleo. Se paciente</string>
+          </property>
+          <property name="text">
+           <string>Compilar Kernel</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/nucleo.png</normaloff>:/Imagenes/nucleo.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QRadioButton" name="radioButton_13">
+          <property name="toolTip">
+           <string>Compila solo un modulo. Util cuando solo quieres compilar un solo modulo</string>
+          </property>
+          <property name="statusTip">
+           <string>Compila solo un modulo. Util cuando solo quieres compilar un solo modulo</string>
+          </property>
+          <property name="whatsThis">
+           <string>Compila solo un modulo. Util cuando solo quieres compilar un solo modulo</string>
+          </property>
+          <property name="text">
+           <string>Compilar modulo</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="radioButton_12">
+          <property name="toolTip">
+           <string>Compila el nucleo configurado. Puede tardar bastante tiempo</string>
+          </property>
+          <property name="statusTip">
+           <string>Compila el nucleo configurado. Puede tardar bastante tiempo</string>
+          </property>
+          <property name="whatsThis">
+           <string>Compila el nucleo configurado. Puede tardar bastante tiempo</string>
+          </property>
+          <property name="text">
+           <string>Compilar nucleo</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Preferred</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="4">
+         <widget class="QPushButton" name="pushButton_10">
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>38</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Ayuda de como localizar la ruta del modulo</string>
+          </property>
+          <property name="statusTip">
+           <string>Ayuda de como localizar la ruta del modulo</string>
+          </property>
+          <property name="whatsThis">
+           <string>Ayuda de como localizar la ruta del modulo</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/help.png</normaloff>:/Imagenes/help.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>30</width>
+            <height>30</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="7" column="5">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="8" column="4">
+    <widget class="QLabel" name="label_9">
+     <property name="font">
+      <font>
+       <family>Helvetica</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Helvetica&quot;;
+font: bold;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="3">
+    <widget class="QLabel" name="label_8">
+     <property name="font">
+      <font>
+       <family>Helvetica</family>
+       <pointsize>14</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Direccion del nucleo enlazado</string>
+     </property>
+     <property name="statusTip">
+      <string>Direccion del nucleo enlazado</string>
+     </property>
+     <property name="whatsThis">
+      <string>Direccion del nucleo enlazado</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Helvetica&quot;;
+font: bold;</string>
+     </property>
+     <property name="text">
+      <string>Enlace del nucleo: /usr/src/linux -&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="2">
+    <spacer name="horizontalSpacer_6">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="8" column="6">
+    <widget class="QPushButton" name="pushButton_11">
+     <property name="toolTip">
+      <string>Cancela el proceso en ejecucion. Procede con precaucion</string>
+     </property>
+     <property name="statusTip">
+      <string>Cancela el proceso en ejecucion. Procede con precaucion</string>
+     </property>
+     <property name="whatsThis">
+      <string>Cancela el proceso en ejecucion. Procede con precaucion</string>
+     </property>
+     <property name="text">
+      <string>Cancelar</string>
+     </property>
+     <property name="icon">
+      <iconset resource="recoverdrake.qrc">
+       <normaloff>:/Imagenes/stop.png</normaloff>:/Imagenes/stop.png</iconset>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

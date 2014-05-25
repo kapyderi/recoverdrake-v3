@@ -1,0 +1,1018 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Comparador</class>
+ <widget class="QDialog" name="Comparador">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1070</width>
+    <height>793</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Comparador v.0.1.0</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/Comparador.png</normaloff>:/Imagenes/Comparador.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="3" column="0">
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1054</width>
+        <height>793</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_9">
+       <item row="5" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Archivo</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_17">
+          <item row="0" column="0" colspan="3">
+           <layout class="QGridLayout" name="gridLayout_15">
+            <item row="0" column="0">
+             <layout class="QGridLayout" name="gridLayout_7">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_2">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="toolTip">
+                 <string>Numero de lineas que contiene el archivo origen</string>
+                </property>
+                <property name="statusTip">
+                 <string>Numero de lineas que contiene el archivo origen</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Numero de lineas que contiene el archivo origen</string>
+                </property>
+                <property name="text">
+                 <string>Lineas Origen:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_4"/>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="1">
+             <layout class="QGridLayout" name="gridLayout_14">
+              <item row="0" column="0">
+               <spacer name="horizontalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_6">
+                <property name="font">
+                 <font>
+                  <pointsize>12</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <spacer name="horizontalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="2">
+             <layout class="QGridLayout" name="gridLayout_12">
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_5">
+                <property name="toolTip">
+                 <string>Numero de lineas que contiene el archivo destino</string>
+                </property>
+                <property name="statusTip">
+                 <string>Numero de lineas que contiene el archivo destino</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Numero de lineas que contiene el archivo destino</string>
+                </property>
+                <property name="text">
+                 <string>Lineas destino:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_3"/>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0" colspan="3">
+           <widget class="QTreeWidget" name="treeWidget">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Muestra la comparacion de lineas de los dos archivos comparados</string>
+            </property>
+            <property name="statusTip">
+             <string>Muestra la comparacion de lineas de los dos archivos comparados</string>
+            </property>
+            <property name="whatsThis">
+             <string>Muestra la comparacion de lineas de los dos archivos comparados</string>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::SelectedClicked</set>
+            </property>
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <column>
+             <property name="text">
+              <string>Linea origen</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Valor origen</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="foreground">
+              <brush brushstyle="NoBrush">
+               <color alpha="255">
+                <red>143</red>
+                <green>143</green>
+                <blue>143</blue>
+               </color>
+              </brush>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Linea destino</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Valor destino</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Tipo</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="3">
+           <layout class="QGridLayout" name="gridLayout_16">
+            <item row="0" column="0">
+             <widget class="QRadioButton" name="radioButton_3">
+              <property name="toolTip">
+               <string>Hace una comparacion de archivos linea a linea segun posicion</string>
+              </property>
+              <property name="statusTip">
+               <string>Hace una comparacion de archivos linea a linea segun posicion</string>
+              </property>
+              <property name="whatsThis">
+               <string>Hace una comparacion de archivos linea a linea segun posicion</string>
+              </property>
+              <property name="text">
+               <string>Comparar linea a linea</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QRadioButton" name="radioButton_4">
+              <property name="toolTip">
+               <string>Hace una comparacion de archivos mostrando el numero de repeticiones de lineas origen en destino</string>
+              </property>
+              <property name="statusTip">
+               <string>Hace una comparacion de archivos mostrando el numero de repeticiones de lineas origen en destino</string>
+              </property>
+              <property name="whatsThis">
+               <string>Hace una comparacion de archivos mostrando el numero de repeticiones de lineas origen en destino</string>
+              </property>
+              <property name="text">
+               <string>Comparar por repeticiones</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QRadioButton" name="radioButton_5">
+              <property name="toolTip">
+               <string>Hace una comparacion exacta con el numero de lineas diferentes</string>
+              </property>
+              <property name="statusTip">
+               <string>Hace una comparacion exacta con el numero de lineas diferentes</string>
+              </property>
+              <property name="whatsThis">
+               <string>Hace una comparacion exacta con el numero de lineas diferentes</string>
+              </property>
+              <property name="text">
+               <string>Comparar diferencias exactas</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Cambios localizados</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="2">
+           <layout class="QGridLayout" name="gridLayout_13">
+            <item row="0" column="1">
+             <widget class="QPushButton" name="pushButton_11">
+              <property name="toolTip">
+               <string>Muestra las lineas de origen que estan vacias</string>
+              </property>
+              <property name="statusTip">
+               <string>Muestra las lineas de origen que estan vacias</string>
+              </property>
+              <property name="whatsThis">
+               <string>Muestra las lineas de origen que estan vacias</string>
+              </property>
+              <property name="text">
+               <string>Mostrar origen vacio</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/logdrake-mdk.png</normaloff>:/Imagenes/logdrake-mdk.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QPushButton" name="pushButton_10">
+              <property name="toolTip">
+               <string>Muestra las lineas de destino que estan vacias</string>
+              </property>
+              <property name="statusTip">
+               <string>Muestra las lineas de destino que estan vacias</string>
+              </property>
+              <property name="whatsThis">
+               <string>Muestra las lineas de destino que estan vacias</string>
+              </property>
+              <property name="text">
+               <string>Mostrar destino vacio</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/prisma.png</normaloff>:/Imagenes/prisma.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QPushButton" name="pushButton_12">
+              <property name="toolTip">
+               <string>Muestra solo las lineas con diferencias</string>
+              </property>
+              <property name="statusTip">
+               <string>Muestra solo las lineas con diferencias</string>
+              </property>
+              <property name="whatsThis">
+               <string>Muestra solo las lineas con diferencias</string>
+              </property>
+              <property name="text">
+               <string>Mostrar lineas diferentes</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/lupaO.png</normaloff>:/Imagenes/lupaO.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QPushButton" name="pushButton_14">
+              <property name="toolTip">
+               <string>Muestra todas las diferencias localizadas</string>
+              </property>
+              <property name="statusTip">
+               <string>Muestra todas las diferencias localizadas</string>
+              </property>
+              <property name="whatsThis">
+               <string>Muestra todas las diferencias localizadas</string>
+              </property>
+              <property name="text">
+               <string>Todas las diferencias</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/help.png</normaloff>:/Imagenes/help.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="4" column="0" colspan="3">
+           <widget class="QTableWidget" name="tableWidget">
+            <property name="toolTip">
+             <string>Muestra los datos de la seleccion de tipo de comparacion en archivos</string>
+            </property>
+            <property name="statusTip">
+             <string>Muestra los datos de la seleccion de tipo de comparacion en archivos</string>
+            </property>
+            <property name="whatsThis">
+             <string>Muestra los datos de la seleccion de tipo de comparacion en archivos</string>
+            </property>
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::SingleSelection</enum>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>Linea origen</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Linea destino</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Tipo diferencia</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="title">
+          <string>Directorio</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_11">
+          <item row="0" column="0">
+           <widget class="QTableWidget" name="tableWidget_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>Muestra los objetivos localizados con sus propiedades</string>
+            </property>
+            <property name="statusTip">
+             <string>Muestra los objetivos localizados con sus propiedades</string>
+            </property>
+            <property name="whatsThis">
+             <string>Muestra los objetivos localizados con sus propiedades</string>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+            <attribute name="horizontalHeaderDefaultSectionSize">
+             <number>150</number>
+            </attribute>
+            <attribute name="horizontalHeaderMinimumSectionSize">
+             <number>50</number>
+            </attribute>
+            <column>
+             <property name="text">
+              <string>Nombre del objetivo</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ruta del objetivo</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Peso del objetivo</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Fecha del objetivo</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Tipo</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Estado</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Nombre del destino</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ruta del destino</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Peso destino</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Fecha destino</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QTextEdit" name="textEdit_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="statusTip">
+             <string>Consola de procesos en busqueda de directorios</string>
+            </property>
+            <property name="whatsThis">
+             <string>Consola de procesos en busqueda de directorios</string>
+            </property>
+            <property name="accessibleName">
+             <string>Consola de procesos en busqueda de directorios</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QProgressBar" name="progressBar">
+            <property name="toolTip">
+             <string>Barra de progreso en directorios</string>
+            </property>
+            <property name="statusTip">
+             <string>Barra de progreso en directorios</string>
+            </property>
+            <property name="whatsThis">
+             <string>Barra de progreso en directorios</string>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Consola de procesos</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="11" column="0" colspan="2">
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="1">
+          <widget class="QPushButton" name="pushButton">
+           <property name="toolTip">
+            <string>Nos vamos...</string>
+           </property>
+           <property name="statusTip">
+            <string>Nos vamos...</string>
+           </property>
+           <property name="whatsThis">
+            <string>Nos vamos...</string>
+           </property>
+           <property name="text">
+            <string>Salir</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="0" colspan="2">
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="1" column="0">
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="toolTip">
+            <string>Examinar el directorio/archivo fuente para sincronizacion</string>
+           </property>
+           <property name="statusTip">
+            <string>Examinar el directorio/archivo fuente para sincronizacion</string>
+           </property>
+           <property name="whatsThis">
+            <string>Examinar el directorio/archivo fuente para sincronizacion</string>
+           </property>
+           <property name="text">
+            <string>Directorio objetivo</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/fileopen.png</normaloff>:/Imagenes/fileopen.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="lineEdit">
+           <property name="toolTip">
+            <string>Ruta de origen.</string>
+           </property>
+           <property name="statusTip">
+            <string>Ruta de origen.</string>
+           </property>
+           <property name="whatsThis">
+            <string>Ruta de origen.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QPushButton" name="pushButton_3">
+           <property name="toolTip">
+            <string>Elegir directorio destino/archivo de sincronizacion.</string>
+           </property>
+           <property name="statusTip">
+            <string>Elegir directorio/archivo destino de sincronizacion.</string>
+           </property>
+           <property name="whatsThis">
+            <string>Elegir directorio/archivo destino de sincronizacion.</string>
+           </property>
+           <property name="text">
+            <string>Directorio destino</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/fileopen.png</normaloff>:/Imagenes/fileopen.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QLineEdit" name="lineEdit_2">
+           <property name="toolTip">
+            <string>Ruta de destino.</string>
+           </property>
+           <property name="statusTip">
+            <string>Ruta de destino.</string>
+           </property>
+           <property name="whatsThis">
+            <string>Ruta de destino.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QRadioButton" name="radioButton">
+           <property name="toolTip">
+            <string>Seleccion de directorios para comparar</string>
+           </property>
+           <property name="statusTip">
+            <string>Seleccion de directorios para comparar</string>
+           </property>
+           <property name="whatsThis">
+            <string>Seleccion de directorios para comparar</string>
+           </property>
+           <property name="text">
+            <string>Directorio </string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2" colspan="2">
+          <widget class="QCheckBox" name="checkBox">
+           <property name="toolTip">
+            <string>En directorios se puede suprimir la busqueda de archivos ocultos</string>
+           </property>
+           <property name="statusTip">
+            <string>En directorios se puede suprimir la busqueda de archivos ocultos</string>
+           </property>
+           <property name="whatsThis">
+            <string>En directorios se puede suprimir la busqueda de archivos ocultos</string>
+           </property>
+           <property name="text">
+            <string>Analizar archivos ocultos</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QRadioButton" name="radioButton_2">
+           <property name="toolTip">
+            <string>Seleccion de archivos para comparar</string>
+           </property>
+           <property name="statusTip">
+            <string>Seleccion de archivos para comparar</string>
+           </property>
+           <property name="whatsThis">
+            <string>Seleccion de archivos para comparar</string>
+           </property>
+           <property name="text">
+            <string>Archivo</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="4">
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="2">
+            <widget class="QGroupBox" name="groupBox_2">
+             <property name="title">
+              <string>Resultados</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_6">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_5">
+                <item row="0" column="4">
+                 <widget class="QPushButton" name="pushButton_13">
+                  <property name="toolTip">
+                   <string>Filtra por los ficheros eliminados o no encontrados en el directorio fuente</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Filtra por los ficheros eliminados o no encontrados en el directorio fuente</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Filtra por los ficheros eliminados o no encontrados en el directorio fuente</string>
+                  </property>
+                  <property name="text">
+                   <string>Sin origen</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QPushButton" name="pushButton_8">
+                  <property name="toolTip">
+                   <string>Filtra por los que no han sufrido cambios</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Filtra por los que no han sufrido cambios</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Filtra por los que no han sufrido cambios</string>
+                  </property>
+                  <property name="text">
+                   <string>Iguales</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/thumbs_up.png</normaloff>:/Imagenes/thumbs_up.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QPushButton" name="pushButton_7">
+                  <property name="toolTip">
+                   <string>Muestra todos los ficheros</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Muestra todos los ficheros</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Muestra todos los ficheros</string>
+                  </property>
+                  <property name="text">
+                   <string>Todos</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/diskdrake_hd.png</normaloff>:/Imagenes/diskdrake_hd.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="pushButton_9">
+                  <property name="toolTip">
+                   <string>Filtra por los que han sufrido cambios</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Filtra por los que han sufrido cambios</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Filtra por los que han sufrido cambios</string>
+                  </property>
+                  <property name="text">
+                   <string>Diferentes</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/Error.png</normaloff>:/Imagenes/Error.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="3">
+                 <widget class="QPushButton" name="pushButton_4">
+                  <property name="toolTip">
+                   <string>Filtra por los archivos nuevos</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Filtra por los archivos nuevos</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Filtra por los archivos nuevos</string>
+                  </property>
+                  <property name="text">
+                   <string>Sin destino</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/help.png</normaloff>:/Imagenes/help.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QGroupBox" name="groupBox_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="title">
+              <string>Acciones</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_10">
+              <item row="0" column="0" colspan="2">
+               <layout class="QGridLayout" name="gridLayout_8">
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="pushButton_15">
+                  <property name="toolTip">
+                   <string>Parar los procesos en ejecucion</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Parar los procesos en ejecucion</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Parar los procesos en ejecucion</string>
+                  </property>
+                  <property name="text">
+                   <string>Parar</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/stop.png</normaloff>:/Imagenes/stop.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QPushButton" name="pushButton_5">
+                  <property name="toolTip">
+                   <string>Analizar el directorio fuente en busca de cambios</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Analizar el directorio fuente en busca de cambios</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Analizar el directorio fuente en busca de cambios</string>
+                  </property>
+                  <property name="text">
+                   <string>Analizar objetivos</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/lupaO.png</normaloff>:/Imagenes/lupaO.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QPushButton" name="pushButton_6">
+                  <property name="toolTip">
+                   <string>Comparacion de archivos</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Comparacion de archivos</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Comparacion de archivos</string>
+                  </property>
+                  <property name="text">
+                   <string>Comparar archivos</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="recoverdrake.qrc">
+                    <normaloff>:/Imagenes/Comparador.png</normaloff>:/Imagenes/Comparador.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>25</width>
+                    <height>25</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -211,13 +211,13 @@ void Backup::on_pushButton_2_clicked()
          return;
     QString fileName = fileNameDestino.replace(" ", "\\ ").replace("&","\\&").replace("'","\\'").replace("(","\\(").replace(")","\\)").replace(".sqlite","");
     system("mkdir -pv /usr/share/RecoverDrake/backup/");
-    QProgressDialog progress(tr("Creando copia... Espera por favor"), tr("Cancelar"), 0, 54);
+    QProgressDialog progress(tr("Creando copia... Espera por favor"), tr("Cancelar"), 0, 50);
     if (Stilo == "A")
         progress.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
     progress.setWindowModality(Qt::WindowModal);
     progress.show();
     QTest::qWait(20);
-    for(int i=0;i<54;i++ )
+    for(int i=0;i<50;i++ )
     {
         progress.setValue(i);
         if (progress.wasCanceled())
@@ -342,27 +342,7 @@ void Backup::on_pushButton_2_clicked()
                     LBic="Si";
                 else if (ui->checkBox_93->isChecked() == false)
                     LBic="No";
-                in << "LBic: "+LBic+"" << "\n";
-                if (ui->checkBox_99->isChecked() == true)
-                    LModelo="Si";
-                else if (ui->checkBox_99->isChecked() == false)
-                    LModelo="No";
-                in << "LModelo: "+LModelo+"" << "\n";
-                if (ui->checkBox_100->isChecked() == true)
-                    LLineas="Si";
-                else if (ui->checkBox_100->isChecked() == false)
-                    LLineas="No";
-                in << "LLineas: "+LLineas+"" << "\n";
-                if (ui->checkBox_101->isChecked() == true)
-                    LCampos="Si";
-                else if (ui->checkBox_101->isChecked() == false)
-                    LCampos="No";
-                in << "LCampos: "+LCampos+"" << "\n";
-                if (ui->checkBox_102->isChecked() == true)
-                    LDocument="Si";
-                else if (ui->checkBox_102->isChecked() == false)
-                    LDocument="No";
-                in << "LDocument: "+LDocument+"" << "\n";
+                in << "LBic: "+LBic+"" << "\n";                
                 if (ui->checkBox_105->isChecked() == true)
                     LReport="Si";
                 else if (ui->checkBox_105->isChecked() == false)
@@ -552,11 +532,7 @@ void Backup::on_pushButton_2_clicked()
                 in << "Lid3: No" << "\n";
                 in << "LClaves: No" << "\n";
                 in << "LAscii: No" << "\n";
-                in << "LBic: No" << "\n";
-                in << "LModelo: No" << "\n";
-                in << "LLineas: No" << "\n";
-                in << "LCampos: No" << "\n";
-                in << "LDocument: No" << "\n";
+                in << "LBic: No" << "\n";                
                 in << "LReport: No" << "\n";
                 in << "LMail: No" << "\n";
             }
@@ -801,27 +777,7 @@ void Backup::on_pushButton_2_clicked()
                     LBic="Si";
                 else if (ui->checkBox_93->isChecked() == false)
                     LBic="No";
-                in << "LBic: "+LBic+"" << "\n";
-                if (ui->checkBox_99->isChecked() == true)
-                    LModelo="Si";
-                else if (ui->checkBox_99->isChecked() == false)
-                    LModelo="No";
-                in << "LModelo: "+LModelo+"" << "\n";
-                if (ui->checkBox_100->isChecked() == true)
-                    LLineas="Si";
-                else if (ui->checkBox_100->isChecked() == false)
-                    LLineas="No";
-                in << "LLineas: "+LLineas+"" << "\n";
-                if (ui->checkBox_101->isChecked() == true)
-                    LCampos="Si";
-                else if (ui->checkBox_101->isChecked() == false)
-                    LCampos="No";
-                in << "LCampos: "+LCampos+"" << "\n";
-                if (ui->checkBox_102->isChecked() == true)
-                    LDocument="Si";
-                else if (ui->checkBox_102->isChecked() == false)
-                    LDocument="No";
-                in << "LDocument: "+LDocument+"" << "\n";
+                in << "LBic: "+LBic+"" << "\n";                
                 if (ui->checkBox_105->isChecked() == true)
                     LReport="Si";
                 else if (ui->checkBox_105->isChecked() == false)
@@ -2544,298 +2500,8 @@ void Backup::on_pushButton_2_clicked()
                     DBackup.commit();
                     setUpdatesEnabled(true);
                 }
-            }
+            }            
             if (i == 48)
-            {
-                if (LModelo=="Si")
-                {
-                    QSqlQuery wlistanegr(db);
-                    wlistanegr.exec("SELECT COUNT(Cantidad) as Cantidad FROM ReportModelo");
-                    int cuenta, comienzo;
-                    wlistanegr.first();
-                    cuenta = wlistanegr.value(0).toInt();
-                    QSqlQuery wlistanegra(db);
-                    wlistanegra.exec("SELECT Codigo,Descripcion,Alto,Ancho,MgSuperior,MgIzquierdo,Orientacion,PorDefecto,Marca,Documento FROM ReportModelo");
-                    setUpdatesEnabled(false);
-                    QProgressDialog progressMenu(tr("Actualizando Modelos... Espera por favor"), tr("Cancelar"), 0, cuenta);
-                    if (Stilo == "A")
-                        progressMenu.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    progressMenu.show();
-                    QTest::qWait(20);
-                    comienzo=0;
-                    int cantidad=1;
-                    while(wlistanegra.next())
-                    {
-                         if (cantidad == 1)
-                         {
-                             DBackup.transaction();
-                         }
-                         progressMenu.setValue(comienzo++);
-                         if (progressMenu.wasCanceled())
-                             break;
-                         QString DatCodigo = wlistanegra.value(0).toString();
-                         QString DatNombre = wlistanegra.value(1).toString();
-                         QString DatAlto = wlistanegra.value(2).toString();
-                         QString DatAncho = wlistanegra.value(3).toString();
-                         QString DatSuperior = wlistanegra.value(4).toString();
-                         QString DatIzquierdo = wlistanegra.value(5).toString();
-                         QString DatOrientacion = wlistanegra.value(6).toString();
-                         QString DatDefecto = wlistanegra.value(7).toString();
-                         QString DatMarca = wlistanegra.value(8).toString();
-                         QString DatDoc = wlistanegra.value(9).toString();
-                         QSqlQuery RecDat(DBackup);
-                         RecDat.exec("SELECT Codigo,Descripcion,Alto,Ancho,MgSuperior,MgIzquierdo,Orientacion,PorDefecto,Marca,Documento FROM ReportModelo WHERE Codigo='"+DatCodigo+"'");
-                         RecDat.first();
-                         if (RecDat.isSelect())
-                         {
-                             QString ValIp = RecDat.value(0).toString();
-                             if (DatCodigo != ValIp)
-                             {
-                                 QSqlQuery Wdark(DBackup);
-                                 Wdark.prepare("INSERT INTO ReportModelo (Codigo,Descripcion,Alto,Ancho,MgSuperior,MgIzquierdo,Orientacion,PorDefecto,Marca,Documento)"
-                                               "VALUES (:Codigo,:Descripcion,:Alto,:Ancho,:MgSuperior,:MgIzquierdo,:Orientacion,:PorDefecto,:Marca,:Documento)");
-                                 Wdark.bindValue(":Codigo", DatCodigo);
-                                 Wdark.bindValue(":Descripcion", DatNombre);
-                                 Wdark.bindValue(":Alto", DatAlto);
-                                 Wdark.bindValue(":Ancho", DatAncho);
-                                 Wdark.bindValue(":MgSuperior", DatSuperior);
-                                 Wdark.bindValue(":MgIzquierdo", DatIzquierdo);
-                                 Wdark.bindValue(":Orientacion", DatOrientacion);
-                                 Wdark.bindValue(":PorDefecto", DatDefecto);
-                                 Wdark.bindValue(":Marca", DatMarca);
-                                 Wdark.bindValue(":Documento", DatDoc);
-                                 Wdark.exec();
-                             }
-                             else
-                             {
-                                 QSqlQuery Wwhite(DBackup);
-                                 Wwhite.exec("UPDATE ReportModelo SET Codigo='"+DatCodigo+"',Descripcion='"+DatNombre+"',Alto='"+DatAlto+"',Ancho='"+DatAncho+"',MgSuperior='"+DatSuperior+"',MgIzquierdo='"+DatIzquierdo+"',Orientacion='"+DatOrientacion+"',PorDefecto='"+DatDefecto+"',Marca='"+DatMarca+"',Documento='"+DatDoc+"' WHERE Codigo='"+DatCodigo+"'");
-                             }
-                         }
-                         cantidad++;
-                         if (cantidad == 50)
-                         {
-                             cantidad=1;
-                             DBackup.commit();
-                         }
-                    }
-                    progressMenu.setValue(cuenta);
-                    DBackup.commit();
-                    setUpdatesEnabled(true);
-                }
-            }
-            if (i == 49)
-            {
-                if (LLineas=="Si")
-                {
-                    QSqlQuery wlistanegr(db);
-                    wlistanegr.exec("SELECT COUNT(Cantidad) as Cantidad FROM ReportLineas");
-                    int cuenta, comienzo;
-                    wlistanegr.first();
-                    cuenta = wlistanegr.value(0).toInt();
-                    QSqlQuery wlistanegra(db);
-                    wlistanegra.exec("SELECT Codigo,Campo,Descripcion,Linea,Columna,Ajuste,Interlineado,Fuente,Color,Marca FROM ReportLineas");
-                    setUpdatesEnabled(false);
-                    QProgressDialog progressMenu(tr("Actualizando Lineas de modelos... Espera por favor"), tr("Cancelar"), 0, cuenta);
-                    if (Stilo == "A")
-                        progressMenu.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    progressMenu.show();
-                    QTest::qWait(20);
-                    comienzo=0;
-                    int cantidad=1;
-                    while(wlistanegra.next())
-                    {
-                         if (cantidad == 1)
-                         {
-                             DBackup.transaction();
-                         }
-                         progressMenu.setValue(comienzo++);
-                         if (progressMenu.wasCanceled())
-                             break;
-                         QString DatCodigo = wlistanegra.value(0).toString();
-                         QString DatCampo = wlistanegra.value(1).toString();
-                         QString DatNombre = wlistanegra.value(2).toString();
-                         QString DatLinea = wlistanegra.value(3).toString();
-                         QString DatColumna = wlistanegra.value(4).toString();
-                         QString DatAjuste = wlistanegra.value(5).toString();
-                         QString DatInter = wlistanegra.value(6).toString();
-                         QString DatFuente = wlistanegra.value(7).toString();
-                         QString DatColor = wlistanegra.value(8).toString();
-                         QString DatMarca = wlistanegra.value(9).toString();
-                         QSqlQuery RecDat(DBackup);
-                         RecDat.exec("SELECT Codigo,Campo,Descripcion,Linea,Columna,Ajuste,Interlineado,Fuente,Color,Marca FROM ReportLineas WHERE Codigo='"+DatCodigo+"'");
-                         RecDat.first();
-                         if (RecDat.isSelect())
-                         {
-                             QString ValIp = RecDat.value(0).toString();
-                             if (DatCodigo != ValIp)
-                             {
-                                 QSqlQuery Wdark(DBackup);
-                                 Wdark.prepare("INSERT INTO ReportLineas (Codigo,Campo,Descripcion,Linea,Columna,Ajuste,Interlineado,Fuente,Color,Marca)"
-                                               "VALUES (:Codigo,:Campo,:Descripcion,:Linea,:Columna,:Ajuste,:Interlineado,:Fuente,:Color,:Marca)");
-                                 Wdark.bindValue(":Codigo", DatCodigo);
-                                 Wdark.bindValue(":Campo", DatCampo);
-                                 Wdark.bindValue(":Descripcion", DatNombre);
-                                 Wdark.bindValue(":Linea", DatLinea);
-                                 Wdark.bindValue(":Columna", DatColumna);
-                                 Wdark.bindValue(":Ajuste", DatAjuste);
-                                 Wdark.bindValue(":Interlineado", DatInter);
-                                 Wdark.bindValue(":Fuente", DatFuente);
-                                 Wdark.bindValue(":Color", DatColor);
-                                 Wdark.bindValue(":Marca", DatMarca);
-                                 Wdark.exec();
-                             }
-                             else
-                             {
-                                 QSqlQuery Wwhite(DBackup);
-                                 Wwhite.exec("UPDATE ReportLineas SET Codigo='"+DatCodigo+"',Campo='"+DatCampo+"',Descripcion='"+DatNombre+"',Linea='"+DatLinea+"',Columna='"+DatColumna+"',Ajuste='"+DatAjuste+"',Interlineado='"+DatInter+"',Fuente='"+DatFuente+"',Color='"+DatColor+"',Marca='"+DatMarca+"' WHERE Codigo='"+DatCodigo+"'");
-                             }
-                         }
-                         cantidad++;
-                         if (cantidad == 50)
-                         {
-                             cantidad=1;
-                             DBackup.commit();
-                         }
-                    }
-                    progressMenu.setValue(cuenta);
-                    DBackup.commit();
-                    setUpdatesEnabled(true);
-                }
-            }
-            if (i == 50)
-            {
-                if (LCampos=="Si")
-                {
-                    QSqlQuery wlistanegr(db);
-                    wlistanegr.exec("SELECT COUNT(Cantidad) as Cantidad FROM ReportCampos");
-                    int cuenta, comienzo;
-                    wlistanegr.first();
-                    cuenta = wlistanegr.value(0).toInt();
-                    QSqlQuery wlistanegra(db);
-                    wlistanegra.exec("SELECT Codigo,Descripcion,TipoDocumento,Marca FROM ReportCampos");
-                    setUpdatesEnabled(false);
-                    QProgressDialog progressMenu(tr("Actualizando Campos de modelos... Espera por favor"), tr("Cancelar"), 0, cuenta);
-                    if (Stilo == "A")
-                        progressMenu.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    progressMenu.show();
-                    QTest::qWait(20);
-                    comienzo=0;
-                    int cantidad=1;
-                    while(wlistanegra.next())
-                    {
-                         if (cantidad == 1)
-                         {
-                             DBackup.transaction();
-                         }
-                         progressMenu.setValue(comienzo++);
-                         if (progressMenu.wasCanceled())
-                             break;
-                         QString DatCodigo = wlistanegra.value(0).toString();
-                         QString DatNombre = wlistanegra.value(1).toString();
-                         QString DatTipo = wlistanegra.value(2).toString();
-                         QString DatMarca = wlistanegra.value(3).toString();
-                         QSqlQuery RecDat(DBackup);
-                         RecDat.exec("SELECT Codigo,Descripcion,TipoDocumento,Marca FROM ReportCampos WHERE Codigo='"+DatCodigo+"'");
-                         RecDat.first();
-                         if (RecDat.isSelect())
-                         {
-                             QString ValIp = RecDat.value(0).toString();
-                             if (DatCodigo != ValIp)
-                             {
-                                 QSqlQuery Wdark(DBackup);
-                                 Wdark.prepare("INSERT INTO ReportCampos (Codigo,Descripcion,TipoDocumento,Marca)"
-                                               "VALUES (:Codigo,:Descripcion,:TipoDocumento,:Marca)");
-                                 Wdark.bindValue(":Codigo", DatCodigo);
-                                 Wdark.bindValue(":Descripcion", DatNombre);
-                                 Wdark.bindValue(":TipoDocumento", DatTipo);
-                                 Wdark.bindValue(":Marca", DatMarca);
-                                 Wdark.exec();
-                             }
-                             else
-                             {
-                                 QSqlQuery Wwhite(DBackup);
-                                 Wwhite.exec("UPDATE ReportCampos SET Codigo='"+DatCodigo+"',Descripcion='"+DatNombre+"',TipoDocumento='"+DatTipo+"',Marca='"+DatMarca+"' WHERE Codigo='"+DatCodigo+"'");
-                             }
-                         }
-                         cantidad++;
-                         if (cantidad == 50)
-                         {
-                             cantidad=1;
-                             DBackup.commit();
-                         }
-                    }
-                    progressMenu.setValue(cuenta);
-                    DBackup.commit();
-                    setUpdatesEnabled(true);
-                }
-            }
-            if (i == 51)
-            {
-                if (LDocument=="Si")
-                {
-                    QSqlQuery wlistanegr(db);
-                    wlistanegr.exec("SELECT COUNT(Cantidad) as Cantidad FROM ReportDocumento");
-                    int cuenta, comienzo;
-                    wlistanegr.first();
-                    cuenta = wlistanegr.value(0).toInt();
-                    QSqlQuery wlistanegra(db);
-                    wlistanegra.exec("SELECT Codigo,Descripcion,Marca FROM ReportDocumento");
-                    setUpdatesEnabled(false);
-                    QProgressDialog progressMenu(tr("Actualizando Documentos... Espera por favor"), tr("Cancelar"), 0, cuenta);
-                    if (Stilo == "A")
-                        progressMenu.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    progressMenu.show();
-                    QTest::qWait(20);
-                    comienzo=0;
-                    int cantidad=1;
-                    while(wlistanegra.next())
-                    {
-                         if (cantidad == 1)
-                         {
-                             DBackup.transaction();
-                         }
-                         progressMenu.setValue(comienzo++);
-                         if (progressMenu.wasCanceled())
-                             break;
-                         QString DatCodigo = wlistanegra.value(0).toString();
-                         QString DatNombre = wlistanegra.value(1).toString();
-                         QString DatMarca = wlistanegra.value(2).toString();
-                         QSqlQuery RecDat(DBackup);
-                         RecDat.exec("SELECT Codigo,Descripcion,Marca FROM ReportDocumento WHERE Codigo='"+DatCodigo+"'");
-                         RecDat.first();
-                         if (RecDat.isSelect())
-                         {
-                             QString ValIp = RecDat.value(0).toString();
-                             if (DatCodigo != ValIp)
-                             {
-                                 QSqlQuery Wdark(DBackup);
-                                 Wdark.prepare("INSERT INTO ReportDocumento (Codigo,Descripcion,Marca)"
-                                               "VALUES (:Codigo,:Descripcion,:Marca)");
-                                 Wdark.bindValue(":Codigo", DatCodigo);
-                                 Wdark.bindValue(":Descripcion", DatNombre);
-                                 Wdark.bindValue(":Marca", DatMarca);
-                                 Wdark.exec();
-                             }
-                             else
-                             {
-                                 QSqlQuery Wwhite(DBackup);
-                                 Wwhite.exec("UPDATE ReportDocumento SET Codigo='"+DatCodigo+"',Descripcion='"+DatNombre+"',Marca='"+DatMarca+"' WHERE Codigo='"+DatCodigo+"'");
-                             }
-                         }
-                         cantidad++;
-                         if (cantidad == 50)
-                         {
-                             cantidad=1;
-                             DBackup.commit();
-                         }
-                    }
-                    progressMenu.setValue(cuenta);
-                    DBackup.commit();
-                    setUpdatesEnabled(true);
-                }
-            }
-            if (i == 52)
             {
                 if (LReport=="Si")
                 {
@@ -2903,7 +2569,7 @@ void Backup::on_pushButton_2_clicked()
                     setUpdatesEnabled(true);
                 }
             }
-            if (i == 53)
+            if (i == 49)
             {
                 if (LMail=="Si")
                 {
@@ -2959,7 +2625,7 @@ void Backup::on_pushButton_2_clicked()
                              else
                              {
                                  QSqlQuery Wwhite(DBackup);
-                                 Wwhite.exec("UPDATE Smtp SET Correo='"+DatName+"',smptserver='"+DatDescrip+"',Clave='"+DatSource+"',Autenticacion="+DatGrade+",SSL='"+DatTabla+"',User='"+DatUser+"',Port='"+DatPort+"' WHERE Correo='"+DatName+"'");
+                                 Wwhite.exec("UPDATE Smtp SET Correo='"+DatName+"',smptserver='"+DatDescrip+"',Clave='"+DatSource+"',Autenticacion='"+DatGrade+"',SSL='"+DatTabla+"',User='"+DatUser+"',Port='"+DatPort+"' WHERE Correo='"+DatName+"'");
                              }
                          }
                          cantidad++;
@@ -2976,7 +2642,7 @@ void Backup::on_pushButton_2_clicked()
             }
         }
     }
-    progress.setValue(53);
+    progress.setValue(50);
     DBackup.close();
     QMessageBox m;
     if (Stilo == "A")
@@ -3432,40 +3098,8 @@ void Backup::on_comboBox_currentIndexChanged(const QString &arg1)
                 ui->checkBox_94->setChecked(true);
             else if (Value == "No")
                 ui->checkBox_94->setChecked(false);
-        }
+        }        
         if (i == 50)
-        {
-            Value = Value.remove("LModelo: ");
-            if (Value == "Si")
-                ui->checkBox_95->setChecked(true);
-            else if (Value == "No")
-                ui->checkBox_95->setChecked(false);
-        }
-        if (i == 51)
-        {
-            Value = Value.remove("LLineas: ");
-            if (Value == "Si")
-                ui->checkBox_96->setChecked(true);
-            else if (Value == "No")
-                ui->checkBox_96->setChecked(false);
-        }
-        if (i == 52)
-        {
-            Value = Value.remove("LCampos: ");
-            if (Value == "Si")
-                ui->checkBox_97->setChecked(true);
-            else if (Value == "No")
-                ui->checkBox_97->setChecked(false);
-        }
-        if (i == 53)
-        {
-            Value = Value.remove("LDocument: ");
-            if (Value == "Si")
-                ui->checkBox_98->setChecked(true);
-            else if (Value == "No")
-                ui->checkBox_98->setChecked(false);
-        }
-        if (i == 54)
         {
             Value = Value.remove("LReport: ");
             if (Value == "Si")
@@ -3473,7 +3107,7 @@ void Backup::on_comboBox_currentIndexChanged(const QString &arg1)
             else if (Value == "No")
                 ui->checkBox_106->setChecked(false);
         }
-        if (i == 55)
+        if (i == 51)
         {
             Value = Value.remove("LMail: ");
             if (Value == "Si")
@@ -3519,15 +3153,7 @@ void Backup::on_pushButton_3_clicked()
         if (ui->checkBox_90->isChecked() == true)
             LAscii="Si";
         if (ui->checkBox_94->isChecked() == true)
-            LBic="Si";
-        if (ui->checkBox_95->isChecked() == true)
-            LModelo="Si";
-        if (ui->checkBox_96->isChecked() == true)
-            LLineas="Si";
-        if (ui->checkBox_97->isChecked() == true)
-            LCampos="Si";
-        if (ui->checkBox_98->isChecked() == true)
-            LDocument="Si";
+            LBic="Si";        
         if (ui->checkBox_106->isChecked() == true)
             LReport="Si";
         if (ui->checkBox_108->isChecked() == true)
@@ -3697,15 +3323,7 @@ void Backup::on_pushButton_3_clicked()
         if (ui->checkBox_90->isChecked() == true)
             LAscii="Si";
         if (ui->checkBox_94->isChecked() == true)
-            LBic="Si";
-        if (ui->checkBox_95->isChecked() == true)
-            LModelo="Si";
-        if (ui->checkBox_96->isChecked() == true)
-            LLineas="Si";
-        if (ui->checkBox_97->isChecked() == true)
-            LCampos="Si";
-        if (ui->checkBox_98->isChecked() == true)
-            LDocument="Si";
+            LBic="Si";        
         if (ui->checkBox_106->isChecked() == true)
             LReport="Si";
         if (ui->checkBox_108->isChecked() == true)
@@ -3725,13 +3343,13 @@ void Backup::on_pushButton_3_clicked()
     }
     else
     {
-        QProgressDialog progress(tr("Recuperando copia... Espera por favor"), tr("Cancelar"), 0, 54);
+        QProgressDialog progress(tr("Recuperando copia... Espera por favor"), tr("Cancelar"), 0, 49);
         if (Stilo == "A")
             progress.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
         progress.setWindowModality(Qt::WindowModal);
         progress.show();
         QTest::qWait(20);
-        for(int i=0;i<54;i++ )
+        for(int i=0;i<49;i++ )
         {
             progress.setValue(i);
             if (progress.wasCanceled())
@@ -5411,298 +5029,8 @@ void Backup::on_pushButton_3_clicked()
                     DB.commit();
                     setUpdatesEnabled(true);
                 }
-            }            
+            }
             if (i == 46)
-            {
-                if (LModelo=="Si")
-                {
-                    QSqlQuery wlistanegr(DBackup);
-                    wlistanegr.exec("SELECT COUNT(Cantidad) as Cantidad FROM ReportModelo");
-                    int cuenta, comienzo;
-                    wlistanegr.first();
-                    cuenta = wlistanegr.value(0).toInt();
-                    QSqlQuery wlistanegra(DBackup);
-                    wlistanegra.exec("SELECT Codigo,Descripcion,Alto,Ancho,MgSuperior,MgIzquierdo,Orientacion,PorDefecto,Marca,Documento FROM ReportModelo");
-                    setUpdatesEnabled(false);
-                    QProgressDialog progressMenu(tr("Actualizando Modelos... Espera por favor"), tr("Cancelar"), 0, cuenta);
-                    if (Stilo == "A")
-                        progressMenu.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    progressMenu.show();
-                    QTest::qWait(20);
-                    comienzo=0;
-                    int cantidad=1;
-                    while(wlistanegra.next())
-                    {
-                         if (cantidad == 1)
-                         {
-                             DB.transaction();
-                         }
-                         progressMenu.setValue(comienzo++);
-                         if (progressMenu.wasCanceled())
-                             break;
-                         QString DatCodigo = wlistanegra.value(0).toString();
-                         QString DatNombre = wlistanegra.value(1).toString();
-                         QString DatAlto = wlistanegra.value(2).toString();
-                         QString DatAncho = wlistanegra.value(3).toString();
-                         QString DatSuperior = wlistanegra.value(4).toString();
-                         QString DatIzquierdo = wlistanegra.value(5).toString();
-                         QString DatOrientacion = wlistanegra.value(6).toString();
-                         QString DatDefecto = wlistanegra.value(7).toString();
-                         QString DatMarca = wlistanegra.value(8).toString();
-                         QString DatDoc = wlistanegra.value(9).toString();
-                         QSqlQuery RecDat(DB);
-                         RecDat.exec("SELECT Codigo,Descripcion,Alto,Ancho,MgSuperior,MgIzquierdo,Orientacion,PorDefecto,Marca,Documento FROM ReportModelo WHERE Codigo='"+DatCodigo+"'");
-                         RecDat.first();
-                         if (RecDat.isSelect())
-                         {
-                             QString ValIp = RecDat.value(0).toString();
-                             if (DatCodigo != ValIp)
-                             {
-                                 QSqlQuery Wdark(DB);
-                                 Wdark.prepare("INSERT INTO ReportModelo (Codigo,Descripcion,Alto,Ancho,MgSuperior,MgIzquierdo,Orientacion,PorDefecto,Marca,Documento)"
-                                               "VALUES (:Codigo,:Descripcion,:Alto,:Ancho,:MgSuperior,:MgIzquierdo,:Orientacion,:PorDefecto,:Marca,:Documento)");
-                                 Wdark.bindValue(":Codigo", DatCodigo);
-                                 Wdark.bindValue(":Descripcion", DatNombre);
-                                 Wdark.bindValue(":Alto", DatAlto);
-                                 Wdark.bindValue(":Ancho", DatAncho);
-                                 Wdark.bindValue(":MgSuperior", DatSuperior);
-                                 Wdark.bindValue(":MgIzquierdo", DatIzquierdo);
-                                 Wdark.bindValue(":Orientacion", DatOrientacion);
-                                 Wdark.bindValue(":PorDefecto", DatDefecto);
-                                 Wdark.bindValue(":Marca", DatMarca);
-                                 Wdark.bindValue(":Documento", DatDoc);
-                                 Wdark.exec();
-                             }
-                             else
-                             {
-                                 QSqlQuery Wwhite(DB);
-                                 Wwhite.exec("UPDATE ReportModelo SET Codigo='"+DatCodigo+"',Descripcion='"+DatNombre+"',Alto='"+DatAlto+"',Ancho='"+DatAncho+"',MgSuperior='"+DatSuperior+"',MgIzquierdo='"+DatIzquierdo+"',Orientacion='"+DatOrientacion+"',PorDefecto='"+DatDefecto+"',Marca='"+DatMarca+"',Documento='"+DatDoc+"' WHERE Codigo='"+DatCodigo+"'");
-                             }
-                         }
-                         cantidad++;
-                         if (cantidad == 50)
-                         {
-                             cantidad=1;
-                             DB.commit();
-                         }
-                    }
-                    progressMenu.setValue(cuenta);
-                    DB.commit();
-                    setUpdatesEnabled(true);
-                }
-            }
-            if (i == 47)
-            {
-                if (LLineas=="Si")
-                {
-                    QSqlQuery wlistanegr(DBackup);
-                    wlistanegr.exec("SELECT COUNT(Cantidad) as Cantidad FROM ReportLineas");
-                    int cuenta, comienzo;
-                    wlistanegr.first();
-                    cuenta = wlistanegr.value(0).toInt();
-                    QSqlQuery wlistanegra(DBackup);
-                    wlistanegra.exec("SELECT Codigo,Campo,Descripcion,Linea,Columna,Ajuste,Interlineado,Fuente,Color,Marca FROM ReportLineas");
-                    setUpdatesEnabled(false);
-                    QProgressDialog progressMenu(tr("Actualizando Lineas de modelos... Espera por favor"), tr("Cancelar"), 0, cuenta);
-                    if (Stilo == "A")
-                        progressMenu.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    progressMenu.show();
-                    QTest::qWait(20);
-                    comienzo=0;
-                    int cantidad=1;
-                    while(wlistanegra.next())
-                    {
-                         if (cantidad == 1)
-                         {
-                             DB.transaction();
-                         }
-                         progressMenu.setValue(comienzo++);
-                         if (progressMenu.wasCanceled())
-                             break;
-                         QString DatCodigo = wlistanegra.value(0).toString();
-                         QString DatCampo = wlistanegra.value(1).toString();
-                         QString DatNombre = wlistanegra.value(2).toString();
-                         QString DatLinea = wlistanegra.value(3).toString();
-                         QString DatColumna = wlistanegra.value(4).toString();
-                         QString DatAjuste = wlistanegra.value(5).toString();
-                         QString DatInter = wlistanegra.value(6).toString();
-                         QString DatFuente = wlistanegra.value(7).toString();
-                         QString DatColor = wlistanegra.value(8).toString();
-                         QString DatMarca = wlistanegra.value(9).toString();
-                         QSqlQuery RecDat(DB);
-                         RecDat.exec("SELECT Codigo,Campo,Descripcion,Linea,Columna,Ajuste,Interlineado,Fuente,Color,Marca FROM ReportLineas WHERE Codigo='"+DatCodigo+"'");
-                         RecDat.first();
-                         if (RecDat.isSelect())
-                         {
-                             QString ValIp = RecDat.value(0).toString();
-                             if (DatCodigo != ValIp)
-                             {
-                                 QSqlQuery Wdark(DB);
-                                 Wdark.prepare("INSERT INTO ReportLineas (Codigo,Campo,Descripcion,Linea,Columna,Ajuste,Interlineado,Fuente,Color,Marca)"
-                                               "VALUES (:Codigo,:Campo,:Descripcion,:Linea,:Columna,:Ajuste,:Interlineado,:Fuente,:Color,:Marca)");
-                                 Wdark.bindValue(":Codigo", DatCodigo);
-                                 Wdark.bindValue(":Campo", DatCampo);
-                                 Wdark.bindValue(":Descripcion", DatNombre);
-                                 Wdark.bindValue(":Linea", DatLinea);
-                                 Wdark.bindValue(":Columna", DatColumna);
-                                 Wdark.bindValue(":Ajuste", DatAjuste);
-                                 Wdark.bindValue(":Interlineado", DatInter);
-                                 Wdark.bindValue(":Fuente", DatFuente);
-                                 Wdark.bindValue(":Color", DatColor);
-                                 Wdark.bindValue(":Marca", DatMarca);
-                                 Wdark.exec();
-                             }
-                             else
-                             {
-                                 QSqlQuery Wwhite(DB);
-                                 Wwhite.exec("UPDATE ReportLineas SET Codigo='"+DatCodigo+"',Campo='"+DatCampo+"',Descripcion='"+DatNombre+"',Linea='"+DatLinea+"',Columna='"+DatColumna+"',Ajuste='"+DatAjuste+"',Interlineado='"+DatInter+"',Fuente='"+DatFuente+"',Color='"+DatColor+"',Marca='"+DatMarca+"' WHERE Codigo='"+DatCodigo+"'");
-                             }
-                         }
-                         cantidad++;
-                         if (cantidad == 50)
-                         {
-                             cantidad=1;
-                             DB.commit();
-                         }
-                    }
-                    progressMenu.setValue(cuenta);
-                    DB.commit();
-                    setUpdatesEnabled(true);
-                }
-            }
-            if (i == 48)
-            {
-                if (LCampos=="Si")
-                {
-                    QSqlQuery wlistanegr(DBackup);
-                    wlistanegr.exec("SELECT COUNT(Cantidad) as Cantidad FROM ReportCampos");
-                    int cuenta, comienzo;
-                    wlistanegr.first();
-                    cuenta = wlistanegr.value(0).toInt();
-                    QSqlQuery wlistanegra(DBackup);
-                    wlistanegra.exec("SELECT Codigo,Descripcion,TipoDocumento,Marca FROM ReportCampos");
-                    setUpdatesEnabled(false);
-                    QProgressDialog progressMenu(tr("Actualizando Campos de modelos... Espera por favor"), tr("Cancelar"), 0, cuenta);
-                    if (Stilo == "A")
-                        progressMenu.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    progressMenu.show();
-                    QTest::qWait(20);
-                    comienzo=0;
-                    int cantidad=1;
-                    while(wlistanegra.next())
-                    {
-                         if (cantidad == 1)
-                         {
-                             DB.transaction();
-                         }
-                         progressMenu.setValue(comienzo++);
-                         if (progressMenu.wasCanceled())
-                             break;
-                         QString DatCodigo = wlistanegra.value(0).toString();
-                         QString DatNombre = wlistanegra.value(1).toString();
-                         QString DatTipo = wlistanegra.value(2).toString();
-                         QString DatMarca = wlistanegra.value(3).toString();
-                         QSqlQuery RecDat(DB);
-                         RecDat.exec("SELECT Codigo,Descripcion,TipoDocumento,Marca FROM ReportCampos WHERE Codigo='"+DatCodigo+"'");
-                         RecDat.first();
-                         if (RecDat.isSelect())
-                         {
-                             QString ValIp = RecDat.value(0).toString();
-                             if (DatCodigo != ValIp)
-                             {
-                                 QSqlQuery Wdark(DB);
-                                 Wdark.prepare("INSERT INTO ReportCampos (Codigo,Descripcion,TipoDocumento,Marca)"
-                                               "VALUES (:Codigo,:Descripcion,:TipoDocumento,:Marca)");
-                                 Wdark.bindValue(":Codigo", DatCodigo);
-                                 Wdark.bindValue(":Descripcion", DatNombre);
-                                 Wdark.bindValue(":TipoDocumento", DatTipo);
-                                 Wdark.bindValue(":Marca", DatMarca);
-                                 Wdark.exec();
-                             }
-                             else
-                             {
-                                 QSqlQuery Wwhite(DB);
-                                 Wwhite.exec("UPDATE ReportCampos SET Codigo='"+DatCodigo+"',Descripcion='"+DatNombre+"',TipoDocumento='"+DatTipo+"',Marca='"+DatMarca+"' WHERE Codigo='"+DatCodigo+"'");
-                             }
-                         }
-                         cantidad++;
-                         if (cantidad == 50)
-                         {
-                             cantidad=1;
-                             DB.commit();
-                         }
-                    }
-                    progressMenu.setValue(cuenta);
-                    DB.commit();
-                    setUpdatesEnabled(true);
-                }
-            }
-            if (i == 50)
-            {
-                if (LDocument=="Si")
-                {
-                    QSqlQuery wlistanegr(DBackup);
-                    wlistanegr.exec("SELECT COUNT(Cantidad) as Cantidad FROM ReportDocumento");
-                    int cuenta, comienzo;
-                    wlistanegr.first();
-                    cuenta = wlistanegr.value(0).toInt();
-                    QSqlQuery wlistanegra(DBackup);
-                    wlistanegra.exec("SELECT Codigo,Descripcion,Marca FROM ReportDocumento");
-                    setUpdatesEnabled(false);
-                    QProgressDialog progressMenu(tr("Actualizando Documentos... Espera por favor"), tr("Cancelar"), 0, cuenta);
-                    if (Stilo == "A")
-                        progressMenu.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                    progressMenu.show();
-                    QTest::qWait(20);
-                    comienzo=0;
-                    int cantidad=1;
-                    while(wlistanegra.next())
-                    {
-                         if (cantidad == 1)
-                         {
-                             DB.transaction();
-                         }
-                         progressMenu.setValue(comienzo++);
-                         if (progressMenu.wasCanceled())
-                             break;
-                         QString DatCodigo = wlistanegra.value(0).toString();
-                         QString DatNombre = wlistanegra.value(1).toString();
-                         QString DatMarca = wlistanegra.value(2).toString();
-                         QSqlQuery RecDat(DB);
-                         RecDat.exec("SELECT Codigo,Descripcion,Marca FROM ReportDocumento WHERE Codigo='"+DatCodigo+"'");
-                         RecDat.first();
-                         if (RecDat.isSelect())
-                         {
-                             QString ValIp = RecDat.value(0).toString();
-                             if (DatCodigo != ValIp)
-                             {
-                                 QSqlQuery Wdark(DB);
-                                 Wdark.prepare("INSERT INTO ReportDocumento (Codigo,Descripcion,Marca)"
-                                               "VALUES (:Codigo,:Descripcion,:Marca)");
-                                 Wdark.bindValue(":Codigo", DatCodigo);
-                                 Wdark.bindValue(":Descripcion", DatNombre);
-                                 Wdark.bindValue(":Marca", DatMarca);
-                                 Wdark.exec();
-                             }
-                             else
-                             {
-                                 QSqlQuery Wwhite(DB);
-                                 Wwhite.exec("UPDATE ReportDocumento SET Codigo='"+DatCodigo+"',Descripcion='"+DatNombre+"',Marca='"+DatMarca+"' WHERE Codigo='"+DatCodigo+"'");
-                             }
-                         }
-                         cantidad++;
-                         if (cantidad == 50)
-                         {
-                             cantidad=1;
-                             DB.commit();
-                         }
-                    }
-                    progressMenu.setValue(cuenta);
-                    DB.commit();
-                    setUpdatesEnabled(true);
-                }
-            }
-            if (i == 51)
             {
                 if (Red=="Si")
                 {
@@ -5721,7 +5049,7 @@ void Backup::on_pushButton_3_clicked()
                     red.exec("UPDATE chequeos SET CheckVerContorno='"+cantidad41+"',CheckLimitarVista='"+cantidad42+"' WHERE id=2");
                 }
             }
-            if (i == 52)
+            if (i == 47)
             {
                 QSqlQuery wlistanegr(DBackup);
                 wlistanegr.exec("SELECT COUNT(report_id) as Cantidad FROM Report");
@@ -5784,7 +5112,7 @@ void Backup::on_pushButton_3_clicked()
                 progressMenu.setValue(cuenta);
                 DB.commit();
             }
-            if (i == 53)
+            if (i == 48)
             {
                 if (LMail=="Si")
                 {
@@ -5840,7 +5168,7 @@ void Backup::on_pushButton_3_clicked()
                              else
                              {
                                  QSqlQuery Wwhite(DB);
-                                 Wwhite.exec("UPDATE Smtp SET Correo='"+DatName+"',smptserver='"+DatDescrip+"',Clave='"+DatSource+"',Autenticacion="+DatGrade+",SSL='"+DatTabla+"',User='"+DatUser+"',Port='"+DatPort+"' WHERE Correo='"+DatName+"'");
+                                 Wwhite.exec("UPDATE Smtp SET Correo='"+DatName+"',smptserver='"+DatDescrip+"',Clave='"+DatSource+"',Autenticacion='"+DatGrade+"',SSL='"+DatTabla+"',User='"+DatUser+"',Port='"+DatPort+"' WHERE Correo='"+DatName+"'");
                              }
                          }
                          cantidad++;
@@ -5856,7 +5184,7 @@ void Backup::on_pushButton_3_clicked()
                 }
             }
         }
-        progress.setValue(54);
+        progress.setValue(49);
         DBackup.close();
         QMessageBox m;
         if (Stilo == "A")
@@ -5870,7 +5198,7 @@ bool Backup::eventFilter(QObject* obj, QEvent *event)
 {
     if (obj == this)
     {
-        if (event->type() == QEvent::KeyPress)
+        if (event->type() == QEvent::KeyRelease)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
             if (keyEvent->key() == Qt::Key_F1)
@@ -5999,11 +5327,7 @@ void Backup::on_pushButton_5_clicked()
         ui->checkBox_87->setChecked(true);
         ui->checkBox_90->setChecked(true);
         ui->checkBox_92->setChecked(true);
-        ui->checkBox_94->setChecked(true);
-        ui->checkBox_95->setChecked(true);
-        ui->checkBox_96->setChecked(true);
-        ui->checkBox_97->setChecked(true);
-        ui->checkBox_98->setChecked(true);
+        ui->checkBox_94->setChecked(true);       
         ui->checkBox_104->setChecked(true);
         ui->checkBox_106->setChecked(true);
         ui->checkBox_107->setChecked(true);
@@ -6061,11 +5385,7 @@ void Backup::on_pushButton_7_clicked()
     ui->checkBox_83->setChecked(true);
     ui->checkBox_88->setChecked(true);
     ui->checkBox_89->setChecked(true);
-    ui->checkBox_93->setChecked(true);
-    ui->checkBox_99->setChecked(true);
-    ui->checkBox_100->setChecked(true);
-    ui->checkBox_101->setChecked(true);
-    ui->checkBox_102->setChecked(true);
+    ui->checkBox_93->setChecked(true);    
     ui->checkBox_105->setChecked(true);
     ui->checkBox_107->setChecked(true);
 }
@@ -6119,11 +5439,7 @@ void Backup::on_pushButton_6_clicked()
     ui->checkBox_83->setChecked(false);
     ui->checkBox_88->setChecked(false);
     ui->checkBox_89->setChecked(false);
-    ui->checkBox_93->setChecked(false);
-    ui->checkBox_99->setChecked(false);
-    ui->checkBox_100->setChecked(false);
-    ui->checkBox_101->setChecked(false);
-    ui->checkBox_102->setChecked(false);
+    ui->checkBox_93->setChecked(false);   
     ui->checkBox_105->setChecked(false);
     ui->checkBox_107->setChecked(false);
 }

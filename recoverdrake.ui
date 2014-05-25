@@ -146,7 +146,7 @@
                <enum>QTabWidget::Triangular</enum>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>0</number>
               </property>
               <property name="movable">
                <bool>true</bool>
@@ -1708,6 +1708,51 @@ p, li { white-space: pre-wrap; }
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:7pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Compresor&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="11" column="7">
+                      <widget class="QPushButton" name="pushButton_118">
+                       <property name="minimumSize">
+                        <size>
+                         <width>75</width>
+                         <height>75</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>75</width>
+                         <height>75</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="icon">
+                        <iconset resource="recoverdrake.qrc">
+                         <normaloff>:/Imagenes/Encriptar.png</normaloff>:/Imagenes/Encriptar.png</iconset>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>60</width>
+                         <height>60</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="12" column="7">
+                      <widget class="QLabel" name="label_181">
+                       <property name="text">
+                        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:7pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Encriptador&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;de&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;Texto&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -21247,6 +21292,20 @@ font: Bold;</string>
             </item>
            </layout>
           </widget>
+          <widget class="QWidget" name="tab_72">
+           <attribute name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/Encriptar.png</normaloff>:/Imagenes/Encriptar.png</iconset>
+           </attribute>
+           <attribute name="title">
+            <string>Encriptador</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_106">
+            <item row="0" column="0">
+             <widget class="QMdiArea" name="mdiArea_26"/>
+            </item>
+           </layout>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -21315,17 +21374,6 @@ font: Bold;</string>
     <property name="separatorsCollapsible">
      <bool>true</bool>
     </property>
-    <widget class="QMenu" name="menuFormatos_de_impresion">
-     <property name="title">
-      <string>Formatos de impresion</string>
-     </property>
-     <property name="icon">
-      <iconset resource="recoverdrake.qrc">
-       <normaloff>:/Imagenes/impresora.png</normaloff>:/Imagenes/impresora.png</iconset>
-     </property>
-     <addaction name="actionConfiguracion_manual"/>
-     <addaction name="actionConfiguracion_visual"/>
-    </widget>
     <addaction name="actionActivar_Desactivar_inicio_con_Linux"/>
     <addaction name="actionComprabar_depndencias_RecoverDrake"/>
     <addaction name="actionSugerencias_y_avisos"/>
@@ -21349,7 +21397,7 @@ font: Bold;</string>
     <addaction name="actionRefrescar_dependencias"/>
     <addaction name="actionAjustes_de_ecualizacion"/>
     <addaction name="actionElegir_tarjeta_de_sonido"/>
-    <addaction name="menuFormatos_de_impresion"/>
+    <addaction name="actionConfiguracion_visual"/>
     <addaction name="actionOpciones"/>
     <addaction name="separator"/>
     <addaction name="actionReiniciar"/>
@@ -28988,10 +29036,14 @@ default connected 1280x1024+0+0 0mm x 0mm
   </action>
   <action name="actionEncriptar_textos">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/Encriptar.png</normaloff>:/Imagenes/Encriptar.png</iconset>
    </property>
    <property name="text">
-    <string>Encriptar textos</string>
+    <string>Encriptador de textos</string>
    </property>
   </action>
   <action name="actionDescargar_web_completas">
@@ -29005,22 +29057,13 @@ default connected 1280x1024+0+0 0mm x 0mm
     <string>http://www.linuxtotal.com.mx/?cont=info_admon_017 -- http://vidalinux.blogspot.com.es/2007/09/como-descargar-una-web-completa-en.html</string>
    </property>
   </action>
-  <action name="actionConfiguracion_manual">
-   <property name="icon">
-    <iconset resource="recoverdrake.qrc">
-     <normaloff>:/Imagenes/icono.png</normaloff>:/Imagenes/icono.png</iconset>
-   </property>
-   <property name="text">
-    <string>Configuracion manual</string>
-   </property>
-  </action>
   <action name="actionConfiguracion_visual">
    <property name="icon">
     <iconset resource="recoverdrake.qrc">
      <normaloff>:/Imagenes/modelo.png</normaloff>:/Imagenes/modelo.png</iconset>
    </property>
    <property name="text">
-    <string>Configuracion visual</string>
+    <string>Configurar formatos de impresion</string>
    </property>
   </action>
   <action name="actionGenerador_QR">

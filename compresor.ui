@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>955</width>
-    <height>757</height>
+    <width>1068</width>
+    <height>772</height>
    </rect>
   </property>
   <property name="font">
@@ -22,7 +22,7 @@
    <iconset resource="recoverdrake.qrc">
     <normaloff>:/Imagenes/comprimir.png</normaloff>:/Imagenes/comprimir.png</iconset>
   </property>
-  <layout class="QGridLayout" name="gridLayout_16">
+  <layout class="QGridLayout" name="gridLayout_17">
    <item row="0" column="0" colspan="4">
     <layout class="QGridLayout" name="gridLayout_3">
      <item row="0" column="0">
@@ -47,6 +47,15 @@
          <layout class="QGridLayout" name="gridLayout">
           <item row="0" column="1">
            <widget class="QCheckBox" name="checkBox">
+            <property name="toolTip">
+             <string>Metodo de compresion/empaquetado individual</string>
+            </property>
+            <property name="statusTip">
+             <string>Metodo de compresion/empaquetado individual</string>
+            </property>
+            <property name="whatsThis">
+             <string>Metodo de compresion/empaquetado individual</string>
+            </property>
             <property name="text">
              <string>Individualmente</string>
             </property>
@@ -54,6 +63,15 @@
           </item>
           <item row="0" column="0">
            <widget class="QRadioButton" name="radioButton">
+            <property name="toolTip">
+             <string>Metodo de compresion/empaquetado</string>
+            </property>
+            <property name="statusTip">
+             <string>Metodo de compresion/empaquetado</string>
+            </property>
+            <property name="whatsThis">
+             <string>Metodo de compresion/empaquetado</string>
+            </property>
             <property name="text">
              <string>Comprimir/Empaquetar</string>
             </property>
@@ -63,6 +81,15 @@
         </item>
         <item row="0" column="2">
          <widget class="QRadioButton" name="radioButton_2">
+          <property name="toolTip">
+           <string>Metodo de descompresion/desempaquetado</string>
+          </property>
+          <property name="statusTip">
+           <string>Metodo de descompresion/desempaquetado</string>
+          </property>
+          <property name="whatsThis">
+           <string>Metodo de descompresion/desempaquetado</string>
+          </property>
           <property name="text">
            <string>Descomprimir/Desempaquetar</string>
           </property>
@@ -77,6 +104,15 @@
         </item>
         <item row="0" column="3">
          <widget class="QCheckBox" name="checkBox_8">
+          <property name="toolTip">
+           <string>Metodo de descompresion/desempaquetado multiple</string>
+          </property>
+          <property name="statusTip">
+           <string>Metodo de descompresion/desempaquetado multiple</string>
+          </property>
+          <property name="whatsThis">
+           <string>Metodo de descompresion/desempaquetado multiple</string>
+          </property>
           <property name="text">
            <string>Multiple</string>
           </property>
@@ -107,6 +143,15 @@
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
            <widget class="QRadioButton" name="radioButton_14">
+            <property name="toolTip">
+             <string>Comprimir/empaquetar solo carpetas</string>
+            </property>
+            <property name="statusTip">
+             <string>Comprimir/empaquetar solo carpetas</string>
+            </property>
+            <property name="whatsThis">
+             <string>Comprimir/empaquetar solo carpetas</string>
+            </property>
             <property name="text">
              <string>Carpetas</string>
             </property>
@@ -114,6 +159,15 @@
           </item>
           <item row="0" column="1">
            <widget class="QCheckBox" name="checkBox_2">
+            <property name="toolTip">
+             <string>Desglosar el contenido de la carpeta a primer nivel de datos</string>
+            </property>
+            <property name="statusTip">
+             <string>Desglosar el contenido de la carpeta a primer nivel de datos</string>
+            </property>
+            <property name="whatsThis">
+             <string>Desglosar el contenido de la carpeta a primer nivel de datos</string>
+            </property>
             <property name="text">
              <string>Desglosar contenido a primer nivel</string>
             </property>
@@ -123,6 +177,15 @@
         </item>
         <item row="0" column="0">
          <widget class="QRadioButton" name="radioButton_13">
+          <property name="toolTip">
+           <string>Comprimir/empaquetar solo archivos</string>
+          </property>
+          <property name="statusTip">
+           <string>Comprimir/empaquetar solo archivos</string>
+          </property>
+          <property name="whatsThis">
+           <string>Comprimir/empaquetar solo archivos</string>
+          </property>
           <property name="text">
            <string>Archivos</string>
           </property>
@@ -142,6 +205,15 @@
    </item>
    <item row="3" column="0" colspan="4">
     <widget class="QGroupBox" name="groupBox_4">
+     <property name="toolTip">
+      <string>Opciones de de compresion/empaquetado</string>
+     </property>
+     <property name="statusTip">
+      <string>Opciones de de compresion/empaquetado</string>
+     </property>
+     <property name="whatsThis">
+      <string>Opciones de de compresion/empaquetado</string>
+     </property>
      <property name="title">
       <string>Opciones de compresion/empaquetado</string>
      </property>
@@ -160,6 +232,15 @@
       </property>
       <item row="0" column="7">
        <widget class="QCheckBox" name="checkBox_5">
+        <property name="toolTip">
+         <string>Metodo recursivo para los directorios</string>
+        </property>
+        <property name="statusTip">
+         <string>Metodo recursivo para los directorios</string>
+        </property>
+        <property name="whatsThis">
+         <string>Metodo recursivo para los directorios</string>
+        </property>
         <property name="text">
          <string>Recursivo</string>
         </property>
@@ -171,7 +252,17 @@
       <item row="1" column="0" colspan="9">
        <layout class="QGridLayout" name="gridLayout_9">
         <item row="0" column="2">
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="lineEdit">
+          <property name="toolTip">
+           <string>Ruta seleccionada</string>
+          </property>
+          <property name="statusTip">
+           <string>Ruta seleccionada</string>
+          </property>
+          <property name="whatsThis">
+           <string>Ruta seleccionada</string>
+          </property>
+         </widget>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label">
@@ -188,6 +279,15 @@
             <height>25</height>
            </size>
           </property>
+          <property name="toolTip">
+           <string>Acceso a seleccion de nombre de ruta</string>
+          </property>
+          <property name="statusTip">
+           <string>Acceso a seleccion de nombre de ruta</string>
+          </property>
+          <property name="whatsThis">
+           <string>Acceso a seleccion de nombre de ruta</string>
+          </property>
           <property name="text">
            <string>...</string>
           </property>
@@ -203,6 +303,15 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="toolTip">
+         <string>Mismo nombre para la compresion que la ruta del primer registro</string>
+        </property>
+        <property name="statusTip">
+         <string>Mismo nombre para la compresion que la ruta del primer registro</string>
+        </property>
+        <property name="whatsThis">
+         <string>Mismo nombre para la compresion que la ruta del primer registro</string>
+        </property>
         <property name="text">
          <string>Utilizar nombre del primer archivo</string>
         </property>
@@ -215,6 +324,15 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Comprimir archivos</string>
+        </property>
+        <property name="statusTip">
+         <string>Comprimir archivos</string>
+        </property>
+        <property name="whatsThis">
+         <string>Comprimir archivos</string>
         </property>
         <property name="text">
          <string>Comprimir</string>
@@ -238,6 +356,15 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Misma ruta para la compresion que la ruta del primer registro</string>
+        </property>
+        <property name="statusTip">
+         <string>Misma ruta para la compresion que la ruta del primer registro</string>
+        </property>
+        <property name="whatsThis">
+         <string>Misma ruta para la compresion que la ruta del primer registro</string>
         </property>
         <property name="text">
          <string>Utilizar misma ruta</string>
@@ -266,6 +393,15 @@
       </item>
       <item row="0" column="3">
        <widget class="QCheckBox" name="checkBox_6">
+        <property name="toolTip">
+         <string>Utilizar metodo multivolumen</string>
+        </property>
+        <property name="statusTip">
+         <string>Utilizar metodo multivolumen</string>
+        </property>
+        <property name="whatsThis">
+         <string>Utilizar metodo multivolumen</string>
+        </property>
         <property name="text">
          <string>Multivolumen</string>
         </property>
@@ -273,6 +409,15 @@
       </item>
       <item row="0" column="6">
        <widget class="QComboBox" name="comboBox">
+        <property name="toolTip">
+         <string>Nivel de compresion de archivo</string>
+        </property>
+        <property name="statusTip">
+         <string>Nivel de compresion de archivo</string>
+        </property>
+        <property name="whatsThis">
+         <string>Nivel de compresion de archivo</string>
+        </property>
         <property name="currentIndex">
          <number>0</number>
         </property>
@@ -311,6 +456,15 @@
       </item>
       <item row="0" column="4">
        <widget class="QComboBox" name="comboBox_2">
+        <property name="toolTip">
+         <string>Seleccion de los megas de cada volumen</string>
+        </property>
+        <property name="statusTip">
+         <string>Seleccion de los megas de cada volumen</string>
+        </property>
+        <property name="whatsThis">
+         <string>Seleccion de los megas de cada volumen</string>
+        </property>
         <item>
          <property name="text">
           <string>100m</string>
@@ -338,6 +492,15 @@
    </item>
    <item row="7" column="0">
     <widget class="QPushButton" name="pushButton_3">
+     <property name="toolTip">
+      <string>Vaciado de registros activos</string>
+     </property>
+     <property name="statusTip">
+      <string>Vaciado de registros activos</string>
+     </property>
+     <property name="whatsThis">
+      <string>Vaciado de registros activos</string>
+     </property>
      <property name="text">
       <string>Vaciar lista</string>
      </property>
@@ -355,6 +518,15 @@
    </item>
    <item row="7" column="1">
     <widget class="QPushButton" name="pushButton_2">
+     <property name="toolTip">
+      <string>Eliminar registros seleccionados</string>
+     </property>
+     <property name="statusTip">
+      <string>Eliminar registros seleccionados</string>
+     </property>
+     <property name="whatsThis">
+      <string>Eliminar registros seleccionados</string>
+     </property>
      <property name="text">
       <string>Eliminar seleccionado</string>
      </property>
@@ -385,6 +557,15 @@
    </item>
    <item row="7" column="3">
     <widget class="QPushButton" name="pushButton">
+     <property name="toolTip">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="statusTip">
+      <string>Nos vamos...</string>
+     </property>
+     <property name="whatsThis">
+      <string>Nos vamos...</string>
+     </property>
      <property name="text">
       <string>Salir</string>
      </property>
@@ -415,6 +596,15 @@
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0" colspan="6">
         <widget class="QGroupBox" name="groupBox_2">
+         <property name="toolTip">
+          <string>Tipo de formados de compresion</string>
+         </property>
+         <property name="statusTip">
+          <string>Tipo de formados de compresion</string>
+         </property>
+         <property name="whatsThis">
+          <string>Tipo de formados de compresion</string>
+         </property>
          <property name="title">
           <string>Tipo de empaquetado/compresion</string>
          </property>
@@ -433,6 +623,15 @@
           </property>
           <item row="0" column="8">
            <widget class="QRadioButton" name="radioButton_11">
+            <property name="toolTip">
+             <string>Empaquetador 7z</string>
+            </property>
+            <property name="statusTip">
+             <string>Empaquetador 7z</string>
+            </property>
+            <property name="whatsThis">
+             <string>Empaquetador 7z</string>
+            </property>
             <property name="text">
              <string>7z</string>
             </property>
@@ -440,6 +639,15 @@
           </item>
           <item row="0" column="0">
            <widget class="QRadioButton" name="radioButton_3">
+            <property name="toolTip">
+             <string>Empaquetador tar</string>
+            </property>
+            <property name="statusTip">
+             <string>Empaquetador tar</string>
+            </property>
+            <property name="whatsThis">
+             <string>Empaquetador tar</string>
+            </property>
             <property name="text">
              <string>tar</string>
             </property>
@@ -447,6 +655,15 @@
           </item>
           <item row="0" column="3">
            <widget class="QRadioButton" name="radioButton_6">
+            <property name="toolTip">
+             <string>Empaquetador y compresor tar.gz</string>
+            </property>
+            <property name="statusTip">
+             <string>Empaquetador y compresor tar.gz</string>
+            </property>
+            <property name="whatsThis">
+             <string>Empaquetador y compresor tar.gz</string>
+            </property>
             <property name="text">
              <string>tar.gz</string>
             </property>
@@ -454,6 +671,15 @@
           </item>
           <item row="0" column="2">
            <widget class="QRadioButton" name="radioButton_5">
+            <property name="toolTip">
+             <string>Compresor bz2</string>
+            </property>
+            <property name="statusTip">
+             <string>Compresor bz2</string>
+            </property>
+            <property name="whatsThis">
+             <string>Compresor bz2</string>
+            </property>
             <property name="text">
              <string>bz2</string>
             </property>
@@ -461,6 +687,15 @@
           </item>
           <item row="0" column="5">
            <widget class="QRadioButton" name="radioButton_8">
+            <property name="toolTip">
+             <string>Compresor zip</string>
+            </property>
+            <property name="statusTip">
+             <string>Compresor zip</string>
+            </property>
+            <property name="whatsThis">
+             <string>Compresor zip</string>
+            </property>
             <property name="text">
              <string>zip</string>
             </property>
@@ -468,6 +703,15 @@
           </item>
           <item row="0" column="7">
            <widget class="QRadioButton" name="radioButton_10">
+            <property name="toolTip">
+             <string>Compresor arj</string>
+            </property>
+            <property name="statusTip">
+             <string>Compresor arj</string>
+            </property>
+            <property name="whatsThis">
+             <string>Compresor arj</string>
+            </property>
             <property name="text">
              <string>arj</string>
             </property>
@@ -475,6 +719,15 @@
           </item>
           <item row="0" column="6">
            <widget class="QRadioButton" name="radioButton_9">
+            <property name="toolTip">
+             <string>Compresor zoo</string>
+            </property>
+            <property name="statusTip">
+             <string>Compresor zoo</string>
+            </property>
+            <property name="whatsThis">
+             <string>Compresor zoo</string>
+            </property>
             <property name="text">
              <string>zoo</string>
             </property>
@@ -482,6 +735,15 @@
           </item>
           <item row="0" column="4">
            <widget class="QRadioButton" name="radioButton_7">
+            <property name="toolTip">
+             <string>Empaquetador y compresor tar.bz2</string>
+            </property>
+            <property name="statusTip">
+             <string>Empaquetador y compresor tar.bz2</string>
+            </property>
+            <property name="whatsThis">
+             <string>Empaquetador y compresor tar.bz2</string>
+            </property>
             <property name="text">
              <string>tar.bz2</string>
             </property>
@@ -489,6 +751,15 @@
           </item>
           <item row="0" column="1">
            <widget class="QRadioButton" name="radioButton_4">
+            <property name="toolTip">
+             <string>Compresor gz</string>
+            </property>
+            <property name="statusTip">
+             <string>Compresor gz</string>
+            </property>
+            <property name="whatsThis">
+             <string>Compresor gz</string>
+            </property>
             <property name="text">
              <string>gz</string>
             </property>
@@ -496,6 +767,15 @@
           </item>
           <item row="0" column="9">
            <widget class="QRadioButton" name="radioButton_12">
+            <property name="toolTip">
+             <string>Empaquetador rar</string>
+            </property>
+            <property name="statusTip">
+             <string>Empaquetador rar</string>
+            </property>
+            <property name="whatsThis">
+             <string>Empaquetador rar</string>
+            </property>
             <property name="text">
              <string>rar</string>
             </property>
@@ -536,11 +816,23 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Lista de registros para descomprimir/desempaquetar</string>
+       </property>
+       <property name="statusTip">
+        <string>Lista de registros para descomprimir/desempaquetar</string>
+       </property>
+       <property name="whatsThis">
+        <string>Lista de registros para descomprimir/desempaquetar</string>
+       </property>
        <property name="alternatingRowColors">
         <bool>true</bool>
        </property>
        <property name="selectionMode">
         <enum>QAbstractItemView::MultiSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
        </property>
        <column>
         <property name="text">
@@ -566,6 +858,15 @@
      </item>
      <item row="0" column="1">
       <widget class="QLabel" name="label_4">
+       <property name="toolTip">
+        <string>Ruta y nombre del fichero a descomprimir/desempaquetar</string>
+       </property>
+       <property name="statusTip">
+        <string>Ruta y nombre del fichero a descomprimir/desempaquetar</string>
+       </property>
+       <property name="whatsThis">
+        <string>Ruta y nombre del fichero a descomprimir/desempaquetar</string>
+       </property>
        <property name="text">
         <string>Fichero: </string>
        </property>
@@ -578,6 +879,15 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Lista de registros para comprimir/empaquetar</string>
+       </property>
+       <property name="statusTip">
+        <string>Lista de registros para comprimir/empaquetar</string>
+       </property>
+       <property name="whatsThis">
+        <string>Lista de registros para comprimir/empaquetar</string>
        </property>
        <property name="alternatingRowColors">
         <bool>true</bool>
@@ -607,6 +917,25 @@
      </item>
     </layout>
    </item>
+   <item row="6" column="0" colspan="4">
+    <widget class="QTextEdit" name="textEdit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="toolTip">
+      <string>Consola de procesos realizados</string>
+     </property>
+     <property name="statusTip">
+      <string>Consola de procesos realizados</string>
+     </property>
+     <property name="whatsThis">
+      <string>Consola de procesos realizados</string>
+     </property>
+    </widget>
+   </item>
    <item row="4" column="0" colspan="4">
     <widget class="QGroupBox" name="groupBox_5">
      <property name="title">
@@ -625,8 +954,43 @@
       <property name="bottomMargin">
        <number>0</number>
       </property>
-      <item row="1" column="1">
+      <item row="1" column="7">
+       <widget class="QPushButton" name="pushButton_8">
+        <property name="toolTip">
+         <string>Descomprimir solo los archivos seleccionados</string>
+        </property>
+        <property name="statusTip">
+         <string>Descomprimir solo los archivos seleccionados</string>
+        </property>
+        <property name="whatsThis">
+         <string>Descomprimir solo los archivos seleccionados</string>
+        </property>
+        <property name="text">
+         <string>Descomprimir seleccionados</string>
+        </property>
+        <property name="icon">
+         <iconset resource="recoverdrake.qrc">
+          <normaloff>:/Imagenes/good.png</normaloff>:/Imagenes/good.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
        <widget class="QPushButton" name="pushButton_9">
+        <property name="toolTip">
+         <string>Insertar campo ruta al registro seleccionado</string>
+        </property>
+        <property name="statusTip">
+         <string>Insertar campo ruta al registro seleccionado</string>
+        </property>
+        <property name="whatsThis">
+         <string>Insertar campo ruta al registro seleccionado</string>
+        </property>
         <property name="text">
          <string>Insertar ruta</string>
         </property>
@@ -645,7 +1009,17 @@
       <item row="1" column="0">
        <layout class="QGridLayout" name="gridLayout_14">
         <item row="0" column="2">
-         <widget class="QLineEdit" name="lineEdit_2"/>
+         <widget class="QLineEdit" name="lineEdit_2">
+          <property name="toolTip">
+           <string>Ruta seleccionada</string>
+          </property>
+          <property name="statusTip">
+           <string>Ruta seleccionada</string>
+          </property>
+          <property name="whatsThis">
+           <string>Ruta seleccionada</string>
+          </property>
+         </widget>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label_2">
@@ -662,6 +1036,15 @@
             <height>25</height>
            </size>
           </property>
+          <property name="toolTip">
+           <string>Acceso a seleccion de nombre de ruta</string>
+          </property>
+          <property name="statusTip">
+           <string>Acceso a seleccion de nombre de ruta</string>
+          </property>
+          <property name="whatsThis">
+           <string>Acceso a seleccion de nombre de ruta</string>
+          </property>
           <property name="text">
            <string>...</string>
           </property>
@@ -669,20 +1052,54 @@
         </item>
         <item row="0" column="3">
          <widget class="QCheckBox" name="checkBox_7">
+          <property name="toolTip">
+           <string>Misma ruta para la descompresion que la ruta del primer registro</string>
+          </property>
+          <property name="statusTip">
+           <string>Misma ruta para la descompresion que la ruta del primer registro</string>
+          </property>
+          <property name="whatsThis">
+           <string>Misma ruta para la descompresion que la ruta del primer registro</string>
+          </property>
           <property name="text">
            <string>Utilizar misma ruta</string>
           </property>
          </widget>
         </item>
+        <item row="0" column="4">
+         <widget class="QCheckBox" name="checkBox_9">
+          <property name="toolTip">
+           <string>Descomprimir archivos sin carpeta</string>
+          </property>
+          <property name="statusTip">
+           <string>Descomprimir archivos sin carpeta</string>
+          </property>
+          <property name="whatsThis">
+           <string>Descomprimir archivos sin carpeta</string>
+          </property>
+          <property name="text">
+           <string>No crear carpeta</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
-      <item row="1" column="5">
+      <item row="1" column="8">
        <widget class="QPushButton" name="pushButton_7">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string>Descomprimir archivos</string>
+        </property>
+        <property name="statusTip">
+         <string>Descomprimir archivos</string>
+        </property>
+        <property name="whatsThis">
+         <string>Descomprimir archivos</string>
         </property>
         <property name="text">
          <string>Descomprimir todo</string>
@@ -700,24 +1117,16 @@
        </widget>
       </item>
       <item row="1" column="4">
-       <widget class="QPushButton" name="pushButton_8">
-        <property name="text">
-         <string>Descomprimir seleccionados</string>
-        </property>
-        <property name="icon">
-         <iconset resource="recoverdrake.qrc">
-          <normaloff>:/Imagenes/good.png</normaloff>:/Imagenes/good.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>25</width>
-          <height>25</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
        <widget class="QPushButton" name="pushButton_10">
+        <property name="toolTip">
+         <string>Eliminar campo ruta del registro seleccionado</string>
+        </property>
+        <property name="statusTip">
+         <string>Eliminar campo ruta del registro seleccionado</string>
+        </property>
+        <property name="whatsThis">
+         <string>Eliminar campo ruta del registro seleccionado</string>
+        </property>
         <property name="text">
          <string>Eliminar ruta</string>
         </property>
@@ -733,14 +1142,23 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="3">
-       <widget class="QPushButton" name="pushButton_11">
+      <item row="1" column="1">
+       <widget class="QPushButton" name="pushButton_12">
+        <property name="toolTip">
+         <string>Comprobacion de la integridad del archivo comprimido</string>
+        </property>
+        <property name="statusTip">
+         <string>Comprobacion de la integridad del archivo comprimido</string>
+        </property>
+        <property name="whatsThis">
+         <string>Comprobacion de la integridad del archivo comprimido</string>
+        </property>
         <property name="text">
-         <string>Modificar ruta</string>
+         <string>Comprobar integridad</string>
         </property>
         <property name="icon">
          <iconset resource="recoverdrake.qrc">
-          <normaloff>:/Imagenes/boli.png</normaloff>:/Imagenes/boli.png</iconset>
+          <normaloff>:/Imagenes/lupaO.png</normaloff>:/Imagenes/lupaO.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -750,25 +1168,67 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="2">
+       <widget class="Line" name="line_3">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
-   <item row="6" column="0" colspan="4">
-    <widget class="QTextEdit" name="textEdit">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-    </widget>
-   </item>
    <item row="5" column="0" colspan="4">
-    <widget class="QProgressBar" name="progressBar">
-     <property name="value">
-      <number>0</number>
-     </property>
-    </widget>
+    <layout class="QGridLayout" name="gridLayout_16">
+     <item row="0" column="0">
+      <widget class="QProgressBar" name="progressBar">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Porcentaje de proceso realizado</string>
+       </property>
+       <property name="statusTip">
+        <string>Porcentaje de proceso realizado</string>
+       </property>
+       <property name="whatsThis">
+        <string>Porcentaje de proceso realizado</string>
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="pushButton_11">
+       <property name="toolTip">
+        <string>Cancelar trabajo en ejecucion</string>
+       </property>
+       <property name="statusTip">
+        <string>Cancelar trabajo en ejecucion</string>
+       </property>
+       <property name="whatsThis">
+        <string>Cancelar trabajo en ejecucion</string>
+       </property>
+       <property name="text">
+        <string>Cancelar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

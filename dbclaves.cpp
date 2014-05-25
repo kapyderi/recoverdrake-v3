@@ -17,14 +17,6 @@
 #include <QtConcurrentRun>
 #include "Report/savetobdfrm.h"
 
-
-
-
-//falta terminar la ayuda y tambien los datos y traducciones de tooltip.
-
-
-
-
 dbclaves::dbclaves(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::dbclaves)
@@ -238,6 +230,17 @@ bool dbclaves::eventFilter(QObject* obj, QEvent *event)
                     close();
                 else if (CierreTotal == 1)
                     return true;
+            }
+        }
+        if (event->type() == QEvent::KeyRelease)
+        {
+            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+            if (keyEvent->key() == Qt::Key_F1)
+            {
+                ayuda = new Ayuda(this);
+                ayuda->show();
+                ayuda->Valor(tr("DB de claves"));
+                return true;
             }
         }
         return false;
@@ -884,7 +887,7 @@ void dbclaves::on_pushButton_12_clicked()
     QFile file(""+fileName+".csv");
     file.open(QIODevice::WriteOnly | QIODevice::Truncate);
     QTextStream in(&file);
-    in << tr("Usuario") << SaltoDat << tr("Clave") << SaltoDat << tr("Descripcion") << SaltoDat << tr("Encriptado Simple") << SaltoDat << tr("Encriptado Doble") << SaltoDat << tr("Encriptado Triple") << SaltoDat << tr("Tipo") << SaltoDat << tr("Usurio RecoverDrake") << "\n";
+    in << tr("Usuario") << SaltoDat << tr("Clave") << SaltoDat << tr("Descripcion") << SaltoDat << tr("Encriptado Simple") << SaltoDat << tr("Encriptado Doble") << SaltoDat << tr("Encriptado Triple") << SaltoDat << tr("Tipo") << SaltoDat << tr("Usuario RecoverDrake") << "\n";
     QSqlQuery Acces(db);
     Acces.exec("SELECT COUNT(id) as Cantidad FROM Clave");
     int cuenta, comienzo;
@@ -979,225 +982,153 @@ void dbclaves::orden()
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
-        {
-            Model->setFilter("dir '%"+ui->lineEdit_8->text()+"%'");
-        }
+            Model->setFilter("dir like '%"+ui->lineEdit_8->text()+"%' and UserRD like'"+IDUser+"'");
         else
-        {
-            Model->setFilter("dir != '""'");
-        }
+            Model->setFilter("dir != '""' and UserRD like'"+IDUser+"'");
         ui->tableView->setModel(Model);
         if (ui->checkBox_22->isChecked() == true)
-        {
             ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-        }
         else
-        {
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-        }
     }
     if (busca == tr("Tipo: Web"))
     {
-       Model->setFilter("tipo like 'Web'");
+       Model->setFilter("tipo like 'Web' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Tipo: Banco"))
     {
-       Model->setFilter("edad like 'Banco'");
+       Model->setFilter("tipo like 'Banco' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Tipo: Movil"))
     {
-       Model->setFilter("edad like 'Movil'");
+       Model->setFilter("tipo like 'Movil' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Tipo: Ordenador"))
     {
-       Model->setFilter("edad like 'Ordenador'");
+       Model->setFilter("tipo like 'Ordenador' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Tipo: Caja fuerte"))
     {
-       Model->setFilter("edad like 'Caja fuerte'");
+       Model->setFilter("tipo like 'Caja fuerte' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Tipo: Otros"))
     {
-       Model->setFilter("edad like 'Otros'");
+       Model->setFilter("tipo like 'Otros' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Usuario"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
-        {
-            Model->setFilter("usuario like '%"+ui->lineEdit_8->text()+"%'");
-        }
+            Model->setFilter("usuario like '%"+ui->lineEdit_8->text()+"%' and UserRD like'"+IDUser+"'");
         else
-        {
-            Model->setFilter("usuario != '""'");
-        }
+            Model->setFilter("usuario != '""' and UserRD like'"+IDUser+"'");
         ui->tableView->setModel(Model);
         if (ui->checkBox_22->isChecked() == true)
-        {
             ui->tableView->sortByColumn(2,Qt::SortOrder(0));
-        }
         else
-        {
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-        }
     }
     if (busca == tr("Clave"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
-        {
-            Model->setFilter("password like '%"+ui->lineEdit_8->text()+"%'");
-        }
+            Model->setFilter("password like '%"+ui->lineEdit_8->text()+"%' and UserRD like'"+IDUser+"'");
         else
-        {
-            Model->setFilter("password != '""'");
-        }
+            Model->setFilter("password != '""' and UserRD like'"+IDUser+"'");
         ui->tableView->setModel(Model);
         if (ui->checkBox_22->isChecked() == true)
-        {
             ui->tableView->sortByColumn(3,Qt::SortOrder(0));
-        }
         else
-        {
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-        }
     }
     if (busca == tr("Encriptacion: Sin encriptar"))
     {
-       Model->setFilter("enc1 like '0'");
+       Model->setFilter("enc1 like '0' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Encriptacion: Encriptacion simple"))
     {
-       Model->setFilter("enc1 != '0'");
+       Model->setFilter("enc1 != '0' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca ==  tr("Encriptacion: Encriptacion doble"))
     {
-       Model->setFilter("enc2 != '0'");
+       Model->setFilter("enc2 != '0' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca ==  tr("Encriptacion: Encriptacion triple"))
     {
-       Model->setFilter("enc3 != '0'");
+       Model->setFilter("enc3 != '0' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Descripcion"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
-        {
-            Model->setFilter("Dir like '%"+ui->lineEdit_8->text()+"%'");
-        }
+            Model->setFilter("Dir like '%"+ui->lineEdit_8->text()+"%' and UserRD like'"+IDUser+"'");
         else
-        {
-            Model->setFilter("dir != '""'");
-        }
+            Model->setFilter("dir != '""' and UserRD like'"+IDUser+"'");
         ui->tableView->setModel(Model);
         if (ui->checkBox_22->isChecked() == true)
-        {
             ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-        }
         else
-        {
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-        }
     }
 }
 
@@ -1207,481 +1138,158 @@ void dbclaves::on_comboBox_currentIndexChanged(QString busca)
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
-        {
-            Model->setFilter("dir like '%"+ui->lineEdit_8->text()+"%'");
-        }
+            Model->setFilter("dir like '%"+ui->lineEdit_8->text()+"%' and UserRD like'"+IDUser+"'");
         else
-        {
-            Model->setFilter("dir != '""'");
-        }
+            Model->setFilter("dir != '""' and UserRD like'"+IDUser+"'");
         ui->tableView->setModel(Model);
         if (ui->checkBox_22->isChecked() == true)
-        {
             ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-        }
         else
-        {
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-        }
     }
     if (busca == tr("Tipo: Web"))
     {
-       Model->setFilter("tipo like 'Web'");
+       Model->setFilter("tipo like 'Web' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Tipo: Banco"))
     {
-       Model->setFilter("edad like 'Banco'");
+       Model->setFilter("tipo like 'Banco' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Tipo: Movil"))
     {
-       Model->setFilter("edad like 'Movil'");
+       Model->setFilter("tipo like 'Movil' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Tipo: Ordenador"))
     {
-       Model->setFilter("edad like 'Ordenador'");
+       Model->setFilter("tipo like 'Ordenador' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Tipo: Caja fuerte"))
     {
-       Model->setFilter("edad like 'Caja fuerte'");
+       Model->setFilter("tipo like 'Caja fuerte' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Tipo: Otros"))
     {
-       Model->setFilter("edad like 'Otros'");
+       Model->setFilter("tipo like 'Otros' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Usuario"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
-        {
-            Model->setFilter("usuario like '%"+ui->lineEdit_8->text()+"%'");
-        }
+            Model->setFilter("usuario like '%"+ui->lineEdit_8->text()+"%' and UserRD like'"+IDUser+"'");
         else
-        {
-            Model->setFilter("usuario != '""'");
-        }
+            Model->setFilter("usuario != '""' and UserRD like'"+IDUser+"'");
         ui->tableView->setModel(Model);
         if (ui->checkBox_22->isChecked() == true)
-        {
             ui->tableView->sortByColumn(2,Qt::SortOrder(0));
-        }
         else
-        {
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-        }
     }
     if (busca == tr("Clave"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
-        {
-            Model->setFilter("password like '%"+ui->lineEdit_8->text()+"%'");
-        }
+            Model->setFilter("password like '%"+ui->lineEdit_8->text()+"%' and UserRD like'"+IDUser+"'");
         else
-        {
-            Model->setFilter("password != '""'");
-        }
+            Model->setFilter("password != '""' and UserRD like'"+IDUser+"'");
         ui->tableView->setModel(Model);
         if (ui->checkBox_22->isChecked() == true)
-        {
             ui->tableView->sortByColumn(3,Qt::SortOrder(0));
-        }
         else
-        {
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-        }
     }
     if (busca == tr("Encriptacion: Sin encriptar"))
     {
-       Model->setFilter("enc1 like '0'");
+       Model->setFilter("enc1 like '0' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca == tr("Encriptacion: Encriptacion simple"))
     {
-       Model->setFilter("enc1 != '0'");
+       Model->setFilter("enc1 != '0' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca ==  tr("Encriptacion: Encriptacion doble"))
     {
-       Model->setFilter("enc2 != '0'");
+       Model->setFilter("enc2 != '0' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
     }
     if (busca ==  tr("Encriptacion: Encriptacion triple"))
     {
-       Model->setFilter("enc3 != '0'");
+       Model->setFilter("enc3 != '0' and UserRD like'"+IDUser+"'");
        ui->tableView->setModel(Model);
        ui->lineEdit_8->setDisabled(true);
        if (ui->checkBox_22->isChecked() == true)
-       {
            ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-       }
        else
-       {
            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-       }
-    }
-    if (busca == tr("Clave"))
-    {
-        ui->lineEdit_8->setDisabled(false);
-        if (ui->lineEdit_8->text() != "")
-        {
-            Model->setFilter("password like '%"+ui->lineEdit_8->text()+"%'");
-        }
-        else
-        {
-            Model->setFilter("password != '""'");
-        }
-        ui->tableView->setModel(Model);
-        if (ui->checkBox_22->isChecked() == true)
-        {
-            ui->tableView->sortByColumn(2,Qt::SortOrder(0));
-        }
-        else
-        {
-            ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-        }
     }
     if (busca == tr("Descripcion"))
     {
         ui->lineEdit_8->setDisabled(false);
         if (ui->lineEdit_8->text() != "")
-        {
-            Model->setFilter("Dir like '%"+ui->lineEdit_8->text()+"%'");
-        }
+            Model->setFilter("Dir like '%"+ui->lineEdit_8->text()+"%' and UserRD like'"+IDUser+"'");
         else
-        {
-            Model->setFilter("dir != '""'");
-        }
+            Model->setFilter("dir != '""' and UserRD like'"+IDUser+"'");
         ui->tableView->setModel(Model);
         if (ui->checkBox_22->isChecked() == true)
-        {
             ui->tableView->sortByColumn(1,Qt::SortOrder(0));
-        }
         else
-        {
             ui->tableView->sortByColumn(0,Qt::SortOrder(0));
-        }
     }
-}
-
-void  dbclaves::print( QPrinter* printer )
-{
-//    QPrinter printer(QPrinter::HighResolution);
-//         printer.setOutputFileName("print.ps");
-//         QPainter painter;
-//         painter.begin(&printer);
-
-//         for (int page = 0; page < numberOfPages; ++page) {
-
-//             // Use the painter to draw on the page.
-
-//             if (page != lastPage)
-//                 printer.newPage();
-//         }
-
-//         painter.end();
-
-
-
-
-    //esta es la parte buena
-//    int posicion;
-//    QString NomOrdenFin;
-//    QPainter txt(printer);
-//    int LocPos;
-//    int size = font.pointSize()+((font.pointSize()*80)/6);
-//    QFont Talla(font);
-//    Talla.setPointSize(size);
-//    QFontMetrics medidas(Talla);
-//    txt.setFont(font);
-//    pen.setColor(color);
-//    pen1.setColor(color1);
-//    QRect columnas[4];
-//    columnas[0].setRect(10, medidas.lineSpacing(), printer->pageRect().width() / 2, medidas.lineSpacing());
-//    int anchoColumna = columnas[0].width() / 3;
-//    columnas[1].setRect(columnas[0].x() + columnas[0].width(), medidas.lineSpacing(), anchoColumna, medidas.lineSpacing());
-//    columnas[2].setRect(columnas[1].x() + columnas[1].width(), medidas.lineSpacing(), anchoColumna, medidas.lineSpacing());
-//    columnas[3].setRect(columnas[2].x() + columnas[2].width(), medidas.lineSpacing(), anchoColumna, medidas.lineSpacing());
-//    posicion = medidas.lineSpacing();
-//    bool sombrear = false;
-//    QSqlQuery claves(db);
-//    LocPos=0;
-//    if (NomOrden == tr("Sin filtro (todas las claves)"))
-//    {
-//        NomOrdenFin= "Dir";
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE UserRD = '"+IDUser+"' ORDER BY '"+NomOrdenFin+"' ASC");
-//    }
-//    if (NomOrden == tr("Descripcion"))
-//    {
-//        NomOrdenFin= "Dir";
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE UserRD = '"+IDUser+"' ORDER BY '"+NomOrdenFin+"' ASC");
-//    }
-//    if (NomOrden == tr("Usuario"))
-//    {
-//        NomOrdenFin="Usuario";
-//        LocPos=1;
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE UserRD = '"+IDUser+"' ORDER BY '"+NomOrdenFin+"' ASC ");
-//    }
-//    if (NomOrden == tr("Clave"))
-//    {
-//        NomOrdenFin="Password";
-//        LocPos=1;
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE UserRD = '"+IDUser+"' ORDER BY '"+NomOrdenFin+"' ASC ");
-//    }
-//    if (NomOrden == tr("Tipo: Web"))
-//    {
-//        NomOrdenFin="Tipo";
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE '"+NomOrdenFin+"' = 'Web' AND UserRD = '"+IDUser+"' ORDER BY Dir ASC");
-//    }
-//    if (NomOrden == tr("Tipo: Banco"))
-//    {
-//        NomOrdenFin="Tipo";
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE '"+NomOrdenFin+"' = 'Banco'  AND UserRD = '"+IDUser+"' ORDER BY Dir ASC");
-//    }
-//    if (NomOrden == tr("Tipo: Movil"))
-//    {
-//        NomOrdenFin="Tipo";
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE '"+NomOrdenFin+"' = 'Movil'  AND UserRD = '"+IDUser+"' ORDER BY Dir ASC");
-//    }
-//    if (NomOrden == tr("Tipo: Ordenador"))
-//    {
-//        NomOrdenFin="Tipo";
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE '"+NomOrdenFin+"' = 'Ordenador'  AND UserRD = '"+IDUser+"' ORDER BY Dir ASC");
-//    }
-//    if (NomOrden == tr("Tipo: Caja fuerte"))
-//    {
-//        NomOrdenFin="Tipo";
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE '"+NomOrdenFin+"' = 'Caja fuerte'  AND UserRD = '"+IDUser+"' ORDER BY Dir ASC");
-//    }
-//    if (NomOrden == tr("Tipo: Otros"))
-//    {
-//        NomOrdenFin="Tipo";
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE '"+NomOrdenFin+"' = 'Otros'  AND UserRD = '"+IDUser+"' ORDER BY Dir ASC");
-//    }
-//    if (NomOrden == tr("Encriptacion: Sin encriptar"))
-//    {
-//        NomOrdenFin="Enc1";
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE '"+NomOrdenFin+"' = '0'  AND UserRD = '"+IDUser+"' ORDER BY Dir ASC");
-//    }
-//    if (NomOrden == tr("Encriptacion: Encriptacion Simple"))
-//    {
-//        NomOrdenFin="Enc1";
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE '"+NomOrdenFin+"' != '0' AND Enc2 = '0'  AND UserRD = '"+IDUser+"' ORDER BY Dir ASC");
-//    }
-//    if (NomOrden == tr("Encriptacion: Encriptacion doble"))
-//    {
-//        NomOrdenFin="Enc2";
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE '"+NomOrdenFin+"' != '0' AND Enc3 = '0'  AND UserRD = '"+IDUser+"' ORDER BY Dir ASC");
-//    }
-//    if (NomOrden == tr("Encriptacion: Encriptacion triple"))
-//    {
-//        NomOrdenFin="Enc3";
-//        claves.exec("SELECT Dir,Usuario,Password,Enc1,Enc2,Enc3,Tipo,UserRD FROM Clave WHERE '"+NomOrdenFin+"' != '0'  AND UserRD = '"+IDUser+"' ORDER BY Dir ASC");
-//    }
-//    while(claves.next())
-//    {
-//        txt.setPen(pen);
-//        QString Dir = claves.value(0).toString();
-//        QString User = claves.value(1).toString();
-//        QString Pass= claves.value(2).toString();
-//        QString Enc1 = claves.value(3).toString();
-//        QString Enc2 = claves.value(4).toString();
-//        QString Enc3 = claves.value(5).toString();
-//        QString Tipo = claves.value(6).toString();
-//        QString Usuario = DesencriptarUser(User,Enc1,Enc2,Enc3,0);
-//        QString Password = DesencriptarUser(Pass,Enc1,Enc2,Enc3,1);
-//        if (posicion > printer->pageRect().height()-size)
-//        {
-//            printer->newPage();
-//            posicion = medidas.lineSpacing();
-//            columnas[0].moveTop(posicion);
-//            columnas[1].moveTop(posicion);
-//            columnas[2].moveTop(posicion);
-//            columnas[3].moveTop(posicion);
-//            sombrear = false;
-//        }
-//        if (posicion == medidas.lineSpacing())
-//        {
-//            txt.drawText(10,posicion,"Listado ordenado por... "+NomOrden+"");
-//            txt.setPen(pen1);
-//            if (LocPos==1)
-//                txt.drawText(columnas[0], Qt::AlignHCenter, NomOrdenFin);
-//            else
-//                txt.drawText(columnas[0], Qt::AlignHCenter, tr("Descripcion"));
-//            txt.drawText(columnas[1], Qt::AlignHCenter, tr("Usuario"));
-//            txt.drawText(columnas[2], Qt::AlignHCenter, tr("Password"));
-//            txt.drawText(columnas[3], Qt::AlignHCenter, tr("Tipo"));
-//            txt.drawLine(columnas[0].x(), columnas[0].bottom(), columnas[3].x() + columnas[3].width(), columnas[3].bottom());
-//            columnas[0].translate(0, medidas.lineSpacing());
-//            columnas[1].translate(0, medidas.lineSpacing());
-//            columnas[2].translate(0, medidas.lineSpacing());
-//            columnas[3].translate(0, medidas.lineSpacing());
-//            posicion += medidas.lineSpacing();
-//            if(sombrear)
-//            {
-//                txt.fillRect(columnas[0], Qt::lightGray);
-//                txt.fillRect(columnas[1], Qt::lightGray);
-//                txt.fillRect(columnas[2], Qt::lightGray);
-//                txt.fillRect(columnas[3], Qt::lightGray);
-//            }
-//            sombrear = !sombrear;
-//            txt.setPen(pen);
-//            txt.drawText(columnas[0], Qt::AlignLeft, Dir);
-//            txt.drawText(columnas[1], Qt::AlignLeft, Usuario);
-//            txt.drawText(columnas[2], Qt::AlignLeft, Password);
-//            txt.drawText(columnas[3], Qt::AlignLeft, Tipo);
-//        }
-//        else
-//        {
-//             if (sombrear)
-//             {
-//                 txt.fillRect(columnas[0], Qt::lightGray);
-//                 txt.fillRect(columnas[1], Qt::lightGray);
-//                 txt.fillRect(columnas[2], Qt::lightGray);
-//                 txt.fillRect(columnas[3], Qt::lightGray);
-//             }
-//             sombrear = !sombrear;
-//             txt.drawText(columnas[0], Qt::AlignLeft, Dir);
-//             txt.drawText(columnas[1], Qt::AlignLeft, Usuario);
-//             txt.drawText(columnas[2], Qt::AlignLeft, Password);
-//             txt.drawText(columnas[3], Qt::AlignLeft, Tipo);
-//        }
-//        columnas[0].translate(0, medidas.lineSpacing());
-//        columnas[1].translate(0, medidas.lineSpacing());
-//        columnas[2].translate(0, medidas.lineSpacing());
-//        columnas[3].translate(0, medidas.lineSpacing());
-//        posicion += medidas.lineSpacing();
-//    }
-//    txt.end();
 }
 
 void dbclaves::on_pushButton_9_clicked()
 {
-//    int respuesta = 0;
-//    respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Definir tipo de letra y datos")),
-//                           QString::fromUtf8(tr("<b>Definir tipo, proporcion y grosor de letra y orden de datos.</b><p>"
-//                           "Puedes definir el tipo de letra que quieras "
-//                           "con las caracteristicas de grosor, proporcion, color, etc.<p>"
-//                           "Por defecto es... Familia: HELVETICA, Proporcion: 6, Grosor: NORMAL.<p>"
-//                           "Tambien puedes ordenar por cualquier tipo de dato.</p>"
-//                           "&iquest;Definir tipo de letra?")), QMessageBox::Ok, QMessageBox::No);
-//    if (respuesta == QMessageBox::Ok)
-//    {
-//        ordenar *Orden=new ordenar();
-//        if (Stilo == "A")
-//            Orden->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-//        Orden->Dato("claves");
-//        Orden->exec();
-//        NomOrden=Orden->NOrden;
-//        font=Orden->TLetra;
-//        color=Orden->TColor;
-//        color1=Orden->TColor1;
-//        if (NomOrden == "")
-//        {
-//            NomOrden=tr("Descripcion");
-//            font = QFont("Helvetica",6,50);
-//            color = QColor(Qt::black);
-//            color1= QColor(Qt::black);
-//        }
-//    }
-//    else if (respuesta == QMessageBox::No)
-//    {
-//        NomOrden=tr("Descripcion");
-//        font = QFont("Helvetica",6,50);
-//        color = QColor(Qt::black);
-//        color1= QColor(Qt::black);
-//    }
-//    QPrinter printer(QPrinter::HighResolution);
-//    QPrintPreviewDialog preview(&printer,this);
-//    connect(&preview,SIGNAL(paintRequested(QPrinter*)),SLOT(print(QPrinter*)) );
-//    preview.exec();
-
     SaveToBDFrm frm(this);
     frm.Valor("2","Clave",IDUser);
     frm.exec();

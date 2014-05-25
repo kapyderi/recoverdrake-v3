@@ -57,7 +57,6 @@ private slots:
     void on_pushButton_5_clicked();
     void orden();
     void on_comboBox_currentIndexChanged(QString busca);
-    void print(QPrinter*);
     void on_pushButton_9_clicked();
     void Cambiar();
     void on_lineEdit_11_textChanged(const QString &arg1);

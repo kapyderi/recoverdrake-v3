@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>wifi</class>
+ <widget class="QDialog" name="wifi">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>740</width>
+    <height>744</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Supervisar red privada</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/tux.png</normaloff>:/Imagenes/tux.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_5">
+   <item row="1" column="0">
+    <widget class="QTextEdit" name="textEdit">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>7</pointsize>
+      </font>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QProgressBar" name="progressBar">
+     <property name="value">
+      <number>0</number>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Lista blanca</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>id</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit_3"/>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pushButton_11">
+          <property name="text">
+           <string>Limpiar</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/borrar.png</normaloff>:/Imagenes/borrar.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>21</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="4">
+         <widget class="QPushButton" name="pushButton_7">
+          <property name="text">
+           <string>Filtrar</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/embudo.png</normaloff>:/Imagenes/embudo.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="5">
+         <widget class="QTableView" name="tableView">
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>ip</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1" colspan="2">
+         <widget class="QLineEdit" name="lineEdit_5">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <italic>true</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>MAC</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QLineEdit" name="lineEdit">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <italic>true</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="5">
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="4">
+           <widget class="QPushButton" name="pushButton_3">
+            <property name="text">
+             <string>Eliminar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="pushButton_10">
+            <property name="text">
+             <string>Modificar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="pushButton">
+            <property name="text">
+             <string>Insertar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/good.png</normaloff>:/Imagenes/good.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="title">
+        <string>Lista negra</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>id</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit_4"/>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pushButton_12">
+          <property name="text">
+           <string>Limpiar</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/borrar.png</normaloff>:/Imagenes/borrar.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QPushButton" name="pushButton_9">
+          <property name="text">
+           <string>Filtrar</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/embudo.png</normaloff>:/Imagenes/embudo.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="5">
+         <widget class="QTableView" name="tableView_2">
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>ip</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1" colspan="2">
+         <widget class="QLineEdit" name="lineEdit_6">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <italic>true</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>MAC</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="4">
+         <widget class="QLineEdit" name="lineEdit_2">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <italic>true</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="5">
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="1">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="text">
+             <string>Insertar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/good.png</normaloff>:/Imagenes/good.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QPushButton" name="pushButton_8">
+            <property name="text">
+             <string>Modificar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QPushButton" name="pushButton_5">
+            <property name="text">
+             <string>Eliminar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="recoverdrake.qrc">
+              <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="3">
+         <spacer name="horizontalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="0">
+    <layout class="QGridLayout" name="gridLayout_4">
+     <item row="4" column="2">
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="text">
+        <string>Salir</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" rowspan="4">
+      <widget class="QTableWidget" name="tableWidget">
+       <property name="autoScrollMargin">
+        <number>26</number>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <attribute name="horizontalHeaderCascadingSectionResizes">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>100</number>
+       </attribute>
+       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="verticalHeaderCascadingSectionResizes">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="verticalHeaderDefaultSectionSize">
+        <number>50</number>
+       </attribute>
+       <attribute name="verticalHeaderMinimumSectionSize">
+        <number>50</number>
+       </attribute>
+       <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="verticalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Dirección IP localizada</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>8</pointsize>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="textAlignment">
+         <set>AlignLeft|AlignVCenter</set>
+        </property>
+        <property name="foreground">
+         <brush brushstyle="Dense4Pattern">
+          <color alpha="255">
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </brush>
+        </property>
+        <property name="icon">
+         <iconset resource="recoverdrake.qrc">
+          <normaloff>:/Imagenes/madwifi-logo-20081106-2.png</normaloff>:/Imagenes/madwifi-logo-20081106-2.png</iconset>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Mac</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item row="3" column="2">
+      <widget class="QPushButton" name="pushButton_14">
+       <property name="text">
+        <string>Anadir a lista negra</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/peligro.png</normaloff>:/Imagenes/peligro.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QPushButton" name="pushButton_13">
+       <property name="text">
+        <string>Anadir a lista blanca</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/thumbs_up.png</normaloff>:/Imagenes/thumbs_up.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QPushButton" name="pushButton_6">
+       <property name="text">
+        <string>Comprobar 
+intrusos en
+la red wifi</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/Error.png</normaloff>:/Imagenes/Error.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

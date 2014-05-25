@@ -423,7 +423,7 @@ bool Grabador::eventFilter(QObject* obj, QEvent *event)
 {
     if (obj == this)
     {
-        if (event->type() == QEvent::KeyPress)
+        if (event->type() == QEvent::KeyRelease)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
             if (keyEvent->key() == Qt::Key_F1)
