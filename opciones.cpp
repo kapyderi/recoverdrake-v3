@@ -16,6 +16,7 @@
 #include <QPalette>
 #include <QStylePlugin>
 #include <Smpt/SmtpMime>
+#include "notas.h"
 
 extern QTranslator *qTranslator;
 
@@ -27,6 +28,9 @@ opciones::opciones(QWidget *parent) :
     drakeSistema drake;
     user = drake.getUser();
     arqt = drake.getArquitectura();
+    notas *acc=new notas();
+    Ver=acc->Ultimo;
+    ui->label_216->setText(Ver);
     db=QSqlDatabase::database("PRINCIPAL");
     Stilo = "B";
     Model= new QSqlTableModel(0,db);
@@ -194,10 +198,10 @@ void opciones::Comprobar()
 void opciones::iniciar()
 {
     setUpdatesEnabled(false);
-    QProgressDialog progress(tr("Recopilando datos de preferencias personales... Espera por favor"), tr("Cancelar"), 0, 98, this);
+    QProgressDialog progress(tr("Recopilando datos de preferencias personales... Espera por favor"), tr("Cancelar"), 0, 101, this);
     progress.show();
     QTest::qWait(20);
-    for(int i=0;i<98;i++)
+    for(int i=0;i<101;i++)
     {
         qApp->processEvents();
         progress.setValue(i);
@@ -710,29 +714,17 @@ void opciones::iniciar()
             if (query53.isValid())
                 cantidad54=query53.value(0).toString();
             if ( cantidad33 == "2")
-            {
                 ui->checkBox->setChecked(true);
-            }
             else
-            {
                 ui->checkBox->setChecked(false);
-            }
             if ( cantidad52 == "2")
-            {
                 ui->checkBox_2->setChecked(true);
-            }
             else
-            {
                 ui->checkBox_2->setChecked(false);
-            }
             if ( cantidad54 == "2")
-            {
                 ui->checkBox_3->setChecked(true);
-            }
             else
-            {
                 ui->checkBox_3->setChecked(false);
-            }
         }
         if (i==7)
         {
@@ -923,9 +915,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("id3v2");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                     ui->label_184->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "id3v2";
@@ -937,9 +927,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("zenity");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_19->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "zenity";
@@ -951,9 +939,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("sudo");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_21->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "sudo";
@@ -965,9 +951,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("kwrite");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_23->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "kwrite";
@@ -979,9 +963,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("ndiswrapper");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_25->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "ndiswrapper";
@@ -993,23 +975,19 @@ void opciones::iniciar()
         {
             Localizar = getRpm("photorec");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_27->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "photorec";
                 QString Value = getPack1(Valor);
-                    ui->label_27->setText(QString::fromUtf8(Value));
+                ui->label_27->setText(QString::fromUtf8(Value));
             }
         }
         if (i==22)
         {
             Localizar = getRpm("testdisk");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_29->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "testdisk";
@@ -1021,23 +999,19 @@ void opciones::iniciar()
         {
             Localizar = getRpm("ntfsconfig");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_31->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "ntfsconfig";
                 QString Value = getPack1(Valor);
-                    ui->label_31->setText(QString::fromUtf8(Value));
+                ui->label_31->setText(QString::fromUtf8(Value));
             }
         }
         if (i==24)
         {
             Localizar = getRpm("cdparanoia");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_33->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "cdparanoia";
@@ -1049,9 +1023,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("lame");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_35->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "lame";
@@ -1063,9 +1035,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("dvdauthor");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_37->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "dvdauthor";
@@ -1077,9 +1047,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("parole");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_39->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "parole";
@@ -1091,9 +1059,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("cdrkit");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_41->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "cdrkit";
@@ -1105,9 +1071,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("tar");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_43->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "tar";
@@ -1119,9 +1083,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("alien");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_45->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "alien";
@@ -1133,9 +1095,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("urpmi");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_47->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "urpmi";
@@ -1147,9 +1107,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("fakeroot");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_49->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "fakeroot";
@@ -1161,9 +1119,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("rpmdrake");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_51->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "rpmdrake";
@@ -1175,9 +1131,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("mkvtoolnix");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_53->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "mkvtoolnix";
@@ -1189,9 +1143,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("clamav");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_55->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "clamav";
@@ -1203,9 +1155,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("dolphin");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_59->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "dolphin";
@@ -1217,9 +1167,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("unrar");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_61->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "unrar";
@@ -1231,9 +1179,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("gnomeutils");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_63->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "gnomeutils";
@@ -1245,9 +1191,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("ffmpeg");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_65->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "ffmpeg";
@@ -1259,9 +1203,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("mencoder");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_67->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "mencoder";
@@ -1273,9 +1215,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("transcode");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_69->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "transcode";
@@ -1287,9 +1227,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("convmv");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_71->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "convmv";
@@ -1301,9 +1239,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("cdrdao");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_73->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "cdrdao";
@@ -1315,9 +1251,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("unzip");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_75->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "unzip";
@@ -1329,9 +1263,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("dalle");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_77->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "dalle";
@@ -1343,9 +1275,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("lsdvd");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_79->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "lsdvd";
@@ -1357,9 +1287,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("vcdimager");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_81->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "vcdimager";
@@ -1371,9 +1299,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("gzip");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_83->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "gzip";
@@ -1385,9 +1311,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("imagemagick");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_85->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "imagemagick";
@@ -1399,9 +1323,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("dvd+rw-tools");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_87->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "dvd+rw-tools";
@@ -1413,9 +1335,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("ccd2iso");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_89->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "ccd2iso";
@@ -1427,9 +1347,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("mdf2iso");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_91->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "mdf2iso";
@@ -1441,9 +1359,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("cdi2iso");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_93->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "cdi2iso";
@@ -1455,9 +1371,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("nrg2iso");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_95->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "nrg2iso";
@@ -1469,9 +1383,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("libnotify");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_97->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "libnotify";
@@ -1483,9 +1395,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("id3lib");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_101->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "id3lib";
@@ -1497,9 +1407,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("nmap");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_103->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "nmap";
@@ -1511,9 +1419,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("iptables");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_105->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "iptables";
@@ -1525,9 +1431,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("konsole");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_135->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "konsole";
@@ -1539,9 +1443,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("vlc");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_116->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "vlc";
@@ -1566,9 +1468,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("grub2");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_137->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "grub2";
@@ -1580,9 +1480,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("syslinux");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_139->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "syslinux";
@@ -1594,9 +1492,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("grub");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_140->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "grub";
@@ -1608,9 +1504,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("file-roller");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_143->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "file-roller";
@@ -1622,9 +1516,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("mtools");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_144->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "mtools";
@@ -1636,9 +1528,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("qemu");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_146->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "qemu";
@@ -1669,9 +1559,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("gcstar");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_148->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "gcstar";
@@ -1683,9 +1571,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("x11vnc");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_150->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "x11vnc";
@@ -1697,9 +1583,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("mutt");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_152->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "mutt";
@@ -1711,9 +1595,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("sendmail");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_155->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "sendmail";
@@ -1725,9 +1607,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("ssmtp");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_157->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "ssmtp";
@@ -1739,9 +1619,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("tigervnc");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_158->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "tigervnc";
@@ -1753,9 +1631,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("transmission-cli");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_160->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "transmission-cli";
@@ -1805,9 +1681,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("firefox");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_165->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "firefox";
@@ -1853,9 +1727,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("dvdbackup");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_168->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "dvdbackup";
@@ -1867,9 +1739,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("gcc");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_172->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "gcc";
@@ -1881,9 +1751,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("make");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_348->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "make";
@@ -1906,9 +1774,7 @@ void opciones::iniciar()
             }
             ui->label_350->setText(Valor);
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_349->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Value = getPack1(Valor);
@@ -1930,9 +1796,7 @@ void opciones::iniciar()
             }
             ui->label_351->setText(Valor);
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_352->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Value = getPack1(Valor);
@@ -2008,9 +1872,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("pulseaudio-utils");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_187->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "pulseaudio-utils";
@@ -2052,9 +1914,7 @@ void opciones::iniciar()
             }
             ui->label_196->setText(Valor);
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_197->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Value = getPack1(Valor);
@@ -2065,9 +1925,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("bzip2");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_198->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "bzip2";
@@ -2079,9 +1937,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("zip");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_200->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "zip";
@@ -2093,9 +1949,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("zoo");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_202->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "zoo";
@@ -2107,9 +1961,7 @@ void opciones::iniciar()
         {
             Localizar = getRpm("arj");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_204->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "arj";
@@ -2121,23 +1973,19 @@ void opciones::iniciar()
         {
             Localizar = getRpm("p7zip");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_207->setText(QString::fromUtf8("..."));
-            }
             else
             {
-                QString Valor= "7z";
+                QString Valor= "p7zip";
                 QString Value = getPack1(Valor);
                 ui->label_207->setText(QString::fromUtf8(Value));
             }
         }
-        if (i==96)
+        if (i==97)
         {
             Localizar = getRpm("rar");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
-            {
                 ui->label_209->setText(QString::fromUtf8("..."));
-            }
             else
             {
                 QString Valor= "rar";
@@ -2145,8 +1993,44 @@ void opciones::iniciar()
                 ui->label_209->setText(QString::fromUtf8(Value));
             }
         }
+        if (i==98)
+        {
+            Localizar = getRpm("tree");
+            if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
+                ui->label_210->setText(QString::fromUtf8("..."));
+            else
+            {
+                QString Valor= "tree";
+                QString Value = getPack1(Valor);
+                ui->label_210->setText(QString::fromUtf8(Value));
+            }
+        }
+        if (i==99)
+        {
+            Localizar = getRpm("hexedit");
+            if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
+                ui->label_213->setText(QString::fromUtf8("..."));
+            else
+            {
+                QString Valor= "hexedit";
+                QString Value = getPack1(Valor);
+                ui->label_213->setText(QString::fromUtf8(Value));
+            }
+        }
+        if (i==100)
+        {
+            Localizar = getRpm("webmin");
+            if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
+                ui->label_215->setText(QString::fromUtf8("..."));
+            else
+            {
+                QString Valor= "webmin";
+                QString Value = getPack1(Valor);
+                ui->label_215->setText(QString::fromUtf8(Value));
+            }
+        }
     }
-    progress.setValue(98);
+    progress.setValue(101);
     setUpdatesEnabled(true);
 }
 
@@ -2164,9 +2048,7 @@ void opciones::on_pushButton_clicked()
             close();
         }
         else
-        {
             close();
-        }
     }
     else
     {
@@ -5490,8 +5372,7 @@ void opciones::on_pushButton_17_clicked()
 
     if (!smtp.sendMail(message))
     {
-        okMessage.setText
-                (tr("El envio del mail ha fallado"));
+        okMessage.setText(tr("El envio del mail ha fallado"));
         okMessage.exec();
         return;
     }

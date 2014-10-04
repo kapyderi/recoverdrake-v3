@@ -10,6 +10,11 @@
     <height>635</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>TeleDrake v.0.1.0</string>
   </property>

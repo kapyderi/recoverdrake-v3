@@ -16,6 +16,7 @@ public:
     ~opciones();
     void iniciar();
     void Valor(QString Opcion);
+    QString Ver;
 
 protected:
     void changeEvent(QEvent *e);

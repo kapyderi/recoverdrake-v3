@@ -57,6 +57,7 @@ private:
     QString Registro, TamCorte, Correo, Skin, Velocidad, Vnc, Resolucion, Grabacion, Wifi, Control, Ecualizador, LMail;
     QString Menu, Chat, Vista, SVideo, Formato, LClave, LNwifi, LMusica, LBwifi, LRadio, LTelevision, LUser, LAccesos;
     QString LVnc, LPelis, LMenu, Estilo, LSincro, Lid3, Calculadora, LClaves, LAscii, Pais, LBic, LModelo, LLineas, LCampos, LDocument;
+    QString LIdES, LIdEN;
     int CierreTotal;
     QString Stilo;
     Ayuda *ayuda;

@@ -2049,7 +2049,7 @@ void compresor::Comprobar2()
                         QMessageBox m;
                         if (Stilo == "A")
                             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                        m.setText(tr("No hay ninguna nombre de destino para comprimir/empaquetar se coge por defecto el que hay en la primera ruta."));
+                        m.setText(tr("No hay ningun nombre de destino para comprimir/empaquetar se coge por defecto el que hay en la primera ruta."));
                         m.exec();
                         QTableWidgetItem *itemA;
                         itemA=ui->tableWidget->item(0,1);

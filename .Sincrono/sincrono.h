@@ -68,6 +68,7 @@ private:
     int Counter;
     int ContadorC;
     int Marca;
+    int Destruir;
 
 private slots:
     void on_pushButton_5_clicked();

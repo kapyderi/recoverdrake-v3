@@ -7,6 +7,7 @@
 #include <QFileDialog>
 #include <QTableWidgetItem>
 #include "drakeprocesos.h"
+#include "compressdrake.h"
 
 namespace Ui {
 class compresor;
@@ -62,6 +63,8 @@ private slots:
     void on_pushButton_11_clicked();
     void on_pushButton_12_clicked();
     void on_pushButton_8_clicked();
+    void on_pushButton_13_clicked();
+    void on_pushButton_14_clicked();
 
 private:
     Ui::compresor *ui;
@@ -99,6 +102,7 @@ private:
     QString getListado(QString Comando);
     QStringList ListaD;
     QList<QTableWidgetItem *> itemsD;
+    CompressDrake *CDrake;
 
 };
 

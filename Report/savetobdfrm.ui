@@ -10,12 +10,17 @@
     <height>718</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Guardar DB como...</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../recoverdrake.qrc">
-    <normaloff>:/Imagenes/save_db.png</normaloff>:/Imagenes/save_db.png</iconset>
+    <normaloff>:/Imagenes/print-preview.png</normaloff>:/Imagenes/print-preview.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_8">
    <item row="1" column="0" colspan="2">

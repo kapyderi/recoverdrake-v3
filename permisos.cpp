@@ -7,6 +7,8 @@
 #include <QMessageBox>
 #include <QDateTimeEdit>
 #include <QDebug>
+#include <QCloseEvent>
+#include <QKeyEvent>
 
 Permisos::Permisos(QWidget *parent) :
     QDialog(parent),
@@ -30,6 +32,12 @@ Permisos::Permisos(QWidget *parent) :
     ui->comboBox->setCurrentIndex(ui->comboBox->findText("root"));
     ui->comboBox_3->setCurrentIndex(ui->comboBox_3->findText(user));
     ui->comboBox_4->setCurrentIndex(ui->comboBox_4->findText("root"));
+    ui->comboBox->model()->sort(0,Qt::AscendingOrder);
+    ui->comboBox_2->model()->sort(0,Qt::AscendingOrder);
+    ui->comboBox_3->model()->sort(0,Qt::AscendingOrder);
+    ui->comboBox_4->model()->sort(0,Qt::AscendingOrder);
+    ui->comboBox_3->setEnabled(false);
+    ui->comboBox_2->setEnabled(false);
     QSqlQuery queryDefecto(db);
     queryDefecto.exec("SELECT Defecto FROM Miscelanea WHERE id=2");
     queryDefecto.first();
@@ -110,9 +118,73 @@ Permisos::~Permisos()
         delete mib;
 }
 
+void Permisos::Valor(QString valor)
+{
+    if (valor == "Quitar")
+        CierreTotal = 1;
+    if (this->isMaximized())
+    {
+        ui->label_10->show();
+        ui->verticalSpacer->changeSize(0,0);
+    }
+    else
+    {
+        ui->label_10->hide();
+        ui->verticalSpacer->changeSize(20,40,QSizePolicy::Expanding,QSizePolicy::Expanding);
+    }
+}
+
 void Permisos::on_pushButton_3_clicked()
 {
-    close();
+    if (CierreTotal == 1)
+        emit Cerrar();
+    else
+        close();
+}
+
+void Permisos::closeEvent ( QCloseEvent * event )
+{
+    if (CierreTotal == 1)
+    {
+        emit Cerrar();
+        event->accept();
+    }
+    else
+    {
+        close();
+        event->accept();
+    }
+}
+
+bool Permisos::eventFilter(QObject* obj, QEvent *event)
+{
+    if (obj == this)
+    {
+        if (event->type() == QEvent::KeyPress)
+        {
+            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+            if (keyEvent->key() == Qt::Key_Escape)
+            {
+                if (CierreTotal == 0)
+                    close();
+                else if (CierreTotal == 1)
+                    return true;
+            }
+        }
+        if (event->type() == QEvent::KeyRelease)
+        {
+            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+            if (keyEvent->key() == Qt::Key_F1)
+            {
+                ayuda = new Ayuda(this);
+                ayuda->show();
+                ayuda->Valor(tr("Permisos"));
+                return true;
+            }
+        }      
+        return false;
+    }
+    return QDialog::eventFilter(obj, event);
 }
 
 void Permisos::on_pushButton_2_clicked()
@@ -326,14 +398,24 @@ void Permisos::Revisar()
         ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText("root"));
         ui->comboBox->setCurrentIndex(ui->comboBox->findText(user));
     }
-    if (ui->lineEdit_2->text() == user)
+    else
+    {
+        ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText(ui->lineEdit_2->text()));
+        ui->comboBox->setCurrentIndex(ui->comboBox->findText(user));
+    }
+    if (ui->lineEdit_3->text() == user)
     {
         ui->comboBox_3->setCurrentIndex(ui->comboBox_3->findText(user));
         ui->comboBox_4->setCurrentIndex(ui->comboBox_4->findText("root"));
     }
-    else if (ui->lineEdit_2->text() == "root")
+    else if (ui->lineEdit_3->text() == "root")
     {
         ui->comboBox_3->setCurrentIndex(ui->comboBox_3->findText("root"));
+        ui->comboBox_4->setCurrentIndex(ui->comboBox_4->findText(user));
+    }
+    else
+    {
+        ui->comboBox_3->setCurrentIndex(ui->comboBox_3->findText(ui->lineEdit_3->text()));
         ui->comboBox_4->setCurrentIndex(ui->comboBox_4->findText(user));
     }
     this->Permisive();
@@ -342,6 +424,15 @@ void Permisos::Revisar()
 void Permisos::on_pushButton_clicked()
 {
     QString Objetivo = ui->lineEdit->text();
+    if (Objetivo == "")
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No hay datos para realizar el cambio."));
+        m.exec();
+        return;
+    }
     if (ui->radioButton->isChecked())
     {
         QString UsuarioF = ui->comboBox->currentText();
@@ -360,18 +451,12 @@ void Permisos::on_pushButton_clicked()
         if (ui->radioButton_8->isChecked())
         {
             if (ui->checkBox_4->isChecked())
-            {
                 system("chown '"+UsuarioF+"':'"+GrupoF+"' '"+Objetivo+"' -R");
-            }
             else
-            {
                 system("chown '"+UsuarioF+"':'"+GrupoF+"' '"+Objetivo+"'");
-            }
         }
         else
-        {
             system("chown '"+UsuarioF+"':'"+GrupoF+"' '"+Objetivo+"'");
-        }
         this->Revisar();
     }
     else if (ui->radioButton_2->isChecked())
@@ -493,7 +578,8 @@ void Permisos::on_pushButton_clicked()
         date->setDateTime(ui->dateTimeEdit->dateTime());
         date->setDisplayFormat("yyyyMMddHHmm");
         QString Fecha = date->text();
-        system("su - "+user+" -c \"touch -t '"+Fecha+"' '"+Objetivo+"'\"");
+        QString Usuario = ui->lineEdit_2->text();
+        system("su - "+Usuario+" -c \"touch -t '"+Fecha+"' '"+Objetivo+"'\"");
         this->Revisar();
     }
 }

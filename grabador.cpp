@@ -84,9 +84,7 @@ Grabador::Grabador(QWidget *parent) :
     QSqlQuery Variable(db);
     Variable.exec("SELECT Genero FROM id3Genre");
     while(Variable.next())
-    {
         ui->comboBox_2->addItem(Variable.value(0).toString());
-    }
     ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText("254 None"));
     CierreTotal = 0;
     ui->pushButton_12->setEnabled(false);
@@ -455,18 +453,14 @@ void Grabador::on_pushButton_clicked()
     if (CierreTotal == 1)
     {
         if (Log == "S")
-        {
             system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-        }
         MediaObject->stop();
         emit Cerrar();
     }
     else
     {
         if (Log == "S")
-        {
             system(QString::fromUtf8("echo '"+ui->textEdit->text()+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-        }
         MediaObject->stop();
         close();
     }
@@ -649,15 +643,11 @@ void Grabador::on_pushButton_5_clicked()
         fileName = QFileDialog::getSaveFileName(this,QString::fromUtf8(tr("Guardar archivo de audio")),
                             path,trUtf8(tr("Archivo de audio (*.mp3)")));
         if (fileName.isEmpty())
-        {
             return;
-        }
         if (fileName.contains(".mp3"))
             ui->lineEdit->setText(fileName);
         else
-        {
             ui->lineEdit->setText(""+fileName+".mp3");
-        }
     }
     else if (ui->radioButton_7->isChecked())
     {
@@ -666,20 +656,17 @@ void Grabador::on_pushButton_5_clicked()
         fileName = QFileDialog::getSaveFileName(this,QString::fromUtf8(tr("Guardar archivo de video")),
                             path,trUtf8(tr("Archivo de video (*.mkv)")));
         if (fileName.isEmpty())
-        {
             return;
-        }
         if (fileName.contains(".mkv"))
             ui->lineEdit->setText(fileName);
         else
-        {
             ui->lineEdit->setText(""+fileName+".mkv");
-        }
     }
 }
 
 void Grabador::on_lineEdit_textChanged(const QString &arg1)
 {
+    Q_UNUSED(arg1);
     if (ui->radioButton_6->isChecked())
     {
         if (ui->lineEdit->text() != "")
@@ -800,9 +787,7 @@ void Grabador::on_pushButton_12_clicked()
         ui->pushButton_6->setEnabled(true);
         ui->pushButton_14->setEnabled(true);
         ui->seekSlider_2->setMediaObject(MediaObject);
-        //ui->seekSlider_2->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         ui->volumeSlider_4->setAudioOutput(AudioOutput);
-        //ui->volumeSlider_4->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         timer->start(1000);
     }
 }
@@ -925,13 +910,9 @@ void Grabador::on_pushButton_15_clicked()
                            "no tiene la extension .mp3 correcta.<p>"
                            "&iquest;Insertar extension .mp3 para continuar?")), QMessageBox::Ok, QMessageBox::No);
             if (respuesta == QMessageBox::Ok)
-            {
                 ui->lineEdit->setText(""+fileName+".mp3");
-            }
             else
-            {
                 return;
-            }
         }
         ui->pushButton_12->setEnabled(false);
         ui->pushButton_3->setEnabled(false);
@@ -950,7 +931,7 @@ void Grabador::on_pushButton_15_clicked()
         connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
         connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
         int valor= comandos.count();
-        mib->Valor(valor,3);
+        mib->Valor(valor,4);
         mib->iniciarProceso();
         Phonon::MediaSource source(ui->lineEdit_33->text());
         MediaObject->setCurrentSource(source);
@@ -959,9 +940,7 @@ void Grabador::on_pushButton_15_clicked()
         ui->pushButton_6->setEnabled(true);
         ui->pushButton_14->setEnabled(true);
         ui->seekSlider_2->setMediaObject(MediaObject);
-        //ui->seekSlider_2->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         ui->volumeSlider_4->setAudioOutput(AudioOutput);
-        //ui->volumeSlider_4->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         timer->start(1000);
     }
 }
@@ -1031,13 +1010,9 @@ void Grabador::on_pushButton_2_clicked()
     drakeSistema drake;
     QString valor = drake.getStart(Explora);
     if (valor == "")
-    {
         archivo = "No";
-    }
     else
-    {
         archivo = "Si";
-    }
     if (ui->radioButton->isChecked())
     {
         if (archivo == "Si")
@@ -1083,9 +1058,7 @@ void Grabador::on_pushButton_2_clicked()
                     b = b+4;
                 }
                 else
-                {
                     in << valor + "\n";
-                }
             }
             file.close();
             ui->textEdit->append(tr("Configurado a entrada de grabacion: Audio interno. Modificado el fichero necesario."));
@@ -1154,18 +1127,13 @@ void Grabador::on_pushButton_2_clicked()
                     b = b+4;
                 }
                 else
-                {
                     in << valor + "\n";
-                }
             }
             file.close();
             ui->textEdit->append(tr("Configurado a entrada de grabacion: Microfono. Modificado el fichero necesario."));
         }
         else if (archivo == "No")
-        {
             ui->textEdit->append(tr("No es necesario configurar el archivo a microfono, No se genera el archivo de configuracion."));
-        }
-
     }
     this->Explorar();
 }
@@ -1278,13 +1246,9 @@ void Grabador::on_pushButton_11_clicked()
                            "no tiene la extension .mkv correcta.<p>"
                            "&iquest;Insertar extension .mkv para continuar?")), QMessageBox::Ok, QMessageBox::No);
             if (respuesta == QMessageBox::Ok)
-            {
                 ui->lineEdit->setText(""+fileName+".mkv");
-            }
             else
-            {
                 return;
-            }
         }
         ui->pushButton_12->setEnabled(false);
         ui->pushButton_3->setEnabled(false);
@@ -1313,7 +1277,7 @@ void Grabador::on_pushButton_11_clicked()
         connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
         connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
         int valor= comandos.count();
-        mib->Valor(valor,3);
+        mib->Valor(valor,4);
         mib->iniciarProceso();
     }
 }
@@ -1355,9 +1319,7 @@ void Grabador::on_pushButton_8_clicked()
                 item->setText(ui->lineEdit_3->text());
             }
             else
-            {
                 return;
-            }
         }
     }
     Fuente = ui->lineEdit_4->text();
@@ -1422,9 +1384,7 @@ void Grabador::on_pushButton_8_clicked()
             ui->spinBox_5->setValue(Segundo.toInt());
         }
         else
-        {
             return;
-        }
     }
     DiaD = FechaInicio.toString("dd");
     MesD = FechaInicio.toString("MM");
@@ -1486,15 +1446,11 @@ void Grabador::on_pushButton_16_clicked()
     fileName = QFileDialog::getSaveFileName(this,QString::fromUtf8(tr("Guardar archivo de audio")),
                         path,trUtf8(tr("Archivo de audio (*.mp3)")));
     if (fileName.isEmpty())
-    {
         return;
-    }
     if (fileName.contains(".mp3"))
         ui->lineEdit_3->setText(fileName);
     else
-    {
         ui->lineEdit_3->setText(""+fileName+".mp3");
-    }
 }
 
 void Grabador::on_tableWidget_itemSelectionChanged()
@@ -1503,9 +1459,7 @@ void Grabador::on_tableWidget_itemSelectionChanged()
     int iFilas;
     iFilas=ui->tableWidget->currentRow();
     if (iFilas == -1)
-    {
         return;
-    }
     else
     {
         QTableWidgetItem *item, *item1, *item2, *item3;
@@ -1592,13 +1546,9 @@ void Grabador::on_pushButton_9_clicked()
                                "no tiene la extension .mp3 correcta.<p>"
                                "&iquest;Insertar extension .mp3 para continuar?")), QMessageBox::Ok, QMessageBox::No);
                 if (respuesta == QMessageBox::Ok)
-                {
                     ui->lineEdit_3->setText(""+Ruta+".mp3");
-                }
                 else
-                {
                     return;
-                }
             }
         }
         Fuente = ui->lineEdit_4->text();
@@ -1663,9 +1613,7 @@ void Grabador::on_pushButton_9_clicked()
                 ui->spinBox_5->setValue(Segundo.toInt());
             }
             else
-            {
                 return;
-            }
         }
         DiaD = FechaInicio.toString("dd");
         MesD = FechaInicio.toString("MM");
@@ -1776,9 +1724,7 @@ QString Grabador::Revisar(QDateTime HoraI, int ValorI, int Posicion)
             int SegundoF = Hora2F.value(2).toInt();
             QDateTime FechaFinal(QDate(AnyoF,MesF,DiaF), QTime(HoraF,MinutoF,SegundoF));
             if (FechaFinal < HoraI)
-            {
                 valor = "Si";
-            }
             else
                 valor = "No";
         }
@@ -1934,7 +1880,6 @@ void Grabador::on_pushButton_13_clicked()
             this->KillProceso();
             system("killall firefox");
         }
-
     }
     else if (Graba == 1)
     {
@@ -2005,7 +1950,7 @@ void Grabador::CtrlRec()
         connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
         connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
         int valor= comandos.count();
-        mib->Valor(valor,3);
+        mib->Valor(valor,4);
         mib->iniciarProceso();
         ControlRec->stop();
         ControlFin = new QTimer(this);

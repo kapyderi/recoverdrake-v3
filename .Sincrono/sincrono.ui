@@ -158,6 +158,15 @@
        </item>
        <item row="1" column="6">
         <widget class="QCheckBox" name="checkBox_3">
+         <property name="toolTip">
+          <string>Analiza archivos ocultos</string>
+         </property>
+         <property name="statusTip">
+          <string>Analiza archivos ocultos</string>
+         </property>
+         <property name="whatsThis">
+          <string>Analiza archivos ocultos</string>
+         </property>
          <property name="text">
           <string>Analizar archivos ocultos</string>
          </property>

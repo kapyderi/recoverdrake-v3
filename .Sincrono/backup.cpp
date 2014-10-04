@@ -2625,7 +2625,7 @@ void Backup::on_pushButton_2_clicked()
                              else
                              {
                                  QSqlQuery Wwhite(DBackup);
-                                 Wwhite.exec("UPDATE Smtp SET Correo='"+DatName+"',smptserver='"+DatDescrip+"',Clave='"+DatSource+"',Autenticacion="+DatGrade+",SSL='"+DatTabla+"',User='"+DatUser+"',Port='"+DatPort+"' WHERE Correo='"+DatName+"'");
+                                 Wwhite.exec("UPDATE Smtp SET Correo='"+DatName+"',smptserver='"+DatDescrip+"',Clave='"+DatSource+"',Autenticacion='"+DatGrade+"',SSL='"+DatTabla+"',User='"+DatUser+"',Port='"+DatPort+"' WHERE Correo='"+DatName+"'");
                              }
                          }
                          cantidad++;
@@ -5168,7 +5168,7 @@ void Backup::on_pushButton_3_clicked()
                              else
                              {
                                  QSqlQuery Wwhite(DB);
-                                 Wwhite.exec("UPDATE Smtp SET Correo='"+DatName+"',smptserver='"+DatDescrip+"',Clave='"+DatSource+"',Autenticacion="+DatGrade+",SSL='"+DatTabla+"',User='"+DatUser+"',Port='"+DatPort+"' WHERE Correo='"+DatName+"'");
+                                 Wwhite.exec("UPDATE Smtp SET Correo='"+DatName+"',smptserver='"+DatDescrip+"',Clave='"+DatSource+"',Autenticacion='"+DatGrade+"',SSL='"+DatTabla+"',User='"+DatUser+"',Port='"+DatPort+"' WHERE Correo='"+DatName+"'");
                              }
                          }
                          cantidad++;

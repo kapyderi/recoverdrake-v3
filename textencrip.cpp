@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QTextCodec>
 #include <QDebug>
+#include "Report/savetobdfrm.h"
 
 textencrip::textencrip(QWidget *parent) :
     QDialog(parent),
@@ -81,6 +82,7 @@ textencrip::textencrip(QWidget *parent) :
     connect(ui->checkBox,SIGNAL(clicked()),this,SLOT(Comprobar()));
     connect(ui->radioButton,SIGNAL(clicked()),this,SLOT(Comprobar1()));
     connect(ui->radioButton_2,SIGNAL(clicked()),this,SLOT(Comprobar1()));
+    connect(ui->comboBox,SIGNAL(currentIndexChanged(QString)),this,SLOT(Validar(QString)));
     ui->radioButton->setChecked(true);
     ui->textEdit_2->setFocus();
     cursor = ui->textEdit_2->textCursor();
@@ -89,11 +91,38 @@ textencrip::textencrip(QWidget *parent) :
     ui->comboBox->setEnabled(true);
     ui->label->setText(tr("Texto original"));
     ui->label_2->setText(tr("Texto encriptado"));
+    ui->lineEdit_13->setEnabled(false);
+    ui->lineEdit_14->setEnabled(false);
+    ui->lineEdit_16->setEnabled(false);
+    ui->lineEdit_18->setEnabled(false);
 }
 
 textencrip::~textencrip()
 {
     delete ui;
+}
+
+void textencrip::Validar(QString Value)
+{
+    if (Value == tr("Simple"))
+    {
+        ui->lineEdit_13->setEnabled(false);
+        ui->lineEdit_14->setEnabled(false);
+        ui->lineEdit_13->setText("");
+        ui->lineEdit_14->setText("");
+    }
+    if (Value == tr("Doble"))
+    {
+        ui->lineEdit_13->setEnabled(true);
+        ui->lineEdit_14->setEnabled(false);
+        ui->lineEdit_14->setText("");
+    }
+    if (Value == tr("Triple"))
+    {
+        ui->lineEdit_13->setEnabled(true);
+        ui->lineEdit_14->setEnabled(true);
+    }
+    this->Reencriptar();
 }
 
 void textencrip::on_pushButton_5_clicked()
@@ -190,6 +219,15 @@ void textencrip::Comprobar1()
         ui->comboBox->setEnabled(true);
         ui->label->setText(tr("Texto original"));
         ui->label_2->setText(tr("Texto encriptado"));
+        ui->groupBox_2->show();
+        ui->textEdit_2->setText("");
+        ui->textEdit->setText("");
+        ui->txtNombre_2->setText("");
+        ui->txtNombre_3->setText("");
+        ui->lineEdit_13->setText("");
+        ui->lineEdit_14->setText("");
+        ui->lineEdit_16->setText("");
+        ui->lineEdit_18->setText("");
     }
     else
     {
@@ -197,6 +235,15 @@ void textencrip::Comprobar1()
         ui->comboBox->setEnabled(false);
         ui->label->setText(tr("Texto encriptado"));
         ui->label_2->setText(tr("Texto original"));
+        ui->groupBox_2->hide();
+        ui->textEdit_2->setText("");
+        ui->textEdit->setText("");
+        ui->txtNombre_2->setText("");
+        ui->txtNombre_3->setText("");
+        ui->lineEdit_13->setText("");
+        ui->lineEdit_14->setText("");
+        ui->lineEdit_16->setText("");
+        ui->lineEdit_18->setText("");
     }
 }
 
@@ -263,12 +310,12 @@ void textencrip::on_pushButton_2_clicked()
 {
     QString path=tr("/home/%1/Documentos/");
     path=path.arg(user);
-    QString fileNameDestino = QFileDialog::getSaveFileName(this,QString::fromUtf8(tr("Guardar archivo ")),
+    QString fileNameDestino = QFileDialog::getSaveFileName(this,QString::fromUtf8(tr("Guardar archivo")),
                         path,trUtf8(tr("Archivo HTML (*.htm *.html)")));
     if (fileNameDestino.isEmpty())
         return;
-    if (! (fileNameDestino.endsWith(".odt", Qt::CaseInsensitive) || fileNameDestino.endsWith(".doc", Qt::CaseInsensitive) || fileNameDestino.endsWith(".htm", Qt::CaseInsensitive) || fileNameDestino.endsWith(".html", Qt::CaseInsensitive)) )
-             fileNameDestino += ".odt";
+    if (!(fileNameDestino.endsWith(".htm", Qt::CaseInsensitive) || fileNameDestino.endsWith(".html", Qt::CaseInsensitive)) )
+             fileNameDestino += ".htm";
     ui->txtNombre_2->setText(fileNameDestino);
 }
 
@@ -279,13 +326,35 @@ void textencrip::on_pushButton_clicked()
         QMessageBox m;
         if (Stilo == "A")
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr("No has seleccionado ningun destino y no se puede guardar.<p>Introduce primero la ruta y vuelve a guardar."));
+        m.setText(tr("No has seleccionado ningun destino y no se puede guardar.<p>Tienes que introducir primero una ruta de destino valida."));
         m.exec();
-        this->on_pushButton_2_clicked();
+        return;
+    }
+    if (ui->textEdit_2->text() == "")
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No hay ningun texto para guardar."));
+        m.exec();
+        return;
+    }
+    if (ui->textEdit_2->text() == ui->textEdit->toPlainText())
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No has encriptado el texto a guardar."));
+        m.exec();
         return;
     }
     QTextDocumentWriter writer(ui->txtNombre_2->text());
     writer.write(ui->textEdit->document());
+    QMessageBox m;
+    if (Stilo == "A")
+        m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+    m.setText(tr("Archivo guardado correctamente."));
+    m.exec();
 }
 
 void textencrip::on_btnLeft_2_clicked()
@@ -313,6 +382,7 @@ void textencrip::on_pushButton_7_clicked()
 {
     ui->textEdit_2->setText("");
     ui->textEdit->setText("");
+    ui->textEdit_2->setFocus();
 }
 
 void textencrip::on_pushButton_6_clicked()
@@ -331,18 +401,399 @@ void textencrip::on_pushButton_6_clicked()
      QTextCodec *codec = Qt::codecForHtml(data);
      QString str = codec->toUnicode(data);
      ui->textEdit_2->setHtml(str);
-     ui->textEdit_2->setFocus();
+     QStringList Validar = ui->textEdit->toPlainText().split(" ");
+     QString Valor = Validar.value(Validar.count()-2);
+     if (Valor == "%")
+     {
+         Cripto = 1;
+         ui->lineEdit_16->setEnabled(true);
+         ui->lineEdit_18->setEnabled(false);
+     }
+     if (Valor == "&")
+     {
+         Cripto = 2;
+         ui->lineEdit_16->setEnabled(true);
+         ui->lineEdit_18->setEnabled(true);
+     }
 }
 
 void textencrip::on_pushButton_4_clicked()
 {
-    QStringList prueba = ui->textEdit->toPlainText().split("\n");
-     qDebug() << prueba;
-    for (int a=0;a<prueba.count();a++)
+    if (ui->textEdit_2->text() != ui->textEdit->toPlainText())
     {
-        qDebug() << prueba.value(a);
-        QString prueba1 = prueba.value(a)+"hola";
-        ui->textEdit->find(prueba.value(a),QTextDocument::FindWholeWords);
-        ui->textEdit->textCursor().insertText(prueba1);
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("Ya esta encriptado el texto."));
+        m.exec();
+        return;
     }
+    int ramdom3, ramdom4;
+    if (ui->comboBox->currentText() == tr("Doble"))
+    {
+        ramdom3 = ramdomize();
+        ui->lineEdit_13->setText(QString::number(ramdom3));
+    }
+    if (ui->comboBox->currentText() == tr("Triple"))
+    {
+        ramdom3 = ramdomize();
+        ramdom4 = ramdomize();
+        ui->lineEdit_13->setText(QString::number(ramdom3));
+        ui->lineEdit_14->setText(QString::number(ramdom4));
+    }
+    QStringList Valor = ui->textEdit->toPlainText().split("\n");
+    for (int a=0;a<Valor.count();a++)
+    {
+        if (Valor.value(a) != "")
+        {
+            QString Parcial = Valor.value(a);
+            QString Encrip = Encriptar(Parcial);
+            QString FEncrip = Traducir(Encrip);
+            ui->textEdit->find(Valor.value(a),QTextDocument::FindWholeWords);
+            ui->textEdit->textCursor().insertText(FEncrip);
+        }
+        else
+            ui->textEdit->textCursor().insertText(Valor.value(a));
+    }
+}
+
+void textencrip::Reencriptar()
+{
+    if (ui->textEdit_2->text() != ui->textEdit->toPlainText())
+    {
+        ui->textEdit->setText(ui->textEdit_2->text());
+        int ramdom3, ramdom4;
+        if (ui->comboBox->currentText() == tr("Doble"))
+        {
+            ramdom3 = ramdomize();
+            ui->lineEdit_13->setText(QString::number(ramdom3));
+        }
+        if (ui->comboBox->currentText() == tr("Triple"))
+        {
+            ramdom3 = ramdomize();
+            ramdom4 = ramdomize();
+            ui->lineEdit_13->setText(QString::number(ramdom3));
+            ui->lineEdit_14->setText(QString::number(ramdom4));
+        }
+        QStringList Valor = ui->textEdit->toPlainText().split("\n");
+        for (int a=0;a<Valor.count();a++)
+        {
+            if (Valor.value(a) != "")
+            {
+                QString Parcial = Valor.value(a);
+                QString Encrip = Encriptar(Parcial);
+                QString FEncrip = Traducir(Encrip);
+                ui->textEdit->find(Valor.value(a),QTextDocument::FindWholeWords);
+                ui->textEdit->textCursor().insertText(FEncrip);
+            }
+            else
+                ui->textEdit->textCursor().insertText(Valor.value(a));
+        }
+    }
+}
+
+QString textencrip::Traducir(QString dato)
+{
+    QString Valor;
+    QStringList DatoParc = dato.split("-");
+    for(int a=0;a<DatoParc.count();a++)
+    {
+        QString Restando = DatoParc.value(a);
+        QStringList ValorR = Restando.split("");
+        for(int b=1;b<ValorR.count()-1;b++)
+        {
+            QString Resto = ValorR.value(b);
+            if (Resto == "0")
+                Valor.append("!");
+            if (Resto == "1")
+                Valor.append("$");
+            if (Resto == "2")
+                Valor.append("%");
+            if (Resto == "3")
+                Valor.append("&");
+            if (Resto == "4")
+                Valor.append("#");
+            if (Resto == "5")
+                Valor.append("(");
+            if (Resto == "6")
+                Valor.append(")");
+            if (Resto == "7")
+                Valor.append("*");
+            if (Resto == "8")
+                Valor.append("?");
+            if (Resto == "9")
+                Valor.append("@");
+        }
+        Valor.append(" ");
+    }
+    return Valor;
+}
+
+int textencrip::ramdomize()
+{
+    int dato;
+    dato = randInt(0,99);
+    return dato;
+}
+
+int textencrip::randInt(int low, int high)
+{
+    return qrand() % ((high + 1) - low) + low;
+}
+
+QString textencrip::Encriptar(QString dato)
+{
+    QString DatEncrip;
+    int PosseU = dato.count();
+    int ramdom1 = ramdomize();
+    int ramdom2 = ramdomize();
+    int ramdom3 = ui->lineEdit_13->text().toInt();
+    int ramdom4 = ui->lineEdit_14->text().toInt();
+    QStringList Pass = dato.split("");
+    if (ui->comboBox->currentText() == tr("Simple"))
+    {
+        for(int a=1;a<Pass.count()-1;a++)
+        {
+            QString Posicion;
+            int Final, Dato, DatUser;
+            Posicion = Pass.value(a);
+            QSqlQuery query(db);
+            query.exec("SELECT Decimal FROM Ascii WHERE Unicode='"+Posicion+"'");
+            query.first();
+            Final = query.value(0).toInt();
+            Dato = PosseU+a+1;
+            DatUser = Final * Dato;
+            if (a != Pass.count()-1)
+                DatEncrip = DatEncrip.append(QString::number(DatUser)+"-");
+            else
+                DatEncrip = DatEncrip.append(QString::number(DatUser));
+        }
+        DatEncrip = DatEncrip.append(QString::number(PosseU)+"-1");
+    }
+    if (ui->comboBox->currentText() == tr("Doble"))
+    {
+        for(int a=1;a<Pass.count()-1;a++)
+        {
+            QString Posicion;
+            int Final, Dato, DatUser;
+            Posicion = Pass.value(a);
+            QSqlQuery query(db);
+            query.exec("SELECT Decimal FROM Ascii WHERE Unicode='"+Posicion+"'");
+            query.first();
+            Final = query.value(0).toInt();
+            Dato = PosseU+ramdom1+a+1+ramdom3;
+            DatUser = Final * Dato;
+            if (a != Pass.count()-1)
+                DatEncrip = DatEncrip.append(QString::number(DatUser)+"-");
+            else
+                DatEncrip = DatEncrip.append(QString::number(DatUser));
+        }
+        DatEncrip = DatEncrip.append(QString::number(ramdom1)+"-"+QString::number(PosseU)+"-2");
+    }
+    if (ui->comboBox->currentText() == tr("Triple"))
+    {
+        for(int a=1;a<Pass.count()-1;a++)
+        {
+            QString Posicion;
+            int Final, Dato, DatUser;
+            Posicion = Pass.value(a);
+            QSqlQuery query(db);
+            query.exec("SELECT Decimal FROM Ascii WHERE Unicode='"+Posicion+"'");
+            query.first();
+            Final = query.value(0).toInt();
+            Dato = PosseU+ramdom1+ramdom2+a+1+ramdom3+ramdom4;
+            DatUser = Final * Dato;
+            if (a != Pass.count()-1)
+                DatEncrip = DatEncrip.append(QString::number(DatUser)+"-");
+            else
+                DatEncrip = DatEncrip.append(QString::number(DatUser));
+        }
+        DatEncrip = DatEncrip.append(QString::number(ramdom1)+"-"+QString::number(ramdom2)+"-"+QString::number(PosseU)+"-3");
+    }
+    return DatEncrip;
+}
+
+void textencrip::on_pushButton_8_clicked()
+{
+    if (ui->textEdit_2->toPlainText() != ui->textEdit->toPlainText())
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("Ya esta desencriptado el texto."));
+        m.exec();
+        return;
+    }
+    if (Cripto == 1)
+    {
+        if (ui->lineEdit_16->text() == "")
+        {
+            QMessageBox m;
+            if (Stilo == "A")
+                m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+            m.setText(tr("Debes de introducir los datos que te han sido facilitados para desencriptar.<p>Sino es asi, debes solicitar estos datos o no podras leer el texto."));
+            m.exec();
+            return;
+        }
+    }
+    if (Cripto == 2)
+    {
+        if (ui->lineEdit_16->text() == "" || ui->lineEdit_18->text() == "")
+        {
+            QMessageBox m;
+            if (Stilo == "A")
+                m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+            m.setText(tr("Debes de introducir los datos que te han sido facilitados para desencriptar.<p>Sino es asi, debes solicitar estos datos o no podras leer el texto."));
+            m.exec();
+            return;
+        }
+    }
+    QStringList Valor = ui->textEdit->toPlainText().split("\n");
+    for (int a=0;a<Valor.count();a++)
+    {
+        if (Valor.value(a) != "")
+        {
+            QString Parcial = Valor.value(a);
+            QString Dencrip = Destraducir(Parcial);
+            QString Encrip = Desencriptar(Dencrip);
+            ui->textEdit->find(Valor.value(a),QTextDocument::FindWholeWords);
+            ui->textEdit->textCursor().insertText(Encrip);
+        }
+        else
+            ui->textEdit->textCursor().insertText(Valor.value(a));
+    }
+}
+
+QString textencrip::Destraducir(QString dato)
+{
+    QString Valor;
+    QStringList DatoParc = dato.split(" ");
+    for(int a=0;a<DatoParc.count()-1;a++)
+    {
+        QString Restando = DatoParc.value(a);
+        QStringList ValorR = Restando.split("");
+        for(int b=1;b<ValorR.count()-1;b++)
+        {
+            QString Resto = ValorR.value(b);
+            if (Resto == "!")
+                Valor.append("0");
+            if (Resto == "$")
+                Valor.append("1");
+            if (Resto == "%")
+                Valor.append("2");
+            if (Resto == "&")
+                Valor.append("3");
+            if (Resto == "#")
+                Valor.append("4");
+            if (Resto == "(")
+                Valor.append("5");
+            if (Resto == ")")
+                Valor.append("6");
+            if (Resto == "*")
+                Valor.append("7");
+            if (Resto == "?")
+                Valor.append("8");
+            if (Resto == "@")
+                Valor.append("9");
+        }
+        Valor.append("-");
+    }
+    Valor.chop(1);
+    return Valor;
+}
+
+QString textencrip::Desencriptar(QString dato)
+{
+    QString DatEncrip;
+    int ramdom3, ramdom4;
+    if (Cripto == 1)
+        ramdom3 = ui->lineEdit_16->text().toInt();
+    if (Cripto == 2)
+    {
+        ramdom3 = ui->lineEdit_16->text().toInt();
+        ramdom4 = ui->lineEdit_18->text().toInt();
+    }
+    QStringList Pass = dato.split("-");
+    if (Pass.value(Pass.count()-1) == "1")
+    {
+        int PosseU = Pass.value(Pass.count()-2).toInt();
+        for(int a=0;a<Pass.count()-2;a++)
+        {
+            int Posicion, Dato, DatUser;
+            QString Final;
+            Posicion = Pass.value(a).toInt();
+            Dato = PosseU+(a+1)+1;
+            DatUser = Posicion / Dato;
+            QSqlQuery query(db);
+            query.exec("SELECT Unicode FROM Ascii WHERE Decimal='"+QString::number(DatUser)+"'");
+            query.first();
+            Final = query.value(0).toString();
+            DatEncrip = DatEncrip.append(Final);
+        }
+    }
+    if (Pass.value(Pass.count()-1) == "2")
+    {
+        int PosseA = Pass.value(Pass.count()-2).toInt();
+        int PosseU = Pass.value(Pass.count()-3).toInt();
+        for(int a=0;a<Pass.count()-3;a++)
+        {
+            int Posicion, Dato, DatUser;
+            QString Final;
+            Posicion = Pass.value(a).toInt();
+            Dato = PosseU+PosseA+(a+1)+1+ramdom3;
+            DatUser = Posicion / Dato;
+            QSqlQuery query(db);
+            query.exec("SELECT Unicode FROM Ascii WHERE Decimal='"+QString::number(DatUser)+"'");
+            query.first();
+            Final = query.value(0).toString();
+            DatEncrip = DatEncrip.append(Final);
+        }
+    }
+    if (Pass.value(Pass.count()-1) == "3")
+    {
+        int PosseA = Pass.value(Pass.count()-2).toInt();
+        int PosseI = Pass.value(Pass.count()-3).toInt();
+        int PosseU = Pass.value(Pass.count()-4).toInt();
+        for(int a=0;a<Pass.count()-4;a++)
+        {
+            int Posicion, Dato, DatUser;
+            QString Final;
+            Posicion = Pass.value(a).toInt();
+            Dato = PosseU+PosseI+PosseA+(a+1)+1+ramdom3+ramdom4;
+            DatUser = Posicion / Dato;
+            QSqlQuery query(db);
+            query.exec("SELECT Unicode FROM Ascii WHERE Decimal='"+QString::number(DatUser)+"'");
+            query.first();
+            Final = query.value(0).toString();
+            DatEncrip = DatEncrip.append(Final);
+        }
+    }
+    return DatEncrip;
+}
+
+void textencrip::on_pushButton_3_clicked()
+{
+    if (ui->textEdit_2->text() == "")
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No hay texto a imprimir."));
+        m.exec();
+        return;
+    }
+    if (ui->textEdit_2->text() == ui->textEdit->toPlainText())
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        if (ui->radioButton->isChecked())
+            m.setText(tr("No has encriptado el texto.<p>Se imprimira sin encriptacion."));
+        else
+            m.setText(tr("No has desencriptado el texto.<p>Se imprimira con encriptacion"));
+        m.exec();
+    }
+    SaveToBDFrm frm(this);
+    frm.Valor("3","","",ui->textEdit->toHtml());
+    frm.exec();
 }

@@ -1960,7 +1960,7 @@ static bool createConnection()
                                             else
                                             {
                                                 QSqlQuery Wwhite(DB);
-                                                Wwhite.exec("UPDATE Report SET report_name='"+DatName+"',report_descrip='"+DatDescrip+"',report_source='"+DatSource+"',report_grade="+DatGrade+",report_table='"+DatTabla+"' WHERE report_name='"+DatName+"'");
+                                                Wwhite.exec("UPDATE Report SET report_name='"+DatName+"',report_descrip='"+DatDescrip+"',report_source='"+DatSource+"',report_grade='"+DatGrade+"',report_table='"+DatTabla+"' WHERE report_name='"+DatName+"'");
                                             }
                                         }
                                         cantidad++;

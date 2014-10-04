@@ -159,55 +159,36 @@ void md5sum::on_pushButton_4_clicked()
     mib = new DrakeProcesos(comandos, this);
     connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
     connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
-    int valor= comandos.count(); mib->Valor(valor,3); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
+    int valor= comandos.count();
+    mib->Valor(valor,3);
+    mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+    mib->iniciarProceso();
 }
 
 void md5sum::Contar()
 {
     if (ui->label_4->text() == tr("Espera por favor. Comprobando md5"))
-    {
          ui->label_4->setText(tr("Espera por favor. Comprobando md5."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Comprobando md5."))
-    {
          ui->label_4->setText(tr("Espera por favor. Comprobando md5.."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Comprobando md5.."))
-    {
          ui->label_4->setText(tr("Espera por favor. Comprobando md5..."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Comprobando md5..."))
-    {
          ui->label_4->setText(tr("Espera por favor. Comprobando md5...."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Comprobando md5...."))
-    {
          ui->label_4->setText(tr("Espera por favor. Comprobando md5....."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Comprobando md5....."))
-    {
          ui->label_4->setText(tr("Espera por favor. Comprobando md5......"));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Comprobando md5......"))
-    {
          ui->label_4->setText(tr("Espera por favor. Comprobando md5......."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Comprobando md5......."))
-    {
          ui->label_4->setText(tr("Espera por favor. Comprobando md5........"));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Comprobando md5........"))
-    {
          ui->label_4->setText(tr("Espera por favor. Comprobando md5........."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Comprobando md5........."))
-    {
          ui->label_4->setText(tr("Espera por favor. Comprobando md5.........."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Comprobando md5.........."))
-    {
          ui->label_4->setText(tr("Espera por favor. Comprobando md5"));
-    }
 }
 
 void md5sum::on_pushButton_6_clicked()
@@ -227,9 +208,7 @@ void md5sum::mibFin()
     if (Val1 != "")
     {
         if (ui->lineEdit_4->text() == "")
-        {
             ui->lineEdit_3->setText(Val1);
-        }
         else if (ui->lineEdit_4->text() != "")
         {
             if (Val1 == Val2)

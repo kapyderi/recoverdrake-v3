@@ -515,7 +515,7 @@ font: bold;</string>
           </property>
           <property name="icon">
            <iconset resource="recoverdrake.qrc">
-            <normaloff>:/Imagenes/lupaO.png</normaloff>:/Imagenes/lupaO.png</iconset>
+            <normaloff>:/Imagenes/Buscar.png</normaloff>:/Imagenes/Buscar.png</iconset>
           </property>
           <property name="iconSize">
            <size>

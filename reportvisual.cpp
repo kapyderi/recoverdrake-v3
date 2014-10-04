@@ -598,7 +598,7 @@ void ReportVisual::on_pushButton_4_clicked()
 void ReportVisual::on_actionGuardar_en_BD_triggered()
 {
     SaveToBDFrm frm(this);
-    frm.Valor("0","","");
+    frm.Valor("0","","","");
     if(frm.exec() == QDialog::Accepted)
     {        
         QString error = "";
@@ -651,7 +651,7 @@ void ReportVisual::on_actionAbrir_desde_BD_triggered()
 {
     QString datos, error;
     SaveToBDFrm frm(this);
-    frm.Valor("1","","");
+    frm.Valor("1","","","");
     if(frm.exec() == QDialog::Accepted)
     {
         int Pose = frm.Posicion;

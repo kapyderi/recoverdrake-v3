@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/codeBar">
+        <file>Imagenes/codebar/FRE3OF9X.TTF</file>
+    </qresource>
+</RCC>

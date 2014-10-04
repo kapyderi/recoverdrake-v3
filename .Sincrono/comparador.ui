@@ -551,13 +551,13 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="toolTip">
+             <string>Consola de procesos en busqueda de directorios</string>
+            </property>
             <property name="statusTip">
              <string>Consola de procesos en busqueda de directorios</string>
             </property>
             <property name="whatsThis">
-             <string>Consola de procesos en busqueda de directorios</string>
-            </property>
-            <property name="accessibleName">
              <string>Consola de procesos en busqueda de directorios</string>
             </property>
            </widget>

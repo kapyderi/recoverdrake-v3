@@ -127,7 +127,7 @@
       <enum>QTabWidget::Triangular</enum>
      </property>
      <property name="currentIndex">
-      <number>11</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_6">
       <attribute name="icon">
@@ -7477,7 +7477,7 @@ p, li { white-space: pre-wrap; }
         </font>
        </property>
        <property name="text">
-        <string>lha</string>
+        <string>zoo</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_204">

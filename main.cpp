@@ -30,9 +30,7 @@ int main(int argc, char *argv[])
     QString DatoNegro;
     opcion2=seting.value("opcion2",false);
     if (!createConnection())
-    {
        return 1;
-    }
     db=QSqlDatabase::database("PRINCIPAL");
     QTextCodec *linuxCodec = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForTr(linuxCodec);

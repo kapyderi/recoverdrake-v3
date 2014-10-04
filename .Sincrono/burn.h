@@ -14,6 +14,7 @@ namespace Ui {
 
 class burn : public QDialog {
     Q_OBJECT
+
 public:
     burn(QWidget *parent = 0);
     ~burn();    

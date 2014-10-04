@@ -143,6 +143,7 @@ void Calendario::Valor(QString valor, QString Log)
             ui->tableWidget->setItem(iFilas,1,item2);
             ui->tableWidget->setItem(iFilas,2,item3);
             ui->tableWidget->setItem(iFilas,3,item4);
+            ui->tableWidget->item(iFilas,3)->setIcon(QIcon(":/Imagenes/bad.png"));
         }
     }
     ui->tableWidget->resizeRowsToContents();

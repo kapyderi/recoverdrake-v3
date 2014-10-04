@@ -37,26 +37,26 @@ private slots:
     void on_textEdit_2_textChanged();
     void Comprobar1();
     void on_btnItalic_2_toggled(bool checked);
-
     void on_btnUnder_2_toggled(bool checked);
-
     void on_btnColor_2_clicked();
-
     void on_pushButton_2_clicked();
-
     void on_pushButton_clicked();
-
     void on_btnLeft_2_clicked();
-
     void on_btnCenter_2_clicked();
-
     void on_btnRigth_2_clicked();
-
     void on_pushButton_7_clicked();
-
     void on_pushButton_6_clicked();
-
     void on_pushButton_4_clicked();
+    QString Encriptar(QString dato);
+    QString Desencriptar(QString dato);
+    int ramdomize();
+    int randInt(int low, int high);
+    void on_pushButton_8_clicked();
+    void on_pushButton_3_clicked();
+    QString Traducir(QString dato);
+    QString Destraducir(QString dato);
+    void Validar(QString Value);
+    void Reencriptar();
 
 private:
     Ui::textencrip *ui;
@@ -75,6 +75,7 @@ private:
     QString Log;
     QTextCursor cursor;
     QString user;
+    int Cripto;
 
 };
 

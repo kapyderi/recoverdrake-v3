@@ -10,6 +10,11 @@
     <height>352</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Configurar imagen</string>
   </property>

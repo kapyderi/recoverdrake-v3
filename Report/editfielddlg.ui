@@ -16,6 +16,11 @@
     <height>455</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Configuracion de campos</string>
   </property>

@@ -153,6 +153,20 @@ void Ayuda::Valor(QString valor)
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(valor);
     }
+    if (valor == tr("DB de claves"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_16,valor);
+        ui->tabWidget->setCurrentPage(0);
+        ui->listWidget->setCurrentRow(0);
+        ui->lineEdit->setText(valor);
+    }
+    if (valor == tr("Encriptador de texto"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_17,valor);
+        ui->tabWidget->setCurrentPage(0);
+        ui->listWidget->setCurrentRow(0);
+        ui->lineEdit->setText(valor);
+    }
     if (ui->lineEdit->text() == "")
     {
         ui->tabWidget_2->setCurrentPage(1);
@@ -243,6 +257,16 @@ void Ayuda::on_listWidget_currentTextChanged(const QString &currentText)
     if (currentText == tr("Compresor"))
     {
         ui->tabWidget->insertTab(0,ui->tab_15,tr("Kompresor"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("DB de claves"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_16,tr("DB de claves"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Encriptador de texto"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_17,tr("Encriptador de texto"));
         ui->tabWidget->setCurrentPage(0);
     }
 }
@@ -338,6 +362,16 @@ void Ayuda::on_listWidget_2_currentTextChanged(const QString &currentText)
         ui->tabWidget->insertTab(0,ui->tab_15,tr("Kompresor"));
         ui->tabWidget->setCurrentPage(0);
     }
+    if (currentText == tr("DB de claves"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_16,tr("DB de claves"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Encriptador de texto"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_17,tr("Encriptador de texto"));
+        ui->tabWidget->setCurrentPage(0);
+    }
 }
 
 void Ayuda::Comprobar()
@@ -430,6 +464,16 @@ void Ayuda::Comprobar()
     if (Valor == tr("Compresor"))
     {
         ui->tabWidget->insertTab(0,ui->tab_15,tr("Kompresor"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (Valor == tr("DB de claves"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_16,tr("DB de claves"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (Valor == tr("Encriptador de texto"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_17,tr("Encriptador de texto"));
         ui->tabWidget->setCurrentPage(0);
     }
 }

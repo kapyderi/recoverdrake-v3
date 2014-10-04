@@ -74,11 +74,11 @@
         <string>Limpiar el QR cargado</string>
        </property>
        <property name="text">
-        <string>Limpiar</string>
+        <string>Nuevo</string>
        </property>
        <property name="icon">
         <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/borrar.png</normaloff>:/Imagenes/borrar.png</iconset>
+         <normaloff>:/Imagenes/URI_www_kapyderi_blogspog.png</normaloff>:/Imagenes/URI_www_kapyderi_blogspog.png</iconset>
        </property>
        <property name="iconSize">
         <size>

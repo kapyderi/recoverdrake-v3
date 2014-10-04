@@ -599,15 +599,13 @@ void Conversor::on_pushButton_clicked()
         valor1=item1->text();
         if(valor == "Ok")
         {
-            ui->videoPlayer->load(Phonon::MediaSource(valor1));
+            ui->videoPlayer->load(Phonon::MediaSource(QUrl(valor1)));
             ui->videoPlayer->play();
             ui->pushButton->setEnabled(false);
             ui->pushButton_6->setEnabled(true);
             ui->pushButton_3->setEnabled(true);            
             ui->seekSlider->setMediaObject(ui->videoPlayer->mediaObject());
-            //ui->seekSlider->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-            ui->volumeSlider_2->setAudioOutput(AudioOutput);
-            //ui->volumeSlider_2->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+            ui->volumeSlider_2->setAudioOutput(ui->videoPlayer->audioOutput());
             timer->start(1000);
         }
     }
@@ -659,7 +657,7 @@ void Conversor::tableClicked(int row, int /*column*/)
     {
        ui->videoPlayer->stop();
        QTest::qWait(500);
-       ui->videoPlayer->load(Phonon::MediaSource(valor1));
+       ui->videoPlayer->load(Phonon::MediaSource(QUrl(valor1)));
        ui->videoPlayer->pause();
        ui->pushButton->setEnabled(true);
        ui->pushButton_6->setEnabled(false);

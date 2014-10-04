@@ -39,7 +39,8 @@ void QRWidget::paint(QPainter &painter)
         QColor bg("white");
         painter.setBrush(bg);
         painter.setPen(Qt::NoPen);
-        painter.drawRect(0,0,width(),height());
+        //painter.drawRect(0,0,width(),height());
+        painter.drawRect(0,0,height(),height());
         painter.setBrush(fg);
         const int s=qr->width>0?qr->width:1;
         const double w=width();
@@ -68,6 +69,7 @@ void QRWidget::paint(QPainter &painter)
     else
     {
         QColor error("red");
+
         painter.setBrush(error);
         painter.drawRect(0,0,width(),height());
     }

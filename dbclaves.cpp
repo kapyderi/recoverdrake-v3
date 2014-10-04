@@ -787,16 +787,12 @@ void dbclaves::on_pushButton_3_clicked()
         respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Borrar clave")),
                      QString::fromUtf8(tr("<center><b>Confirmar borrado de clave</center><p>"
                      "Vas a proceder al borrado del usuario y la clave...<p>"
-                     "<b>"+ui->lineEdit->text()+" -  "+ui->lineEdit_2->text()+"</b><p>"
+                     "<b>"+ui->lineEdit->text()+" - "+ui->lineEdit_2->text()+"</b><p>"
                      "&iquest;Borrar clave?")), QMessageBox::Ok, QMessageBox::No);
          if (respuesta == QMessageBox::Ok)
-         {
              ui->tableView->model()->removeRow(fila);
-         }
          else if (respuesta == QMessageBox::No)
-         {
              return;
-         }
     }
     else
     {
@@ -860,9 +856,7 @@ void dbclaves::on_pushButton_11_clicked()
 void dbclaves::on_pushButton_10_clicked()
 {
     if (ui->lineEdit_6->text().contains("www"))
-    {
          system("su - "+user+" -c \"firefox "+ui->lineEdit_6->text()+"\"");
-    }
 }
 
 void dbclaves::on_pushButton_12_clicked()
@@ -959,9 +953,7 @@ void dbclaves::on_pushButton_5_clicked()
         import->exec();
         QString Recibido=import->Resultado;
         if (Recibido == "Negativo")
-        {
             return;
-        }
         else if (Recibido == "Positivo")
         {
             Model->select();
@@ -969,9 +961,7 @@ void dbclaves::on_pushButton_5_clicked()
         }
     }
     else if (respuesta == QMessageBox::No)
-    {
         return;
-    }
 }
 
 void dbclaves::orden()
@@ -1291,7 +1281,7 @@ void dbclaves::on_comboBox_currentIndexChanged(QString busca)
 void dbclaves::on_pushButton_9_clicked()
 {
     SaveToBDFrm frm(this);
-    frm.Valor("2","Clave",IDUser);
+    frm.Valor("2","Clave",IDUser,"");
     frm.exec();
 }
 
@@ -1301,9 +1291,7 @@ QString dbclaves::DesencriptarUser(QString Userid, QString Enc1, QString Enc2, Q
     QString UserParc = Userid;
     QStringList User = UserParc.split("-");
     if (Enc1 == "0")
-    {
         resultado = Userid;
-    }
     else if (Enc2 == "0")
     {
         for (int a=0;a<User.count();a++)

@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <QSqlDatabase>
+#include <QTimer>
+#include "ayuda.h"
 
 namespace Ui {
 class examen;
@@ -57,6 +59,8 @@ private:
     int CierreTotal;
     int Siguiente;
     QString Stilo;
+    QTimer *timer;
+    Ayuda *ayuda;
 
 };
 

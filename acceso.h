@@ -62,6 +62,7 @@ private:
     Ayuda *ayuda;
     QString Valor1;
     QString Valor4;
+    QString Valor5;
     int Registro;
     int Limitacion;
     QTimer *timer;

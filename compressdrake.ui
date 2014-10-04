@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CompressDrake</class>
+ <widget class="QDialog" name="CompressDrake">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>958</width>
+    <height>460</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+    <kerning>true</kerning>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Compresor RDK</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/comprimir.png</normaloff>:/Imagenes/comprimir.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_9">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout_8">
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Tipo</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="1" column="0">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QRadioButton" name="radioButton">
+            <property name="toolTip">
+             <string>Comprimir archivos rdk</string>
+            </property>
+            <property name="statusTip">
+             <string>Comprimir archivos rdk</string>
+            </property>
+            <property name="whatsThis">
+             <string>Comprimir archivos rdk</string>
+            </property>
+            <property name="text">
+             <string>Comprimir</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QRadioButton" name="radioButton_2">
+            <property name="toolTip">
+             <string>Descomprimir archivos rdk</string>
+            </property>
+            <property name="statusTip">
+             <string>Descomprimir archivos rdk</string>
+            </property>
+            <property name="whatsThis">
+             <string>Descomprimir archivos rdk</string>
+            </property>
+            <property name="text">
+             <string>Descomprimir</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="checkBox_2">
+            <property name="toolTip">
+             <string>Realizar compresion de forma individual</string>
+            </property>
+            <property name="statusTip">
+             <string>Realizar compresion de forma individual</string>
+            </property>
+            <property name="whatsThis">
+             <string>Realizar compresion de forma individual</string>
+            </property>
+            <property name="text">
+             <string>Modo individual</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="title">
+        <string>Ruta destino</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButton">
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Buscar ruta destino para guardar compresion rdk</string>
+          </property>
+          <property name="statusTip">
+           <string>Buscar ruta destino para guardar compresion rdk</string>
+          </property>
+          <property name="whatsThis">
+           <string>Buscar ruta destino para guardar compresion rdk</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLineEdit" name="lineEdit">
+          <property name="toolTip">
+           <string>Ruta destino para guardar compresion rdk</string>
+          </property>
+          <property name="statusTip">
+           <string>Ruta destino para guardar compresion rdk</string>
+          </property>
+          <property name="whatsThis">
+           <string>Ruta destino para guardar compresion rdk</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QGroupBox" name="groupBox_3">
+       <property name="title">
+        <string>Ruta origen</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButton_8">
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Buscar ruta origen de datos rdk</string>
+          </property>
+          <property name="statusTip">
+           <string>Buscar ruta origen de datos rdk</string>
+          </property>
+          <property name="whatsThis">
+           <string>Buscar ruta origen de datos rdk</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLineEdit" name="lineEdit_2">
+          <property name="toolTip">
+           <string>Ruta origen de datos rdk</string>
+          </property>
+          <property name="statusTip">
+           <string>Ruta origen de datos rdk</string>
+          </property>
+          <property name="whatsThis">
+           <string>Ruta origen de datos rdk</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="1" column="0">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="toolTip">
+        <string>Nos vamos...</string>
+       </property>
+       <property name="statusTip">
+        <string>Nos vamos...</string>
+       </property>
+       <property name="whatsThis">
+        <string>Nos vamos...</string>
+       </property>
+       <property name="text">
+        <string>Salir</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="2">
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="page">
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="toolTip">
+          <string>Eliminar archivos para comprimir</string>
+         </property>
+         <property name="statusTip">
+          <string>Eliminar archivos para comprimir</string>
+         </property>
+         <property name="whatsThis">
+          <string>Eliminar archivos para comprimir</string>
+         </property>
+         <property name="text">
+          <string>Eliminar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/menos.png</normaloff>:/Imagenes/menos.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="pushButton_7">
+         <property name="toolTip">
+          <string>Vaciar todos los archivos para comprimir</string>
+         </property>
+         <property name="statusTip">
+          <string>Vaciar todos los archivos para comprimir</string>
+         </property>
+         <property name="whatsThis">
+          <string>Vaciar todos los archivos para comprimir</string>
+         </property>
+         <property name="text">
+          <string>Vaciar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/papelera.png</normaloff>:/Imagenes/papelera.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="4">
+        <widget class="QPushButton" name="pushButton_5">
+         <property name="toolTip">
+          <string>Realizar la compresion</string>
+         </property>
+         <property name="statusTip">
+          <string>Realizar la compresion</string>
+         </property>
+         <property name="whatsThis">
+          <string>Realizar la compresion</string>
+         </property>
+         <property name="text">
+          <string>Comprimir</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/comprimirUP.png</normaloff>:/Imagenes/comprimirUP.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_3">
+         <property name="toolTip">
+          <string>Insertar archivos para comprimir</string>
+         </property>
+         <property name="statusTip">
+          <string>Insertar archivos para comprimir</string>
+         </property>
+         <property name="whatsThis">
+          <string>Insertar archivos para comprimir</string>
+         </property>
+         <property name="text">
+          <string>Insertar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/mas.png</normaloff>:/Imagenes/mas.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="5">
+        <widget class="QTableWidget" name="tableWidget">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <stylestrategy>PreferAntialias</stylestrategy>
+          </font>
+         </property>
+         <property name="toolTip">
+          <string>Muestra los objetivos localizados con sus propiedades</string>
+         </property>
+         <property name="statusTip">
+          <string>Muestra los objetivos localizados con sus propiedades</string>
+         </property>
+         <property name="whatsThis">
+          <string>Muestra los objetivos localizados con sus propiedades</string>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>150</number>
+         </attribute>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>50</number>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>Nombre</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Ruta</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Tamano</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_2">
+      <layout class="QGridLayout" name="gridLayout_11">
+       <item row="1" column="0">
+        <layout class="QGridLayout" name="gridLayout_7">
+         <item row="0" column="2">
+          <widget class="QPushButton" name="pushButton_11">
+           <property name="toolTip">
+            <string>Exportar codigo hexadecimal/binario a un archivo</string>
+           </property>
+           <property name="statusTip">
+            <string>Exportar codigo hexadecimal/binario a un archivo</string>
+           </property>
+           <property name="whatsThis">
+            <string>Exportar codigo hexadecimal/binario a un archivo</string>
+           </property>
+           <property name="text">
+            <string>Exportar hexadecimal a archivo</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/filesave.png</normaloff>:/Imagenes/filesave.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="pushButton_9">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Visualizado de codigo hexadecimal/binario</string>
+           </property>
+           <property name="statusTip">
+            <string>Visualizado de codigo hexadecimal/binario</string>
+           </property>
+           <property name="whatsThis">
+            <string>Visualizado de codigo hexadecimal/binario</string>
+           </property>
+           <property name="text">
+            <string>Visualizar codigo hexadecimal/binario</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/lupaO.png</normaloff>:/Imagenes/lupaO.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="pushButton_10">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Editor de codigo hexadecimal/binario</string>
+           </property>
+           <property name="statusTip">
+            <string>Editor de codigo hexadecimal/binario</string>
+           </property>
+           <property name="whatsThis">
+            <string>Editor de codigo hexadecimal/binario</string>
+           </property>
+           <property name="text">
+            <string>Editar codigo hexadecimal/binario</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/boli.png</normaloff>:/Imagenes/boli.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="1">
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>525</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="pushButton_6">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Realizar proceso de descompresion</string>
+         </property>
+         <property name="statusTip">
+          <string>Realizar proceso de descompresion</string>
+         </property>
+         <property name="whatsThis">
+          <string>Realizar proceso de descompresion</string>
+         </property>
+         <property name="text">
+          <string>Descomprimir</string>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/comprimirUP.png</normaloff>:/Imagenes/comprimirUP.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="3">
+        <widget class="QTableWidget" name="tableWidget_2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <stylestrategy>PreferAntialias</stylestrategy>
+          </font>
+         </property>
+         <property name="toolTip">
+          <string>Muestra los objetivos localizados con sus propiedades</string>
+         </property>
+         <property name="statusTip">
+          <string>Muestra los objetivos localizados con sus propiedades</string>
+         </property>
+         <property name="whatsThis">
+          <string>Muestra los objetivos localizados con sus propiedades</string>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>150</number>
+         </attribute>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>50</number>
+         </attribute>
+         <column>
+          <property name="text">
+           <string>Nombre</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Tamano comprimido</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Seleccionar</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="3">
+        <layout class="QGridLayout" name="gridLayout_10">
+         <item row="0" column="2">
+          <widget class="QPushButton" name="pushButton_15">
+           <property name="toolTip">
+            <string>Deseleccionar todo para descompresion</string>
+           </property>
+           <property name="statusTip">
+            <string>Deseleccionar todo para descompresion</string>
+           </property>
+           <property name="whatsThis">
+            <string>Deseleccionar todo para descompresion</string>
+           </property>
+           <property name="text">
+            <string>Deseleccionar todo</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/menos.png</normaloff>:/Imagenes/menos.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="pushButton_14">
+           <property name="toolTip">
+            <string>Seleccionar todo para descompresion</string>
+           </property>
+           <property name="statusTip">
+            <string>Seleccionar todo para descompresion</string>
+           </property>
+           <property name="whatsThis">
+            <string>Seleccionar todo para descompresion</string>
+           </property>
+           <property name="text">
+            <string>Seleccionar todo</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/mas.png</normaloff>:/Imagenes/mas.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="pushButton_12">
+           <property name="toolTip">
+            <string>Seleccionar/Deseleccionar archivo marcado</string>
+           </property>
+           <property name="statusTip">
+            <string>Seleccionar/Deseleccionar archivo marcado</string>
+           </property>
+           <property name="whatsThis">
+            <string>Seleccionar/Deseleccionar archivo marcado</string>
+           </property>
+           <property name="text">
+            <string>Seleccionar/Deseleccionar</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/good.png</normaloff>:/Imagenes/good.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QPushButton" name="pushButton_13">
+           <property name="toolTip">
+            <string>Seleccion de ruta a descomprimir los archivos</string>
+           </property>
+           <property name="statusTip">
+            <string>Seleccion de ruta a descomprimir los archivos</string>
+           </property>
+           <property name="whatsThis">
+            <string>Seleccion de ruta a descomprimir los archivos</string>
+           </property>
+           <property name="text">
+            <string>Descomprimir en...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/archivoIn.png</normaloff>:/Imagenes/archivoIn.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QLineEdit" name="lineEdit_3">
+           <property name="toolTip">
+            <string>Ruta a descomprimir los archivos</string>
+           </property>
+           <property name="statusTip">
+            <string>Ruta a descomprimir los archivos</string>
+           </property>
+           <property name="whatsThis">
+            <string>Ruta a descomprimir los archivos</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

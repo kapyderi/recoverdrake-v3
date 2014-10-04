@@ -445,7 +445,7 @@ p, li { white-space: pre-wrap; }
            <string>Limpia la ventana de registros.</string>
           </property>
           <property name="text">
-           <string>Limpiar/Vaciar lista</string>
+           <string>Vaciar lista</string>
           </property>
           <property name="icon">
            <iconset resource="recoverdrake.qrc">

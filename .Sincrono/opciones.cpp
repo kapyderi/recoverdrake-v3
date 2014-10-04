@@ -2091,14 +2091,14 @@ void opciones::iniciar()
         }
         if (i==94)
         {
-            Localizar = getRpm("lha");
+            Localizar = getRpm("zoo");
             if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
             {
                 ui->label_202->setText(QString::fromUtf8("..."));
             }
             else
             {
-                QString Valor= "lha";
+                QString Valor= "zoo";
                 QString Value = getPack1(Valor);
                 ui->label_202->setText(QString::fromUtf8(Value));
             }

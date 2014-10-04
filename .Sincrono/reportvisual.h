@@ -68,6 +68,8 @@ private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
+    void on_actionGuardar_en_BD_triggered();
+    void on_actionAbrir_desde_BD_triggered();
 
 public slots:
     void on_actionBorrar_triggered();

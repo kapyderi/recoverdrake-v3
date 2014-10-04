@@ -13,6 +13,8 @@
 #include <QKeyEvent>
 #include <QtConcurrentRun>
 #include <QFuture>
+#include <QDesktopServices>
+#include <QDirIterator>
 
 Busca::Busca(QWidget *parent) :
     QDialog(parent),
@@ -102,6 +104,11 @@ Busca::Busca(QWidget *parent) :
     ui->pushButton_5->hide();
     ui->pushButton_2->hide();
     ui->pushButton_6->hide();
+    connect(ui->radioButton_13,SIGNAL(clicked()),this,SLOT(Comprobar1()));
+    connect(ui->radioButton_14,SIGNAL(clicked()),this,SLOT(Comprobar1()));
+    ui->radioButton_13->setChecked(true);
+    connect(ui->tableWidget_2, SIGNAL(cellActivated(int,int)),this, SLOT(openFileOfItem(int,int)));
+    ui->comboBox_3->addItem(QDir::currentPath());
 }
 
 Busca::~Busca()
@@ -126,9 +133,7 @@ void Busca::changeEvent(QEvent *e)
 void Busca::Value(int value)
 {
     if (value == 1)
-    {
         CierreTotal = 1;
-    }
 }
 
 void Busca::on_pushButton_3_clicked()
@@ -151,6 +156,14 @@ void Busca::closeEvent ( QCloseEvent * event )
         close();
         event->accept();
     }
+}
+
+void Busca::Comprobar1()
+{
+    if (ui->radioButton_13->isChecked())
+        ui->stackedWidget->setCurrentIndex(1);
+    else if (ui->radioButton_14->isChecked())
+        ui->stackedWidget->setCurrentIndex(0);
 }
 
 void Busca::on_pushButton_clicked()
@@ -226,42 +239,26 @@ void Busca::on_pushButton_4_clicked()
     if (ui->checkBox_4->isChecked() == false)
     {
         if (ui->radioButton->isChecked() == true)
-        {
             Name="-iname";
-        }
         else if (ui->radioButton_2->isChecked() == true)
-        {
             Name="-name";
-        }
         cm1="find \"%1\" -type f %3 \"%2\"";
         cm1=cm1.arg(ui->lineEdit_2->text()).arg(ui->lineEdit->text()).arg(Name);
     }
     else if (ui->checkBox_4->isChecked() == true)
     {
         if (ui->radioButton_3->isChecked() == true)
-        {
             Signo="+";
-        }
         else if (ui->radioButton_4->isChecked() == true)
-        {
             Signo="-";
-        }
         else if (ui->radioButton_5->isChecked() == true)
-        {
             Signo="";
-        }
         if (ui->radioButton_6->isChecked() == true)
-        {
             Tipo="k";
-        }
         else if (ui->radioButton_7->isChecked() == true)
-        {
             Tipo="M";
-        }
         else if (ui->radioButton_8->isChecked() == true)
-        {
             Tipo="G";
-        }
         cm1="find \"%2\" -size %3\"%4\"%5";
         cm1=cm1.arg(ui->lineEdit_2->text()).arg(Signo).arg(ui->lineEdit_3->text()).arg(Tipo);
     }
@@ -272,14 +269,17 @@ void Busca::on_pushButton_4_clicked()
     mib = new DrakeProcesos(comandos, this);
     connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
     connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
-    int valor= comandos.count(); mib->Valor(valor,3); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
+    int valor= comandos.count();
+    mib->Valor(valor,3);
+    mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+    mib->iniciarProceso();
 }
 
 void Busca::mibEscribir(QString valor)
 {
     valor = valor.remove("# ");
     if (Control == 0)
-    {
+   {
         float f;
         qint64 size;
         int iFilas;
@@ -299,9 +299,7 @@ void Busca::mibEscribir(QString valor)
                         size = QFileInfo(file).size();
                         f=(size + 1023) / 1024;
                         if (Tipo == "M")
-                        {
                             f=f/1024;
-                        }
                         else if (Tipo == "G")
                         {
                             f=f/1024;
@@ -310,9 +308,7 @@ void Busca::mibEscribir(QString valor)
                         else
                         {
                             if (f < 1024)
-                            {
                                 Tipo="k";
-                            }
                             else if (f >= 1024 || f < 1048576)
                             {
                                 f=f/1024;
@@ -339,6 +335,7 @@ void Busca::mibEscribir(QString valor)
             }
             Tipo.clear();
         }
+        ui->tableWidget->resizeColumnsToContents();
     }
 }
 
@@ -358,6 +355,7 @@ void Busca::mibFin()
 
 void Busca::on_tableWidget_doubleClicked(const QModelIndex &index)
 {
+    Q_UNUSED(index);
     Control=1;
     ui->label_4->setText(tr("Ejecutando enlace..."));
     int acceso = ui->tableWidget->currentRow();
@@ -480,55 +478,36 @@ void Busca::on_pushButton_2_clicked()
     mib = new DrakeProcesos(comandos, this);
     connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
     connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
-    int valor= comandos.count(); mib->Valor(valor,3); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
+    int valor= comandos.count();
+    mib->Valor(valor,3);
+    mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+    mib->iniciarProceso();
 }
 
 void Busca::Contar()
 {
     if (ui->label_4->text() == tr("Espera por favor. Buscando"))
-    {
          ui->label_4->setText(tr("Espera por favor. Buscando."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Buscando."))
-    {
          ui->label_4->setText(tr("Espera por favor. Buscando.."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Buscando.."))
-    {
          ui->label_4->setText(tr("Espera por favor. Buscando..."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Buscando..."))
-    {
          ui->label_4->setText(tr("Espera por favor. Buscando...."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Buscando...."))
-    {
          ui->label_4->setText(tr("Espera por favor. Buscando....."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Buscando....."))
-    {
          ui->label_4->setText(tr("Espera por favor. Buscando......"));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Buscando......"))
-    {
          ui->label_4->setText(tr("Espera por favor. Buscando......."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Buscando......."))
-    {
          ui->label_4->setText(tr("Espera por favor. Buscando........"));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Buscando........"))
-    {
          ui->label_4->setText(tr("Espera por favor. Buscando........."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Buscando........."))
-    {
          ui->label_4->setText(tr("Espera por favor. Buscando.........."));
-    }
     else if (ui->label_4->text() == tr("Espera por favor. Buscando.........."))
-    {
          ui->label_4->setText(tr("Espera por favor. Buscando"));
-    }
 }
 
 void Busca::on_pushButton_5_clicked()
@@ -557,6 +536,17 @@ bool Busca::eventFilter(QObject* obj, QEvent *event)
                     close();
                 else if (CierreTotal == 1)
                     return true;
+            }
+        }
+        if (event->type() == QEvent::KeyRelease)
+        {
+            QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
+            if (keyEvent->key() == Qt::Key_F1)
+            {
+                ayuda = new Ayuda(this);
+                ayuda->show();
+                ayuda->Valor(tr("Buscador"));
+                return true;
             }
         }
         return false;
@@ -589,36 +579,24 @@ void Busca::on_pushButton_7_clicked()
         Opcion = 0;
         return;
     }
-    Contador->start(200);
-    ui->label_4->setText(tr("Espera por favor. Buscando"));
-    QString Valor;
-    dato = ui->lineEdit_2->text();
-    QFuture<QString> valor = QtConcurrent::run(this,&Busca::Peso);
-    valor.waitForFinished();
-    Valor = valor;
-    int iFilas;
-    Contador->stop();
-    QStringList list = Valor.split("\n");
-    for(int i=0;i<list.count();i++)
+    int Borrado, x;
+    Borrado = ui->tableWidget->rowCount();
+    for(x=0;x<Borrado;x++)
     {
-        QString Value0 = list.value(i);
-        QTableWidgetItem *item1, *item2;
-        item1=new QTableWidgetItem;
-        item2=new QTableWidgetItem;
-                    item1->setText(""+Value0+"");
-                    item2->setText("");
-                    iFilas=ui->tableWidget->rowCount();
-                    ui->tableWidget->insertRow(iFilas);
-                    ui->tableWidget->setItem(iFilas,0,item1);
-                    ui->tableWidget->setItem(iFilas,1,item2);
+         ui->tableWidget->removeRow(x);
+         x=x-1;
+         Borrado=Borrado-1;
     }
-    int cantidad = ui->tableWidget->rowCount();
-    ui->label_4->setText(tr("Encontradas ")+QString::number(cantidad)+tr(" coincidencias."));
-    Opcion = 0;
+    Contador->start(200);
+    ui->label_4->setText(tr("Espera por favor. Buscando"));    
+    dato = ui->lineEdit_2->text();
+    QFuture<void> valor = QtConcurrent::run(this,&Busca::Peso,dato);
+    Q_UNUSED(valor);
 }
 
-QString Busca::Peso()
+void Busca::Peso(QString dat)
 {
+    QString Valor;
     QProcess *procesoCut, *procesoCut2, *procesoCut3;
     QStringList argumentosCut, argumentosCut2;
     QByteArray release;
@@ -627,13 +605,13 @@ QString Busca::Peso()
     procesoCut3=new QProcess(this);
     procesoCut->setStandardOutputProcess(procesoCut2);
     procesoCut2->setStandardOutputProcess(procesoCut3);
-    argumentosCut << "-Sm" << ""+dato+"";
+    argumentosCut << "-Sm" << ""+dat+"";
     argumentosCut2 << "-n";
     procesoCut->start("du", argumentosCut);
     procesoCut2->start("sort", argumentosCut2);
     procesoCut3->start("tail");
     if (! procesoCut3->waitForStarted())
-        return QString("");
+        return;
     procesoCut->waitForFinished();
     procesoCut2->waitForFinished();
     procesoCut3->waitForFinished();
@@ -643,12 +621,240 @@ QString Busca::Peso()
     delete procesoCut3;
     QString res = QString(release);
     res.chop(1);
-    return res;
+    Valor = res;
+    int iFilas;
+    Contador->stop();
+    QStringList list = Valor.split("\n");
+    for(int i=0;i<list.count();i++)
+    {
+        QString Value0 = list.value(i);
+        QTableWidgetItem *item1, *item2;
+        item1=new QTableWidgetItem;
+        item2=new QTableWidgetItem;
+        item1->setText(""+Value0+"");
+        item2->setText("");
+        iFilas=ui->tableWidget->rowCount();
+        ui->tableWidget->insertRow(iFilas);
+        ui->tableWidget->setItem(iFilas,0,item1);
+        ui->tableWidget->setItem(iFilas,1,item2);
+    }
+    int cantidad = ui->tableWidget->rowCount();
+    ui->label_4->setText(tr("Encontradas ")+QString::number(cantidad)+tr(" coincidencias."));
+    Opcion = 0;
+}
+
+void Busca::on_pushButton_8_clicked()
+{
+    if (Opcion == 0)
+        Opcion = 1;
+    else
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("Debes esperar a que termine el proceso que se esta realizando."));
+        m.exec();
+        return;
+    }
+    QString directory = QFileDialog::getExistingDirectory(this,
+                               tr("Encontrar archivos"), QDir::currentPath());
+    if (!directory.isEmpty())
+    {
+        if (ui->comboBox_3->findText(directory) == -1)
+            ui->comboBox_3->addItem(directory);
+        ui->comboBox_3->setCurrentIndex(ui->comboBox_3->findText(directory));
+    }
+    Opcion=0;
+}
+
+void Busca::on_pushButton_9_clicked()
+{
+    if (Opcion == 0)
+        Opcion = 1;
+    else
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("Debes esperar a que termine el proceso que se esta realizando."));
+        m.exec();
+        return;
+    }
+    int Borrado, x;
+    Borrado = ui->tableWidget->rowCount();
+    for(x=0;x<Borrado;x++)
+    {
+         ui->tableWidget->removeRow(x);
+         x=x-1;
+         Borrado=Borrado-1;
+    }
+    Contador->start(200);
+    ui->label_4->setText(tr("Espera por favor. Buscando"));
+    QString path = ui->comboBox_3->currentText();
+    QFuture<void> valor = QtConcurrent::run(this,&Busca::Exaustivo,path);
+    Q_UNUSED(valor);
+}
+
+void Busca::Exaustivo(QString valor)
+{
+    currentDir = QDir(valor);
+    QStringList Directorios;
+    Directorios << valor;
+    if (ui->checkBox_3->isChecked())
+    {
+        if (ui->checkBox->isChecked())
+        {
+            QDirIterator iterator(currentDir.absolutePath(), QDir::Dirs|QDir::NoDotAndDotDot|QDir::Hidden, QDirIterator::Subdirectories|QDirIterator::FollowSymlinks);
+            while (iterator.hasNext())
+            {
+                iterator.next();
+                if (iterator.fileInfo().isDir())
+                   Directorios << iterator.filePath();
+            }
+        }
+        else
+        {
+            QDirIterator iterator(currentDir.absolutePath(), QDir::Dirs|QDir::NoDotAndDotDot, QDirIterator::Subdirectories|QDirIterator::FollowSymlinks);
+            while (iterator.hasNext())
+            {
+                iterator.next();
+                if (iterator.fileInfo().isDir())
+                    Directorios << iterator.filePath();
+            }
+        }
+        QString fileName = ui->comboBox->currentText();
+        QString text = ui->comboBox_2->currentText();
+        updateComboBox(ui->comboBox);
+        updateComboBox(ui->comboBox_2);
+        updateComboBox(ui->comboBox_3);
+        ui->tableWidget_2->setRowCount(0);
+        for(int a=0;a<Directorios.count();a++)
+        {
+            Directory = QDir(Directorios.value(a));
+            QStringList files;
+            if (fileName.isEmpty())
+                fileName = "*";
+            if (ui->checkBox->isChecked())
+                files = Directory.entryList(QStringList(fileName), QDir::Files | QDir::NoSymLinks | QDir::Hidden);
+            else
+                files = Directory.entryList(QStringList(fileName), QDir::Files | QDir::NoSymLinks);
+            if (!text.isEmpty())
+                files = findFiles(files, text);
+            showFiles(files);
+        }
+    }
+    else
+    {
+        Directory = currentDir;
+        QString fileName = ui->comboBox->currentText();
+        QString text = ui->comboBox_2->currentText();
+        updateComboBox(ui->comboBox);
+        updateComboBox(ui->comboBox_2);
+        updateComboBox(ui->comboBox_3);
+        ui->tableWidget_2->setRowCount(0);
+        QStringList files;
+        if (fileName.isEmpty())
+            fileName = "*";
+        if (ui->checkBox->isChecked())
+            files = currentDir.entryList(QStringList(fileName),
+                               QDir::Files|QDir::NoSymLinks|QDir::NoDotAndDotDot|QDir::Hidden);
+        else
+            files = currentDir.entryList(QStringList(fileName),
+                               QDir::Files|QDir::NoSymLinks|QDir::NoDotAndDotDot);
+        if (!text.isEmpty())
+            files = findFiles(files, text);
+        showFiles(files);
+    }
+    ui->tableWidget_2->resizeRowsToContents();
+    ui->tableWidget_2->resizeColumnsToContents();
+    Opcion = 0;
+}
+
+QStringList Busca::findFiles(const QStringList &files, const QString &text)
+{
+    QProgressDialog progressDialog(this);
+    progressDialog.setCancelButtonText(tr("&Cancelar"));
+    progressDialog.setRange(0, files.size());
+    progressDialog.setWindowTitle(tr("Encontrar archivos"));
+    progressDialog.show();
+    QStringList foundFiles;
+    for (int i = 0; i < files.size(); ++i)
+    {
+        progressDialog.setValue(i);
+        progressDialog.setLabelText(tr("Buscando archivos %1 de %2...").arg(i).arg(files.size()));
+        qApp->processEvents();
+        if (progressDialog.wasCanceled())
+            break;
+        QFile file(Directory.absoluteFilePath(files[i]));
+        if (file.open(QIODevice::ReadOnly))
+        {
+            QString line;
+            QTextStream in(&file);
+            while (!in.atEnd())
+            {
+                if (progressDialog.wasCanceled())
+                    break;
+                line = in.readLine();
+                if (ui->checkBox_2->isChecked())
+                {
+                    if (line.contains(text, Qt::CaseInsensitive))
+                    {
+                        foundFiles << files[i];
+                        break;
+                    }
+                }
+                else
+                {
+                    if (line.contains(text))
+                    {
+                        foundFiles << files[i];
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return foundFiles;
+}
+
+void Busca::showFiles(const QStringList &files)
+{
+    int row;
+    for (int i = 0; i < files.size(); ++i)
+    {
+        QFile file(Directory.absoluteFilePath(files[i]));
+        qint64 size = QFileInfo(file).size();
+        QString Path = QFileInfo(file).absoluteFilePath();
+        QTableWidgetItem *fileNameItem = new QTableWidgetItem(files[i]);
+        fileNameItem->setFlags(fileNameItem->flags() ^ Qt::ItemIsEditable);
+        QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("%1 KB").arg(int((size + 1023) / 1024)));
+        sizeItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+        sizeItem->setFlags(sizeItem->flags() ^ Qt::ItemIsEditable);
+        QTableWidgetItem *fileNamePath = new QTableWidgetItem(Path);
+        fileNamePath->setFlags(fileNamePath->flags() ^ Qt::ItemIsEditable);
+        row = ui->tableWidget_2->rowCount();
+        ui->tableWidget_2->insertRow(row);
+        ui->tableWidget_2->setItem(row, 0, fileNameItem);
+        ui->tableWidget_2->setItem(row, 1, sizeItem);
+        ui->tableWidget_2->setItem(row, 2, fileNamePath);
+    }    
+    row = ui->tableWidget_2->rowCount();
+    ui->label_4->setText(tr("%1 archivo(s) encontrado(s)").arg(row) + tr(" (Doble click para abrir un archivo)"));
+}
+
+void Busca::updateComboBox(QComboBox *comboBox)
+{
+    if (comboBox->findText(comboBox->currentText()) == -1)
+        comboBox->addItem(comboBox->currentText());
+}
+
+void Busca::openFileOfItem(int row, int /* column */)
+{
+    QTableWidgetItem *item = ui->tableWidget_2->item(row, 2);
+    QDesktopServices::openUrl(QUrl::fromLocalFile(item->text()));
 }
 
 void Busca::on_pushButton_6_clicked()
 {
-    //falta esta parte para abrir los programas
+    //falta esta parte para abrir la ruta de los programas
 }
-
-

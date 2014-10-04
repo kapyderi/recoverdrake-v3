@@ -78,7 +78,6 @@ compresor::compresor(QWidget *parent) :
     fdlg->setLabelText(QFileDialog::Reject, NULL);
     fdlg->setLabelText(QFileDialog::Accept, tr("Insertar archivos"));
     ui->gridLayout_4->addWidget(fdlg);
-    fdlg->setWindowState(Qt::WindowMaximized);
     fdlg->setDir("/home/"+user);
     fdlg->setNameFilter(tr("Todos los archivos (*.*)"));
     fdlg->setFileMode(QFileDialog::ExistingFiles);
@@ -88,7 +87,6 @@ compresor::compresor(QWidget *parent) :
     connect(fdlg1, SIGNAL(finished(int)),fdlg1, SLOT(open()));
     connect(fdlg1, SIGNAL(fileSelected(QString)), this, SLOT(Listado(QString)));
     ui->gridLayout_7->addWidget(fdlg1);
-    fdlg1->setWindowState(Qt::WindowMaximized);
     fdlg1->setDir("/home/"+user);
     fdlg1->setNameFilter(tr("Todos los archivos compatibles (*.tar *.gz *.bz2 *.tar.gz *.tar.bz2 *.zip *.zoo *.arj *.7z *.rar);;Archivos tar (*.tar);;Archivos gz (*.gz);;Archivos bz2 (*.bz2);;Archivos tar.gz (*.tar.gz);;Archivos tar.bz2 (*.tar.bz2)"
                              ";;Archivos zip (*.zip);;Archivos zoo (*.zoo);;Archivos arj (*.arj);;Archivos 7z (*.7z);;Archivos rar (*.rar)"));
@@ -96,6 +94,8 @@ compresor::compresor(QWidget *parent) :
     fdlg1->setLabelText(QFileDialog::Accept, tr("Seleccionar"));
     fdlg1->setViewMode(QFileDialog::Detail);
     fdlg1->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Fixed);
+    fdlg->setMaximumHeight(0);
+    fdlg1->setMaximumHeight(0);
     connect(ui->radioButton,SIGNAL(clicked()),this,SLOT(Comprobar()));
     connect(ui->radioButton_2,SIGNAL(clicked()),this,SLOT(Comprobar()));
     connect(ui->radioButton_13,SIGNAL(clicked()),this,SLOT(Comprobar1()));
@@ -140,6 +140,8 @@ compresor::compresor(QWidget *parent) :
 compresor::~compresor()
 {
     delete ui;
+    if (mib != 0)
+        delete mib;
 }
 
 void compresor::Valor(QString valor, QString Logs)
@@ -230,7 +232,7 @@ QString compresor::getSize(QString Dir)
     procesoCut->waitForFinished();
     delete procesoDu;
     delete procesoCut;
-    QString res =  QString(Size);
+    QString res = QString(Size);
     res.chop(1);
     return res;
 }
@@ -244,13 +246,14 @@ void compresor::on_pushButton_clicked()
 }
 
 void compresor::Comprobar()
-{
+{   
     if (ui->radioButton->isChecked())
     {
+        ui->stackedWidget->setVisible(true);
         if (TipoCom == 1)
         {
             this->Empaquet();
-            ui->checkBox->setVisible(true);
+            ui->checkBox->setVisible(true);            
             ui->stackedWidget->setCurrentIndex(0);
             TipoCom = 0;
             int Borrado, x;
@@ -262,6 +265,7 @@ void compresor::Comprobar()
                  Borrado=Borrado-1;
             }
         }
+        ui->groupBox_2->setVisible(true);
         ui->groupBox_5->setVisible(false);
         ui->groupBox_4->setVisible(true);
         ui->groupBox_3->setEnabled(true);
@@ -270,13 +274,18 @@ void compresor::Comprobar()
         ui->label_4->hide();
         ui->checkBox_8->hide();
         ui->pushButton_2->setText(tr("Eliminar seleccionado"));
+        if (ui->pushButton_14->text() == tr("Ocultar seleccion"))
+        {
+                fdlg->setMaximumHeight(400);
+                fdlg1->setMaximumHeight(0);
+        }
     }
     if (ui->radioButton_2->isChecked())
     {
         if (TipoCom == 0)
         {
             ui->checkBox->setVisible(false);
-            ui->stackedWidget->setCurrentIndex(1);
+            ui->stackedWidget->setVisible(false);
             TipoCom = 1;
             int Borrado, x;
             Borrado = ui->tableWidget->rowCount();
@@ -292,6 +301,7 @@ void compresor::Comprobar()
         ui->groupBox_3->setEnabled(false);
         ui->tableWidget->hide();
         ui->tableWidget_2->show();
+        ui->groupBox_2->setVisible(false);
         if (ui->checkBox_8->isChecked())
         {
             ui->label_4->hide();
@@ -303,7 +313,13 @@ void compresor::Comprobar()
             ui->pushButton_2->setText(tr("Eliminar seleccionados"));
         }
         ui->checkBox_8->show();
+        if (ui->pushButton_14->text() == tr("Ocultar seleccion"))
+        {
+                fdlg->setMaximumHeight(0);
+                fdlg1->setMaximumHeight(450);
+        }
     }
+    ui->stackedWidget->adjustSize();
 }
 
 void compresor::Comprobar1()
@@ -332,7 +348,7 @@ void compresor::ValorRuta(QStringList valor)
     drakeSistema drake;
     QTableWidgetItem *item1,*item2,*item3;
     QStringList Depurado;
-    QString rutaAbs, Tipo, Peso;
+    QString rutaAbs;
     float f;
     int iFilas, cantidad;
     Lista.clear();
@@ -379,26 +395,37 @@ void compresor::ValorRuta(QStringList valor)
                                 ruta= rutaAbs;
                             item1->setText(tr("DIRECTORIO"));
                             item2->setText(tr(ruta));
-                            f=size.toFloat()/1024;
-                            if (f <= 700)
+                            f = size.toFloat()*1024;
+                            if (f > 0)
                             {
-                                item3->setText(""+QString::number(f,'f',3)+"Mb");
-                                Tipo = "Mb";
+                                if (f <= 999)
+                                    item3->setText(""+QString::number(f)+" B");
+                                if (f > 999 && f <= 999999)
+                                {
+                                    f = (f + 1023) / 1024;
+                                    item3->setText(""+QString::number(f,'f',1)+" kB");
+                                }
+                                if (f > 999999 && f <= 999999999)
+                                {
+                                    f = (f + 1023) / 1024;
+                                    f = f / 1024;
+                                    item3->setText(""+QString::number(f,'f',1)+" MB");
+                                }
+                                if (f > 999999999)
+                                {
+                                    f = (f + 1023) / 1024;
+                                    f = f / 1024;
+                                    f = f / 1024;
+                                    item3->setText(""+QString::number(f,'f',1)+" GB");
+                                }
+                                iFilas=ui->tableWidget->rowCount();
+                                ui->tableWidget->insertRow(iFilas);
+                                ui->tableWidget->setItem(iFilas,0,item1);
+                                ui->tableWidget->setItem(iFilas,1,item2);
+                                ui->tableWidget->setItem(iFilas,2,item3);
+                                ui->tableWidget->resizeRowsToContents();
+                                ui->tableWidget->resizeColumnsToContents();
                             }
-                            if (f > 700)
-                            {
-                                float g = f / 1024;
-                                item3->setText(""+QString::number(g,'f',3)+"Gb");
-                                Peso = "Gb";
-                                Tipo = "Gb";
-                            }
-                            iFilas=ui->tableWidget->rowCount();
-                            ui->tableWidget->insertRow(iFilas);
-                            ui->tableWidget->setItem(iFilas,0,item1);
-                            ui->tableWidget->setItem(iFilas,1,item2);
-                            ui->tableWidget->setItem(iFilas,2,item3);
-                            ui->tableWidget->resizeRowsToContents();
-                            ui->tableWidget->resizeColumnsToContents();
                         }
                         else
                             Lista << Fichero;
@@ -421,26 +448,37 @@ void compresor::ValorRuta(QStringList valor)
                         ruta= rutaAbs;
                     item1->setText(tr("DIRECTORIO"));
                     item2->setText(tr(ruta));
-                    f=size.toFloat()/1024;
-                    if (f <= 700)
+                    f = size.toFloat()*1024;
+                    if (f > 0)
                     {
-                        item3->setText(""+QString::number(f,'f',3)+"Mb");
-                        Tipo = "Mb";
+                        if (f <= 999)
+                            item3->setText(""+QString::number(f)+" B");
+                        if (f > 999 && f <= 999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            item3->setText(""+QString::number(f,'f',1)+" kB");
+                        }
+                        if (f > 999999 && f <= 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            item3->setText(""+QString::number(f,'f',1)+" MB");
+                        }
+                        if (f > 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            f = f / 1024;
+                            item3->setText(""+QString::number(f,'f',1)+" GB");
+                        }
+                        iFilas=ui->tableWidget->rowCount();
+                        ui->tableWidget->insertRow(iFilas);
+                        ui->tableWidget->setItem(iFilas,0,item1);
+                        ui->tableWidget->setItem(iFilas,1,item2);
+                        ui->tableWidget->setItem(iFilas,2,item3);
+                        ui->tableWidget->resizeRowsToContents();
+                        ui->tableWidget->resizeColumnsToContents();
                     }
-                    if (f > 700)
-                    {
-                        float g = f / 1024;
-                        item3->setText(""+QString::number(g,'f',3)+"Gb");
-                        Peso = "Gb";
-                        Tipo = "Gb";
-                    }
-                    iFilas=ui->tableWidget->rowCount();
-                    ui->tableWidget->insertRow(iFilas);
-                    ui->tableWidget->setItem(iFilas,0,item1);
-                    ui->tableWidget->setItem(iFilas,1,item2);
-                    ui->tableWidget->setItem(iFilas,2,item3);
-                    ui->tableWidget->resizeRowsToContents();
-                    ui->tableWidget->resizeColumnsToContents();
                 }
                 else
                     Lista << Fichero;
@@ -499,27 +537,37 @@ void compresor::ValorRuta(QStringList valor)
                     float size = QFileInfo(file).size();
                     item1->setText(tr(QFileInfo(file).fileName()));
                     item2->setText(tr(rutaAbs));
-                    f = (size + 1023) / 1024;
-                    f = f / 1024;
-                    if (f <= 700)
+                    f = size;
+                    if (f > 0)
                     {
-                        item3->setText(""+QString::number(f,'f',3)+"Mb");
-                        Tipo = "Mb";
+                        if (f <= 999)
+                            item3->setText(""+QString::number(f)+" B");
+                        if (f > 999 && f <= 999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            item3->setText(""+QString::number(f,'f',1)+" kB");
+                        }
+                        if (f > 999999 && f <= 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            item3->setText(""+QString::number(f,'f',1)+" MB");
+                        }
+                        if (f > 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            f = f / 1024;
+                            item3->setText(""+QString::number(f,'f',1)+" Gb");
+                        }
+                        iFilas=ui->tableWidget->rowCount();
+                        ui->tableWidget->insertRow(iFilas);
+                        ui->tableWidget->setItem(iFilas,0,item1);
+                        ui->tableWidget->setItem(iFilas,1,item2);
+                        ui->tableWidget->setItem(iFilas,2,item3);
+                        ui->tableWidget->resizeRowsToContents();
+                        ui->tableWidget->resizeColumnsToContents();
                     }
-                    if (f > 700)
-                    {
-                        float g = f / 1024;
-                        item3->setText(""+QString::number(g,'f',3)+"Gb");
-                        Peso = "Gb";
-                        Tipo = "Gb";
-                    }
-                    iFilas=ui->tableWidget->rowCount();
-                    ui->tableWidget->insertRow(iFilas);
-                    ui->tableWidget->setItem(iFilas,0,item1);
-                    ui->tableWidget->setItem(iFilas,1,item2);
-                    ui->tableWidget->setItem(iFilas,2,item3);
-                    ui->tableWidget->resizeRowsToContents();
-                    ui->tableWidget->resizeColumnsToContents();
                 }
             }
             else
@@ -536,26 +584,37 @@ void compresor::ValorRuta(QStringList valor)
                     ruta= rutaAbs;
                 item1->setText(tr("DIRECTORIO"));
                 item2->setText(tr(ruta));
-                f=size.toFloat()/1024;
-                if (f <= 700)
+                f = size.toFloat()*1024;
+                if (f > 0)
                 {
-                    item3->setText(""+QString::number(f,'f',3)+"Mb");
-                    Tipo = "Mb";
+                    if (f <= 999)
+                        item3->setText(""+QString::number(f)+" B");
+                    if (f > 999 && f <= 999999)
+                    {
+                        f = (f + 1023) / 1024;
+                        item3->setText(""+QString::number(f,'f',1)+" kB");
+                    }
+                    if (f > 999999 && f <= 999999999)
+                    {
+                        f = (f + 1023) / 1024;
+                        f = f / 1024;
+                        item3->setText(""+QString::number(f,'f',1)+" MB");
+                    }
+                    if (f > 999999999)
+                    {
+                        f = (f + 1023) / 1024;
+                        f = f / 1024;
+                        f = f / 1024;
+                        item3->setText(""+QString::number(f,'f',1)+" GB");
+                    }
+                    iFilas=ui->tableWidget->rowCount();
+                    ui->tableWidget->insertRow(iFilas);
+                    ui->tableWidget->setItem(iFilas,0,item1);
+                    ui->tableWidget->setItem(iFilas,1,item2);
+                    ui->tableWidget->setItem(iFilas,2,item3);
+                    ui->tableWidget->resizeRowsToContents();
+                    ui->tableWidget->resizeColumnsToContents();
                 }
-                if (f > 700)
-                {
-                    float g = f / 1024;
-                    item3->setText(""+QString::number(g,'f',3)+"Gb");
-                    Peso = "Gb";
-                    Tipo = "Gb";
-                }
-                iFilas=ui->tableWidget->rowCount();
-                ui->tableWidget->insertRow(iFilas);
-                ui->tableWidget->setItem(iFilas,0,item1);
-                ui->tableWidget->setItem(iFilas,1,item2);
-                ui->tableWidget->setItem(iFilas,2,item3);
-                ui->tableWidget->resizeRowsToContents();
-                ui->tableWidget->resizeColumnsToContents();
             }
         }
         else
@@ -570,27 +629,37 @@ void compresor::ValorRuta(QStringList valor)
                 float size = QFileInfo(file).size();
                 item1->setText(tr(QFileInfo(file).fileName()));
                 item2->setText(tr(rutaAbs));
-                f = (size + 1023) / 1024;
-                f = f / 1024;
-                if (f <= 700)
+                f = size;
+                if (f > 0)
                 {
-                    item3->setText(""+QString::number(f,'f',3)+"Mb");
-                    Tipo = "Mb";
+                    if (f <= 999)
+                        item3->setText(""+QString::number(f)+" B");
+                    if (f > 999 && f <= 999999)
+                    {
+                        f = (f + 1023) / 1024;
+                        item3->setText(""+QString::number(f,'f',1)+" kB");
+                    }
+                    if (f > 999999 && f <= 999999999)
+                    {
+                        f = (f + 1023) / 1024;
+                        f = f / 1024;
+                        item3->setText(""+QString::number(f,'f',1)+" MB");
+                    }
+                    if (f > 999999999)
+                    {
+                        f = (f + 1023) / 1024;
+                        f = f / 1024;
+                        f = f / 1024;
+                        item3->setText(""+QString::number(f,'f',1)+" Gb");
+                    }
+                    iFilas=ui->tableWidget->rowCount();
+                    ui->tableWidget->insertRow(iFilas);
+                    ui->tableWidget->setItem(iFilas,0,item1);
+                    ui->tableWidget->setItem(iFilas,1,item2);
+                    ui->tableWidget->setItem(iFilas,2,item3);
+                    ui->tableWidget->resizeRowsToContents();
+                    ui->tableWidget->resizeColumnsToContents();
                 }
-                if (f > 700)
-                {
-                    float g = f / 1024;
-                    item3->setText(""+QString::number(g,'f',3)+"Gb");
-                    Peso = "Gb";
-                    Tipo = "Gb";
-                }
-                iFilas=ui->tableWidget->rowCount();
-                ui->tableWidget->insertRow(iFilas);
-                ui->tableWidget->setItem(iFilas,0,item1);
-                ui->tableWidget->setItem(iFilas,1,item2);
-                ui->tableWidget->setItem(iFilas,2,item3);
-                ui->tableWidget->resizeRowsToContents();
-                ui->tableWidget->resizeColumnsToContents();
             }
         }
     }
@@ -663,13 +732,29 @@ void compresor::Listado(QString Valor)
                 Juntar.append(Final.value(h)+" ");
             item1->setText(Juntar);
             item3->setText(tr("SIN COMPRESION"));
-            f=(size.toFloat()/1024)/1024;
-            if (f <= 700)
-                item2->setText(""+QString::number(f,'f',2)+"Mb");
-            if (f > 700)
+            f = size.toFloat();
+            if (f > 0)
             {
-                float g = f / 1024;
-                item2->setText(""+QString::number(g,'f',2)+"Gb");
+                if (f <= 999)
+                    item2->setText(""+QString::number(f)+" B");
+                if (f > 999 && f <= 999999)
+                {
+                    f = (f + 1023) / 1024;
+                    item2->setText(""+QString::number(f,'f',1)+" kB");
+                }
+                if (f > 999999 && f <= 999999999)
+                {
+                    f = (f + 1023) / 1024;
+                    f = f / 1024;
+                    item2->setText(""+QString::number(f,'f',1)+" MB");
+                }
+                if (f > 999999999)
+                {
+                    f = (f + 1023) / 1024;
+                    f = f / 1024;
+                    f = f / 1024;
+                    item2->setText(""+QString::number(f,'f',1)+" Gb");
+                }
             }
             iFilas=ui->tableWidget_2->rowCount();
             ui->tableWidget_2->insertRow(iFilas);
@@ -703,25 +788,57 @@ void compresor::Listado(QString Valor)
             if (a == 1)
             {
                 ValorC = Final.value(a);
-                f=(ValorC.toFloat()/1024)/1024;
-                if (f <= 700)
-                    item4->setText(""+QString::number(f,'f',2)+"Mb");
-                if (f > 700)
+                f = ValorC.toFloat();
+                if (f > 0)
                 {
-                    float g = f / 1024;
-                    item4->setText(""+QString::number(g,'f',2)+"Gb");
+                    if (f <= 999)
+                        item4->setText(""+QString::number(f)+" B");
+                    if (f > 999 && f <= 999999)
+                    {
+                        f = (f + 1023) / 1024;
+                        item4->setText(""+QString::number(f,'f',1)+" kB");
+                    }
+                    if (f > 999999 && f <= 999999999)
+                    {
+                        f = (f + 1023) / 1024;
+                        f = f / 1024;
+                        item4->setText(""+QString::number(f,'f',1)+" MB");
+                    }
+                    if (f > 999999999)
+                    {
+                        f = (f + 1023) / 1024;
+                        f = f / 1024;
+                        f = f / 1024;
+                        item4->setText(""+QString::number(f,'f',1)+" Gb");
+                    }
                 }
             }
             if (a == 2)
             {
                 ValorT = Final.value(a);
-                f=(ValorT.toFloat()/1024)/1024;
-                if (f <= 700)
-                    item2->setText(""+QString::number(f,'f',2)+"Mb");
-                if (f > 700)
+                f = ValorT.toFloat();
+                if (f > 0)
                 {
-                    float g = f / 1024;
-                    item2->setText(""+QString::number(g,'f',2)+"Gb");
+                    if (f <= 999)
+                        item2->setText(""+QString::number(f)+" B");
+                    if (f > 999 && f <= 999999)
+                    {
+                        f = (f + 1023) / 1024;
+                        item2->setText(""+QString::number(f,'f',1)+" kB");
+                    }
+                    if (f > 999999 && f <= 999999999)
+                    {
+                        f = (f + 1023) / 1024;
+                        f = f / 1024;
+                        item2->setText(""+QString::number(f,'f',1)+" MB");
+                    }
+                    if (f > 999999999)
+                    {
+                        f = (f + 1023) / 1024;
+                        f = f / 1024;
+                        f = f / 1024;
+                        item2->setText(""+QString::number(f,'f',1)+" Gb");
+                    }
                 }
             }
             if (a == 3)
@@ -778,13 +895,29 @@ void compresor::Listado(QString Valor)
             for (int h=5;h<Final.count();h++)
                 Juntar.append(Final.value(h)+" ");
             item1->setText(Juntar);
-            f=(size.toFloat()/1024)/1024;
-            if (f <= 700)
-                item2->setText(""+QString::number(f,'f',2)+"Mb");
-            if (f > 700)
+            f = size.toFloat();
+            if (f > 0)
             {
-                float g = f / 1024;
-                item2->setText(""+QString::number(g,'f',2)+"Gb");
+                if (f <= 999)
+                    item2->setText(""+QString::number(f)+" B");
+                if (f > 999 && f <= 999999)
+                {
+                    f = (f + 1023) / 1024;
+                    item2->setText(""+QString::number(f,'f',1)+" kB");
+                }
+                if (f > 999999 && f <= 999999999)
+                {
+                    f = (f + 1023) / 1024;
+                    f = f / 1024;
+                    item2->setText(""+QString::number(f,'f',1)+" MB");
+                }
+                if (f > 999999999)
+                {
+                    f = (f + 1023) / 1024;
+                    f = f / 1024;
+                    f = f / 1024;
+                    item2->setText(""+QString::number(f,'f',1)+" Gb");
+                }
             }
             iFilas=ui->tableWidget_2->rowCount();
             ui->tableWidget_2->insertRow(iFilas);
@@ -817,13 +950,29 @@ void compresor::Listado(QString Valor)
             for (int h=5;h<Final.count();h++)
                 Juntar.append(Final.value(h)+" ");
             item1->setText(Juntar);
-            f=(size.toFloat()/1024)/1024;
-            if (f <= 700)
-                item2->setText(""+QString::number(f,'f',2)+"Mb");
-            if (f > 700)
+            f = size.toFloat();
+            if (f > 0)
             {
-                float g = f / 1024;
-                item2->setText(""+QString::number(g,'f',2)+"Gb");
+                if (f <= 999)
+                    item2->setText(""+QString::number(f)+" B");
+                if (f > 999 && f <= 999999)
+                {
+                    f = (f + 1023) / 1024;
+                    item2->setText(""+QString::number(f,'f',1)+" kB");
+                }
+                if (f > 999999 && f <= 999999999)
+                {
+                    f = (f + 1023) / 1024;
+                    f = f / 1024;
+                    item2->setText(""+QString::number(f,'f',1)+" MB");
+                }
+                if (f > 999999999)
+                {
+                    f = (f + 1023) / 1024;
+                    f = f / 1024;
+                    f = f / 1024;
+                    item2->setText(""+QString::number(f,'f',1)+" Gb");
+                }
             }
             iFilas=ui->tableWidget_2->rowCount();
             ui->tableWidget_2->insertRow(iFilas);
@@ -840,9 +989,15 @@ void compresor::Listado(QString Valor)
         QString ValorT, ValorC;
         Value = "su - %2 -c \"unzip -v '%1'\"";
         Value = Value.arg(Valor).arg(user);
-        Lista = getListado(Value);
+        Lista = getListado(Value);        
         QStringList Parcial = Lista.split("\n");
-        for (int i=3;i<Parcial.count();i++)
+        int Posicion;
+        QString Lugar = Parcial.value(2);
+        if (Lugar.contains("---"))
+            Posicion = 3;
+        else
+            Posicion = 4;
+        for (int i=Posicion;i<Parcial.count();i++)
         {
             QString Value = Parcial.value(i);
             if (Value.contains("--------"))
@@ -850,42 +1005,143 @@ void compresor::Listado(QString Valor)
             QString FFinal = Parcial.value(i);
             FFinal.replace(QRegExp("\\s+"), " ");
             FFinal.trimmed();
-            QStringList Final = FFinal.split(" ");
+            QStringList Final = FFinal.split(" ");            
             item1=new QTableWidgetItem;
             item2=new QTableWidgetItem;
             item3=new QTableWidgetItem;
             item4=new QTableWidgetItem;
             QString Juntar;
-            for (int a=1;a<Final.count();a++)
+            if (Final.value(0) == "")
             {
-                if (a == 1)
+                for (int a=1;a<Final.count();a++)
                 {
-                    ValorC = Final.value(a);
-                    f=(ValorC.toFloat()/1024)/1024;
-                    if (f <= 700)
-                        item2->setText(""+QString::number(f,'f',2)+"Mb");
-                    if (f > 700)
+                    if (a == 1)
                     {
-                        float g = f / 1024;
-                        item2->setText(""+QString::number(g,'f',2)+"Gb");
+                        ValorC = Final.value(a);
+                        f = ValorC.toFloat();
+                        if (f > 0)
+                        {
+                            if (f <= 999)
+                                item2->setText(""+QString::number(f)+" B");
+                            if (f > 999 && f <= 999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                item2->setText(""+QString::number(f,'f',1)+" kB");
+                            }
+                            if (f > 999999 && f <= 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                item2->setText(""+QString::number(f,'f',1)+" MB");
+                            }
+                            if (f > 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                f = f / 1024;
+                                item2->setText(""+QString::number(f,'f',1)+" Gb");
+                            }
+                        }
                     }
+                    if (a == 3)
+                    {
+                        ValorT = Final.value(a);
+                        f = ValorT.toFloat();
+                        if (f > 0)
+                        {
+                            if (f <= 999)
+                                item4->setText(""+QString::number(f)+" B");
+                            if (f > 999 && f <= 999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                item4->setText(""+QString::number(f,'f',1)+" kB");
+                            }
+                            if (f > 999999 && f <= 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                item4->setText(""+QString::number(f,'f',1)+" MB");
+                            }
+                            if (f > 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                f = f / 1024;
+                                item4->setText(""+QString::number(f,'f',1)+" Gb");
+                            }
+                        }
+                    }
+                    if (a == 4)
+                        item3->setText(Final.value(a));
+                    if (a >= 8)
+                        Juntar.append(Final.value(a)+" ");
                 }
-                if (a == 3)
+            }
+            else if (Final.value(0) != "")
+            {
+                for (int a=0;a<Final.count();a++)
                 {
-                    ValorT = Final.value(a);
-                    f=(ValorT.toFloat()/1024)/1024;
-                    if (f <= 700)
-                        item4->setText(""+QString::number(f,'f',2)+"Mb");
-                    if (f > 700)
+                    if (a == 0)
                     {
-                        float g = f / 1024;
-                        item4->setText(""+QString::number(g,'f',2)+"Gb");
+                        ValorC = Final.value(a);
+                        f = ValorC.toFloat();
+                        if (f > 0)
+                        {
+                            if (f <= 999)
+                                item2->setText(""+QString::number(f)+" B");
+                            if (f > 999 && f <= 999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                item2->setText(""+QString::number(f,'f',1)+" kB");
+                            }
+                            if (f > 999999 && f <= 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                item2->setText(""+QString::number(f,'f',1)+" MB");
+                            }
+                            if (f > 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                f = f / 1024;
+                                item2->setText(""+QString::number(f,'f',1)+" Gb");
+                            }
+                        }
                     }
+                    if (a == 2)
+                    {
+                        ValorT = Final.value(a);
+                        f = ValorT.toFloat();
+                        if (f > 0)
+                        {
+                            if (f <= 999)
+                                item4->setText(""+QString::number(f)+" B");
+                            if (f > 999 && f <= 999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                item4->setText(""+QString::number(f,'f',1)+" kB");
+                            }
+                            if (f > 999999 && f <= 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                item4->setText(""+QString::number(f,'f',1)+" MB");
+                            }
+                            if (f > 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                f = f / 1024;
+                                item4->setText(""+QString::number(f,'f',1)+" Gb");
+                            }
+                        }
+                    }
+                    if (a == 3)
+                        item3->setText(Final.value(a));
+                    if (a >= 7)
+                        Juntar.append(Final.value(a)+" ");
                 }
-                if (a == 4)
-                    item3->setText(Final.value(a));
-                if (a >= 8)
-                    Juntar.append(Final.value(a)+" ");
             }
             item1->setText(Juntar);
             iFilas=ui->tableWidget_2->rowCount();
@@ -926,13 +1182,29 @@ void compresor::Listado(QString Valor)
                 if (a == 1)
                 {
                     ValorC = Final.value(a);
-                    f=(ValorC.toFloat()/1024)/1024;
-                    if (f <= 700)
-                        item2->setText(""+QString::number(f,'f',2)+"Mb");
-                    if (f > 700)
+                    f = ValorC.toFloat();
+                    if (f > 0)
                     {
-                        float g = f / 1024;
-                        item2->setText(""+QString::number(g,'f',2)+"Gb");
+                        if (f <= 999)
+                            item2->setText(""+QString::number(f)+" B");
+                        if (f > 999 && f <= 999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            item2->setText(""+QString::number(f,'f',1)+" kB");
+                        }
+                        if (f > 999999 && f <= 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            item2->setText(""+QString::number(f,'f',1)+" MB");
+                        }
+                        if (f > 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            f = f / 1024;
+                            item2->setText(""+QString::number(f,'f',1)+" Gb");
+                        }
                     }
                 }
                 if (a == 2)
@@ -940,13 +1212,29 @@ void compresor::Listado(QString Valor)
                 if (a == 3)
                 {
                     ValorT = Final.value(a);
-                    f=(ValorT.toFloat()/1024)/1024;
-                    if (f <= 700)
-                        item4->setText(""+QString::number(f,'f',2)+"Mb");
-                    if (f > 700)
+                    f = ValorT.toFloat();
+                    if (f > 0)
                     {
-                        float g = f / 1024;
-                        item4->setText(""+QString::number(g,'f',2)+"Gb");
+                        if (f <= 999)
+                            item4->setText(""+QString::number(f)+" B");
+                        if (f > 999 && f <= 999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            item4->setText(""+QString::number(f,'f',1)+" kB");
+                        }
+                        if (f > 999999 && f <= 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            item4->setText(""+QString::number(f,'f',1)+" MB");
+                        }
+                        if (f > 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            f = f / 1024;
+                            item4->setText(""+QString::number(f,'f',1)+" Gb");
+                        }
                     }
                 }
                 if (a >= 9)
@@ -1005,25 +1293,57 @@ void compresor::Listado(QString Valor)
                     if (h == 3)
                     {
                         ValorC = Nombre.value(h);
-                        f=(ValorC.toFloat()/1024)/1024;
-                        if (f <= 700)
-                            item2->setText(""+QString::number(f,'f',2)+"Mb");
-                        if (f > 700)
+                        f = ValorC.toFloat();
+                        if (f > 0)
                         {
-                            float g = f / 1024;
-                            item2->setText(""+QString::number(g,'f',2)+"Gb");
+                            if (f <= 999)
+                                item2->setText(""+QString::number(f)+" B");
+                            if (f > 999 && f <= 999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                item2->setText(""+QString::number(f,'f',1)+" kB");
+                            }
+                            if (f > 999999 && f <= 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                item2->setText(""+QString::number(f,'f',1)+" MB");
+                            }
+                            if (f > 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                f = f / 1024;
+                                item2->setText(""+QString::number(f,'f',1)+" Gb");
+                            }
                         }
                     }
                     if (h == 4)
                     {
                         ValorT = Nombre.value(h);
-                        f=(ValorT.toFloat()/1024)/1024;
-                        if (f <= 700)
-                            item4->setText(""+QString::number(f,'f',2)+"Mb");
-                        if (f > 700)
+                        f = ValorT.toFloat();
+                        if (f > 0)
                         {
-                            float g = f / 1024;
-                            item4->setText(""+QString::number(g,'f',2)+"Gb");
+                            if (f <= 999)
+                                item4->setText(""+QString::number(f)+" B");
+                            if (f > 999 && f <= 999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                item4->setText(""+QString::number(f,'f',1)+" kB");
+                            }
+                            if (f > 999999 && f <= 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                item4->setText(""+QString::number(f,'f',1)+" MB");
+                            }
+                            if (f > 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                f = f / 1024;
+                                item4->setText(""+QString::number(f,'f',1)+" Gb");
+                            }
                         }
                     }
                     if (h == 5)
@@ -1081,13 +1401,29 @@ void compresor::Listado(QString Valor)
                 if (a == 3)
                 {
                     ValorC = Final.value(a);
-                    f=(ValorC.toFloat()/1024)/1024;
-                    if (f <= 700)
-                        item4->setText(""+QString::number(f,'f',2)+"Mb");
-                    if (f > 700)
+                    f = ValorC.toFloat();
+                    if (f > 0)
                     {
-                        float g = f / 1024;
-                        item4->setText(""+QString::number(g,'f',2)+"Gb");
+                        if (f <= 999)
+                            item4->setText(""+QString::number(f)+" B");
+                        if (f > 999 && f <= 999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            item4->setText(""+QString::number(f,'f',1)+" kB");
+                        }
+                        if (f > 999999 && f <= 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            item4->setText(""+QString::number(f,'f',1)+" MB");
+                        }
+                        if (f > 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            f = f / 1024;
+                            item4->setText(""+QString::number(f,'f',1)+" Gb");
+                        }
                     }
                 }
                 if (a == 4)
@@ -1099,13 +1435,29 @@ void compresor::Listado(QString Valor)
                     numero=ascii.toAscii() ;
                     if (numero >= 48 && numero <=57)
                     {
-                        f=(ValorT.toFloat()/1024)/1024;
-                        if (f <= 700)
-                            item2->setText(""+QString::number(f,'f',2)+"Mb");
-                        if (f > 700)
+                        f = ValorT.toFloat();
+                        if (f > 0)
                         {
-                            float g = f / 1024;
-                            item2->setText(""+QString::number(g,'f',2)+"Gb");
+                            if (f <= 999)
+                                item2->setText(""+QString::number(f)+" B");
+                            if (f > 999 && f <= 999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                item2->setText(""+QString::number(f,'f',1)+" kB");
+                            }
+                            if (f > 999999 && f <= 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                item2->setText(""+QString::number(f,'f',1)+" MB");
+                            }
+                            if (f > 999999999)
+                            {
+                                f = (f + 1023) / 1024;
+                                f = f / 1024;
+                                f = f / 1024;
+                                item2->setText(""+QString::number(f,'f',1)+" Gb");
+                            }
                         }
                     }
                     else
@@ -1168,25 +1520,57 @@ void compresor::Listado(QString Valor)
                 if (a == 2)
                 {
                     ValorC = Final.value(a);
-                    f=(ValorC.toFloat()/1024)/1024;
-                    if (f <= 700)
-                        item2->setText(""+QString::number(f,'f',2)+"Mb");
-                    if (f > 700)
+                    f = ValorC.toFloat();
+                    if (f > 0)
                     {
-                        float g = f / 1024;
-                        item2->setText(""+QString::number(g,'f',2)+"Gb");
+                        if (f <= 999)
+                            item2->setText(""+QString::number(f)+" B");
+                        if (f > 999 && f <= 999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            item2->setText(""+QString::number(f,'f',1)+" kB");
+                        }
+                        if (f > 999999 && f <= 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            item2->setText(""+QString::number(f,'f',1)+" MB");
+                        }
+                        if (f > 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            f = f / 1024;
+                            item2->setText(""+QString::number(f,'f',1)+" Gb");
+                        }
                     }
                 }
                 if (a == 3)
                 {
                     ValorT = Final.value(a);
-                    f=(ValorT.toFloat()/1024)/1024;
-                    if (f <= 700)
-                        item4->setText(""+QString::number(f,'f',2)+"Mb");
-                    if (f > 700)
+                    f = ValorT.toFloat();
+                    if (f > 0)
                     {
-                        float g = f / 1024;
-                        item4->setText(""+QString::number(g,'f',2)+"Gb");
+                        if (f <= 999)
+                            item4->setText(""+QString::number(f)+" B");
+                        if (f > 999 && f <= 999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            item4->setText(""+QString::number(f,'f',1)+" kB");
+                        }
+                        if (f > 999999 && f <= 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            item4->setText(""+QString::number(f,'f',1)+" MB");
+                        }
+                        if (f > 999999999)
+                        {
+                            f = (f + 1023) / 1024;
+                            f = f / 1024;
+                            f = f / 1024;
+                            item4->setText(""+QString::number(f,'f',1)+" Gb");
+                        }
                     }
                 }
                 if (a == 4)
@@ -1918,7 +2302,7 @@ void compresor::on_pushButton_4_clicked()
         connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
         connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
         int valor= comandos.count();
-        mib->Valor(valor,3);
+        mib->Valor(valor,4);
         mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
         mib->iniciarProceso();
         Totalizar = comandos.count();
@@ -3122,7 +3506,7 @@ void compresor::on_pushButton_7_clicked()
     connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
     connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
     int valor= comandos.count();
-    mib->Valor(valor,3);
+    mib->Valor(valor,4);
     mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
     mib->iniciarProceso();
     Totalizar = comandos.count();
@@ -3333,7 +3717,7 @@ void compresor::on_pushButton_12_clicked()
     connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
     connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
     int valor= comandos.count();
-    mib->Valor(valor,3);
+    mib->Valor(valor,4);
     mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
     mib->iniciarProceso();
     Totalizar = comandos.count();
@@ -3483,9 +3867,35 @@ void compresor::on_pushButton_8_clicked()
     connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
     connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
     int valor= comandos.count();
-    mib->Valor(valor,3);
+    mib->Valor(valor,4);
     mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
     mib->iniciarProceso();
     Totalizar = comandos.count();
     ui->progressBar->setRange(0,Totalizar);
+}
+
+void compresor::on_pushButton_13_clicked()
+{
+    CDrake=new CompressDrake(this);
+    CDrake->exec();
+}
+
+void compresor::on_pushButton_14_clicked()
+{
+    if (ui->pushButton_14->text() == tr("Mostrar seleccion"))
+    {
+        ui->pushButton_14->setText(tr("Ocultar seleccion"));
+        if (ui->radioButton->isChecked())
+            fdlg->setMaximumHeight(400);
+        else
+            fdlg1->setMaximumHeight(450);
+    }
+    else if (ui->pushButton_14->text() == tr("Ocultar seleccion"))
+    {
+        ui->pushButton_14->setText(tr("Mostrar seleccion"));
+        if (ui->radioButton->isChecked())
+            fdlg->setMaximumHeight(0);
+        else
+            fdlg1->setMaximumHeight(0);
+    }
 }

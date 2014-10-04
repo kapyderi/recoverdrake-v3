@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>481</width>
-    <height>147</height>
+    <height>161</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
     <width>481</width>
-    <height>147</height>
+    <height>161</height>
    </size>
   </property>
   <property name="font">
@@ -33,13 +33,13 @@
     <number>0</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>9</number>
    </property>
    <property name="rightMargin">
     <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>9</number>
    </property>
    <item row="0" column="0" colspan="3">
     <widget class="QLabel" name="label_2">
