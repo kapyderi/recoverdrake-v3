@@ -147,45 +147,27 @@ void sincrono::Valor(QString Ref, QString Valor1, QString Valor2, QString Valor3
         ui->pushButton_15->setEnabled(true);
     }
     if (Valor3 == "Si")
-    {
         ui->checkBox->setChecked(true);
-    }
     else
-    {
         ui->checkBox->setChecked(false);
-    }
     if (Valor4 == "Si")
-    {
         ui->checkBox_2->setChecked(true);
-    }
     else
-    {
         ui->checkBox_2->setChecked(false);
-    }
     if (Valor5 == "Si")
-    {
         ui->checkBox_3->setChecked(true);
-    }
     else
-    {
         ui->checkBox_3->setChecked(false);
-    }
+    ui->lineEdit->setEnabled(false);
+    ui->lineEdit_2->setEnabled(false);
+    ui->pushButton->setEnabled(false);
+    ui->pushButton_3->setEnabled(false);
     if (Value == 1)
-    {
         this->on_pushButton_4_clicked();
-    }
     else if (Value == 2)
     {
         Marca = 1;
-        this->on_pushButton_4_clicked();
         this->on_pushButton_5_clicked();
-    }
-    else if (Value == 0)
-    {
-        ui->lineEdit->setEnabled(false);
-        ui->lineEdit_2->setEnabled(false);
-        ui->pushButton->setEnabled(false);
-        ui->pushButton_3->setEnabled(false);
     }
     QString Valor10 = "ls -l -d \"%1\"";
     Valor10 = Valor10.arg(ui->lineEdit->text());
@@ -246,9 +228,7 @@ void sincrono::Comprobar()
                                "sabes lo que estas haciendo.</B><p>"
                                "&iquest;Utilizar la opcion de borrado de archivos?")), QMessageBox::Ok, QMessageBox::No);
         if (respuesta == QMessageBox::No)
-        {
             ui->checkBox->setChecked(false);
-        }
     }
 }
 
@@ -261,9 +241,7 @@ void sincrono::on_pushButton_clicked()
         path=path.arg(user);
     }
     else
-    {
         path=ui->lineEdit->text();
-    }
     QString fileNameDirectori = QFileDialog::getExistingDirectory(this,tr("Directorio fuente?"),path,QFileDialog::ShowDirsOnly);
     if (fileNameDirectori.isEmpty())
        return;
@@ -279,9 +257,7 @@ void sincrono::on_pushButton_3_clicked()
         path=path.arg(user);
     }
     else
-    {
         path=ui->lineEdit_2->text();
-    }
     QString fileNameDirectori = QFileDialog::getExistingDirectory(this,tr("Directorio destino?"),path,QFileDialog::ShowDirsOnly);
     if (fileNameDirectori.isEmpty())
        return;
@@ -386,9 +362,7 @@ QString sincrono::getMount(QString Dev)
             break;
         }
         else
-        {
             res = "No";
-        }
     }
     return res;
 }
@@ -426,6 +400,11 @@ QString sincrono::getLocal(QString Dev)
 
 void sincrono::on_pushButton_4_clicked()
 {
+    if (Evento == 1)
+    {
+        Evento = 0;
+        return;
+    }
     ui->textEdit->setText("");
     int Cantidad;
     QString Traspaso;
@@ -500,9 +479,7 @@ void sincrono::on_pushButton_4_clicked()
                                 }
                             }
                             for (int b=Resto;b<Depurado.count();b++)
-                            {
                                 Valorado.append("/"+Depurado.value(b)+"");
-                            }
                             Depurar = ""+Definitivo+""+Valorado+"";
                             ui->lineEdit_2->setText(Depurar);
                             Contador = 1;                          
@@ -598,9 +575,7 @@ void sincrono::on_pushButton_4_clicked()
                                 }
                             }
                             for (int b=Resto;b<Depurado.count();b++)
-                            {
                                 Valorado.append("/"+Depurado.value(b)+"");
-                            }
                             Depurar = ""+Definitivo+""+Valorado+"";
                             ui->lineEdit->setText(Depurar);
                             Contador = 1;
@@ -1413,6 +1388,7 @@ void sincrono::on_pushButton_4_clicked()
     }
     else
         ContadorC = 0;
+    ui->tableWidget_2->selectRow(0);
 }
 
 void sincrono::on_pushButton_6_clicked()
@@ -1443,6 +1419,7 @@ void sincrono::on_pushButton_6_clicked()
     Counter = 0;
     ContadorC = 0;
     Value = 0;
+    return;
 }
 
 void sincrono::on_pushButton_8_clicked()
@@ -1760,7 +1737,7 @@ void sincrono::on_pushButton_5_clicked()
                             }
                             Depurar = ""+Definitivo+""+Valorado+"";
                             ui->lineEdit_2->setText(Depurar);
-                            Contador = 1;                            
+                            Contador = 1;
                             if (Comparar.value(0) != ui->lineEdit_2->text())
                             {
                                 ui->textEdit->append(tr("<FONT COLOR=\"RED\">...En sincronizacion: La ruta introducida en destino no existe. Comprueba la accesibilidad de la misma."));
@@ -1937,15 +1914,23 @@ void sincrono::on_pushButton_5_clicked()
                 Valor1 = drake.getStart(md1);
                 if (Valor1 == "")
                 {
-                    if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                    if (ui->checkBox_6->isChecked())
                     {
                         cm = "su -c \"mkdir %1/.Sincrono\"";
                         cm = cm.arg(fileDestino);
                     }
                     else
                     {
-                        cm = "su - "+user+" -c \"mkdir %1/.Sincrono\"";
-                        cm = cm.arg(fileDestino);
+                        if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                        {
+                            cm = "su -c \"mkdir %1/.Sincrono\"";
+                            cm = cm.arg(fileDestino);
+                        }
+                        else
+                        {
+                            cm = "su - "+user+" -c \"mkdir %1/.Sincrono\"";
+                            cm = cm.arg(fileDestino);
+                        }
                     }
                     comandos << cm;                    
                 }
@@ -2021,29 +2006,45 @@ void sincrono::on_pushButton_5_clicked()
                 QString Buscar = drake.getStart(Valor);
                 if (Buscar == "")
                 {
-                    if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                    if (ui->checkBox_6->isChecked())
                     {
                         cm1 = "su -c \"mkdir %1%2\"";
                         cm1 = cm1.arg(fileDestino).arg(RutaObj);
                     }
                     else
                     {
-                        cm1 = "su - "+user+" -c \"mkdir %1%2\"";
-                        cm1 = cm1.arg(fileDestino).arg(RutaObj);
+                        if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                        {
+                            cm1 = "su -c \"mkdir %1%2\"";
+                            cm1 = cm1.arg(fileDestino).arg(RutaObj);
+                        }
+                        else
+                        {
+                            cm1 = "su - "+user+" -c \"mkdir %1%2\"";
+                            cm1 = cm1.arg(fileDestino).arg(RutaObj);
+                        }
                     }
                 }
             }
             else if (Tipo == tr("Archivo"))
             {
-                if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                if (ui->checkBox_6->isChecked())
                 {
                     cm1 = "su -c \"cp --preserve=mode,timestamps -v %1%2 %3%2\"";
                     cm1=cm1.arg(fileOrigen).arg(RutaObj).arg(fileDestino);
                 }
                 else
                 {
-                    cm1 = "su - "+user+" -c \"cp --preserve=mode,timestamps -v %1%2 %3%2\"";
-                    cm1=cm1.arg(fileOrigen).arg(RutaObj).arg(fileDestino);
+                    if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                    {
+                        cm1 = "su -c \"cp --preserve=mode,timestamps -v %1%2 %3%2\"";
+                        cm1=cm1.arg(fileOrigen).arg(RutaObj).arg(fileDestino);
+                    }
+                    else
+                    {
+                        cm1 = "su - "+user+" -c \"cp --preserve=mode,timestamps -v %1%2 %3%2\"";
+                        cm1=cm1.arg(fileOrigen).arg(RutaObj).arg(fileDestino);
+                    }
                 }
             }
             comandos << cm1;
@@ -2072,42 +2073,66 @@ void sincrono::on_pushButton_5_clicked()
                         if (Valor1 == "")
                         {
                             QString cm1;
-                            if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                            if (ui->checkBox_6->isChecked())
                             {
                                 cm1 = "su -c \"mkdir -p %1/.Sincrono/%2\"";
                                 cm1 = cm1.arg(fileDestino).arg(Crear);
                             }
                             else
                             {
-                                cm1 = "su - "+user+" -c \"mkdir -p %1/.Sincrono/%2\"";
-                                cm1 = cm1.arg(fileDestino).arg(Crear);
+                                if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                                {
+                                    cm1 = "su -c \"mkdir -p %1/.Sincrono/%2\"";
+                                    cm1 = cm1.arg(fileDestino).arg(Crear);
+                                }
+                                else
+                                {
+                                    cm1 = "su - "+user+" -c \"mkdir -p %1/.Sincrono/%2\"";
+                                    cm1 = cm1.arg(fileDestino).arg(Crear);
+                                }
                             }
                             comandos << cm1;
                         }
                     }
-                    if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                    if (ui->checkBox_6->isChecked())
                     {
                         cm = "su -c \"cp --preserve=mode,timestamps %1%2 %1/.Sincrono%2\"";
                         cm = cm.arg(fileDestino).arg(RutaDest);
                     }
                     else
                     {
-                        cm = "su - "+user+" -c \"cp --preserve=mode,timestamps %1%2 %1/.Sincrono%2\"";
-                        cm = cm.arg(fileDestino).arg(RutaDest);
+                        if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                        {
+                            cm = "su -c \"cp --preserve=mode,timestamps %1%2 %1/.Sincrono%2\"";
+                            cm = cm.arg(fileDestino).arg(RutaDest);
+                        }
+                        else
+                        {
+                            cm = "su - "+user+" -c \"cp --preserve=mode,timestamps %1%2 %1/.Sincrono%2\"";
+                            cm = cm.arg(fileDestino).arg(RutaDest);
+                        }
                     }
                     comandos << cm;                    
                 }
             }
             QString cm1;
-            if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+            if (ui->checkBox_6->isChecked())
             {
                 cm1 = "su -c \"cp --preserve=mode,timestamps -v %1%2 %3%2\"";
                 cm1=cm1.arg(fileOrigen).arg(RutaObj).arg(fileDestino);
             }
             else
             {
-                cm1 = "su - "+user+" -c \"cp --preserve=mode,timestamps -v %1%2 %3%2\"";
-                cm1=cm1.arg(fileOrigen).arg(RutaObj).arg(fileDestino);
+                if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                {
+                    cm1 = "su -c \"cp --preserve=mode,timestamps -v %1%2 %3%2\"";
+                    cm1=cm1.arg(fileOrigen).arg(RutaObj).arg(fileDestino);
+                }
+                else
+                {
+                    cm1 = "su - "+user+" -c \"cp --preserve=mode,timestamps -v %1%2 %3%2\"";
+                    cm1=cm1.arg(fileOrigen).arg(RutaObj).arg(fileDestino);
+                }
             }
             comandos << cm1;
         }
@@ -2137,41 +2162,65 @@ void sincrono::on_pushButton_5_clicked()
                             if (Valor1 == "")
                             {
                                 QString cm1;
-                                if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                                if (ui->checkBox_6->isChecked())
                                 {
                                     cm1 = "su -c \"mkdir -p %1/.Sincrono/%2\"";
                                     cm1 = cm1.arg(fileDestino).arg(Crear);
                                 }
                                 else
                                 {
-                                    cm1 = "su - "+user+" -c \"mkdir -p %1/.Sincrono/%2\"";
-                                    cm1 = cm1.arg(fileDestino).arg(Crear);
+                                    if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                                    {
+                                        cm1 = "su -c \"mkdir -p %1/.Sincrono/%2\"";
+                                        cm1 = cm1.arg(fileDestino).arg(Crear);
+                                    }
+                                    else
+                                    {
+                                        cm1 = "su - "+user+" -c \"mkdir -p %1/.Sincrono/%2\"";
+                                        cm1 = cm1.arg(fileDestino).arg(Crear);
+                                    }
                                 }
                                 comandos << cm1;                                
                             }
                         }
-                        if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                        if (ui->checkBox_6->isChecked())
                         {
                             cm = "su -c \"cp --preserve=mode,timestamps %1%2 %1/.Sincrono%2\"";
                             cm = cm.arg(fileDestino).arg(RutaDest);
                         }
                         else
                         {
-                            cm = "su - "+user+" -c \"cp --preserve=mode,timestamps %1%2 %1/.Sincrono%2\"";
-                            cm = cm.arg(fileDestino).arg(RutaDest);
+                            if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                            {
+                                cm = "su -c \"cp --preserve=mode,timestamps %1%2 %1/.Sincrono%2\"";
+                                cm = cm.arg(fileDestino).arg(RutaDest);
+                            }
+                            else
+                            {
+                                cm = "su - "+user+" -c \"cp --preserve=mode,timestamps %1%2 %1/.Sincrono%2\"";
+                                cm = cm.arg(fileDestino).arg(RutaDest);
+                            }
                         }
                         comandos << cm;                        
                     }
                 }
-                if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                if (ui->checkBox_6->isChecked())
                 {
                     cm1 = "su -c \"rm -vfd %1%2\"";
                     cm1 = cm1.arg(fileDestino).arg(RutaDest);
                 }
                 else
                 {
-                    cm1 = "su - "+user+" -c \"rm -vfd %1%2\"";
-                    cm1 = cm1.arg(fileDestino).arg(RutaDest);
+                    if (Root.contains("root") || PermiO.contains("root") || PermiD.contains("root"))
+                    {
+                        cm1 = "su -c \"rm -vfd %1%2\"";
+                        cm1 = cm1.arg(fileDestino).arg(RutaDest);
+                    }
+                    else
+                    {
+                        cm1 = "su - "+user+" -c \"rm -vfd %1%2\"";
+                        cm1 = cm1.arg(fileDestino).arg(RutaDest);
+                    }
                 }
                 comandos << cm1;
             }
@@ -2201,9 +2250,7 @@ void sincrono::mibEscribir(QString valor)
     valor = valor.remove("# ");
     ui->textEdit->append(valor);
     if (log == "S")
-    {
         system(QString::fromUtf8("echo '"+valor+"' >> /usr/share/RecoverDrake/RecoverDrake.log"));
-    }
 }
 
 void sincrono::mibprogreso(QString Dat)
@@ -2214,49 +2261,193 @@ void sincrono::mibprogreso(QString Dat)
 
 void sincrono::ProcesarValor(QString ValorComand)
 {
-    int iFilas, a;
-    QString valor, valor1, valor2, valor3;
-    iFilas=ui->tableWidget_2->rowCount();
-    QTableWidgetItem *item, *item1, *item2, *item3, *item4, *item5, *item6, *item7, *item8;
-    for(a=0;a<iFilas;a++)
-    {        
-        item=ui->tableWidget_2->item(a,1);
-        item1=ui->tableWidget_2->item(a,5);
-        item2=ui->tableWidget_2->item(a,0);
-        item3=ui->tableWidget_2->item(a,2);
-        item4=ui->tableWidget_2->item(a,3);
-        item5=ui->tableWidget_2->item(a,6);
-        item6=ui->tableWidget_2->item(a,7);
-        item7=ui->tableWidget_2->item(a,8);
-        item8=ui->tableWidget_2->item(a,9);
-        valor=item->text();
-        valor1=item2->text();
-        valor2=item3->text();
-        valor3=item4->text();
-        if (valor != "")
-        {            
-            QString Ruta = ""+ui->lineEdit->text()+""+valor+"";
-            QFile file(Ruta);
-            QString Value = QFileInfo(file).absoluteFilePath();
-            Value = Value.replace(" ", "\\ ").replace("&","\\&").replace("'","\\'").replace("(","\\(").replace(")","\\)");
-            if (ValorComand.contains(Value))
+    int iFilas;
+    QString valor;
+    QTableWidgetItem *item, *item1, *item2, *item3, *item4, *item5, *item6, *item7, *item8, *item9, *item10;
+    item1=new QTableWidgetItem;
+    item2=new QTableWidgetItem;
+    item3=new QTableWidgetItem;
+    item4=new QTableWidgetItem;
+    item5=new QTableWidgetItem;
+    item6=new QTableWidgetItem;
+    item7=new QTableWidgetItem;
+    item8=new QTableWidgetItem;
+    item9=new QTableWidgetItem;
+    item10=new QTableWidgetItem;
+    iFilas=ui->tableWidget_2->currentRow();
+    item=ui->tableWidget_2->item(iFilas,1);    
+    valor=item->text();    
+    QString ruta = ""+ui->lineEdit->text()+""+valor+"";
+    QString Busqueda = ruta;
+    QFile file(ruta);
+    QString Value = QFileInfo(file).absoluteFilePath();
+    Value = Value.replace(" ", "\\ ").replace("&","\\&").replace("'","\\'").replace("(","\\(").replace(")","\\)");
+    if (ValorComand.contains(Value))
+    {
+        if(ValorComand.contains("/.Sincrono") == false)
+        {
+            item1->setText(QFileInfo(file).fileName());
+            item2->setText(QString::fromUtf8(ruta.remove(ui->lineEdit->text())));
+            item3->setText(QString::number(QFileInfo(file).size()));
+            QDateTime Fecha = QFileInfo(file).lastModified();
+            item4->setText(Fecha.toString());
+            drakeSistema drake;
+            QString tipo = drake.getTipo(Busqueda);
+            QStringList Tipo = tipo.split(":");
+            QString tipe = Tipo.value(1);
+            if (tipe.contains("directory"))
             {
-                if(ValorComand.contains("/.Sincrono") == false)
+                item5->setText(tr("Directorio"));
+                item3->setText("");
+                item4->setText("");
+            }
+            else
+                item5->setText(tr("Archivo"));
+            QString final= ""+ui->lineEdit_2->text()+""+valor+"";
+            QFile file1(final);
+            QString Buscar = QFileInfo(file1).fileName();
+            QString Buscar0 = QString::fromUtf8(final.remove(ui->lineEdit_2->text()));
+            QString Buscar1 = QString::number(QFileInfo(file1).size());
+            QString Buscar2 = QFileInfo(file1).lastModified().toString();
+            if (QString::fromUtf8(ruta.remove(ui->lineEdit->text())) == QString::fromUtf8(final.remove(ui->lineEdit_2->text())))
+            {
+                if (QFileInfo(file1).fileName() == QFileInfo(file).fileName())
                 {
-                    ui->tableWidget_2->item(a,5)->setIcon(QIcon(":/Imagenes/good.png"));
-                    item1->setText(tr("Sin cambios"));
-                    item5->setText(valor1);
-                    item6->setText(valor);
-                    item7->setText(valor2);
-                    item8->setText(valor3);
-                    ui->tableWidget_2->setItem(iFilas,5,item1);
-                    ui->tableWidget_2->setItem(iFilas,6,item5);
-                    ui->tableWidget_2->setItem(iFilas,7,item6);
-                    ui->tableWidget_2->setItem(iFilas,8,item7);
-                    ui->tableWidget_2->setItem(iFilas,9,item8);
-                    ui->tableWidget_2->selectRow(a);
+                    if (QString::number(QFileInfo(file1).size()) == QString::number(QFileInfo(file).size()))
+                    {
+                        if (tipe.contains("directory"))
+                        {
+                            item6->setText(tr("Sin cambios"));
+                            item7->setText(Buscar);
+                            item8->setText(Buscar0);
+                            item9->setText("");
+                            item10->setText("");
+                        }
+                        else
+                        {
+                            QDateTime Fecha1 = QFileInfo(file).lastModified();
+                            QDateTime Fecha2 = QFileInfo(file1).lastModified();
+                            QDate date1 = Fecha1.date();
+                            QDate date2 = Fecha2.date();
+                            QTime time1 = Fecha1.time();
+                            QTime time2 = Fecha2.time();
+                            int Hora1 = time1.hour();
+                            int Hora2 = time2.hour();
+                            int Minuto1 = time1.minute();
+                            int Minuto2 = time1.minute();
+                            if (QFileInfo(file1).lastModified().toString() == QFileInfo(file).lastModified().toString())
+                            {
+                                item6->setText(tr("Sin cambios"));
+                                item7->setText(Buscar);
+                                item8->setText(Buscar0);
+                                item9->setText(Buscar1);
+                                item10->setText(Buscar2);
+                            }
+                            else if (QFileInfo(file1).lastModified().toString() != QFileInfo(file).lastModified().toString())
+                            {
+                                if (Fecha1 == Fecha2)
+                                {
+                                    item6->setText(tr("Sin cambios"));
+                                    item7->setText(Buscar);
+                                    item8->setText(Buscar0);
+                                    item9->setText(Buscar1);
+                                    item10->setText(Buscar2);
+                                }
+                                else
+                                {
+                                    if (date1 == date2)
+                                    {
+                                        item6->setText(tr("Sin cambios"));
+                                        item7->setText(Buscar);
+                                        item8->setText(Buscar0);
+                                        item9->setText(Buscar1);
+                                        item10->setText(Buscar2);
+                                    }
+                                    else
+                                    {
+                                        if (Hora1 == Hora2 && Minuto1 == Minuto2)
+                                        {
+                                            item6->setText(tr("Sin cambios"));
+                                            item7->setText(Buscar);
+                                            item8->setText(Buscar0);
+                                            item9->setText(Buscar1);
+                                            item10->setText(Buscar2);
+                                        }
+                                        else
+                                        {
+                                            item6->setText(tr("Modificado"));
+                                            item7->setText(Buscar);
+                                            item8->setText(Buscar0);
+                                            item9->setText(Buscar1);
+                                            item10->setText(Buscar2);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else if (QString::number(QFileInfo(file1).size()) != QString::number(QFileInfo(file).size()))
+                    {
+                        if (tipe.contains("directory"))
+                        {
+                            item6->setText(tr("Sin cambios"));
+                            item7->setText(Buscar);
+                            item8->setText(Buscar0);
+                            item9->setText("");
+                            item10->setText("");
+                        }
+                        else
+                        {
+                            item6->setText(tr("Modificado"));
+                            item7->setText(Buscar);
+                            item8->setText(Buscar0);
+                            item9->setText(Buscar1);
+                            item10->setText(Buscar2);
+                        }
+                    }
                 }
             }
+            if (item6->text() == tr("Sin cambios"))
+            {
+                    if (item6->text() == tr("Sin cambios"))
+                        valor = ":/Imagenes/thumbs_up.png";
+                    else if (item6->text() == tr("Modificado"))
+                        valor = ":/Imagenes/Error.png";
+                    else if (item6->text() == tr("Nuevo"))
+                        valor = ":/Imagenes/help.png";
+                    ui->tableWidget_2->setItem(iFilas,0,item1);
+                    ui->tableWidget_2->setItem(iFilas,1,item2);
+                    ui->tableWidget_2->setItem(iFilas,2,item3);
+                    ui->tableWidget_2->setItem(iFilas,3,item4);
+                    ui->tableWidget_2->setItem(iFilas,4,item5);
+                    ui->tableWidget_2->setItem(iFilas,5,item6);
+                    ui->tableWidget_2->item(iFilas,5)->setIcon(QIcon(valor));
+                    ui->tableWidget_2->setItem(iFilas,6,item7);
+                    ui->tableWidget_2->setItem(iFilas,7,item8);
+                    ui->tableWidget_2->setItem(iFilas,8,item9);
+                    ui->tableWidget_2->setItem(iFilas,9,item10);
+            }
+            else
+            {
+                if (item6->text() == tr("Modificado"))
+                    valor = ":/Imagenes/Error.png";
+                else if (item6->text() == tr("Nuevo"))
+                    valor = ":/Imagenes/help.png";
+                ui->tableWidget_2->setItem(iFilas,0,item1);
+                ui->tableWidget_2->setItem(iFilas,1,item2);
+                ui->tableWidget_2->setItem(iFilas,2,item3);
+                ui->tableWidget_2->setItem(iFilas,3,item4);
+                ui->tableWidget_2->setItem(iFilas,4,item5);
+                ui->tableWidget_2->setItem(iFilas,5,item6);
+                ui->tableWidget_2->item(iFilas,5)->setIcon(QIcon(valor));
+                ui->tableWidget_2->setItem(iFilas,6,item7);
+                ui->tableWidget_2->setItem(iFilas,7,item8);
+                ui->tableWidget_2->setItem(iFilas,8,item9);
+                ui->tableWidget_2->setItem(iFilas,9,item10);
+            }
+            ui->tableWidget_2->selectRow(ui->tableWidget_2->currentRow()+1);
+            ui->tableWidget_2->resizeColumnsToContents();
+            ui->tableWidget_2->resizeRowsToContents();
         }
     }
     TotalProceso = TotalProceso+1;

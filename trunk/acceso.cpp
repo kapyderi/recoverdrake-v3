@@ -141,7 +141,7 @@ acceso::acceso(QWidget *parent) :
     notas *acc=new notas();
     Ver=acc->Ultimo;
     QString Version = tr("Construido con Qt ")+QString::fromStdString(QT_VERSION_STR);
-    ui->label_20->setText(Version);
+    ui->label_20->setText(Version);    
     qsrand(QTime::currentTime().msec());
     if (Limitacion == 0)
     {
@@ -406,13 +406,9 @@ void acceso::User()
         English=queryEnglish.value(0).toString();
     QString idioma;
     if ( Spain == "2")
-    {
         idioma = "es";
-    }
     else if ( English == "2")
-    {
         idioma = "en";
-    }
     QSqlQuery clave(db);
     clave.exec("SELECT clave FROM Registro");
     clave.first();
@@ -426,9 +422,7 @@ void acceso::User()
             QSqlQuery Variable(db);
             Variable.exec("SELECT Usuario,Activo FROM Acceso WHERE Activo LIKE '2' AND Usuario != 'kapyderi'");
             while(Variable.next())
-            {
                 ui->comboBox->addItem(Variable.value(0).toString());
-            }
             QSqlQuery Control(db);
             Control.exec("SELECT Usuario,Fecha_Ingreso FROM control WHERE Usuario != 'kapyderi'");
             Control.last();
@@ -445,9 +439,7 @@ void acceso::User()
             QSqlQuery Variable(db);
             Variable.exec("SELECT Usuario,Activo FROM Acceso WHERE Activo LIKE '2'");
             while(Variable.next())
-            {
                 ui->comboBox->addItem(Variable.value(0).toString());
-            }
             QSqlQuery Control(db);
             Control.exec("SELECT Usuario,Fecha_Ingreso FROM control");
             Control.last();
@@ -468,9 +460,7 @@ void acceso::User()
             QSqlQuery Variable(db);
             Variable.exec("SELECT Usuario,Activo,Nivel FROM Acceso WHERE Activo LIKE '2' and Nivel LIKE '1' AND Usuario != 'kapyderi'");
             while(Variable.next())
-            {
                 ui->comboBox->addItem(Variable.value(0).toString());
-            }
         }
         else if (ui->checkBox->isChecked() == true)
         {
@@ -478,9 +468,7 @@ void acceso::User()
             QSqlQuery Variable(db);
             Variable.exec("SELECT Usuario,Activo,Nivel FROM Acceso WHERE Activo LIKE '2' and Nivel LIKE '1'");
             while(Variable.next())
-            {
                 ui->comboBox->addItem(Variable.value(0).toString());
-            }
         }
     }
     QSqlQuery query1(db);
@@ -498,9 +486,7 @@ void acceso::User()
             ui->pushButton_3->setText("Forgot your password?");
         }
         else
-        {
             ui->groupBox_2->setTitle(QString::fromUtf8(tr("Contrasena")));
-        }
     }
     else
     {
@@ -578,45 +564,43 @@ void acceso::on_pushButton_clicked()
     query.exec("select * from Acceso where Usuario='"+ui->comboBox->currentText()+"' and Clave='"+ui->lineEdit_2->text()+"'");
     if( query.first() )
     {
-            if (ui->checkBox->isChecked() == true)
+        if (ui->checkBox->isChecked() == true)
+        {
+            bool ok;
+            QString Clave;
+            Clave = QInputDialog::getText(this, QString::fromUtf8(tr("Clave de Administrador")),
+            QString::fromUtf8(tr("Introduce la clave de administrador...")),
+            QLineEdit::Password,
+            "",&ok);
+            if (Clave.isEmpty())
+                return;
+            if (ok && !Clave.isEmpty())
             {
-                bool ok;
-                QString Clave;
-                Clave = QInputDialog::getText(this, QString::fromUtf8(tr("Clave de Administrador")),
-                QString::fromUtf8(tr("Introduce la clave de administrador...")),
-                QLineEdit::Password,
-                "",&ok);
-                if (Clave.isEmpty())
-                    return;
-                if (ok && !Clave.isEmpty())
+                if (Clave != "4Rimas")
                 {
-                    if (Clave != "4Rimas")
-                    {
-                        QMessageBox m;
-                        if (Stilo == "A")
-                            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-                        m.setText(tr("La clave introducida no concuerda con la del Administrador. No se puede continuar..."));
-                        m.exec();
-                        return;
-                    }
-                }
-                else
-                {
+                    QMessageBox m;
+                    if (Stilo == "A")
+                        m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                    m.setText(tr("La clave introducida no concuerda con la del Administrador. No se puede continuar..."));
+                    m.exec();
                     return;
                 }
             }
-            this->correcto=true;
-            QSqlQuery mod(db);
-            mod.prepare("INSERT INTO Control (Usuario,Fecha_Ingreso,Version,Nucleo)"
-                        "VALUES (:User, :Fecha, :Version, :Nucleo)");
-            mod.bindValue(":User", ui->comboBox->currentText());
-            mod.bindValue(":Fecha", QDateTime::currentDateTime());
-            mod.bindValue(":Version", Ver);
-            mod.bindValue(":Nucleo", Nucleo);
-            mod.exec();
-            this->Usuar=ui->comboBox->currentText();          
-            this->close();
-            return;
+            else
+                return;
+        }
+        this->correcto=true;
+        QSqlQuery mod(db);
+        mod.prepare("INSERT INTO Control (Usuario,Fecha_Ingreso,Version,Nucleo)"
+                    "VALUES (:User, :Fecha, :Version, :Nucleo)");
+        mod.bindValue(":User", ui->comboBox->currentText());
+        mod.bindValue(":Fecha", QDateTime::currentDateTime());
+        mod.bindValue(":Version", Ver);
+        mod.bindValue(":Nucleo", Nucleo);
+        mod.exec();
+        this->Usuar=ui->comboBox->currentText();
+        this->close();
+        return;
     }
     else
     {
@@ -632,13 +616,9 @@ void acceso::on_pushButton_clicked()
         {
             ui->lineEdit_2->setText(tr(""));
             if(contador==3)
-            {
                 exit(0);
-            }
             else
-            {
                 return;
-            }
         }
         exit(0);
     }
@@ -660,13 +640,9 @@ void acceso::on_pushButton_3_clicked()
     Pass->exec();
     QString Loc=Pass->Local;
     if (Loc == "")
-    {
         return;
-    }
     else if (Loc != "")
-    {
         ui->lineEdit_2->setText(Loc);
-    }
 }
 
 void acceso::on_comboBox_currentIndexChanged()
@@ -1014,9 +990,7 @@ void acceso::Comprobar()
             QSqlQuery Variable(db);
             Variable.exec("SELECT Usuario,Activo FROM Acceso WHERE Activo LIKE '2' AND Usuario != 'kapyderi'");
             while(Variable.next())
-            {
                 ui->comboBox->addItem(Variable.value(0).toString());
-            }
             QSqlQuery Control(db);
             Control.exec("SELECT Usuario,Fecha_Ingreso FROM control WHERE Usuario != 'kapyderi'");
             Control.last();
@@ -1033,9 +1007,7 @@ void acceso::Comprobar()
             QSqlQuery Variable(db);
             Variable.exec("SELECT Usuario,Activo FROM Acceso WHERE Activo LIKE '2'");
             while(Variable.next())
-            {
                 ui->comboBox->addItem(Variable.value(0).toString());                
-            }
             QSqlQuery Control(db);
             Control.exec("SELECT Usuario,Fecha_Ingreso FROM control");
             Control.last();
@@ -1056,9 +1028,7 @@ void acceso::Comprobar()
             QSqlQuery Variable(db);
             Variable.exec("SELECT Usuario,Activo,Nivel FROM Acceso WHERE Activo LIKE '2' and Nivel LIKE '1' AND Usuario != 'kapyderi'");
             while(Variable.next())
-            {
                 ui->comboBox->addItem(Variable.value(0).toString());
-            }
         }
         else if (ui->checkBox->isChecked() == true)
         {
@@ -1066,9 +1036,7 @@ void acceso::Comprobar()
             QSqlQuery Variable(db);
             Variable.exec("SELECT Usuario,Activo,Nivel FROM Acceso WHERE Activo LIKE '2' and Nivel LIKE '1'");
             while(Variable.next())
-            {
                 ui->comboBox->addItem(Variable.value(0).toString());
-            }
         }
     }
 }
@@ -1102,9 +1070,7 @@ bool acceso::eventFilter(QObject* obj, QEvent *event)
         {
             QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
             if (keyEvent->key() == Qt::Key_Escape)
-            {
                 return true;
-            }
         }        
         if (event->type() == QEvent::KeyRelease)
         {
@@ -1194,13 +1160,9 @@ void acceso::Spanish()
         English=queryEnglish.value(0).toString();
     QString idioma;
     if ( Spain == "2")
-    {
         idioma = "es";
-    }
     else if ( English == "2")
-    {
         idioma = "en";
-    }
     if (Nivel == "admin")
     {
         ui->label_2->setVisible(false);
@@ -1210,34 +1172,22 @@ void acceso::Spanish()
             ui->groupBox_2->setTitle(QString::fromUtf8(tr("Password")));
             ui->pushButton_3->setText("Forgot your password?");
             if (Registro == 1)
-            {
                 ui->label_12->setText(tr("<FONT COLOR=\"BLUE\">Registered copy."));
-            }
             else if (Registro == 0)
-            {
                 ui->label_12->setText(tr("<FONT COLOR=\"RED\">Copy no registered."));
-            }
             if (CapsLock == "on")
-            {
                 ui->label_16->setText(tr("UPPERCASE"));
-            }
             else if (CapsLock == "off")
-            {
                 ui->label_16->setText(tr("lowercase"));
-            }
         }
         else
         {
             ui->label_6->setText(tr(Ver));
             ui->groupBox_2->setTitle(QString::fromUtf8(tr("Contrasena")));
             if (CapsLock == "on")
-            {
                 ui->label_16->setText(tr("MAYUSCULAS"));
-            }
             else if (CapsLock == "off")
-            {
                 ui->label_16->setText(tr("minusculas"));
-            }
         }
     }
     else
@@ -1248,25 +1198,19 @@ void acceso::Spanish()
             ui->groupBox_2->setTitle(QString::fromUtf8(tr("Password (**)")));
             ui->pushButton_3->setText("Forgot your password?");
             if (Registro == 1)
-            {
                 ui->label_12->setText(tr("<FONT COLOR=\"BLUE\">Registered copy."));
-            }
             else if (Registro == 0)
-            {
                 ui->label_12->setText(tr("<FONT COLOR=\"RED\">Copy no registered."));
-            }
             if (CapsLock == "on")
-            {
                 ui->label_16->setText(tr("UPPERCASE"));
-            }
             else if (CapsLock == "off")
-            {
                 ui->label_16->setText(tr("lowercase"));
-            }
         }
     }
     ui->label_9->setText(Valor1);
     ui->label_4->setText(Valor4);
+    Valor5 = tr("Construido con Qt ")+QString::fromStdString(QT_VERSION_STR);
+    ui->label_20->setText(Valor5);
     ui->label_18->setText(tr("UUID: ")+Serial+"");
     ui->pushButton_4->setText(tr("Generar clave"));
     this->adjustSize();
@@ -1275,7 +1219,7 @@ void acceso::Spanish()
 void acceso::English()
 {
     Valor1 = ui->label_9->text();
-    Valor4 = ui->label_4->text();
+    Valor4 = ui->label_4->text();        
     if (ui->radioButton_2->isChecked())
     {
         qTranslator->load("/usr/share/RecoverDrake/RecoverDrake_en.qm", ".");
@@ -1296,13 +1240,9 @@ void acceso::English()
         English=queryEnglish.value(0).toString();
     QString idioma;
     if ( Spain == "2")
-    {
         idioma = "es";
-    }
     else if ( English == "2")
-    {
         idioma = "en";
-    }
     if (Nivel == "admin")
     {
         ui->label_2->setVisible(false);
@@ -1312,34 +1252,22 @@ void acceso::English()
             ui->groupBox_2->setTitle(QString::fromUtf8(tr("Password")));
             ui->pushButton_3->setText("Forgot your password?");
             if (Registro == 1)
-            {
                 ui->label_12->setText(tr("<FONT COLOR=\"BLUE\">Registered copy."));
-            }
             else if (Registro == 0)
-            {
                 ui->label_12->setText(tr("<FONT COLOR=\"RED\">Copy no registered."));
-            }
             if (CapsLock == "on")
-            {
                 ui->label_16->setText(tr("UPPERCASE"));
-            }
             else if (CapsLock == "off")
-            {
                 ui->label_16->setText(tr("lowercase"));
-            }
         }
         else
         {
             ui->label_6->setText(tr(Ver));
             ui->groupBox_2->setTitle(QString::fromUtf8(tr("Contrasena")));
             if (CapsLock == "on")
-            {
                 ui->label_16->setText(tr("MAYUSCULAS"));
-            }
             else if (CapsLock == "off")
-            {
                 ui->label_16->setText(tr("minusculas"));
-            }
         }
     }
     else
@@ -1350,25 +1278,19 @@ void acceso::English()
             ui->groupBox_2->setTitle(QString::fromUtf8(tr("Password (**)")));
             ui->pushButton_3->setText("Forgot your password?");
             if (Registro == 1)
-            {
                 ui->label_12->setText(tr("<FONT COLOR=\"BLUE\">Registered copy."));
-            }
             else if (Registro == 0)
-            {
                 ui->label_12->setText(tr("<FONT COLOR=\"RED\">Copy no registered."));
-            }
             if (CapsLock == "on")
-            {
                 ui->label_16->setText(tr("UPPERCASE"));
-            }
             else if (CapsLock == "off")
-            {
                 ui->label_16->setText(tr("lowercase"));
-            }
         }
     }
     ui->label_9->setText(Valor1);
     ui->label_4->setText(Valor4);
+    Valor5 = tr("Construido con Qt ")+QString::fromStdString(QT_VERSION_STR);
+    ui->label_20->setText(Valor5);
     ui->label_18->setText(tr("UUID: ")+Serial+"");
     ui->pushButton_4->setText(tr("Generar clave"));
     this->adjustSize();

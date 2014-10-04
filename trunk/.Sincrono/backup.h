@@ -54,7 +54,7 @@ private:
     QString cantidad51;
     QString Backp;
     QString Corte, Eth, Idioma, Video, Fuente, Red, Miscelanea, Color, ConvAudio, Cancion, Canal, Radio, Checkeo, LReport;
-    QString Registro, TamCorte, Correo, Skin, Velocidad, Vnc, Resolucion, Grabacion, Wifi, Control, Ecualizador;
+    QString Registro, TamCorte, Correo, Skin, Velocidad, Vnc, Resolucion, Grabacion, Wifi, Control, Ecualizador, LMail;
     QString Menu, Chat, Vista, SVideo, Formato, LClave, LNwifi, LMusica, LBwifi, LRadio, LTelevision, LUser, LAccesos;
     QString LVnc, LPelis, LMenu, Estilo, LSincro, Lid3, Calculadora, LClaves, LAscii, Pais, LBic, LModelo, LLineas, LCampos, LDocument;
     int CierreTotal;

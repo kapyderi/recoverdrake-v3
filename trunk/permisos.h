@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "drakeprocesos.h"
 #include <QSqlDatabase>
+#include "ayuda.h"
 
 namespace Ui {
 class Permisos;
@@ -16,6 +17,14 @@ class Permisos : public QDialog
 public:
     explicit Permisos(QWidget *parent = 0);
     ~Permisos();
+    void Valor(QString valor);
+
+signals:
+    void Cerrar();
+
+protected:
+    virtual bool eventFilter(QObject *, QEvent *);
+    void closeEvent(QCloseEvent *event);
     
 private:
     Ui::Permisos *ui;
@@ -32,6 +41,8 @@ private:
     DrakeProcesos *mib;
     QString LecturaU, LecturaG, LecturaO, EscrituraU, EscrituraG, EscrituraO, EjecucionU, EjecucionG, EjecucionO;
     QString Stilo;
+    int CierreTotal;
+    Ayuda *ayuda;
 
 private slots:
     void on_pushButton_clicked();

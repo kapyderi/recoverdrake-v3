@@ -211,7 +211,7 @@ void importar::on_pushButton_clicked()
         }
         if (Base == 0)
         {
-            if (Relacion == tr("titulo"))
+            if (Relacion == tr("Titulo"))
             {
                 Control=1;
             }
@@ -258,7 +258,7 @@ void importar::on_pushButton_4_clicked()
     }
     if (Base == 0)
     {
-        if (Relacion == tr("titulo"))
+        if (Relacion == tr("Titulo"))
         {
             Control=0;
         }

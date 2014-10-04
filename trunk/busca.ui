@@ -29,380 +29,14 @@
     <normaloff>:/Imagenes/lupa.png</normaloff>:/Imagenes/lupa.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_10">
-   <item row="2" column="0" colspan="4">
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="title">
-      <string>Opciones de busqueda</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item row="0" column="0">
-       <widget class="QGroupBox" name="groupBox_6">
-        <property name="title">
-         <string>Mayusculas/Minusculas</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_4">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item row="0" column="0">
-          <widget class="QRadioButton" name="radioButton">
-           <property name="toolTip">
-            <string>No distingir entre mayusculas y minusculas</string>
-           </property>
-           <property name="statusTip">
-            <string>No distingir entre mayusculas y minusculas</string>
-           </property>
-           <property name="whatsThis">
-            <string>No distingir entre mayusculas y minusculas</string>
-           </property>
-           <property name="text">
-            <string>No distingir Mayusculas/Minusculas</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QRadioButton" name="radioButton_2">
-           <property name="toolTip">
-            <string>Distingir entre mayusculas y minusculas</string>
-           </property>
-           <property name="statusTip">
-            <string>Distingir entre mayusculas y minusculas</string>
-           </property>
-           <property name="whatsThis">
-            <string>Distingir entre mayusculas y minusculas</string>
-           </property>
-           <property name="text">
-            <string>Distingir Mayusculas/Minusculas</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QGroupBox" name="groupBox_3">
-        <property name="title">
-         <string>Desde donde buscar</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_7">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item row="0" column="0">
-          <widget class="QLineEdit" name="lineEdit_2">
-           <property name="toolTip">
-            <string>Ruta desde donde buscar</string>
-           </property>
-           <property name="statusTip">
-            <string>Ruta desde donde buscar</string>
-           </property>
-           <property name="whatsThis">
-            <string>Ruta desde donde buscar</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton">
-           <property name="maximumSize">
-            <size>
-             <width>25</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="toolTip">
-            <string>Acceso a directorio</string>
-           </property>
-           <property name="statusTip">
-            <string>Acceso a directorio</string>
-           </property>
-           <property name="whatsThis">
-            <string>Acceso a directorio</string>
-           </property>
-           <property name="text">
-            <string>...</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="0" column="1" rowspan="2">
-       <widget class="QGroupBox" name="groupBox_7">
-        <property name="maximumSize">
-         <size>
-          <width>350</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="title">
-         <string>Peso/Tipo</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_8">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item row="0" column="0">
-          <widget class="QCheckBox" name="checkBox_4">
-           <property name="toolTip">
-            <string>Buscar condicionales por peso de ficheros</string>
-           </property>
-           <property name="statusTip">
-            <string>Buscar condicionales por peso de ficheros</string>
-           </property>
-           <property name="whatsThis">
-            <string>Buscar condicionales por peso de ficheros</string>
-           </property>
-           <property name="text">
-            <string>Buscar por peso de ficheros</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QGroupBox" name="groupBox_4">
-           <property name="title">
-            <string>Peso</string>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_5">
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item row="0" column="3">
-             <widget class="QRadioButton" name="radioButton_4">
-              <property name="toolTip">
-               <string>Menor que...</string>
-              </property>
-              <property name="statusTip">
-               <string>Menor que...</string>
-              </property>
-              <property name="whatsThis">
-               <string>Menor que...</string>
-              </property>
-              <property name="text">
-               <string>Menor</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QRadioButton" name="radioButton_3">
-              <property name="toolTip">
-               <string>Mayor que...</string>
-              </property>
-              <property name="statusTip">
-               <string>Mayor que...</string>
-              </property>
-              <property name="whatsThis">
-               <string>Mayor que...</string>
-              </property>
-              <property name="text">
-               <string>Mayor</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="6">
-             <widget class="QLineEdit" name="lineEdit_3">
-              <property name="maximumSize">
-               <size>
-                <width>40</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>Cantidad a buscar</string>
-              </property>
-              <property name="statusTip">
-               <string>Cantidad a buscar</string>
-              </property>
-              <property name="whatsThis">
-               <string>Cantidad a buscar</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="5">
-             <widget class="QRadioButton" name="radioButton_5">
-              <property name="toolTip">
-               <string>Igual que...</string>
-              </property>
-              <property name="statusTip">
-               <string>Igual que...</string>
-              </property>
-              <property name="whatsThis">
-               <string>Igual que...</string>
-              </property>
-              <property name="text">
-               <string>Igual</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="0" column="4">
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QGroupBox" name="groupBox_5">
-           <property name="toolTip">
-            <string>Tipo de busqueda</string>
-           </property>
-           <property name="statusTip">
-            <string>Tipo de busqueda</string>
-           </property>
-           <property name="whatsThis">
-            <string>Tipo de busqueda</string>
-           </property>
-           <property name="title">
-            <string>Tipo</string>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_6">
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item row="0" column="0">
-             <widget class="QRadioButton" name="radioButton_6">
-              <property name="toolTip">
-               <string>Busqueda por Kb</string>
-              </property>
-              <property name="statusTip">
-               <string>Busqueda por Kb</string>
-              </property>
-              <property name="whatsThis">
-               <string>Busqueda por Kb</string>
-              </property>
-              <property name="text">
-               <string>Kilobyte</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QRadioButton" name="radioButton_7">
-              <property name="toolTip">
-               <string>Busqueda por Mb</string>
-              </property>
-              <property name="statusTip">
-               <string>Busqueda por Mb</string>
-              </property>
-              <property name="whatsThis">
-               <string>Busqueda por Mb</string>
-              </property>
-              <property name="text">
-               <string>Megas</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QRadioButton" name="radioButton_8">
-              <property name="toolTip">
-               <string>Busqueda por Gb</string>
-              </property>
-              <property name="statusTip">
-               <string>Busqueda por Gb</string>
-              </property>
-              <property name="whatsThis">
-               <string>Busqueda por Gb</string>
-              </property>
-              <property name="text">
-               <string>Gigas</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="4" column="0">
+   <item row="3" column="0">
     <widget class="QLabel" name="label_4">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="styleSheet">
       <string notr="true">font: 14pt &quot;Sans Serif&quot;;
 font: bold;</string>
@@ -412,37 +46,7 @@ font: bold;</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="1">
-    <spacer name="horizontalSpacer_3">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="4" column="2">
-    <widget class="QPushButton" name="pushButton_6">
-     <property name="text">
-      <string>Abrir ruta</string>
-     </property>
-     <property name="icon">
-      <iconset resource="recoverdrake.qrc">
-       <normaloff>:/Imagenes/lupaO.png</normaloff>:/Imagenes/lupaO.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="3">
+   <item row="3" column="2">
     <widget class="QPushButton" name="pushButton_3">
      <property name="maximumSize">
       <size>
@@ -474,12 +78,12 @@ font: bold;</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="0" colspan="4">
-    <widget class="QGroupBox" name="groupBox_8">
+   <item row="0" column="0" colspan="3">
+    <widget class="QGroupBox" name="groupBox_9">
      <property name="title">
       <string>Tipo de busqueda</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_9">
+     <layout class="QGridLayout" name="gridLayout_13">
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -493,229 +97,1020 @@ font: bold;</string>
        <number>0</number>
       </property>
       <item row="0" column="0">
-       <widget class="QRadioButton" name="radioButton_9">
+       <widget class="QRadioButton" name="radioButton_13">
+        <property name="toolTip">
+         <string>Busqueda con detalle</string>
+        </property>
+        <property name="statusTip">
+         <string>Busqueda con detalle</string>
+        </property>
+        <property name="whatsThis">
+         <string>Busqueda con detalle</string>
+        </property>
         <property name="text">
-         <string>Por nombre</string>
+         <string>Busqueda exhaustiva (Recomendada)</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="0">
-         <widget class="QRadioButton" name="radioButton_10">
-          <property name="text">
-           <string>Por espacio (los 10 archivos/carpetas que mas ocupan)</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="pushButton_7">
-          <property name="text">
-           <string>Buscar</string>
-          </property>
-          <property name="icon">
-           <iconset resource="recoverdrake.qrc">
-            <normaloff>:/Imagenes/Buscar.png</normaloff>:/Imagenes/Buscar.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>25</width>
-            <height>25</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
       <item row="0" column="1">
-       <spacer name="horizontalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+       <widget class="QRadioButton" name="radioButton_14">
+        <property name="toolTip">
+         <string>Busqueda normal con condiciones explicitas</string>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
+        <property name="statusTip">
+         <string>Busqueda normal con condiciones explicitas</string>
         </property>
-       </spacer>
+        <property name="whatsThis">
+         <string>Busqueda normal con condiciones explicitas</string>
+        </property>
+        <property name="text">
+         <string>Busqueda normal</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="1" column="0" colspan="4">
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string>Nombre a buscar</string>
+   <item row="1" column="0" colspan="3">
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="currentIndex">
+      <number>1</number>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item row="0" column="0">
-       <widget class="QLineEdit" name="lineEdit">
-        <property name="toolTip">
-         <string>Palabra clave a buscar</string>
-        </property>
-        <property name="statusTip">
-         <string>Palabra clave a buscar</string>
-        </property>
-        <property name="whatsThis">
-         <string>Palabra clave a buscar</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="4">
-       <widget class="QLabel" name="label_2">
-        <property name="styleSheet">
-         <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+     <widget class="QWidget" name="page">
+      <layout class="QGridLayout" name="gridLayout_14">
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="groupBox_8">
+         <property name="title">
+          <string>Buscar por...</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QRadioButton" name="radioButton_9">
+            <property name="toolTip">
+             <string>Busqueda normal por nombre</string>
+            </property>
+            <property name="statusTip">
+             <string>Busqueda normal por nombre</string>
+            </property>
+            <property name="whatsThis">
+             <string>Busqueda normal por nombre</string>
+            </property>
+            <property name="text">
+             <string>Por nombre</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="0">
+             <widget class="QRadioButton" name="radioButton_10">
+              <property name="toolTip">
+               <string>Busqueda por peso</string>
+              </property>
+              <property name="statusTip">
+               <string>Busqueda por peso</string>
+              </property>
+              <property name="whatsThis">
+               <string>Busqueda por peso</string>
+              </property>
+              <property name="text">
+               <string>Por espacio (los 10 archivos/carpetas que mas ocupan)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QPushButton" name="pushButton_7">
+              <property name="toolTip">
+               <string>Buscar por peso de los 10 mas grandes</string>
+              </property>
+              <property name="statusTip">
+               <string>Buscar por peso de los 10 mas grandes</string>
+              </property>
+              <property name="whatsThis">
+               <string>Buscar por peso de los 10 mas grandes</string>
+              </property>
+              <property name="text">
+               <string>Buscar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/Buscar.png</normaloff>:/Imagenes/Buscar.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Nombre a buscar</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_12">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_2">
+            <item row="0" column="4">
+             <widget class="QPushButton" name="pushButton_6">
+              <property name="toolTip">
+               <string>Abrir ruta desde un explorador de archivos</string>
+              </property>
+              <property name="statusTip">
+               <string>Abrir ruta desde un explorador de archivos</string>
+              </property>
+              <property name="whatsThis">
+               <string>Abrir ruta desde un explorador de archivos</string>
+              </property>
+              <property name="text">
+               <string>Abrir ruta</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/lupaO.png</normaloff>:/Imagenes/lupaO.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLineEdit" name="lineEdit">
+              <property name="toolTip">
+               <string>Palabra clave a buscar</string>
+              </property>
+              <property name="statusTip">
+               <string>Palabra clave a buscar</string>
+              </property>
+              <property name="whatsThis">
+               <string>Palabra clave a buscar</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QPushButton" name="pushButton_4">
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Lanzar la busqueda</string>
+              </property>
+              <property name="statusTip">
+               <string>Lanzar la busqueda</string>
+              </property>
+              <property name="whatsThis">
+               <string>Lanzar la busqueda</string>
+              </property>
+              <property name="text">
+               <string>Buscar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/lupa.png</normaloff>:/Imagenes/lupa.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QPushButton" name="pushButton_5">
+              <property name="maximumSize">
+               <size>
+                <width>160</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Cancelar la busqueda comenzada</string>
+              </property>
+              <property name="statusTip">
+               <string>Cancelar la busqueda comenzada</string>
+              </property>
+              <property name="whatsThis">
+               <string>Cancelar la busqueda comenzada</string>
+              </property>
+              <property name="text">
+               <string>Cancelar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QPushButton" name="pushButton_2">
+              <property name="toolTip">
+               <string>Ejecutar los archivos localizados</string>
+              </property>
+              <property name="statusTip">
+               <string>Ejecutar los archivos localizados</string>
+              </property>
+              <property name="whatsThis">
+               <string>Ejecutar los archivos localizados</string>
+              </property>
+              <property name="text">
+               <string>Ejecutar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/tirachinas.png</normaloff>:/Imagenes/tirachinas.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="styleSheet">
+             <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 color: rgb(0, 0, 255);
 font: bold;</string>
-        </property>
-        <property name="text">
-         <string>*Utiliza comodines para ampliar la busqueda. (Ejem. *mos*.avi, *mos*, *.avi, *mos o mos*)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QPushButton" name="pushButton_4">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>Lanzar la busqueda</string>
-        </property>
-        <property name="statusTip">
-         <string>Lanzar la busqueda</string>
-        </property>
-        <property name="whatsThis">
-         <string>Lanzar la busqueda</string>
-        </property>
-        <property name="text">
-         <string>Buscar</string>
-        </property>
-        <property name="icon">
-         <iconset resource="recoverdrake.qrc">
-          <normaloff>:/Imagenes/lupa.png</normaloff>:/Imagenes/lupa.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>40</width>
-          <height>25</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QPushButton" name="pushButton_5">
-        <property name="maximumSize">
-         <size>
-          <width>160</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>Cancelar la busqueda comenzada</string>
-        </property>
-        <property name="statusTip">
-         <string>Cancelar la busqueda comenzada</string>
-        </property>
-        <property name="whatsThis">
-         <string>Cancelar la busqueda comenzada</string>
-        </property>
-        <property name="text">
-         <string>Cancelar</string>
-        </property>
-        <property name="icon">
-         <iconset resource="recoverdrake.qrc">
-          <normaloff>:/Imagenes/bad.png</normaloff>:/Imagenes/bad.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>40</width>
-          <height>25</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>35</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>Ejecutar los archivos localizados</string>
-        </property>
-        <property name="statusTip">
-         <string>Ejecutar los archivos localizados</string>
-        </property>
-        <property name="whatsThis">
-         <string>Ejecutar los archivos localizados</string>
-        </property>
-        <property name="text">
-         <string>Ejecutar</string>
-        </property>
-        <property name="icon">
-         <iconset resource="recoverdrake.qrc">
-          <normaloff>:/Imagenes/tirachinas.png</normaloff>:/Imagenes/tirachinas.png</iconset>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="4">
-    <widget class="QTableWidget" name="tableWidget">
-     <property name="toolTip">
-      <string>Fichero localizados en la busqueda</string>
-     </property>
-     <property name="statusTip">
-      <string>Fichero localizados en la busqueda</string>
-     </property>
-     <property name="whatsThis">
-      <string>Fichero localizados en la busqueda</string>
-     </property>
-     <property name="editTriggers">
-      <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::EditKeyPressed</set>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-     <property name="selectionBehavior">
-      <enum>QAbstractItemView::SelectRows</enum>
-     </property>
-     <property name="sortingEnabled">
-      <bool>true</bool>
-     </property>
-     <column>
-      <property name="text">
-       <string>Ruta/Archivo</string>
-      </property>
-      <property name="icon">
-       <iconset resource="recoverdrake.qrc">
-        <normaloff>:/Imagenes/64px-Dolphin-icon.svg.png</normaloff>:/Imagenes/64px-Dolphin-icon.svg.png</iconset>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Peso</string>
-      </property>
-     </column>
+            </property>
+            <property name="text">
+             <string>*Utiliza comodines para ampliar la busqueda. (Ejem. *mos*.avi, *mos*k, *mos*, *.avi, *mos, mos*, etc.)</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Opciones de busqueda</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QGroupBox" name="groupBox_6">
+            <property name="title">
+             <string>Mayusculas/Minusculas</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_4">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <property name="verticalSpacing">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="radioButton">
+               <property name="toolTip">
+                <string>No distinguir entre mayusculas y minusculas</string>
+               </property>
+               <property name="statusTip">
+                <string>No distinguir entre mayusculas y minusculas</string>
+               </property>
+               <property name="whatsThis">
+                <string>No distinguir entre mayusculas y minusculas</string>
+               </property>
+               <property name="text">
+                <string>No distinguir Mayusculas/Minusculas</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QRadioButton" name="radioButton_2">
+               <property name="toolTip">
+                <string>Distinguir entre mayusculas y minusculas</string>
+               </property>
+               <property name="statusTip">
+                <string>Distinguir entre mayusculas y minusculas</string>
+               </property>
+               <property name="whatsThis">
+                <string>Distinguir entre mayusculas y minusculas</string>
+               </property>
+               <property name="text">
+                <string>Distinguir Mayusculas/Minusculas</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QGroupBox" name="groupBox_3">
+            <property name="title">
+             <string>Desde donde buscar</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_7">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <property name="horizontalSpacing">
+              <number>6</number>
+             </property>
+             <property name="verticalSpacing">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLineEdit" name="lineEdit_2">
+               <property name="toolTip">
+                <string>Ruta desde donde buscar</string>
+               </property>
+               <property name="statusTip">
+                <string>Ruta desde donde buscar</string>
+               </property>
+               <property name="whatsThis">
+                <string>Ruta desde donde buscar</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QPushButton" name="pushButton">
+               <property name="maximumSize">
+                <size>
+                 <width>25</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>Acceso a directorio</string>
+               </property>
+               <property name="statusTip">
+                <string>Acceso a directorio</string>
+               </property>
+               <property name="whatsThis">
+                <string>Acceso a directorio</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="1" rowspan="2">
+           <widget class="QGroupBox" name="groupBox_7">
+            <property name="maximumSize">
+             <size>
+              <width>350</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Peso/Tipo</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_8">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBox_4">
+               <property name="toolTip">
+                <string>Buscar condicionales por peso de ficheros</string>
+               </property>
+               <property name="statusTip">
+                <string>Buscar condicionales por peso de ficheros</string>
+               </property>
+               <property name="whatsThis">
+                <string>Buscar condicionales por peso de ficheros</string>
+               </property>
+               <property name="text">
+                <string>Buscar por peso de ficheros</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QGroupBox" name="groupBox_4">
+               <property name="title">
+                <string>Peso</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_5">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <property name="horizontalSpacing">
+                 <number>0</number>
+                </property>
+                <property name="verticalSpacing">
+                 <number>6</number>
+                </property>
+                <item row="0" column="3">
+                 <widget class="QRadioButton" name="radioButton_4">
+                  <property name="toolTip">
+                   <string>Menor que...</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Menor que...</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Menor que...</string>
+                  </property>
+                  <property name="text">
+                   <string>Menor</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QRadioButton" name="radioButton_3">
+                  <property name="toolTip">
+                   <string>Mayor que...</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Mayor que...</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Mayor que...</string>
+                  </property>
+                  <property name="text">
+                   <string>Mayor</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="6">
+                 <widget class="QLineEdit" name="lineEdit_3">
+                  <property name="maximumSize">
+                   <size>
+                    <width>40</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Cantidad a buscar</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Cantidad a buscar</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Cantidad a buscar</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="5">
+                 <widget class="QRadioButton" name="radioButton_5">
+                  <property name="toolTip">
+                   <string>Igual que...</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Igual que...</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Igual que...</string>
+                  </property>
+                  <property name="text">
+                   <string>Igual</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <spacer name="horizontalSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="0" column="4">
+                 <spacer name="horizontalSpacer_2">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QGroupBox" name="groupBox_5">
+               <property name="toolTip">
+                <string>Tipo de busqueda</string>
+               </property>
+               <property name="statusTip">
+                <string>Tipo de busqueda</string>
+               </property>
+               <property name="whatsThis">
+                <string>Tipo de busqueda</string>
+               </property>
+               <property name="title">
+                <string>Tipo</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_6">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <property name="horizontalSpacing">
+                 <number>6</number>
+                </property>
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QRadioButton" name="radioButton_6">
+                  <property name="toolTip">
+                   <string>Busqueda por Kb</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Busqueda por Kb</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Busqueda por Kb</string>
+                  </property>
+                  <property name="text">
+                   <string>Kilobyte</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QRadioButton" name="radioButton_7">
+                  <property name="toolTip">
+                   <string>Busqueda por Mb</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Busqueda por Mb</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Busqueda por Mb</string>
+                  </property>
+                  <property name="text">
+                   <string>Megas</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QRadioButton" name="radioButton_8">
+                  <property name="toolTip">
+                   <string>Busqueda por Gb</string>
+                  </property>
+                  <property name="statusTip">
+                   <string>Busqueda por Gb</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Busqueda por Gb</string>
+                  </property>
+                  <property name="text">
+                   <string>Gigas</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <widget class="QTableWidget" name="tableWidget">
+            <property name="toolTip">
+             <string>Fichero localizados en la busqueda</string>
+            </property>
+            <property name="statusTip">
+             <string>Fichero localizados en la busqueda</string>
+            </property>
+            <property name="whatsThis">
+             <string>Fichero localizados en la busqueda</string>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::EditKeyPressed</set>
+            </property>
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+            <column>
+             <property name="text">
+              <string>Ruta/Archivo</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Peso</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_2">
+      <layout class="QGridLayout" name="gridLayout_17">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_11">
+         <item row="0" column="2">
+          <widget class="QCheckBox" name="checkBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Incluye en la busqueda los archivos ocultos</string>
+           </property>
+           <property name="statusTip">
+            <string>Incluye en la busqueda los archivos ocultos</string>
+           </property>
+           <property name="whatsThis">
+            <string>Incluye en la busqueda los archivos ocultos</string>
+           </property>
+           <property name="text">
+            <string>Incluir ocultos</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="label_5">
+           <property name="styleSheet">
+            <string notr="true">font: 7pt &quot;Sans Serif&quot;;
+color: rgb(0, 0, 255);
+font: bold;</string>
+           </property>
+           <property name="text">
+            <string>*Utiliza comodines para ampliar la busqueda. (Ejem. *mos*.avi, *mos*k, *mos*, *.avi, *mos, mos*, etc.)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="comboBox">
+           <property name="toolTip">
+            <string>Datos a buscar. Por defecto * para todo</string>
+           </property>
+           <property name="statusTip">
+            <string>Datos a buscar. Por defecto * para todo</string>
+           </property>
+           <property name="whatsThis">
+            <string>Datos a buscar. Por defecto * para todo</string>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+           <property name="currentText">
+            <string>*</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Nombre a buscar</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <layout class="QGridLayout" name="gridLayout_15">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Buscar texto en archivos</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="comboBox_2">
+           <property name="toolTip">
+            <string>Texto a buscar dentro de cada archivo</string>
+           </property>
+           <property name="statusTip">
+            <string>Texto a buscar dentro de cada archivo</string>
+           </property>
+           <property name="whatsThis">
+            <string>Texto a buscar dentro de cada archivo</string>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QCheckBox" name="checkBox_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Coincidencia en mayusculas o minusculas</string>
+           </property>
+           <property name="statusTip">
+            <string>Coincidencia en mayusculas o minusculas</string>
+           </property>
+           <property name="whatsThis">
+            <string>Coincidencia en mayusculas o minusculas</string>
+           </property>
+           <property name="text">
+            <string>No distinguir mayusculas/minusculas</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="0">
+        <layout class="QGridLayout" name="gridLayout_16">
+         <item row="0" column="2">
+          <widget class="QPushButton" name="pushButton_8">
+           <property name="maximumSize">
+            <size>
+             <width>25</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>Acceso a directorio</string>
+           </property>
+           <property name="statusTip">
+            <string>Acceso a directorio</string>
+           </property>
+           <property name="whatsThis">
+            <string>Acceso a directorio</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QPushButton" name="pushButton_9">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Buscar las condiciones pedidas</string>
+           </property>
+           <property name="statusTip">
+            <string>Buscar las condiciones pedidas</string>
+           </property>
+           <property name="whatsThis">
+            <string>Buscar las condiciones pedidas</string>
+           </property>
+           <property name="text">
+            <string>Buscar</string>
+           </property>
+           <property name="icon">
+            <iconset resource="recoverdrake.qrc">
+             <normaloff>:/Imagenes/Buscar.png</normaloff>:/Imagenes/Buscar.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="comboBox_3">
+           <property name="toolTip">
+            <string>Direccion del directorio a buscar</string>
+           </property>
+           <property name="statusTip">
+            <string>Direccion del directorio a buscar</string>
+           </property>
+           <property name="whatsThis">
+            <string>Direccion del directorio a buscar</string>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_7">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Directorio de busqueda</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QCheckBox" name="checkBox_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>Busqueda en subdirectorios</string>
+           </property>
+           <property name="statusTip">
+            <string>Busqueda en subdirectorios</string>
+           </property>
+           <property name="whatsThis">
+            <string>Busqueda en subdirectorios</string>
+           </property>
+           <property name="text">
+            <string>Recursivo</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0">
+        <widget class="QTableWidget" name="tableWidget_2">
+         <property name="toolTip">
+          <string>Ventana de coincidencias encontradas</string>
+         </property>
+         <property name="statusTip">
+          <string>Ventana de coincidencias encontradas</string>
+         </property>
+         <property name="whatsThis">
+          <string>Ventana de coincidencias encontradas</string>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <column>
+          <property name="text">
+           <string>Archivo</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Peso</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Ruta completa</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>

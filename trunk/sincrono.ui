@@ -13,6 +13,7 @@
   <property name="font">
    <font>
     <pointsize>7</pointsize>
+    <kerning>true</kerning>
    </font>
   </property>
   <property name="windowTitle">
@@ -273,6 +274,32 @@
        </item>
        <item row="0" column="0" colspan="9">
         <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEdit_4">
+           <property name="minimumSize">
+            <size>
+             <width>40</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>40</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(0, 0, 255);
+background-color: rgb(255, 251, 239);</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="2">
           <widget class="QPushButton" name="pushButton">
            <property name="toolTip">
@@ -364,6 +391,13 @@
            </property>
           </widget>
          </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Numero Sincronizacion</string>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="6">
           <widget class="QLabel" name="label_4">
            <property name="sizePolicy">
@@ -377,36 +411,19 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_5">
+         <item row="0" column="8">
+          <widget class="QCheckBox" name="checkBox_6">
+           <property name="toolTip">
+            <string>Se guarda por defecto como root</string>
+           </property>
+           <property name="statusTip">
+            <string>Se guarda por defecto como root</string>
+           </property>
+           <property name="whatsThis">
+            <string>Se guarda por defecto como root</string>
+           </property>
            <property name="text">
-            <string>Numero Sincronizacion</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit_4">
-           <property name="minimumSize">
-            <size>
-             <width>40</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>40</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color: rgb(0, 0, 255);
-background-color: rgb(255, 251, 239);</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
+            <string>Guardar como root</string>
            </property>
           </widget>
          </item>
@@ -732,32 +749,6 @@ background-color: rgb(255, 251, 239);</string>
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
-               <widget class="QPushButton" name="pushButton_5">
-                <property name="toolTip">
-                 <string>Sincronizar los cambios localizados</string>
-                </property>
-                <property name="statusTip">
-                 <string>Sincronizar los cambios localizados</string>
-                </property>
-                <property name="whatsThis">
-                 <string>Sincronizar los cambios localizados</string>
-                </property>
-                <property name="text">
-                 <string>Sincronizar</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="recoverdrake.qrc">
-                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
-                </property>
-                <property name="iconSize">
-                 <size>
-                  <width>25</width>
-                  <height>25</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="2">
                <widget class="QPushButton" name="pushButton_6">
                 <property name="toolTip">
@@ -775,6 +766,32 @@ background-color: rgb(255, 251, 239);</string>
                 <property name="icon">
                  <iconset resource="recoverdrake.qrc">
                   <normaloff>:/Imagenes/stop.png</normaloff>:/Imagenes/stop.png</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QPushButton" name="pushButton_5">
+                <property name="toolTip">
+                 <string>Sincronizar los cambios localizados</string>
+                </property>
+                <property name="statusTip">
+                 <string>Sincronizar los cambios localizados</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Sincronizar los cambios localizados</string>
+                </property>
+                <property name="text">
+                 <string>Sincronizar</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="recoverdrake.qrc">
+                  <normaloff>:/Imagenes/sustituir.png</normaloff>:/Imagenes/sustituir.png</iconset>
                 </property>
                 <property name="iconSize">
                  <size>

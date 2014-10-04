@@ -300,7 +300,7 @@ void Televideo::tableClicked()
     ui->videoPlayer->stop();
     QTest::qWait(500);
     ui->tableView->selectRow(ActualRow);
-    ui->videoPlayer->load(Phonon::MediaSource(Emisora));;
+    ui->videoPlayer->load(Phonon::MediaSource(QUrl(Emisora)));
     QSqlQuery Cancion(db);
     Cancion.exec("SELECT Posicion FROM PosTele WHERE id=1");
     Cancion.first();
@@ -323,7 +323,7 @@ void Televideo::on_pushButton_clicked()
         if (Cancion.isValid())
             cantidad=Cancion.value(0).toInt();
         ui->tableView->selectRow(cantidad);
-        ui->videoPlayer->load(Phonon::MediaSource(Emisora));;
+        ui->videoPlayer->load(Phonon::MediaSource(QUrl(Emisora)));
         this->play();
     }
     else
@@ -358,8 +358,7 @@ void Televideo::play()
     ui->pushButton->setEnabled(false);
     ui->pushButton_3->setEnabled(true);
     ui->pushButton_6->setEnabled(true);
-    ui->volumeSlider_6->setAudioOutput(AudioOutput);
-    //ui->volumeSlider_6->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+    ui->volumeSlider_6->setAudioOutput(ui->videoPlayer->audioOutput());
     Contador->start(1000);
 }
 
@@ -501,13 +500,12 @@ void Televideo::on_pushButton_9_clicked()
         system("sp-sc '"+Nombre+"' 3908 8908 > /dev/null &");
         QTest::qWait(8000);
         ui->videoPlayer->stop();
-        ui->videoPlayer->load(Phonon::MediaSource("http://localhost:8908/tv.asf"));
+        ui->videoPlayer->load(Phonon::MediaSource(QUrl("http://localhost:8908/tv.asf")));
         ui->videoPlayer->play();
         ui->pushButton->setEnabled(false);
         ui->pushButton_3->setEnabled(true);
         ui->pushButton_6->setEnabled(true);
         ui->volumeSlider_6->setAudioOutput(ui->videoPlayer->audioOutput());
-        //ui->volumeSlider_6->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
     }
     else
     {

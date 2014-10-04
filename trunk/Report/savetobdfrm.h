@@ -24,7 +24,7 @@ public:
     QString nombre;
     QString desc;
     int grad;    
-    void Valor(QString valor, QString tipo, QString Id);
+    void Valor(QString valor, QString tipo, QString Id, QString ruta);
     int Posicion;
     QString tabla;
     QString Ruta;
@@ -71,12 +71,10 @@ private slots:
     void print();
     void pdf();
     void previewReady();
-
     void on_pushButton_6_clicked();
-
     void on_tableView_2_doubleClicked(const QModelIndex &index);
-
     void on_lineEdit_2_textChanged(const QString &arg1);
+    void Imprimir(QPrinter *printer);
 
 private:
     Ui::SaveToBDFrm *ui;
@@ -99,6 +97,8 @@ private:
     Paper paper;
     ReportRenderer* render;
     QString IDUser;
+    QString Conexion;
+    QString RutaImp;
 
 };
 

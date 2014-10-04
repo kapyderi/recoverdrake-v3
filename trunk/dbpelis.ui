@@ -13,6 +13,8 @@
   <property name="font">
    <font>
     <pointsize>7</pointsize>
+    <weight>50</weight>
+    <bold>false</bold>
    </font>
   </property>
   <property name="windowTitle">
@@ -1110,6 +1112,15 @@ font: bold</string>
        </item>
        <item row="4" column="0" colspan="9">
         <widget class="QTableView" name="tableView">
+         <property name="font">
+          <font>
+           <family>Sans Serif</family>
+           <pointsize>7</pointsize>
+           <weight>75</weight>
+           <italic>false</italic>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="styleSheet">
           <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 font: bold</string>

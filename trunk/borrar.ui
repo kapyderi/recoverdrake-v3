@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Borrar</class>
+ <widget class="QDialog" name="Borrar">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>904</width>
+    <height>614</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+    <weight>50</weight>
+    <bold>false</bold>
+    <stylestrategy>PreferAntialias</stylestrategy>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Borrado de archivos masivos</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="recoverdrake.qrc">
+    <normaloff>:/Imagenes/borrar.png</normaloff>:/Imagenes/borrar.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_18">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="2" column="0">
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="page">
+      <layout class="QGridLayout" name="gridLayout_9">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="6">
+          <widget class="QRadioButton" name="radioButton_21">
+           <property name="text">
+            <string>.ini</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QRadioButton" name="radioButton_5">
+           <property name="text">
+            <string>.bat</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QRadioButton" name="radioButton_19">
+           <property name="text">
+            <string>.cfg</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QRadioButton" name="radioButton">
+           <property name="text">
+            <string>.bak</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="10">
+          <widget class="QRadioButton" name="radioButton_6">
+           <property name="text">
+            <string>.tmp</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="9">
+          <widget class="QRadioButton" name="radioButton_7">
+           <property name="text">
+            <string>.sys</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QRadioButton" name="radioButton_4">
+           <property name="text">
+            <string>.dll</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="8">
+          <widget class="QRadioButton" name="radioButton_8">
+           <property name="text">
+            <string>.reg</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QRadioButton" name="radioButton_3">
+           <property name="text">
+            <string>.exe</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QRadioButton" name="radioButton_20">
+           <property name="text">
+            <string>.db</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="7">
+          <widget class="QRadioButton" name="radioButton_22">
+           <property name="text">
+            <string>.msi</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_2">
+      <layout class="QGridLayout" name="gridLayout_8">
+       <item row="2" column="0">
+        <layout class="QGridLayout" name="gridLayout_7">
+         <item row="1" column="2">
+          <widget class="QRadioButton" name="radioButton_59">
+           <property name="text">
+            <string>.mp4</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QRadioButton" name="radioButton_10">
+           <property name="text">
+            <string>.mpg</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QRadioButton" name="radioButton_9">
+           <property name="text">
+            <string>.avi</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QRadioButton" name="radioButton_11">
+           <property name="text">
+            <string>.mpeg</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QRadioButton" name="radioButton_12">
+           <property name="text">
+            <string>.divx</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="6">
+          <widget class="QRadioButton" name="radioButton_24">
+           <property name="text">
+            <string>.mkv</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QRadioButton" name="radioButton_15">
+           <property name="text">
+            <string>.xvid</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="7">
+          <widget class="QRadioButton" name="radioButton_33">
+           <property name="text">
+            <string>.flv</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_3">
+      <layout class="QGridLayout" name="gridLayout_10">
+       <item row="0" column="2">
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="1" column="6">
+          <widget class="QRadioButton" name="radioButton_23">
+           <property name="text">
+            <string>.wav</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QRadioButton" name="radioButton_25">
+           <property name="text">
+            <string>.ogg</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="7">
+          <widget class="QRadioButton" name="radioButton_18">
+           <property name="text">
+            <string>.wma</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QRadioButton" name="radioButton_26">
+           <property name="text">
+            <string>.ac3</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QRadioButton" name="radioButton_17">
+           <property name="text">
+            <string>.mp3</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QRadioButton" name="radioButton_27">
+           <property name="text">
+            <string>.aac</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QRadioButton" name="radioButton_28">
+           <property name="text">
+            <string>.flac</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_4">
+      <layout class="QGridLayout" name="gridLayout_12">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_11">
+         <item row="1" column="8">
+          <widget class="QRadioButton" name="radioButton_32">
+           <property name="text">
+            <string>.psd</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="6">
+          <widget class="QRadioButton" name="radioButton_34">
+           <property name="text">
+            <string>.jpeg</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QRadioButton" name="radioButton_37">
+           <property name="text">
+            <string>.jpg</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QRadioButton" name="radioButton_36">
+           <property name="text">
+            <string>.bpm</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QRadioButton" name="radioButton_35">
+           <property name="text">
+            <string>.gif</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="7">
+          <widget class="QRadioButton" name="radioButton_30">
+           <property name="text">
+            <string>.png</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="9">
+          <widget class="QRadioButton" name="radioButton_31">
+           <property name="text">
+            <string>.svg</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QRadioButton" name="radioButton_38">
+           <property name="text">
+            <string>.dwg</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_5">
+      <layout class="QGridLayout" name="gridLayout_14">
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_13">
+         <item row="1" column="1">
+          <widget class="QRadioButton" name="radioButton_47">
+           <property name="text">
+            <string>.arj</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="10">
+          <widget class="QRadioButton" name="radioButton_41">
+           <property name="text">
+            <string>.zoo</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="6">
+          <widget class="QRadioButton" name="radioButton_46">
+           <property name="text">
+            <string>.gz</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QRadioButton" name="radioButton_40">
+           <property name="text">
+            <string>.cab</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="7">
+          <widget class="QRadioButton" name="radioButton_43">
+           <property name="text">
+            <string>.rar</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="9">
+          <widget class="QRadioButton" name="radioButton_45">
+           <property name="text">
+            <string>.zip</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QRadioButton" name="radioButton_44">
+           <property name="text">
+            <string>.ace</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="8">
+          <widget class="QRadioButton" name="radioButton_42">
+           <property name="text">
+            <string>.tar</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_6">
+      <layout class="QGridLayout" name="gridLayout_16">
+       <item row="1" column="0" colspan="2">
+        <layout class="QGridLayout" name="gridLayout_15">
+         <item row="2" column="11">
+          <widget class="QLineEdit" name="lineEdit">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QRadioButton" name="radioButton_57">
+           <property name="text">
+            <string>.bin</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="4">
+          <widget class="QRadioButton" name="radioButton_52">
+           <property name="text">
+            <string>.doc</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="8">
+          <widget class="QRadioButton" name="radioButton_55">
+           <property name="text">
+            <string>.txt</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="5">
+          <widget class="QRadioButton" name="radioButton_48">
+           <property name="text">
+            <string>.htm</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="7">
+          <widget class="QRadioButton" name="radioButton_53">
+           <property name="text">
+            <string>.pdf</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="6">
+          <widget class="QRadioButton" name="radioButton_50">
+           <property name="text">
+            <string>.html</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="9">
+          <widget class="QRadioButton" name="radioButton_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Otros</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="10">
+          <widget class="QLabel" name="label">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QTableWidget" name="tableWidget_2">
+     <property name="font">
+      <font>
+       <stylestrategy>PreferDefault</stylestrategy>
+       <kerning>false</kerning>
+      </font>
+     </property>
+     <property name="toolTip">
+      <string>Ventana de coincidencias encontradas</string>
+     </property>
+     <property name="statusTip">
+      <string>Ventana de coincidencias encontradas</string>
+     </property>
+     <property name="whatsThis">
+      <string>Ventana de coincidencias encontradas</string>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <column>
+      <property name="text">
+       <string>Archivo</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Peso</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Ruta completa</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="0">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="text">
+        <string>Salir</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="1">
+      <widget class="QPushButton" name="pushButton_9">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Buscar las condiciones pedidas</string>
+       </property>
+       <property name="statusTip">
+        <string>Buscar las condiciones pedidas</string>
+       </property>
+       <property name="whatsThis">
+        <string>Buscar las condiciones pedidas</string>
+       </property>
+       <property name="text">
+        <string>Rastrear</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/Buscar.png</normaloff>:/Imagenes/Buscar.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QPushButton" name="pushButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Borrar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/borrar.png</normaloff>:/Imagenes/borrar.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" rowspan="2">
+      <widget class="QStackedWidget" name="stackedWidget_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="page_7">
+        <layout class="QGridLayout" name="gridLayout_17">
+         <item row="0" column="0">
+          <widget class="QGroupBox" name="groupBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="title">
+            <string>Tipo de extension</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_22">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item row="0" column="0">
+             <layout class="QGridLayout" name="gridLayout_6">
+              <item row="0" column="0">
+               <widget class="QRadioButton" name="radioButton_13">
+                <property name="text">
+                 <string>Archivo</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QRadioButton" name="radioButton_14">
+                <property name="text">
+                 <string>Video</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QRadioButton" name="radioButton_16">
+                <property name="text">
+                 <string>Audio</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QRadioButton" name="radioButton_29">
+                <property name="text">
+                 <string>Imagen</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <widget class="QRadioButton" name="radioButton_49">
+                <property name="text">
+                 <string>Compresion</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="5">
+               <widget class="QRadioButton" name="radioButton_39">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>Otros formatos</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="page_8">
+        <layout class="QGridLayout" name="gridLayout_20">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_19">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Nombre a borrar</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="5">
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="label_7">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEdit_6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QLineEdit" name="lineEdit_7">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Tipo de borrado</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_21">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="QRadioButton" name="radioButton_51">
+          <property name="text">
+           <string>Por extension</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QRadioButton" name="radioButton_54">
+          <property name="text">
+           <string>Por exactitud</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QLabel" name="label_8">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Desde donde buscar</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="QLineEdit" name="lineEdit_8"/>
+        </item>
+        <item row="0" column="6">
+         <widget class="QPushButton" name="pushButton_4">
+          <property name="text">
+           <string>Nuevo rastreo</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/Comparador.png</normaloff>:/Imagenes/Comparador.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="7">
+         <widget class="QCheckBox" name="checkBox">
+          <property name="text">
+           <string>No distinguir mayusculas y minusculas</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="recoverdrake.qrc"/>
+ </resources>
+ <connections/>
+</ui>

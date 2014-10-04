@@ -7,6 +7,7 @@
 #include "drakesistema.h"
 #include <QMessageBox>
 #include <QTextCodec>
+#include <QDebug>
 
 textencrip::textencrip(QWidget *parent) :
     QDialog(parent),
@@ -75,13 +76,15 @@ textencrip::textencrip(QWidget *parent) :
     CierreTotal = 0;
     ui->textEdit_2->setFontFamily(ui->fontComboBox_2->currentText());
     ui->textEdit_2->setPointSize(ui->sizeSpin_2->text().toInt());
+    ui->textEdit->setFontFamily(ui->fontComboBox_2->currentText());
+    ui->textEdit->setPointSize(ui->sizeSpin_2->text().toInt());
     connect(ui->checkBox,SIGNAL(clicked()),this,SLOT(Comprobar()));
     connect(ui->radioButton,SIGNAL(clicked()),this,SLOT(Comprobar1()));
     connect(ui->radioButton_2,SIGNAL(clicked()),this,SLOT(Comprobar1()));
     ui->radioButton->setChecked(true);
     ui->textEdit_2->setFocus();
     cursor = ui->textEdit_2->textCursor();
-    cursor.movePosition( QTextCursor::End );
+    cursor.movePosition(QTextCursor::End);
     ui->stackedWidget->setCurrentIndex(0);
     ui->comboBox->setEnabled(true);
     ui->label->setText(tr("Texto original"));
@@ -212,31 +215,36 @@ void textencrip::on_fontComboBox_2_currentIndexChanged(const QString &arg1)
 void textencrip::on_sizeSpin_2_valueChanged(const QString &arg1)
 {
     ui->textEdit_2->setPointSize(arg1.toInt());
-    ui->textEdit->setHtml(ui->textEdit_2->toHtml());
+    ui->textEdit->setPointSize(arg1.toInt());
     ui->textEdit_2->setFocus();
 }
 
 void textencrip::on_btnBold_2_toggled(bool checked)
 {
     if(checked)
+    {
         ui->textEdit_2->setFontWeight(QFont::Bold);
+        ui->textEdit->setFontWeight(QFont::Bold);
+    }
     else
-        ui->textEdit_2->setTextCursor(cursor);
-    ui->textEdit->setHtml(ui->textEdit_2->toHtml());
+    {
+        ui->textEdit_2->setFontWeight(QFont::Normal);
+        ui->textEdit->setFontWeight(QFont::Normal);
+    }
     ui->textEdit_2->setFocus();
 }
 
 void textencrip::on_btnItalic_2_toggled(bool checked)
 {
     ui->textEdit_2->setItalic(checked);
-    ui->textEdit->setHtml(ui->textEdit_2->toHtml());
+    ui->textEdit->setItalic(checked);
     ui->textEdit_2->setFocus();
 }
 
 void textencrip::on_btnUnder_2_toggled(bool checked)
 {
     ui->textEdit_2->setUnderline(checked);
-    ui->textEdit->setHtml(ui->textEdit_2->toHtml());
+    ui->textEdit->setUnderline(checked);
     ui->textEdit_2->setFocus();
 }
 
@@ -246,7 +254,7 @@ void textencrip::on_btnColor_2_clicked()
     if(d.exec() == QDialog::Accepted)
     {
         ui->textEdit_2->setColor(d.selectedColor());
-        ui->textEdit->setHtml(ui->textEdit_2->toHtml());
+        ui->textEdit->setColor(d.selectedColor());
         ui->textEdit_2->setFocus();
     }
 }
@@ -256,7 +264,7 @@ void textencrip::on_pushButton_2_clicked()
     QString path=tr("/home/%1/Documentos/");
     path=path.arg(user);
     QString fileNameDestino = QFileDialog::getSaveFileName(this,QString::fromUtf8(tr("Guardar archivo ")),
-                        path,trUtf8(tr("Archivo ODT (*.odt);;Archivo DOC (*.doc);;Archivo HTML (*.htm *.html);;Todos los archivos (*)")));
+                        path,trUtf8(tr("Archivo HTML (*.htm *.html)")));
     if (fileNameDestino.isEmpty())
         return;
     if (! (fileNameDestino.endsWith(".odt", Qt::CaseInsensitive) || fileNameDestino.endsWith(".doc", Qt::CaseInsensitive) || fileNameDestino.endsWith(".htm", Qt::CaseInsensitive) || fileNameDestino.endsWith(".html", Qt::CaseInsensitive)) )
@@ -283,27 +291,28 @@ void textencrip::on_pushButton_clicked()
 void textencrip::on_btnLeft_2_clicked()
 {
     ui->textEdit_2->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
-    ui->textEdit->setHtml(ui->textEdit_2->toHtml());
+    ui->textEdit->setAlignment(Qt::AlignLeft | Qt::AlignAbsolute);
     ui->textEdit_2->setFocus();
 }
 
 void textencrip::on_btnCenter_2_clicked()
 {
     ui->textEdit_2->setAlignment(Qt::AlignCenter);
-    ui->textEdit->setHtml(ui->textEdit_2->toHtml());
+    ui->textEdit->setAlignment(Qt::AlignCenter);
     ui->textEdit_2->setFocus();
 }
 
 void textencrip::on_btnRigth_2_clicked()
 {
     ui->textEdit_2->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
-    ui->textEdit->setHtml(ui->textEdit_2->toHtml());
+    ui->textEdit->setAlignment(Qt::AlignRight | Qt::AlignAbsolute);
     ui->textEdit_2->setFocus();
 }
 
 void textencrip::on_pushButton_7_clicked()
 {
     ui->textEdit_2->setText("");
+    ui->textEdit->setText("");
 }
 
 void textencrip::on_pushButton_6_clicked()
@@ -311,7 +320,7 @@ void textencrip::on_pushButton_6_clicked()
     QString path=tr("/home/%1/Documentos/");
     path=path.arg(user);
     QString fileNameOrigen = QFileDialog::getOpenFileName(this, tr("Abrir archivo"),
-                      path,trUtf8(tr("Archivo ODT (*.odt);;Archivo DOC (*.doc);;Archivo HTML (*.htm *.html);;Todos los archivos (*)")));;
+                      path,trUtf8(tr("Archivo HTML (*.htm *.html)")));;
      if (fileNameOrigen.isEmpty())
          return;
      ui->txtNombre_3->setText(fileNameOrigen);
@@ -319,10 +328,21 @@ void textencrip::on_pushButton_6_clicked()
      if (!file.open(QFile::ReadOnly))
          return;
      QByteArray data = file.readAll();
-     //falla esta parte para archivos .otc
      QTextCodec *codec = Qt::codecForHtml(data);
      QString str = codec->toUnicode(data);
      ui->textEdit_2->setHtml(str);
-     ui->textEdit->setHtml(ui->textEdit_2->toHtml());
      ui->textEdit_2->setFocus();
+}
+
+void textencrip::on_pushButton_4_clicked()
+{
+    QStringList prueba = ui->textEdit->toPlainText().split("\n");
+     qDebug() << prueba;
+    for (int a=0;a<prueba.count();a++)
+    {
+        qDebug() << prueba.value(a);
+        QString prueba1 = prueba.value(a)+"hola";
+        ui->textEdit->find(prueba.value(a),QTextDocument::FindWholeWords);
+        ui->textEdit->textCursor().insertText(prueba1);
+    }
 }

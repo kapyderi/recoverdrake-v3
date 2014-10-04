@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1173</width>
+    <width>1052</width>
     <height>657</height>
    </rect>
   </property>
   <property name="font">
    <font>
-    <pointsize>8</pointsize>
+    <pointsize>7</pointsize>
    </font>
   </property>
   <property name="windowTitle">
@@ -22,47 +22,507 @@
    <iconset resource="recoverdrake.qrc">
     <normaloff>:/Imagenes/Encriptar.png</normaloff>:/Imagenes/Encriptar.png</iconset>
   </property>
-  <layout class="QGridLayout" name="gridLayout_9">
-   <item row="0" column="0" colspan="2">
-    <layout class="QGridLayout" name="gridLayout_8">
-     <item row="0" column="3">
-      <widget class="QLineEdit" name="txtNombre_2"/>
+  <layout class="QGridLayout" name="gridLayout_6">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Seleccionar tipo</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="comboBox">
+        <item>
+         <property name="text">
+          <string>Simple</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Doble</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Triple</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Total</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="5">
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="text">
+         <string>Imprimir/Enviar</string>
+        </property>
+        <property name="icon">
+         <iconset resource="recoverdrake.qrc">
+          <normaloff>:/Imagenes/impresora.png</normaloff>:/Imagenes/impresora.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>25</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="6">
+       <widget class="QStackedWidget" name="stackedWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="page">
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="1" column="0">
+           <layout class="QGridLayout" name="gridLayout_8">
+            <item row="3" column="3">
+             <widget class="QLineEdit" name="txtNombre_2"/>
+            </item>
+            <item row="3" column="1">
+             <widget class="QPushButton" name="pushButton_2">
+              <property name="maximumSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="6">
+             <widget class="QPushButton" name="pushButton">
+              <property name="text">
+               <string>Guardar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/filesave.png</normaloff>:/Imagenes/filesave.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="8">
+             <widget class="QPushButton" name="pushButton_4">
+              <property name="text">
+               <string>Encriptar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/Encriptar.png</normaloff>:/Imagenes/Encriptar.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Guardar en...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_2">
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_9">
+            <item row="3" column="3">
+             <widget class="QLineEdit" name="txtNombre_3"/>
+            </item>
+            <item row="3" column="1">
+             <widget class="QPushButton" name="pushButton_6">
+              <property name="maximumSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="7">
+             <widget class="QPushButton" name="pushButton_8">
+              <property name="text">
+               <string>Desencriptar</string>
+              </property>
+              <property name="icon">
+               <iconset resource="recoverdrake.qrc">
+                <normaloff>:/Imagenes/Encriptar.png</normaloff>:/Imagenes/Encriptar.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>25</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Cargar de...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="radioButton">
+        <property name="text">
+         <string>Encriptar</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QRadioButton" name="radioButton_2">
+        <property name="text">
+         <string>Desencriptar</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="6">
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <layout class="QGridLayout" name="gridLayout_7">
+       <item row="0" column="5">
+        <widget class="QSpinBox" name="sizeSpin_2">
+         <property name="value">
+          <number>8</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Fuente:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" colspan="2">
+        <widget class="QFontComboBox" name="fontComboBox_2"/>
+       </item>
+       <item row="0" column="7">
+        <widget class="QPushButton" name="btnItalic_2">
+         <property name="maximumSize">
+          <size>
+           <width>43</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/text_italic.png</normaloff>:/Imagenes/text_italic.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="checkBox">
+         <property name="text">
+          <string>Seleccionar todo</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QPushButton" name="btnColor_2">
+         <property name="maximumSize">
+          <size>
+           <width>43</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/pantone.png</normaloff>:/Imagenes/pantone.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="6">
+        <widget class="QPushButton" name="btnBold_2">
+         <property name="maximumSize">
+          <size>
+           <width>43</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/text_bold.png</normaloff>:/Imagenes/text_bold.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="12">
+        <widget class="QPushButton" name="btnRigth_2">
+         <property name="maximumSize">
+          <size>
+           <width>44</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/text_align_right.png</normaloff>:/Imagenes/text_align_right.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="10">
+        <widget class="QPushButton" name="btnLeft_2">
+         <property name="maximumSize">
+          <size>
+           <width>43</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/text_align_left.png</normaloff>:/Imagenes/text_align_left.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="11">
+        <widget class="QPushButton" name="btnCenter_2">
+         <property name="maximumSize">
+          <size>
+           <width>43</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/text_align_center.png</normaloff>:/Imagenes/text_align_center.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="13">
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="8">
+        <widget class="QPushButton" name="btnUnder_2">
+         <property name="maximumSize">
+          <size>
+           <width>44</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="recoverdrake.qrc">
+           <normaloff>:/Imagenes/text_underline.png</normaloff>:/Imagenes/text_underline.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>25</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
-     <item row="0" column="4">
-      <widget class="QRadioButton" name="radioButton">
-       <property name="text">
-        <string>Encriptar</string>
+     <item row="3" column="0" colspan="3">
+      <widget class="QTextEdit" name="textEdit_2"/>
+     </item>
+     <item row="1" column="0" colspan="3">
+      <widget class="Line" name="line_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="maximumSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
+     <item row="2" column="0" colspan="3">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>...</string>
+        <string>Texto original</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
-     <item row="0" column="5">
-      <widget class="QRadioButton" name="radioButton_2">
+     <item row="0" column="2">
+      <widget class="QPushButton" name="pushButton_7">
        <property name="text">
-        <string>Desencriptar</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="6">
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>Guardar</string>
+        <string>Limpiar</string>
        </property>
        <property name="icon">
         <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/filesave.png</normaloff>:/Imagenes/filesave.png</iconset>
+         <normaloff>:/Imagenes/borrar.png</normaloff>:/Imagenes/borrar.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -72,19 +532,30 @@
        </property>
       </widget>
      </item>
+    </layout>
+   </item>
+   <item row="3" column="0">
+    <layout class="QGridLayout" name="gridLayout_2">
      <item row="0" column="0">
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Guardar en...</string>
+        <string>Texto encriptado</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QTextEdit" name="textEdit">
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
     </layout>
    </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QPlainTextEdit" name="plainTextEdit"/>
-   </item>
-   <item row="4" column="0" colspan="2">
+   <item row="4" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <spacer name="horizontalSpacer_3">
@@ -118,350 +589,7 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="0" colspan="2">
-    <layout class="QGridLayout" name="gridLayout_7">
-     <item row="0" column="10">
-      <widget class="QPushButton" name="btnCenter_2">
-       <property name="maximumSize">
-        <size>
-         <width>43</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/text_align_center.png</normaloff>:/Imagenes/text_align_center.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="4">
-      <widget class="QSpinBox" name="sizeSpin_2">
-       <property name="value">
-        <number>8</number>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="17">
-      <widget class="QPushButton" name="pushButton_4">
-       <property name="text">
-        <string>Encriptar</string>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/Encriptar.png</normaloff>:/Imagenes/Encriptar.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="5">
-      <widget class="QPushButton" name="btnBold_2">
-       <property name="maximumSize">
-        <size>
-         <width>43</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/text_bold.png</normaloff>:/Imagenes/text_bold.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="6">
-      <widget class="QPushButton" name="btnItalic_2">
-       <property name="maximumSize">
-        <size>
-         <width>43</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/text_italic.png</normaloff>:/Imagenes/text_italic.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="7">
-      <widget class="QPushButton" name="btnUnder_2">
-       <property name="maximumSize">
-        <size>
-         <width>44</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/text_underline.png</normaloff>:/Imagenes/text_underline.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Fuente:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2" colspan="2">
-      <widget class="QFontComboBox" name="fontComboBox_2"/>
-     </item>
-     <item row="0" column="15">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Encriptado</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="8">
-      <widget class="QPushButton" name="btnColor_2">
-       <property name="maximumSize">
-        <size>
-         <width>43</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/pantone.png</normaloff>:/Imagenes/pantone.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="12">
-      <widget class="QPushButton" name="btnVertical_2">
-       <property name="maximumSize">
-        <size>
-         <width>44</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/text_align_up.png</normaloff>:/Imagenes/text_align_up.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="13">
-      <widget class="QPushButton" name="btnHorizontal_2">
-       <property name="maximumSize">
-        <size>
-         <width>44</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/text_align_left.png</normaloff>:/Imagenes/text_align_left.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="16">
-      <widget class="QComboBox" name="comboBox">
-       <item>
-        <property name="text">
-         <string>Simple</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Doble</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Triple</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Total</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="0" column="18">
-      <widget class="QPushButton" name="pushButton_3">
-       <property name="text">
-        <string>Imprimir/Enviar</string>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/impresora.png</normaloff>:/Imagenes/impresora.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="9">
-      <widget class="QPushButton" name="btnLeft_2">
-       <property name="maximumSize">
-        <size>
-         <width>43</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/text_align_left.png</normaloff>:/Imagenes/text_align_left.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="11">
-      <widget class="QPushButton" name="btnRigth_2">
-       <property name="maximumSize">
-        <size>
-         <width>44</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="recoverdrake.qrc">
-         <normaloff>:/Imagenes/text_align_right.png</normaloff>:/Imagenes/text_align_right.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-       <property name="flat">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QCheckBox" name="checkBox">
-       <property name="text">
-        <string>Seleccionar todo</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QTextEdit" name="textEdit">
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
   </layout>
-  <zorder>plainTextEdit</zorder>
-  <zorder></zorder>
-  <zorder>textEdit</zorder>
  </widget>
  <resources>
   <include location="recoverdrake.qrc"/>

@@ -511,76 +511,44 @@ void burn::Refrescar()
 {            
     cdrdao= "cdrdao";
     if (Localizar.contains(cdrdao) == false)
-    {
             cdrdao= "0";
-    }
     else
-    {
             cdrdao= "1";
-    }
     cdrkit= "cdrkit";
     if (Localizar.contains(cdrkit) == false)
-    {
             cdrkit= "0";
-    }
     else
-    {
             cdrkit= "1";
-    }
     ffmpeg= "ffmpeg";
     if (Localizar.contains(ffmpeg) == false)
-    {
             ffmpeg= "0";
-    }
     else
-    {
             ffmpeg= "1";
-    }
     dvdauthor= "dvdauthor";
     if (Localizar.contains(dvdauthor) == false)
-    {
             dvdauthor= "0";
-    }
     else
-    {
             dvdauthor= "1";
-    }
     dvdrwtools= "dvd+rw-tools";
     if (Localizar.contains(dvdrwtools) == false)
-    {
             dvdrwtools= "0";
-    }
     else
-    {
             dvdrwtools= "1";
-    }
     vcdimager= "vcdimager";
     if (Localizar.contains(vcdimager) == false)
-    {
             vcdimager= "0";
-    }
     else
-    {
             vcdimager= "1";
-    }
     cdparanoia= "cdparanoia";
     if (Localizar.contains(cdparanoia) == false)
-    {
             cdparanoia= "0";
-    }
     else
-    {
             cdparanoia= "1";
-    }
     dvdbackup= "dvdbackup";
     if (Localizar.contains(dvdbackup) == false)
-    {
             dvdbackup= "0";
-    }
     else
-    {
             dvdbackup= "1";
-    }
 }
 
 QString burn::getPack()
@@ -658,43 +626,56 @@ void burn::on_pushButton_clicked()
             item1->setText(tr(QFileInfo(file).fileName()));
             item2->setText(tr(rutaAbs));
             float f;
-            f = (size + 1023) / 1024;
-            f = f / 1024;
-            if (f <= 700)
+            f = size;
+            if (f > 0)
             {
-                item3->setText(""+QString::number(f,'f',3)+"Mb");
-                Tipo = "Mb";
+                if (f <= 999)
+                    item3->setText(""+QString::number(f)+" B");
+                if (f > 999 && f <= 999999)
+                {
+                    f = (size + 1023) / 1024;
+                    item3->setText(""+QString::number(f,'f',1)+" kB");
+                }
+                if (f > 999999 && f <= 999999999)
+                {
+                    f = (size + 1023) / 1024;
+                    f = f / 1024;
+                    item3->setText(""+QString::number(f,'f',1)+" MB");
+                    Tipo = "MB";
+                }
+                if (f > 999999999)
+                {
+                    f = (size + 1023) / 1024;
+                    f = f / 1024;
+                    f = f / 1024;
+                    item3->setText(""+QString::number(f,'f',1)+" GB");
+                    Peso = "GB";
+                    Tipo = "GB";
+                }
+                iFilas=ui->tableWidget->rowCount();
+                ui->tableWidget->insertRow(iFilas);
+                ui->tableWidget->setItem(iFilas,0,item1);
+                ui->tableWidget->setItem(iFilas,1,item2);
+                ui->tableWidget->setItem(iFilas,2,item3);
+                ui->tableWidget->resizeRowsToContents();
+                ui->tableWidget->resizeColumnsToContents();
             }
-            if (f > 700)
-            {
-                float g = f / 1024;
-                item3->setText(""+QString::number(g,'f',3)+"Gb");
-                Peso = "Gb";
-                Tipo = "Gb";
-            }
-            iFilas=ui->tableWidget->rowCount();
-            ui->tableWidget->insertRow(iFilas);
-            ui->tableWidget->setItem(iFilas,0,item1);
-            ui->tableWidget->setItem(iFilas,1,item2);
-            ui->tableWidget->setItem(iFilas,2,item3);
-            ui->tableWidget->resizeRowsToContents();
-            ui->tableWidget->resizeColumnsToContents();
         }
     }
     this->Recuento();
     int Ratio = tamanio;
     if (tamanio <= 700.00)
     {
-        if (Peso != "Gb")
-            ui->label_2->setText("Mb");
+        if (Peso != "GB")
+            ui->label_2->setText("MB");
     }
     else if (tamanio > 700.00)
     {
         tamanio = tamanio / 1024;
-        ui->label_2->setText("Gb");
+        ui->label_2->setText("GB");
     }
-    ui->label_4->setText(QString::number(tamanio,'f',3));
-    if (Peso != "Gb")
+    ui->label_4->setText(QString::number(tamanio,'f',2));
+    if (Peso != "GB")
     {
         if (tamanio <= 700.00)
         {
@@ -769,16 +750,34 @@ void burn::Recuento()
         QTableWidgetItem *item;
         item=ui->tableWidget->item(a,2);
         QString Valorar = item->text();
-        int pos1 = Valorar.indexOf("Mb", 0);
+        int pos1 = Valorar.indexOf(" MB", 0);
         if (pos1 != -1)
         {
-            Valorar = Valorar.remove("Mb");
+            Valorar = Valorar.remove(" MB");
             tamanio = tamanio + Valorar.toFloat();
         }
         else
         {
-            Valorar = Valorar.remove("Gb");
-            tamanio = tamanio + (Valorar.toFloat()*1024);
+            int pos2 = Valorar.indexOf(" B", 0);
+            if (pos2 != -1)
+            {
+                Valorar = Valorar.remove(" B");
+                tamanio = tamanio + ((Valorar.toFloat()/1024)/1024);
+            }
+            else
+            {
+                int pos3 = Valorar.indexOf(" kB", 0);
+                if (pos3 != -1)
+                {
+                    Valorar = Valorar.remove(" kB");
+                    tamanio = tamanio + ((Valorar.toFloat()/1024));
+                }
+                else
+                {
+                    Valorar = Valorar.remove(" GB");
+                    tamanio = tamanio + (Valorar.toFloat()*1024);
+                }
+            }
         }
     }    
 }
@@ -860,41 +859,55 @@ void burn::on_pushButton_2_clicked()
         item1->setText(tr("DIRECTORIO"));
         item2->setText(tr(ruta));
         float f;
-        f=size.toFloat()/1024;
-        if (f <= 700)
+        f = size.toFloat()*1024;
+        if (f > 0)
         {
-            item3->setText(""+QString::number(f,'f',3)+"Mb");
-            Tipo = "Mb";
+            if (f <= 999)
+                item3->setText(""+QString::number(f)+" B");
+            if (f > 999 && f <= 999999)
+            {
+                f = (f + 1023) / 1024;
+                item3->setText(""+QString::number(f,'f',1)+" kB");
+            }
+            if (f > 999999 && f <= 999999999)
+            {
+                f = (f + 1023) / 1024;
+                f = f / 1024;
+                item3->setText(""+QString::number(f,'f',1)+" MB");
+                Tipo = "MB";
+            }
+            if (f > 999999999)
+            {
+                f = (f + 1023) / 1024;
+                f = f / 1024;
+                f = f / 1024;
+                item3->setText(""+QString::number(f,'f',1)+" GB");
+                Peso = "GB";
+                Tipo = "GB";
+            }
+            iFilas=ui->tableWidget->rowCount();
+            ui->tableWidget->insertRow(iFilas);
+            ui->tableWidget->setItem(iFilas,0,item1);
+            ui->tableWidget->setItem(iFilas,1,item2);
+            ui->tableWidget->setItem(iFilas,2,item3);
+            ui->tableWidget->resizeRowsToContents();
+            ui->tableWidget->resizeColumnsToContents();
         }
-        if (f > 700)
-        {
-            float g = f / 1024;
-            item3->setText(""+QString::number(g,'f',3)+"Gb");
-            Peso = "Gb";
-            Tipo = "Gb";
-        }
-        iFilas=ui->tableWidget->rowCount();
-        ui->tableWidget->insertRow(iFilas);
-        ui->tableWidget->setItem(iFilas,0,item1);
-        ui->tableWidget->setItem(iFilas,1,item2);
-        ui->tableWidget->setItem(iFilas,2,item3);
-        ui->tableWidget->resizeRowsToContents();
-        ui->tableWidget->resizeColumnsToContents();
     }
     this->Recuento();
     int Ratio = tamanio;
     if (tamanio <= 700)
     {
-        if (Peso != "Gb")
-            ui->label_2->setText("Mb");
+        if (Peso != "GB")
+            ui->label_2->setText("MB");
     }
     else if (tamanio > 700)
     {
         tamanio = tamanio / 1024;
-        ui->label_2->setText("Gb");
+        ui->label_2->setText("GB");
     }
     ui->label_4->setText(tr(QString::number(tamanio,'f',3)));
-    if (Peso != "Gb")
+    if (Peso != "GB")
     {
         if (tamanio <= 700.00)
         {
@@ -998,17 +1011,17 @@ void burn::on_pushButton_3_clicked()
         Ratio = tamanio;
         if (tamanio <= 700)
         {
-            if (Peso != "Gb")
-                ui->label_2->setText("Mb");
+            if (Peso != "GB")
+                ui->label_2->setText("MB");
         }
         else if (tamanio > 700)
         {
             tamanio = tamanio / 1024;
-            ui->label_2->setText("Gb");
+            ui->label_2->setText("GB");
         }        
         ui->label_4->setText(tr(QString::number(tamanio,'f',3)));
     }  
-    if (Peso != "Gb")
+    if (Peso != "GB")
     {
         if (tamanio <= 700.00)
         {
@@ -1617,7 +1630,7 @@ void burn::dropEvent(QDropEvent *event)
             QString ruta= rutaAbs+"/";
             item1->setText(tr("DIRECTORIO"));
             item2->setText(tr(ruta));
-            f=size.toFloat()/1024;
+            f=size.toFloat()*1024;
         }
         else
         {
@@ -1625,43 +1638,56 @@ void burn::dropEvent(QDropEvent *event)
             float size = QFileInfo(file).size();
             item1->setText(tr(QFileInfo(file).fileName()));
             item2->setText(tr(rutaAbs));
-            f = (size + 1023) / 1024;
-            f = f / 1024;
+            f = size;
         }
-        if (f <= 700)
+        if (f > 0)
         {
-            item3->setText(""+QString::number(f,'f',3)+"Mb");
-            Tipo = "Mb";
+            if (f <= 999)
+                item3->setText(""+QString::number(f)+" B");
+            if (f > 999 && f <= 999999)
+            {
+                f = (f + 1023) / 1024;
+                item3->setText(""+QString::number(f,'f',1)+" kB");
+            }
+            if (f > 999999 && f <= 999999999)
+            {
+                f = (f + 1023) / 1024;
+                f = f / 1024;
+                item3->setText(""+QString::number(f,'f',1)+" MB");
+                Tipo = "MB";
+            }
+            if (f > 999999999)
+            {
+                f = (f + 1023) / 1024;
+                f = f / 1024;
+                f = f / 1024;
+                item3->setText(""+QString::number(f,'f',1)+" GB");
+                Peso = "GB";
+                Tipo = "GB";
+            }
+            iFilas=ui->tableWidget->rowCount();
+            ui->tableWidget->insertRow(iFilas);
+            ui->tableWidget->setItem(iFilas,0,item1);
+            ui->tableWidget->setItem(iFilas,1,item2);
+            ui->tableWidget->setItem(iFilas,2,item3);
+            ui->tableWidget->resizeRowsToContents();
+            ui->tableWidget->resizeColumnsToContents();
         }
-        if (f > 700)
-        {
-            float g = f / 1024;
-            item3->setText(""+QString::number(g,'f',3)+"Gb");
-            Peso = "Gb";
-            Tipo = "Gb";
-        }
-        iFilas=ui->tableWidget->rowCount();
-        ui->tableWidget->insertRow(iFilas);
-        ui->tableWidget->setItem(iFilas,0,item1);
-        ui->tableWidget->setItem(iFilas,1,item2);
-        ui->tableWidget->setItem(iFilas,2,item3);
-        ui->tableWidget->resizeRowsToContents();
-        ui->tableWidget->resizeColumnsToContents();
     }
     this->Recuento();
     int Ratio = tamanio;
     if (tamanio <= 700)
     {
-        if (Peso != "Gb")
-            ui->label_2->setText("Mb");
+        if (Peso != "GB")
+            ui->label_2->setText("MB");
     }
     else if (tamanio > 700)
     {
         tamanio = tamanio / 1024;
-        ui->label_2->setText("Gb");
+        ui->label_2->setText("GB");
     }
     ui->label_4->setText(QString::number(tamanio,'f',3));
-    if (Peso != "Gb")
+    if (Peso != "GB")
     {
         if (tamanio <= 700.00)
         {
@@ -1784,43 +1810,56 @@ void burn::Cargar(QString Valor)
             float size = QFileInfo(file).size();
             item1->setText(tr(QFileInfo(file).fileName()));
             item2->setText(tr(rutaAbs));
-            f = (size + 1023) / 1024;
-            f = f / 1024;
-            if (f <= 700)
+            f = size;
+            if (f > 0)
             {
-                item3->setText(""+QString::number(f,'f',3)+"Mb");
-                Tipo = "Mb";
+                if (f <= 999)
+                    item3->setText(""+QString::number(f)+" B");
+                if (f > 999 && f <= 999999)
+                {
+                    f = (f + 1023) / 1024;
+                    item3->setText(""+QString::number(f,'f',1)+" kB");
+                }
+                if (f > 999999 && f <= 999999999)
+                {
+                    f = (f + 1023) / 1024;
+                    f = f / 1024;
+                    item3->setText(""+QString::number(f,'f',1)+" MB");
+                    Tipo = "MB";
+                }
+                if (f > 999999999)
+                {
+                    f = (f + 1023) / 1024;
+                    f = f / 1024;
+                    f = f / 1024;
+                    item3->setText(""+QString::number(f,'f',1)+" GB");
+                    Peso = "GB";
+                    Tipo = "GB";
+                }
+                iFilas=ui->tableWidget->rowCount();
+                ui->tableWidget->insertRow(iFilas);
+                ui->tableWidget->setItem(iFilas,0,item1);
+                ui->tableWidget->setItem(iFilas,1,item2);
+                ui->tableWidget->setItem(iFilas,2,item3);
+                ui->tableWidget->resizeRowsToContents();
+                ui->tableWidget->resizeColumnsToContents();
             }
-            if (f > 700)
-            {
-                float g = f / 1024;
-                item3->setText(""+QString::number(g,'f',3)+"Gb");
-                Peso = "Gb";
-                Tipo = "Gb";
-            }
-            iFilas=ui->tableWidget->rowCount();
-            ui->tableWidget->insertRow(iFilas);
-            ui->tableWidget->setItem(iFilas,0,item1);
-            ui->tableWidget->setItem(iFilas,1,item2);
-            ui->tableWidget->setItem(iFilas,2,item3);
-            ui->tableWidget->resizeRowsToContents();
-            ui->tableWidget->resizeColumnsToContents();
         }
     }
     this->Recuento();
     int Ratio = tamanio;
     if (tamanio <= 700)
     {
-        if (Peso != "Gb")
-            ui->label_2->setText("Mb");
+        if (Peso != "GB")
+            ui->label_2->setText("MB");
     }
     else if (tamanio > 700)
     {
         tamanio = tamanio / 1024;
-        ui->label_2->setText("Gb");
+        ui->label_2->setText("GB");
     }
     ui->label_4->setText(QString::number(tamanio,'f',3));    
-    if (Peso != "Gb")
+    if (Peso != "GB")
     {
         if (tamanio <= 700.00)
         {
@@ -1981,9 +2020,7 @@ void burn::Refresco()
             break;
         }
         else
-        {
             Value = 1;
-        }
     }
     if (Value == 1)
     {
@@ -2312,12 +2349,9 @@ void burn::on_pushButton_13_clicked()
         int respuesta = 0;
         respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Borrar disco CD/DVD regrabable")),
                                QString::fromUtf8(tr("<center><b>Borrar disco CD/DVD regrabable</center><p>"
-
                                "Utilidad para forzar el borrado del disco CD/DVD regrabable.<p>"
-
                                "IMPORTANTE: Utilizar solo en el caso de que el "
                                "disco no se autoformatee.<p>"
-
                                "&iquest;Borrar disco CD/DVD?")), QMessageBox::Ok, QMessageBox::No);
         if (respuesta == QMessageBox::Ok)
         {
@@ -2370,12 +2404,9 @@ void burn::on_pushButton_15_clicked()
         int respuesta = 0;
         respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Formatear disco CD/DVD regrabable")),
                                QString::fromUtf8(tr("<center><b>Formatear disco CD/DVD regrabable<center><p>"
-
                                "Utilidad para forzar el formateo del disco CD/DVD regrabable.<p>"
-
                                "IMPORTANTE: Utilizar solo en el caso de que el "
                                "disco no se autoformatee y no utilices mucho esta opcion o dejaras inservible el medio.<p>"
-
                                "&iquest;Formatear disco CD/DVD?")), QMessageBox::Ok, QMessageBox::No);
         if (respuesta == QMessageBox::Ok)
         {
@@ -2764,9 +2795,7 @@ void burn::on_pushButton_14_clicked()
                                                 else
                                                 {
                                                     if (ui->comboBox_2->currentText().toInt() > 1 && Copia < ui->comboBox_2->currentText().toInt())
-                                                    {
-                                                        //No tiene que hacer nada
-                                                    }
+                                                    {}
                                                     else
                                                     {
                                                         cmd = "su - %1 -c \"mkisofs -RJ -v -V \"%4\" -o %3RCV_DATA.iso %2\"";

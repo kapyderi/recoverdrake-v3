@@ -227,7 +227,9 @@ void makefile::on_pushButton_4_clicked()
         {
             connect(mib, SIGNAL(finProceso()), this, SLOT(Desinstalacion()));
         }
-        int valor= comandos.count(); mib->Valor(valor,3); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
+        int valor= comandos.count(); mib->Valor(valor,4);
+        mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+        mib->iniciarProceso();
     }
     else
     {
@@ -271,7 +273,9 @@ void makefile::on_pushButton_4_clicked()
             connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
             connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
             connect(mib, SIGNAL(finProceso()), this, SLOT(Instalacion()));
-            int valor= comandos.count(); mib->Valor(valor,3); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
+            int valor= comandos.count(); mib->Valor(valor,4);
+            mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+            mib->iniciarProceso();
         }
         else if (ui->radioButton_3->isChecked() == false)
         {
@@ -283,7 +287,10 @@ void makefile::on_pushButton_4_clicked()
             connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
             connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
             connect(mib, SIGNAL(finProceso()), this, SLOT(Desinstalacion()));
-            int valor= comandos.count(); mib->Valor(valor,3); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
+            int valor= comandos.count();
+            mib->Valor(valor,4);
+            mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+            mib->iniciarProceso();
         }
     }
 }
@@ -529,7 +536,9 @@ void makefile::on_pushButton_clicked()
     mib = new DrakeProcesos(comandos, this);
     connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
     connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
-    int valor= comandos.count(); mib->Valor(valor,3); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
+    int valor= comandos.count();
+    mib->Valor(valor,4); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+    mib->iniciarProceso();
 }
 
 void makefile::on_pushButton_5_clicked()
@@ -569,7 +578,10 @@ void makefile::on_pushButton_6_clicked()
     mib = new DrakeProcesos(comandos, this);
     connect(mib, SIGNAL(publicarDatos(QString)), this, SLOT(mibEscribir(QString)));
     connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
-    int valor= comandos.count(); mib->Valor(valor,3); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
+    int valor= comandos.count();
+    mib->Valor(valor,4);
+    mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+    mib->iniciarProceso();
 }
 
 bool makefile::eventFilter(QObject* obj, QEvent *event)

@@ -6,15 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>614</width>
-    <height>635</height>
+    <width>715</width>
+    <height>747</height>
    </rect>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>614</width>
-    <height>635</height>
-   </size>
   </property>
   <property name="font">
    <font>
@@ -22,17 +16,23 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Cambio de permisos/usuarios</string>
+   <string>PermiUser v.0.1.0</string>
   </property>
   <property name="windowIcon">
    <iconset resource="recoverdrake.qrc">
     <normaloff>:/Imagenes/drakauth-mdk.png</normaloff>:/Imagenes/drakauth-mdk.png</iconset>
   </property>
-  <layout class="QGridLayout" name="gridLayout_7">
-   <item row="0" column="0" colspan="2">
+  <layout class="QGridLayout" name="gridLayout_17">
+   <item row="0" column="0" colspan="3">
     <widget class="QGroupBox" name="groupBox_5">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="title">
-      <string>Fichero/Directorio</string>
+      <string>Permisos de...</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_5">
       <property name="leftMargin">
@@ -49,15 +49,17 @@
       </property>
       <item row="0" column="0">
        <widget class="QRadioButton" name="radioButton_7">
+        <property name="toolTip">
+         <string>Cambio de permisos a ficheros</string>
+        </property>
+        <property name="statusTip">
+         <string>Cambio de permisos a ficheros</string>
+        </property>
+        <property name="whatsThis">
+         <string>Cambio de permisos a ficheros</string>
+        </property>
         <property name="text">
          <string>Fichero</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QRadioButton" name="radioButton_8">
-        <property name="text">
-         <string>Directorio</string>
         </property>
        </widget>
       </item>
@@ -74,19 +76,164 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="toolTip">
+           <string>Localizar archivo/directorio</string>
+          </property>
+          <property name="statusTip">
+           <string>Localizar archivo/directorio</string>
+          </property>
+          <property name="whatsThis">
+           <string>Localizar archivo/directorio</string>
+          </property>
           <property name="text">
            <string>...</string>
           </property>
          </widget>
         </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pushButton">
+          <property name="toolTip">
+           <string>Proceder a realizar los cambios seleccionados</string>
+          </property>
+          <property name="statusTip">
+           <string>Proceder a realizar los cambios seleccionados</string>
+          </property>
+          <property name="whatsThis">
+           <string>Proceder a realizar los cambios seleccionados</string>
+          </property>
+          <property name="text">
+           <string>Realizar cambio</string>
+          </property>
+          <property name="icon">
+           <iconset resource="recoverdrake.qrc">
+            <normaloff>:/Imagenes/drakauth-mdk.png</normaloff>:/Imagenes/drakauth-mdk.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+         </widget>
+        </item>
        </layout>
+      </item>
+      <item row="0" column="1">
+       <widget class="QRadioButton" name="radioButton_8">
+        <property name="toolTip">
+         <string>Cambio de permisos a directorio</string>
+        </property>
+        <property name="statusTip">
+         <string>Cambio de permisos a directorio</string>
+        </property>
+        <property name="whatsThis">
+         <string>Cambio de permisos a directorio</string>
+        </property>
+        <property name="text">
+         <string>Directorio</string>
+        </property>
+       </widget>
       </item>
       <item row="2" column="0" colspan="2">
        <widget class="QGroupBox" name="groupBox_6">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="palette">
+         <palette>
+          <active>
+           <colorrole role="WindowText">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Text">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="ButtonText">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </active>
+          <inactive>
+           <colorrole role="WindowText">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Text">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="ButtonText">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </inactive>
+          <disabled>
+           <colorrole role="WindowText">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>2</red>
+              <green>2</green>
+              <blue>2</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="Text">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+           <colorrole role="ButtonText">
+            <brush brushstyle="SolidPattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>0</blue>
+             </color>
+            </brush>
+           </colorrole>
+          </disabled>
+         </palette>
+        </property>
         <property name="title">
          <string>Datos del fichero/directorio seleccionado</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_14">
+        <layout class="QGridLayout" name="gridLayout_18">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -99,7 +246,7 @@
          <property name="bottomMargin">
           <number>0</number>
          </property>
-         <item row="0" column="0" colspan="2">
+         <item row="0" column="0">
           <layout class="QGridLayout" name="gridLayout_8">
            <item row="0" column="0">
             <widget class="QLabel" name="label_4">
@@ -109,7 +256,17 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit_2"/>
+            <widget class="QLineEdit" name="lineEdit_2">
+             <property name="toolTip">
+              <string>Usuario que tiene los permisos</string>
+             </property>
+             <property name="statusTip">
+              <string>Usuario que tiene los permisos</string>
+             </property>
+             <property name="whatsThis">
+              <string>Usuario que tiene los permisos</string>
+             </property>
+            </widget>
            </item>
            <item row="0" column="2">
             <widget class="QLabel" name="label_5">
@@ -119,34 +276,87 @@
             </widget>
            </item>
            <item row="0" column="3">
-            <widget class="QLineEdit" name="lineEdit_3"/>
-           </item>
-          </layout>
-         </item>
-         <item row="1" column="0" colspan="2">
-          <layout class="QGridLayout" name="gridLayout_9">
-           <item row="0" column="3">
-            <widget class="QLineEdit" name="lineEdit_5"/>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit_4">
-             <property name="maximumSize">
-              <size>
-               <width>60</width>
-               <height>16777215</height>
-              </size>
+            <widget class="QLineEdit" name="lineEdit_3">
+             <property name="toolTip">
+              <string>Grupo que tiene los permisos</string>
+             </property>
+             <property name="statusTip">
+              <string>Grupo que tiene los permisos</string>
+             </property>
+             <property name="whatsThis">
+              <string>Grupo que tiene los permisos</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="2">
+          </layout>
+         </item>
+         <item row="1" column="0">
+          <layout class="QGridLayout" name="gridLayout_9">
+           <item row="0" column="3">
             <widget class="QLabel" name="label_7">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
               <string>Fecha/Hora</string>
              </property>
             </widget>
            </item>
            <item row="0" column="4">
+            <widget class="QLineEdit" name="lineEdit_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Fecha y hora de la creacion del archivo</string>
+             </property>
+             <property name="statusTip">
+              <string>Fecha y hora de la creacion del archivo</string>
+             </property>
+             <property name="whatsThis">
+              <string>Fecha y hora de la creacion del archivo</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="lineEdit_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>60</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string>Numero de contenidos incluidos</string>
+             </property>
+             <property name="statusTip">
+              <string>Numero de contenidos incluidos</string>
+             </property>
+             <property name="whatsThis">
+              <string>Numero de contenidos incluidos</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="6">
             <widget class="QLabel" name="label_8">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
               <string>Peso</string>
              </property>
@@ -154,148 +364,288 @@
            </item>
            <item row="0" column="0">
             <widget class="QLabel" name="label_6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
               <string>Numero de contenidos</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="5">
+           <item row="0" column="7">
             <widget class="QLineEdit" name="lineEdit_6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="maximumSize">
               <size>
                <width>70</width>
                <height>16777215</height>
               </size>
              </property>
+             <property name="toolTip">
+              <string>Peso del fichero/directorio seleccionado</string>
+             </property>
+             <property name="statusTip">
+              <string>Peso del fichero/directorio seleccionado</string>
+             </property>
+             <property name="whatsThis">
+              <string>Peso del fichero/directorio seleccionado</string>
+             </property>
             </widget>
+           </item>
+           <item row="0" column="2">
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </item>
-         <item row="2" column="0" colspan="2">
-          <widget class="QGroupBox" name="groupBox_8">
-           <property name="title">
-            <string>Usuario</string>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_10">
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="checkBox_5">
-              <property name="text">
-               <string>Lectura</string>
+         <item row="2" column="0">
+          <layout class="QGridLayout" name="gridLayout_14">
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="groupBox_8">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="title">
+              <string>Usuario</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_10">
+              <property name="leftMargin">
+               <number>0</number>
               </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="checkBox_6">
-              <property name="text">
-               <string>Escritura</string>
+              <property name="topMargin">
+               <number>0</number>
               </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QCheckBox" name="checkBox_7">
-              <property name="text">
-               <string>Ejecucion</string>
+              <property name="rightMargin">
+               <number>0</number>
               </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QGroupBox" name="groupBox_10">
-           <property name="title">
-            <string>Otros</string>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_13">
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="checkBox_11">
-              <property name="text">
-               <string>Lectura</string>
+              <property name="bottomMargin">
+               <number>0</number>
               </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="checkBox_12">
-              <property name="text">
-               <string>Escritura</string>
+              <item row="0" column="2">
+               <widget class="QCheckBox" name="checkBox_7">
+                <property name="toolTip">
+                 <string>Permisos de ejecucion seleccionada para esta opcion</string>
+                </property>
+                <property name="statusTip">
+                 <string>Permisos de ejecucion seleccionada para esta opcion</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Permisos de ejecucion seleccionada para esta opcion</string>
+                </property>
+                <property name="text">
+                 <string>Ejecucion</string>
+                </property>
+                <property name="checkable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="checkBox_5">
+                <property name="toolTip">
+                 <string>Permisos de lectura seleccionada para esta opcion</string>
+                </property>
+                <property name="statusTip">
+                 <string>Permisos de lectura seleccionada para esta opcion</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Permisos de lectura seleccionada para esta opcion</string>
+                </property>
+                <property name="text">
+                 <string>Lectura</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QCheckBox" name="checkBox_6">
+                <property name="toolTip">
+                 <string>Permisos de escritura seleccionada para esta opcion</string>
+                </property>
+                <property name="statusTip">
+                 <string>Permisos de escritura seleccionada para esta opcion</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Permisos de escritura seleccionada para esta opcion</string>
+                </property>
+                <property name="text">
+                 <string>Escritura</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QGroupBox" name="groupBox_9">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="title">
+              <string>Grupo</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_12">
+              <property name="leftMargin">
+               <number>0</number>
               </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QCheckBox" name="checkBox_13">
-              <property name="text">
-               <string>Ejecucion</string>
+              <property name="topMargin">
+               <number>0</number>
               </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QGroupBox" name="groupBox_9">
-           <property name="title">
-            <string>Grupo</string>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_12">
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
-            <property name="bottomMargin">
-             <number>0</number>
-            </property>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="checkBox_8">
-              <property name="text">
-               <string>Lectura</string>
+              <property name="rightMargin">
+               <number>0</number>
               </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="checkBox_9">
-              <property name="text">
-               <string>Escritura</string>
+              <property name="bottomMargin">
+               <number>0</number>
               </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QCheckBox" name="checkBox_10">
-              <property name="text">
-               <string>Ejecucion</string>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="checkBox_8">
+                <property name="toolTip">
+                 <string>Permisos de lectura seleccionada para esta opcion</string>
+                </property>
+                <property name="statusTip">
+                 <string>Permisos de lectura seleccionada para esta opcion</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Permisos de lectura seleccionada para esta opcion</string>
+                </property>
+                <property name="text">
+                 <string>Lectura</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QCheckBox" name="checkBox_9">
+                <property name="toolTip">
+                 <string>Permisos de escritura seleccionada para esta opcion</string>
+                </property>
+                <property name="statusTip">
+                 <string>Permisos de escritura seleccionada para esta opcion</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Permisos de escritura seleccionada para esta opcion</string>
+                </property>
+                <property name="text">
+                 <string>Escritura</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QCheckBox" name="checkBox_10">
+                <property name="toolTip">
+                 <string>Permisos de ejecucion seleccionada para esta opcion</string>
+                </property>
+                <property name="statusTip">
+                 <string>Permisos de ejecucion seleccionada para esta opcion</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Permisos de ejecucion seleccionada para esta opcion</string>
+                </property>
+                <property name="text">
+                 <string>Ejecucion</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QGroupBox" name="groupBox_10">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="title">
+              <string>Otros</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_13">
+              <property name="leftMargin">
+               <number>0</number>
               </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="checkBox_11">
+                <property name="toolTip">
+                 <string>Permisos de lectura seleccionada para esta opcion</string>
+                </property>
+                <property name="statusTip">
+                 <string>Permisos de lectura seleccionada para esta opcion</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Permisos de lectura seleccionada para esta opcion</string>
+                </property>
+                <property name="text">
+                 <string>Lectura</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QCheckBox" name="checkBox_12">
+                <property name="toolTip">
+                 <string>Permisos de escritura seleccionada para esta opcion</string>
+                </property>
+                <property name="statusTip">
+                 <string>Permisos de escritura seleccionada para esta opcion</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Permisos de escritura seleccionada para esta opcion</string>
+                </property>
+                <property name="text">
+                 <string>Escritura</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QCheckBox" name="checkBox_13">
+                <property name="toolTip">
+                 <string>Permisos de ejecucion seleccionada para esta opcion</string>
+                </property>
+                <property name="statusTip">
+                 <string>Permisos de ejecucion seleccionada para esta opcion</string>
+                </property>
+                <property name="whatsThis">
+                 <string>Permisos de ejecucion seleccionada para esta opcion</string>
+                </property>
+                <property name="text">
+                 <string>Ejecucion</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>
@@ -303,8 +653,73 @@
      </layout>
     </widget>
    </item>
-   <item row="5" column="0" rowspan="2">
+   <item row="7" column="0" colspan="3">
+    <layout class="QGridLayout" name="gridLayout_7">
+     <item row="0" column="0">
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Nos vamos...</string>
+       </property>
+       <property name="statusTip">
+        <string>Nos vamos...</string>
+       </property>
+       <property name="whatsThis">
+        <string>Nos vamos...</string>
+       </property>
+       <property name="text">
+        <string>Salir</string>
+       </property>
+       <property name="icon">
+        <iconset resource="recoverdrake.qrc">
+         <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="5" column="0" colspan="3">
+    <widget class="QLabel" name="label_10">
+     <property name="pixmap">
+      <pixmap resource="recoverdrake.qrc">:/Imagenes/Placa.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="3">
     <widget class="QGroupBox" name="groupBox_3">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="font">
       <font>
        <pointsize>7</pointsize>
@@ -328,63 +743,31 @@
       </property>
       <item row="0" column="0">
        <widget class="QCheckBox" name="checkBox_4">
+        <property name="toolTip">
+         <string>Cambio de forma recursiva sobre subdirectorios</string>
+        </property>
+        <property name="statusTip">
+         <string>Cambio de forma recursiva sobre subdirectorios</string>
+        </property>
+        <property name="whatsThis">
+         <string>Cambio de forma recursiva sobre subdirectorios</string>
+        </property>
         <property name="text">
          <string>Cambiar todo el contenido de forma recursiva</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
      </layout>
     </widget>
    </item>
-   <item row="5" column="1">
-    <widget class="QPushButton" name="pushButton">
-     <property name="text">
-      <string>Realizar cambio</string>
-     </property>
-     <property name="icon">
-      <iconset resource="recoverdrake.qrc">
-       <normaloff>:/Imagenes/drakauth-mdk.png</normaloff>:/Imagenes/drakauth-mdk.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="QPushButton" name="pushButton_3">
-     <property name="text">
-      <string>Salir</string>
-     </property>
-     <property name="icon">
-      <iconset resource="recoverdrake.qrc">
-       <normaloff>:/Imagenes/puerta.png</normaloff>:/Imagenes/puerta.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="2">
+   <item row="1" column="0" colspan="3">
     <widget class="QGroupBox" name="groupBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="font">
       <font>
        <pointsize>7</pointsize>
@@ -406,198 +789,400 @@
       <property name="bottomMargin">
        <number>0</number>
       </property>
-      <item row="0" column="0">
+      <item row="2" column="0">
        <widget class="QRadioButton" name="radioButton">
+        <property name="toolTip">
+         <string>Seleccionar cambio de usuario/grupo</string>
+        </property>
+        <property name="statusTip">
+         <string>Seleccionar cambio de usuario/grupo</string>
+        </property>
+        <property name="whatsThis">
+         <string>Seleccionar cambio de usuario/grupo</string>
+        </property>
         <property name="text">
          <string>Cambiar usuario/grupo</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
+      <item row="2" column="2">
        <widget class="QRadioButton" name="radioButton_2">
+        <property name="toolTip">
+         <string>Seleccionar cambio de permisos</string>
+        </property>
+        <property name="statusTip">
+         <string>Seleccionar cambio de permisos</string>
+        </property>
+        <property name="whatsThis">
+         <string>Seleccionar cambio de permisos</string>
+        </property>
         <property name="text">
          <string>Cambiar permisos</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="2" column="3">
        <widget class="QRadioButton" name="radioButton_9">
+        <property name="toolTip">
+         <string>Seleccionar cambio de fecha</string>
+        </property>
+        <property name="statusTip">
+         <string>Seleccionar cambio de fecha</string>
+        </property>
+        <property name="whatsThis">
+         <string>Seleccionar cambio de fecha</string>
+        </property>
         <property name="text">
          <string>Cambiar fecha</string>
         </property>
        </widget>
       </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="4" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="title">
-      <string>Cambio de permisos</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
       <item row="3" column="3">
-       <widget class="QRadioButton" name="radioButton_5">
-        <property name="text">
-         <string>Otros</string>
+       <widget class="QGroupBox" name="groupBox_7">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-       </widget>
-      </item>
-      <item row="3" column="4">
-       <widget class="QRadioButton" name="radioButton_6">
-        <property name="text">
-         <string>Todos</string>
+        <property name="title">
+         <string>Cambio de fecha</string>
         </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QCheckBox" name="checkBox">
-        <property name="text">
-         <string>Lectura</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1" colspan="4">
-       <widget class="Line" name="line">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
+        <layout class="QGridLayout" name="gridLayout_11">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QDateTimeEdit" name="dateTimeEdit">
+           <property name="toolTip">
+            <string>Seleccionar fecha y hora</string>
+           </property>
+           <property name="statusTip">
+            <string>Seleccionar fecha y hora</string>
+           </property>
+           <property name="whatsThis">
+            <string>Seleccionar fecha y hora</string>
+           </property>
+           <property name="displayFormat">
+            <string>dd/MM/yyyy HH:mm</string>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item row="3" column="2">
-       <widget class="QRadioButton" name="radioButton_4">
-        <property name="text">
-         <string>Grupo</string>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
+        <property name="title">
+         <string>Cambio de permisos</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="3" column="3">
+          <widget class="QRadioButton" name="radioButton_5">
+           <property name="toolTip">
+            <string>Seleccion de otros</string>
+           </property>
+           <property name="statusTip">
+            <string>Seleccion de otros</string>
+           </property>
+           <property name="whatsThis">
+            <string>Seleccion de otros</string>
+           </property>
+           <property name="text">
+            <string>Otros</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="4">
+          <widget class="QRadioButton" name="radioButton_6">
+           <property name="toolTip">
+            <string>Seleccionar todos</string>
+           </property>
+           <property name="statusTip">
+            <string>Seleccionar todos</string>
+           </property>
+           <property name="whatsThis">
+            <string>Seleccionar todos</string>
+           </property>
+           <property name="text">
+            <string>Todos</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QCheckBox" name="checkBox">
+           <property name="toolTip">
+            <string>Permisos de lectura seleccionada</string>
+           </property>
+           <property name="statusTip">
+            <string>Permisos de lectura seleccionada</string>
+           </property>
+           <property name="whatsThis">
+            <string>Permisos de lectura seleccionada</string>
+           </property>
+           <property name="text">
+            <string>Lectura</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QRadioButton" name="radioButton_4">
+           <property name="toolTip">
+            <string>Seleccion de grupo</string>
+           </property>
+           <property name="statusTip">
+            <string>Seleccion de grupo</string>
+           </property>
+           <property name="whatsThis">
+            <string>Seleccion de grupo</string>
+           </property>
+           <property name="text">
+            <string>Grupo</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QCheckBox" name="checkBox_3">
+           <property name="toolTip">
+            <string>Permisos de ejecucion seleccionada</string>
+           </property>
+           <property name="statusTip">
+            <string>Permisos de ejecucion seleccionada</string>
+           </property>
+           <property name="whatsThis">
+            <string>Permisos de ejecucion seleccionada</string>
+           </property>
+           <property name="text">
+            <string>Ejecucion</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QRadioButton" name="radioButton_3">
+           <property name="toolTip">
+            <string>Seleccion de usuario</string>
+           </property>
+           <property name="statusTip">
+            <string>Seleccion de usuario</string>
+           </property>
+           <property name="whatsThis">
+            <string>Seleccion de usuario</string>
+           </property>
+           <property name="text">
+            <string>Usuario</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QCheckBox" name="checkBox_2">
+           <property name="toolTip">
+            <string>Permisos de escritura seleccionada</string>
+           </property>
+           <property name="statusTip">
+            <string>Permisos de escritura seleccionada</string>
+           </property>
+           <property name="whatsThis">
+            <string>Permisos de escritura seleccionada</string>
+           </property>
+           <property name="text">
+            <string>Escritura</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1" colspan="5">
+          <widget class="Line" name="line">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
-      <item row="3" column="1">
-       <widget class="QRadioButton" name="radioButton_3">
-        <property name="text">
-         <string>Usuario</string>
+      <item row="3" column="0">
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QCheckBox" name="checkBox_2">
-        <property name="text">
-         <string>Escritura</string>
+        <property name="title">
+         <string>Cambio de usuario/grupo</string>
         </property>
-       </widget>
-      </item>
-      <item row="0" column="4">
-       <widget class="QCheckBox" name="checkBox_3">
-        <property name="text">
-         <string>Ejecucion</string>
-        </property>
+        <layout class="QGridLayout" name="gridLayout_16">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboBox_2">
+             <property name="toolTip">
+              <string>Lista de usuarios del sistema</string>
+             </property>
+             <property name="statusTip">
+              <string>Lista de usuarios del sistema</string>
+             </property>
+             <property name="whatsThis">
+              <string>Lista de usuarios del sistema</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="label_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>A usuario...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QComboBox" name="comboBox">
+             <property name="toolTip">
+              <string>Lista de usuarios del sistema</string>
+             </property>
+             <property name="statusTip">
+              <string>Lista de usuarios del sistema</string>
+             </property>
+             <property name="whatsThis">
+              <string>Lista de usuarios del sistema</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>De usuario...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <layout class="QGridLayout" name="gridLayout_15">
+             <item row="0" column="3">
+              <widget class="QComboBox" name="comboBox_4">
+               <property name="toolTip">
+                <string>Lista de usuarios del sistema</string>
+               </property>
+               <property name="statusTip">
+                <string>Lista de usuarios del sistema</string>
+               </property>
+               <property name="whatsThis">
+                <string>Lista de usuarios del sistema</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="comboBox_3">
+             <property name="toolTip">
+              <string>Lista de usuarios del sistema</string>
+             </property>
+             <property name="statusTip">
+              <string>Lista de usuarios del sistema</string>
+             </property>
+             <property name="whatsThis">
+              <string>Lista de usuarios del sistema</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="label_9">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>A grupo...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>De grupo...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="3" column="0">
-    <widget class="QGroupBox" name="groupBox_4">
-     <property name="title">
-      <string>Cambio de usuario/grupo</string>
+   <item row="6" column="0" colspan="3">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout_6">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="comboBox_2"/>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>De usuario...</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QComboBox" name="comboBox"/>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>A usuario...</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QComboBox" name="comboBox_3"/>
-      </item>
-      <item row="1" column="3">
-       <widget class="QComboBox" name="comboBox_4"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>De grupo...</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>A grupo...</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QGroupBox" name="groupBox_7">
-     <property name="title">
-      <string>Cambio de fecha</string>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
      </property>
-     <layout class="QGridLayout" name="gridLayout_11">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item row="0" column="0">
-       <widget class="QDateTimeEdit" name="dateTimeEdit">
-        <property name="displayFormat">
-         <string>dd/MM/yyyy HH:mm</string>
-        </property>
-        <property name="calendarPopup">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
+    </spacer>
    </item>
   </layout>
  </widget>

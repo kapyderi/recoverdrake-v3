@@ -78,7 +78,6 @@ SOURCES += main.cpp \
     conversorud.cpp \
     calculadora.cpp \
     dbclaves.cpp \
-    report.cpp \
     Report/container.cpp \
     Report/customlabel.cpp \
     Report/detailsection.cpp \
@@ -126,7 +125,8 @@ SOURCES += main.cpp \
     Smpt/smtpclient.cpp \
     QR/qrwidget.cpp \
     qrcode.cpp \
-    compresor.cpp
+    compresor.cpp \
+    textencrip.cpp
 HEADERS += recoverdrake.h \
     drakesistema.h \
     drakeprocesos.h \
@@ -186,7 +186,6 @@ HEADERS += recoverdrake.h \
     conversorud.h \
     calculadora.h \
     dbclaves.h \
-    report.h \
     Report/container.h \
     Report/customlabel.h \
     Report/detailsection.h \
@@ -235,7 +234,8 @@ HEADERS += recoverdrake.h \
     Smpt/SmtpMime \
     QR/qrwidget.h \
     qrcode.h \
-    compresor.h
+    compresor.h \
+    textencrip.h
 FORMS += recoverdrake.ui \
     acceso.ui \
     claves.ui \
@@ -291,7 +291,6 @@ FORMS += recoverdrake.ui \
     conversorud.ui \
     calculadora.ui \
     dbclaves.ui \
-    report.ui \
     Report/editdetailsecdlg.ui \
     Report/editfielddlg.ui \
     Report/editimagedlg.ui \
@@ -307,7 +306,8 @@ FORMS += recoverdrake.ui \
     Report/editrelationalfield.ui \
     Report/savetobdfrm.ui \
     qrcode.ui \
-    compresor.ui
+    compresor.ui \
+    textencrip.ui
 RESOURCES += recoverdrake.qrc
 OTHER_FILES += 
 TRANSLATIONS += RecoverDrake_en.ts \

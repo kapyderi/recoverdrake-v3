@@ -236,16 +236,14 @@ void Reproductor::on_pushButton_clicked()
     }
     else
     {
-        ui->videoPlayer->load(Phonon::MediaSource(listaArchivos));
+        ui->videoPlayer->load(Phonon::MediaSource(QUrl(listaArchivos)));
         ui->videoPlayer->play();
         ui->pushButton->setEnabled(false);
         ui->pushButton_6->setEnabled(true);
         ui->pushButton_3->setEnabled(true);
         ui->pushButton_2->setEnabled(true);
         ui->seekSlider->setMediaObject(ui->videoPlayer->mediaObject());
-        //ui->seekSlider->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-        ui->volumeSlider_5->setAudioOutput(AudioOutput);
-        //ui->volumeSlider_5->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+        ui->volumeSlider_5->setAudioOutput(ui->videoPlayer->audioOutput());
         timer->start(1000);
     }
 }

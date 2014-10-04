@@ -16,6 +16,11 @@
     <height>371</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Configurar seccion</string>
   </property>

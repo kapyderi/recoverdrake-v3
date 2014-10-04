@@ -67,6 +67,7 @@ recoverdrake::recoverdrake(QWidget *parent) :
     ui->radioButton_4->setChecked(true);
     ui->radioButton_5->setChecked(true);
     ui->checkBox_7->setChecked(true);
+    ui->tabWidget->removeTab(27);
     ui->tabWidget->removeTab(26);
     ui->tabWidget->removeTab(25);
     ui->tabWidget->removeTab(24);
@@ -120,6 +121,7 @@ recoverdrake::recoverdrake(QWidget *parent) :
     Pagina23=0;
     Pagina24=0;
     Pagina25=0;
+    Pagina26=0;
     CerrarP=0;
     Puntero = 0;
     Puntero1 = 0;
@@ -29351,32 +29353,6 @@ void recoverdrake::CerrarClaves()
     }
 }
 
-void recoverdrake::on_actionConfiguracion_manual_triggered()
-{
-    QString hora = QTime::currentTime().toString("hh:mm:ss");
-    ui->textEdit_4->append(""+hora+tr("-- Accion: Formatos de impresion manual."));
-    int respuesta = 0;
-    if (Mensaka!="Activo")
-    {
-        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Formatos de impresion manual")),
-                       QString::fromUtf8(tr("<center><b>Formatos manuales</center><p>"
-                       "Aqui puedes visualizar los modelos predefinidos de impresion y tambien "
-                       "puedes definir nuevos o modificar los existentes introduciendo las coordenas y datos necesarios de forma manual.<p>"
-                       "&iquest;Configurar formatos de impresion?")), QMessageBox::Ok, QMessageBox::No);
-    }
-    else
-    {
-        respuesta=QMessageBox::Ok;
-    }
-    if (respuesta == QMessageBox::Ok)
-    {
-        Report *Reporte=new Report(this);
-        if (Stilo == "A")
-            Reporte->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        Reporte->exec();
-    }
-}
-
 void recoverdrake::on_actionConfiguracion_visual_triggered()
 {
     QString hora = QTime::currentTime().toString("hh:mm:ss");
@@ -29688,6 +29664,7 @@ void recoverdrake::CerrarCompresor()
         Desconectar();
     }
 }
+
 void recoverdrake::on_pushButton_116_clicked()
 {
     this->on_actionComprimir_descomprimir_triggered();
@@ -29696,4 +29673,90 @@ void recoverdrake::on_pushButton_116_clicked()
 void recoverdrake::on_actionRefrescar_dependencias_triggered()
 {
     this->ActualizarTodo();
+}
+
+void recoverdrake::on_actionEncriptar_textos_triggered()
+{
+    QString hora = QTime::currentTime().toString("hh:mm:ss");
+    ui->textEdit_4->append(""+hora+tr("-- Accion: Encriptar texto."));
+    int respuesta = 0;
+    if (Mensaka!="Activo")
+    {
+        respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Encriptador de texto")),
+                       QString::fromUtf8(tr("<center><b>Encriptador de texto</center><p>"
+                       "Esta utilidad sirve para encriptar un texto que quieras enviar sin que pueda "
+                       "ser leido por otros, salvo que tenga los codigos para desencriptar.<p>"
+                       "&iquest;Encriptar texto?")), QMessageBox::Ok, QMessageBox::No);
+    }
+    else
+    {
+        respuesta=QMessageBox::Ok;
+    }
+    if (respuesta == QMessageBox::Ok)
+    {
+        if (Window == 0)
+        {
+            textencrip *Encriptar=new textencrip(this);
+            if (Stilo == "A")
+                Encriptar->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+            Encriptar->showMaximized();
+            Encriptar->Valor("",Logs);
+            Encriptar->exec();
+        }
+        else if (Window == 1)
+        {
+            QMdiSubWindow *existing = buscarEncriptar();
+            if(!existing)
+            {
+                Conectar();
+                Encriptar = new textencrip;
+                ui->tabWidget->insertTab(Pestanas,ui->tab_72,tr("Encriptador"));
+                ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/Encriptar.png"));
+                ui->tabWidget->setCurrentPage(Pestanas);
+                Pagina26 = Pestanas;
+                ui->mdiArea_26->addSubWindow(Encriptar);
+                connect(Encriptar, SIGNAL(Cerrar()), this, SLOT(CerrarEncriptar()));
+                if (Stilo == "A")
+                    Encriptar->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                Encriptar->showMaximized();
+                Encriptar->Valor("Quitar",Logs);
+                Encriptar->exec();
+            }
+            else
+            {
+                ui->tabWidget->setCurrentPage(Pagina26);
+                ui->mdiArea_26->setActiveSubWindow(existing);
+            }
+            Encriptar->setWindowState(Qt::WindowMaximized);
+        }
+    }
+}
+
+QMdiSubWindow *recoverdrake::buscarEncriptar()
+{
+    foreach (QMdiSubWindow *window, ui->mdiArea_26->subWindowList())
+    {
+        if(textencrip *a= qobject_cast<textencrip *>(window->widget()))
+        {
+            Q_UNUSED(a);
+            return window;
+        }
+    }
+    return 0;
+}
+
+void recoverdrake::CerrarEncriptar()
+{
+    if (Pagina26 != 0)
+    {
+        ui->mdiArea_26->removeSubWindow(Encriptar);
+        ui->tabWidget->removeTab(ui->tabWidget->currentIndex());
+        Pagina26=0;
+        Desconectar();
+    }
+}
+
+void recoverdrake::on_pushButton_118_clicked()
+{
+    this->on_actionEncriptar_textos_triggered();
 }

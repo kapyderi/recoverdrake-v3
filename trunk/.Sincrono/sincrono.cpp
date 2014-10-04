@@ -93,6 +93,7 @@ sincrono::sincrono(QWidget *parent) :
     Counter = 0;
     ContadorC = 0;
     Marca = 0;
+    Destruir = 0;
     Contad = new QTimer(this);
     connect(Contad, SIGNAL(timeout()), this, SLOT(Montaje()));
     Contad->start(5000);
@@ -519,6 +520,7 @@ void sincrono::on_pushButton_4_clicked()
                                 m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
                             m.setText(tr("No esta montada la unidad destino, por lo que debes montarla antes de utilizar la sincronizacion."));
                             m.exec();
+                            Destruir = 1;
                             return;
                         }
                     }
@@ -531,6 +533,7 @@ void sincrono::on_pushButton_4_clicked()
                     m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
                 m.setText(tr("No has introducido la ruta correcta de destino o no es accesible."));
                 m.exec();
+                Destruir = 1;
                 return;
             }
         }
@@ -541,6 +544,7 @@ void sincrono::on_pushButton_4_clicked()
                 m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
             m.setText(tr("No has introducido la ruta correcta de destino o no es accesible."));
             m.exec();
+            Destruir = 1;
             return;
         }
     }
@@ -609,6 +613,7 @@ void sincrono::on_pushButton_4_clicked()
                                 m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
                             m.setText(tr("No esta montada la unidad origen, por lo que debes montarla antes de utilizar la sincronizacion."));
                             m.exec();
+                            Destruir = 1;
                             return;
                         }
                     }
@@ -621,6 +626,7 @@ void sincrono::on_pushButton_4_clicked()
                     m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
                 m.setText(tr("No has introducido la ruta correcta de origen o no es accesible."));
                 m.exec();
+                Destruir = 1;
                 return;
             }
         }
@@ -633,6 +639,7 @@ void sincrono::on_pushButton_4_clicked()
                     m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
                 m.setText(tr("No has introducido la ruta correcta de origen."));
                 m.exec();
+                Destruir = 1;
                 return;
             }
         }
@@ -642,8 +649,7 @@ void sincrono::on_pushButton_4_clicked()
     ui->pushButton_8->setText(tr("Iguales"));
     ui->pushButton_9->setText(tr("Cambios"));
     ui->pushButton_2->setText(tr("Nuevos"));
-    ui->pushButton_13->setText(tr("Eliminados"));
-    Evento = 0;
+    ui->pushButton_13->setText(tr("Eliminados"));    
     if (ui->lineEdit->text() == "")
     {
         QMessageBox m;
@@ -651,6 +657,7 @@ void sincrono::on_pushButton_4_clicked()
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
         m.setText(tr("No has definido una ruta fuente para poder marcar objetivos."));
         m.exec();
+        Destruir = 1;
         return;
     }
     if (ui->lineEdit_2->text() == "")
@@ -660,6 +667,7 @@ void sincrono::on_pushButton_4_clicked()
             m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
         m.setText(tr("No has definido una ruta destino para poder comparar objetivos."));
         m.exec();
+        Destruir = 1;
         return;
     }
     ui->pushButton_4->setEnabled(false);
@@ -712,6 +720,7 @@ void sincrono::on_pushButton_4_clicked()
         ui->pushButton_12->setEnabled(true);
         Contad->start(5000);
         Value = 0;
+        Destruir = 1;
         return;
     }
     int Posibilidad = 0;
@@ -1633,6 +1642,15 @@ void sincrono::on_pushButton_10_clicked()
 
 void sincrono::on_pushButton_5_clicked()
 {
+    if (Destruir == 1)
+    {
+        Marca = 0;
+        Counter = 0;
+        ContadorC= 0;
+        Evento=0;
+        Destruir=0;
+        return;
+    }
     if (Evento == 1)
     {
         Marca = 0;

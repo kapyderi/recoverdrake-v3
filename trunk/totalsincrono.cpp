@@ -278,13 +278,9 @@ void TotalSincrono::on_pushButton_5_clicked()
 void TotalSincrono::Refrescar(int Valor,QString Value)
 {
     if (Valor == 1)
-    {
         ui->tabWidget->removeTab(ui->tabWidget->currentIndex());
-    }
     if (Value != "")
-    {
         ui->tabWidget->setTabText(ui->tabWidget->currentIndex(),Value);
-    }
     Model->select();
     ui->tableView->setModel(Model);
     ui->tableView->resizeRowsToContents();
@@ -387,12 +383,12 @@ void TotalSincrono::on_tableView_doubleClicked(const QModelIndex &index)
     {
         if (ui->tabWidget->tabText(a) == Refer)
         {
-        QMessageBox m;
-        if (Stilo == "A")
-            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr("Ya hay un objetivo abierto con el mismo nombre."));
-        m.exec();
-        return;
+            QMessageBox m;
+            if (Stilo == "A")
+                m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+            m.setText(tr("Ya hay un objetivo abierto con el mismo nombre."));
+            m.exec();
+            return;
         }
     }
     QString Referencia, Objetivo, Destino, Eliminar, Comprobar, Ocultos, Codigo, Id;

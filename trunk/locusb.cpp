@@ -92,7 +92,9 @@ void LocUsb::UsbInfo()
     {
         if (Lista.value(0) == "")
         {
-            QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+            QMessageBox m;
+            if (Stilo == "A")
+                m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
             m.setText(tr("Nada que procesar.<p>No hay nada en la ruta /media para procesar."));
             m.exec();
             return;
@@ -111,9 +113,11 @@ void LocUsb::UsbInfo()
                     Parte1 = Valor.value(a);
                     Value1 = Parte1.left(8);
                     Peso = getTalla(Parte1);
+                    Peso.replace(QRegExp("\\s+"), " ");
+                    Peso.trimmed();
+                    QStringList Final = Peso.split(" ");
                     Value4 = Parte1;
-                    Value5 = Peso.left(33).right(8).remove(" ");
-                    drakeSistema drake;
+                    Value5 = Final.value(1);
                     LabelOld = drake.getLabelOld(Value4);
                     LabelOld=LabelOld.remove("Volume label is ").remove(" ");
                     Value6 = LabelOld;
@@ -178,8 +182,10 @@ void LocUsb::on_pushButton_8_clicked()
     }
     else
     {
-        QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
-        m.setText(tr("No hay ningún USB seleccionado."));
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("No hay ningun USB seleccionado."));
         m.exec();
         return;
     }
@@ -191,26 +197,18 @@ QString LocUsb::getTalla(QString Peso)
     QStringList argumentosFree;
     QStringList argumentosGrep;
     QByteArray Total;
-
     procesoFree=new QProcess(this);
     procesoGrep=new QProcess(this);
-
     argumentosFree << "--block-size=G" << ""+Peso+"";
     argumentosGrep << ""+Peso+"";
-
     procesoFree->setStandardOutputProcess(procesoGrep);
-
     procesoFree->start("df", argumentosFree);
     procesoGrep->start("grep", argumentosGrep);
-
     if (! procesoGrep->waitForStarted())
         return QString("");
-
     procesoFree->waitForFinished();
     procesoGrep->waitForFinished();
-
     Total = procesoGrep->readAllStandardOutput();
-
     delete procesoFree;
     delete procesoGrep;
     QString res = QString(Total);

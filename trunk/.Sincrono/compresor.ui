@@ -957,13 +957,13 @@
       <item row="1" column="7">
        <widget class="QPushButton" name="pushButton_8">
         <property name="toolTip">
-         <string>Descomprimr solo los archivos seleccionados</string>
+         <string>Descomprimir solo los archivos seleccionados</string>
         </property>
         <property name="statusTip">
-         <string>Descomprimr solo los archivos seleccionados</string>
+         <string>Descomprimir solo los archivos seleccionados</string>
         </property>
         <property name="whatsThis">
-         <string>Descomprimr solo los archivos seleccionados</string>
+         <string>Descomprimir solo los archivos seleccionados</string>
         </property>
         <property name="text">
          <string>Descomprimir seleccionados</string>
@@ -1093,13 +1093,13 @@
          </sizepolicy>
         </property>
         <property name="toolTip">
-         <string>Descomprimr archivos</string>
+         <string>Descomprimir archivos</string>
         </property>
         <property name="statusTip">
-         <string>Descomprimr archivos</string>
+         <string>Descomprimir archivos</string>
         </property>
         <property name="whatsThis">
-         <string>Descomprimr archivos</string>
+         <string>Descomprimir archivos</string>
         </property>
         <property name="text">
          <string>Descomprimir todo</string>

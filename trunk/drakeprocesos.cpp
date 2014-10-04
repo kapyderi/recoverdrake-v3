@@ -126,72 +126,83 @@ void DrakeProcesos::finalizado (int exitCode, QProcess::ExitStatus exitStatus )
     {
         if (DatoRef != 3)
         {
-            if (exitStatus == QProcess::CrashExit)
-            {
-                system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'ERROR: El proceso termino inesperadamente.\'\"");
-                if (DatoTotal == 999)
-                {
-                    emit publicarDatos(tr("El proceso termino inesperadamente."));
-                }
-                else
-                {
-                    QMessageBox m;
-                    if (Stilo == "A")
-                        m.setStyleSheet("background-color: "+Fcantidad51+"; color: "+Fcantidad50+"; font-size: "+Fcantidad49+"pt; font-style: "+FDatoTalla+"; font-family: "+Fcantidad47+"; font-weight: "+FDatoNegro+"");
-                    m.setText(tr(QString::fromUtf8("<b>El proceso termino inesperadamente.<p>Se actualizaran procesos internos.<p>Se paciente...")));
-                    m.exec();
-                }
-            }
-            else if (exitCode != 0)
-            {
-                system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'PROBLEMA: El proceso no se ha realizado satisfactoriamente.\'\"");
-                if (DatoTotal == 999)
-                {
-                    emit publicarDatos(tr("El proceso no se ha realizado satisfactoriamente."));
-                }
-                else
-                {
-                    QMessageBox m;
-                    if (Stilo == "A")
-                        m.setStyleSheet("background-color: "+Fcantidad51+"; color: "+Fcantidad50+"; font-size: "+Fcantidad49+"pt; font-style: "+FDatoTalla+"; font-family: "+Fcantidad47+"; font-weight: "+FDatoNegro+"");
-                    m.setText(tr(QString::fromUtf8("<b>El proceso no se ha realizado satisfactoriamente.<p>Se actualizaran procesos internos.<p>Se paciente...")));
-                    m.exec();
-                }
-            }
+            if (DatoRef == 5)
+            {}
             else
             {
-                system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'OK: Proceso realizado correctamente.\'\"");
-                if (DatoTotal == 999)
+                if (DatoRef == 4)
                 {
-                    emit publicarDatos(tr("Proceso realizado correctamente."));
+                    if (exitStatus == QProcess::CrashExit)
+                    {
+                        system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'ERROR: El proceso termino inesperadamente.\'\"");
+                        emit publicarDatos(tr("El proceso termino inesperadamente."));
+                    }
+                    else if (exitCode != 0)
+                    {
+                        system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'PROBLEMA: El proceso no se ha realizado satisfactoriamente.\'\"");
+                        emit publicarDatos(tr("El proceso no se ha realizado satisfactoriamente."));
+                    }
+                    else
+                    {
+                        system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'OK: Proceso realizado correctamente.\'\"");
+                        emit publicarDatos(tr("Proceso realizado correctamente."));
+                    }
                 }
                 else
                 {
-                    QMessageBox m;
-                    if (Stilo == "A")
-                        m.setStyleSheet("background-color: "+Fcantidad51+"; color: "+Fcantidad50+"; font-size: "+Fcantidad49+"pt; font-style: "+FDatoTalla+"; font-family: "+Fcantidad47+"; font-weight: "+FDatoNegro+"");
-                    m.setText(tr(QString::fromUtf8("<b>Proceso realizado correctamente.<p>Se actualizarán procesos internos.<p>Se paciente...")));
-                    m.exec();
+                    if (exitStatus == QProcess::CrashExit)
+                    {
+                        system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'ERROR: El proceso termino inesperadamente.\'\"");
+                        if (DatoTotal == 999)
+                            emit publicarDatos(tr("El proceso termino inesperadamente."));
+                        else
+                        {
+                            QMessageBox m;
+                            if (Stilo == "A")
+                                m.setStyleSheet("background-color: "+Fcantidad51+"; color: "+Fcantidad50+"; font-size: "+Fcantidad49+"pt; font-style: "+FDatoTalla+"; font-family: "+Fcantidad47+"; font-weight: "+FDatoNegro+"");
+                            m.setText(tr(QString::fromUtf8("<b>El proceso termino inesperadamente.<p>Se actualizaran procesos internos.<p>Se paciente...")));
+                            m.exec();
+                        }
+                    }
+                    else if (exitCode != 0)
+                    {
+                        system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'PROBLEMA: El proceso no se ha realizado satisfactoriamente.\'\"");
+                        if (DatoTotal == 999)
+                            emit publicarDatos(tr("El proceso no se ha realizado satisfactoriamente."));
+                        else
+                        {
+                            QMessageBox m;
+                            if (Stilo == "A")
+                                m.setStyleSheet("background-color: "+Fcantidad51+"; color: "+Fcantidad50+"; font-size: "+Fcantidad49+"pt; font-style: "+FDatoTalla+"; font-family: "+Fcantidad47+"; font-weight: "+FDatoNegro+"");
+                            m.setText(tr(QString::fromUtf8("<b>El proceso no se ha realizado satisfactoriamente.<p>Se actualizaran procesos internos.<p>Se paciente...")));
+                            m.exec();
+                        }
+                    }
+                    else
+                    {
+                        system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'OK: Proceso realizado correctamente.\'\"");
+                        if (DatoTotal == 999)
+                            emit publicarDatos(tr("Proceso realizado correctamente."));
+                        else
+                        {
+                            QMessageBox m;
+                            if (Stilo == "A")
+                                m.setStyleSheet("background-color: "+Fcantidad51+"; color: "+Fcantidad50+"; font-size: "+Fcantidad49+"pt; font-style: "+FDatoTalla+"; font-family: "+Fcantidad47+"; font-weight: "+FDatoNegro+"");
+                            m.setText(tr(QString::fromUtf8("<b>Proceso realizado correctamente.<p>Se actualizarán procesos internos.<p>Se paciente...")));
+                            m.exec();
+                        }
+                    }
                 }
             }
         }
         else
         {
             if (exitStatus == QProcess::CrashExit)
-            {
                 system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'ERROR: El proceso termino inesperadamente.\'\"");
-                emit publicarDatos(tr("El proceso termino inesperadamente."));
-            }
             else if (exitCode != 0)
-            {
                 system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'PROBLEMA: El proceso no se ha realizado satisfactoriamente.\'\"");
-                emit publicarDatos(tr("El proceso no se ha realizado satisfactoriamente."));
-            }
             else
-            {
                 system("su - "+user+" -c \"/usr/bin/notify-send -i /usr/share/icons/gnome/32x32/status/important.png \'(RecoverDrake)...\' \'OK: Proceso realizado correctamente.\'\"");
-                emit publicarDatos(tr("Proceso realizado correctamente."));
-            }
         }
     }
     this->iniciarProceso();

@@ -16,6 +16,11 @@
     <height>408</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>7</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Configurar detalles</string>
   </property>

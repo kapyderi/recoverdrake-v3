@@ -204,9 +204,7 @@ void urpmi::on_pushButton_14_clicked()
                     QString verlo=QString::fromUtf8(Datos.value(a));
                     int pos1 = verlo.indexOf(Value0, 0);
                     if (pos1 != -1)
-                    {
                         Value1 = tr("Si");
-                    }                    
                 }
             }
                 for(int b=0;b<DatosUp.count();b++)
@@ -214,9 +212,7 @@ void urpmi::on_pushButton_14_clicked()
                     QString verlo1=QString::fromUtf8(DatosUp.value(b));
                     int pos2 = verlo1.indexOf(Value0, 0);
                     if (pos2 != -1)
-                    {
                         Value3 = tr("Si");
-                    }
                 }
                 QTableWidgetItem *item1, *item2, *item3, *item4, *item5;
                 item1=new QTableWidgetItem;

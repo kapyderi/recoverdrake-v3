@@ -240,6 +240,7 @@ ConversorUD::ConversorUD(QWidget *parent) :
     ui->lineEdit_159->installEventFilter(this);
     this->installEventFilter(this);
     QFuture<void> f1 = QtConcurrent::run(this, &ConversorUD::Divisa);
+    Q_UNUSED(f1);
 }
 
 ConversorUD::~ConversorUD()

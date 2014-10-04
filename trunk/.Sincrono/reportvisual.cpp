@@ -600,7 +600,7 @@ void ReportVisual::on_actionGuardar_en_BD_triggered()
     SaveToBDFrm frm(this);
     frm.Valor("0","","");
     if(frm.exec() == QDialog::Accepted)
-    {
+    {        
         QString error = "";
         QString nombre = frm.nombre;
         QString desc = frm.desc;

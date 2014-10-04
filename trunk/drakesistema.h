@@ -75,6 +75,7 @@ public:
     QString user;
     QString dist;
     QString getMAC(QString Tipo);
+    QString getWhoami();
 
 };
 

@@ -47,6 +47,9 @@
     <addaction name="actionGuardar"/>
     <addaction name="actionVista_Previa"/>
     <addaction name="separator"/>
+    <addaction name="actionAbrir_desde_BD"/>
+    <addaction name="actionGuardar_en_BD"/>
+    <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
    <widget class="QMenu" name="menuInsertar">
@@ -63,6 +66,7 @@
     <addaction name="actionCampo_Relacional"/>
     <addaction name="actionCodeBar"/>
     <addaction name="actionParametro"/>
+    <addaction name="actionAcumulador"/>
    </widget>
    <widget class="QMenu" name="menuHerramientas">
     <property name="title">
@@ -112,6 +116,7 @@
    <addaction name="actionCampo_Relacional"/>
    <addaction name="actionCodeBar"/>
    <addaction name="actionParametro"/>
+   <addaction name="actionAcumulador"/>
    <addaction name="separator"/>
    <addaction name="actionDestruir_bloque"/>
    <addaction name="actionBlock"/>
@@ -137,10 +142,14 @@
     <bool>true</bool>
    </attribute>
    <addaction name="actionNuevo"/>
+   <addaction name="separator"/>
    <addaction name="actionAbrir"/>
    <addaction name="actionGuardar"/>
-   <addaction name="actionVista_Previa"/>
    <addaction name="separator"/>
+   <addaction name="actionAbrir_desde_BD"/>
+   <addaction name="actionGuardar_en_BD"/>
+   <addaction name="separator"/>
+   <addaction name="actionVista_Previa"/>
    <addaction name="actionConfigurar_modelo"/>
    <addaction name="actionMostrar_ocultar_lista_de_campos"/>
   </widget>
@@ -598,6 +607,48 @@
    </property>
    <property name="toolTip">
     <string>Parametro</string>
+   </property>
+  </action>
+  <action name="actionAcumulador">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/ccm3.png</normaloff>:/Imagenes/ccm3.png</iconset>
+   </property>
+   <property name="text">
+    <string>Acumulador</string>
+   </property>
+   <property name="toolTip">
+    <string>Acumulador</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+K</string>
+   </property>
+  </action>
+  <action name="actionGuardar_en_BD">
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/save_db.png</normaloff>:/Imagenes/save_db.png</iconset>
+   </property>
+   <property name="text">
+    <string>Guardar en BD</string>
+   </property>
+   <property name="toolTip">
+    <string>Guardar en BD</string>
+   </property>
+  </action>
+  <action name="actionAbrir_desde_BD">
+   <property name="icon">
+    <iconset resource="recoverdrake.qrc">
+     <normaloff>:/Imagenes/upload_db.png</normaloff>:/Imagenes/upload_db.png</iconset>
+   </property>
+   <property name="text">
+    <string>Abrir desde BD</string>
+   </property>
+   <property name="toolTip">
+    <string>Abrir desde BD</string>
    </property>
   </action>
  </widget>

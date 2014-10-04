@@ -56,3 +56,9 @@ void Separador::on_pushButton_clicked()
     }
     close();
 }
+
+void Separador::on_pushButton_2_clicked()
+{
+    this->SaltoDato="Cancelar";
+    close();
+}

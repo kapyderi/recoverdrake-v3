@@ -27,6 +27,15 @@
     <layout class="QGridLayout" name="gridLayout_4">
      <item row="0" column="0">
       <widget class="QPushButton" name="pushButton_6">
+       <property name="toolTip">
+        <string>Limpiar datos para introducir nuevos</string>
+       </property>
+       <property name="statusTip">
+        <string>Limpiar datos para introducir nuevos</string>
+       </property>
+       <property name="whatsThis">
+        <string>Limpiar datos para introducir nuevos</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 font: bold</string>
@@ -48,6 +57,15 @@ font: bold</string>
      </item>
      <item row="0" column="1">
       <widget class="QPushButton" name="pushButton">
+       <property name="toolTip">
+        <string>Inserccion de nueva clave encriptada</string>
+       </property>
+       <property name="statusTip">
+        <string>Inserccion de nueva clave encriptada</string>
+       </property>
+       <property name="whatsThis">
+        <string>Inserccion de nueva clave encriptada</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 font: bold</string>
@@ -69,6 +87,15 @@ font: bold</string>
      </item>
      <item row="0" column="2">
       <widget class="QPushButton" name="pushButton_2">
+       <property name="toolTip">
+        <string>Modificacion de clave encriptada</string>
+       </property>
+       <property name="statusTip">
+        <string>Modificacion de clave encriptada</string>
+       </property>
+       <property name="whatsThis">
+        <string>Modificacion de clave encriptada</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 font: bold</string>
@@ -90,6 +117,15 @@ font: bold</string>
      </item>
      <item row="0" column="3">
       <widget class="QPushButton" name="pushButton_3">
+       <property name="toolTip">
+        <string>Eliminacion de clave encriptada</string>
+       </property>
+       <property name="statusTip">
+        <string>Eliminacion de clave encriptada</string>
+       </property>
+       <property name="whatsThis">
+        <string>Eliminacion de clave encriptada</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 font: bold</string>
@@ -111,6 +147,15 @@ font: bold</string>
      </item>
      <item row="0" column="4">
       <widget class="QPushButton" name="pushButton_11">
+       <property name="toolTip">
+        <string>Vacia completamente toda la base de datos del usuario, no del resto de usuarios</string>
+       </property>
+       <property name="statusTip">
+        <string>Vacia completamente toda la base de datos del usuario, no del resto de usuarios</string>
+       </property>
+       <property name="whatsThis">
+        <string>Vacia completamente toda la base de datos del usuario, no del resto de usuarios</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 font: bold</string>
@@ -135,12 +180,21 @@ font: bold</string>
        <property name="enabled">
         <bool>true</bool>
        </property>
+       <property name="toolTip">
+        <string>Imprimir listado de claves del usuario activo</string>
+       </property>
+       <property name="statusTip">
+        <string>Imprimir listado de claves del usuario activo</string>
+       </property>
+       <property name="whatsThis">
+        <string>Imprimir listado de claves del usuario activo</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 font: bold</string>
        </property>
        <property name="text">
-        <string>Imprimir</string>
+        <string>Imprimir/Enviar</string>
        </property>
        <property name="icon">
         <iconset resource="recoverdrake.qrc">
@@ -156,6 +210,15 @@ font: bold</string>
      </item>
      <item row="0" column="6">
       <widget class="QPushButton" name="pushButton_12">
+       <property name="toolTip">
+        <string>Exportar claves del usuario activo a archivo compatible</string>
+       </property>
+       <property name="statusTip">
+        <string>Exportar claves del usuario activo a archivo compatible</string>
+       </property>
+       <property name="whatsThis">
+        <string>Exportar claves del usuario activo a archivo compatible</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 font: bold</string>
@@ -177,6 +240,15 @@ font: bold</string>
      </item>
      <item row="0" column="7">
       <widget class="QPushButton" name="pushButton_5">
+       <property name="toolTip">
+        <string>Importar claves del usuario activo desde archivo compatible</string>
+       </property>
+       <property name="statusTip">
+        <string>Importar claves del usuario activo desde archivo compatible</string>
+       </property>
+       <property name="whatsThis">
+        <string>Importar claves del usuario activo desde archivo compatible</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 font: bold</string>
@@ -208,6 +280,15 @@ font: bold</string>
          <height>23</height>
         </size>
        </property>
+       <property name="toolTip">
+        <string>Seleccionar Registro anterior</string>
+       </property>
+       <property name="statusTip">
+        <string>Seleccionar Registro anterior</string>
+       </property>
+       <property name="whatsThis">
+        <string>Seleccionar Registro anterior</string>
+       </property>
        <property name="text">
         <string/>
        </property>
@@ -230,6 +311,15 @@ font: bold</string>
          <width>31</width>
          <height>23</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Seleccionar Registro posterior</string>
+       </property>
+       <property name="statusTip">
+        <string>Seleccionar Registro posterior</string>
+       </property>
+       <property name="whatsThis">
+        <string>Seleccionar Registro posterior</string>
        </property>
        <property name="text">
         <string/>
@@ -254,10 +344,28 @@ font: bold</string>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="toolTip">
+        <string>Se filtra por el texto introducido y el tipo de filtro seleccionado</string>
+       </property>
+       <property name="statusTip">
+        <string>Se filtra por el texto introducido y el tipo de filtro seleccionado</string>
+       </property>
+       <property name="whatsThis">
+        <string>Se filtra por el texto introducido y el tipo de filtro seleccionado</string>
+       </property>
       </widget>
      </item>
      <item row="0" column="4">
       <widget class="QCheckBox" name="checkBox_22">
+       <property name="toolTip">
+        <string>Ordenar por el tipo que haya en el filtro</string>
+       </property>
+       <property name="statusTip">
+        <string>Ordenar por el tipo que haya en el filtro</string>
+       </property>
+       <property name="whatsThis">
+        <string>Ordenar por el tipo que haya en el filtro</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 font: bold</string>
@@ -269,6 +377,15 @@ font: bold</string>
      </item>
      <item row="0" column="6">
       <widget class="QPushButton" name="pushButton_4">
+       <property name="toolTip">
+        <string>Nos vamos...</string>
+       </property>
+       <property name="statusTip">
+        <string>Nos vamos...</string>
+       </property>
+       <property name="whatsThis">
+        <string>Nos vamos...</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 font: bold</string>
@@ -290,6 +407,15 @@ font: bold</string>
      </item>
      <item row="0" column="3">
       <widget class="QComboBox" name="comboBox">
+       <property name="toolTip">
+        <string>Filtro de registros mostrados</string>
+       </property>
+       <property name="statusTip">
+        <string>Filtro de registros mostrados</string>
+       </property>
+       <property name="whatsThis">
+        <string>Filtro de registros mostrados</string>
+       </property>
        <property name="styleSheet">
         <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 font: bold</string>
@@ -390,7 +516,7 @@ font: bold</string>
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page_3">
       <layout class="QGridLayout" name="gridLayout_10">
@@ -477,6 +603,15 @@ font: bold</string>
                 <bold>true</bold>
                </font>
               </property>
+              <property name="toolTip">
+               <string>Clave de usuario</string>
+              </property>
+              <property name="statusTip">
+               <string>Clave de usuario</string>
+              </property>
+              <property name="whatsThis">
+               <string>Clave de usuario</string>
+              </property>
              </widget>
             </item>
             <item row="0" column="3">
@@ -487,6 +622,15 @@ font: bold</string>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
+              </property>
+              <property name="toolTip">
+               <string>Nombre de usuario</string>
+              </property>
+              <property name="statusTip">
+               <string>Nombre de usuario</string>
+              </property>
+              <property name="whatsThis">
+               <string>Nombre de usuario</string>
               </property>
              </widget>
             </item>
@@ -532,6 +676,15 @@ font: bold</string>
                 <height>16777215</height>
                </size>
               </property>
+              <property name="toolTip">
+               <string>Sin informacion disponible</string>
+              </property>
+              <property name="statusTip">
+               <string>Sin informacion disponible</string>
+              </property>
+              <property name="whatsThis">
+               <string>Sin informacion disponible</string>
+              </property>
               <property name="styleSheet">
                <string notr="true">color: rgb(0, 0, 255);
 background-color: rgb(255, 251, 239);</string>
@@ -558,6 +711,15 @@ background-color: rgb(255, 251, 239);</string>
                 <height>16777215</height>
                </size>
               </property>
+              <property name="toolTip">
+               <string>Sin informacion disponible</string>
+              </property>
+              <property name="statusTip">
+               <string>Sin informacion disponible</string>
+              </property>
+              <property name="whatsThis">
+               <string>Sin informacion disponible</string>
+              </property>
               <property name="styleSheet">
                <string notr="true">color: rgb(0, 0, 255);
 background-color: rgb(255, 251, 239);</string>
@@ -583,6 +745,15 @@ background-color: rgb(255, 251, 239);</string>
                 <width>45</width>
                 <height>16777215</height>
                </size>
+              </property>
+              <property name="toolTip">
+               <string>Sin informacion disponible</string>
+              </property>
+              <property name="statusTip">
+               <string>Sin informacion disponible</string>
+              </property>
+              <property name="whatsThis">
+               <string>Sin informacion disponible</string>
               </property>
               <property name="styleSheet">
                <string notr="true">color: rgb(0, 0, 255);
@@ -616,6 +787,15 @@ background-color: rgb(255, 251, 239);</string>
                 <width>60</width>
                 <height>16777215</height>
                </size>
+              </property>
+              <property name="toolTip">
+               <string>Numero de identificacion de clave</string>
+              </property>
+              <property name="statusTip">
+               <string>Numero de identificacion de clave</string>
+              </property>
+              <property name="whatsThis">
+               <string>Numero de identificacion de clave</string>
               </property>
               <property name="styleSheet">
                <string notr="true">color: rgb(0, 0, 255);
@@ -658,6 +838,15 @@ background-color: rgb(255, 251, 239);</string>
               <layout class="QGridLayout" name="gridLayout">
                <item row="0" column="0">
                 <widget class="QRadioButton" name="radioButton">
+                 <property name="toolTip">
+                  <string>Datos no encriptados.</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Datos no encriptados.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Datos no encriptados.</string>
+                 </property>
                  <property name="text">
                   <string>Sin encriptar</string>
                  </property>
@@ -678,6 +867,15 @@ background-color: rgb(255, 251, 239);</string>
                </item>
                <item row="0" column="2">
                 <widget class="QRadioButton" name="radioButton_2">
+                 <property name="toolTip">
+                  <string>Datos encriptados de forma sencilla.</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Datos encriptados de forma sencilla.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Datos encriptados de forma sencilla.</string>
+                 </property>
                  <property name="text">
                   <string>Encriptacion simple (Por defecto)</string>
                  </property>
@@ -698,6 +896,15 @@ background-color: rgb(255, 251, 239);</string>
                </item>
                <item row="0" column="4">
                 <widget class="QRadioButton" name="radioButton_3">
+                 <property name="toolTip">
+                  <string>Datos encriptados de forma doble.</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Datos encriptados de forma doble.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Datos encriptados de forma doble.</string>
+                 </property>
                  <property name="text">
                   <string>Encriptacion doble</string>
                  </property>
@@ -718,6 +925,15 @@ background-color: rgb(255, 251, 239);</string>
                </item>
                <item row="0" column="6">
                 <widget class="QRadioButton" name="radioButton_4">
+                 <property name="toolTip">
+                  <string>Datos encriptados de forma triple.</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Datos encriptados de forma triple.</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Datos encriptados de forma triple.</string>
+                 </property>
                  <property name="text">
                   <string>Encriptacion triple</string>
                  </property>
@@ -768,6 +984,15 @@ background-color: rgb(255, 251, 239);</string>
                </item>
                <item row="0" column="1">
                 <widget class="QLineEdit" name="lineEdit_9">
+                 <property name="toolTip">
+                  <string>Muestra del dato de usuario encriptado</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Muestra del dato de usuario encriptado</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Muestra del dato de usuario encriptado</string>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 255);
 background-color: rgb(255, 251, 239);</string>
@@ -779,6 +1004,15 @@ background-color: rgb(255, 251, 239);</string>
                </item>
                <item row="0" column="3">
                 <widget class="QLineEdit" name="lineEdit_10">
+                 <property name="toolTip">
+                  <string>Muestra del dato clave encriptado</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Muestra del dato clave encriptado</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Muestra del dato clave encriptado</string>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 255);
 background-color: rgb(255, 251, 239);</string>
@@ -796,7 +1030,17 @@ background-color: rgb(255, 251, 239);</string>
           <item row="1" column="0">
            <layout class="QGridLayout" name="gridLayout_6">
             <item row="0" column="3">
-             <widget class="QLineEdit" name="lineEdit_6"/>
+             <widget class="QLineEdit" name="lineEdit_6">
+              <property name="toolTip">
+               <string>Detalle del tipo seleccionado. En caso de web, la direccion web</string>
+              </property>
+              <property name="statusTip">
+               <string>Detalle del tipo seleccionado. En caso de web, la direccion web</string>
+              </property>
+              <property name="whatsThis">
+               <string>Detalle del tipo seleccionado. En caso de web, la direccion web</string>
+              </property>
+             </widget>
             </item>
             <item row="0" column="2">
              <widget class="QLabel" name="label_7">
@@ -813,6 +1057,15 @@ background-color: rgb(255, 251, 239);</string>
             </item>
             <item row="0" column="4">
              <widget class="QPushButton" name="pushButton_10">
+              <property name="toolTip">
+               <string>Acceder a internet para claves de tipo web</string>
+              </property>
+              <property name="statusTip">
+               <string>Acceder a internet para claves de tipo web</string>
+              </property>
+              <property name="whatsThis">
+               <string>Acceder a internet para claves de tipo web</string>
+              </property>
               <property name="text">
                <string>Abrir enlace</string>
               </property>
@@ -836,6 +1089,15 @@ background-color: rgb(255, 251, 239);</string>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
+              </property>
+              <property name="toolTip">
+               <string>Tipo de soporte de clave</string>
+              </property>
+              <property name="statusTip">
+               <string>Tipo de soporte de clave</string>
+              </property>
+              <property name="whatsThis">
+               <string>Tipo de soporte de clave</string>
               </property>
               <item>
                <property name="text">
@@ -995,6 +1257,15 @@ background-color: rgb(255, 251, 239);</string>
                 <bold>true</bold>
                </font>
               </property>
+              <property name="toolTip">
+               <string>Clave encriptada</string>
+              </property>
+              <property name="statusTip">
+               <string>Clave encriptada</string>
+              </property>
+              <property name="whatsThis">
+               <string>Clave encriptada</string>
+              </property>
              </widget>
             </item>
             <item row="0" column="1">
@@ -1005,6 +1276,15 @@ background-color: rgb(255, 251, 239);</string>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
+              </property>
+              <property name="toolTip">
+               <string>Datos de usuario encriptado</string>
+              </property>
+              <property name="statusTip">
+               <string>Datos de usuario encriptado</string>
+              </property>
+              <property name="whatsThis">
+               <string>Datos de usuario encriptado</string>
               </property>
              </widget>
             </item>
@@ -1021,6 +1301,15 @@ background-color: rgb(255, 251, 239);</string>
                 <width>35</width>
                 <height>16777215</height>
                </size>
+              </property>
+              <property name="toolTip">
+               <string>Primer dato necesario para desencriptar</string>
+              </property>
+              <property name="statusTip">
+               <string>Primer dato necesario para desencriptar</string>
+              </property>
+              <property name="whatsThis">
+               <string>Primer dato necesario para desencriptar</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -1055,6 +1344,15 @@ background-color: rgb(255, 251, 239);</string>
                 <height>16777215</height>
                </size>
               </property>
+              <property name="toolTip">
+               <string>Segundo dato necesario para desencriptar</string>
+              </property>
+              <property name="statusTip">
+               <string>Segundo dato necesario para desencriptar</string>
+              </property>
+              <property name="whatsThis">
+               <string>Segundo dato necesario para desencriptar</string>
+              </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
               </property>
@@ -1073,6 +1371,15 @@ background-color: rgb(255, 251, 239);</string>
                 <width>45</width>
                 <height>16777215</height>
                </size>
+              </property>
+              <property name="toolTip">
+               <string>Tercer dato necesario para desencriptar</string>
+              </property>
+              <property name="statusTip">
+               <string>Tercer dato necesario para desencriptar</string>
+              </property>
+              <property name="whatsThis">
+               <string>Tercer dato necesario para desencriptar</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -1111,7 +1418,17 @@ background-color: rgb(255, 251, 239);</string>
              </widget>
             </item>
             <item row="0" column="3">
-             <widget class="QLineEdit" name="lineEdit_17"/>
+             <widget class="QLineEdit" name="lineEdit_17">
+              <property name="toolTip">
+               <string>Detalle del tipo seleccionado. En caso de web, la direccion web</string>
+              </property>
+              <property name="statusTip">
+               <string>Detalle del tipo seleccionado. En caso de web, la direccion web</string>
+              </property>
+              <property name="whatsThis">
+               <string>Detalle del tipo seleccionado. En caso de web, la direccion web</string>
+              </property>
+             </widget>
             </item>
             <item row="0" column="1">
              <widget class="QComboBox" name="comboBox_3">
@@ -1121,6 +1438,15 @@ background-color: rgb(255, 251, 239);</string>
                 <weight>75</weight>
                 <bold>true</bold>
                </font>
+              </property>
+              <property name="toolTip">
+               <string>Tipo de soporte de clave</string>
+              </property>
+              <property name="statusTip">
+               <string>Tipo de soporte de clave</string>
+              </property>
+              <property name="whatsThis">
+               <string>Tipo de soporte de clave</string>
               </property>
               <item>
                <property name="text">
@@ -1209,6 +1535,15 @@ background-color: rgb(255, 251, 239);</string>
                </item>
                <item row="0" column="1">
                 <widget class="QLineEdit" name="lineEdit_18">
+                 <property name="toolTip">
+                  <string>Dato de usuario desencriptado</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Dato de usuario desencriptado</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Dato de usuario desencriptado</string>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 255);
 background-color: rgb(255, 251, 239);</string>
@@ -1220,6 +1555,15 @@ background-color: rgb(255, 251, 239);</string>
                </item>
                <item row="0" column="3">
                 <widget class="QLineEdit" name="lineEdit_19">
+                 <property name="toolTip">
+                  <string>Dato de clave desencriptada</string>
+                 </property>
+                 <property name="statusTip">
+                  <string>Dato de clave desencriptada</string>
+                 </property>
+                 <property name="whatsThis">
+                  <string>Dato de clave desencriptada</string>
+                 </property>
                  <property name="styleSheet">
                   <string notr="true">color: rgb(0, 0, 255);
 background-color: rgb(255, 251, 239);</string>
@@ -1243,6 +1587,15 @@ background-color: rgb(255, 251, 239);</string>
    </item>
    <item row="3" column="0">
     <widget class="QTableView" name="tableView">
+     <property name="toolTip">
+      <string>Lista de claves</string>
+     </property>
+     <property name="statusTip">
+      <string>Lista de claves</string>
+     </property>
+     <property name="whatsThis">
+      <string>Lista de claves</string>
+     </property>
      <property name="styleSheet">
       <string notr="true">font: 7pt &quot;Sans Serif&quot;;
 font: bold</string>
@@ -1283,6 +1636,15 @@ font: bold</string>
        <layout class="QGridLayout" name="gridLayout_8">
         <item row="0" column="0">
          <widget class="QRadioButton" name="radioButton_5">
+          <property name="toolTip">
+           <string>Opcion de encriptado de claves</string>
+          </property>
+          <property name="statusTip">
+           <string>Opcion de encriptado de claves</string>
+          </property>
+          <property name="whatsThis">
+           <string>Opcion de encriptado de claves</string>
+          </property>
           <property name="text">
            <string>Encriptar</string>
           </property>
@@ -1290,6 +1652,15 @@ font: bold</string>
         </item>
         <item row="0" column="1">
          <widget class="QRadioButton" name="radioButton_6">
+          <property name="toolTip">
+           <string>Opcion de desencriptado de claves</string>
+          </property>
+          <property name="statusTip">
+           <string>Opcion de desencriptado de claves</string>
+          </property>
+          <property name="whatsThis">
+           <string>Opcion de desencriptado de claves</string>
+          </property>
           <property name="text">
            <string>Desencriptar</string>
           </property>

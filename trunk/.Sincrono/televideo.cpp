@@ -256,6 +256,7 @@ bool Televideo::event( QEvent* event )
 
 bool Televideo::eventFilter(QObject *obj, QEvent *event)
 {
+    Q_UNUSED(obj);
     if (event->type() == QEvent::MouseMove)
     {
         QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
@@ -267,7 +268,7 @@ bool Televideo::eventFilter(QObject *obj, QEvent *event)
             Contador->start(2000);
         }
     }
-    if (event->type() == QEvent::KeyPress)
+    if (event->type() == QEvent::KeyRelease)
     {
         QKeyEvent* keyEvent = static_cast<QKeyEvent*>(event);
         if (keyEvent->key() == Qt::Key_F1)

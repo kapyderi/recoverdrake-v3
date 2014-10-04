@@ -211,13 +211,13 @@ void Backup::on_pushButton_2_clicked()
          return;
     QString fileName = fileNameDestino.replace(" ", "\\ ").replace("&","\\&").replace("'","\\'").replace("(","\\(").replace(")","\\)").replace(".sqlite","");
     system("mkdir -pv /usr/share/RecoverDrake/backup/");
-    QProgressDialog progress(tr("Creando copia... Espera por favor"), tr("Cancelar"), 0, 50);
+    QProgressDialog progress(tr("Creando copia... Espera por favor"), tr("Cancelar"), 0, 52);
     if (Stilo == "A")
         progress.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
     progress.setWindowModality(Qt::WindowModal);
     progress.show();
     QTest::qWait(20);
-    for(int i=0;i<50;i++ )
+    for(int i=0;i<52;i++ )
     {
         progress.setValue(i);
         if (progress.wasCanceled())
@@ -353,6 +353,16 @@ void Backup::on_pushButton_2_clicked()
                 else if (ui->checkBox_107->isChecked() == false)
                     LMail="No";
                 in << "LMail: "+LMail+"" << "\n";
+                if (ui->checkBox_95->isChecked() == true)
+                    LIdES="Si";
+                else if (ui->checkBox_95->isChecked() == false)
+                    LIdES="No";
+                in << "LIdES: "+LIdES+"" << "\n";
+                if (ui->checkBox_96->isChecked() == true)
+                    LIdEN="Si";
+                else if (ui->checkBox_96->isChecked() == false)
+                    LIdEN="No";
+                in << "LIdEN: "+LIdEN+"" << "\n";
             }
             else if (ui->radioButton->isChecked() == true)
             {
@@ -535,6 +545,8 @@ void Backup::on_pushButton_2_clicked()
                 in << "LBic: No" << "\n";                
                 in << "LReport: No" << "\n";
                 in << "LMail: No" << "\n";
+                in << "LIdES: No" << "\n";
+                in << "LIdEN: No" << "\n";
             }
             else if (ui->radioButton_3->isChecked() == true)
             {
@@ -788,6 +800,16 @@ void Backup::on_pushButton_2_clicked()
                 else if (ui->checkBox_107->isChecked() == false)
                     LMail="No";
                 in << "LMail: "+LMail+"" << "\n";
+                if (ui->checkBox_95->isChecked() == true)
+                    LIdES="Si";
+                else if (ui->checkBox_95->isChecked() == false)
+                    LIdES="No";
+                in << "LIdES: "+LIdES+"" << "\n";
+                if (ui->checkBox_96->isChecked() == true)
+                    LIdEN="Si";
+                else if (ui->checkBox_96->isChecked() == false)
+                    LIdEN="No";
+                in << "LIdEN: "+LIdEN+"" << "\n";
             }
             file.close();
         }
@@ -2640,9 +2662,113 @@ void Backup::on_pushButton_2_clicked()
                     setUpdatesEnabled(true);
                 }
             }
+            if (i == 50)
+            {
+                if (LIdES=="Si")
+                {
+                    QSqlQuery wlistanegr(db);
+                    wlistanegr.exec("SELECT COUNT(id) as Cantidad FROM IdiomaES");
+                    int cuenta, comienzo;
+                    wlistanegr.first();
+                    cuenta = wlistanegr.value(0).toInt();
+                    QSqlQuery wlistanegra(db);
+                    wlistanegra.exec("SELECT Clave,Idioma FROM IdiomaES");
+                    setUpdatesEnabled(false);
+                    QProgressDialog progressMenu(tr("Actualizando Listado de Idiomas (Espanol)... Espera por favor"), tr("Cancelar"), 0, cuenta);
+                    if (Stilo == "A")
+                        progressMenu.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                    progressMenu.show();
+                    QTest::qWait(20);
+                    comienzo=0;
+                    int cantidad=1;
+                    while(wlistanegra.next())
+                    {
+                         if (cantidad == 1)
+                             DBackup.transaction();
+                         progressMenu.setValue(comienzo++);
+                         if (progressMenu.wasCanceled())
+                             break;
+                         QString DatDecimal = wlistanegra.value(0).toString();
+                         QString DatUnicode = wlistanegra.value(1).toString();
+                         QSqlQuery RecDat(DBackup);
+                         RecDat.exec("SELECT Clave, Idioma FROM IdiomaES WHERE Clave='"+DatDecimal+"'");
+                         RecDat.first();
+                         if (RecDat.isSelect())
+                         {
+                             QSqlQuery Wdark(DBackup);
+                             Wdark.prepare("INSERT INTO IdiomaES (Clave,Idioma)"
+                                           "VALUES (:Clave,:Idioma)");
+                             Wdark.bindValue(":Clave", DatDecimal);
+                             Wdark.bindValue(":Idioma", DatUnicode);
+                             Wdark.exec();
+                         }
+                         cantidad++;
+                         if (cantidad == 50)
+                         {
+                             cantidad=1;
+                             DBackup.commit();
+                         }
+                    }
+                    progressMenu.setValue(cuenta);
+                    DBackup.commit();
+                    setUpdatesEnabled(true);
+                }
+            }
+            if (i == 51)
+            {
+                if (LIdEN=="Si")
+                {
+                    QSqlQuery wlistanegr(db);
+                    wlistanegr.exec("SELECT COUNT(id) as Cantidad FROM IdiomaEN");
+                    int cuenta, comienzo;
+                    wlistanegr.first();
+                    cuenta = wlistanegr.value(0).toInt();
+                    QSqlQuery wlistanegra(db);
+                    wlistanegra.exec("SELECT Clave,Idioma FROM IdiomaEN");
+                    setUpdatesEnabled(false);
+                    QProgressDialog progressMenu(tr("Actualizando Listado de Idiomas (Ingles)... Espera por favor"), tr("Cancelar"), 0, cuenta);
+                    if (Stilo == "A")
+                        progressMenu.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                    progressMenu.show();
+                    QTest::qWait(20);
+                    comienzo=0;
+                    int cantidad=1;
+                    while(wlistanegra.next())
+                    {
+                         if (cantidad == 1)
+                             DBackup.transaction();
+                         progressMenu.setValue(comienzo++);
+                         if (progressMenu.wasCanceled())
+                             break;
+                         QString DatDecimal = wlistanegra.value(0).toString();
+                         QString DatUnicode = wlistanegra.value(1).toString();
+                         QSqlQuery RecDat(DBackup);
+                         RecDat.exec("SELECT Clave, Idioma FROM IdiomaEN WHERE Clave='"+DatDecimal+"'");
+                         RecDat.first();
+                         if (RecDat.isSelect())
+                         {
+                             QSqlQuery Wdark(DBackup);
+                             Wdark.prepare("INSERT INTO IdiomaEN (Clave,Idioma)"
+                                           "VALUES (:Clave,:Idioma)");
+                             Wdark.bindValue(":Clave", DatDecimal);
+                             Wdark.bindValue(":Idioma", DatUnicode);
+                             Wdark.exec();
+                         }
+                         cantidad++;
+                         if (cantidad == 50)
+                         {
+                             cantidad=1;
+                             DBackup.commit();
+                         }
+                    }
+                    progressMenu.setValue(cuenta);
+                    DBackup.commit();
+                    setUpdatesEnabled(true);
+                }
+            }
         }
     }
-    progress.setValue(50);
+    progress.setValue(52);
     DBackup.close();
     QMessageBox m;
     if (Stilo == "A")
@@ -3115,6 +3241,22 @@ void Backup::on_comboBox_currentIndexChanged(const QString &arg1)
             else if (Value == "No")
                 ui->checkBox_108->setChecked(false);
         }
+        if (i == 52)
+        {
+            Value = Value.remove("LIdES: ");
+            if (Value == "Si")
+                ui->checkBox_97->setChecked(true);
+            else if (Value == "No")
+                ui->checkBox_97->setChecked(false);
+        }
+        if (i == 53)
+        {
+            Value = Value.remove("LIdEN: ");
+            if (Value == "Si")
+                ui->checkBox_98->setChecked(true);
+            else if (Value == "No")
+                ui->checkBox_98->setChecked(false);
+        }
     }
 }
 
@@ -3158,6 +3300,10 @@ void Backup::on_pushButton_3_clicked()
             LReport="Si";
         if (ui->checkBox_108->isChecked() == true)
             LMail="Si";
+        if (ui->checkBox_97->isChecked() == true)
+            LIdES="Si";
+        if (ui->checkBox_98->isChecked() == true)
+            LIdEN="Si";
     }
     else if (ui->radioButton_4->isChecked() == true)
     {
@@ -3328,6 +3474,10 @@ void Backup::on_pushButton_3_clicked()
             LReport="Si";
         if (ui->checkBox_108->isChecked() == true)
             LMail="Si";
+        if (ui->checkBox_97->isChecked() == true)
+            LIdES="Si";
+        if (ui->checkBox_98->isChecked() == true)
+            LIdEN="Si";
     }
     DBackup = QSqlDatabase::addDatabase("QSQLITE","BACKUP");
     QString Ruta = ui->label_2->text().remove("Ruta: ");
@@ -3343,13 +3493,13 @@ void Backup::on_pushButton_3_clicked()
     }
     else
     {
-        QProgressDialog progress(tr("Recuperando copia... Espera por favor"), tr("Cancelar"), 0, 49);
+        QProgressDialog progress(tr("Recuperando copia... Espera por favor"), tr("Cancelar"), 0, 51);
         if (Stilo == "A")
             progress.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
         progress.setWindowModality(Qt::WindowModal);
         progress.show();
         QTest::qWait(20);
-        for(int i=0;i<49;i++ )
+        for(int i=0;i<51;i++ )
         {
             progress.setValue(i);
             if (progress.wasCanceled())
@@ -5183,8 +5333,116 @@ void Backup::on_pushButton_3_clicked()
                     setUpdatesEnabled(true);
                 }
             }
+            if (i == 49)
+            {
+                if (LIdES=="Si")
+                {
+                    QSqlQuery wlistanegr(DBackup);
+                    wlistanegr.exec("SELECT COUNT(id) as Cantidad FROM IdiomaES");
+                    int cuenta, comienzo;
+                    wlistanegr.first();
+                    cuenta = wlistanegr.value(0).toInt();
+                    QSqlQuery wlistanegra(DBackup);
+                    wlistanegra.exec("SELECT Clave, Idioma FROM IdiomaES");
+                    setUpdatesEnabled(false);
+                    QProgressDialog progressMenu(tr("Actualizando Listado de idiomas (Espanol)... Espera por favor"), tr("Cancelar"), 0, cuenta);
+                    if (Stilo == "A")
+                        progressMenu.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                    progressMenu.show();
+                    QTest::qWait(20);
+                    comienzo=0;
+                    int cantidad=1;
+                    while(wlistanegra.next())
+                    {
+                         if (cantidad == 1)
+                         {
+                             DB.transaction();
+                         }
+                         progressMenu.setValue(comienzo++);
+                         if (progressMenu.wasCanceled())
+                             break;
+                         QString DatDecimal = wlistanegra.value(0).toString();
+                         QString DatUnicode = wlistanegra.value(1).toString();
+                         QSqlQuery RecDat(DB);
+                         RecDat.exec("SELECT Clave, Idioma FROM IdiomaES WHERE Clave='"+DatDecimal+"'");
+                         RecDat.first();
+                         if (RecDat.isSelect())
+                         {
+                             QSqlQuery Wdark(DB);
+                             Wdark.prepare("INSERT INTO IdiomaES (Clave,Idioma)"
+                                           "VALUES (:Clave,:Idioma)");
+                             Wdark.bindValue(":Clave", DatDecimal);
+                             Wdark.bindValue(":Idioma", DatUnicode);
+                             Wdark.exec();
+                         }
+                         cantidad++;
+                         if (cantidad == 50)
+                         {
+                             cantidad=1;
+                             DB.commit();
+                         }
+                    }
+                    progressMenu.setValue(cuenta);
+                    DB.commit();
+                    setUpdatesEnabled(true);
+                }
+            }
+            if (i == 50)
+            {
+                if (LIdEN=="Si")
+                {
+                    QSqlQuery wlistanegr(DBackup);
+                    wlistanegr.exec("SELECT COUNT(id) as Cantidad FROM IdiomaEN");
+                    int cuenta, comienzo;
+                    wlistanegr.first();
+                    cuenta = wlistanegr.value(0).toInt();
+                    QSqlQuery wlistanegra(DBackup);
+                    wlistanegra.exec("SELECT Clave, Idioma FROM IdiomaEN");
+                    setUpdatesEnabled(false);
+                    QProgressDialog progressMenu(tr("Actualizando Listado de idiomas (Ingles)... Espera por favor"), tr("Cancelar"), 0, cuenta);
+                    if (Stilo == "A")
+                        progressMenu.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                    progressMenu.show();
+                    QTest::qWait(20);
+                    comienzo=0;
+                    int cantidad=1;
+                    while(wlistanegra.next())
+                    {
+                         if (cantidad == 1)
+                         {
+                             DB.transaction();
+                         }
+                         progressMenu.setValue(comienzo++);
+                         if (progressMenu.wasCanceled())
+                             break;
+                         QString DatDecimal = wlistanegra.value(0).toString();
+                         QString DatUnicode = wlistanegra.value(1).toString();
+                         QSqlQuery RecDat(DB);
+                         RecDat.exec("SELECT Clave, Idioma FROM IdiomaEN WHERE Clave='"+DatDecimal+"'");
+                         RecDat.first();
+                         if (RecDat.isSelect())
+                         {
+                             QSqlQuery Wdark(DB);
+                             Wdark.prepare("INSERT INTO IdiomaEN (Clave,Idioma)"
+                                           "VALUES (:Clave,:Idioma)");
+                             Wdark.bindValue(":Clave", DatDecimal);
+                             Wdark.bindValue(":Idioma", DatUnicode);
+                             Wdark.exec();
+                         }
+                         cantidad++;
+                         if (cantidad == 50)
+                         {
+                             cantidad=1;
+                             DB.commit();
+                         }
+                    }
+                    progressMenu.setValue(cuenta);
+                    DB.commit();
+                    setUpdatesEnabled(true);
+                }
+            }
         }
-        progress.setValue(49);
+        progress.setValue(51);
         DBackup.close();
         QMessageBox m;
         if (Stilo == "A")
@@ -5331,6 +5589,8 @@ void Backup::on_pushButton_5_clicked()
         ui->checkBox_104->setChecked(true);
         ui->checkBox_106->setChecked(true);
         ui->checkBox_107->setChecked(true);
+        ui->checkBox_97->setChecked(true);
+        ui->checkBox_98->setChecked(true);
         this->Comprobar();
         this->Comprobar1();
     }
@@ -5388,6 +5648,8 @@ void Backup::on_pushButton_7_clicked()
     ui->checkBox_93->setChecked(true);    
     ui->checkBox_105->setChecked(true);
     ui->checkBox_107->setChecked(true);
+    ui->checkBox_97->setChecked(true);
+    ui->checkBox_98->setChecked(true);
 }
 
 void Backup::on_pushButton_6_clicked()
@@ -5442,4 +5704,6 @@ void Backup::on_pushButton_6_clicked()
     ui->checkBox_93->setChecked(false);   
     ui->checkBox_105->setChecked(false);
     ui->checkBox_107->setChecked(false);
+    ui->checkBox_97->setChecked(false);
+    ui->checkBox_98->setChecked(false);
 }

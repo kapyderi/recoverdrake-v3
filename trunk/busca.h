@@ -6,6 +6,10 @@
 #include <QModelIndex>
 #include <QTimer>
 #include <QSqlDatabase>
+#include <QDir>
+#include "ayuda.h"
+
+class QComboBox;
 
 namespace Ui {
     class Busca;
@@ -46,9 +50,15 @@ private:
     QString cantidad51;
     QString Stilo;
     int CierreTotal;
-    int Opcion;
-    QString Peso();
+    int Opcion;    
     QString dato;
+    QDir currentDir;
+    QDir Directory;
+    QStringList findFiles(const QStringList &files, const QString &text);
+    void showFiles(const QStringList &files);
+    void createFilesTable();
+    void updateComboBox(QComboBox *comboBox);
+    Ayuda *ayuda;
 
 private slots:
     void on_pushButton_5_clicked();
@@ -65,6 +75,13 @@ private slots:
     void on_pushButton_6_clicked();
     void on_pushButton_7_clicked();
     void Menu();
+    void Comprobar1();
+    void on_pushButton_8_clicked();
+    void on_pushButton_9_clicked();
+    void openFileOfItem(int row, int column);
+    void Peso(QString dat);
+    void Exaustivo(QString valor);
+
 };
 
 #endif // BUSCA_H

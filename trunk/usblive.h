@@ -5,6 +5,7 @@
 #include <QTableWidgetItem>
 #include "drakeprocesos.h"
 #include <QSqlDatabase>
+#include "ayuda.h"
 
 namespace Ui {
     class UsbLive;
@@ -17,6 +18,14 @@ class UsbLive : public QDialog
 public:
     explicit UsbLive(QWidget *parent = 0);
     ~UsbLive();
+    void Value(QString valor);
+
+signals:
+    void Cerrar();
+
+protected:
+    virtual bool eventFilter(QObject *, QEvent *);
+    void closeEvent(QCloseEvent *event);
 
 private slots:
     void on_pushButton_23_clicked();
@@ -85,6 +94,86 @@ private slots:
     void tableClicked(int row, int column);
     void Enable();
     void Disabled();
+    void EstadoLinea();
+    void Disponibilidad(QString Valor);
+    void TipoArch(QString Valor);
+    void on_comboBox_11_currentIndexChanged(const QString &arg1);
+    void on_comboBox_12_currentIndexChanged(const QString &arg1);
+    void on_comboBox_13_currentIndexChanged(const QString &arg1);
+    void on_comboBox_14_currentIndexChanged(const QString &arg1);
+    void on_comboBox_15_currentIndexChanged(const QString &arg1);
+    void on_comboBox_16_currentIndexChanged(const QString &arg1);
+    void on_comboBox_17_currentIndexChanged(const QString &arg1);
+    void on_comboBox_18_currentIndexChanged(const QString &arg1);
+    void on_comboBox_19_currentIndexChanged(const QString &arg1);
+    void on_comboBox_20_currentIndexChanged(const QString &arg1);
+    void on_checkBox_clicked(bool checked);
+    void on_checkBox_2_clicked(bool checked);
+    void on_checkBox_3_clicked(bool checked);
+    void on_checkBox_4_clicked(bool checked);
+    void on_checkBox_5_clicked(bool checked);
+    void on_checkBox_6_clicked(bool checked);
+    void on_checkBox_7_clicked(bool checked);
+    void on_checkBox_19_clicked(bool checked);
+    void on_checkBox_9_clicked(bool checked);
+    void on_checkBox_8_clicked(bool checked);
+    void on_comboBox_currentIndexChanged(const QString &arg1);
+    void on_comboBox_2_currentIndexChanged(const QString &arg1);
+    void on_comboBox_3_currentIndexChanged(const QString &arg1);
+    void on_comboBox_4_currentIndexChanged(const QString &arg1);
+    void on_comboBox_5_currentIndexChanged(const QString &arg1);
+    void on_comboBox_6_currentIndexChanged(const QString &arg1);
+    void on_comboBox_7_currentIndexChanged(const QString &arg1);
+    void on_comboBox_8_currentIndexChanged(const QString &arg1);
+    void on_comboBox_9_currentIndexChanged(const QString &arg1);
+    void on_comboBox_10_currentIndexChanged(const QString &arg1);
+    void on_checkBox_13_clicked();
+    void on_checkBox_14_clicked();
+    void on_checkBox_15_clicked();
+    void on_checkBox_17_clicked();
+    void on_radioButton_23_clicked();
+    void on_radioButton_22_clicked();
+    void on_radioButton_25_clicked();
+    void on_radioButton_24_clicked();
+    void on_radioButton_27_clicked();
+    void on_radioButton_26_clicked();
+    void on_radioButton_31_clicked();
+    void on_radioButton_30_clicked();
+    void on_comboBox_28_currentIndexChanged(const QString &arg1);
+    void on_comboBox_30_currentIndexChanged(const QString &arg1);
+    void on_comboBox_32_currentIndexChanged(const QString &arg1);
+    void on_comboBox_36_currentIndexChanged(const QString &arg1);
+    void on_checkBox_13_clicked(bool checked);
+    void on_checkBox_14_clicked(bool checked);
+    void on_checkBox_15_clicked(bool checked);
+    void on_checkBox_17_clicked(bool checked);
+    void on_comboBox_27_currentIndexChanged(const QString &arg1);
+    void on_comboBox_29_currentIndexChanged(const QString &arg1);
+    void on_comboBox_31_currentIndexChanged(const QString &arg1);
+    void on_comboBox_35_currentIndexChanged(const QString &arg1);
+    void on_pushButton_27_clicked();
+    void on_pushButton_28_clicked();
+    void on_pushButton_29_clicked();
+    void on_pushButton_31_clicked();
+    void on_comboBox_22_currentIndexChanged(const QString &arg1);
+    void on_comboBox_21_currentIndexChanged(const QString &arg1);
+    void on_radioButton_7_clicked();
+    void on_radioButton_3_clicked();
+    void on_pushButton_24_clicked();
+    void on_checkBox_10_clicked(bool checked);
+    void on_checkBox_10_clicked();
+    void Revisar();
+    void on_pushButton_25_clicked();
+    void Comprobar();
+    void Rastreo();
+    void on_pushButton_30_clicked();
+    void on_pushButton_32_clicked();
+    void on_pushButton_36_clicked();
+    void Reconstruir(QString Nombre, QString Version, QString Arquitectura, QString Carpeta);
+    void on_pushButton_34_clicked();
+    void on_pushButton_33_clicked();
+    void on_pushButton_26_clicked();
+    void on_pushButton_35_clicked();
 
 private:
     Ui::UsbLive *ui;
@@ -123,11 +212,11 @@ private:
     QString DatoComand;
     DrakeProcesos *mib;
     QString grub2;
-    QString getPack();
+    QString getPack(QString Activo);
     int Control;
     QStringList comandos;
     QString Tamano;
-    QString activo1, activo2, activo3, activo4, activo5;
+    QString activo1, activo2, activo3, activo4, activo5, activo6;
     QStringList grub;
     QStringList LeeIso;
     QString DistroTip;
@@ -142,11 +231,17 @@ private:
     QString TipKnoppix;
     QString TipOpenSUSE;
     QString TipLinuxMint;
+    QString TipBootRepair;
+    QString TipClonezilla;
+    QString TipGParted;
+    QString TipSystemRescue;
+    QString TipOpenMandriva;
     QString LabelOld;
     QString getCompara(QString Valor, QString Ruta);
     QString getDistroIns(QString dev, QString distro);
     int Ctrl;
     QString Valor1;
+    QString Valor2;
     int Marcado;
     QString qemu;
     QStringList MdCfg;
@@ -174,6 +269,17 @@ private:
     QString ruta;
     QString Localizar;
     QString Stilo;
+    int CierreTotal;
+    Ayuda *ayuda;
+    QString getWget(QString Verificado);
+    QString Reload();
+    QString getSize(QString Dir);
+    QStringList ValorGrub;
+    QStringList RecoUSB;
+    QString getMediaInfo(QString Dato);
+    QString GrubInfo;
+    QString TipoGrub;
+    QString Deshabilitar;
 
 };
 

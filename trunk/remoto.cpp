@@ -90,7 +90,10 @@ void remoto::on_pushButton_3_clicked()
         delete mib;
     mib = new DrakeProcesos(comandos, this);
     connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
-    int valor= comandos.count(); mib->Valor(valor,3); mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro); mib->iniciarProceso();
+    int valor= comandos.count();
+    mib->Valor(valor,3);
+    mib->Mascara(cantidad51,cantidad50,cantidad49,DatoTalla,cantidad47,DatoNegro);
+    mib->iniciarProceso();
     close();
 }
 

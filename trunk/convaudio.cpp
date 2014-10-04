@@ -248,9 +248,7 @@ void ConvAudio::on_pushButton_12_clicked()
             ui->pushButton_13->setEnabled(true);
             ui->pushButton_14->setEnabled(true);            
             ui->seekSlider_2->setMediaObject(MediaObject);
-            //ui->seekSlider_2->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
             ui->volumeSlider_4->setAudioOutput(AudioOutput);
-            //ui->volumeSlider_4->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
             timer->start(1000);
         }
     }
