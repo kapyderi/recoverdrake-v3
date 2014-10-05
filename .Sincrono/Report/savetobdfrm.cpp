@@ -99,9 +99,7 @@ SaveToBDFrm::SaveToBDFrm(QWidget *parent) :
     QSqlQuery q(db);
     q.exec("SELECT name FROM sqlite_master WHERE type='table'");
     while(q.next())
-    {
         ui->comboCampo->addItem(q.value(0).toString());
-    }
     ui->radioButton->setChecked(true);
     ui->radioButton_4->setChecked(true);
     Formato = "Vista previa";
@@ -138,14 +136,12 @@ SaveToBDFrm::SaveToBDFrm(QWidget *parent) :
     QSqlQuery query(db);
     query.exec("SELECT Correo FROM Smtp");
     while(query.next())
-    {
         ui->comboBox->addItem(query.value(0).toString());
-    }
     ui->fontComboBox->setCurrentText("DejaVu Sans");
     ui->sizeSpin->setValue(8);
     this->Cambiar();
     this->Cambiar1();
-    this->Cambiar2();
+    this->Cambiar2();    
     ui->attachments->installEventFilter(this);
 }
 
@@ -154,7 +150,7 @@ SaveToBDFrm::~SaveToBDFrm()
     delete ui;
 }
 
-void SaveToBDFrm::Valor(QString valor, QString tipo, QString Id)
+void SaveToBDFrm::Valor(QString valor, QString tipo, QString Id, QString ruta)
 {
     if (valor == "0")
     {
@@ -186,7 +182,7 @@ void SaveToBDFrm::Valor(QString valor, QString tipo, QString Id)
     else if (valor == "2" )
     {
         Value = 2;
-        this->setWindowTitle(tr("Formatos de impresion..."));
+        this->setWindowTitle(tr("Formatos de salida..."));
         ui->pushButton_2->setVisible(false);
         ui->pushButton->setVisible(false);
         Listado = tipo;
@@ -199,6 +195,26 @@ void SaveToBDFrm::Valor(QString valor, QString tipo, QString Id)
         ui->label_16->setVisible(false);
         ui->lineEdit->setVisible(false);
         ui->pushButton_5->setVisible(false);
+    }
+    else if (valor == "3" )
+    {
+        Value = 3;
+        Conexion = "Directa";
+        this->setWindowTitle(tr("Imprimir/enviar..."));
+        ui->pushButton_2->setVisible(false);
+        ui->pushButton->setVisible(false);
+        ui->groupBox->setEnabled(false);
+        ui->groupBox_2->setEnabled(false);
+        ui->label_16->setVisible(false);
+        ui->lineEdit->setVisible(false);
+        ui->pushButton_5->setVisible(false);
+        RutaImp = ruta;
+        ui->stackedWidget_2->setEnabled(false);
+        ui->stackedWidget_3->setEnabled(false);
+        ui->radioButton->setEnabled(false);
+        ui->radioButton_2->setVisible(false);
+        ui->radioButton_7->setEnabled(false);
+        ui->radioButton_9->setVisible(false);
     }
 }
 
@@ -235,7 +251,7 @@ void SaveToBDFrm::on_spinGrd_valueChanged(int arg1)
 
 void SaveToBDFrm::Comprobar()
 {
-    if (Value != 2)
+    if (Value <= 1)
     {
         grad = ui->spinGrd->value();
         if (nombre == "" || desc == "")
@@ -286,7 +302,7 @@ void SaveToBDFrm::Comprobar()
         else if (Value == 1)
             this->accept();;
     }
-    else
+    if (Value == 2)
     {
         if (Formato == "PDF")
         {
@@ -338,6 +354,8 @@ void SaveToBDFrm::Comprobar()
         }
         this->Comenzar();
     }
+    if (Value == 3)
+        this->Comenzar();
 }
 
 void SaveToBDFrm::on_pushButton_clicked()
@@ -697,17 +715,13 @@ EmailAddress* SaveToBDFrm::stringToEmail(const QString &str)
     int p1 = str.indexOf("<");
     int p2 = str.indexOf(">");
     if (p1 == -1)
-    {
         return new EmailAddress(str);
-    }
     else
-    {
         return new EmailAddress(str.mid(p1 + 1, p2 - p1 - 1), str.left(p1));
-    }
 }
 
 void SaveToBDFrm::on_addAttachment_clicked()
-{
+{   
     QFileDialog dialog(this);
     dialog.setFileMode(QFileDialog::ExistingFiles);
     if (dialog.exec())
@@ -849,91 +863,155 @@ void SaveToBDFrm::on_btnCancel_clicked()
 
 void SaveToBDFrm::Comenzar()
 {
-    QDomDocument doc("Impresion");
-    if (Tipo == 0)
+    if (Conexion == "Directa")
     {
-        QSqlQuery query(db);
-        query.exec("SELECT report_source FROM Report WHERE report_id ='"+QString::number(Posicion)+"'");
-        query.first();
-        QByteArray xmlData(query.value(0).toByteArray());
-        doc.setContent(xmlData);
-    }
-    else if (Tipo == 1)
-    {
-        QFile ff(Ruta);
-        if(ff.open(QFile::ReadOnly))
+        if (Formato== "Imprimir")
+            this->print();
+        if (Formato == "Vista previa")
+            this->previewReady();
+        if (Formato == "PDF")
+            this->pdf();
+        if (Formato == "Mail")
         {
-            QByteArray xmlData(ff.readAll());
+            this->pdf();
+            ui->attachments->addItem(ui->lineEdit->text());
+        }
+    }
+    else
+    {
+        QDomDocument doc("Impresion");
+        if (Tipo == 0)
+        {
+            QSqlQuery query(db);
+            query.exec("SELECT report_source FROM Report WHERE report_id ='"+QString::number(Posicion)+"'");
+            query.first();
+            QByteArray xmlData(query.value(0).toByteArray());
             doc.setContent(xmlData);
         }
-        ff.close();
-    }
-    QProgressDialog* pDlg = new QProgressDialog(this);
-    pDlg->setMaximum(0);
-    pDlg->setValue(0);
-    pDlg->show();
-    QPrinter * printer = new QPrinter();
-    if (Formato == "PDF" || Formato == "Mail")
-    {
-         printer->setOutputFormat(QPrinter::PdfFormat);
-         printer->setOutputFileName(RutaPDF);
-    }
-    if (doc.toString().contains("<Orientation type=\"V\"/>"))
-        printer->setOrientation(QPrinter::Portrait);
-    else if (doc.toString().contains("<Orientation type=\"H\"/>"))
-        printer->setOrientation(QPrinter::Landscape);
-    render = new ReportRenderer();
-    render->setPrinter(printer);
-    render->setDocIn(doc);
-    QMap<QString,QString> c;
-    if (Listado == "Clave")
-    {
-        c["General.Clave"] = "UserRD = '"+IDUser+"'";
-        render->setQueryClausules(c);
-    }
-    QtConcurrent::run(render, &ReportRenderer::PreRender);
-    connect(render,SIGNAL(end()),pDlg,SLOT(deleteLater()));
-    if (Formato== "Imprimir")
-        connect(render,SIGNAL(end()),this,SLOT(print()));
-    if (Formato == "Vista previa")
-        connect(render,SIGNAL(end()),this,SLOT(previewReady()));
-    if (Formato == "PDF")
-        connect(render,SIGNAL(end()),this,SLOT(pdf()));
-    if (Formato == "Mail")
-    {
-        connect(render,SIGNAL(end()),this,SLOT(pdf()));
-        int Verificar = 0;
-        int Peso = ui->attachments->count();
-        for (int k1 = 0; k1 < Peso; k1++)
+        else if (Tipo == 1)
         {
-               if (ui->attachments->item(k1)->text().contains(RutaPDF))
-               {
-                    Verificar = 1;
-               }
+            QFile ff(Ruta);
+            if(ff.open(QFile::ReadOnly))
+            {
+                QByteArray xmlData(ff.readAll());
+                doc.setContent(xmlData);
+            }
+            ff.close();
         }
-        if (Verificar == 0)
-            ui->attachments->addItem(RutaPDF);
+        QProgressDialog* pDlg = new QProgressDialog(this);
+        pDlg->setMaximum(0);
+        pDlg->setValue(0);
+        pDlg->show();
+        QPrinter * printer = new QPrinter();
+        if (Formato == "PDF" || Formato == "Mail")
+        {
+             printer->setOutputFormat(QPrinter::PdfFormat);
+             printer->setOutputFileName(RutaPDF);
+        }
+        if (doc.toString().contains("<Orientation type=\"V\"/>"))
+            printer->setOrientation(QPrinter::Portrait);
+        else if (doc.toString().contains("<Orientation type=\"H\"/>"))
+            printer->setOrientation(QPrinter::Landscape);
+        render = new ReportRenderer();
+        render->setPrinter(printer);
+        render->setDocIn(doc);
+        QMap<QString,QString> c;
+        if (Listado == "Clave")
+        {
+            c["General.Clave"] = "UserRD = '"+IDUser+"'";
+            render->setQueryClausules(c);
+        }
+        QtConcurrent::run(render, &ReportRenderer::PreRender);
+        connect(render,SIGNAL(end()),pDlg,SLOT(deleteLater()));
+        if (Formato== "Imprimir")
+            connect(render,SIGNAL(end()),this,SLOT(print()));
+        if (Formato == "Vista previa")
+            connect(render,SIGNAL(end()),this,SLOT(previewReady()));
+        if (Formato == "PDF")
+            connect(render,SIGNAL(end()),this,SLOT(pdf()));
+        if (Formato == "Mail")
+        {
+            connect(render,SIGNAL(end()),this,SLOT(pdf()));
+            int Verificar = 0;
+            int Peso = ui->attachments->count();
+            for (int k1 = 0; k1 < Peso; k1++)
+            {
+                 if (ui->attachments->item(k1)->text().contains(RutaPDF))
+                     Verificar = 1;
+            }
+            if (Verificar == 0)
+                ui->attachments->addItem(RutaPDF);
+        }
     }
 }
 
 void SaveToBDFrm::print()
 {
-    QPrintDialog * printDialog = new QPrintDialog(render->getPrinter(), this);
-    connect(printDialog, SIGNAL(accepted(QPrinter*)), render, SLOT(Print(QPrinter*)));
-    if (printDialog->exec() == QDialog::Accepted){}
+    if (Conexion == "Directa")
+    {
+        QPrinter printer(QPrinter::HighResolution);
+        QPrintDialog pre(&printer,this);
+        connect(&pre, SIGNAL(accepted(QPrinter *)),SLOT(Imprimir(QPrinter *)));
+        if (pre.exec() == QDialog::Accepted){}
+    }
+    else
+    {
+        QPrintDialog * printDialog = new QPrintDialog(render->getPrinter(), this);
+        connect(printDialog, SIGNAL(accepted(QPrinter*)), render, SLOT(Print(QPrinter*)));
+        if (printDialog->exec() == QDialog::Accepted){}
+    }
+}
+
+void SaveToBDFrm::Imprimir(QPrinter *printer)
+{
+    QTextDocument td;
+    td.setHtml(RutaImp);
+    td.print(printer);
 }
 
 void SaveToBDFrm::pdf()
 {
-    render->Print(render->getPrinter());
+    if (Conexion == "Directa")
+    {
+        QPrinter printer(QPrinter::HighResolution);
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        QFile file(ui->lineEdit->text());
+        if (!file.open(QFile::ReadOnly))
+        {
+            QMessageBox m;
+            if (Stilo == "A")
+                m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+            m.setText(tr("La ruta de destino para guardar el pdf no es accesible.<p>Comprueba que este correcta."));
+            m.exec();
+            return;
+        }
+        else
+            printer.setOutputFileName(ui->lineEdit->text());
+        QTextDocument td;
+        td.setHtml(RutaImp);
+        td.print(&printer);
+    }
+    else
+        render->Print(render->getPrinter());
 }
 
 void SaveToBDFrm::previewReady()
 {
-    QPrintPreviewDialog * pre = new QPrintPreviewDialog(render->getPrinter(),this);
-    connect(pre, SIGNAL(paintRequested(QPrinter*)), render, SLOT(Print(QPrinter*)));
-    pre->showMaximized();
-    pre->exec();
+    if (Conexion == "Directa")
+    {
+        QPrinter printer(QPrinter::HighResolution);
+        QPrintPreviewDialog pre(&printer,this);
+        connect(&pre, SIGNAL(paintRequested(QPrinter *)),SLOT(Imprimir(QPrinter *)));
+        pre.showMaximized();
+        pre.exec();
+    }
+    else
+    {
+        QPrintPreviewDialog * pre = new QPrintPreviewDialog(render->getPrinter(),this);
+        connect(pre, SIGNAL(paintRequested(QPrinter*)), render, SLOT(Print(QPrinter*)));
+        pre->showMaximized();
+        pre->exec();
+    }
 }
 
 void SaveToBDFrm::on_pushButton_6_clicked()

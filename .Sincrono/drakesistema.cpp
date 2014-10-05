@@ -77,9 +77,7 @@ QString drakeSistema::getRpms()
     argumentosFind << "-qa" << "--last";
     procesoDir->start("rpm",argumentosFind);
     if (! procesoDir->waitForStarted())
-    {
         return QString("");
-    }
     procesoDir->waitForFinished();
     rpm = QString(procesoDir->readAllStandardOutput());
     delete procesoDir;
@@ -248,6 +246,37 @@ QString drakeSistema::getUser()
     delete procesoCut;
     QString res =  QString(usuario);
     res.chop(1);
+    if (res == "")
+        res = getWhoami();
+    return res;
+}
+
+QString drakeSistema::getWhoami()
+{
+    QProcess *procesowho, *procesoCut, *procesoawk;
+    QStringList argumentoscat;
+    QStringList argumentosawk;
+    QByteArray usuario;
+    procesoawk=new QProcess(this);
+    procesowho=new QProcess(this);
+    procesoCut=new QProcess(this);
+    argumentoscat << "/etc/passwd";
+    argumentosawk << "-F" << ":" << "$3 >= 500 && $3 < 1024 {printf $1}";
+    procesowho->setStandardOutputProcess(procesoawk);
+    procesoawk->setStandardOutputProcess(procesoCut);
+    procesowho->start("cat",argumentoscat);
+    procesoawk->start("sort");
+    procesoCut->start("awk",argumentosawk);
+    if (! procesoCut->waitForStarted())
+        return QString("");
+    procesowho->waitForFinished();
+    procesoawk->waitForFinished();
+    procesoCut->waitForFinished();
+    usuario = QString(procesoCut->readAllStandardOutput());
+    delete procesowho;
+    delete procesoawk;
+    delete procesoCut;
+    QString res =  QString(usuario);
     return res;
 }
 
@@ -259,14 +288,10 @@ QString drakeSistema::getArquitectura()
     procesoCut=new QProcess(this);
     drakeSistema drake;
     Distro = drake.getDistrop();
-    if (Distro=="Mandriva")
-    {
+    if (Distro=="Mandriva" || Distro=="OpenMandriva")
         argumentosCut << "-c" << "cut -d ' ' -f7 /etc/release";
-    }
     else if (Distro=="Mageia")
-    {
         argumentosCut << "-c" << "cut -d ' ' -f6 /etc/release";
-    }
     procesoCut->start("/bin/sh", argumentosCut);
     if (! procesoCut->waitForStarted())
         return QString("");
@@ -390,30 +415,18 @@ QString drakeSistema::getDistribucion()
     QProcess *procesoCut;
     QStringList argumentosCut;
     QByteArray distribucion;
-
     procesoCut=new QProcess(this);
-
     drakeSistema drake;
     Distro = drake.getDistrop();
-
-    if (Distro=="Mandriva")
-    {
+    if (Distro=="Mandriva" || Distro=="OpenMandriva")
         argumentosCut << "-c" << "cut -d ' ' -f4 /etc/release";
-    }
     else if (Distro=="Mageia")
-    {
         argumentosCut << "-c" << "cut -d ' ' -f3 /etc/release";
-    }
-
     procesoCut->start("/bin/sh", argumentosCut);
-
     if (! procesoCut->waitForStarted())
         return QString("");
-
     procesoCut->waitForFinished();
-
     distribucion = procesoCut->readAllStandardOutput();
-
     delete procesoCut;
     QString res =  QString(distribucion);
     res.chop(1);
@@ -447,18 +460,12 @@ QString drakeSistema::getCdrom()
 {
     QProcess *procesoCD;
     QByteArray Cdrom;
-
     procesoCD=new QProcess(this);
-
-    procesoCD->start("cdrecord --scanbus");
-
+    procesoCD->start("wodim -scanbus dev=/dev/sr0 -checkdrive");
     if (! procesoCD->waitForStarted())
         return QString("");
-
     procesoCD->waitForFinished();
-
     Cdrom = QString(procesoCD->readAllStandardOutput());
-
     delete procesoCD;
     QString res =  QString(Cdrom);
     res.chop(1);
@@ -837,14 +844,10 @@ QString drakeSistema::getRelease()
     drakeSistema drake;
     Distro = drake.getDistrop();
     argumentosCut << "-qa";
-    if (Distro=="Mandriva")
-    {
+    if (Distro=="Mandriva") // || Distro=="OpenMandriva")
         argumentosCut2 << "-i" << "mandriva-release";
-    }
     else if (Distro=="Mageia")
-    {
         argumentosCut2 << "-i" << "mageia-release";
-    }
     argumentosCut3 << "-v" << "common";
     argumentosCut4 << "-f3" << "-d" << "-";
     procesoCut->start("rpm", argumentosCut);
@@ -983,38 +986,25 @@ QString drakeSistema::getMedia()
     QProcess *procesoMount, *procesoGrep;
     QStringList argumentosGrep;
     QByteArray IMedia;
-
     procesoMount=new QProcess(this);
     procesoGrep=new QProcess(this);
-
-    drakeSistema drake;
-    Distro = drake.getDistrop();
-    user = drake.getUser();
-    dist = drake.getDistribucion();
-    if (Distro=="Mageia")
-    {
-        if (dist == "3")
-            argumentosGrep << "/run/media/"+user+"/";
-        else
-            argumentosGrep << "/media";
-    }
+    user = getUser();
+    QString Valor20 = "find /run/media -maxdepth 1";
+    QString valor = getStart(Valor20);
+    QStringList Comparar = valor.split("\n");
+    QString value = Comparar.value(0);
+    if (value == "")
+        argumentosGrep << "/media/";
     else
-    {
-        argumentosGrep << "/media";
-    }
+        argumentosGrep << "/run/media/"+user+"/";
     procesoMount->setStandardOutputProcess(procesoGrep);
-
     procesoMount->start("mount");
     procesoGrep->start("grep", argumentosGrep);
-
     if (! procesoGrep->waitForStarted())
         return QString("");
-
     procesoMount->waitForFinished();
     procesoGrep->waitForFinished();
-
     IMedia = procesoGrep->readAllStandardOutput();
-
     delete procesoMount;
     delete procesoGrep;
     QString res = QString(IMedia);

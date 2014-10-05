@@ -18,7 +18,7 @@ public:
 
 private:
     Ui::Terminal *ui;
-    QTermWidget *consola, *consola1, *consola2;
+    QTermWidget *consola;
     QString User;
     QFont font ;
 
