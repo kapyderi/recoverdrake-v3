@@ -36,7 +36,7 @@ QString MimeContentFormatter::format(const QString &content, bool quotedPrintabl
             }
         }
         else {
-            if (content[i] == '\n') {       // new line
+            if (content[i] == '\n') {
                 out.append(content[i]);
                 chars = 0;
                 continue;

@@ -584,7 +584,7 @@ QString drakeSistema::getIP()
     QStringList argumentosFree;
     QByteArray ip;
     procesoFree=new QProcess(this);
-    argumentosFree << "http://cualesmiip.e-mision.net:999/";
+    argumentosFree << "ifconfig.me/ip";
     procesoFree->start("curl", argumentosFree);
     if (! procesoFree->waitForStarted())
         return QString("");
@@ -1519,27 +1519,17 @@ QString drakeSistema::getMAC(QString Tipo)
     QProcess *procesoDir, *procesoCut;
     QStringList argumentosFind, argumentosCut;
     QByteArray rpm;
-
     procesoDir=new QProcess(this);
     procesoCut=new QProcess(this);
-
     argumentosFind << ""+Tipo+"";
     argumentosCut << "/HW/ {print $5}";
-
     procesoDir->setStandardOutputProcess(procesoCut);
-
     procesoDir->start("ifconfig",argumentosFind);
     procesoCut->start("awk", argumentosCut);
-
     if (! procesoCut->waitForStarted())
-    {
         return QString("");
-    }
-
     procesoCut->waitForFinished();
-
     rpm = QString(procesoCut->readAllStandardOutput());
-
     delete procesoDir;
     delete procesoCut;
     QString res =  QString(rpm);

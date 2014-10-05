@@ -550,7 +550,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:400;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;En un principio fue creada para recuperar paquetes instalados en su ordenardor y poder volver a instalarlos sin tener que recordar que habia instalado anteriormente, a quien no le ha pasado alguna vez, ¿verdad?.&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:400;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Con el paso del tiempo, se ha hecho mas extenso y en estos momentos cubre muchas aplicaciones en una, ya que tienes infinidad de soporte a problemas, configuraciones y extras.&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Con el paso del tiempo, se ha hecho mas extensa y en estos momentos cubre muchas aplicaciones en una, ya que tienes infinidad de soporte a problemas, configuraciones y extras.&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:400;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;No me hago responsable por el uso que se le de a &lt;/span&gt;&lt;span style=&quot; font-style:italic; color:#0000ff;&quot;&gt;Recover&lt;/span&gt;&lt;span style=&quot; font-style:italic; color:#ff0000;&quot;&gt;Drake&lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt; o defectos y perdidas que puedan ser derivadas de su uso, como por ejemplo &amp;quot;bugs&amp;quot; o mala utilización de sus herramientas.&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Todos las utilidades de Linux son externas a RecoverDrake por lo que cualquier fallo de uso es derivado del código anfitrión y no del codigo huesped.&lt;/span&gt;&lt;/p&gt;
@@ -560,7 +560,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Gracias por usarlo.&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-style:italic;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Dedicado a mi mujer Paky y a mis dos hijas, Atenea y Minerva. &lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;(Sois mis inspiración)&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;(Sois mi inspiración)&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Para cualquier bugs o comentario: &lt;span style=&quot; font-style:italic; color:#ff0000;&quot;&gt;kapyderi@eresmas.com&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-style:italic; color:#ff0000;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
@@ -678,7 +678,7 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Notas de la versión</string>
+       <string>Notas de la version</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="0">
@@ -987,7 +987,7 @@ font: bold Italic;
 color: rgb(0, 0, 255);</string>
      </property>
      <property name="text">
-      <string>Version 3.162.103 T.E.U. La Version final</string>
+      <string>Version 3.168.105 T.E.U. La Version final</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

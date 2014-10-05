@@ -1038,10 +1038,13 @@ private slots:
     void on_actionBorrar_archivos_especificos_recursivamente_triggered();
     void on_pushButton_120_clicked();
     void on_actionModo_Administrador_triggered();
-
     void on_pushButton_121_clicked();
-
     void on_actionTraductor_triggered();
+    void Liberador();
+    void on_tabWidget_5_currentChanged(int index);
+    void on_tabWidget_6_currentChanged(int index);
+    void on_tabWidget_8_currentChanged(int index);
+    void borrado();
 
 public:
     Ui::recoverdrake *uil;

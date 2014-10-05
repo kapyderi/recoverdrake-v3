@@ -69,6 +69,9 @@
 #include <QFutureWatcher>
 #include "compresor.h"
 #include "textencrip.h"
+#include "permisos.h"
+#include "borrar.h"
+#include "traductor.h"
 
 namespace Ui {
     class recoverdrake;
@@ -96,6 +99,8 @@ private:
     Ayuda *ayuda;
     compresor *Kompresor;
     textencrip *Encriptar;
+    Permisos *Permite;
+    Traductor *traduce;
     QSqlDatabase dbs;
     QSqlTableModel *Model;
     QSqlTableModel *Model1;
@@ -128,6 +133,10 @@ private:
     QMdiSubWindow *buscarQR();
     QMdiSubWindow *buscarCompresor();
     QMdiSubWindow *buscarEncriptar();
+    QMdiSubWindow *buscarPermisos();
+    QMdiSubWindow *buscarUsblive();
+    QMdiSubWindow *buscarBorrar();
+    QMdiSubWindow *buscarTraductor();
     QStringList listaArchivos;
     Phonon::Effect *effect;
     Phonon::MediaObject *mediaObject;
@@ -281,6 +290,10 @@ private:
     int Pagina24;
     int Pagina25;
     int Pagina26;
+    int Pagina27;
+    int Pagina28;
+    int Pagina29;
+    int Pagina30;
     int Dato1;
     int Dato2;
     int CerrarP;
@@ -329,7 +342,6 @@ private:
     burn *quemar;
     help *hp;
     TotalSincrono *Sync;
-    Permisos *Permite;
     Montaje *Montar;
     Kernel *Nucleo;
     Sonido *Ecualizador;
@@ -340,6 +352,7 @@ private:
     dbclaves *Claves;
     ReportVisual *VReport;
     qrcode *QR;
+    Borrar *Delete;
     int filaAudio;
     int filaAudioRadio;
     int i;
@@ -370,7 +383,7 @@ private:
     QAction *restoreAction;
     QAction *quitAction;
     void crearAcciones();
-    QString getPack();
+    QString getPackGenerico();
     QString getRpm(QString Valor);
     QString Ethernet;
     QStringList ListEthernet;
@@ -429,6 +442,8 @@ private:
     QString arj;
     QString a7z;
     QString rar;
+    QString tree;
+    QString webmin;
     int EthF;
     int LocDia;
     int LocMes;
@@ -440,6 +455,8 @@ private:
     QString fileNameDirTorrent;
     int Parando;
     int RX;
+    QString getPack(QString activo);
+    QString Reconfigurar;
 
 private slots:
     void actionConsola_como_root();
@@ -484,6 +501,10 @@ private slots:
     void CerrarQR();
     void CerrarCompresor();
     void CerrarEncriptar();
+    void CerrarPermisos();
+    void CerrarUsblive();
+    void CerrarBorrar();
+    void CerrarTraductor();
     void on_pushButton_52_clicked();
     void on_pushButton_54_clicked();
     void on_pushButton_51_clicked();
@@ -1009,6 +1030,19 @@ private slots:
     void on_actionRefrescar_dependencias_triggered();
     void on_pushButton_118_clicked();
     void on_actionEncriptar_textos_triggered();
+    void on_actionIncompatiblidad_grub_con_grub_efi_triggered();
+    void Paquetes();
+    void on_pushButton_119_clicked();
+    void on_actionRealizar_arreglo_bruto_triggered();
+    void on_actionInstalar_paquetes_para_programar_en_QT_triggered();
+    void on_actionBorrar_archivos_especificos_recursivamente_triggered();
+    void on_pushButton_120_clicked();
+    void on_actionModo_Administrador_triggered();
+    void on_pushButton_121_clicked();
+    void on_actionTraductor_triggered();
+    void Liberador();
+    void espacio();
+    void on_tabWidget_5_currentChanged(int index);
 
 public:
     Ui::recoverdrake *uil;

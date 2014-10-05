@@ -16,7 +16,7 @@
   <layout class="QGridLayout" name="gridLayout_4">
    <item row="2" column="0" colspan="2">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="4">
+     <item row="0" column="5">
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -29,7 +29,7 @@
        </property>
       </spacer>
      </item>
-     <item row="0" column="5">
+     <item row="0" column="6">
       <widget class="QPushButton" name="pushButton_2">
        <property name="text">
         <string>Salir</string>
@@ -56,10 +56,10 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="3">
+     <item row="0" column="4">
       <widget class="QComboBox" name="comboBox">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -99,6 +99,13 @@
          <width>25</width>
          <height>25</height>
         </size>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Color de terminal activa</string>
        </property>
       </widget>
      </item>
