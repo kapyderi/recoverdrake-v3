@@ -6,13 +6,15 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QDebug>
-
+#include <QProcess>
+#include <QProgressDialog>
 
 Traductor::Traductor(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Traductor)
 {
     ui->setupUi(this);
+    Posicion = 0;
     db=QSqlDatabase::database("PRINCIPAL");
     Stilo = "B";
     drakeSistema drake;
@@ -83,35 +85,73 @@ Traductor::Traductor(QWidget *parent) :
     queryEnglish.first();
     if (queryEnglish.isSelect())
         English=queryEnglish.value(0).toString();
-    QString idioma;
     if ( Spain == "2")
         idioma = "es";
     else if ( English == "2")
         idioma = "en";
+    ui->comboBox->addItem("auto");
     if (idioma == "es")
-    {
+    {        
         QSqlQuery Variable(db);
-        Variable.exec("SELECT Idioma FROM IdiomaES");
+        Variable.exec("SELECT Idioma FROM IdiomaES ORDER BY Idioma");
         while(Variable.next())
         {
-            ui->comboBox->addItem(Variable.value(0).toString());
-            ui->comboBox_2->addItem(Variable.value(0).toString());
-            ui->comboBox->setCurrentIndex(ui->comboBox->findText("Español"));
-            ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText("Ingles"));
+            if (ui->comboBox->findText(Variable.value(0).toString()) == -1)
+            {
+                ui->comboBox->addItem(Variable.value(0).toString());
+                ui->comboBox_2->addItem(Variable.value(0).toString());
+
+            }
         }
+        ui->comboBox->setCurrentIndex(ui->comboBox->findText("auto)"));
+        ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText("inglés"));
+        QString Entrada, Salida;
+        Entrada = ui->comboBox->currentText();
+        Salida = ui->comboBox_2->currentText();
+        QSqlQuery Clave(db);
+        Clave.exec("SELECT Clave FROM IdiomaES WHERE Idioma='"+Entrada+"'");
+        Clave.first();
+        if (ui->comboBox->currentText() != "auto")
+            Origen = Clave.value(0).toString();
+        else
+            Origen = "auto";
+        QSqlQuery Clave1(db);
+        Clave1.exec("SELECT Clave FROM IdiomaES WHERE Idioma='"+Salida+"'");
+        Clave1.first();
+        Destino = Clave1.value(0).toString();
     }
     else
     {
         QSqlQuery Variable(db);
-        Variable.exec("SELECT Idioma FROM IdiomaEN");
+        Variable.exec("SELECT Idioma FROM IdiomaEN ORDER BY Idioma");
         while(Variable.next())
         {
-            ui->comboBox->addItem(Variable.value(0).toString());
-            ui->comboBox_2->addItem(Variable.value(0).toString());
-            ui->comboBox->setCurrentIndex(ui->comboBox->findText("Spanish"));
-            ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText("English"));
+            if (ui->comboBox->findText(Variable.value(0).toString()) == -1)
+            {
+                ui->comboBox->addItem(Variable.value(0).toString());
+                ui->comboBox_2->addItem(Variable.value(0).toString());
+            }
         }
+        ui->comboBox->setCurrentIndex(ui->comboBox->findText("auto"));
+        ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText("English"));
+        QString Entrada, Salida;
+        Entrada = ui->comboBox->currentText();
+        Salida = ui->comboBox_2->currentText();
+        QSqlQuery Clave(db);
+        Clave.exec("SELECT Clave FROM IdiomaEN WHERE Idioma='"+Entrada+"'");
+        Clave.first();
+        if (ui->comboBox->currentText() != "auto")
+            Origen = Clave.value(0).toString();
+        else
+            Origen = "auto";
+        QSqlQuery Clave1(db);
+        Clave1.exec("SELECT Clave FROM IdiomaEN WHERE Idioma='"+Salida+"'");
+        Clave1.first();
+        Destino = Clave1.value(0).toString();
     }
+    ui->textEdit->installEventFilter(this);
+    ui->textEdit->acceptDrops();
+    Posicion = 1;
 }
 
 Traductor::~Traductor()
@@ -190,23 +230,156 @@ void Traductor::on_pushButton_2_clicked()
         close();
 }
 
+void Traductor::on_comboBox_currentIndexChanged(const QString &arg1)
+{    
+    QString Entrada, Salida;
+    Entrada = ui->comboBox->currentText();
+    Salida = ui->comboBox_2->currentText();
+    if (arg1 == ui->comboBox_2->currentText())
+    {
+        QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("Si pones el mismo idioma la traduccion no se realizara."));
+        m.exec();
+        return;
+    }
+    else
+    {
+        if (idioma == "es")
+        {
+            QSqlQuery Clave(db);
+            Clave.exec("SELECT Clave FROM IdiomaES WHERE Idioma='"+Entrada+"'");
+            Clave.first();
+            if (ui->comboBox->currentText() != "auto")
+                Origen = Clave.value(0).toString();
+            else
+                Origen = "auto";
+            QSqlQuery Clave1(db);
+            Clave1.exec("SELECT Clave FROM IdiomaES WHERE Idioma='"+Salida+"'");
+            Clave1.first();
+            Destino = Clave1.value(0).toString();
+        }
+        else
+        {
+            QSqlQuery Clave(db);
+            Clave.exec("SELECT Clave FROM IdiomaEN WHERE Idioma='"+Entrada+"'");
+            Clave.first();
+            if (ui->comboBox->currentText() != "auto")
+                Origen = Clave.value(0).toString();
+            else
+                Origen = "auto";
+            QSqlQuery Clave1(db);
+            Clave1.exec("SELECT Clave FROM IdiomaEN WHERE Idioma='"+Salida+"'");
+            Clave1.first();
+            Destino = Clave1.value(0).toString();
+        }
+    }
+    if (Posicion == 1)
+        on_pushButton_clicked();
+}
 
+void Traductor::on_comboBox_2_currentIndexChanged(const QString &arg1)
+{
+    QString Entrada, Salida;
+    Entrada = ui->comboBox->currentText();
+    Salida = ui->comboBox_2->currentText();
+    if (arg1 == ui->comboBox->currentText())
+    {
+        QMessageBox m;
+        if (Stilo == "A")
+            m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr("Si pones el mismo idioma la traduccion no se realizara."));
+        m.exec();
+        return;
+    }
+    else
+    {
+        if (idioma == "es")
+        {
+            QSqlQuery Clave(db);
+            Clave.exec("SELECT Clave FROM IdiomaES WHERE Idioma='"+Entrada+"'");
+            Clave.first();
+            if (ui->comboBox->currentText() != "auto")
+                Origen = Clave.value(0).toString();
+            else
+                Origen = "auto";
+            QSqlQuery Clave1(db);
+            Clave1.exec("SELECT Clave FROM IdiomaES WHERE Idioma='"+Salida+"'");
+            Clave1.first();
+            Destino = Clave1.value(0).toString();
+        }
+        else
+        {
+            QSqlQuery Clave(db);
+            Clave.exec("SELECT Clave FROM IdiomaEN WHERE Idioma='"+Entrada+"'");
+            Clave.first();
+            if (ui->comboBox->currentText() != "auto")
+                Origen = Clave.value(0).toString();
+            else
+                Origen = "auto";
+            QSqlQuery Clave1(db);
+            Clave1.exec("SELECT Clave FROM IdiomaEN WHERE Idioma='"+Salida+"'");
+            Clave1.first();
+            Destino = Clave1.value(0).toString();
+        }
+    }
+    if (Posicion == 1)
+        on_pushButton_clicked();
+}
 
+void Traductor::on_pushButton_clicked()
+{
+    ui->textEdit_2->clear();
+    QString ListTrad = ui->textEdit->text();
+    QStringList Lista =ListTrad.split("\n");
+    QString ValorLinea;
+    QProgressDialog progress(tr("Realizando traduccion... Espera por favor"), tr("Cancelar"), 0, Lista.count(),this);
+    progress.show();
+    for (int a=0;a<Lista.count();a++)
+    {
+        qApp->processEvents();
+        progress.setValue(a);
+        if (progress.wasCanceled())
+            break;
+        QString Dato = Lista.value(a);
+        Dato.replace(" ","%20");
+        ValorLinea = "wget v -U \"Firefox\" -q -O - \"http://translate.google.com/translate_a/t?client=t&text=\"%1\"&sl=%2&tl=%3";
+        ValorLinea = ValorLinea.arg(Dato).arg(Origen).arg(Destino);
+        QString Datos = tramitarDatos(ValorLinea);
+        ui->textEdit_2->append(Datos);
+    }
+    progress.setValue(Lista.count());
+}
 
+void Traductor::on_pushButton_3_clicked()
+{
+    ui->textEdit->clear();
+    ui->textEdit_2->clear();
+}
 
+QString Traductor::tramitarDatos(QString Datos)
+{
+    QProcess *procesoCat, *procesoGrep;
+    QStringList argumentosGrep;
+    QByteArray IpRouter;
+    procesoCat=new QProcess(this);
+    procesoGrep=new QProcess(this);
+    argumentosGrep << "-d" << "\"" << "-f2";
+    procesoCat->setStandardOutputProcess(procesoGrep);
+    procesoCat->start(Datos);
+    procesoGrep->start("cut", argumentosGrep);
+    if (! procesoGrep->waitForStarted())
+        return QString("");
+    procesoCat->waitForFinished();
+    procesoGrep->waitForFinished();
+    IpRouter = procesoGrep->readAllStandardOutput();
+    delete procesoCat;
+    delete procesoGrep;
+    QString res = QString(IpRouter);
+    res.chop(1);
+    return res;
+}
 
 //#!/bin/bash
-
-//################################################################################
-//## Script para llamar a Google Translate.
-//## Álvaro Martín. Junio 2012.
-//##
-//##basado en http://crunchbanglinux.org/forums/topic/17034/access-google-translate-from-a-terminal/
-//##
-//################################################################################
-
-//#lista códigos idiomas:
-//    #http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 
 //#google se encarga de identificar el lenguaje origen al estar en auto
 //DEFAULT_SOURCE_LANG=auto
@@ -268,10 +441,3 @@ void Traductor::on_pushButton_2_clicked()
 //https://translate.google.es/translate_a/single?client=t&sl=es&tl=en&q=hola%20que%20hay%20para%20traducir
 //https://translate.google.es/translate_a/single?client=t&sl=es&tl=en&q=hola%20que%20hay%20para%20traducir%0A%0Aa%20ver%20que%20pasa%20con%20varias%20lineas
 //HAY QUE HACERLO POR FRASES COMO EN ESTE EJEMPLO, HASTA RECIBIR EL SALTO DE LINEA...
-//wget v -U "Firefox" -q -O - "http://translate.google.com/translate_a/t?client=t&text="pedido%20que%20hace%20los%20humanos"&sl=es&tl=en"
-
-void Traductor::on_pushButton_3_clicked()
-{
-    termino = new Terminal(this);
-    termino->exec();
-}

@@ -34,9 +34,7 @@ void Visualizar::changeEvent(QEvent *e)
 void Visualizar::Valor(QString valor, QString Tipo, QString ValorReg)
 {
     if (valor == "Quitar")
-    {        
         CierreTotal = 1;
-    }
     if (Tipo == "Logs")
     {
         ui->tableView->setVisible(true);
@@ -56,9 +54,7 @@ void Visualizar::Valor(QString valor, QString Tipo, QString ValorReg)
         ui->textEdit->setVisible(true);
         QStringList Leer = ValorReg.split("\n");
         for (int i=0;i<Leer.count();i++)
-        {
             ui->textEdit->append(Leer.value(i));
-        }
         TipoS = 1;
     }
 }

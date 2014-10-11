@@ -1041,8 +1041,10 @@ private slots:
     void on_pushButton_121_clicked();
     void on_actionTraductor_triggered();
     void Liberador();
-    void espacio();
     void on_tabWidget_5_currentChanged(int index);
+    void on_tabWidget_6_currentChanged(int index);
+    void on_tabWidget_8_currentChanged(int index);
+    void borrado();
 
 public:
     Ui::recoverdrake *uil;

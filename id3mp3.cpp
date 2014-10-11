@@ -148,7 +148,7 @@ id3mp3::id3mp3(QWidget *parent) :
     ui->lineEdit_7->setEnabled(false);
     ui->comboBox_2->setEnabled(false);
     QSqlQuery Variable(db);
-    Variable.exec("SELECT Genero FROM id3Genre");
+    Variable.exec("SELECT Genero FROM id3Genre ORDER BY Genero");
     while(Variable.next())
     {
         ui->comboBox->addItem(Variable.value(0).toString());

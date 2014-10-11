@@ -522,6 +522,8 @@
         <file>Imagenes/F1Compresor8.png</file>
         <file>Imagenes/F1Compresor9.png</file>
         <file>Imagenes/traductor.png</file>
+        <file>Imagenes/F1TempRDK.png</file>
+        <file>Imagenes/F1TempRDK1.png</file>
     </qresource>
     <qresource prefix="/codeBar">
         <file>Imagenes/codebar/FRE3OF9X.TTF</file>

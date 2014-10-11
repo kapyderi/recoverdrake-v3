@@ -572,7 +572,7 @@ color: rgb(0, 0, 255);</string>
       </sizepolicy>
      </property>
      <property name="title">
-      <string>Vacio</string>
+      <string>Pendiente...</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <property name="leftMargin">

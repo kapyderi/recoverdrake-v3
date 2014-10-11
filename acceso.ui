@@ -98,7 +98,7 @@ font: bold;
 </string>
        </property>
        <property name="text">
-        <string>vacio</string>
+        <string>Pendiente</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -548,7 +548,7 @@ color: rgb(0, 0, 255);
 font: bold italic;</string>
        </property>
        <property name="text">
-        <string>Vacio</string>
+        <string>Pendiente</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -898,7 +898,7 @@ color: rgb(0, 0, 255);
 font: Bold;</string>
        </property>
        <property name="text">
-        <string>Vacio</string>
+        <string>Pendiente</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1057,14 +1057,14 @@ font: bold;</string>
 font: bold;</string>
         </property>
         <property name="text">
-         <string>Vacio</string>
+         <string>Pendiente</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0" colspan="3">
        <widget class="QLabel" name="label_18">
         <property name="text">
-         <string>Vacio</string>
+         <string>Pendiente</string>
         </property>
        </widget>
       </item>

@@ -76,6 +76,7 @@ public:
     QString dist;
     QString getMAC(QString Tipo);
     QString getWhoami();
+    QString getIPconexion(QString Web);
 
 };
 

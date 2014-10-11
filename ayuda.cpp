@@ -188,6 +188,13 @@ void Ayuda::Valor(QString valor)
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(valor);
     }
+    if (valor == tr("TermRDK"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_23,valor);
+        ui->tabWidget->setCurrentPage(0);
+        ui->listWidget->setCurrentRow(0);
+        ui->lineEdit->setText(valor);
+    }
     if (ui->lineEdit->text() == "")
     {
         ui->tabWidget_2->setCurrentPage(1);
@@ -313,6 +320,11 @@ void Ayuda::on_listWidget_currentTextChanged(const QString &currentText)
     if (currentText == tr("Solucion a problemas::Grub con Grub-efi"))
     {
         ui->tabWidget->insertTab(0,ui->tab_22,tr("Solucion a problemas::Grub con Grub-efi"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("TermRDK"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_23,tr("TermRDK"));
         ui->tabWidget->setCurrentPage(0);
     }
 }
@@ -443,6 +455,11 @@ void Ayuda::on_listWidget_2_currentTextChanged(const QString &currentText)
         ui->tabWidget->insertTab(0,ui->tab_22,tr("Solucion a problemas::Grub con Grub-efi"));
         ui->tabWidget->setCurrentPage(0);
     }
+    if (currentText == tr("TermRDK"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_23,tr("TermRDK"));
+        ui->tabWidget->setCurrentPage(0);
+    }
 }
 
 void Ayuda::Comprobar()
@@ -570,6 +587,11 @@ void Ayuda::Comprobar()
     if (Valor == tr("Solucion a problemas::Grub con Grub-efi"))
     {
         ui->tabWidget->insertTab(0,ui->tab_22,tr("Solucion a problemas::Grub con Grub-efi"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (Valor == tr("TermRDK"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_23,tr("TermRDK"));
         ui->tabWidget->setCurrentPage(0);
     }
 }

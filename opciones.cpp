@@ -198,10 +198,10 @@ void opciones::Comprobar()
 void opciones::iniciar()
 {
     setUpdatesEnabled(false);
-    QProgressDialog progress(tr("Recopilando datos de preferencias personales... Espera por favor"), tr("Cancelar"), 0, 101, this);
+    QProgressDialog progress(tr("Recopilando datos de preferencias personales... Espera por favor"), tr("Cancelar"), 0, 102, this);
     progress.show();
     QTest::qWait(20);
-    for(int i=0;i<101;i++)
+    for(int i=0;i<102;i++)
     {
         qApp->processEvents();
         progress.setValue(i);
@@ -2029,8 +2029,30 @@ void opciones::iniciar()
                 ui->label_215->setText(QString::fromUtf8(Value));
             }
         }
+        if (i==100)
+        {
+            QString Valor;
+            if (arqt =="x86_64")
+            {
+                Valor= "lib64qtermwidget-devel";
+                Localizar = getRpm(Valor);
+            }
+            else
+            {
+                Valor= "libqtermwidget-devel";
+                Localizar = getRpm(Valor);
+            }
+            ui->label_447->setText(Valor);
+            if (Localizar.contains(tr("instalado")) || Localizar.contains("installed") || Localizar.contains("instalado"))
+                ui->label_448->setText(QString::fromUtf8("..."));
+            else
+            {
+                QString Value = getPack1(Valor);
+                ui->label_448->setText(QString::fromUtf8(Value));
+            }
+        }
     }
-    progress.setValue(101);
+    progress.setValue(102);
     setUpdatesEnabled(true);
 }
 
