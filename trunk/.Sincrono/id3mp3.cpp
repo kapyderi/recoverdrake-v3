@@ -839,7 +839,7 @@ void id3mp3::on_pushButton_2_clicked()
     connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
     connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
     int valor= comandos.count();
-    mib->Valor(valor,3);
+    mib->Valor(valor,4);
     mib->iniciarProceso();
     Totalizar = comandos.count();
     ui->progressBar->setRange(0,Totalizar);
@@ -1212,9 +1212,7 @@ void id3mp3::on_pushButton_12_clicked()
             ui->pushButton_13->setEnabled(true);
             ui->pushButton_14->setEnabled(true);
             ui->seekSlider_2->setMediaObject(MediaObject);
-            //ui->seekSlider_2->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
             ui->volumeSlider_4->setAudioOutput(AudioOutput);
-            //ui->volumeSlider_4->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
             timer->start(1000);
         }
     }
@@ -1242,9 +1240,7 @@ void id3mp3::on_pushButton_12_clicked()
         ui->pushButton_13->setEnabled(true);
         ui->pushButton_14->setEnabled(true);
         ui->seekSlider_2->setMediaObject(MediaObject);
-        //ui->seekSlider_2->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         ui->volumeSlider_4->setAudioOutput(AudioOutput);
-        //ui->volumeSlider_4->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         timer->start(1000);
     }
 }
@@ -2220,7 +2216,7 @@ void id3mp3::on_pushButton_17_clicked()
     connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
     connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
     int valor= comandos.count();
-    mib->Valor(valor,3);
+    mib->Valor(valor,4);
     mib->iniciarProceso();
     Totalizar = comandos.count();
     ui->progressBar->setRange(0,Totalizar);
@@ -2430,7 +2426,7 @@ void id3mp3::on_pushButton_8_clicked()
                 connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
                 connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
                 int valor= comandos.count();
-                mib->Valor(valor,3);
+                mib->Valor(valor,4);
                 mib->iniciarProceso();
                 Totalizar = comandos.count();
                 ui->progressBar->setRange(0,Totalizar);
@@ -2677,7 +2673,7 @@ void id3mp3::on_pushButton_8_clicked()
                     connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
                     connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
                     int valor= comandos.count();
-                    mib->Valor(valor,3);
+                    mib->Valor(valor,4);
                     mib->iniciarProceso();
                     Totalizar = comandos.count();
                     ui->progressBar->setRange(0,Totalizar);
@@ -2791,7 +2787,7 @@ void id3mp3::on_pushButton_8_clicked()
                     connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
                     connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
                     int valor= comandos.count();
-                    mib->Valor(valor,3);
+                    mib->Valor(valor,4);
                     mib->iniciarProceso();
                     Totalizar = comandos.count();
                     ui->progressBar->setRange(0,Totalizar);
@@ -3065,7 +3061,7 @@ void id3mp3::on_pushButton_20_clicked()
             connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
             connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
             int valor= comandos.count();
-            mib->Valor(valor,3);
+            mib->Valor(valor,4);
             mib->iniciarProceso();
             Totalizar = comandos.count();
             ui->progressBar->setRange(0,Totalizar);
@@ -3218,7 +3214,7 @@ void id3mp3::on_pushButton_21_clicked()
             connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
             connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
             int valor= comandos.count();
-            mib->Valor(valor,3);
+            mib->Valor(valor,4);
             mib->iniciarProceso();
             Totalizar = comandos.count();
             ui->progressBar->setRange(0,Totalizar);
@@ -3363,7 +3359,7 @@ void id3mp3::on_pushButton_22_clicked()
         connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
         connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
         int valor= comandos.count();
-        mib->Valor(valor,3);
+        mib->Valor(valor,4);
         mib->iniciarProceso();
         Totalizar = comandos.count();
         ui->progressBar->setRange(0,Totalizar);
@@ -3558,9 +3554,7 @@ void id3mp3::Ordenando()
     {
         QString cm;
         if (OtroDirectorio == "")
-        {
             cm = "mkdir /usr/share/RecoverDrake/BACKUPRD/";
-        }
         else
         {
             cm = "mkdir %1/BACKUPRD/";
@@ -3572,9 +3566,7 @@ void id3mp3::Ordenando()
     {
         QString cmd1;
         if (OtroDirectorio == "")
-        {
             cmd1 = "rm -vf -r /usr/share/RecoverDrake/BACKUPRD/";
-        }
         else
         {
             cmd1 = "rm -vf -r %1/BACKUPRD/";
@@ -3588,7 +3580,7 @@ void id3mp3::Ordenando()
         connect(mib, SIGNAL(ValorDato(QString)), this, SLOT(ProcesarValor(QString)));
         connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
         int valor= comandos.count();
-        mib->Valor(valor,3);
+        mib->Valor(valor,4);
         mib->iniciarProceso();
         Totalizar = comandos.count();
         ui->progressBar->setRange(0,Totalizar);
@@ -3679,7 +3671,7 @@ void id3mp3::Ordenando()
             connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
             connect(mib, SIGNAL(finProceso()), this, SLOT(Ordenando()));
             int valor= comandos.count();
-            mib->Valor(valor,3);
+            mib->Valor(valor,4);
             mib->iniciarProceso();
             Totalizar = comandos.count();
             ui->progressBar->setRange(0,Totalizar);
@@ -3693,7 +3685,7 @@ void id3mp3::Ordenando()
             connect(mib, SIGNAL(finProceso()), this, SLOT(mibFin()));
             connect(mib, SIGNAL(finProceso()), this, SLOT(Ordenando()));
             int valor= comandos.count();
-            mib->Valor(valor,3);
+            mib->Valor(valor,4);
             mib->iniciarProceso();
             Totalizar = comandos.count();
             ui->progressBar->setRange(0,Totalizar);

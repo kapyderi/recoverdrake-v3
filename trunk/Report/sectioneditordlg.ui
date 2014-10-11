@@ -74,7 +74,7 @@
      <item>
       <widget class="QGroupBox" name="footPageChk">
        <property name="title">
-        <string>Pie de Página</string>
+        <string>Pie de Pagina</string>
        </property>
        <property name="checkable">
         <bool>true</bool>

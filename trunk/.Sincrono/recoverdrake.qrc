@@ -479,6 +479,49 @@
         <file>Imagenes/F1DBClaves6.png</file>
         <file>Imagenes/F1DBClaves7.png</file>
         <file>Imagenes/Encriptar.png</file>
+        <file>Imagenes/F1Encriptador.png</file>
+        <file>Imagenes/F1Encriptador1.png</file>
+        <file>Imagenes/F1Encriptador2.png</file>
+        <file>Imagenes/F1Encriptador3.png</file>
+        <file>Imagenes/F1Encriptador4.png</file>
+        <file>Imagenes/F1Encriptador5.png</file>
+        <file>Imagenes/F1Encriptador6.png</file>
+        <file>Imagenes/F1Encriptador7.png</file>
+        <file>Imagenes/F1Encriptador8.png</file>
+        <file>Imagenes/F1Buscardor.png</file>
+        <file>Imagenes/F1Buscardor1.png</file>
+        <file>Imagenes/F1Buscardor2.png</file>
+        <file>Imagenes/F1Buscardor3.png</file>
+        <file>Imagenes/F1Buscardor5.png</file>
+        <file>Imagenes/F1Buscardor6.png</file>
+        <file>Imagenes/F1Buscardor7.png</file>
+        <file>Imagenes/Placa.png</file>
+        <file>Imagenes/F1Examen.png</file>
+        <file>Imagenes/F1Examen1.png</file>
+        <file>Imagenes/F1Examen2.png</file>
+        <file>Imagenes/F1Examen3.png</file>
+        <file>Imagenes/F1Examen4.png</file>
+        <file>Imagenes/F1Permisos.png</file>
+        <file>Imagenes/F1Permisos1.png</file>
+        <file>Imagenes/F1Permisos2.png</file>
+        <file>Imagenes/F1Permisos3.png</file>
+        <file>Imagenes/F1Permisos4.png</file>
+        <file>Imagenes/F1Permisos5.png</file>
+        <file>Imagenes/F1Permisos6.png</file>
+        <file>Imagenes/bootrepair.png</file>
+        <file>Imagenes/rescatux.png</file>
+        <file>Imagenes/systemrescue.png</file>
+        <file>Imagenes/clonezilla.png</file>
+        <file>Imagenes/gparted.png</file>
+        <file>Imagenes/openmandriva.png</file>
+        <file>Imagenes/F1PUsbLive.png</file>
+        <file>Imagenes/cohete.png</file>
+        <file>Imagenes/inicio.png</file>
+        <file>Imagenes/F1Noefi.png</file>
+        <file>Imagenes/F1Sincro7.png</file>
+        <file>Imagenes/F1Compresor8.png</file>
+        <file>Imagenes/F1Compresor9.png</file>
+        <file>Imagenes/traductor.png</file>
     </qresource>
     <qresource prefix="/codeBar">
         <file>Imagenes/codebar/FRE3OF9X.TTF</file>

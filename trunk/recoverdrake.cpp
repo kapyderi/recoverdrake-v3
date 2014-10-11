@@ -49,6 +49,8 @@
 
 using namespace QtConcurrent;
 
+
+
 //ver lo de instalado cuando esta en un sistema con codificacion espanol y recoverdrake en ingles que falla. (pasa en constain(tr("instalado")
 //http://asotto.blogspot.com.es/2012/01/borrando-archivos-de-un-directorio-con.html
 
@@ -70,6 +72,7 @@ recoverdrake::recoverdrake(QWidget *parent) :
     ui->radioButton_4->setChecked(true);
     ui->radioButton_5->setChecked(true);
     ui->checkBox_7->setChecked(true);
+    ui->tabWidget->removeTab(32);
     ui->tabWidget->removeTab(31);
     ui->tabWidget->removeTab(30);
     ui->tabWidget->removeTab(29);
@@ -133,6 +136,7 @@ recoverdrake::recoverdrake(QWidget *parent) :
     Pagina28=0;
     Pagina29=0;
     Pagina30=0;
+    Pagina31=0;
     CerrarP=0;
     Puntero = 0;
     Puntero1 = 0;
@@ -969,6 +973,50 @@ bool recoverdrake::eventFilter(QObject* obj, QEvent *event)
 void recoverdrake::Paquetes()
 {
     drakeSistema drake;
+    IPconexion = drake.getIPconexion("www.google.com");
+    if (IPconexion == "")
+        IPconexion = drake.getIPconexion("www.ebay.com");
+    if (IPconexion == "")
+        IPconexion = drake.getIPconexion("www.wikipedia.org");
+    ip = drake.getIP();    
+    release = drake.getRelease();
+    ipRoute = drake.getIPRouter();
+    QStringList Route = ipRoute.split(" ");
+    ipRoute = Route.value(Route.count()-1);
+    ipEssid = drake.getEssid(ipRoute);
+    QStringList Essid1;
+    ipEssid = ipEssid.remove("ESSID:");
+    ipEssid = ipEssid.remove("                    ");
+    Essid1 = ipEssid.split("\n");
+    ipEssid = Essid1.value(0);
+    ipEssid = ipEssid.remove("\"");
+    if (ipRoute!="")
+    {
+        if (EthF > 0)
+            this->ui->label_22->setText(""+ipRoute+"");
+        else
+            this->ui->label_22->setText(""+ipRoute+" / "+Essid+"");
+    }
+    else if (ipRoute == "")
+        this->ui->label_22->setText(tr("Utilizando Ethernet"));
+    if (ip == "")
+        this->ui->label_19->setText(tr("Sin Acceso a Red"));
+    else if (ip != "")
+        this->ui->label_19->setText(QString::fromUtf8(ip));
+    if (EthF > 0)
+    {
+        QSqlQuery query8(dbs);
+        query8.exec("UPDATE ethernet SET Conexion='"+ipRoute+"' WHERE id=2");
+        QSqlQuery eth(dbs);
+        eth.exec("UPDATE red SET ethernet='2',wifi='0' WHERE id=2");
+    }
+    else
+    {
+        QSqlQuery query8(dbs);
+        query8.exec("UPDATE wifi SET Conexion='"+ipRoute+"',Essid='"+ipEssid+"' WHERE id=2");
+        QSqlQuery eth(dbs);
+        eth.exec("UPDATE red SET ethernet='0',wifi='2' WHERE id=2");
+    }
     arqt = drake.getArquitectura();
     du = drake.getEspacio();
     Pci = drake.getPci();
@@ -1301,6 +1349,14 @@ void recoverdrake::Paquetes()
         webmin = "0";
     else
         webmin ="1";
+    if (arqt =="x86_64")
+        libqTermWidget= getPack("lib64qtermwidget-devel");
+    else
+        libqTermWidget= getPack("libqtermwidget-devel");
+    if (libqTermWidget == "")
+        libqTermWidget= "0";
+    else
+        libqTermWidget= "1";
 }
 
 QString recoverdrake::getPack(QString activo)
@@ -1330,9 +1386,9 @@ void recoverdrake::Modulos()
 {
     drakeSistema drake;
     setUpdatesEnabled(false);
-    QProgressDialog progress(tr("Cargando modulos y configuraciones... Espera por favor"), tr("Cancelar"), 0, 27, this);
+    QProgressDialog progress(tr("Cargando modulos y configuraciones... Espera por favor"), tr("Cancelar"), 0, 23, this);
     progress.show();
-    for(i=0;i<27;i++)
+    for(i=0;i<23;i++)
     {
         qApp->processEvents();
         progress.setValue(i);
@@ -1346,177 +1402,122 @@ void recoverdrake::Modulos()
             QStringList Parcial2 = X2.split("x");
             Dato1 = Parcial2.value(0).toInt();
             Dato2 = Parcial2.value(1).toInt();
+            progress.setLabelText(tr("Recibiendo Arquitectura... Espera por favor"));
         }        
         if (i==1)
         {
-            progress.setLabelText(tr("Recibiendo Arquitectura... Espera por favor"));
             arqt = drake.getArquitectura();
+            progress.setLabelText(tr("Recibiendo Usuario... Espera por favor"));
         }
         if (i==2)
         {
-            progress.setLabelText(tr("Recibiendo Usuario... Espera por favor"));
             user = drake.getUser();
+            progress.setLabelText(tr("Recibiendo Tipo de Nucleo... Espera por favor"));
         }
         if (i==3)
         {
-            progress.setLabelText(tr("Recibiendo Tipo de Nucleo... Espera por favor"));
             Tip = drake.getTipKernel();
+            progress.setLabelText(tr("Recibiendo Version del Nucleo... Espera por favor"));
         }
         if (i==4)
         {
-            progress.setLabelText(tr("Recibiendo Version del Nucleo... Espera por favor"));
             Ver = drake.getVerKernel();
+            progress.setLabelText(tr("Recibiendo Revision del Nucleo... Espera por favor"));
         }
         if (i==5)
         {
-            progress.setLabelText(tr("Recibiendo Revision del Nucleo... Espera por favor"));
             Rev = drake.getRevKernel();
+            progress.setLabelText(tr("Recibiendo Directorio actual... Espera por favor"));
         }
         if (i==6)
         {
-            progress.setLabelText(tr("Recibiendo Directorio actual... Espera por favor"));
             Dir = drake.getDirActual();
             Vir = drake.getVirtual();
+            progress.setLabelText(tr("Recibiendo Distro y version... Espera por favor"));
         }
         if (i==7)
         {
-            progress.setLabelText(tr("Recibiendo Distro y version... Espera por favor"));
             Linux = drake.getLinux();
+            progress.setLabelText(tr("Recibiendo Modulos instalados en el nucleo... Espera por favor"));
         }
         if (i==8)
         {
-            progress.setLabelText(tr("Recibiendo Modulos instalados en el nucleo... Espera por favor"));
             Mod = drake.getModulo();
+            progress.setLabelText(tr("Recibiendo Nombre de la Distro... Espera por favor"));
         }
         if (i==10)
         {
-            progress.setLabelText(tr("Recibiendo Nombre de la Distro... Espera por favor"));
             Distro = drake.getDistrop();
+            progress.setLabelText(tr("Recibiendo Memoria libre... Espera por favor"));
         }
         if (i==11)
         {
-            progress.setLabelText(tr("Recibiendo Memoria libre... Espera por favor"));
             free = drake.getFree();
+            progress.setLabelText(tr("Recibiendo Espacio libre total... Espera por favor"));
         }
         if (i==12)
         {
-            progress.setLabelText(tr("Recibiendo Espacio libre total... Espera por favor"));
             Total = drake.getDisco();
+            progress.setLabelText(tr("Recibiendo Espacio libre de la raiz... Espera por favor"));
         }
         if (i==13)
         {
-            progress.setLabelText(tr("Recibiendo Espacio libre de la raiz... Espera por favor"));
             Raiz = drake.getDiscR();
             Raiz=Raiz.right(6).left(3).remove("%");
+            progress.setLabelText(tr("Recibiendo Espacio libre de home... Espera por favor"));
         }
         if (i==14)
         {
-            progress.setLabelText(tr("Recibiendo Espacio libre de home... Espera por favor"));
             Home = drake.getDiscH();
             Home=Home.right(10).left(3).remove("%");
+            progress.setLabelText(tr("Recibiendo IP del router... Espera por favor"));
         }
         if (i==15)
         {
-            progress.setLabelText(tr("Recibiendo IP del router... Espera por favor"));
             ipRoute = drake.getIPRouter();
             QStringList Route = ipRoute.split(" ");
             ipRoute = Route.value(Route.count()-1);
+            progress.setLabelText(tr("Recibiendo Resoluciones disponibles de pantalla... Espera por favor"));
         }
         if (i==16)
         {
-            progress.setLabelText(tr("Recibiendo Resoluciones disponibles de pantalla... Espera por favor"));
             Resolution = drake.getResolucion();
             Resolution = Resolution.replace("minimum","Min.").replace("current","Actual").replace("maximum","Max.").remove("Screen 0:");
+            progress.setLabelText(tr("Recibiendo Hostname... Espera por favor"));
         }
         if (i==17)
         {
-            progress.setLabelText(tr("Recibiendo Hostname... Espera por favor"));
             infoHost = drake.getHostname();
+            progress.setLabelText(tr("Recibiendo Ethernet... Espera por favor"));
         }
         if (i==18)
         {
-            progress.setLabelText(tr("Recibiendo Ethernet... Espera por favor"));
             Eth=drake.getEthernet();
             Eth=Eth.remove("          ");
             Eth=Eth.remove("RX bytes:");
             QStringList Eth0=Eth.split(" ");
             Eth = Eth0.value(0);
             EthF = Eth.toInt();
+            progress.setLabelText(tr("Recibiendo Arquitectura... Espera por favor"));
         }
         if (i==19)
         {
-            progress.setLabelText(tr("Recibiendo Arquitectura... Espera por favor"));
             arqt = drake.getArquitectura();
+            progress.setLabelText(tr("Recibiendo Distribucion... Espera por favor"));
         }
         if (i==20)
-        {
-            progress.setLabelText(tr("Recibiendo Distribucion... Espera por favor"));
+        {            
             dist = drake.getDistribucion();
+            progress.setLabelText(tr("Recibiendo MAC... Espera por favor"));
         }
         if (i==21)
         {
-            progress.setLabelText(tr("Recibiendo Ip... Espera por favor"));
-            ip = drake.getIP();
+            MAC = drake.getMAC(ipRoute);
+            this->ui->label_161->setText(MAC);
+            progress.setLabelText(tr("Configurando Estilo visual... Espera por favor"));
         }
         if (i==22)
         {
-            progress.setLabelText(tr("Recibiendo Release... Espera por favor"));
-            release = drake.getRelease();
-        }
-        if (i==23)
-        {
-            progress.setLabelText(tr("Recibiendo Ip del router... Espera por favor"));
-            ipRoute = drake.getIPRouter();
-            QStringList Route = ipRoute.split(" ");
-            ipRoute = Route.value(Route.count()-1);
-            ipEssid = drake.getEssid(ipRoute);
-            QStringList Essid1;
-            ipEssid = ipEssid.remove("ESSID:");
-            ipEssid = ipEssid.remove("                    ");
-            Essid1 = ipEssid.split("\n");
-            ipEssid = Essid1.value(0);
-            ipEssid = ipEssid.remove("\"");
-            if (ipRoute!="")
-            {
-                if (EthF > 0)
-                    this->ui->label_22->setText(""+ipRoute+"");
-                else
-                    this->ui->label_22->setText(""+ipRoute+" / "+Essid+"");
-            }
-            else if (ipRoute == "")
-                this->ui->label_22->setText(tr("Utilizando Ethernet"));
-            if (ip == "")
-                this->ui->label_19->setText(tr("Sin Acceso a Red"));
-            else if (ip != "")
-                this->ui->label_19->setText(QString::fromUtf8(ip));
-        }
-        if (i==24)
-        {
-            progress.setLabelText(tr("Actualizando Datos de redes... Espera por favor"));
-            if (EthF > 0)
-            {
-                QSqlQuery query8(dbs);
-                query8.exec("UPDATE ethernet SET Conexion='"+ipRoute+"' WHERE id=2");
-                QSqlQuery eth(dbs);
-                eth.exec("UPDATE red SET ethernet='2',wifi='0' WHERE id=2");
-            }
-            else
-            {
-                QSqlQuery query8(dbs);
-                query8.exec("UPDATE wifi SET Conexion='"+ipRoute+"',Essid='"+ipEssid+"' WHERE id=2");
-                QSqlQuery eth(dbs);
-                eth.exec("UPDATE red SET ethernet='0',wifi='2' WHERE id=2");
-            }
-        }
-        if (i==25)
-        {
-            progress.setLabelText(tr("Recibiendo MAC... Espera por favor"));
-            MAC = drake.getMAC(ipRoute);
-            this->ui->label_161->setText(MAC);
-        }
-        if (i==26)
-        {
-            progress.setLabelText(tr("Configurando Estilo visual... Espera por favor"));
             if (Dato1 != 1280 || Dato2 != 1024)
             {
                 if (Dato1 <= 1279 || Dato2 <= 1023)
@@ -1577,7 +1578,7 @@ void recoverdrake::Modulos()
             ui->textEdit_2->setText(tr("<center><span style='font-size:12pt'><b>Sin alarmas activas"));
         }
     }
-    progress.setValue(27);
+    progress.setValue(23);
     setUpdatesEnabled(true);
 }
 
@@ -1823,6 +1824,11 @@ void recoverdrake::Actualizar()
     drakeSistema drake;
     Raiz = drake.getDiscR();
     Home = drake.getDiscH();
+    IPconexion = drake.getIPconexion("www.google.com");
+    if (IPconexion == "")
+        IPconexion = drake.getIPconexion("www.ebay.com");
+    if (IPconexion == "")
+        IPconexion = drake.getIPconexion("www.wikipedia.org");
     ip = drake.getIP();
     Resolution = drake.getResolucion();
     Resolution = Resolution.replace("minimum","Min.").replace("current","Actual").replace("maximum","Max.").remove("Screen 0:");
@@ -2635,6 +2641,11 @@ void recoverdrake::Arranque()
                 QString comando100 = "urpmi -a --auto --force tree";
                 QString comando101 = "urpmi -a --auto --force hexedit";
                 QString comando102 = "urpmi -a --auto --force webmin";
+                QString comando103;
+                if (arqt =="x86_64")
+                    comando103 = "urpmi -a --auto --force lib64qtermwidget-devel";
+                else
+                    comando103 = "urpmi -a --auto --force libqtermwidget-devel";
                 comandos << cmdx << comando << comando1 << comando2 << comando3 << comando4 << comando5 << comando6 << comando7 << comando8 << comando9 << comando10;
                 comandos << comando11 << comando12 << comando13 << comando14 << comando15 << comando16 << comando17 << comando18 << comando19 << comando20;
                 if (Eliminar == 1)
@@ -2647,7 +2658,7 @@ void recoverdrake::Arranque()
                 comandos << comando61 << comando62 << comando63 << comando64 << comando65 << comando66 << comando67 << comando68 << comando69 << comando70 << comando71 << comando72;
                 comandos << comando73 << comando74 << comando75 << comando76 << comando77 << comando78 << comando79 << comando80 << comando81 << comando82 << comando83 << comando84;
                 comandos << comando85 << comando86 << comando87 << comando88 << comando89 << comando90 << comando91 << comando92 << comando93 << comando94;
-                comandos << comando95 << comando96 << comando98 << comando99 << comando100 << comando101 << comando102;
+                comandos << comando95 << comando96 << comando98 << comando99 << comando100 << comando101 << comando102 << comando103;
                 QString cm, cmd, cmd1, cmd2, cmd3, cmd4;
                 if (nrg2iso == "0")
                 {
@@ -2890,6 +2901,11 @@ void recoverdrake::Arranque()
                         QString comando100 = "urpmi -a --auto --force tree";
                         QString comando101 = "urpmi -a --auto --force hexedit";
                         QString comando102 = "urpmi -a --auto --force webmin";
+                        QString comando103;
+                        if (arqt =="x86_64")
+                            comando103 = "urpmi -a --auto --force lib64qtermwidget-devel";
+                        else
+                            comando103 = "urpmi -a --auto --force libqtermwidget-devel";
                         comandos << cmdx << comando << comando1 << comando2 << comando3 << comando4 << comando5 << comando6 << comando7 << comando8 << comando9 << comando10;
                         comandos << comando11 << comando12 << comando13 << comando14 << comando15 << comando16 << comando17 << comando18 << comando19 << comando20;
                         if (Eliminar == 1)
@@ -2902,7 +2918,7 @@ void recoverdrake::Arranque()
                         comandos << comando61 << comando62 << comando63 << comando64 << comando65 << comando66 << comando67 << comando68 << comando69 << comando70 << comando71 << comando72;
                         comandos << comando73 << comando74 << comando75 << comando76 << comando77 << comando78 << comando79 << comando80 << comando81 << comando82 << comando83 << comando84;
                         comandos << comando85 << comando86 << comando87 << comando88 << comando89 << comando90 << comando91 << comando92 << comando93 << comando94;
-                        comandos << comando95 << comando96 << comando98 << comando99 << comando100 << comando101 << comando102;
+                        comandos << comando95 << comando96 << comando98 << comando99 << comando100 << comando101 << comando102 << comando103;
                         QString cm, cmd, cmd1, cmd2, cmd3, cmd4;
                         if (nrg2iso == "0")
                         {
@@ -3173,6 +3189,11 @@ void recoverdrake::on_actionComprobar_dependencias_triggered()
            QString comando100 = "urpmi -a --auto --force tree";
            QString comando101 = "urpmi -a --auto --force hexedit";
            QString comando102 = "urpmi -a --auto --force webmin";
+           QString comando103;
+           if (arqt =="x86_64")
+               comando103 = "urpmi -a --auto --force lib64qtermwidget-devel";
+           else
+               comando103 = "urpmi -a --auto --force libqtermwidget-devel";
            comandos << cmdx << comando << comando1 << comando2 << comando3 << comando4 << comando5 << comando6 << comando7 << comando8 << comando9 << comando10;
            comandos << comando11 << comando12 << comando13 << comando14 << comando15 << comando16 << comando17 << comando18 << comando19 << comando20;
            if (Eliminar == 1)
@@ -3185,7 +3206,7 @@ void recoverdrake::on_actionComprobar_dependencias_triggered()
            comandos << comando61 << comando62 << comando63 << comando64 << comando65 << comando66 << comando67 << comando68 << comando69 << comando70 << comando71 << comando72;
            comandos << comando73 << comando74 << comando75 << comando76 << comando77 << comando78 << comando79 << comando80 << comando81 << comando82 << comando83 << comando84;
            comandos << comando85 << comando86 << comando87 << comando88 << comando89 << comando90 << comando91 << comando92 << comando93 << comando94;
-           comandos << comando95 << comando96 << comando98 << comando99 << comando100 << comando101 << comando102;
+           comandos << comando95 << comando96 << comando98 << comando99 << comando100 << comando101 << comando102 << comando103;
            QString cm, cmd, cmd1, cmd2, cmd3, cmd4;
            if (nrg2iso == "0")
            {
@@ -3589,6 +3610,11 @@ void recoverdrake::on_actionComprabar_depndencias_RecoverDrake_triggered(bool c)
            QString comando100 = "urpmi -a --auto --force tree";
            QString comando101 = "urpmi -a --auto --force hexedit";
            QString comando102 = "urpmi -a --auto --force webmin";
+           QString comando103;
+           if (arqt =="x86_64")
+               comando103 = "urpmi -a --auto --force lib64qtermwidget-devel";
+           else
+               comando103 = "urpmi -a --auto --force libqtermwidget-devel";
            comandos << cmdx << comando << comando1 << comando2 << comando3 << comando4 << comando5 << comando6 << comando7 << comando8 << comando9 << comando10;
            comandos << comando11 << comando12 << comando13 << comando14 << comando15 << comando16 << comando17 << comando18 << comando19 << comando20;
            if (Eliminar == 1)
@@ -3601,7 +3627,7 @@ void recoverdrake::on_actionComprabar_depndencias_RecoverDrake_triggered(bool c)
            comandos << comando61 << comando62 << comando63 << comando64 << comando65 << comando66 << comando67 << comando68 << comando69 << comando70 << comando71 << comando72;
            comandos << comando73 << comando74 << comando75 << comando76 << comando77 << comando78 << comando79 << comando80 << comando81 << comando82 << comando83 << comando84;
            comandos << comando85 << comando86 << comando87 << comando88 << comando89 << comando90 << comando91 << comando92 << comando93 << comando94;
-           comandos << comando95 << comando96 << comando98 << comando99 << comando100 << comando101 << comando102;
+           comandos << comando95 << comando96 << comando98 << comando99 << comando100 << comando101 << comando102 << comando103;
            QString cm, cmd, cmd1, cmd2, cmd3, cmd4;
            if (nrg2iso == "0")
            {
@@ -20685,9 +20711,9 @@ void recoverdrake::on_pushButton_clicked()
     ui->progressBar->setValue(0);
     drakeSistema drake;
     setUpdatesEnabled(false);
-    QProgressDialog progress(tr("Refrescando datos... Espera por favor"), tr("Cancelar"), 0, 26, this);
+    QProgressDialog progress(tr("Refrescando datos... Espera por favor"), tr("Cancelar"), 0, 27, this);
     progress.show();
-    for(i=0;i<26;i++)
+    for(i=0;i<27;i++)
     {
         qApp->processEvents();
         progress.setValue(i);
@@ -20742,7 +20768,8 @@ void recoverdrake::on_pushButton_clicked()
         if (i==23)
         {
             ipRoute = drake.getIPRouter();
-            ipRoute = ipRoute.right(5).remove(" ");
+            QStringList Route = ipRoute.split(" ");
+            ipRoute = Route.value(Route.count()-1);
             MAC = drake.getMAC(ipRoute);
             this->ui->label_161->setText(MAC);
         }
@@ -20756,6 +20783,14 @@ void recoverdrake::on_pushButton_clicked()
         {
             Resolution = drake.getResolucion();
             Resolution = Resolution.replace("minimum","Min.").replace("current","Actual").replace("maximum","Max.").remove("Screen 0:");
+        }
+        if (i==26)
+        {
+            IPconexion = drake.getIPconexion("www.google.com");
+            if (IPconexion == "")
+                IPconexion = drake.getIPconexion("www.ebay.com");
+            if (IPconexion == "")
+                IPconexion = drake.getIPconexion("www.wikipedia.org");
         }
     }
     this->ui->textEdit_9->setText(QString::fromUtf8(rpm));
@@ -20798,7 +20833,7 @@ void recoverdrake::on_pushButton_clicked()
         ui->tabWidget_8->setCurrentPage(0);
         return;
     }
-    progress.setValue(26);
+    progress.setValue(27);
     setUpdatesEnabled(true);
 }
 
@@ -29400,7 +29435,7 @@ void recoverdrake::on_actionTraductor_triggered()
 {
     QString hora = QTime::currentTime().toString("hh:mm:ss");
     ui->textEdit_4->append(""+hora+tr("-- Accion: Traductor."));
-    if (ip == tr("Sin Acceso a Red"))
+    if (IPconexion == "")
     {
         QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
         m.setText(tr(QString::fromUtf8("Esta utilidad solo funciona si se tiene internet.<p>Comprueba que tengas acceso.")));
@@ -29532,23 +29567,116 @@ void recoverdrake::on_tabWidget_6_currentChanged(int index)
 
 void recoverdrake::on_tabWidget_8_currentChanged(int index)
 {
-        Q_UNUSED(index);
-        ui->textEdit_9->setText(QString::fromUtf8(rpm));
-        ui->textEdit_10->setText(QString::fromUtf8(Pci));
-        ui->textEdit_6->setText(QString::fromUtf8(du));
-        ui->textEdit_7->setText(QString::fromUtf8(repo));
-        ui->textEdit_5->setText(QString::fromUtf8(Mod));
-        ui->textEdit_8->setText(QString::fromUtf8(red));
-        ui->textEdit_11->setText(QString::fromUtf8(infoPro));
-        ui->textEdit_12->setText(QString::fromUtf8(Bios));
-        ui->textEdit_13->setText(QString::fromUtf8(rpm));
-        ui->textEdit_14->setText(QString::fromUtf8(Pci));
-        ui->textEdit_15->setText(QString::fromUtf8(du));
-        ui->textEdit_16->setText(QString::fromUtf8(repo));
-        ui->textEdit_17->setText(QString::fromUtf8(Mod));
-        ui->textEdit_18->setText(QString::fromUtf8(red));
-        ui->textEdit_19->setText(QString::fromUtf8(infoPro));
-        ui->textEdit_20->setText(QString::fromUtf8(Bios));
+    Q_UNUSED(index);
+    ui->textEdit_9->setText(QString::fromUtf8(rpm));
+    ui->textEdit_10->setText(QString::fromUtf8(Pci));
+    ui->textEdit_6->setText(QString::fromUtf8(du));
+    ui->textEdit_7->setText(QString::fromUtf8(repo));
+    ui->textEdit_5->setText(QString::fromUtf8(Mod));
+    ui->textEdit_8->setText(QString::fromUtf8(red));
+    ui->textEdit_11->setText(QString::fromUtf8(infoPro));
+    ui->textEdit_12->setText(QString::fromUtf8(Bios));
+    ui->textEdit_13->setText(QString::fromUtf8(rpm));
+    ui->textEdit_14->setText(QString::fromUtf8(Pci));
+    ui->textEdit_15->setText(QString::fromUtf8(du));
+    ui->textEdit_16->setText(QString::fromUtf8(repo));
+    ui->textEdit_17->setText(QString::fromUtf8(Mod));
+    ui->textEdit_18->setText(QString::fromUtf8(red));
+    ui->textEdit_19->setText(QString::fromUtf8(infoPro));
+    ui->textEdit_20->setText(QString::fromUtf8(Bios));
+}
+
+void recoverdrake::on_pushButton_122_clicked()
+{
+    this->on_actionConsola_triggered();
+}
+
+void recoverdrake::on_actionConsola_triggered()
+{
+    QString hora = QTime::currentTime().toString("hh:mm:ss");
+    ui->textEdit_4->append(""+hora+tr("-- Accion: Consola."));
+    if (libqTermWidget == "0")
+    {
+        QMessageBox m; if (Stilo == "A") m.setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+        m.setText(tr(QString::fromUtf8("No se puede utilizar esta funcion sin instalar la dependencia \"libqtermwidget-devel\" necesaria.<p>Lo primero es refrescar dependencias en el menu principal.<p>Si no se soluciona, realiza la instalacion para poder utilizarla, activando las dependencias en el menu principal.<P>Si sigue pasando puede ser debido a una corrupcion de la base de datos.<p>Realiza la opcion correspondiente de Solucion de problemas/Reconstruccion de la DB.")));
+        m.exec();
+    }
+    else
+    {
+        int respuesta = 0;
+        if (Mensaka!="Activo")
+        {
+            respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Consola TermRDK")),
+                           QString::fromUtf8(tr("<center><b>Consola TermRDK</b></center><p>"
+                           "Con esta utilidad accedemos de forma embebida a una consola dentro "
+                           "de RecoverDrake.<p>"
+                           "&iquest;Acceder a la consola TermRDK?")), QMessageBox::Ok, QMessageBox::No);
+        }
+        else
+            respuesta=QMessageBox::Ok;
+        if (respuesta == QMessageBox::Ok)
+        {
+            if (Window == 0)
+            {
+                Terminal *Consola = new Terminal(this);
+                if (Stilo == "A")
+                    Consola->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                Consola->showMaximized();
+                Consola->Valor("");
+                Consola->exec();
+            }
+            else if (Window == 1)
+            {
+                QMdiSubWindow *existing = buscarConsola();
+                if(!existing)
+                {
+                    Conectar();
+                    Consola = new Terminal;
+                    ui->tabWidget->insertTab(Pestanas,ui->tab_77,tr("TermRDK"));
+                    ui->tabWidget->setTabIcon(Pestanas,QIcon(":/Imagenes/console-mdk.png"));
+                    ui->tabWidget->setCurrentPage(Pestanas);
+                    Pagina31 = Pestanas;
+                    ui->mdiArea_31->addSubWindow(Consola);
+                    connect(Consola, SIGNAL(Cerrar()), this, SLOT(CerrarConsola()));
+                    if (Stilo == "A")
+                        Consola->setStyleSheet("background-color: "+cantidad51+"; color: "+cantidad50+"; font-size: "+cantidad49+"pt; font-style: "+DatoTalla+"; font-family: "+cantidad47+"; font-weight: "+DatoNegro+"");
+                    Consola->showMaximized();
+                    Consola->Valor("Quitar");
+                    Consola->exec();
+                }
+                else
+                {
+                    ui->tabWidget->setCurrentPage(Pagina31);
+                    ui->mdiArea_31->setActiveSubWindow(existing);
+                }
+                Consola->setWindowState(Qt::WindowMaximized);
+            }
+        }
+    }
+}
+
+QMdiSubWindow *recoverdrake::buscarConsola()
+{
+    foreach (QMdiSubWindow *window, ui->mdiArea_31->subWindowList())
+    {
+        if(Terminal *a= qobject_cast<Terminal *>(window->widget()))
+        {
+            Q_UNUSED(a);
+            return window;
+        }
+    }
+    return 0;
+}
+
+void recoverdrake::CerrarConsola()
+{
+    if (Pagina31 != 0)
+    {
+        ui->mdiArea_31->removeSubWindow(Consola);
+        ui->tabWidget->removeTab(ui->tabWidget->currentIndex());
+        Pagina31=0;
+        Desconectar();
+    }
 }
 
 void recoverdrake::on_actionRealizar_arreglo_bruto_triggered()

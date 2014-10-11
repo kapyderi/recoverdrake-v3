@@ -911,7 +911,7 @@ recoverdrake::recoverdrake(QWidget *parent) :
         ui->tableView->resizeColumnsToContents();
     }
     future = new QFuture<void>;
-    watcher = new QFutureWatcher<void>;
+    watcher = new QFutureWatcher<void>;    
     Arranque();
     this->installEventFilter(this);
     Modulos();
@@ -970,11 +970,18 @@ void recoverdrake::Paquetes()
 {
     drakeSistema drake;
     arqt = drake.getArquitectura();
+    du = drake.getEspacio();
+    Pci = drake.getPci();
     Localizar = drake.getRpms();
+    repo = drake.getRepositorio();
+    red = drake.getRedes();
+    infoPro = drake.getInfoPro();
+    Bios = drake.getBios();
     if (Localizar == "")
     {
         system("rm -vrf /var/lib/rpm/__db.0*");
-        system("rpm --rebuilddb");        
+        system("rpm --rebuilddb");
+        Localizar = drake.getRpms();
     }
     else
     {
@@ -1323,9 +1330,9 @@ void recoverdrake::Modulos()
 {
     drakeSistema drake;
     setUpdatesEnabled(false);
-    QProgressDialog progress(tr("Cargando modulos y configuraciones... Espera por favor"), tr("Cancelar"), 0, 32, this);
+    QProgressDialog progress(tr("Cargando modulos y configuraciones... Espera por favor"), tr("Cancelar"), 0, 27, this);
     progress.show();
-    for(i=0;i<32;i++)
+    for(i=0;i<27;i++)
     {
         qApp->processEvents();
         progress.setValue(i);
@@ -1378,75 +1385,55 @@ void recoverdrake::Modulos()
         }
         if (i==8)
         {
-            progress.setLabelText(tr("Recibiendo Hardware PCI... Espera por favor"));
-            Pci = drake.getPci();
-        }
-        if (i==9)
-        {
             progress.setLabelText(tr("Recibiendo Modulos instalados en el nucleo... Espera por favor"));
             Mod = drake.getModulo();
         }
         if (i==10)
         {
-            progress.setLabelText(tr("Recibiendo Modulos de redes... Espera por favor"));
-            red = drake.getRedes();
-        }
-        if (i==11)
-        {
             progress.setLabelText(tr("Recibiendo Nombre de la Distro... Espera por favor"));
             Distro = drake.getDistrop();
         }
-        if (i==12)
+        if (i==11)
         {
             progress.setLabelText(tr("Recibiendo Memoria libre... Espera por favor"));
             free = drake.getFree();
         }
-        if (i==13)
+        if (i==12)
         {
             progress.setLabelText(tr("Recibiendo Espacio libre total... Espera por favor"));
             Total = drake.getDisco();
         }
-        if (i==14)
+        if (i==13)
         {
             progress.setLabelText(tr("Recibiendo Espacio libre de la raiz... Espera por favor"));
             Raiz = drake.getDiscR();
             Raiz=Raiz.right(6).left(3).remove("%");
         }
-        if (i==15)
+        if (i==14)
         {
             progress.setLabelText(tr("Recibiendo Espacio libre de home... Espera por favor"));
             Home = drake.getDiscH();
             Home=Home.right(10).left(3).remove("%");
         }
-        if (i==16)
+        if (i==15)
         {
             progress.setLabelText(tr("Recibiendo IP del router... Espera por favor"));
             ipRoute = drake.getIPRouter();
             QStringList Route = ipRoute.split(" ");
             ipRoute = Route.value(Route.count()-1);
         }
-        if (i==17)
-        {
-            progress.setLabelText(tr("Recibiendo Uso de CPU... Espera por favor"));
-            infoPro = drake.getInfoPro();
-        }
-        if (i==18)
+        if (i==16)
         {
             progress.setLabelText(tr("Recibiendo Resoluciones disponibles de pantalla... Espera por favor"));
             Resolution = drake.getResolucion();
             Resolution = Resolution.replace("minimum","Min.").replace("current","Actual").replace("maximum","Max.").remove("Screen 0:");
         }
-        if (i==19)
+        if (i==17)
         {
             progress.setLabelText(tr("Recibiendo Hostname... Espera por favor"));
             infoHost = drake.getHostname();
         }
-        if (i==20)
-        {
-            progress.setLabelText(tr("Recibiendo Informacion de la BIOS... Espera por favor"));
-            Bios = drake.getBios();
-        }
-        if (i==21)
+        if (i==18)
         {
             progress.setLabelText(tr("Recibiendo Ethernet... Espera por favor"));
             Eth=drake.getEthernet();
@@ -1456,39 +1443,27 @@ void recoverdrake::Modulos()
             Eth = Eth0.value(0);
             EthF = Eth.toInt();
         }
-        if (i==22)
+        if (i==19)
         {
             progress.setLabelText(tr("Recibiendo Arquitectura... Espera por favor"));
             arqt = drake.getArquitectura();
         }
-        if (i==23)
+        if (i==20)
         {
             progress.setLabelText(tr("Recibiendo Distribucion... Espera por favor"));
             dist = drake.getDistribucion();
         }
-        if (i==24)
-        {
-            progress.setLabelText(tr("Recibiendo Espacio libre... Espera por favor"));
-            du="";
-            QFuture<void> f1 = run(this,&recoverdrake::espacio);
-            Q_UNUSED(f1);
-        }
-        if (i==25)
-        {
-            progress.setLabelText(tr("Recibiendo Repositorios... Espera por favor"));            
-            repo = drake.getRepositorio();
-        }
-        if (i==26)
+        if (i==21)
         {
             progress.setLabelText(tr("Recibiendo Ip... Espera por favor"));
             ip = drake.getIP();
         }
-        if (i==27)
+        if (i==22)
         {
             progress.setLabelText(tr("Recibiendo Release... Espera por favor"));
             release = drake.getRelease();
         }
-        if (i==28)
+        if (i==23)
         {
             progress.setLabelText(tr("Recibiendo Ip del router... Espera por favor"));
             ipRoute = drake.getIPRouter();
@@ -1515,7 +1490,7 @@ void recoverdrake::Modulos()
             else if (ip != "")
                 this->ui->label_19->setText(QString::fromUtf8(ip));
         }
-        if (i==29)
+        if (i==24)
         {
             progress.setLabelText(tr("Actualizando Datos de redes... Espera por favor"));
             if (EthF > 0)
@@ -1533,13 +1508,13 @@ void recoverdrake::Modulos()
                 eth.exec("UPDATE red SET ethernet='0',wifi='2' WHERE id=2");
             }
         }
-        if (i==30)
+        if (i==25)
         {
             progress.setLabelText(tr("Recibiendo MAC... Espera por favor"));
             MAC = drake.getMAC(ipRoute);
             this->ui->label_161->setText(MAC);
         }
-        if (i==31)
+        if (i==26)
         {
             progress.setLabelText(tr("Configurando Estilo visual... Espera por favor"));
             if (Dato1 != 1280 || Dato2 != 1024)
@@ -1549,11 +1524,6 @@ void recoverdrake::Modulos()
                     RX = 1;
                     ui->groupBox_4->hide();
                     ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(false);
-                    ui->textEdit_14->setText(QString::fromUtf8(Pci));
-                    ui->textEdit_17->setText(QString::fromUtf8(Mod));
-                    ui->textEdit_18->setText(QString::fromUtf8(red));
-                    ui->textEdit_19->setText(QString::fromUtf8(infoPro));
-                    ui->textEdit_20->setText(QString::fromUtf8(Bios));
                     ui->lineEdit_14->setText(QString::fromUtf8(user));
                     ui->lineEdit_17->setText(QString::fromUtf8(Ver));
                     ui->lineEdit_20->setText(QString::fromUtf8(Tip));
@@ -1566,21 +1536,11 @@ void recoverdrake::Modulos()
                     ui->lineEdit_6->setText(QString::fromUtf8(Rev));
                     ui->lineEdit_7->setText(QString::fromUtf8(Resolution));
                     ui->textEdit_3->setText(QString::fromUtf8(Linux));
-                    ui->textEdit_10->setText(QString::fromUtf8(Pci));
-                    ui->textEdit_11->setText(QString::fromUtf8(infoPro));
-                    ui->textEdit_5->setText(QString::fromUtf8(Mod));
-                    ui->textEdit_8->setText(QString::fromUtf8(red));
-                    ui->textEdit_12->setText(QString::fromUtf8(Bios));
-                    ui->textEdit_13->setText(QString::fromUtf8(rpm));
-                    ui->textEdit_15->setText(QString::fromUtf8(du));
-                    ui->textEdit_16->setText(QString::fromUtf8(repo));
                     ui->lineEdit_15->setText(QString::fromUtf8(arqt));
                     ui->lineEdit_16->setText(QString::fromUtf8(dist));
                     ui->label_86->setText(QString::fromUtf8(release));
-                    ui->textEdit_9->setText(QString::fromUtf8(rpm));
                     ui->lineEdit_2->setText(QString::fromUtf8(arqt));
                     ui->lineEdit_3->setText(QString::fromUtf8(dist));
-                    ui->textEdit_7->setText(QString::fromUtf8(repo));
                     ui->label_21->setText(QString::fromUtf8(release));
                 }
                 else
@@ -1595,32 +1555,17 @@ void recoverdrake::Modulos()
                 ui->lineEdit_6->setText(QString::fromUtf8(Rev));
                 ui->lineEdit_7->setText(QString::fromUtf8(Resolution));
                 ui->textEdit_3->setText(QString::fromUtf8(Linux));
-                ui->textEdit_10->setText(QString::fromUtf8(Pci));
-                ui->textEdit_11->setText(QString::fromUtf8(infoPro));
-                ui->textEdit_5->setText(QString::fromUtf8(Mod));
-                ui->textEdit_8->setText(QString::fromUtf8(red));
-                ui->textEdit_12->setText(QString::fromUtf8(Bios));
-                ui->textEdit_14->setText(QString::fromUtf8(Pci));
-                ui->textEdit_17->setText(QString::fromUtf8(Mod));
-                ui->textEdit_18->setText(QString::fromUtf8(red));
-                ui->textEdit_19->setText(QString::fromUtf8(infoPro));
-                ui->textEdit_20->setText(QString::fromUtf8(Bios));
                 ui->lineEdit_14->setText(QString::fromUtf8(user));
                 ui->lineEdit_17->setText(QString::fromUtf8(Ver));
                 ui->lineEdit_20->setText(QString::fromUtf8(Tip));
                 ui->lineEdit_18->setText(QString::fromUtf8(Rev));
                 ui->lineEdit_19->setText(QString::fromUtf8(Resolution));
                 ui->textEdit_21->setText(QString::fromUtf8(Linux));
-                ui->textEdit_13->setText(QString::fromUtf8(rpm));
-                ui->textEdit_15->setText(QString::fromUtf8(du));
-                ui->textEdit_16->setText(QString::fromUtf8(repo));
                 ui->lineEdit_15->setText(QString::fromUtf8(arqt));
                 ui->lineEdit_16->setText(QString::fromUtf8(dist));
                 ui->label_86->setText(QString::fromUtf8(release));
-                ui->textEdit_9->setText(QString::fromUtf8(rpm));
                 ui->lineEdit_2->setText(QString::fromUtf8(arqt));
                 ui->lineEdit_3->setText(QString::fromUtf8(dist));
-                ui->textEdit_7->setText(QString::fromUtf8(repo));
                 ui->label_21->setText(QString::fromUtf8(release));
                 ui->actionMostrar_Caracteristicas_especificas_de_tu_sistema_GNU_Linux->setVisible(false);
                 ui->groupBox_4->show();
@@ -1632,7 +1577,7 @@ void recoverdrake::Modulos()
             ui->textEdit_2->setText(tr("<center><span style='font-size:12pt'><b>Sin alarmas activas"));
         }
     }
-    progress.setValue(32);
+    progress.setValue(27);
     setUpdatesEnabled(true);
 }
 
@@ -23366,9 +23311,7 @@ void recoverdrake::on_pushButton_5_clicked()
             trayIcon->showMessage(tr("Parado: "),QString::fromUtf8(""+Titulo+""),QSystemTrayIcon::Information, 4000);
     }
     else
-    {
         ui->label_31->setText(tr("La lista esta vacia."));
-    }
 }
 
 void recoverdrake::tableClicked()
@@ -23411,13 +23354,9 @@ void recoverdrake::on_pushButton_7_clicked()
     bool wasPlaying = mediaObject->state() == Phonon::PlayingState;
     int row;
     if (Ramdom == 1)
-    {
         row = randInt(ActualRow,ui->tableView->model()->rowCount());
-    }
     else if (Ramdom == 0)
-    {
         row = ActualRow+1;
-    }
     if (sources.size() > row)
     {
         mediaObject->stop();
@@ -23428,9 +23367,7 @@ void recoverdrake::on_pushButton_7_clicked()
         ui->lcdNumber_2->display("00:00:00");        
     }
     if (wasPlaying)
-    {
         play();
-    }
 }
 
 void recoverdrake::on_pushButton_8_clicked()
@@ -23438,13 +23375,9 @@ void recoverdrake::on_pushButton_8_clicked()
     bool wasPlaying = mediaObject->state() == Phonon::PlayingState;
     int row;
     if (Ramdom == 1)
-    {
         row = randInt(0,ActualRow);
-    }
     else if (Ramdom == 0)
-    {
         row = ActualRow-1;
-    }
     if (sources.size() > row)
     {
         if (row >= 0)
@@ -23458,9 +23391,7 @@ void recoverdrake::on_pushButton_8_clicked()
         }
     }
     if (wasPlaying)
-    {
         play();
-    }
 }
 
 void recoverdrake::keyPressEvent( QKeyEvent* e )
@@ -23468,6 +23399,22 @@ void recoverdrake::keyPressEvent( QKeyEvent* e )
   switch ( e->key() )
   {
   case Qt::Key_Delete:
+        this->borrado();
+        break;
+     default:
+        QMainWindow::keyPressEvent( e );
+        break;
+  }
+}
+
+void recoverdrake::borrado()
+{
+    int respuesta = 0;
+    respuesta = QMessageBox::question(this, QString::fromUtf8(tr("Borrado de lista de reproduccion")),
+                QString::fromUtf8(tr("<center><b>Borrar cancion de la lista</b></center><p>"
+                "&iquest;Quieres confirmar el borrado del registro seleccionado?")), QMessageBox::Ok, QMessageBox::No);
+    if (respuesta == QMessageBox::Ok)
+    {
         ui->tableView->model()->removeRow(ActualRow);
         mediaObject->stop();
         ui->pushButton_4->setEnabled(true);
@@ -23475,11 +23422,8 @@ void recoverdrake::keyPressEvent( QKeyEvent* e )
         ui->pushButton_6->setEnabled(false);
         timeSound->stop();
         ui->lcdNumber_2->display("00:00:00");
-        break;
-     default:
-        QMainWindow::keyPressEvent( e );
-        break;
-  }
+    }
+    return;
 }
 
 void recoverdrake::on_pushButton_16_clicked()
@@ -27056,6 +27000,22 @@ void recoverdrake::Desconectar()
 void recoverdrake::on_tabWidget_currentChanged(int index)
 {
     Q_UNUSED(index)
+    ui->textEdit_9->setText(QString::fromUtf8(rpm));
+    ui->textEdit_10->setText(QString::fromUtf8(Pci));
+    ui->textEdit_6->setText(QString::fromUtf8(du));
+    ui->textEdit_7->setText(QString::fromUtf8(repo));
+    ui->textEdit_5->setText(QString::fromUtf8(Mod));
+    ui->textEdit_8->setText(QString::fromUtf8(red));
+    ui->textEdit_11->setText(QString::fromUtf8(infoPro));
+    ui->textEdit_12->setText(QString::fromUtf8(Bios));
+    ui->textEdit_13->setText(QString::fromUtf8(rpm));
+    ui->textEdit_14->setText(QString::fromUtf8(Pci));
+    ui->textEdit_15->setText(QString::fromUtf8(du));
+    ui->textEdit_16->setText(QString::fromUtf8(repo));
+    ui->textEdit_17->setText(QString::fromUtf8(Mod));
+    ui->textEdit_18->setText(QString::fromUtf8(red));
+    ui->textEdit_19->setText(QString::fromUtf8(infoPro));
+    ui->textEdit_20->setText(QString::fromUtf8(Bios));
     if (Dato1 >= 1280 && Dato2 >= 1024)
     {
         if (ui->tabWidget->currentIndex() == 0)
@@ -27095,12 +27055,6 @@ void recoverdrake::on_tabWidget_currentChanged(int index)
             {
                 ui->toolBar->show();
             }
-            ui->textEdit_6->setText(QString::fromUtf8(du));
-
-
-            falta por poner aqui todos los que se hagan con los hilos
-
-
         }
         else if (ui->tabWidget->currentIndex() >= 2)
         {
@@ -29534,22 +29488,67 @@ void recoverdrake::on_pushButton_121_clicked()
     this->on_actionTraductor_triggered();
 }
 
-void recoverdrake::espacio()
-{
-    drakeSistema drake;
-    du = drake.getEspacio();
-}
-
 void recoverdrake::on_tabWidget_5_currentChanged(int index)
 {
-    Q_UNUSED(index)
+    Q_UNUSED(index);
+    if (ui->tabWidget_5->currentIndex() == 0)
+        ui->textEdit_9->setText(QString::fromUtf8(rpm));
+    if (ui->tabWidget_5->currentIndex() == 1)
+        ui->textEdit_10->setText(QString::fromUtf8(Pci));
     if (ui->tabWidget_5->currentIndex() == 2)
         ui->textEdit_6->setText(QString::fromUtf8(du));
+    if (ui->tabWidget_5->currentIndex() == 3)
+        ui->textEdit_7->setText(QString::fromUtf8(repo));
+    if (ui->tabWidget_5->currentIndex() == 4)
+        ui->textEdit_5->setText(QString::fromUtf8(Mod));
+    if (ui->tabWidget_5->currentIndex() == 5)
+        ui->textEdit_8->setText(QString::fromUtf8(red));
+    if (ui->tabWidget_5->currentIndex() == 6)
+        ui->textEdit_11->setText(QString::fromUtf8(infoPro));
+    if (ui->tabWidget_5->currentIndex() == 7)
+        ui->textEdit_12->setText(QString::fromUtf8(Bios));
+}
 
+void recoverdrake::on_tabWidget_6_currentChanged(int index)
+{
+    Q_UNUSED(index);
+    if (ui->tabWidget_6->currentIndex() == 0)
+        ui->textEdit_13->setText(QString::fromUtf8(rpm));
+    if (ui->tabWidget_6->currentIndex() == 0)
+        ui->textEdit_14->setText(QString::fromUtf8(Pci));
+    if (ui->tabWidget_6->currentIndex() == 2)
+        ui->textEdit_15->setText(QString::fromUtf8(du));
+    if (ui->tabWidget_6->currentIndex() == 3)
+        ui->textEdit_16->setText(QString::fromUtf8(repo));
+    if (ui->tabWidget_6->currentIndex() == 4)
+        ui->textEdit_17->setText(QString::fromUtf8(Mod));
+    if (ui->tabWidget_6->currentIndex() == 5)
+        ui->textEdit_18->setText(QString::fromUtf8(red));
+    if (ui->tabWidget_6->currentIndex() == 6)
+        ui->textEdit_19->setText(QString::fromUtf8(infoPro));
+    if (ui->tabWidget_6->currentIndex() == 7)
+        ui->textEdit_20->setText(QString::fromUtf8(Bios));
+}
 
-        falta arreglar el resto de hilos que ralentizan el equipo... a partir de du ver los que son mas lentos.
-
-
+void recoverdrake::on_tabWidget_8_currentChanged(int index)
+{
+        Q_UNUSED(index);
+        ui->textEdit_9->setText(QString::fromUtf8(rpm));
+        ui->textEdit_10->setText(QString::fromUtf8(Pci));
+        ui->textEdit_6->setText(QString::fromUtf8(du));
+        ui->textEdit_7->setText(QString::fromUtf8(repo));
+        ui->textEdit_5->setText(QString::fromUtf8(Mod));
+        ui->textEdit_8->setText(QString::fromUtf8(red));
+        ui->textEdit_11->setText(QString::fromUtf8(infoPro));
+        ui->textEdit_12->setText(QString::fromUtf8(Bios));
+        ui->textEdit_13->setText(QString::fromUtf8(rpm));
+        ui->textEdit_14->setText(QString::fromUtf8(Pci));
+        ui->textEdit_15->setText(QString::fromUtf8(du));
+        ui->textEdit_16->setText(QString::fromUtf8(repo));
+        ui->textEdit_17->setText(QString::fromUtf8(Mod));
+        ui->textEdit_18->setText(QString::fromUtf8(red));
+        ui->textEdit_19->setText(QString::fromUtf8(infoPro));
+        ui->textEdit_20->setText(QString::fromUtf8(Bios));
 }
 
 void recoverdrake::on_actionRealizar_arreglo_bruto_triggered()

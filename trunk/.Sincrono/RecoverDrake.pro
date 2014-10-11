@@ -126,7 +126,11 @@ SOURCES += main.cpp \
     QR/qrwidget.cpp \
     qrcode.cpp \
     compresor.cpp \
-    textencrip.cpp
+    textencrip.cpp \
+    borrar.cpp \
+    compressdrake.cpp \
+    traductor.cpp \
+    terminal.cpp
 HEADERS += recoverdrake.h \
     drakesistema.h \
     drakeprocesos.h \
@@ -235,7 +239,11 @@ HEADERS += recoverdrake.h \
     QR/qrwidget.h \
     qrcode.h \
     compresor.h \
-    textencrip.h
+    textencrip.h \
+    borrar.h \
+    compressdrake.h \
+    traductor.h \
+    terminal.h
 FORMS += recoverdrake.ui \
     acceso.ui \
     claves.ui \
@@ -307,12 +315,17 @@ FORMS += recoverdrake.ui \
     Report/savetobdfrm.ui \
     qrcode.ui \
     compresor.ui \
-    textencrip.ui
+    textencrip.ui \
+    borrar.ui \
+    compressdrake.ui \
+    traductor.ui \
+    terminal.ui
 RESOURCES += recoverdrake.qrc
 OTHER_FILES += 
 TRANSLATIONS += RecoverDrake_en.ts \
     RecoverDrake_es.ts
-LIBS += -lqrencode
+LIBS += -lqrencode \
+    -lqtermwidget
 CODECFORTR = UTF-8
 CODECFORSRC = UTF-8
 

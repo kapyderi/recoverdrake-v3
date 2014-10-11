@@ -10,14 +10,8 @@
     <x>0</x>
     <y>0</y>
     <width>580</width>
-    <height>668</height>
+    <height>669</height>
    </rect>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>580</width>
-    <height>721</height>
-   </size>
   </property>
   <property name="font">
    <font>
@@ -138,7 +132,7 @@
        <string>General</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="3" column="0" colspan="2">
+       <item row="4" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_3">
          <property name="title">
           <string>Control parental en Internet*</string>
@@ -190,7 +184,14 @@
          </layout>
         </widget>
        </item>
-       <item row="6" column="0" colspan="2">
+       <item row="3" column="0" colspan="2">
+        <widget class="Line" name="line_7">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_8">
          <property name="title">
           <string>Tipo de red a utilizar**</string>
@@ -446,14 +447,7 @@ p, li { white-space: pre-wrap; }
          </widget>
         </widget>
        </item>
-       <item row="2" column="0" colspan="2">
-        <widget class="Line" name="line_7">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0" colspan="2">
+       <item row="5" column="0" colspan="2">
         <widget class="QLabel" name="label_107">
          <property name="palette">
           <palette>
@@ -595,30 +589,29 @@ p, li { white-space: pre-wrap; }
           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#0000ff;&quot;&gt;Recover&lt;/span&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#ff0000;&quot;&gt;Drake&lt;/span&gt;&lt;span style=&quot; font-size:20pt; font-weight:600; color:#ff0000;&quot;&gt; &lt;/span&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#0000ff;&quot;&gt;v. 2.31.28 TEU&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;Proyecto Derix&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:7pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;Recove&lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#0000ff;&quot;&gt;r&lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#ff0000;&quot;&gt;Drake &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; color:#0000ff;&quot;&gt;-- &lt;/span&gt;&lt;span style=&quot; font-size:9pt; font-weight:600; font-style:italic; color:#0000ff;&quot;&gt;Proyecto Derix&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QCheckBox" name="checkBox_3">
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="checkBox">
          <property name="text">
-          <string>Deshabilitar aviso de dependencias</string>
+          <string>Deshabilitar pantalla de bienvenida</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="0" colspan="2">
+       <item row="6" column="0" colspan="2">
         <widget class="Line" name="line_10">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
-       <item row="7" column="0" colspan="2">
+       <item row="8" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_15">
          <property name="title">
           <string>Consola de procesos</string>
@@ -653,14 +646,7 @@ p, li { white-space: pre-wrap; }
          </layout>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QCheckBox" name="checkBox">
-         <property name="text">
-          <string>Deshabilitar pantalla de bienvenida</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="0" colspan="2">
+       <item row="9" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_21">
          <property name="title">
           <string>Pais*** </string>
@@ -695,7 +681,7 @@ p, li { white-space: pre-wrap; }
          </layout>
         </widget>
        </item>
-       <item row="9" column="0" colspan="2">
+       <item row="10" column="0" colspan="2">
         <widget class="QLabel" name="label_188">
          <property name="palette">
           <palette>
@@ -801,7 +787,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="10" column="0" colspan="2">
+       <item row="11" column="0" colspan="2">
         <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -813,6 +799,28 @@ p, li { white-space: pre-wrap; }
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLabel" name="label_216">
+         <property name="styleSheet">
+          <string notr="true">font: 9pt &quot;Sans Serif&quot;;
+color: rgb(0, 0, 255);
+font: bold italic;</string>
+         </property>
+         <property name="text">
+          <string>vacio</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" rowspan="2">
+        <widget class="QCheckBox" name="checkBox_3">
+         <property name="text">
+          <string>Deshabilitar aviso de dependencias</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -1873,20 +1881,7 @@ p, li { white-space: pre-wrap; }
          </layout>
         </widget>
        </item>
-       <item row="2" column="0">
-        <spacer name="verticalSpacer_8">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="12" column="0">
+       <item row="8" column="0">
         <widget class="QGroupBox" name="groupBox_18">
          <property name="title">
           <string>Acceso a Chat #Blogdrake</string>
@@ -1921,7 +1916,7 @@ p, li { white-space: pre-wrap; }
          </layout>
         </widget>
        </item>
-       <item row="9" column="0">
+       <item row="6" column="0">
         <widget class="QGroupBox" name="groupBox_11">
          <property name="title">
           <string>Idioma de la aplicacion</string>
@@ -1970,20 +1965,7 @@ p, li { white-space: pre-wrap; }
          </layout>
         </widget>
        </item>
-       <item row="11" column="0">
-        <spacer name="verticalSpacer_7">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="4" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="label_163">
          <property name="palette">
           <palette>
@@ -2120,19 +2102,6 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item row="5" column="0">
-        <spacer name="verticalSpacer_6">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="7" column="0">
         <widget class="QLabel" name="label_166">
          <property name="palette">
           <palette>
@@ -2268,7 +2237,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
+       <item row="2" column="0">
         <widget class="QGroupBox" name="groupBox_17">
          <property name="title">
           <string>Vista de aplicaciones*</string>
@@ -2303,7 +2272,7 @@ p, li { white-space: pre-wrap; }
          </layout>
         </widget>
        </item>
-       <item row="6" column="0">
+       <item row="4" column="0">
         <widget class="QGroupBox" name="groupBox_19">
          <property name="title">
           <string>Formato de aplicacion*</string>
@@ -2337,32 +2306,6 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </widget>
-       </item>
-       <item row="13" column="0">
-        <spacer name="verticalSpacer_9">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="8" column="0">
-        <spacer name="verticalSpacer_10">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_162">
@@ -2499,6 +2442,19 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Sans Serif'; color:#0000ff;&quot;&gt;* Solo funciona con utilidades que sean interactivas y automaticas a la vez.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
         </widget>
+       </item>
+       <item row="9" column="0">
+        <spacer name="verticalSpacer_9">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -7137,7 +7093,7 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>2</x>
          <y>547</y>
-         <width>431</width>
+         <width>421</width>
          <height>23</height>
         </rect>
        </property>
@@ -7242,7 +7198,7 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>0</x>
          <y>250</y>
-         <width>131</width>
+         <width>111</width>
          <height>21</height>
         </rect>
        </property>
@@ -7261,7 +7217,7 @@ p, li { white-space: pre-wrap; }
         <rect>
          <x>0</x>
          <y>270</y>
-         <width>131</width>
+         <width>111</width>
          <height>21</height>
         </rect>
        </property>
@@ -7569,6 +7525,102 @@ p, li { white-space: pre-wrap; }
          <x>140</x>
          <y>450</y>
          <width>361</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_210">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>470</y>
+         <width>361</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_211">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>470</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>tree</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_212">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>490</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>hexedit</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_213">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>490</y>
+         <width>401</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_214">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>510</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>wedmin</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_215">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>510</y>
+         <width>401</width>
          <height>21</height>
         </rect>
        </property>

@@ -4,7 +4,7 @@
 #include <QDialog>
 #include "ayuda.h"
 #include <QSqlDatabase>
-#include "terminal.h"
+#include <QFuture>
 
 namespace Ui {
 class Traductor;
@@ -29,7 +29,10 @@ protected:
 
 private slots:
     void on_pushButton_2_clicked();
-    void on_pushButton_3_clicked();
+    void on_comboBox_currentIndexChanged(const QString &arg1);
+    void on_comboBox_2_currentIndexChanged(const QString &arg1);    
+    void on_pushButton_clicked();
+    void on_pushButton_3_clicked();    
 
 private:
     Ui::Traductor *ui;
@@ -46,7 +49,11 @@ private:
     QString Stilo;
     QSqlDatabase db;
     QString user;
-    Terminal *termino;
+    QString Origen;
+    QString Destino;
+    QString idioma;
+    int Posicion;
+    QString tramitarDatos(QString Datos);
 
 };
 

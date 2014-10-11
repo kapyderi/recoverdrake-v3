@@ -167,6 +167,27 @@ void Ayuda::Valor(QString valor)
         ui->listWidget->setCurrentRow(0);
         ui->lineEdit->setText(valor);
     }
+    if (valor == tr("Buscador"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_18,valor);
+        ui->tabWidget->setCurrentPage(0);
+        ui->listWidget->setCurrentRow(0);
+        ui->lineEdit->setText(valor);
+    }
+    if (valor == tr("Permisos"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_19,valor);
+        ui->tabWidget->setCurrentPage(0);
+        ui->listWidget->setCurrentRow(0);
+        ui->lineEdit->setText(valor);
+    }
+    if (valor == tr("Test de Linux"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_20,valor);
+        ui->tabWidget->setCurrentPage(0);
+        ui->listWidget->setCurrentRow(0);
+        ui->lineEdit->setText(valor);
+    }
     if (ui->lineEdit->text() == "")
     {
         ui->tabWidget_2->setCurrentPage(1);
@@ -256,7 +277,7 @@ void Ayuda::on_listWidget_currentTextChanged(const QString &currentText)
     }
     if (currentText == tr("Compresor"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_15,tr("Kompresor"));
+        ui->tabWidget->insertTab(0,ui->tab_15,tr("Compresor"));
         ui->tabWidget->setCurrentPage(0);
     }
     if (currentText == tr("DB de claves"))
@@ -267,6 +288,31 @@ void Ayuda::on_listWidget_currentTextChanged(const QString &currentText)
     if (currentText == tr("Encriptador de texto"))
     {
         ui->tabWidget->insertTab(0,ui->tab_17,tr("Encriptador de texto"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Buscador"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_18,tr("Buscador"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Permisos"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_19,tr("Permisos"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Test de Linux"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_20,tr("Test de Linux"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Menu utilidades::Probar USB por emulacion"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_21,tr("Menu utilidades::Probar USB por emulacion"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Solucion a problemas::Grub con Grub-efi"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_22,tr("Solucion a problemas::Grub con Grub-efi"));
         ui->tabWidget->setCurrentPage(0);
     }
 }
@@ -359,7 +405,7 @@ void Ayuda::on_listWidget_2_currentTextChanged(const QString &currentText)
     }
     if (currentText == tr("Compresor"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_15,tr("Kompresor"));
+        ui->tabWidget->insertTab(0,ui->tab_15,tr("Compresor"));
         ui->tabWidget->setCurrentPage(0);
     }
     if (currentText == tr("DB de claves"))
@@ -370,6 +416,31 @@ void Ayuda::on_listWidget_2_currentTextChanged(const QString &currentText)
     if (currentText == tr("Encriptador de texto"))
     {
         ui->tabWidget->insertTab(0,ui->tab_17,tr("Encriptador de texto"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Buscador"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_18,tr("Buscador"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Permisos"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_19,tr("Permisos"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Test de Linux"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_20,tr("Test de Linux"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Menu utilidades::Probar USB por emulacion"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_21,tr("Menu utilidades::Probar USB por emulacion"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (currentText == tr("Solucion a problemas::Grub con Grub-efi"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_22,tr("Solucion a problemas::Grub con Grub-efi"));
         ui->tabWidget->setCurrentPage(0);
     }
 }
@@ -463,7 +534,7 @@ void Ayuda::Comprobar()
     }
     if (Valor == tr("Compresor"))
     {
-        ui->tabWidget->insertTab(0,ui->tab_15,tr("Kompresor"));
+        ui->tabWidget->insertTab(0,ui->tab_15,tr("Compresor"));
         ui->tabWidget->setCurrentPage(0);
     }
     if (Valor == tr("DB de claves"))
@@ -474,6 +545,31 @@ void Ayuda::Comprobar()
     if (Valor == tr("Encriptador de texto"))
     {
         ui->tabWidget->insertTab(0,ui->tab_17,tr("Encriptador de texto"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (Valor == tr("Buscador"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_18,tr("Buscador"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (Valor == tr("Permisos"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_19,tr("Permisos"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (Valor == tr("Test de Linux"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_20,tr("Test de Linux"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (Valor == tr("Menu utilidades::Probar USB por emulacion"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_21,tr("Menu utilidades::Probar USB por emulacion"));
+        ui->tabWidget->setCurrentPage(0);
+    }
+    if (Valor == tr("Solucion a problemas::Grub con Grub-efi"))
+    {
+        ui->tabWidget->insertTab(0,ui->tab_22,tr("Solucion a problemas::Grub con Grub-efi"));
         ui->tabWidget->setCurrentPage(0);
     }
 }

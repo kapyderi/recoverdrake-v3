@@ -72,6 +72,7 @@
 #include "permisos.h"
 #include "borrar.h"
 #include "traductor.h"
+#include "terminal.h"
 
 namespace Ui {
     class recoverdrake;
@@ -101,6 +102,7 @@ private:
     textencrip *Encriptar;
     Permisos *Permite;
     Traductor *traduce;
+    Terminal *Consola;
     QSqlDatabase dbs;
     QSqlTableModel *Model;
     QSqlTableModel *Model1;
@@ -137,6 +139,7 @@ private:
     QMdiSubWindow *buscarUsblive();
     QMdiSubWindow *buscarBorrar();
     QMdiSubWindow *buscarTraductor();
+    QMdiSubWindow *buscarConsola();
     QStringList listaArchivos;
     Phonon::Effect *effect;
     Phonon::MediaObject *mediaObject;
@@ -245,6 +248,7 @@ private:
     QString MAC;
     QString Stilo;
     QString Logs;
+    QString IPconexion;
     int ControlClose;
     int SegundaFuncion;
     int pos;
@@ -294,6 +298,7 @@ private:
     int Pagina28;
     int Pagina29;
     int Pagina30;
+    int Pagina31;
     int Dato1;
     int Dato2;
     int CerrarP;
@@ -444,6 +449,7 @@ private:
     QString rar;
     QString tree;
     QString webmin;
+    QString libqTermWidget;
     int EthF;
     int LocDia;
     int LocMes;
@@ -505,6 +511,7 @@ private slots:
     void CerrarUsblive();
     void CerrarBorrar();
     void CerrarTraductor();
+    void CerrarConsola();
     void on_pushButton_52_clicked();
     void on_pushButton_54_clicked();
     void on_pushButton_51_clicked();
@@ -1045,6 +1052,8 @@ private slots:
     void on_tabWidget_6_currentChanged(int index);
     void on_tabWidget_8_currentChanged(int index);
     void borrado();
+    void on_pushButton_122_clicked();
+    void on_actionConsola_triggered();
 
 public:
     Ui::recoverdrake *uil;

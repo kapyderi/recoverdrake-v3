@@ -96,8 +96,8 @@ Traductor::Traductor(QWidget *parent) :
         {
             ui->comboBox->addItem(Variable.value(0).toString());
             ui->comboBox_2->addItem(Variable.value(0).toString());
-            ui->comboBox->findText("Español");
-            ui->comboBox_2->findText("Ingles");
+            ui->comboBox->setCurrentIndex(ui->comboBox->findText("Español"));
+            ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText("Ingles"));
         }
     }
     else
@@ -108,8 +108,8 @@ Traductor::Traductor(QWidget *parent) :
         {
             ui->comboBox->addItem(Variable.value(0).toString());
             ui->comboBox_2->addItem(Variable.value(0).toString());
-            ui->comboBox->findText("Spanish");
-            ui->comboBox_2->findText("English");
+            ui->comboBox->setCurrentIndex(ui->comboBox->findText("Spanish"));
+            ui->comboBox_2->setCurrentIndex(ui->comboBox_2->findText("English"));
         }
     }
 }

@@ -938,6 +938,24 @@ QString drakeSistema::getInfoPro()
     return res;
 }
 
+QString drakeSistema::getIPconexion(QString Web)
+{
+    QProcess *procesoCat;
+    QStringList argumentosCat;
+    QByteArray Cat;
+    procesoCat=new QProcess(this);
+    argumentosCat << "-c1" << Web;
+    procesoCat->start("ping", argumentosCat);
+    if (! procesoCat->waitForStarted())
+        return QString("");
+    procesoCat->waitForFinished();
+    Cat = procesoCat->readAllStandardOutput();
+    delete procesoCat;
+    QString res = QString(Cat);
+    res.chop(1);
+    return res;
+}
+
 QString drakeSistema::getMac(QString Valor)
 {
     QProcess *procesoCat, *procesoGrep;

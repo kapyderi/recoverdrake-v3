@@ -65,6 +65,7 @@ void Terminal::finalizar()
 void Terminal::on_pushButton_clicked()
 {
     consola = new QTermWidget();
+    consola->setName("prueba");
     ui->tabWidget->addTab(consola, QString(QDir::currentPath()));
     ui->tabWidget->setCurrentIndex(ui->tabWidget->currentIndex()+1);
     font.setFamily("Monospace");
@@ -94,7 +95,12 @@ void Terminal::on_pushButton_2_clicked()
 
 void Terminal::on_comboBox_currentIndexChanged(const QString &arg1)
 {
-   consola->setColorScheme(arg1);
+    QTermWidget *pt;
+    if (ui->tabWidget->currentIndex()>=0)
+    {
+       pt=(QTermWidget *)ui->tabWidget->currentWidget();
+       pt->setColorScheme(arg1);
+    }
 }
 
 void Terminal::closeTab(int index)

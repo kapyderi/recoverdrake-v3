@@ -442,7 +442,7 @@
    <item row="8" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>VACIO</string>
+      <string>Pendiente...</string>
      </property>
     </widget>
    </item>
@@ -1368,7 +1368,7 @@
            </font>
           </property>
           <property name="text">
-           <string>VACIO</string>
+           <string>Pendiente...</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
